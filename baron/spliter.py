@@ -6,7 +6,7 @@ def split(sequence):
 
 
 def split_generator(sequence):
-    iterator = iter(FlexibleIterator(sequence))
+    iterator = FlexibleIterator(sequence)
     while True:
         if iterator.end():
             return
