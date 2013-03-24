@@ -1,6 +1,7 @@
 import string
 from utils import FlexibleIterator
 
+
 def split(sequence):
     return list(split_generator(sequence))
 
@@ -19,11 +20,11 @@ def split_generator(sequence):
 
         for section in ("'", '"'):
             not_found = False
-            if iterator.next_starts_with(section*3):
+            if iterator.next_starts_with(section * 3):
                 result = iterator.next()
                 result += iterator.next()
                 result += iterator.next()
-                result += iterator.grab(lambda iterator: not iterator.next_starts_with(section*3))
+                result += iterator.grab(lambda iterator: not iterator.next_starts_with(section * 3))
                 result += iterator.next()
                 result += iterator.next()
                 result += iterator.next()
