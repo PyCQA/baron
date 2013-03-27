@@ -32,7 +32,7 @@ def test_decorator():
     assert split("@pouet") == ["@", "pouet"]
 
 def test_tab_n_space():
-    assert split("	 ") == ["	", " "]
+    assert split("	 ") == ["	 "]
 
 def test_numbers():
     assert split("1234") == ["1234"]
