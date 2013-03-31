@@ -80,3 +80,6 @@ def test_more_more_egual():
 
 def test_decorator():
     assert group(["@", "pouet"]) == ["@pouet"]
+
+def test_endl():
+    assert group(["\r", "\n"]) == ["\r\n"]

@@ -35,7 +35,7 @@ def split_generator(sequence):
                 result += iterator.next()
                 yield result
 
-        for section in (string.ascii_letters + "_" + "1234567890", " ", "\t"):
+        for section in (string.ascii_letters + "_" + "1234567890", " \t"):
             if iterator.next_in(section):
                 not_found = False
                 yield iterator.grab(lambda iterator: iterator.show_next() in section)
