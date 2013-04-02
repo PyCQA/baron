@@ -109,3 +109,10 @@ def test_exponant():
     assert group(['1.1e', '-', '123']) == ['1.1e-123']
     assert group(['.1e', '+', '123']) == ['.1e+123']
     assert group(['.1e', '-', '123']) == ['.1e-123']
+
+def test_endl_with_backslash():
+    assert group(['\\', '\n']) == ['\\\n']
+
+def test_space_endl_with_backslash():
+    assert group([' 	 ', '\\', '\n', '   ']) == [' 	 \\\n   ']
+    assert group([' 	 ', '\\', '\n', 'pouet']) == [' 	 \\\n', 'pouet']

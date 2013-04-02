@@ -57,6 +57,17 @@ def group_generator(sequence):
             # ['123.123e', '[+-]', '123']
             assert re.match(r'^\d+[eE][-+]?\d+$', current) or re.match(r'^\d*.\d*[eE][-+]?\d+$', current)
 
+        if current == "\\" and iterator.show_next() in ('\n', '\r\n'):
+            current += iterator.next()
+            if re.match(r'^\s+$', str(iterator.show_next())):
+                current += iterator.next()
+
+        if re.match(r'^\s+$', current) and iterator.show_next() == "\\":
+            current += iterator.next()
+            current += iterator.next()
+            if re.match(r'^\s+$', str(iterator.show_next())):
+                current += iterator.next()
+
         yield current
 
 
