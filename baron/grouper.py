@@ -49,6 +49,14 @@ def group_generator(sequence):
             current += iterator.next()
         if str(current).lower() in ["ur", "br"] and str(iterator.show_next()).startswith(('"', "'")):
             current += iterator.next()
+        if any(map(lambda x: re.match(x, current), (r'^\d+e$', r'^\d+.\d*e$', r'^.\d+e$'))):
+            current += iterator.next()
+            current += iterator.next()
+
+            # I'm obligatory in a case where I have something like that:
+            # ['123.123e', '[+-]', '123']
+            assert re.match(r'^\d+[eE][-+]?\d+$', current) or re.match(r'^\d*.\d*[eE][-+]?\d+$', current)
+
         yield current
 
 

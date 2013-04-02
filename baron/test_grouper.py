@@ -101,3 +101,11 @@ def test_unicode_raw_string():
     assert group(["Ur", "'pouet'"]) == ["Ur'pouet'"]
     assert group(["uR", "'pouet'"]) == ["uR'pouet'"]
     assert group(["UR", "'pouet'"]) == ["UR'pouet'"]
+
+def test_exponant():
+    assert group(['1e', '+', '123']) == ['1e+123']
+    assert group(['1e', '-', '123']) == ['1e-123']
+    assert group(['1.1e', '+', '123']) == ['1.1e+123']
+    assert group(['1.1e', '-', '123']) == ['1.1e-123']
+    assert group(['.1e', '+', '123']) == ['.1e+123']
+    assert group(['.1e', '-', '123']) == ['.1e-123']
