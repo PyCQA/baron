@@ -16,7 +16,12 @@ def split_generator(sequence):
 
         if iterator.next_in("#"):
             not_found = False
-            yield iterator.grab(lambda iterator: iterator.show_next() not in "\r\n\\")
+            result = iterator.grab(lambda iterator: (iterator.show_next() not in "\r\n"))
+            if result.endswith("\\"):
+                yield result[:-1]
+                yield "\\"
+            else:
+                yield result
 
         for section in ("'", '"'):
             not_found = False

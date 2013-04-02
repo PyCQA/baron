@@ -259,5 +259,8 @@ def test_multi_string_with_same_quotes_in():
 def test_comment_backslash():
     assert split('# pouet \\\npouet') == ["# pouet ", "\\", "\n", "pouet"]
 
+def test_backslash_in_comment():
+    assert split("# pouet \\t pouet\npouet") == ["# pouet \\t pouet", "\n", "pouet"]
+
 def test_regression():
     assert split("(r'[\"\\'](.|\n|\r)*[\"\\']', 'STRING'),") == ["(", "r", "'[\"\\'](.|\n|\r)*[\"\\']'", ",", " ", "'STRING'", ")", ","]
