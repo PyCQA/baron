@@ -127,6 +127,12 @@ def test_left_square_bracket():
 def test_right_square_bracket():
     match(']', 'RIGHT_SQUARE_BRACKET')
 
+def test_left_bracket():
+    match('{', 'LEFT_BRACKET')
+
+def test_right_bracket():
+    match('}', 'RIGHT_BRACKET')
+
 def test_back_quote():
     match('`', 'BACKQUOTE')
 

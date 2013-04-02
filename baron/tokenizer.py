@@ -31,6 +31,8 @@ TOKENS = (
     (r'%', 'PERCENT'),
     (r'\[', 'LEFT_SQUARE_BRACKET'),
     (r'\]', 'RIGHT_SQUARE_BRACKET'),
+    (r'\{', 'LEFT_BRACKET'),
+    (r'\}', 'RIGHT_BRACKET'),
     (r'`', 'BACKQUOTE'),
     (r'==', 'EQUAL_EQUAL'),
     (r'!=', 'NOT_EQUAL'),
