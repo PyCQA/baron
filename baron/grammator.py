@@ -529,7 +529,7 @@ pg = ParserGenerator(tuple(map(lambda x: x.upper(), KEYWORDS)) + zip(*TOKENS)[1]
 
 @pg.production("main : INT")
 def main(p):
-    return p[0]
+    return [p[0].value]
 
 parser = pg.build()
 
@@ -537,4 +537,8 @@ def fake_lexer(sequence):
     for i in tokenize(sequence):
         yield Token(*i) if i else i
 
-print parser.parse(fake_lexer("1")).value
+def parse(sequence):
+    return parser.parse(fake_lexer(sequence))
+
+if __name__ == '__main__':
+    print parse('1')
