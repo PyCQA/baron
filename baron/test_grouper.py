@@ -77,3 +77,27 @@ def test_decorator():
 
 def test_endl():
     assert group(["\r", "\n"]) == ["\r\n"]
+
+def test_raw_string():
+    assert group(["r", "'pouet'"]) == ["r'pouet'"]
+    assert group(["R", "'pouet'"]) == ["R'pouet'"]
+
+def test_unicode_string():
+    assert group(["u", "'pouet'"]) == ["u'pouet'"]
+    assert group(["U", "'pouet'"]) == ["U'pouet'"]
+
+def test_binary_string():
+    assert group(["b", "'pouet'"]) == ["b'pouet'"]
+    assert group(["B", "'pouet'"]) == ["B'pouet'"]
+
+def test_binary_raw_string():
+    assert group(["br", "'pouet'"]) == ["br'pouet'"]
+    assert group(["Br", "'pouet'"]) == ["Br'pouet'"]
+    assert group(["bR", "'pouet'"]) == ["bR'pouet'"]
+    assert group(["BR", "'pouet'"]) == ["BR'pouet'"]
+
+def test_unicode_raw_string():
+    assert group(["ur", "'pouet'"]) == ["ur'pouet'"]
+    assert group(["Ur", "'pouet'"]) == ["Ur'pouet'"]
+    assert group(["uR", "'pouet'"]) == ["uR'pouet'"]
+    assert group(["UR", "'pouet'"]) == ["UR'pouet'"]

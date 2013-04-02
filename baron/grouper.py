@@ -47,6 +47,10 @@ def group_generator(sequence):
             current += iterator.next()
         if current == "@" and re.match("[a-zA-Z_]+", iterator.show_next()):
             current += iterator.next()
+        if current in list('uUrRbB') and str(iterator.show_next()).startswith(('"', "'")):
+            current += iterator.next()
+        if str(current).lower() in ["ur", "br"] and str(iterator.show_next()).startswith(('"', "'")):
+            current += iterator.next()
         yield current
 
 
