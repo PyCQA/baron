@@ -245,7 +245,7 @@ def test_escape():
     assert split("\\\\") == ["\\", "\\"]
 
 def test_escape_in_string():
-    assert split("'\\'") == ["'\\'"]
+    assert split("'\\\\'") == ["'\\\\'"]
 
 def test_other_escape_string():
     assert split("'\\\\'") == ["'\\\\'"]
@@ -255,3 +255,6 @@ def test_hexa():
 
 def test_multi_string_with_same_quotes_in():
     assert split('"""pouet " "" pouet"""') == ['"""pouet " "" pouet"""']
+
+def test_regression():
+    assert split("(r'[\"\\'](.|\n|\r)*[\"\\']', 'STRING'),") == ["(", "r", "'[\"\\'](.|\n|\r)*[\"\\']'", ",", " ", "'STRING'", ")", ","]
