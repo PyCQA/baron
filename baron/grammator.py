@@ -535,9 +535,6 @@ parser = pg.build()
 
 def fake_lexer(sequence):
     for i in tokenize(sequence):
-        if i:
-            yield Token(*i)
-        else:
-            yield i
+        yield Token(*i) if i else i
 
 print parser.parse(fake_lexer("1")).value
