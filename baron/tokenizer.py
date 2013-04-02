@@ -58,12 +58,12 @@ TOKENS = (
     (r'\r\n', 'ENDL'),
     (r'#.*', 'COMMENT'),
     (r'(\s|\\\n|\\\r\n)+', 'SPACE'),
-    (r'["\'].*["\']', 'STRING'),
-    (r'[uU]["\'].*["\']', 'UNICODE_STRING'),
-    (r'[rR]["\'].*["\']', 'RAW_STRING'),
-    (r'[bB]["\'].*["\']', 'BINARY_STRING'),
-    (r'[uU][rR]["\'].*["\']', 'UNICODE_RAW_STRING'),
-    (r'[bB][rR]["\'].*["\']', 'BINARY_RAW_STRING'),
+    (r'["\'](.|\n|\r)*["\']', 'STRING'),
+    (r'[uU]["\'](.|\n|\r)*["\']', 'UNICODE_STRING'),
+    (r'[rR]["\'](.|\n|\r)*["\']', 'RAW_STRING'),
+    (r'[bB]["\'](.|\n|\r)*["\']', 'BINARY_STRING'),
+    (r'[uU][rR]["\'](.|\n|\r)*["\']', 'UNICODE_RAW_STRING'),
+    (r'[bB][rR]["\'](.|\n|\r)*["\']', 'BINARY_RAW_STRING'),
 )
 
 

@@ -262,6 +262,14 @@ def test_raw_binary_string():
     match('BR"""pouet pouet"""', 'BINARY_RAW_STRING')
     match("Br'''pouet pouet'''", "BINARY_RAW_STRING")
 
+def test_big_string_with_endl():
+    match('"""pouet\n \r\npouet"""', 'STRING')
+    match('u"""pouet\n \r\npouet"""', 'UNICODE_STRING')
+    match('r"""pouet\n \r\npouet"""', 'RAW_STRING')
+    match('b"""pouet\n \r\npouet"""', 'BINARY_STRING')
+    match('ur"""pouet\n \r\npouet"""', 'UNICODE_RAW_STRING')
+    match('br"""pouet\n \r\npouet"""', 'BINARY_RAW_STRING')
+
 def test_comment():
     match('# pouet pouet', 'COMMENT')
 
