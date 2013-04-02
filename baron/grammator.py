@@ -524,21 +524,70 @@ from rply import ParserGenerator
 
 from tokenizer import TOKENS, KEYWORDS, tokenize
 
-pg = ParserGenerator(tuple(map(lambda x: x.upper(), KEYWORDS)) + zip(*TOKENS)[1], cache_id="baron")
+pg = ParserGenerator(tuple(map(lambda x: x.upper(), KEYWORDS)) + zip(*TOKENS)[1] + ("ENDMARKER",), cache_id="baron")
         #precedence=[("left", ['PLUS', 'MINUS'])], cache_id="baron")
 
-@pg.production("main : INT")
+def create_node(token, section=None, **kwargs):
+    if section is None:
+        result = {"type": token.name.lower(), "section": token.name.lower(), "value": token.value}
+    else:
+        result = {"type": token.name.lower(), "section": section, "value": token.value}
+    if kwargs:
+        result.update(kwargs)
+    return result
+
+@pg.production("main : exprs")
 def main(p):
-    return [p[0].value]
+    return filter(None, p[0])
+
+@pg.production("exprs : exprs expr")
+def exprs_expr(p):
+    return p[0] + [p[1]]
+
+@pg.production("exprs : expr")
+def exprs(p):
+    return [p[0]]
+
+@pg.production("expr : INT")
+def int(p):
+    return create_node(p[0], "number")
+
+@pg.production("expr : SPACE ENDL")
+def space_endl(p):
+    return {"type": p[1].name.lower(), "section": "separator", "value": p[1].value, "before_space": p[0].value}
+
+@pg.production("expr : ENDL")
+def endl(p):
+    return {"type": "endl", "section": "separator", "value": p[0].value, "before_space": ""}
+
+@pg.production("expr : SPACE ENDMARKER")
+def space(p):
+    return create_node(p[0])
+
+@pg.production("expr : ENDMARKER")
+def end(p):
+    return None
 
 parser = pg.build()
 
 def fake_lexer(sequence):
     for i in tokenize(sequence):
-        yield Token(*i) if i else i
+        if i is None:
+            yield None
+        yield Token(*i)
 
 def parse(sequence):
     return parser.parse(fake_lexer(sequence))
 
 if __name__ == '__main__':
-    print parse('1')
+    import json
+    from grouper import group
+    from spliter import split
+    def pouet(sequence):
+        return tokenize(group(split(sequence)))
+
+    def pouetpouet(sequence):
+        return group(split(sequence))
+
+    print json.dumps(parse(pouetpouet('1  \n ')), indent=4)
+    print pouet('1  \n ')
