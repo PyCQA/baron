@@ -285,3 +285,6 @@ def test_space():
     match('	 ', 'SPACE')
     match('	 \\\n ', 'SPACE')
     match('	 \\\r\n ', 'SPACE')
+
+def test_arobase():
+    match('@', 'AT')

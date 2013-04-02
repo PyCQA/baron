@@ -19,6 +19,7 @@ TOKENS = (
     (r':', 'COLON'),
     (r',', 'COMMA'),
     (r';', 'SEMICOLON'),
+    (r'@', 'AT'),
     (r'\+', 'PLUS'),
     (r'-', 'MINUS'),
     (r'\*', 'STAR'),
