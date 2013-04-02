@@ -5,10 +5,10 @@
 from tokenizer import tokenize, KEYWORDS
 
 def match(string, token):
-    assert tokenize([string]) == [(token, string), None]
+    assert tokenize([string]) == [(token, string), ('ENDMARKER', ''), None]
 
 def test_empty():
-    assert tokenize([]) == [None]
+    assert tokenize([]) == [('ENDMARKER', ''), None]
 
 def test_name():
     match('a', 'NAME')
@@ -77,7 +77,7 @@ def test_right_parenthesis():
 
 def test_colon():
     match(':', 'COLON')
-    assert tokenize([':']) == [('COLON', ':'), None]
+    assert tokenize([':']) == [('COLON', ':'), ('ENDMARKER', ''), None]
 
 def test_comma():
     match(',', 'COMMA')
@@ -86,7 +86,7 @@ def test_semicolon():
     match(';', 'SEMICOLON')
 
 def test_sequence():
-    assert tokenize(['a', '123']) == [('NAME', 'a'), ('INT', '123'), None]
+    assert tokenize(['a', '123']) == [('NAME', 'a'), ('INT', '123'), ('ENDMARKER', ''), None]
 
 def test_plus():
     match('+', 'PLUS')
@@ -204,7 +204,7 @@ def test_double_slash_equal():
 
 def test_keywords():
     for keyword in KEYWORDS:
-        assert tokenize([keyword]) == [(keyword.upper(), keyword), None]
+        assert tokenize([keyword]) == [(keyword.upper(), keyword), ('ENDMARKER', ''), None]
 
 def test_endl():
     match('\n', 'ENDL')

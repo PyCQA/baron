@@ -34,6 +34,9 @@ def test_decorator():
 def test_tab_n_space():
     assert split("	 ") == ["	 "]
 
+def test_several_spaces():
+    assert split("     ") == ["     "]
+
 def test_numbers():
     assert split("1234") == ["1234"]
 

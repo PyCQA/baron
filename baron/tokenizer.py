@@ -88,6 +88,7 @@ def tokenize_generator(sequence):
                 break
         else:
             raise UnknowItem("Can't find a matching token for this item: '%s'" % item)
+    yield ('ENDMARKER', '')
     yield
 
 if __name__ == '__main__':
