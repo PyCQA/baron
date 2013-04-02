@@ -536,15 +536,15 @@ def create_node(token, section=None, **kwargs):
         result.update(kwargs)
     return result
 
-@pg.production("main : exprs")
+@pg.production("main : statement")
 def main(p):
     return filter(None, p[0])
 
-@pg.production("exprs : exprs expr")
+@pg.production("statement : statement expr")
 def exprs_expr(p):
     return p[0] + [p[1]]
 
-@pg.production("exprs : expr")
+@pg.production("statement : expr")
 def exprs(p):
     return [p[0]]
 
