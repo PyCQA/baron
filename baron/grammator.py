@@ -547,11 +547,11 @@ def create_node(name, value, section=None, **kwargs):
 
 @pg.production("main : statements")
 def main(p):
-    return filter(None, p[0])
+    return filter(None, p[0]) if p[0] else []
 
 @pg.production("statements : statements statement")
 def statements_statement(p):
-    return p[0] + [p[1]]
+    return p[0] + p[1]
 
 @pg.production("statements : statement")
 def statement(p):
@@ -559,7 +559,7 @@ def statement(p):
 
 @pg.production("statement : ENDMARKER")
 def end(p):
-    return None
+    return [None]
 
 @pg.production("statement : expr")
 def exprs(p):
