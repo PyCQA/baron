@@ -561,7 +561,7 @@ def statement(p):
 def end(p):
     return [None]
 
-@pg.production("statement : expr")
+@pg.production("statement : expression")
 def exprs(p):
     return [create_node("expression", p[0])]
 
@@ -569,7 +569,7 @@ def exprs(p):
 def separator(p):
     return [p[0]]
 
-@pg.production("expr : INT")
+@pg.production("expression : INT")
 def int(p):
     return create_node_from_token(p[0], "number")
 
