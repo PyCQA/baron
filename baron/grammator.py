@@ -551,15 +551,23 @@ def main(p):
 
 @pg.production("statements : statements statement")
 def statements_statement(p):
-    return p[0] + [create_node("expression", p[1])]
+    return p[0] + [p[1]]
 
-@pg.production("statement : expr | separator")
+@pg.production("statements : statement")
+def statement(p):
+    return p[0]
+
+@pg.production("statement : ENDMARKER")
+def end(p):
+    return None
+
+@pg.production("statement : expr")
 def exprs(p):
     return [create_node("expression", p[0])]
 
-#@pg.production("statement :")
-#def separator(p):
-    #return [create_node("expression", p[0])]
+@pg.production("statement : separator")
+def separator(p):
+    return [p[0]]
 
 @pg.production("expr : INT")
 def int(p):
@@ -576,10 +584,6 @@ def endl(p):
 @pg.production("separator : SPACE ENDMARKER")
 def space(p):
     return create_node_from_token(p[0])
-
-@pg.production("separator : ENDMARKER")
-def end(p):
-    return None
 
 parser = pg.build()
 
@@ -602,5 +606,12 @@ if __name__ == '__main__':
     def pouetpouet(sequence):
         return group(split(sequence))
 
-    print json.dumps(parse(pouetpouet('1  \n ')), indent=4)
-    print pouet('1  \n ')
+    def pouetpouetpouet(sequence):
+        for i in sequence:
+            if i is None:
+                yield None
+            yield Token(*i)
+
+    #print pouet('1')
+    #print json.dumps(parse(pouetpouet('1')), indent=4)
+    print json.dumps(parser.parse(pouetpouetpouet([('ENDMARKER', ''), None])), indent=4)
