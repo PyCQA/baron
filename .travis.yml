@@ -1,4 +1,5 @@
 language: python
+install: "pip install rply"
 python:
     - "2.6"
     - "2.7"
