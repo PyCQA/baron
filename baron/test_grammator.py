@@ -24,7 +24,8 @@ def test_space_endl():
 def test_some_stuff():
     parse([('INT', '3'), ('SPACE', '   '), ('ENDL', '\n'), ('INT', '42')], [{"type": "expression", "section": "expression", "value": {"type": "int", "section": "number", "value": "3"}}, {"type": "endl", "section": "separator", "value": "\n", "before_space": "   "}, {"type": "expression", "section": "expression", "value": {"type": "int", "section": "number", "value": "42"}}])
 
-# file_input: ([SPACE] NEWLINE | stmt)* [SPACE] ENDMARKER
+def test_name():
+    parse([('NAME', 'a')], [{"type": "expression", "section": "expression", "value": {"type": "name", "section": "name", "value": "a"}}])
 
 # stmt: simple_stmt
 # stmt: compound_stmt
