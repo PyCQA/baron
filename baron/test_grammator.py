@@ -10,22 +10,22 @@ def test_empty():
     parse([], [])
 
 def test_space():
-    parse([('SPACE', '   ')], [{"type": "space", "section": "space", "value": "   "}])
+    parse([('SPACE', '   ')], [{"type": "space", "value": "   "}])
 
 def test_int():
-    parse([('INT', '1')], [{"type": "expression", "section": "expression", "value": {"type": "int", "section": "number", "value": "1"}}])
+    parse([('INT', '1')], [{"type": "expression", "value": {"type": "int", "section": "number", "value": "1"}}])
 
 def test_endl():
-    parse([('ENDL', '\n')], [{"type": "endl", "section": "separator", "value": "\n", "before_space": ""}])
+    parse([('ENDL', '\n')], [{"type": "endl", "value": "\n", "before_space": ""}])
 
 def test_space_endl():
-    parse([('SPACE', '   '), ('ENDL', '\n')], [{"type": "endl", "section": "separator", "value": "\n", "before_space": "   "}])
+    parse([('SPACE', '   '), ('ENDL', '\n')], [{"type": "endl", "value": "\n", "before_space": "   "}])
 
 def test_some_stuff():
-    parse([('INT', '3'), ('SPACE', '   '), ('ENDL', '\n'), ('INT', '42')], [{"type": "expression", "section": "expression", "value": {"type": "int", "section": "number", "value": "3"}}, {"type": "endl", "section": "separator", "value": "\n", "before_space": "   "}, {"type": "expression", "section": "expression", "value": {"type": "int", "section": "number", "value": "42"}}])
+    parse([('INT', '3'), ('SPACE', '   '), ('ENDL', '\n'), ('INT', '42')], [{"type": "expression", "value": {"type": "int", "section": "number", "value": "3"}}, {"type": "endl", "value": "\n", "before_space": "   "}, {"type": "expression", "value": {"type": "int", "section": "number", "value": "42"}}])
 
 def test_name():
-    parse([('NAME', 'a')], [{"type": "expression", "section": "expression", "value": {"type": "name", "section": "name", "value": "a"}}])
+    parse([('NAME', 'a')], [{"type": "expression", "value": {"type": "name", "value": "a"}}])
 
 # stmt: simple_stmt
 # stmt: compound_stmt

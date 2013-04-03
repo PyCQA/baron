@@ -527,20 +527,14 @@ from tokenizer import TOKENS, KEYWORDS, tokenize
 pg = ParserGenerator(tuple(map(lambda x: x.upper(), KEYWORDS)) + zip(*TOKENS)[1] + ("ENDMARKER",), cache_id="baron")
         #precedence=[("left", ['PLUS', 'MINUS'])], cache_id="baron")
 
-def create_node_from_token(token, section=None, **kwargs):
-    if section is None:
-        result = {"type": token.name.lower(), "section": token.name.lower(), "value": token.value}
-    else:
-        result = {"type": token.name.lower(), "section": section, "value": token.value}
+def create_node_from_token(token, **kwargs):
+    result = {"type": token.name.lower(), "value": token.value}
     if kwargs:
         result.update(kwargs)
     return result
 
-def create_node(name, value, section=None, **kwargs):
-    if section is None:
-        result = {"type": name, "section": name, "value": value}
-    else:
-        result = {"type": value, "section": section, "value": value}
+def create_node(name, value, **kwargs):
+    result = {"type": name, "value": value}
     if kwargs:
         result.update(kwargs)
     return result
@@ -571,7 +565,7 @@ def separator(p):
 
 @pg.production("expression : INT")
 def int(p):
-    return create_node_from_token(p[0], "number")
+    return create_node_from_token(p[0], section="number")
 
 @pg.production("expression : NAME")
 def name(p):
@@ -579,11 +573,11 @@ def name(p):
 
 @pg.production("separator : SPACE ENDL")
 def space_endl(p):
-    return {"type": p[1].name.lower(), "section": "separator", "value": p[1].value, "before_space": p[0].value}
+    return {"type": p[1].name.lower(), "value": p[1].value, "before_space": p[0].value}
 
 @pg.production("separator : ENDL")
 def endl(p):
-    return {"type": "endl", "section": "separator", "value": p[0].value, "before_space": ""}
+    return {"type": "endl", "value": p[0].value, "before_space": ""}
 
 @pg.production("separator : SPACE ENDMARKER")
 def space(p):
