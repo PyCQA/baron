@@ -527,7 +527,7 @@ from tokenizer import TOKENS, KEYWORDS, tokenize
 pg = ParserGenerator(tuple(map(lambda x: x.upper(), KEYWORDS)) + zip(*TOKENS)[1] + ("ENDMARKER",), cache_id="baron")
         #precedence=[("left", ['PLUS', 'MINUS'])], cache_id="baron")
 
-def create_node(token, section=None, **kwargs):
+def create_node_from_token(token, section=None, **kwargs):
     if section is None:
         result = {"type": token.name.lower(), "section": token.name.lower(), "value": token.value}
     else:
@@ -536,35 +536,48 @@ def create_node(token, section=None, **kwargs):
         result.update(kwargs)
     return result
 
-@pg.production("main : statement")
+def create_node(name, value, section=None, **kwargs):
+    if section is None:
+        result = {"type": name, "section": name, "value": value}
+    else:
+        result = {"type": value, "section": section, "value": value}
+    if kwargs:
+        result.update(kwargs)
+    return result
+
+@pg.production("main : statements")
 def main(p):
     return filter(None, p[0])
 
-@pg.production("statement : statement expr")
-def exprs_expr(p):
-    return p[0] + [p[1]]
+@pg.production("statements : statements statement")
+def statements_statement(p):
+    return p[0] + [create_node("expression", p[1])]
 
-@pg.production("statement : expr")
+@pg.production("statement : expr | separator")
 def exprs(p):
-    return [p[0]]
+    return [create_node("expression", p[0])]
+
+#@pg.production("statement :")
+#def separator(p):
+    #return [create_node("expression", p[0])]
 
 @pg.production("expr : INT")
 def int(p):
-    return create_node(p[0], "number")
+    return create_node_from_token(p[0], "number")
 
-@pg.production("expr : SPACE ENDL")
+@pg.production("separator : SPACE ENDL")
 def space_endl(p):
     return {"type": p[1].name.lower(), "section": "separator", "value": p[1].value, "before_space": p[0].value}
 
-@pg.production("expr : ENDL")
+@pg.production("separator : ENDL")
 def endl(p):
     return {"type": "endl", "section": "separator", "value": p[0].value, "before_space": ""}
 
-@pg.production("expr : SPACE ENDMARKER")
+@pg.production("separator : SPACE ENDMARKER")
 def space(p):
-    return create_node(p[0])
+    return create_node_from_token(p[0])
 
-@pg.production("expr : ENDMARKER")
+@pg.production("separator : ENDMARKER")
 def end(p):
     return None
 
