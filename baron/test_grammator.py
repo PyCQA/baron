@@ -27,6 +27,10 @@ def test_some_stuff():
 def test_name():
     parse([('NAME', 'a')], [{"type": "expression", "value": {"type": "name", "value": "a"}}])
 
+def test_string():
+    parse([('STRING', '"pouet pouet"')], [{"type": "expression", "value": {"type": "string", "value": '"pouet pouet"'}}])
+    parse([('STRING', '"""pouet pouet"""')], [{"type": "expression", "value": {"type": "string", "value": '"""pouet pouet"""'}}])
+
 # stmt: simple_stmt
 # stmt: compound_stmt
 
@@ -112,7 +116,7 @@ def test_name():
 # atom: '[' [SPACE] [listmaker] [SPACE] ']'
 # atom: '{' [SPACE] [dictorsetmaker] [SPACE] '}'
 # atom: '`' [SPACE] testlist1 [SPACE] '`'
-# atom: NAME
-# atom: NUMBER
-# atom: STRING+
+### atom: NAME
+### atom: NUMBER
+### atom: STRING+
 

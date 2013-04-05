@@ -571,6 +571,10 @@ def int(p):
 def name(p):
     return create_node_from_token(p[0])
 
+@pg.production("expression : STRING")
+def string(p):
+    return create_node_from_token(p[0])
+
 @pg.production("separator : SPACE ENDL")
 def space_endl(p):
     return {"type": p[1].name.lower(), "value": p[1].value, "before_space": p[0].value}
