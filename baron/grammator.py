@@ -560,6 +560,7 @@ def exprs(p):
     return [create_node("expression", p[0])]
 
 @pg.production("statement : separator")
+@pg.production("statement : import")
 def separator(p):
     return [p[0]]
 
@@ -586,6 +587,10 @@ def endl(p):
 @pg.production("separator : SPACE ENDMARKER")
 def space(p):
     return create_node_from_token(p[0])
+
+@pg.production("import : IMPORT SPACE NAME")
+def importeu(p):
+    return {"type": "import", "value": [create_node_from_token(p[2])], "space": p[1].value}
 
 parser = pg.build()
 

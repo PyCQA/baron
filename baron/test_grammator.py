@@ -31,6 +31,39 @@ def test_string():
     parse([('STRING', '"pouet pouet"')], [{"type": "expression", "value": {"type": "string", "value": '"pouet pouet"'}}])
     parse([('STRING', '"""pouet pouet"""')], [{"type": "expression", "value": {"type": "string", "value": '"""pouet pouet"""'}}])
 
+def test_import():
+    parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet')], [{"type": "import", "space": "  ", "value": [{"type": "name", "value": "pouet"}]}])
+
+# dotted_name: NAME
+# dotted_name: NAME.NAME
+# dotted_name: NAME(.NAME)+
+
+# dotted_as_name: dotted_name
+# dotted_as_name: dotted_name SPACE 'as' SPACE NAME
+
+# dotted_as_names: dotted_as_name
+# dotted_as_names: dotted_as_name [SPACE] ',' [SPACE] dotted_as_name
+# dotted_as_names: dotted_as_name ([SPACE] ',' [SPACE] dotted_as_name)*
+
+# import_as_name: NAME
+# import_as_name: NAME SPACE 'as' SPACE NAME
+
+# import_as_names: import_as_name
+# import_as_names: import_as_name [SPACE] ',' [SPACE] import_as_name
+# import_as_names: import_as_name ([SPACE] ',' [SPACE] import_as_name)*
+# import_as_names: import_as_name ([SPACE] ',' [SPACE] import_as_name)* [SPACE] [',']
+
+# import_name: 'import' SPACE dotted_as_names
+
+# import_from: 'from' SPACE dotted_name SPACE 'import' SPACE import_as_names
+# import_from: 'from' SPACE dotted_name SPACE 'import' [SPACE] '(' [SPACE] import_as_names [SPACE] ')'
+# import_from: 'from' SPACE dotted_name SPACE 'import' [SPACE] '*'
+
+# import_from: 'from' [SPACE] '.'* [SPACE] dotted_name SPACE 'import' ...........
+# import_from: 'from' [SPACE] '.'+ [SPACE] 'import' ...........
+
+# ----------
+
 # stmt: simple_stmt
 # stmt: compound_stmt
 
@@ -111,6 +144,10 @@ def test_string():
 
 # power: atom [SPACE] trailer* [[SPACE] '**' [SPACE] factor]
 
+# trailer: '.' [SPACE] NAME
+# trailer: '[' [SPACE] subscriptlist [SPACE] ']'
+# trailer: '(' [SPACE] [arglist] [SPACE] ')'
+
 # atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
 # atom: '(' [SPACE] [yield_expr] [SPACE] ')'
 # atom: '[' [SPACE] [listmaker] [SPACE] ']'
@@ -119,4 +156,3 @@ def test_string():
 ### atom: NAME
 ### atom: NUMBER
 ### atom: STRING+
-
