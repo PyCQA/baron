@@ -6,43 +6,77 @@ from grammator import parser, Token
 def parse(tokens, result):
     assert parser.parse(iter(map(lambda x: Token(*x) if x else x, tokens + [('ENDMARKER', ''), None]))) == result
 
+def _node(typeu, value, **kwargs):
+    if kwargs is not None:
+        to_return = {"type": typeu, "value": value}
+        to_return.update(kwargs)
+        return to_return
+    return {"type": typeu, "value": value}
+
+def space(value):
+    return _node("space", value)
+
+def name(value):
+    return _node("name", value)
+
+def inteu(value):
+    return _node("int", value, section="number")
+
+def string(value):
+    return _node("string", value)
+
+def endl(value, **kwargs):
+    return _node("endl", value, **kwargs)
+
+def dot():
+    return _node("dot", ".")
+
+def expression(value):
+    return _node("expression", value)
+
+def dotted_name(value):
+    return _node("dotted_name", value)
+
+def importeu(value, **kwargs):
+    return _node("import", value, **kwargs)
+
 def test_empty():
     parse([], [])
 
 def test_space():
-    parse([('SPACE', '   ')], [{"type": "space", "value": "   "}])
+    parse([('SPACE', '   ')], [space("   ")])
 
 def test_int():
-    parse([('INT', '1')], [{"type": "expression", "value": {"type": "int", "section": "number", "value": "1"}}])
+    parse([('INT', '1')], [expression(inteu("1"))])
 
 def test_endl():
-    parse([('ENDL', '\n')], [{"type": "endl", "value": "\n", "before_space": ""}])
+    parse([('ENDL', '\n')], [endl("\n", before_space="")])
 
 def test_space_endl():
-    parse([('SPACE', '   '), ('ENDL', '\n')], [{"type": "endl", "value": "\n", "before_space": "   "}])
+    parse([('SPACE', '   '), ('ENDL', '\n')], [endl("\n", before_space="   ")])
 
 def test_some_stuff():
-    parse([('INT', '3'), ('SPACE', '   '), ('ENDL', '\n'), ('INT', '42')], [{"type": "expression", "value": {"type": "int", "section": "number", "value": "3"}}, {"type": "endl", "value": "\n", "before_space": "   "}, {"type": "expression", "value": {"type": "int", "section": "number", "value": "42"}}])
+    parse([('INT', '3'), ('SPACE', '   '), ('ENDL', '\n'), ('INT', '42')], [expression(inteu("3")), endl("\n", before_space="   "), expression(inteu("42"))])
 
 def test_name():
-    parse([('NAME', 'a')], [{"type": "expression", "value": {"type": "name", "value": "a"}}])
+    parse([('NAME', 'a')], [expression(name("a"))])
 
 def test_string():
-    parse([('STRING', '"pouet pouet"')], [{"type": "expression", "value": {"type": "string", "value": '"pouet pouet"'}}])
-    parse([('STRING', '"""pouet pouet"""')], [{"type": "expression", "value": {"type": "string", "value": '"""pouet pouet"""'}}])
+    parse([('STRING', '"pouet pouet"')], [expression(string('"pouet pouet"'))])
+    parse([('STRING', '"""pouet pouet"""')], [expression(string('"""pouet pouet"""'))])
 
 def test_simple_import():
-    parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet')], [{"type": "import", "space": "  ", "value": {"type": "dotted_name", "value": [{"type": "name", "value": "pouet"}]}}])
+    parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet')], [importeu(dotted_name([name("pouet")]), space="  ")])
 
 def test_import_basic_dot():
-    parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet'), ('DOT', '.'), ('NAME', 'blob')], [{"type": "import", "space": "  ", "value": {"type": "dotted_name", "value": [{"type": "name", "value": "pouet"}, {"type": "dot", "value": "."}, {"type": "name", "value": "blob"}]}}])
+    parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet'), ('DOT', '.'), ('NAME', 'blob')], [importeu(dotted_name([name("pouet"), dot(), name("blob")]), space="  ")])
 
 def test_import_more_dot():
-    parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet'), ('DOT', '.'), ('NAME', 'blob'), ('SPACE', ' '), ('DOT', '.'), ('NAME', 'plop')], [{"type": "import", "space": "  ", "value": {"type": "dotted_name", "value": [{"type": "name", "value": "pouet"}, {"type": "dot", "value": "."}, {"type": "name", "value": "blob"}, {"type": "space", "value": " "}, {"type": "dot", "value": "."}, {"type": "name", "value": "plop"}]}}])
+    parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet'), ('DOT', '.'), ('NAME', 'blob'), ('SPACE', ' '), ('DOT', '.'), ('NAME', 'plop')], [importeu(dotted_name([name("pouet"), dot(), name("blob"), space(" "), dot(), name("plop")]), space="  ")])
 
-# dotted_name: NAME
-# dotted_name: NAME.NAME
-# dotted_name: NAME(.NAME)+
+### dotted_name: NAME
+### dotted_name: NAME.NAME
+### dotted_name: NAME(.NAME)+
 
 # dotted_as_name: dotted_name
 # dotted_as_name: dotted_name SPACE 'as' SPACE NAME
