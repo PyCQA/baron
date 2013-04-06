@@ -31,8 +31,11 @@ def test_string():
     parse([('STRING', '"pouet pouet"')], [{"type": "expression", "value": {"type": "string", "value": '"pouet pouet"'}}])
     parse([('STRING', '"""pouet pouet"""')], [{"type": "expression", "value": {"type": "string", "value": '"""pouet pouet"""'}}])
 
-def test_import():
-    parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet')], [{"type": "import", "space": "  ", "value": [{"type": "name", "value": "pouet"}]}])
+def test_simple_import():
+    parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet')], [{"type": "import", "space": "  ", "value": {"type": "dotted_name", "value": [{"type": "name", "value": "pouet"}]}}])
+
+def test_import_basic_dot():
+    parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet'), ('DOT', '.'), ('NAME', 'blob')], [{"type": "import", "space": "  ", "value": {"type": "dotted_name", "value": [{"type": "name", "value": "pouet"}, {"type": "dot", "value": "."}, {"type": "name", "value": "blob"}]}}])
 
 # dotted_name: NAME
 # dotted_name: NAME.NAME

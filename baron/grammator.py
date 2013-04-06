@@ -588,9 +588,18 @@ def endl(p):
 def space(p):
     return create_node_from_token(p[0])
 
-@pg.production("import : IMPORT SPACE NAME")
+@pg.production("import : IMPORT SPACE dotted_name")
 def importeu(p):
-    return {"type": "import", "value": [create_node_from_token(p[2])], "space": p[1].value}
+    return {"type": "import", "value": p[2], "space": p[1].value}
+
+@pg.production("dotted_name : NAME DOT NAME")
+def dotted_names(p):
+    return {"type": "dotted_name", "value": [create_node_from_token(p[0]), create_node_from_token(p[1]), create_node_from_token(p[2])]}
+
+@pg.production("dotted_name : NAME")
+def dotted_name(p):
+    return {"type": "dotted_name", "value": [create_node_from_token(p[0])]}
+
 
 parser = pg.build()
 
