@@ -590,15 +590,21 @@ def space(p):
 
 @pg.production("import : IMPORT SPACE dotted_name")
 def importeu(p):
-    return {"type": "import", "value": p[2], "space": p[1].value}
+    return {"type": "import", "value": {"type": "dotted_name", "value": p[2]}, "space": p[1].value}
 
-@pg.production("dotted_name : NAME DOT NAME")
-def dotted_names(p):
-    return {"type": "dotted_name", "value": [create_node_from_token(p[0]), create_node_from_token(p[1]), create_node_from_token(p[2])]}
+@pg.production("dotted_name : dotted_name dotted_name_element")
+def dotted_name_elements_element(p):
+    return p[0] + p[1]
 
-@pg.production("dotted_name : NAME")
+@pg.production("dotted_name : dotted_name_element")
+def dotted_name_element(p):
+    return p[0]
+
+@pg.production("dotted_name_element : NAME")
+@pg.production("dotted_name_element : DOT")
+@pg.production("dotted_name_element : SPACE")
 def dotted_name(p):
-    return {"type": "dotted_name", "value": [create_node_from_token(p[0])]}
+    return [create_node_from_token(p[0])]
 
 
 parser = pg.build()

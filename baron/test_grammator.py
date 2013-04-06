@@ -37,6 +37,9 @@ def test_simple_import():
 def test_import_basic_dot():
     parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet'), ('DOT', '.'), ('NAME', 'blob')], [{"type": "import", "space": "  ", "value": {"type": "dotted_name", "value": [{"type": "name", "value": "pouet"}, {"type": "dot", "value": "."}, {"type": "name", "value": "blob"}]}}])
 
+def test_import_more_dot():
+    parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet'), ('DOT', '.'), ('NAME', 'blob'), ('SPACE', ' '), ('DOT', '.'), ('NAME', 'plop')], [{"type": "import", "space": "  ", "value": {"type": "dotted_name", "value": [{"type": "name", "value": "pouet"}, {"type": "dot", "value": "."}, {"type": "name", "value": "blob"}, {"type": "space", "value": " "}, {"type": "dot", "value": "."}, {"type": "name", "value": "plop"}]}}])
+
 # dotted_name: NAME
 # dotted_name: NAME.NAME
 # dotted_name: NAME(.NAME)+
