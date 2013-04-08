@@ -588,9 +588,13 @@ def endl(p):
 def space(p):
     return create_node_from_token(p[0])
 
-@pg.production("import : IMPORT SPACE dotted_name")
+@pg.production("import : IMPORT SPACE dotted_as_name")
 def importeu(p):
-    return {"type": "import", "value": {"type": "dotted_name", "value": p[2]}, "space": p[1].value}
+    return {"type": "import", "value": {"type": "dotted_as_name", "value": p[2], "before_space": "", "after_space": ""}, "space": p[1].value}
+
+@pg.production("dotted_as_name : dotted_name")
+def dotted_as_name(p):
+    return {"type": "dotted_name", "value": p[0]}
 
 @pg.production("dotted_name : dotted_name dotted_name_element")
 def dotted_name_elements_element(p):
@@ -635,5 +639,5 @@ if __name__ == '__main__':
             yield Token(*i)
 
     #print pouet('1')
-    #print json.dumps(parse(pouetpouet('1')), indent=4)
-    print json.dumps(parser.parse(pouetpouetpouet([('ENDMARKER', ''), None])), indent=4)
+    print json.dumps(parse(pouetpouet('import q')), indent=4)
+    #print json.dumps(parser.parse(pouetpouetpouet([('ENDMARKER', ''), None])), indent=4)
