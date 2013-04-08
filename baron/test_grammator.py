@@ -5,37 +5,51 @@ from test_utils import (parse, space, expression, inteu, endl, name, string,
                         importeu, dotted_as_name, dotted_name, dot)
 
 def test_empty():
+    ""
     parse([], [])
 
 def test_space():
+    "   "
     parse([('SPACE', '   ')], [space("   ")])
 
 def test_int():
+    "1"
     parse([('INT', '1')], [expression(inteu("1"))])
 
 def test_endl():
+    "\n"
     parse([('ENDL', '\n')], [endl("\n", before_space="")])
 
 def test_space_endl():
+    "    \n"
     parse([('SPACE', '   '), ('ENDL', '\n')], [endl("\n", before_space="   ")])
 
 def test_some_stuff():
+    "3    \n42"
     parse([('INT', '3'), ('SPACE', '   '), ('ENDL', '\n'), ('INT', '42')], [expression(inteu("3")), endl("\n", before_space="   "), expression(inteu("42"))])
 
 def test_name():
+    "a"
     parse([('NAME', 'a')], [expression(name("a"))])
 
 def test_string():
+    '''
+    "pouet pouet"
+    """pouet pouet"""
+    '''
     parse([('STRING', '"pouet pouet"')], [expression(string('"pouet pouet"'))])
     parse([('STRING', '"""pouet pouet"""')], [expression(string('"""pouet pouet"""'))])
 
 def test_simple_import():
+    "import   pouet"
     parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet')], [importeu(dotted_as_name(dotted_name([name("pouet")])), space="  ")])
 
 def test_import_basic_dot():
+    "import   pouet.blob"
     parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet'), ('DOT', '.'), ('NAME', 'blob')], [importeu(dotted_as_name(dotted_name([name("pouet"), dot(), name("blob")])), space="  ")])
 
 def test_import_more_dot():
+    "import   pouet.blob .plop"
     parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet'), ('DOT', '.'), ('NAME', 'blob'), ('SPACE', ' '), ('DOT', '.'), ('NAME', 'plop')], [importeu(dotted_as_name(dotted_name([name("pouet"), dot(), name("blob"), space(" "), dot(), name("plop")])), space="  ")])
 
 ### dotted_name: NAME
