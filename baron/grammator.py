@@ -590,11 +590,15 @@ def space(p):
 
 @pg.production("import : IMPORT SPACE dotted_as_name")
 def importeu(p):
-    return {"type": "import", "value": {"type": "dotted_as_name", "value": p[2], "before_space": "", "after_space": ""}, "space": p[1].value}
+    return {"type": "import", "value": p[2], "space": p[1].value}
+
+@pg.production("dotted_as_name : dotted_name SPACE AS SPACE NAME")
+def dotted_as_name_as(p):
+    return {"type": "dotted_as_name", "value": {"type": "dotted_name", "value": p[0]}, "before_space": p[1].value, "after_space": p[3].value, "target": p[4].value, "as_": True}
 
 @pg.production("dotted_as_name : dotted_name")
 def dotted_as_name(p):
-    return {"type": "dotted_name", "value": p[0]}
+    return {"type": "dotted_as_name", "value": {"type": "dotted_name", "value": p[0]}, "before_space": "", "after_space": ""}
 
 @pg.production("dotted_name : dotted_name dotted_name_element")
 def dotted_name_elements_element(p):

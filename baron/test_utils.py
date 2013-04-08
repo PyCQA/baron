@@ -28,9 +28,6 @@ def endl(value, **kwargs):
 def dot():
     return _node("dot", ".")
 
-def aseu():
-    return _node("as", "as")
-
 def expression(value):
     return _node("expression", value)
 

@@ -52,12 +52,16 @@ def test_import_more_dot():
     "import   pouet.blob .plop"
     parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet'), ('DOT', '.'), ('NAME', 'blob'), ('SPACE', ' '), ('DOT', '.'), ('NAME', 'plop')], [importeu(dotted_as_name(dotted_name([name("pouet"), dot(), name("blob"), space(" "), dot(), name("plop")])), space="  ")])
 
+def test_import_as():
+    "import   pouet as  b"
+    parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet'), ('SPACE', ' '), ('AS', 'as'), ('SPACE', '  '), ('NAME', 'b')], [importeu(dotted_as_name(dotted_name([name("pouet")]), before_space=" ", as_=True, after_space="  ", target='b'), space="  ")])
+
 ### dotted_name: NAME
 ### dotted_name: NAME.NAME
 ### dotted_name: NAME(.NAME)+
 
-# dotted_as_name: dotted_name
-# dotted_as_name: dotted_name SPACE 'as' SPACE NAME
+### dotted_as_name: dotted_name
+### dotted_as_name: dotted_name SPACE 'as' SPACE NAME
 
 # dotted_as_names: dotted_as_name
 # dotted_as_names: dotted_as_name [SPACE] ',' [SPACE] dotted_as_name
