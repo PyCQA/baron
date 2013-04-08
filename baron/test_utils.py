@@ -10,7 +10,7 @@ def _node(typeu, value, **kwargs):
         return to_return
     return {"type": typeu, "value": value}
 
-def space(value):
+def space(value=" "):
     return _node("space", value)
 
 def name(value):
