@@ -2,7 +2,8 @@
 # -*- coding:Utf-8 -*-
 
 from test_utils import (parse, space, expression, inteu, endl, name, string,
-                        importeu, dotted_as_name, dotted_name, dot, comma)
+                        importeu, dotted_as_name, dotted_name, dot, comma,
+                        from_import)
 
 def test_empty():
     ""
@@ -67,6 +68,10 @@ def test_import_a_b_as_c():
 def test_import_a_b_c_d():
     "import a, b, c, d"
     parse([('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'a'), ('COMMA', ','), ('SPACE', ' '), ('NAME', 'b'), ('COMMA', ','), ('SPACE', ' '), ('NAME', 'c'), ('COMMA', ','), ('SPACE', ' '), ('NAME', 'd')], [importeu([dotted_as_name(dotted_name([name('a')])), comma(), space(), dotted_as_name(dotted_name([name('b')])), comma(), space(), dotted_as_name(dotted_name([name('c')])), comma(), space(), dotted_as_name(dotted_name([name('d')]))], space=" ")])
+
+def test_from_a_import_b():
+    "from a import b"
+    parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b')], [from_import(dotted_name([name('a')]), target=name('b'))])
 
 ### dotted_name: NAME
 ### dotted_name: NAME.NAME

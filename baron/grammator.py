@@ -561,6 +561,7 @@ def exprs(p):
 
 @pg.production("statement : separator")
 @pg.production("statement : import")
+@pg.production("statement : from_import")
 def separator(p):
     return [p[0]]
 
@@ -591,6 +592,10 @@ def space(p):
 @pg.production("import : IMPORT SPACE dotted_as_names")
 def importeu(p):
     return {"type": "import", "value": p[2], "space": p[1].value}
+
+@pg.production("from_import : FROM SPACE dotted_name SPACE IMPORT SPACE NAME")
+def from_import(p):
+    return {"type": "from_import", "value": {"type": "dotted_name", "value": p[2]}, "target": {"value": p[6].value, "type": "name"}, "after_space": p[5].value, "before_space": p[1].value, "middle_space": p[3].value}
 
 @pg.production("dotted_as_names : dotted_as_names COMMA SPACE dotted_as_name")
 def dotted_as_names_dotted_as_names_dotted_as_name(p):
