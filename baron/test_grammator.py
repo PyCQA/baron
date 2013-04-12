@@ -60,6 +60,10 @@ def test_import_a_b():
     "import a, b"
     parse([('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'a'), ('COMMA', ','), ('SPACE', ' '), ('NAME', 'b')], [importeu([dotted_as_name(dotted_name([name('a')])), comma(), space(), dotted_as_name(dotted_name([name('b')]))], space=" ")])
 
+def test_import_a_b_as_c():
+    "import a, b.d as  c"
+    parse([('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'a'), ('COMMA', ','), ('SPACE', ' '), ('NAME', 'b'), ('DOT', '.'), ('NAME', 'd'), ('SPACE', ' '), ('AS', 'as'), ('SPACE', '  '), ('NAME', 'c')], [importeu([dotted_as_name(dotted_name([name('a')])), comma(), space(), dotted_as_name(dotted_name([name('b'), dot(), name('d')]), as_=True, before_space=" ", after_space="  ", target="c")], space=" ")])
+
 ### dotted_name: NAME
 ### dotted_name: NAME.NAME
 ### dotted_name: NAME(.NAME)+
