@@ -1,3 +1,5 @@
+import json
+
 def flaten(jayzon):
     to_return = []
     for key, value in jayzon.items():
@@ -24,7 +26,14 @@ def dict_diff(first, second):
     return diffs
 
 def diff(left, right):
-    to_return = []
+    to_return = json.dumps(left, indent=4, sort_keys=True).split("\n")
+    to_return += [""]
+    to_return += ["=="]
+    to_return += [""]
+    to_return += json.dumps(right, indent=4, sort_keys=True).split("\n")
+    to_return += [""]
+    to_return += [`left`, "==", `right`]
+    to_return += [""]
     a = 0
     for first, second in zip(left, right):
         if first == second:
@@ -35,4 +44,4 @@ def diff(left, right):
 
 def pytest_assertrepr_compare(config, op, left, right):
     if isinstance(left, list) and isinstance(right, list) and op == "==":
-        return [`left`, "==", `right`] + diff(left, right)
+        return diff(left, right)
