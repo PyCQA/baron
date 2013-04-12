@@ -64,6 +64,10 @@ def test_import_a_b_as_c():
     "import a, b.d as  c"
     parse([('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'a'), ('COMMA', ','), ('SPACE', ' '), ('NAME', 'b'), ('DOT', '.'), ('NAME', 'd'), ('SPACE', ' '), ('AS', 'as'), ('SPACE', '  '), ('NAME', 'c')], [importeu([dotted_as_name(dotted_name([name('a')])), comma(), space(), dotted_as_name(dotted_name([name('b'), dot(), name('d')]), as_=True, before_space=" ", after_space="  ", target="c")], space=" ")])
 
+def test_import_a_b_c_d():
+    "import a, b, c, d"
+    parse([('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'a'), ('COMMA', ','), ('SPACE', ' '), ('NAME', 'b'), ('COMMA', ','), ('SPACE', ' '), ('NAME', 'c'), ('COMMA', ','), ('SPACE', ' '), ('NAME', 'd')], [importeu([dotted_as_name(dotted_name([name('a')])), comma(), space(), dotted_as_name(dotted_name([name('b')])), comma(), space(), dotted_as_name(dotted_name([name('c')])), comma(), space(), dotted_as_name(dotted_name([name('d')]))], space=" ")])
+
 ### dotted_name: NAME
 ### dotted_name: NAME.NAME
 ### dotted_name: NAME(.NAME)+
@@ -72,21 +76,10 @@ def test_import_a_b_as_c():
 ### dotted_as_name: dotted_name SPACE 'as' SPACE NAME
 
 ### dotted_as_names: dotted_as_name
-# dotted_as_names: dotted_as_name [SPACE] ',' [SPACE] dotted_as_name
-# dotted_as_names: dotted_as_name ([SPACE] ',' [SPACE] dotted_as_name)*
+### dotted_as_names: dotted_as_name [SPACE] ',' [SPACE] dotted_as_name
+### dotted_as_names: dotted_as_name ([SPACE] ',' [SPACE] dotted_as_name)*
 
-# don't think I need this one
-# import_as_name: NAME
-# import_as_name: NAME SPACE 'as' SPACE NAME
-
-# neither this one
-# import_as_names: import_as_name
-# import_as_names: import_as_name [SPACE] ',' [SPACE] import_as_name
-# import_as_names: import_as_name ([SPACE] ',' [SPACE] import_as_name)*
-# import_as_names: import_as_name ([SPACE] ',' [SPACE] import_as_name)* [SPACE] [',']
-
-# but I this one is correct
-# import_name: 'import' SPACE dotted_as_names
+### import_name: 'import' SPACE dotted_as_names
 
 # import_from: 'from' SPACE dotted_name SPACE 'import' SPACE import_as_names
 # import_from: 'from' SPACE dotted_name SPACE 'import' [SPACE] '(' [SPACE] import_as_names [SPACE] ')'
