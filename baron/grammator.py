@@ -588,17 +588,25 @@ def endl(p):
 def space(p):
     return create_node_from_token(p[0])
 
-@pg.production("import : IMPORT SPACE dotted_as_name")
+@pg.production("import : IMPORT SPACE dotted_as_names")
 def importeu(p):
     return {"type": "import", "value": p[2], "space": p[1].value}
 
+@pg.production("dotted_as_names : dotted_as_names COMMA SPACE dotted_as_name")
+def dotted_as_names_dotted_as_names_dotted_as_name(p):
+    return p[0] + [{"type": "comma", "value": ","}, {"type": "space", "value": " "}] + p[3]
+
+@pg.production("dotted_as_names : dotted_as_name")
+def dotted_as_names_dotted_as_name(p):
+    return p[0]
+
 @pg.production("dotted_as_name : dotted_name SPACE AS SPACE NAME")
 def dotted_as_name_as(p):
-    return {"type": "dotted_as_name", "value": {"type": "dotted_name", "value": p[0]}, "before_space": p[1].value, "after_space": p[3].value, "target": p[4].value, "as_": True}
+    return [{"type": "dotted_as_name", "value": {"type": "dotted_name", "value": p[0]}, "before_space": p[1].value, "after_space": p[3].value, "target": p[4].value, "as_": True}]
 
 @pg.production("dotted_as_name : dotted_name")
 def dotted_as_name(p):
-    return {"type": "dotted_as_name", "value": {"type": "dotted_name", "value": p[0]}, "before_space": "", "after_space": ""}
+    return [{"type": "dotted_as_name", "value": {"type": "dotted_name", "value": p[0]}, "before_space": "", "after_space": ""}]
 
 @pg.production("dotted_name : dotted_name dotted_name_element")
 def dotted_name_elements_element(p):

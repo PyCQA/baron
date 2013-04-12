@@ -39,3 +39,6 @@ def importeu(value, **kwargs):
 
 def dotted_as_name(value, before_space="", after_space="", **kwargs):
     return _node("dotted_as_name", value, before_space=before_space, after_space=after_space, **kwargs)
+
+def comma():
+    return _node("comma", ",")

@@ -2,7 +2,7 @@
 # -*- coding:Utf-8 -*-
 
 from test_utils import (parse, space, expression, inteu, endl, name, string,
-                        importeu, dotted_as_name, dotted_name, dot)
+                        importeu, dotted_as_name, dotted_name, dot, comma)
 
 def test_empty():
     ""
@@ -42,19 +42,23 @@ def test_string():
 
 def test_simple_import():
     "import   pouet"
-    parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet')], [importeu(dotted_as_name(dotted_name([name("pouet")])), space="  ")])
+    parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet')], [importeu([dotted_as_name(dotted_name([name("pouet")]))], space="  ")])
 
 def test_import_basic_dot():
     "import   pouet.blob"
-    parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet'), ('DOT', '.'), ('NAME', 'blob')], [importeu(dotted_as_name(dotted_name([name("pouet"), dot(), name("blob")])), space="  ")])
+    parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet'), ('DOT', '.'), ('NAME', 'blob')], [importeu([dotted_as_name(dotted_name([name("pouet"), dot(), name("blob")]))], space="  ")])
 
 def test_import_more_dot():
     "import   pouet.blob .plop"
-    parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet'), ('DOT', '.'), ('NAME', 'blob'), ('SPACE', ' '), ('DOT', '.'), ('NAME', 'plop')], [importeu(dotted_as_name(dotted_name([name("pouet"), dot(), name("blob"), space(" "), dot(), name("plop")])), space="  ")])
+    parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet'), ('DOT', '.'), ('NAME', 'blob'), ('SPACE', ' '), ('DOT', '.'), ('NAME', 'plop')], [importeu([dotted_as_name(dotted_name([name("pouet"), dot(), name("blob"), space(" "), dot(), name("plop")]))], space="  ")])
 
 def test_import_as():
     "import   pouet as  b"
-    parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet'), ('SPACE', ' '), ('AS', 'as'), ('SPACE', '  '), ('NAME', 'b')], [importeu(dotted_as_name(dotted_name([name("pouet")]), before_space=" ", as_=True, after_space="  ", target='b'), space="  ")])
+    parse([('IMPORT', 'import'), ('SPACE', '  '), ('NAME', 'pouet'), ('SPACE', ' '), ('AS', 'as'), ('SPACE', '  '), ('NAME', 'b')], [importeu([dotted_as_name(dotted_name([name("pouet")]), before_space=" ", as_=True, after_space="  ", target='b')], space="  ")])
+
+def test_import_a_b():
+    "import a, b"
+    parse([('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'a'), ('COMMA', ','), ('SPACE', ' '), ('NAME', 'b')], [importeu([dotted_as_name(dotted_name([name('a')])), comma(), space(), dotted_as_name(dotted_name([name('b')]))], space=" ")])
 
 ### dotted_name: NAME
 ### dotted_name: NAME.NAME
@@ -63,18 +67,21 @@ def test_import_as():
 ### dotted_as_name: dotted_name
 ### dotted_as_name: dotted_name SPACE 'as' SPACE NAME
 
-# dotted_as_names: dotted_as_name
+### dotted_as_names: dotted_as_name
 # dotted_as_names: dotted_as_name [SPACE] ',' [SPACE] dotted_as_name
 # dotted_as_names: dotted_as_name ([SPACE] ',' [SPACE] dotted_as_name)*
 
+# don't think I need this one
 # import_as_name: NAME
 # import_as_name: NAME SPACE 'as' SPACE NAME
 
+# neither this one
 # import_as_names: import_as_name
 # import_as_names: import_as_name [SPACE] ',' [SPACE] import_as_name
 # import_as_names: import_as_name ([SPACE] ',' [SPACE] import_as_name)*
 # import_as_names: import_as_name ([SPACE] ',' [SPACE] import_as_name)* [SPACE] [',']
 
+# but I this one is correct
 # import_name: 'import' SPACE dotted_as_names
 
 # import_from: 'from' SPACE dotted_name SPACE 'import' SPACE import_as_names
