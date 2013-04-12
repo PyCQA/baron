@@ -73,6 +73,10 @@ def test_from_a_import_b():
     "from a import b"
     parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b')], [from_import(dotted_name([name('a')]), target=name('b'))])
 
+def test_from_a_dot_c_import_b():
+    "from a.C import b"
+    parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('DOT', '.'), ('NAME', 'c'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b')], [from_import(dotted_name([name('a'), dot(), name('c')]), target=name('b'))])
+
 ### dotted_name: NAME
 ### dotted_name: NAME.NAME
 ### dotted_name: NAME(.NAME)+
