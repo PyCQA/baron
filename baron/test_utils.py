@@ -43,5 +43,5 @@ def dotted_as_name(value, before_space="", after_space="", **kwargs):
 def comma():
     return _node("comma", ",")
 
-def from_import(value, target, before_space=" ", middle_space=" ", after_space=" ", **kwargs):
-    return _node("from_import", value, target=target, before_space=before_space, middle_space=middle_space, after_space=after_space, **kwargs)
+def from_import(value, targets, before_space=" ", middle_space=" ", after_space=" ", **kwargs):
+    return _node("from_import", value, targets=targets, before_space=before_space, middle_space=middle_space, after_space=after_space, **kwargs)

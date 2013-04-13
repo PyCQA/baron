@@ -595,7 +595,7 @@ def importeu(p):
 
 @pg.production("from_import : FROM SPACE dotted_name SPACE IMPORT SPACE NAME")
 def from_import(p):
-    return {"type": "from_import", "value": {"type": "dotted_name", "value": p[2]}, "target": {"value": p[6].value, "type": "name"}, "after_space": p[5].value, "before_space": p[1].value, "middle_space": p[3].value}
+    return {"type": "from_import", "value": {"type": "dotted_name", "value": p[2]}, "targets": [{"value": p[6].value, "type": "name"}], "after_space": p[5].value, "before_space": p[1].value, "middle_space": p[3].value}
 
 @pg.production("dotted_as_names : dotted_as_names COMMA SPACE dotted_as_name")
 def dotted_as_names_dotted_as_names_dotted_as_name(p):

@@ -71,11 +71,11 @@ def test_import_a_b_c_d():
 
 def test_from_a_import_b():
     "from a import b"
-    parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b')], [from_import(dotted_name([name('a')]), target=name('b'))])
+    parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b')], [from_import(dotted_name([name('a')]), targets=[name('b')])])
 
 def test_from_a_dot_c_import_b():
     "from a.C import b"
-    parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('DOT', '.'), ('NAME', 'c'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b')], [from_import(dotted_name([name('a'), dot(), name('c')]), target=name('b'))])
+    parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('DOT', '.'), ('NAME', 'c'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b')], [from_import(dotted_name([name('a'), dot(), name('c')]), targets=[name('b')])])
 
 ### dotted_name: NAME
 ### dotted_name: NAME.NAME
@@ -88,7 +88,15 @@ def test_from_a_dot_c_import_b():
 ### dotted_as_names: dotted_as_name [SPACE] ',' [SPACE] dotted_as_name
 ### dotted_as_names: dotted_as_name ([SPACE] ',' [SPACE] dotted_as_name)*
 
-### import_name: 'import' SPACE dotted_as_names
+# import_as_name: NAME
+# import_as_name: NAME SPACE 'as' SPACE NAME
+
+# import_as_names: import_as_name
+# import_as_names: import_as_name [SPACE] ',' [SPACE] import_as_name
+# import_as_names: import_as_name ([SPACE] ',' [SPACE] import_as_name)*
+# import_as_names: import_as_name ([SPACE] ',' [SPACE] import_as_name)* [SPACE] [',']
+
+### import_name: 'import' SPACE import_as_names
 
 # import_from: 'from' SPACE dotted_name SPACE 'import' SPACE import_as_names
 # import_from: 'from' SPACE dotted_name SPACE 'import' [SPACE] '(' [SPACE] import_as_names [SPACE] ')'
