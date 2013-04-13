@@ -605,9 +605,13 @@ def name_as_names_name_as_name(p):
 def name_as_names(p):
     return p[0]
 
+@pg.production("name_as_name : NAME SPACE AS SPACE NAME")
+def name_as_name_name_as_name(p):
+    return [{"type": "name_as_name", "value": p[0].value, "before_space": p[1].value, "after_space": p[3].value, "as_": True, "target": p[4].value}]
+
 @pg.production("name_as_name : NAME")
 def name_as_name_name(p):
-    return [{"type": "name_as_name", "value": create_node_from_token(p[0])}]
+    return [{"type": "name_as_name", "value": p[0].value, "before_space": "", "after_space": ""}]
 
 @pg.production("name_as_name : COMMA")
 @pg.production("name_as_name : SPACE")

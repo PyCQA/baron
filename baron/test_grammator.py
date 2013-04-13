@@ -71,15 +71,19 @@ def test_import_a_b_c_d():
 
 def test_from_a_import_b():
     "from a import b"
-    parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b')], [from_import(dotted_name([name('a')]), targets=[name_as_name(name('b'))])])
+    parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b')], [from_import(dotted_name([name('a')]), targets=[name_as_name('b')])])
 
 def test_from_a_dot_c_import_b():
     "from a.C import b"
-    parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('DOT', '.'), ('NAME', 'c'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b')], [from_import(dotted_name([name('a'), dot(), name('c')]), targets=[name_as_name(name('b'))])])
+    parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('DOT', '.'), ('NAME', 'c'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b')], [from_import(dotted_name([name('a'), dot(), name('c')]), targets=[name_as_name('b')])])
 
 def test_from_a_dot_c_import_b_d():
     "from a.c import b, d"
-    parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('DOT', '.'), ('NAME', 'c'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b'), ('COMMA', ','), ('SPACE', ' '), ('NAME', 'd')], [from_import(dotted_name([name('a'), dot(), name('c')]), targets=[name_as_name(name('b')), comma(), space(), name_as_name(name('d'))])])
+    parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('DOT', '.'), ('NAME', 'c'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b'), ('COMMA', ','), ('SPACE', ' '), ('NAME', 'd')], [from_import(dotted_name([name('a'), dot(), name('c')]), targets=[name_as_name('b'), comma(), space(), name_as_name('d')])])
+
+def test_from_a_import_b_as_d():
+    "from a import b as d"
+    parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b'), ('SPACE', ' '), ('AS', 'as'), ('SPACE', ' '), ('NAME', 'd')], [from_import(dotted_name([name('a')]), targets=[name_as_name('b', as_=True, before_space=" ", after_space=" ", target="d")])])
 
 ### dotted_name: NAME
 ### dotted_name: NAME.NAME
