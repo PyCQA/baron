@@ -3,7 +3,7 @@
 
 from test_utils import (parse, space, expression, inteu, endl, name, string,
                         importeu, dotted_as_name, dotted_name, dot, comma,
-                        from_import)
+                        from_import, name_as_name)
 
 def test_empty():
     ""
@@ -71,15 +71,15 @@ def test_import_a_b_c_d():
 
 def test_from_a_import_b():
     "from a import b"
-    parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b')], [from_import(dotted_name([name('a')]), targets=[name('b')])])
+    parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b')], [from_import(dotted_name([name('a')]), targets=[name_as_name(name('b'))])])
 
 def test_from_a_dot_c_import_b():
     "from a.C import b"
-    parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('DOT', '.'), ('NAME', 'c'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b')], [from_import(dotted_name([name('a'), dot(), name('c')]), targets=[name('b')])])
+    parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('DOT', '.'), ('NAME', 'c'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b')], [from_import(dotted_name([name('a'), dot(), name('c')]), targets=[name_as_name(name('b'))])])
 
 def test_from_a_dot_c_import_b_d():
     "from a.c import b, d"
-    parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('DOT', '.'), ('NAME', 'c'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b'), ('COMMA', ','), ('SPACE', ' '), ('NAME', 'd')], [from_import(dotted_name([name('a'), dot(), name('c')]), targets=[name('b'), comma(), space(), name('d')])])
+    parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('DOT', '.'), ('NAME', 'c'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b'), ('COMMA', ','), ('SPACE', ' '), ('NAME', 'd')], [from_import(dotted_name([name('a'), dot(), name('c')]), targets=[name_as_name(name('b')), comma(), space(), name_as_name(name('d'))])])
 
 ### dotted_name: NAME
 ### dotted_name: NAME.NAME

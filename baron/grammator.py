@@ -606,9 +606,12 @@ def name_as_names(p):
     return p[0]
 
 @pg.production("name_as_name : NAME")
+def name_as_name_name(p):
+    return [{"type": "name_as_name", "value": create_node_from_token(p[0])}]
+
 @pg.production("name_as_name : COMMA")
 @pg.production("name_as_name : SPACE")
-def name_as_name_name(p):
+def name_as_name_comma_space(p):
     return [create_node_from_token(p[0])]
 
 @pg.production("dotted_as_names : dotted_as_names COMMA SPACE dotted_as_name")

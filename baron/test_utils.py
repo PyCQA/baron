@@ -45,3 +45,6 @@ def comma():
 
 def from_import(value, targets, before_space=" ", middle_space=" ", after_space=" ", **kwargs):
     return _node("from_import", value, targets=targets, before_space=before_space, middle_space=middle_space, after_space=after_space, **kwargs)
+
+def name_as_name(value, **kwargs):
+    return _node("name_as_name", value, **kwargs)
