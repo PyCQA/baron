@@ -593,25 +593,35 @@ def space(p):
 def importeu(p):
     return {"type": "import", "value": p[2], "space": p[1].value}
 
-@pg.production("from_import : FROM SPACE dotted_name SPACE IMPORT from_import_target")
+@pg.production("from_import : FROM from_import_module IMPORT from_import_target")
 def from_import(p):
     print "without end space"
-    return {"type": "from_import", "value": {"type": "dotted_name", "value": p[2]}, "targets": p[5], "after_space": "", "before_space": p[1].value, "middle_space": p[3].value}
+    result = {"type": "from_import", "targets": p[3], "after_space": ""}
+    result.update(p[1])
+    return result
 
-@pg.production("from_import : FROM dotted_name SPACE IMPORT from_import_target")
-def from_import_witouth_before_space(p):
-    print "without end space and first space"
-    return {"type": "from_import", "value": {"type": "dotted_name", "value": p[1]}, "targets": p[4], "after_space": "", "before_space": "", "middle_space": p[2].value}
-
-@pg.production("from_import : FROM SPACE dotted_name SPACE IMPORT SPACE from_import_target")
+@pg.production("from_import : FROM from_import_module IMPORT SPACE from_import_target")
 def from_import_with_space(p):
     print "classical"
-    return {"type": "from_import", "value": {"type": "dotted_name", "value": p[2]}, "targets": p[6], "after_space": p[5].value, "before_space": p[1].value, "middle_space": p[3].value}
+    result = {"type": "from_import", "targets": p[4], "after_space": p[3].value}
+    result.update(p[1])
+    return result
 
-@pg.production("from_import : FROM dotted_name SPACE IMPORT SPACE from_import_target")
-def from_import_with_space_without_before_space(p):
-    print "without first space"
-    return {"type": "from_import", "value": {"type": "dotted_name", "value": p[1]}, "targets": p[5], "after_space": p[4].value, "before_space": "", "middle_space": p[2].value}
+@pg.production("from_import_module : SPACE dotted_name SPACE")
+def from_import_module(p):
+    return {"before_space": p[0].value, "middle_space": p[2].value, "value": {"type": "dotted_name", "value": p[1]}}
+
+@pg.production("from_import_module : dotted_name SPACE")
+def from_import_module_no_before_space(p):
+    return {"before_space": "", "middle_space": p[1].value, "value": {"type": "dotted_name", "value": p[0]}}
+
+@pg.production("from_import_module : SPACE dotted_name")
+def from_import_module_no_after_space(p):
+    return {"before_space": p[0].value, "middle_space": "", "value": {"type": "dotted_name", "value": p[1]}}
+
+@pg.production("from_import_module : dotted_name")
+def from_import_module_no_spaces(p):
+    return {"before_space": "", "middle_space": "", "value": {"type": "dotted_name", "value": p[0]}}
 
 @pg.production("from_import_target : name_as_names")
 def from_import_target_name_as_names(p):
