@@ -3,7 +3,8 @@
 
 from test_utils import (parse, space, expression, inteu, endl, name, string,
                         importeu, dotted_as_name, dotted_name, dot, comma,
-                        from_import, name_as_name)
+                        from_import, name_as_name, left_parenthesis,
+                        right_parenthesis)
 
 def test_empty():
     ""
@@ -85,6 +86,10 @@ def test_from_a_import_b_as_d():
     "from a import b as d"
     parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b'), ('SPACE', ' '), ('AS', 'as'), ('SPACE', ' '), ('NAME', 'd')], [from_import(dotted_name([name('a')]), targets=[name_as_name('b', as_=True, before_space=" ", after_space=" ", target="d")])])
 
+def test_from_a_import_parenthesis_b():
+    "from a import (b)"
+    parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('LEFT_PARENTHESIS', '('), ('NAME', 'b'), ('RIGHT_PARENTHESIS', ')')], [from_import(dotted_name([name('a')]), targets=[left_parenthesis(), name_as_name('b'), right_parenthesis()])])
+
 ### dotted_name: NAME
 ### dotted_name: NAME.NAME
 ### dotted_name: NAME(.NAME)+
@@ -94,13 +99,13 @@ def test_from_a_import_b_as_d():
 
 ### dotted_as_names: dotted_as_name
 ### dotted_as_names: dotted_as_name [SPACE] ',' [SPACE] dotted_as_name
-### dotted_as_names: dotted_as_name ([SPACE] ',' [SPACE] dotted_as_name)*
+# dotted_as_names: dotted_as_name ([SPACE] ',' [SPACE] dotted_as_name)*
 
-# import_as_name: NAME
-# import_as_name: NAME SPACE 'as' SPACE NAME
+### import_as_name: NAME
+### import_as_name: NAME SPACE 'as' SPACE NAME
 
-# import_as_names: import_as_name
-# import_as_names: import_as_name [SPACE] ',' [SPACE] import_as_name
+### import_as_names: import_as_name
+### import_as_names: import_as_name [SPACE] ',' [SPACE] import_as_name
 # import_as_names: import_as_name ([SPACE] ',' [SPACE] import_as_name)*
 # import_as_names: import_as_name ([SPACE] ',' [SPACE] import_as_name)* [SPACE] [',']
 
