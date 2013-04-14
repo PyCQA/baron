@@ -54,3 +54,6 @@ def left_parenthesis():
 
 def right_parenthesis():
     return _node('right_parenthesis', ')')
+
+def star():
+    return _node('star', '*')

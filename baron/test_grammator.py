@@ -4,7 +4,7 @@
 from test_utils import (parse, space, expression, inteu, endl, name, string,
                         importeu, dotted_as_name, dotted_name, dot, comma,
                         from_import, name_as_name, left_parenthesis,
-                        right_parenthesis)
+                        right_parenthesis, star)
 
 def test_empty():
     ""
@@ -98,15 +98,14 @@ def test_from_a_import_parenthesis_b_comma():
     "from a import (b,)"
     parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('LEFT_PARENTHESIS', '('), ('NAME', 'b'), ('COMMA', ','), ('RIGHT_PARENTHESIS', ')')], [from_import(dotted_name([name('a')]), targets=[left_parenthesis(), name_as_name('b'), comma(), right_parenthesis()])])
 
-### import_as_names: import_as_name
-### import_as_names: import_as_name [SPACE] ',' [SPACE] import_as_name
-### import_as_names: import_as_name ([SPACE] ',' [SPACE] import_as_name)*
-### import_as_names: import_as_name ([SPACE] ',' [SPACE] import_as_name)*
+def test_from_a_import_star():
+    "from a import *"
+    parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('STAR', '*')], [from_import(dotted_name([name('a')]), targets=[star()])])
 
-### import_name: 'import' SPACE import_as_names
+def test_from_a_import_star_without_space():
+    "from a import*"
+    parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('SPACE', ' '), ('IMPORT', 'import'), ('STAR', '*')], [from_import(dotted_name([name('a')]), targets=[star()], after_space="")])
 
-# import_from: 'from' SPACE dotted_name SPACE 'import' SPACE import_as_names
-# import_from: 'from' SPACE dotted_name SPACE 'import' [SPACE] '(' [SPACE] import_as_names [SPACE] ')'
 # import_from: 'from' SPACE dotted_name SPACE 'import' [SPACE] '*'
 
 # import_from: 'from' [SPACE] '.'* [SPACE] dotted_name SPACE 'import' ...........
