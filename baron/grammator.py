@@ -593,25 +593,37 @@ def space(p):
 def importeu(p):
     return {"type": "import", "value": p[2], "space": p[1].value}
 
-@pg.production("from_import : FROM SPACE dotted_name SPACE IMPORT SPACE name_as_names")
+@pg.production("from_import : FROM SPACE dotted_name SPACE IMPORT from_import_target")
 def from_import(p):
+    print "without end space"
+    return {"type": "from_import", "value": {"type": "dotted_name", "value": p[2]}, "targets": p[5], "after_space": "", "before_space": p[1].value, "middle_space": p[3].value}
+
+@pg.production("from_import : FROM dotted_name SPACE IMPORT from_import_target")
+def from_import_witouth_before_space(p):
+    print "without end space and first space"
+    return {"type": "from_import", "value": {"type": "dotted_name", "value": p[1]}, "targets": p[4], "after_space": "", "before_space": "", "middle_space": p[2].value}
+
+@pg.production("from_import : FROM SPACE dotted_name SPACE IMPORT SPACE from_import_target")
+def from_import_with_space(p):
+    print "classical"
     return {"type": "from_import", "value": {"type": "dotted_name", "value": p[2]}, "targets": p[6], "after_space": p[5].value, "before_space": p[1].value, "middle_space": p[3].value}
 
-@pg.production("from_import : FROM SPACE dotted_name SPACE IMPORT SPACE LEFT_PARENTHESIS name_as_names RIGHT_PARENTHESIS")
+@pg.production("from_import : FROM dotted_name SPACE IMPORT SPACE from_import_target")
+def from_import_with_space_without_before_space(p):
+    print "without first space"
+    return {"type": "from_import", "value": {"type": "dotted_name", "value": p[1]}, "targets": p[5], "after_space": p[4].value, "before_space": "", "middle_space": p[2].value}
+
+@pg.production("from_import_target : name_as_names")
+def from_import_target_name_as_names(p):
+    return p[0]
+
+@pg.production("from_import_target : LEFT_PARENTHESIS name_as_names RIGHT_PARENTHESIS")
 def from_import_parenthesis(p):
-    return {"type": "from_import", "value": {"type": "dotted_name", "value": p[2]}, "targets": [{"type": "left_parenthesis", "value": "("}] + p[7] + [{"type": "right_parenthesis", "value": ")"}], "after_space": p[5].value, "before_space": p[1].value, "middle_space": p[3].value}
+    return [{"type": "left_parenthesis", "value": "("}] + p[1] + [{"type": "right_parenthesis", "value": ")"}]
 
-@pg.production("from_import : FROM SPACE dotted_name SPACE IMPORT LEFT_PARENTHESIS name_as_names RIGHT_PARENTHESIS")
-def from_import_parenthesis_without_space(p):
-    return {"type": "from_import", "value": {"type": "dotted_name", "value": p[2]}, "targets": [{"type": "left_parenthesis", "value": "("}] + p[6] + [{"type": "right_parenthesis", "value": ")"}], "after_space": "", "before_space": p[1].value, "middle_space": p[3].value}
-
-@pg.production("from_import : FROM SPACE dotted_name SPACE IMPORT SPACE STAR")
+@pg.production("from_import_target : STAR")
 def from_import_star(p):
-    return {"type": "from_import", "value": {"type": "dotted_name", "value": p[2]}, "targets": [{"type": "star", "value": "*"}], "after_space": p[5].value, "before_space": p[1].value, "middle_space": p[3].value}
-
-@pg.production("from_import : FROM SPACE dotted_name SPACE IMPORT STAR")
-def from_import_star_without_space(p):
-    return {"type": "from_import", "value": {"type": "dotted_name", "value": p[2]}, "targets": [{"type": "star", "value": "*"}], "after_space": "", "before_space": p[1].value, "middle_space": p[3].value}
+    return [{"type": "star", "value": "*"}]
 
 @pg.production("name_as_names : name_as_names name_as_name")
 def name_as_names_name_as_name(p):

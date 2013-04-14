@@ -106,7 +106,22 @@ def test_from_a_import_star_without_space():
     "from a import*"
     parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('SPACE', ' '), ('IMPORT', 'import'), ('STAR', '*')], [from_import(dotted_name([name('a')]), targets=[star()], after_space="")])
 
-# import_from: 'from' SPACE dotted_name SPACE 'import' [SPACE] '*'
+def test_from_dot_a_import_b():
+    "from .a import b"
+    parse([('FROM', 'from'), ('SPACE', ' '), ('DOT', '.'), ('NAME', 'a'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b')], [from_import(dotted_name([dot(), name('a')]), targets=[name_as_name('b')])])
+
+def test_from_dot_dot_dot_a_import_b():
+    "from ...a import b"
+    parse([('FROM', 'from'), ('SPACE', ' '), ('DOT', '.'), ('DOT', '.'), ('DOT', '.'), ('NAME', 'a'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b')], [from_import(dotted_name([dot(), dot(), dot(), name('a')]), targets=[name_as_name('b')])])
+
+def test_from_no_space_dot_a_import_b():
+    "from.a import b"
+    parse([('FROM', 'from'), ('DOT', '.'), ('NAME', 'a'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b')], [from_import(dotted_name([dot(), name('a')]), targets=[name_as_name('b')], before_space="")])
+
+"from . import b"
+"from .import b"
+"from. import b"
+"from.import b"
 
 # import_from: 'from' [SPACE] '.'* [SPACE] dotted_name SPACE 'import' ...........
 # import_from: 'from' [SPACE] '.'+ [SPACE] 'import' ...........
