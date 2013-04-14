@@ -94,6 +94,10 @@ def test_from_a_import_parenthesis_b_without_space():
     "from a import(b)"
     parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('SPACE', ' '), ('IMPORT', 'import'), ('LEFT_PARENTHESIS', '('), ('NAME', 'b'), ('RIGHT_PARENTHESIS', ')')], [from_import(dotted_name([name('a')]), targets=[left_parenthesis(), name_as_name('b'), right_parenthesis()], after_space="")])
 
+def test_from_a_import_parenthesis_b_comma():
+    "from a import (b,)"
+    parse([('FROM', 'from'), ('SPACE', ' '), ('NAME', 'a'), ('SPACE', ' '), ('IMPORT', 'import'), ('SPACE', ' '), ('LEFT_PARENTHESIS', '('), ('NAME', 'b'), ('COMMA', ','), ('RIGHT_PARENTHESIS', ')')], [from_import(dotted_name([name('a')]), targets=[left_parenthesis(), name_as_name('b'), comma(), right_parenthesis()])])
+
 ### import_as_names: import_as_name
 ### import_as_names: import_as_name [SPACE] ',' [SPACE] import_as_name
 ### import_as_names: import_as_name ([SPACE] ',' [SPACE] import_as_name)*
