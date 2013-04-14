@@ -601,6 +601,10 @@ def from_import(p):
 def from_import_parenthesis(p):
     return {"type": "from_import", "value": {"type": "dotted_name", "value": p[2]}, "targets": [{"type": "left_parenthesis", "value": "("}] + p[7] + [{"type": "right_parenthesis", "value": ")"}], "after_space": p[5].value, "before_space": p[1].value, "middle_space": p[3].value}
 
+@pg.production("from_import : FROM SPACE dotted_name SPACE IMPORT LEFT_PARENTHESIS name_as_names RIGHT_PARENTHESIS")
+def from_import_parenthesis_without_space(p):
+    return {"type": "from_import", "value": {"type": "dotted_name", "value": p[2]}, "targets": [{"type": "left_parenthesis", "value": "("}] + p[6] + [{"type": "right_parenthesis", "value": ")"}], "after_space": "", "before_space": p[1].value, "middle_space": p[3].value}
+
 @pg.production("name_as_names : name_as_names name_as_name")
 def name_as_names_name_as_name(p):
     return p[0] + p[1]
