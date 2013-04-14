@@ -595,14 +595,12 @@ def importeu(p):
 
 @pg.production("from_import : FROM from_import_module IMPORT from_import_target")
 def from_import(p):
-    print "without end space"
     result = {"type": "from_import", "targets": p[3], "after_space": ""}
     result.update(p[1])
     return result
 
 @pg.production("from_import : FROM from_import_module IMPORT SPACE from_import_target")
 def from_import_with_space(p):
-    print "classical"
     result = {"type": "from_import", "targets": p[4], "after_space": p[3].value}
     result.update(p[1])
     return result
