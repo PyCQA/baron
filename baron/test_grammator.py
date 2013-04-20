@@ -4,7 +4,7 @@
 from test_utils import (parse, space, expression, inteu, endl, name, string,
                         importeu, dotted_as_name, dotted_name, dot, comma,
                         from_import, name_as_name, left_parenthesis,
-                        right_parenthesis, star)
+                        right_parenthesis, star, binary_operator)
 
 def test_empty():
     ""
@@ -135,6 +135,10 @@ def test_from_no_space_dot_no_sapceimport_b():
     parse([('FROM', 'from'), ('DOT', '.'), ('IMPORT', 'import'), ('SPACE', ' '), ('NAME', 'b')], [from_import(dotted_name([dot()]), targets=[name_as_name('b')], middle_space="", before_space="")])
 
 # ----------
+
+def test_simple_power():
+    "a**b"
+    parse([('NAME', 'a'), ('DOUBLE_STAR', '**'), ('NAME', 'b')], [binary_operator('**', first=name('a'), second=name('b'), first_space="", second_space="")])
 
 # stmt: simple_stmt
 # stmt: compound_stmt

@@ -562,18 +562,23 @@ def exprs((expression,)):
 @pg.production("statement : separator")
 @pg.production("statement : import")
 @pg.production("statement : from_import")
+@pg.production("statement : power")
 def separator((statement,)):
     return [statement]
 
-@pg.production("expression : INT")
+@pg.production("expression : atom")
+def atom((atom,)):
+    return atom
+
+@pg.production("atom : INT")
 def int((int_,)):
     return create_node_from_token(int_, section="number")
 
-@pg.production("expression : NAME")
+@pg.production("atom : NAME")
 def name((name,)):
     return create_node_from_token(name)
 
-@pg.production("expression : STRING")
+@pg.production("atom : STRING")
 def string((string_,)):
     return create_node_from_token(string_)
 
@@ -782,6 +787,17 @@ def dotted_name_element((dotted_name_element,)):
 def dotted_name((token,)):
     return [create_node_from_token(token)]
 
+
+@pg.production("power : atom DOUBLE_STAR atom")
+def power((atom, double_star, atom2)):
+    return {
+            "type": "binary_operator",
+            "value": "**",
+            "first": atom,
+            "second": atom2,
+            "first_space": "",
+            "second_space": "",
+    }
 
 parser = pg.build()
 
