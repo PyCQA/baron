@@ -259,9 +259,10 @@ def test_from_no_space_dot_no_sapceimport_b():
 # atom: '[' [SPACE] [listmaker] [SPACE] ']'
 # -> list([values])
 # atom: '{' [SPACE] [dictorsetmaker] [SPACE] '}'
-# -> dict([keys], [values])]
+# -> dict(zip([keys], [values]))
 # atom: '`' [SPACE] testlist1 [SPACE] '`'
 # -> repr([testlist1])
 ### atom: NAME
 ### atom: NUMBER
+# all sort of numbers!
 ### atom: STRING+
