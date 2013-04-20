@@ -156,30 +156,41 @@ def test_from_no_space_dot_no_sapceimport_b():
 
 # expr_stmt: testlist
 # expr_stmt: testlist ([SPACE] '=' [SPACE] testlist)*
+# -> assign(testlist, testlist)
 # expr_stmt: testlist ([SPACE] '=' [SPACE] yield_expr)*
+# -> assign(testlist, testlist)
 # expr_stmt: testlist augassign yield_expr
+# -> augassign(testlist, testlist)
 # expr_stmt: testlist augassign testlist
+# -> augassign(testlist, testlist)
 
 # testlist: test
 # testlist: test [SPACE] [',']
 # testlist: test ([SPACE] ',' [SPACE] test)*
 # testlist: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
+# -> testlist([...])
 
 # test: lambdef
 # test: or_test
 # test: or_test [SPACE 'if' SPACE or_test SPACE 'else' SPACE test]
+# -> ternaryOp(or_test, or_test, test)
 
 # or_test: and_test
 # or_test: and_test (SPACE 'or' SPACE and_test)*
+# -> boolOP('or', not_test, not_test)
 
 # and_test: not_test
 # and_test: not_test (SPACE 'and' SPACE not_test)*
+# -> boolOP('and', not_test, not_test)
 
-# not_test: 'not' SPACE not_test
 # not_test: comparison
+# not_test: 'not' SPACE not_test
+# -> unitaryOp('not', not_test)
 
 # comparison: expr
+# -> expr
 # comparison: expr (comp_op expr)*
+# -> comparison(comp_or, expr, expr)
 
 # comp_op: '<'
 # comp_op: '>'
@@ -192,28 +203,49 @@ def test_from_no_space_dot_no_sapceimport_b():
 # comp_op: 'not' SPACE 'in'
 # comp_op: 'is'
 # comp_op: 'is' SPACE 'not'
+# -> comp_op
 
 # expr: xor_expr
 # expr: xor_expr ([SPACE] '|' [SPACE] xor_expr)*
+# -> binop('|', term, term)
 
 # xor_expr: and_expr
 # xor_expr: and_expr ([SPACE] '^' [SPACE] and_expr)*
+# -> binop('^', term, term)
 
 # and_expr: shift_expr
 # and_expr: shift_expr ([SPACE] '&' [SPACE] shift_expr)*
+# -> binop('&', term, term)
 
 # shift_expr: arith_expr
 # shift_expr: arith_expr ([SPACE] ('<<'|'>>') [SPACE] arith_expr)*
+# -> binop(('<<'|'>>'), term, term)
 
 # arith_expr: term
+# -> term
 # arith_expr: term ([SPACE] ('+'|'-') [SPACE] term)*
+# -> binop(('+'|'-'), term, term)
 
 # term: factor
+# -> factor
 # term: factor ([SPACE] ('*'|'/'|'%'|'//') [SPACE] factor)*
+# -> binop(('*'|'/'|'%'|'//'), factor, factor)
 
 # factor: ('+'|'-'|'~') [SPACE] factor
+# -> uniatryop(('+'|'-'|'~'), factor)
 # factor: power
+# -> power
 
+# power: atom
+# -> atom
+# power: atom [SPACE] trailer*
+# -> dépend du trailer (eg: dotted_name) -> doit être une liste
+# power: atom [SPACE] '**' [SPACE] factor
+# -> binop("**", atom, factor)
+# power: atom [SPACE] '**' [SPACE] factor [SPACE] ** [SPACE] factor2
+# -> binop("**", atom, binop("**", factor, factor2)))
+# power: atom [[SPACE] '**' [SPACE] factor]
+# -> binop("**", atom, factor)
 # power: atom [SPACE] trailer* [[SPACE] '**' [SPACE] factor]
 
 # trailer: '.' [SPACE] NAME
@@ -221,10 +253,15 @@ def test_from_no_space_dot_no_sapceimport_b():
 # trailer: '(' [SPACE] [arglist] [SPACE] ')'
 
 # atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
+# -> tuple([values])
 # atom: '(' [SPACE] [yield_expr] [SPACE] ')'
+# -> ???(yieldexpr) a("yield a") == a("(yield a)"))
 # atom: '[' [SPACE] [listmaker] [SPACE] ']'
+# -> list([values])
 # atom: '{' [SPACE] [dictorsetmaker] [SPACE] '}'
+# -> dict([keys], [values])]
 # atom: '`' [SPACE] testlist1 [SPACE] '`'
+# -> repr([testlist1])
 ### atom: NAME
 ### atom: NUMBER
 ### atom: STRING+
