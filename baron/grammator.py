@@ -539,6 +539,16 @@ def create_node(name, value, **kwargs):
         result.update(kwargs)
     return result
 
+def binary_operator(operator, first, second, first_space="", second_space=""):
+    return {
+        "type": "binary_operator",
+        "value": operator,
+        "first": first,
+        "second": second,
+        "first_space": first_space,
+        "second_space": second_space,
+    }
+
 @pg.production("main : statements")
 def main((statements,)):
     return filter(None, statements) if statements else []
@@ -790,47 +800,19 @@ def dotted_name((token,)):
 
 @pg.production("power : atom DOUBLE_STAR atom")
 def power((atom, double_star, atom2)):
-    return {
-            "type": "binary_operator",
-            "value": "**",
-            "first": atom,
-            "second": atom2,
-            "first_space": "",
-            "second_space": "",
-    }
+    return binary_operator("**", atom, atom2)
 
 @pg.production("power : atom SPACE DOUBLE_STAR atom")
 def power_first_space((atom, space, double_star, atom2)):
-    return {
-            "type": "binary_operator",
-            "value": "**",
-            "first": atom,
-            "second": atom2,
-            "first_space": space.value,
-            "second_space": "",
-    }
+    return binary_operator("**", atom, atom2, first_space=space.value)
 
 @pg.production("power : atom DOUBLE_STAR SPACE atom")
 def power_second_space((atom, double_star, space, atom2)):
-    return {
-            "type": "binary_operator",
-            "value": "**",
-            "first": atom,
-            "second": atom2,
-            "first_space": "",
-            "second_space": space.value,
-    }
+    return binary_operator("**", atom, atom2, second_space=space.value)
 
 @pg.production("power : atom SPACE DOUBLE_STAR SPACE atom")
 def power_spaces((atom, space, double_star, space2, atom2)):
-    return {
-            "type": "binary_operator",
-            "value": "**",
-            "first": atom,
-            "second": atom2,
-            "first_space": space.value,
-            "second_space": space2.value,
-    }
+    return binary_operator("**", atom, atom2, first_space=space.value, second_space=space2.value)
 
 parser = pg.build()
 
