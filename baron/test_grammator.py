@@ -132,6 +132,18 @@ def test_simple_power():
     "a**b"
     parse([('NAME', 'a'), ('DOUBLE_STAR', '**'), ('NAME', 'b')], [binary_operator('**', first=name('a'), second=name('b'), first_space="", second_space="")])
 
+def test_first_space_power():
+    "a  **b"
+    parse([('NAME', 'a'), ('SPACE', '  '), ('DOUBLE_STAR', '**'), ('NAME', 'b')], [binary_operator('**', first=name('a'), second=name('b'), first_space="  ", second_space="")])
+
+def test_second_space_power():
+    "a** b"
+    parse([('NAME', 'a'), ('DOUBLE_STAR', '**'), ('SPACE', ' '), ('NAME', 'b')], [binary_operator('**', first=name('a'), second=name('b'), first_space="", second_space=" ")])
+
+def test_spaces_power():
+    "a ** b"
+    parse([('NAME', 'a'), ('SPACE', ' '), ('DOUBLE_STAR', '**'), ('SPACE', '  '), ('NAME', 'b')], [binary_operator('**', first=name('a'), second=name('b'), first_space=" ", second_space="  ")])
+
 # stmt: simple_stmt
 # stmt: compound_stmt
 

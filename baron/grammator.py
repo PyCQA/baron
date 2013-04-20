@@ -799,6 +799,39 @@ def power((atom, double_star, atom2)):
             "second_space": "",
     }
 
+@pg.production("power : atom SPACE DOUBLE_STAR atom")
+def power_first_space((atom, space, double_star, atom2)):
+    return {
+            "type": "binary_operator",
+            "value": "**",
+            "first": atom,
+            "second": atom2,
+            "first_space": space.value,
+            "second_space": "",
+    }
+
+@pg.production("power : atom DOUBLE_STAR SPACE atom")
+def power_second_space((atom, double_star, space, atom2)):
+    return {
+            "type": "binary_operator",
+            "value": "**",
+            "first": atom,
+            "second": atom2,
+            "first_space": "",
+            "second_space": space.value,
+    }
+
+@pg.production("power : atom SPACE DOUBLE_STAR SPACE atom")
+def power_spaces((atom, space, double_star, space2, atom2)):
+    return {
+            "type": "binary_operator",
+            "value": "**",
+            "first": atom,
+            "second": atom2,
+            "first_space": space.value,
+            "second_space": space2.value,
+    }
+
 parser = pg.build()
 
 def fake_lexer(sequence):
