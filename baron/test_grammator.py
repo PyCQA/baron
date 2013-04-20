@@ -22,14 +22,6 @@ def test_endl():
     "\n"
     parse([('ENDL', '\n')], [endl("\n", before_space="")])
 
-def test_space_endl():
-    "    \n"
-    parse([('SPACE', '   '), ('ENDL', '\n')], [endl("\n", before_space="   ")])
-
-def test_some_stuff():
-    "3    \n42"
-    parse([('INT', '3'), ('SPACE', '   '), ('ENDL', '\n'), ('INT', '42')], [expression(inteu("3")), endl("\n", before_space="   "), expression(inteu("42"))])
-
 def test_name():
     "a"
     parse([('NAME', 'a')], [expression(name("a"))])
