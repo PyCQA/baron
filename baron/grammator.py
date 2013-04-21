@@ -808,7 +808,7 @@ def power_atom((factor,)):
 @pg.production("power : atom DOUBLE_STAR factor")
 def factor((atom, double_star, factor)):
     return binary_operator(
-                           "**",
+                           double_star.value,
                            atom,
                            factor
                           )
@@ -817,7 +817,7 @@ def factor((atom, double_star, factor)):
 @pg.production("power : atom SPACE DOUBLE_STAR power")
 def power_first_space((atom, space, double_star, factor)):
     return binary_operator(
-                           "**",
+                           double_star.value,
                            atom,
                            factor,
                            first_space=space.value
@@ -827,7 +827,7 @@ def power_first_space((atom, space, double_star, factor)):
 @pg.production("power : atom DOUBLE_STAR SPACE power")
 def power_second_space((atom, double_star, space, factor)):
     return binary_operator(
-                           "**",
+                           double_star.value,
                            atom,
                            factor,
                            second_space=space.value
@@ -837,7 +837,7 @@ def power_second_space((atom, double_star, space, factor)):
 @pg.production("power : atom SPACE DOUBLE_STAR SPACE power")
 def power_spaces((atom, space, double_star, space2, factor)):
     return binary_operator(
-                           "**",
+                           double_star.value,
                            atom,
                            factor,
                            first_space=space.value,
