@@ -626,6 +626,83 @@ def test_spaces_power():
                            second_space="  "
                           )])
 
+def test_power_power():
+    "a **  b   **    c"
+    parse([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('DOUBLE_STAR', '**'),
+           ('SPACE', '  '),
+           ('NAME', 'b'),
+           ('SPACE', '   '),
+           ('DOUBLE_STAR', '**'),
+           ('SPACE', '    '),
+           ('NAME', 'c')
+          ],
+          [binary_operator(
+                           '**',
+                           first=name('a'),
+                           second=binary_operator(
+                                                  '**',
+                                                  first=name('b'),
+                                                  second=name('c'),
+                                                  first_space="   ",
+                                                  second_space="    "
+                                                 ),
+                           first_space=" ",
+                           second_space="  "
+                          )])
+
+def test_power_power_spaces():
+    "a**  b   **    c"
+    parse([
+           ('NAME', 'a'),
+           ('DOUBLE_STAR', '**'),
+           ('SPACE', '  '),
+           ('NAME', 'b'),
+           ('SPACE', '   '),
+           ('DOUBLE_STAR', '**'),
+           ('SPACE', '    '),
+           ('NAME', 'c')
+          ],
+          [binary_operator(
+                           '**',
+                           first=name('a'),
+                           second=binary_operator(
+                                                  '**',
+                                                  first=name('b'),
+                                                  second=name('c'),
+                                                  first_space="   ",
+                                                  second_space="    "
+                                                 ),
+                           first_space="",
+                           second_space="  "
+                          )])
+    "a **b   **    c"
+    parse([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('DOUBLE_STAR', '**'),
+           ('NAME', 'b'),
+           ('SPACE', '   '),
+           ('DOUBLE_STAR', '**'),
+           ('SPACE', '    '),
+           ('NAME', 'c')
+          ],
+          [binary_operator(
+                           '**',
+                           first=name('a'),
+                           second=binary_operator(
+                                                  '**',
+                                                  first=name('b'),
+                                                  second=name('c'),
+                                                  first_space="   ",
+                                                  second_space="    "
+                                                 ),
+                           first_space=" ",
+                           second_space=""
+                          )])
+
 # stmt: simple_stmt
 # stmt: compound_stmt
 
