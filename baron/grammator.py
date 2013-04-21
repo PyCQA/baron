@@ -806,6 +806,7 @@ def power_atom((factor,)):
     return factor
 
 @pg.production("power : atom DOUBLE_STAR factor")
+@pg.production("power : atom DOUBLE_STAR power")
 def factor((atom, double_star, factor)):
     return binary_operator(
                            double_star.value,
@@ -872,5 +873,5 @@ if __name__ == '__main__':
             yield Token(*i)
 
     #print pouet('1')
-    print json.dumps(parse(pouetpouet('from a.b import c as d, e, f')), indent=4)
+    print json.dumps(parse(pouetpouet('B**c**D')), indent=4)
     #print json.dumps(parser.parse(pouetpouetpouet([('ENDMARKER', ''), None])), indent=4)

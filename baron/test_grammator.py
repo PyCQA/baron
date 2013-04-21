@@ -702,6 +702,27 @@ def test_power_power_spaces():
                            first_space=" ",
                            second_space=""
                           )])
+    "a**b**c"
+    parse([
+           ('NAME', 'a'),
+           ('DOUBLE_STAR', '**'),
+           ('NAME', 'b'),
+           ('DOUBLE_STAR', '**'),
+           ('NAME', 'c')
+          ],
+          [binary_operator(
+                           '**',
+                           first=name('a'),
+                           second=binary_operator(
+                                                  '**',
+                                                  first=name('b'),
+                                                  second=name('c'),
+                                                  first_space="",
+                                                  second_space=""
+                                                 ),
+                           first_space="",
+                           second_space=""
+                          )])
 
 # stmt: simple_stmt
 # stmt: compound_stmt
@@ -809,10 +830,10 @@ def test_power_power_spaces():
 # -> dépend du trailer (eg: dotted_name) -> doit être une liste
 ### power: atom [SPACE] '**' [SPACE] factor
 ### -> binop("**", atom, factor)
-# power: atom [SPACE] '**' [SPACE] factor [SPACE] ** [SPACE] factor2
-# -> binop("**", atom, binop("**", factor, factor2)))
-# power: atom [[SPACE] '**' [SPACE] factor]
-# -> binop("**", atom, factor)
+### power: atom [SPACE] '**' [SPACE] factor [SPACE] ** [SPACE] factor2
+### -> binop("**", atom, binop("**", factor, factor2)))
+### power: atom [[SPACE] '**' [SPACE] factor]
+### -> binop("**", atom, factor)
 # power: atom [SPACE] trailer* [[SPACE] '**' [SPACE] factor]
 
 # trailer: '.' [SPACE] NAME
