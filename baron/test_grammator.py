@@ -244,12 +244,12 @@ def test_spaces_power():
 # factor: power
 # -> power
 
-# power: atom
-# -> atom
+## power: atom
+## -> atom
 # power: atom [SPACE] trailer*
 # -> dépend du trailer (eg: dotted_name) -> doit être une liste
-# power: atom [SPACE] '**' [SPACE] factor
-# -> binop("**", atom, factor)
+## power: atom [SPACE] '**' [SPACE] factor
+## -> binop("**", atom, factor)
 # power: atom [SPACE] '**' [SPACE] factor [SPACE] ** [SPACE] factor2
 # -> binop("**", atom, binop("**", factor, factor2)))
 # power: atom [[SPACE] '**' [SPACE] factor]
