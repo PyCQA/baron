@@ -797,25 +797,29 @@ def dotted_name_element((dotted_name_element,)):
 def dotted_name((token,)):
     return [create_node_from_token(token)]
 
-@pg.production("power : atom")
-def power_atom((atom,)):
+@pg.production("factor : atom")
+def factor_atom((atom,)):
     return atom
 
-@pg.production("power : atom DOUBLE_STAR power")
-def power((atom, double_star, power)):
-    return binary_operator("**", atom, power)
+@pg.production("power : factor")
+def power_atom((factor,)):
+    return factor
 
-@pg.production("power : atom SPACE DOUBLE_STAR power")
-def power_first_space((atom, space, double_star, power)):
-    return binary_operator("**", atom, power, first_space=space.value)
+@pg.production("power : atom DOUBLE_STAR factor")
+def factor((atom, double_star, factor)):
+    return binary_operator("**", atom, factor)
 
-@pg.production("power : atom DOUBLE_STAR SPACE power")
-def power_second_space((atom, double_star, space, power)):
-    return binary_operator("**", atom, power, second_space=space.value)
+@pg.production("power : atom SPACE DOUBLE_STAR factor")
+def power_first_space((atom, space, double_star, factor)):
+    return binary_operator("**", atom, factor, first_space=space.value)
 
-@pg.production("power : atom SPACE DOUBLE_STAR SPACE power")
-def power_spaces((atom, space, double_star, space2, power)):
-    return binary_operator("**", atom, power, first_space=space.value, second_space=space2.value)
+@pg.production("power : atom DOUBLE_STAR SPACE factor")
+def power_second_space((atom, double_star, space, factor)):
+    return binary_operator("**", atom, factor, second_space=space.value)
+
+@pg.production("power : atom SPACE DOUBLE_STAR SPACE factor")
+def power_spaces((atom, space, double_star, space2, factor)):
+    return binary_operator("**", atom, factor, first_space=space.value, second_space=space2.value)
 
 parser = pg.build()
 
