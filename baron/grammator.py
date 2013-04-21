@@ -815,6 +815,12 @@ def factor_atom((atom,)):
 def factor_unitary_operator((operator, factor,)):
     return unitary_operator(operator.value, factor, space="")
 
+@pg.production("factor : PLUS SPACE factor")
+@pg.production("factor : MINUS SPACE factor")
+@pg.production("factor : TILDE SPACE factor")
+def factor_unitary_operator_space((operator, space, factor,)):
+    return unitary_operator(operator.value, factor, space=space.value)
+
 @pg.production("power : factor")
 def power_atom((factor,)):
     return factor

@@ -811,6 +811,25 @@ def test_power_operator_madness():
                    second_space="  "
               )])
 
+def test_power_factor_tild_space():
+    "a **  ~ b"
+    parse([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('DOUBLE_STAR', '**'),
+           ('SPACE', '  '),
+           ('TILDE', '~'),
+           ('SPACE', ' '),
+           ('NAME', 'b')
+          ],
+          [binary_operator(
+                           '**',
+                           first=name('a'),
+                           second=unitary_operator('~', name('b'), space=" "),
+                           first_space=" ",
+                           second_space="  "
+                          )])
+
 # stmt: simple_stmt
 # stmt: compound_stmt
 
