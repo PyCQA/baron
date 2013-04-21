@@ -809,11 +809,11 @@ def dotted_name((token,)):
 def factor_atom((atom,)):
     return atom
 
-@pg.production("factor : PLUS atom")
-@pg.production("factor : MINUS atom")
-@pg.production("factor : TILDE atom")
-def factor_unitary_operator((operator, atom,)):
-    return unitary_operator(operator.value, atom, space="")
+@pg.production("factor : PLUS factor")
+@pg.production("factor : MINUS factor")
+@pg.production("factor : TILDE factor")
+def factor_unitary_operator((operator, factor,)):
+    return unitary_operator(operator.value, factor, space="")
 
 @pg.production("power : factor")
 def power_atom((factor,)):

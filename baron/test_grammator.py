@@ -779,6 +779,38 @@ def test_power_factor_tild():
                            second_space="  "
                           )])
 
+def test_power_operator_madness():
+    "a **  ~+-b"
+    parse([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('DOUBLE_STAR', '**'),
+           ('SPACE', '  '),
+           ('TILDE', '~'),
+           ('PLUS', '+'),
+           ('MINUS', '-'),
+           ('NAME', 'b')
+          ],
+          [binary_operator(
+                   '**',
+                   first=name('a'),
+                   second=unitary_operator(
+                                           '~',
+                                           unitary_operator(
+                                                           '+',
+                                                           unitary_operator(
+                                                                    '-',
+                                                                    name('b'),
+                                                                    space=""
+                                                                   ),
+                                                           space=""
+                                           ),
+                                           space=""
+                                          ),
+                   first_space=" ",
+                   second_space="  "
+              )])
+
 # stmt: simple_stmt
 # stmt: compound_stmt
 
