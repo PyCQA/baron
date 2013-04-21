@@ -549,6 +549,14 @@ def binary_operator(operator, first, second, first_space="", second_space=""):
         "second_space": second_space,
     }
 
+def unitary_operator(operator, target, space=""):
+    return {
+        "type": "unitary_operator",
+        "value": operator,
+        "target": target,
+        "space": space,
+    }
+
 @pg.production("main : statements")
 def main((statements,)):
     return filter(None, statements) if statements else []
@@ -800,6 +808,10 @@ def dotted_name((token,)):
 @pg.production("factor : atom")
 def factor_atom((atom,)):
     return atom
+
+@pg.production("factor : PLUS atom")
+def factor_unitary_operator((plus, atom,)):
+    return unitary_operator(plus.value, atom, space="")
 
 @pg.production("power : factor")
 def power_atom((factor,)):

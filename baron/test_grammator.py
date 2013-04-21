@@ -4,7 +4,8 @@
 from test_utils import (parse, space, expression, inteu, endl, name, string,
                         importeu, dotted_as_name, dotted_name, dot, comma,
                         from_import, name_as_name, left_parenthesis,
-                        right_parenthesis, star, binary_operator)
+                        right_parenthesis, star, binary_operator,
+                        unitary_operator)
 
 def test_empty():
     ""
@@ -722,6 +723,24 @@ def test_power_power_spaces():
                                                  ),
                            first_space="",
                            second_space=""
+                          )])
+
+def test_power_factor():
+    "a **  +b"
+    parse([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('DOUBLE_STAR', '**'),
+           ('SPACE', '  '),
+           ('PLUS', '+'),
+           ('NAME', 'b')
+          ],
+          [binary_operator(
+                           '**',
+                           first=name('a'),
+                           second=unitary_operator('+', name('b'), space=""),
+                           first_space=" ",
+                           second_space="  "
                           )])
 
 # stmt: simple_stmt
