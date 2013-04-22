@@ -47,8 +47,29 @@ def group_generator(sequence):
             current += iterator.next()
         if current in to_group_keys and matching_found(to_group, current, iterator.show_next()):
             current += iterator.next()
-        if current == "@" and re.match("[a-zA-Z_]+", iterator.show_next()):
+        if current in list('uUrRbB') and str(iterator.show_next()).startswith(('"', "'")):
             current += iterator.next()
+        if str(current).lower() in ["ur", "br"] and str(iterator.show_next()).startswith(('"', "'")):
+            current += iterator.next()
+        if any(map(lambda x: re.match(x, current), (r'^\d+e$', r'^\d+\.\d*e$', r'^\.\d+e$'))):
+            current += iterator.next()
+            current += iterator.next()
+
+            # I'm obligatory in a case where I have something like that:
+            # ['123.123e', '[+-]', '123']
+            assert re.match(r'^\d+[eE][-+]?\d+$', current) or re.match(r'^\d*.\d*[eE][-+]?\d+$', current)
+
+        if current == "\\" and iterator.show_next() in ('\n', '\r\n'):
+            current += iterator.next()
+            if re.match(r'^\s+$', str(iterator.show_next())):
+                current += iterator.next()
+
+        if re.match(r'^\s+$', current) and iterator.show_next() == "\\":
+            current += iterator.next()
+            current += iterator.next()
+            if re.match(r'^\s+$', str(iterator.show_next())):
+                current += iterator.next()
+
         yield current
 
 

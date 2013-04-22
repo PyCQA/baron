@@ -34,6 +34,9 @@ def test_decorator():
 def test_tab_n_space():
     assert split("	 ") == ["	 "]
 
+def test_several_spaces():
+    assert split("     ") == ["     "]
+
 def test_numbers():
     assert split("1234") == ["1234"]
 
@@ -245,7 +248,7 @@ def test_escape():
     assert split("\\\\") == ["\\", "\\"]
 
 def test_escape_in_string():
-    assert split("'\\'") == ["'\\'"]
+    assert split("'\\\\'") == ["'\\\\'"]
 
 def test_other_escape_string():
     assert split("'\\\\'") == ["'\\\\'"]
@@ -255,3 +258,12 @@ def test_hexa():
 
 def test_multi_string_with_same_quotes_in():
     assert split('"""pouet " "" pouet"""') == ['"""pouet " "" pouet"""']
+
+def test_comment_backslash():
+    assert split('# pouet \\\npouet') == ["# pouet ", "\\", "\n", "pouet"]
+
+def test_backslash_in_comment():
+    assert split("# pouet \\t pouet\npouet") == ["# pouet \\t pouet", "\n", "pouet"]
+
+def test_regression():
+    assert split("(r'[\"\\'](.|\n|\r)*[\"\\']', 'STRING'),") == ["(", "r", "'[\"\\'](.|\n|\r)*[\"\\']'", ",", " ", "'STRING'", ")", ","]

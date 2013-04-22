@@ -35,13 +35,22 @@ class FlexibleIterator():
     def grab(self, test):
         to_return = ""
         current = None
+        while self.show_next() is not None and test(self):
+            current = self.next()
+            to_return += current
+
+        return to_return
+
+    def grab_string(self, test):
+        to_return = ""
+        current = None
         escaped = False
         while self.show_next() is not None and (escaped or test(self)):
+            current = self.next()
+            to_return += current
             if escaped:
                 escaped = False
             elif current == "\\":
-                escaped == True
-            current = self.next()
-            to_return += current
+                escaped = True
 
         return to_return
