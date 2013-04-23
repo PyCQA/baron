@@ -690,6 +690,15 @@ def name_as_name_name((name,)):
              "after_space": ""
             }]
 
+@pg.production("name_as_name : NAME SPACE")
+def name_as_name_name_space((name, space)):
+    return [{
+             "type": "name_as_name",
+             "value": name.value,
+             "before_space": "",
+             "after_space": ""
+            }] + [create_node_from_token(space)]
+
 @pg.production("name_as_name : COMMA")
 @pg.production("name_as_name : SPACE")
 def name_as_name_comma_space((name_as_name,)):
@@ -805,5 +814,5 @@ if __name__ == '__main__':
             yield Token(*i)
 
     #print pouet('1')
-    print json.dumps(parse(pouetpouet('B**c**D')), indent=4)
+    print json.dumps(parse(pouetpouet('from a import (a )')), indent=4)
     #print json.dumps(parser.parse(pouetpouetpouet([('ENDMARKER', ''), None])), indent=4)
