@@ -569,8 +569,10 @@ def statements_statement((statements, statement)):
 def statement((statement,)):
     return statement
 
-@pg.production("statement : ENDMARKER")
-def end(_):
+@pg.production("statement : SPACE? ENDMARKER")
+def end((space, endmarker)):
+    if space:
+        return [create_node_from_token(space)]
     return [None]
 
 @pg.production("statement : expression")
@@ -600,25 +602,13 @@ def name((name,)):
 def string((string_,)):
     return create_node_from_token(string_)
 
-@pg.production("separator : SPACE ENDL")
+@pg.production("separator : SPACE? ENDL")
 def space_endl((space, endl,)):
     return {
             "type": endl.name.lower(),
             "value": endl.value,
-            "before_space": space.value
+            "before_space": space.value if space else ""
            }
-
-@pg.production("separator : ENDL")
-def endl((endl,)):
-    return {
-            "type": "endl",
-            "value": endl.value,
-            "before_space": ""
-           }
-
-@pg.production("separator : SPACE ENDMARKER")
-def space((space, endmarker)):
-    return create_node_from_token(space)
 
 @pg.production("import : IMPORT SPACE dotted_as_names")
 def importeu((import_, space, dotted_as_names)):
@@ -628,64 +618,21 @@ def importeu((import_, space, dotted_as_names)):
             "space": space.value
            }
 
-@pg.production("from_import : FROM from_import_module IMPORT from_import_target")
-def from_import((from_, from_import_module, import_, from_import_target)):
-    result = {
-              "type": "from_import",
-              "targets": from_import_target,
-              "after_space": ""
-             }
-    result.update(from_import_module)
-    return result
-
-@pg.production("from_import : FROM from_import_module IMPORT SPACE from_import_target")
+@pg.production("from_import : FROM from_import_module IMPORT SPACE? from_import_target")
 def from_import_with_space((from_, from_import_module, import_, space, from_import_target)):
     result = {
               "type": "from_import",
               "targets": from_import_target,
-              "after_space": space.value
+              "after_space": space.value if space else ""
              }
     result.update(from_import_module)
     return result
 
-@pg.production("from_import_module : SPACE dotted_name SPACE")
+@pg.production("from_import_module : SPACE? dotted_name SPACE?")
 def from_import_module((space, dotted_name, space2)):
     return {
-            "before_space": space.value,
-            "middle_space": space2.value,
-            "value": {
-                      "type": "dotted_name",
-                      "value": dotted_name
-                     }
-           }
-
-@pg.production("from_import_module : dotted_name SPACE")
-def from_import_module_no_before_space((dotted_name, space)):
-    return {
-            "before_space": "",
-            "middle_space": space.value,
-            "value": {
-                      "type": "dotted_name", 
-                      "value": dotted_name
-                     }
-           }
-
-@pg.production("from_import_module : SPACE dotted_name")
-def from_import_module_no_after_space((space, dotted_name)):
-    return {
-            "before_space": space.value,
-            "middle_space": "",
-            "value": {
-                      "type": "dotted_name",
-                      "value": dotted_name
-                     }
-           }
-
-@pg.production("from_import_module : dotted_name")
-def from_import_module_no_spaces((dotted_name,)):
-    return {
-            "before_space": "",
-            "middle_space": "",
+            "before_space": space.value if space else "",
+            "middle_space": space2.value if space2 else "",
             "value": {
                       "type": "dotted_name",
                       "value": dotted_name
@@ -809,60 +756,25 @@ def dotted_name((token,)):
 def factor_atom((atom,)):
     return atom
 
-@pg.production("factor : PLUS factor")
-@pg.production("factor : MINUS factor")
-@pg.production("factor : TILDE factor")
-def factor_unitary_operator((operator, factor,)):
-    return unitary_operator(operator.value, factor, space="")
-
-@pg.production("factor : PLUS SPACE factor")
-@pg.production("factor : MINUS SPACE factor")
-@pg.production("factor : TILDE SPACE factor")
+@pg.production("factor : PLUS SPACE? factor")
+@pg.production("factor : MINUS SPACE? factor")
+@pg.production("factor : TILDE SPACE? factor")
 def factor_unitary_operator_space((operator, space, factor,)):
-    return unitary_operator(operator.value, factor, space=space.value)
+    return unitary_operator(operator.value, factor, space=space.value if space else "")
 
 @pg.production("power : factor")
 def power_atom((factor,)):
     return factor
 
-@pg.production("power : atom DOUBLE_STAR factor")
-@pg.production("power : atom DOUBLE_STAR power")
-def factor((atom, double_star, factor)):
-    return binary_operator(
-                           double_star.value,
-                           atom,
-                           factor
-                          )
-
-@pg.production("power : atom SPACE DOUBLE_STAR factor")
-@pg.production("power : atom SPACE DOUBLE_STAR power")
-def power_first_space((atom, space, double_star, factor)):
-    return binary_operator(
-                           double_star.value,
-                           atom,
-                           factor,
-                           first_space=space.value
-                          )
-
-@pg.production("power : atom DOUBLE_STAR SPACE factor")
-@pg.production("power : atom DOUBLE_STAR SPACE power")
-def power_second_space((atom, double_star, space, factor)):
-    return binary_operator(
-                           double_star.value,
-                           atom,
-                           factor,
-                           second_space=space.value
-                          )
-
-@pg.production("power : atom SPACE DOUBLE_STAR SPACE factor")
-@pg.production("power : atom SPACE DOUBLE_STAR SPACE power")
+@pg.production("power : atom SPACE? DOUBLE_STAR SPACE? factor")
+@pg.production("power : atom SPACE? DOUBLE_STAR SPACE? power")
 def power_spaces((atom, space, double_star, space2, factor)):
     return binary_operator(
                            double_star.value,
                            atom,
                            factor,
-                           first_space=space.value,
-                           second_space=space2.value
+                           first_space=space.value if space else "",
+                           second_space=space2.value if space2 else ""
                           )
 
 parser = pg.build()
