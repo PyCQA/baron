@@ -1,1 +1,1 @@
-rply
+git+git://github.com/Psycojoker/rply.git
