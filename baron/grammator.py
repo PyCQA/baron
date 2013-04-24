@@ -776,9 +776,17 @@ def power_atomtrailers((atomtrailers,)):
 def atomtrailers_atom((atom,)):
     return [atom]
 
-@pg.production("atomtrailers : atom trailer")
+@pg.production("atomtrailers : atom trailers")
 def atomtrailer((atom, trailers)):
     return [atom] + trailers
+
+@pg.production("trailers : trailer")
+def trailers((trailer,)):
+    return trailer
+
+@pg.production("trailers : trailers trailer")
+def trailers_trailer((trailers, trailer)):
+    return trailers + trailer
 
 @pg.production("trailer : SPACE? DOT SPACE? NAME")
 def trailer((space, dot, space2, name,)):
@@ -831,5 +839,5 @@ if __name__ == '__main__':
             yield Token(*i)
 
     #print pouet('1')
-    print json.dumps(parse(pouetpouet('from a import (a )')), indent=4)
+    print json.dumps(parse(pouetpouet('a.B')), indent=4)
     #print json.dumps(parser.parse(pouetpouetpouet([('ENDMARKER', ''), None])), indent=4)

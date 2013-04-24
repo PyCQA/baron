@@ -917,6 +917,74 @@ def test_power_trailer_spaces():
                  ]
                 )])
 
+def test_power_trailers():
+    "a.b.c"
+    parse([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('DOT', '.'),
+           ('NAME', 'c'),
+          ],
+          [atomtrailers([
+                  name('a'),
+                  dot(),
+                  name('b'),
+                  dot(),
+                  name('c')
+                 ]
+                )])
+    "a.b.c.d.e"
+    parse([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('DOT', '.'),
+           ('NAME', 'c'),
+           ('DOT', '.'),
+           ('NAME', 'd'),
+           ('DOT', '.'),
+           ('NAME', 'e'),
+          ],
+          [atomtrailers([
+                  name('a'),
+                  dot(),
+                  name('b'),
+                  dot(),
+                  name('c'),
+                  dot(),
+                  name('d'),
+                  dot(),
+                  name('e'),
+                 ]
+                )])
+
+def test_power_trailers_space():
+    "a . b . c"
+    parse([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('DOT', '.'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+           ('SPACE', ' '),
+           ('DOT', '.'),
+           ('SPACE', ' '),
+           ('NAME', 'c'),
+          ],
+          [atomtrailers([
+                  name('a'),
+                  space(),
+                  dot(),
+                  space(),
+                  name('b'),
+                  space(),
+                  dot(),
+                  space(),
+                  name('c')
+                 ]
+                )])
+
 # stmt: simple_stmt
 # stmt: compound_stmt
 
