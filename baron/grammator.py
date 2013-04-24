@@ -780,9 +780,16 @@ def atomtrailers_atom((atom,)):
 def atomtrailer((atom, trailers)):
     return [atom] + trailers
 
-@pg.production("trailer : DOT NAME")
-def trailer((dot, name,)):
-    return [create_node_from_token(dot), create_node_from_token(name)]
+@pg.production("trailer : SPACE? DOT SPACE? NAME")
+def trailer((space, dot, space2, name,)):
+    to_return = []
+    if space:
+        to_return += [create_node_from_token(space)]
+    to_return += [create_node_from_token(dot)]
+    if space2:
+        to_return += [create_node_from_token(space2)]
+    to_return += [create_node_from_token(name)]
+    return to_return
 
 @pg.production("atom : INT")
 def int((int_,)):
