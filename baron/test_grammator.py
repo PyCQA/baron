@@ -1,11 +1,10 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
 
-from test_utils import (parse, space, expression, inteu, endl, name, string,
-                        importeu, dotted_as_name, dotted_name, dot, comma,
-                        from_import, name_as_name, left_parenthesis,
-                        right_parenthesis, star, binary_operator,
-                        unitary_operator)
+from test_utils import (parse, space, inteu, endl, name, string, importeu,
+                        dotted_as_name, dotted_name, dot, comma, from_import,
+                        name_as_name, left_parenthesis, right_parenthesis,
+                        star, binary_operator, unitary_operator, atomtrailers)
 
 def test_empty():
     ""
@@ -375,6 +374,32 @@ def test_from_a_import_parenthesis_b_comma():
                                 left_parenthesis(),
                                 name_as_name('b'),
                                 comma(),
+                                right_parenthesis()
+                               ]
+                      )])
+
+def test_from_a_import_parenthesis_b_space():
+    "from a import (b )"
+    parse([
+           ('FROM', 'from'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('IMPORT', 'import'),
+           ('SPACE', ' '),
+           ('LEFT_PARENTHESIS', '('),
+           ('NAME', 'b'),
+           ('SPACE', ' '),
+           ('RIGHT_PARENTHESIS', ')')
+          ],
+          [from_import(
+                       dotted_name([
+                                    name('a')
+                                   ]),
+                       targets=[
+                                left_parenthesis(),
+                                name_as_name('b'),
+                                space(),
                                 right_parenthesis()
                                ]
                       )])
@@ -830,6 +855,20 @@ def test_power_factor_tild_space():
                            second_space="  "
                           )])
 
+def test_power_trailer():
+    "a.b"
+    parse([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+          ],
+          [atomtrailers([
+                  name('a'),
+                  dot(),
+                  name('b')
+                 ]
+                )])
+
 # stmt: simple_stmt
 # stmt: compound_stmt
 
@@ -925,8 +964,8 @@ def test_power_factor_tild_space():
 # term: factor ([SPACE] ('*'|'/'|'%'|'//') [SPACE] factor)*
 # -> binop(('*'|'/'|'%'|'//'), factor, factor)
 
-# factor: ('+'|'-'|'~') [SPACE] factor
-# -> uniatryop(('+'|'-'|'~'), factor)
+### factor: ('+'|'-'|'~') [SPACE] factor
+### -> uniatryop(('+'|'-'|'~'), factor)
 ### factor: power
 ### -> power
 

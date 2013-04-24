@@ -757,6 +757,8 @@ def power_atom((factor,)):
 
 @pg.production("power : atom SPACE? DOUBLE_STAR SPACE? factor")
 @pg.production("power : atom SPACE? DOUBLE_STAR SPACE? power")
+@pg.production("power : atomtrailers SPACE? DOUBLE_STAR SPACE? factor")
+@pg.production("power : atomtrailers SPACE? DOUBLE_STAR SPACE? power")
 def power_spaces((atom, space, double_star, space2, factor)):
     return binary_operator(
                            double_star.value,
@@ -765,6 +767,34 @@ def power_spaces((atom, space, double_star, space2, factor)):
                            first_space=space.value if space else "",
                            second_space=space2.value if space2 else ""
                           )
+
+@pg.production("power : atomtrailers")
+def power_atomtrailers((atomtrailers,)):
+    return {"type": "atomtrailers", "value": atomtrailers}
+
+@pg.production("atomtrailers : atom")
+def atomtrailers_atom((atom,)):
+    return [atom]
+
+@pg.production("atomtrailers : atom trailer")
+def atomtrailer((atom, trailers)):
+    return [atom] + trailers
+
+@pg.production("trailer : DOT NAME")
+def trailer((dot, name,)):
+    return [create_node_from_token(dot), create_node_from_token(name)]
+
+@pg.production("atom : INT")
+def int((int_,)):
+    return create_node_from_token(int_, section="number")
+
+@pg.production("atom : NAME")
+def name((name,)):
+    return create_node_from_token(name)
+
+@pg.production("atom : STRING")
+def string((string_,)):
+    return create_node_from_token(string_)
 
 parser = pg.build()
 
