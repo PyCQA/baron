@@ -985,6 +985,27 @@ def test_power_trailers_space():
                  ]
                 )])
 
+def test_power_trailer_power():
+    "a.b**c"
+    parse([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('DOUBLE_STAR', '**'),
+           ('NAME', 'c'),
+          ],
+          [binary_operator(
+                           '**',
+                           first=atomtrailers([
+                                               name('a'),
+                                               dot(),
+                                               name('b')
+                                              ]),
+                           second=name('c'),
+                           first_space="",
+                           second_space="",
+                          )])
+
 # stmt: simple_stmt
 # stmt: compound_stmt
 
@@ -1087,17 +1108,18 @@ def test_power_trailers_space():
 
 ### power: atom
 ### -> atom
-# power: atom [SPACE] trailer*
-# -> dépend du trailer (eg: dotted_name) -> doit être une liste
+### power: atom [SPACE] trailer*
+### -> atomtrailers([atom, [space], trailer*
+
 ### power: atom [SPACE] '**' [SPACE] factor
 ### -> binop("**", atom, factor)
 ### power: atom [SPACE] '**' [SPACE] factor [SPACE] ** [SPACE] factor2
 ### -> binop("**", atom, binop("**", factor, factor2)))
 ### power: atom [[SPACE] '**' [SPACE] factor]
 ### -> binop("**", atom, factor)
-# power: atom [SPACE] trailer* [[SPACE] '**' [SPACE] factor]
+### power: atom [SPACE] trailer* [[SPACE] '**' [SPACE] factor]
 
-# trailer: '.' [SPACE] NAME
+### trailer: '.' [SPACE] NAME
 # trailer: '[' [SPACE] subscriptlist [SPACE] ']'
 # trailer: '(' [SPACE] [arglist] [SPACE] ')'
 

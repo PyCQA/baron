@@ -757,12 +757,24 @@ def power_atom((factor,)):
 
 @pg.production("power : atom SPACE? DOUBLE_STAR SPACE? factor")
 @pg.production("power : atom SPACE? DOUBLE_STAR SPACE? power")
-@pg.production("power : atomtrailers SPACE? DOUBLE_STAR SPACE? factor")
-@pg.production("power : atomtrailers SPACE? DOUBLE_STAR SPACE? power")
-def power_spaces((atom, space, double_star, space2, factor)):
+def power((atom, space, double_star, space2, factor)):
     return binary_operator(
                            double_star.value,
                            atom,
+                           factor,
+                           first_space=space.value if space else "",
+                           second_space=space2.value if space2 else ""
+                          )
+
+@pg.production("power : atomtrailers SPACE? DOUBLE_STAR SPACE? factor")
+@pg.production("power : atomtrailers SPACE? DOUBLE_STAR SPACE? power")
+def power_atomtrailer_power((atomtrailers, space, double_star, space2, factor)):
+    return binary_operator(
+                           double_star.value,
+                           {
+                            "type": "atomtrailers",
+                            "value": atomtrailers,
+                           },
                            factor,
                            first_space=space.value if space else "",
                            second_space=space2.value if space2 else ""
