@@ -57,6 +57,12 @@ def test_egual_egual():
 def test_different():
     assert group(["!", "="]) == ["!="]
 
+def test_inferior_egual():
+    assert group([">", "="]) == [">="]
+
+def test_superior_egual():
+    assert group(["<", "="]) == ["<="]
+
 def test_different_old_style():
     assert group(["<", ">"]) == ["<>"]
 
