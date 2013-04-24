@@ -575,32 +575,12 @@ def end((space, endmarker)):
         return [create_node_from_token(space)]
     return [None]
 
-@pg.production("statement : expression")
-def exprs((expression,)):
-    return [create_node("expression", expression)]
-
 @pg.production("statement : separator")
 @pg.production("statement : import")
 @pg.production("statement : from_import")
 @pg.production("statement : power")
 def separator((statement,)):
     return [statement]
-
-@pg.production("expression : atom")
-def atom((atom,)):
-    return atom
-
-@pg.production("atom : INT")
-def int((int_,)):
-    return create_node_from_token(int_, section="number")
-
-@pg.production("atom : NAME")
-def name((name,)):
-    return create_node_from_token(name)
-
-@pg.production("atom : STRING")
-def string((string_,)):
-    return create_node_from_token(string_)
 
 @pg.production("separator : SPACE? ENDL")
 def space_endl((space, endl,)):

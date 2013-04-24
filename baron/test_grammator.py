@@ -23,7 +23,7 @@ def test_int():
     "1"
     parse([
            ('INT', '1')],
-          [expression(inteu("1"))])
+          [inteu("1")])
 
 def test_endl():
     "\n"
@@ -35,7 +35,7 @@ def test_name():
     "a"
     parse([
            ('NAME', 'a')],
-          [expression(name("a"))])
+          [name("a")])
 
 def test_string():
     '''
@@ -44,10 +44,10 @@ def test_string():
     '''
     parse([
            ('STRING', '"pouet pouet"')],
-          [expression(string('"pouet pouet"'))])
+          [string('"pouet pouet"')])
     parse([
            ('STRING', '"""pouet pouet"""')],
-          [expression(string('"""pouet pouet"""'))])
+          [string('"""pouet pouet"""')])
 
 def test_simple_import():
     "import   pouet"
