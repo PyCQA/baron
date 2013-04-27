@@ -1643,6 +1643,103 @@ def test_chained_left_right_shift():
                            second_space="",
                           )])
 
+def test_and_expr():
+    "a&b"
+    parse([
+           ('NAME', 'a'),
+           ('AMPER', '&'),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('&',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space="",
+                           second_space="",
+                          )])
+
+def test_and_expr_first_space():
+    "a &b"
+    parse([
+           ('NAME', 'a'),
+           ('AMPER', '&', ' ', ''),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('&',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space=" ",
+                           second_space="",
+                          )])
+
+def test_and_expr_second_space():
+    "a& b"
+    parse([
+           ('NAME', 'a'),
+           ('AMPER', '&', '', ' '),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('&',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space="",
+                           second_space=" ",
+                          )])
+
+def test_and_expr_spaces():
+    "a & b"
+    parse([
+           ('NAME', 'a'),
+           ('AMPER', '&', ' ', ' '),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('&',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space=" ",
+                           second_space=" ",
+                          )])
+
+def test_and_expr_spaces_atomtrailers():
+    "a.b & c"
+    parse([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('AMPER', '&', ' ', ' '),
+           ('NAME', 'c'),
+          ],
+          [binary_operator('&',
+                           first=atomtrailers([
+                                               name('a'),
+                                               dot(),
+                                               name('b'),
+                                              ]),
+                           second=name('c'),
+                           first_space=" ",
+                           second_space=" ",
+                          )])
+
+def test_chained_left_and_expr():
+    "a&b&c"
+    parse([
+           ('NAME', 'a'),
+           ('AMPER', '&'),
+           ('NAME', 'b'),
+           ('AMPER', '&'),
+           ('NAME', 'c'),
+          ],
+          [binary_operator('&',
+                           first=name('a'),
+                           second=binary_operator('&',
+                                                  first=name("b"),
+                                                  second=name("c"),
+                                                  first_space="",
+                                                  second_space=""
+                                                 ),
+                           first_space="",
+                           second_space="",
+                          )])
+
 
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
@@ -1741,12 +1838,12 @@ def test_chained_left_right_shift():
 # -> binop('^', term, term)
 
 ### and_expr: shift_expr
-# and_expr: shift_expr ([SPACE] '&' [SPACE] shift_expr)*
-# -> binop('&', term, term)
+### and_expr: shift_expr ([SPACE] '&' [SPACE] shift_expr)*
+### -> binop('&', term, term)
 
 ### shift_expr: arith_expr
-# shift_expr: arith_expr ([SPACE] ('<<'|'>>') [SPACE] arith_expr)*
-# -> binop(('<<'|'>>'), term, term)
+### shift_expr: arith_expr ([SPACE] ('<<'|'>>') [SPACE] arith_expr)*
+### -> binop(('<<'|'>>'), term, term)
 
 ### arith_expr: term
 ### -> term
