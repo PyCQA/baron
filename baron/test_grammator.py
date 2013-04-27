@@ -4,7 +4,8 @@
 from test_utils import (parse, space, inteu, endl, name, string, importeu,
                         dotted_as_name, dotted_name, dot, comma, from_import,
                         name_as_name, left_parenthesis, right_parenthesis,
-                        star, binary_operator, unitary_operator, atomtrailers)
+                        star, binary_operator, unitary_operator, atomtrailers,
+                        getitem)
 
 def test_empty():
     ""
@@ -1006,6 +1007,18 @@ def test_power_trailer_power():
                            second_space="",
                           )])
 
+def test_power_trailer_getitem_empty():
+    "a[]"
+    parse([
+           ('NAME', 'a'),
+           ('LEFT_SQUARE_BRACKET', '['),
+           ('RIGHT_SQUARE_BRACKET', ']'),
+          ],
+          [atomtrailers([
+                         name('a'),
+                         getitem(),
+                        ])])
+
 # stmt: simple_stmt
 # stmt: compound_stmt
 
@@ -1120,6 +1133,7 @@ def test_power_trailer_power():
 ### power: atom [SPACE] trailer* [[SPACE] '**' [SPACE] factor]
 
 ### trailer: '.' [SPACE] NAME
+# trailer: '[' [SPACE] ']'
 # trailer: '[' [SPACE] subscriptlist [SPACE] ']'
 # trailer: '(' [SPACE] [arglist] [SPACE] ')'
 
