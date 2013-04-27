@@ -585,6 +585,7 @@ def space_endl((space, endl,)):
 
 @pg.production("term : factor STAR factor")
 @pg.production("term : factor SLASH factor")
+@pg.production("term : factor PERCENT factor")
 def term_binary_operator((factor, operator, factor2)):
     return binary_operator(
                            operator.value,
