@@ -1472,6 +1472,158 @@ def test_chained_add_substract():
                            second_space="",
                           )])
 
+def test_arith_expr_left_shift():
+    "a<<b"
+    parse([
+           ('NAME', 'a'),
+           ('LEFT_SHIFT', '<<'),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('<<',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space="",
+                           second_space="",
+                          )])
+
+def test_arith_expr_left_shift_first_space():
+    "a <<b"
+    parse([
+           ('NAME', 'a'),
+           ('LEFT_SHIFT', '<<', ' ', ''),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('<<',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space=" ",
+                           second_space="",
+                          )])
+
+def test_arith_expr_left_shift_second_space():
+    "a<< b"
+    parse([
+           ('NAME', 'a'),
+           ('LEFT_SHIFT', '<<', '', ' '),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('<<',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space="",
+                           second_space=" ",
+                          )])
+
+def test_arith_expr_left_shift_spaces():
+    "a << b"
+    parse([
+           ('NAME', 'a'),
+           ('LEFT_SHIFT', '<<', ' ', ' '),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('<<',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space=" ",
+                           second_space=" ",
+                          )])
+
+def test_arith_expr_left_shift_spaces_atomtrailers():
+    "a.b << c"
+    parse([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('LEFT_SHIFT', '<<', ' ', ' '),
+           ('NAME', 'c'),
+          ],
+          [binary_operator('<<',
+                           first=atomtrailers([
+                                               name('a'),
+                                               dot(),
+                                               name('b'),
+                                              ]),
+                           second=name('c'),
+                           first_space=" ",
+                           second_space=" ",
+                          )])
+def test_arith_expr_right_shift():
+    "a>>b"
+    parse([
+           ('NAME', 'a'),
+           ('RIGHT_SHIFT', '>>'),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('>>',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space="",
+                           second_space="",
+                          )])
+
+def test_arith_expr_right_shift_first_space():
+    "a >>b"
+    parse([
+           ('NAME', 'a'),
+           ('RIGHT_SHIFT', '>>', ' ', ''),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('>>',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space=" ",
+                           second_space="",
+                          )])
+
+def test_arith_expr_right_shift_second_space():
+    "a>> b"
+    parse([
+           ('NAME', 'a'),
+           ('RIGHT_SHIFT', '>>', '', ' '),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('>>',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space="",
+                           second_space=" ",
+                          )])
+
+def test_arith_expr_right_shift_spaces():
+    "a >> b"
+    parse([
+           ('NAME', 'a'),
+           ('RIGHT_SHIFT', '>>', ' ', ' '),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('>>',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space=" ",
+                           second_space=" ",
+                          )])
+
+def test_arith_expr_right_shift_spaces_atomtrailers():
+    "a.b >> c"
+    parse([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('RIGHT_SHIFT', '>>', ' ', ' '),
+           ('NAME', 'c'),
+          ],
+          [binary_operator('>>',
+                           first=atomtrailers([
+                                               name('a'),
+                                               dot(),
+                                               name('b'),
+                                              ]),
+                           second=name('c'),
+                           first_space=" ",
+                           second_space=" ",
+                          )])
+
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt

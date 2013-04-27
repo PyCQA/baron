@@ -589,6 +589,8 @@ def space_endl((space, endl,)):
 def factor_unitary_operator_space((operator, factor,)):
     return unitary_operator(operator.value, factor, space=operator.after_space)
 
+@pg.production("shift_expr : arith_expr RIGHT_SHIFT arith_expr")
+@pg.production("shift_expr : arith_expr LEFT_SHIFT arith_expr")
 @pg.production("arith_expr : term PLUS arith_expr")
 @pg.production("arith_expr : term MINUS arith_expr")
 @pg.production("term : factor STAR term")
@@ -700,5 +702,5 @@ if __name__ == '__main__':
             yield Token(*i)
 
     #print pouet('1')
-    print json.dumps(parse(pouetpouet('a/B*c')), indent=4)
+    print json.dumps(parse(pouetpouet('a+1*2')), indent=4, sort_keys=True)
     #print json.dumps(parser.parse(pouetpouetpouet([('ENDMARKER', ''), None])), indent=4)
