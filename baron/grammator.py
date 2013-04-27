@@ -4,31 +4,31 @@
 
 # dotted_name: NAME
 # dotted_name: NAME.NAME
-# dotted_name: NAME(.NAME)+
+# dotted_name: NAME([NAME] -> . <- [NAME] NAME)+
 
 # dotted_as_name: dotted_name
-# dotted_as_name: dotted_name SPACE 'as' SPACE NAME
+# dotted_as_name: dotted_name SPACE -> 'as' <- SPACE NAME
 
 # dotted_as_names: dotted_as_name
-# dotted_as_names: dotted_as_name [SPACE] ',' [SPACE] dotted_as_name
-# dotted_as_names: dotted_as_name ([SPACE] ',' [SPACE] dotted_as_name)*
+# dotted_as_names: dotted_as_name [SPACE] -> ',' <- [SPACE] dotted_as_name
+# dotted_as_names: dotted_as_name ([SPACE] -> ',' <- [SPACE] dotted_as_name)*
 
 # import_as_name: NAME
-# import_as_name: NAME SPACE 'as' SPACE NAME
+# import_as_name: NAME SPACE -> 'as' <- SPACE NAME
 
 # import_as_names: import_as_name
-# import_as_names: import_as_name [SPACE] ',' [SPACE] import_as_name
-# import_as_names: import_as_name ([SPACE] ',' [SPACE] import_as_name)*
-# import_as_names: import_as_name ([SPACE] ',' [SPACE] import_as_name)* [SPACE] [',']
+# import_as_names: import_as_name [SPACE] -> ',' <- [SPACE] import_as_name
+# import_as_names: import_as_name ([SPACE] -> ',' <- [SPACE] import_as_name)*
+# import_as_names: import_as_name ([SPACE] -> ',' <- [SPACE] import_as_name)* [SPACE] -> [',']
 
-# import_name: 'import' SPACE dotted_as_names
+# import_name: 'import' <- SPACE dotted_as_names
 
-# import_from: 'from' SPACE dotted_name SPACE 'import' SPACE import_as_names
-# import_from: 'from' SPACE dotted_name SPACE 'import' [SPACE] '(' [SPACE] import_as_names [SPACE] ')'
-# import_from: 'from' SPACE dotted_name SPACE 'import' [SPACE] '*'
+# import_from: 'from' <- SPACE dotted_name SPACE -> 'import' <- SPACE import_as_names
+# import_from: 'from' <- SPACE dotted_name SPACE -> 'import' <- [SPACE] '(' <- [SPACE] import_as_names [SPACE] -> ')'
+# import_from: 'from' <- SPACE dotted_name SPACE -> 'import' <- [SPACE] '*'
 
-# import_from: 'from' [SPACE] '.'* [SPACE] dotted_name SPACE 'import' ...........
-# import_from: 'from' [SPACE] '.'+ [SPACE] 'import' ...........
+# import_from: 'from' <- [SPACE] '.'* <- [SPACE] dotted_name SPACE 'import' ...........
+# import_from: 'from' <- [SPACE] '.'+ <- [SPACE] 'import' ...........
 
 # -
 
