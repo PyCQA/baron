@@ -1373,6 +1373,82 @@ def test_arith_expr_add_spaces_atomtrailers():
                            second_space=" ",
                           )])
 
+def test_arith_expr_substract():
+    "a-b"
+    parse([
+           ('NAME', 'a'),
+           ('MINUS', '-'),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('-',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space="",
+                           second_space="",
+                          )])
+
+def test_arith_expr_substract_first_space():
+    "a -b"
+    parse([
+           ('NAME', 'a'),
+           ('MINUS', '-', ' ', ''),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('-',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space=" ",
+                           second_space="",
+                          )])
+
+def test_arith_expr_substract_second_space():
+    "a- b"
+    parse([
+           ('NAME', 'a'),
+           ('MINUS', '-', '', ' '),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('-',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space="",
+                           second_space=" ",
+                          )])
+
+def test_arith_expr_substract_spaces():
+    "a - b"
+    parse([
+           ('NAME', 'a'),
+           ('MINUS', '-', ' ', ' '),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('-',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space=" ",
+                           second_space=" ",
+                          )])
+
+def test_arith_expr_substract_spaces_atomtrailers():
+    "a.b - c"
+    parse([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('MINUS', '-', ' ', ' '),
+           ('NAME', 'c'),
+          ],
+          [binary_operator('-',
+                           first=atomtrailers([
+                                               name('a'),
+                                               dot(),
+                                               name('b'),
+                                              ]),
+                           second=name('c'),
+                           first_space=" ",
+                           second_space=" ",
+                          )])
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt

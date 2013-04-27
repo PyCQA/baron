@@ -584,6 +584,7 @@ def space_endl((space, endl,)):
            }
 
 @pg.production("arith_expr : term PLUS term")
+@pg.production("arith_expr : term MINUS term")
 def arith_expr((term, operator, term2)):
     return binary_operator(
                            operator.value,
