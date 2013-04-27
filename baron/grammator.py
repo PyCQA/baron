@@ -583,26 +583,36 @@ def space_endl((space, endl,)):
             "before_space": space.value if space else ""
            }
 
-@pg.production("factor : PLUS SPACE? factor")
-@pg.production("factor : MINUS SPACE? factor")
-@pg.production("factor : TILDE SPACE? factor")
-def factor_unitary_operator_space((operator, space, factor,)):
-    return unitary_operator(operator.value, factor, space=space.value if space else "")
+@pg.production("term : factor STAR factor")
+def term_binary_operator((factor, operator, factor2)):
+    return binary_operator(
+                           operator.value,
+                           first=factor,
+                           second=factor2,
+                           first_space=operator.before_space,
+                           second_space=operator.after_space,
+                          )
 
-@pg.production("power : atom SPACE? DOUBLE_STAR SPACE? factor")
-@pg.production("power : atom SPACE? DOUBLE_STAR SPACE? power")
-def power((atom, space, double_star, space2, factor)):
+@pg.production("factor : PLUS factor")
+@pg.production("factor : MINUS factor")
+@pg.production("factor : TILDE factor")
+def factor_unitary_operator_space((operator, factor,)):
+    return unitary_operator(operator.value, factor, space=operator.after_space)
+
+@pg.production("power : atom DOUBLE_STAR factor")
+@pg.production("power : atom DOUBLE_STAR power")
+def power((atom, double_star, factor)):
     return binary_operator(
                            double_star.value,
                            atom,
                            factor,
-                           first_space=space.value if space else "",
-                           second_space=space2.value if space2 else ""
+                           first_space=double_star.before_space,
+                           second_space=double_star.after_space
                           )
 
-@pg.production("power : atomtrailers SPACE? DOUBLE_STAR SPACE? factor")
-@pg.production("power : atomtrailers SPACE? DOUBLE_STAR SPACE? power")
-def power_atomtrailer_power((atomtrailers, space, double_star, space2, factor)):
+@pg.production("power : atomtrailers DOUBLE_STAR factor")
+@pg.production("power : atomtrailers DOUBLE_STAR power")
+def power_atomtrailer_power((atomtrailers, double_star, factor)):
     return binary_operator(
                            double_star.value,
                            {
@@ -610,8 +620,8 @@ def power_atomtrailer_power((atomtrailers, space, double_star, space2, factor)):
                             "value": atomtrailers,
                            },
                            factor,
-                           first_space=space.value if space else "",
-                           second_space=space2.value if space2 else ""
+                           first_space=double_star.before_space,
+                           second_space=double_star.after_space
                           )
 
 @pg.production("power : atomtrailers")
@@ -634,24 +644,24 @@ def trailers((trailer,)):
 def trailers_trailer((trailers, trailer)):
     return trailers + trailer
 
-@pg.production("trailer : SPACE? DOT SPACE? NAME")
-def trailer((space, dot, space2, name,)):
+@pg.production("trailer : DOT NAME")
+def trailer((dot, name,)):
     to_return = []
-    if space:
-        to_return += [create_node_from_token(space)]
+    if dot.before_space:
+        to_return += [{"type": "space", "value": dot.before_space}]
     to_return += [create_node_from_token(dot)]
-    if space2:
-        to_return += [create_node_from_token(space2)]
+    if dot.after_space:
+        to_return += [{"type": "space", "value": dot.after_space}]
     to_return += [create_node_from_token(name)]
     return to_return
 
-@pg.production("trailer : SPACE? LEFT_SQUARE_BRACKET SPACE? RIGHT_SQUARE_BRACKET")
-@pg.production("trailer : SPACE? LEFT_PARENTHESIS SPACE? RIGHT_PARENTHESIS")
-def trailer_getitem((space, left, space2, right)):
+@pg.production("trailer : LEFT_SQUARE_BRACKET RIGHT_SQUARE_BRACKET")
+@pg.production("trailer : LEFT_PARENTHESIS RIGHT_PARENTHESIS")
+def trailer_getitem((left, right)):
     to_return = []
-    if space:
-        to_return += [create_node_from_token(space)]
-    to_return += [{"type": "getitem" if left.value == "[" else "call", "value": None, "first_space": space2.value if space2 else "", "second_space": ""}]
+    if left.before_space:
+        to_return += [{"type": "space", "value": left.before_space}]
+    to_return += [{"type": "getitem" if left.value == "[" else "call", "value": None, "first_space": left.after_space, "second_space": ""}]
     return to_return
 
 @pg.production("atom : INT")
@@ -694,5 +704,5 @@ if __name__ == '__main__':
             yield Token(*i)
 
     #print pouet('1')
-    print json.dumps(parse(pouetpouet('a.B')), indent=4)
+    print json.dumps(parse(pouetpouet('a.B * c')), indent=4)
     #print json.dumps(parser.parse(pouetpouetpouet([('ENDMARKER', ''), None])), indent=4)

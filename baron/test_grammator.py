@@ -52,8 +52,7 @@ def test_string():
 def test_simple_import():
     "import   pouet"
     parse([
-           ('IMPORT', 'import'),
-           ('SPACE', '  '),
+           ('IMPORT', 'import', '', '  '),
            ('NAME', 'pouet')],
           [importeu([
                      dotted_as_name(dotted_name([name("pouet")]))
@@ -63,8 +62,7 @@ def test_simple_import():
 def test_import_basic_dot():
     "import   pouet.blob"
     parse([
-           ('IMPORT', 'import'),
-           ('SPACE', '  '),
+           ('IMPORT', 'import', '', '  '),
            ('NAME', 'pouet'),
            ('DOT', '.'),
            ('NAME', 'blob')],
@@ -82,13 +80,11 @@ def test_import_basic_dot():
 def test_import_more_dot():
     "import   pouet.blob .plop"
     parse([
-           ('IMPORT', 'import'),
-           ('SPACE', '  '),
+           ('IMPORT', 'import', '', '  '),
            ('NAME', 'pouet'),
            ('DOT', '.'),
            ('NAME', 'blob'),
-           ('SPACE', ' '),
-           ('DOT', '.'),
+           ('DOT', '.', ' '),
            ('NAME', 'plop')],
           [importeu([
                      dotted_as_name(dotted_name([
@@ -106,12 +102,9 @@ def test_import_more_dot():
 def test_import_as():
     "import   pouet as  b"
     parse([
-           ('IMPORT', 'import'),
-           ('SPACE', '  '),
+           ('IMPORT', 'import', '', '  '),
            ('NAME', 'pouet'),
-           ('SPACE', ' '),
-           ('AS', 'as'),
-           ('SPACE', '  '),
+           ('AS', 'as', ' ', '  '),
            ('NAME', 'b')],
           [importeu([
                      dotted_as_name(dotted_name([name("pouet")]),
@@ -126,11 +119,9 @@ def test_import_as():
 def test_import_a_b():
     "import a, b"
     parse([
-           ('IMPORT', 'import'),
-           ('SPACE', ' '),
+           ('IMPORT', 'import', '', ' '),
            ('NAME', 'a'),
-           ('COMMA', ','),
-           ('SPACE', ' '),
+           ('COMMA', ',', '', ' '),
            ('NAME', 'b')],
           [importeu([
                      dotted_as_name(dotted_name([name('a')])),
@@ -143,17 +134,13 @@ def test_import_a_b():
 def test_import_a_b_as_c():
     "import a, b.d as  c"
     parse([
-           ('IMPORT', 'import'),
-           ('SPACE', ' '),
+           ('IMPORT', 'import', '', ' '),
            ('NAME', 'a'),
-           ('COMMA', ','),
-           ('SPACE', ' '),
+           ('COMMA', ',', '', ' '),
            ('NAME', 'b'),
            ('DOT', '.'),
            ('NAME', 'd'),
-           ('SPACE', ' '),
-           ('AS', 'as'),
-           ('SPACE', '  '),
+           ('AS', 'as', ' ', '  '),
            ('NAME', 'c')],
           [importeu([
                      dotted_as_name(dotted_name([name('a')])),
@@ -177,17 +164,13 @@ def test_import_a_b_as_c():
 def test_import_a_b_c_d():
     "import a, b, c, d"
     parse([
-           ('IMPORT', 'import'),
-           ('SPACE', ' '),
+           ('IMPORT', 'import', '', ' '),
            ('NAME', 'a'),
-           ('COMMA', ','),
-           ('SPACE', ' '),
+           ('COMMA', ',', '', ' '),
            ('NAME', 'b'),
-           ('COMMA', ','),
-           ('SPACE', ' '),
+           ('COMMA', ',', '', ' '),
            ('NAME', 'c'),
-           ('COMMA', ','),
-           ('SPACE', ' '),
+           ('COMMA', ',', '', ' '),
            ('NAME', 'd')],
           [importeu([
                      dotted_as_name(dotted_name([name('a')])),
@@ -207,12 +190,9 @@ def test_import_a_b_c_d():
 def test_from_a_import_b():
     "from a import b"
     parse([
-           ('FROM', 'from'),
-           ('SPACE', ' '),
+           ('FROM', 'from', '', ' '),
            ('NAME', 'a'),
-           ('SPACE', ' '),
-           ('IMPORT', 'import'),
-           ('SPACE', ' '),
+           ('IMPORT', 'import', ' ', ' '),
            ('NAME', 'b')],
           [from_import(
                        dotted_name([
@@ -226,14 +206,11 @@ def test_from_a_import_b():
 def test_from_a_dot_c_import_b():
     "from a.C import b"
     parse([
-           ('FROM', 'from'),
-           ('SPACE', ' '),
+           ('FROM', 'from', '', ' '),
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'c'),
-           ('SPACE', ' '),
-           ('IMPORT', 'import'),
-           ('SPACE', ' '),
+           ('IMPORT', 'import', ' ', ' '),
            ('NAME', 'b')],
           [from_import(
                        dotted_name([
@@ -249,17 +226,13 @@ def test_from_a_dot_c_import_b():
 def test_from_a_dot_c_import_b_d():
     "from a.c import b, d"
     parse([
-           ('FROM', 'from'),
-           ('SPACE', ' '),
+           ('FROM', 'from', '', ' '),
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'c'),
-           ('SPACE', ' '),
-           ('IMPORT', 'import'),
-           ('SPACE', ' '),
+           ('IMPORT', 'import', ' ', ' '),
            ('NAME', 'b'),
-           ('COMMA', ','),
-           ('SPACE', ' '),
+           ('COMMA', ',', '', ' '),
            ('NAME', 'd')],
           [from_import(
                        dotted_name([
@@ -278,16 +251,11 @@ def test_from_a_dot_c_import_b_d():
 def test_from_a_import_b_as_d():
     "from a import b as d"
     parse([
-           ('FROM', 'from'),
-           ('SPACE', ' '),
+           ('FROM', 'from', '', ' '),
            ('NAME', 'a'),
-           ('SPACE', ' '),
-           ('IMPORT', 'import'),
-           ('SPACE', ' '),
+           ('IMPORT', 'import', ' ', ' '),
            ('NAME', 'b'),
-           ('SPACE', ' '),
-           ('AS', 'as'),
-           ('SPACE', ' '),
+           ('AS', 'as', ' ', ' '),
            ('NAME', 'd')
           ],
           [from_import(
@@ -308,12 +276,9 @@ def test_from_a_import_b_as_d():
 def test_from_a_import_parenthesis_b():
     "from a import (b)"
     parse([
-           ('FROM', 'from'),
-           ('SPACE', ' '),
+           ('FROM', 'from', '', ' '),
            ('NAME', 'a'),
-           ('SPACE', ' '),
-           ('IMPORT', 'import'),
-           ('SPACE', ' '),
+           ('IMPORT', 'import', ' ', ' '),
            ('LEFT_PARENTHESIS', '('),
            ('NAME', 'b'),
            ('RIGHT_PARENTHESIS', ')')
@@ -332,11 +297,9 @@ def test_from_a_import_parenthesis_b():
 def test_from_a_import_parenthesis_b_without_space():
     "from a import(b)"
     parse([
-           ('FROM', 'from'),
-           ('SPACE', ' '),
+           ('FROM', 'from', '', ' '),
            ('NAME', 'a'),
-           ('SPACE', ' '),
-           ('IMPORT', 'import'),
+           ('IMPORT', 'import', ' ', ''),
            ('LEFT_PARENTHESIS', '('),
            ('NAME', 'b'),
            ('RIGHT_PARENTHESIS', ')')
@@ -356,12 +319,9 @@ def test_from_a_import_parenthesis_b_without_space():
 def test_from_a_import_parenthesis_b_comma():
     "from a import (b,)"
     parse([
-           ('FROM', 'from'),
-           ('SPACE', ' '),
+           ('FROM', 'from', '', ' '),
            ('NAME', 'a'),
-           ('SPACE', ' '),
-           ('IMPORT', 'import'),
-           ('SPACE', ' '),
+           ('IMPORT', 'import', ' ', ' '),
            ('LEFT_PARENTHESIS', '('),
            ('NAME', 'b'),
            ('COMMA', ','),
@@ -382,16 +342,12 @@ def test_from_a_import_parenthesis_b_comma():
 def test_from_a_import_parenthesis_b_space():
     "from a import (b )"
     parse([
-           ('FROM', 'from'),
-           ('SPACE', ' '),
+           ('FROM', 'from', '', ' '),
            ('NAME', 'a'),
-           ('SPACE', ' '),
-           ('IMPORT', 'import'),
-           ('SPACE', ' '),
+           ('IMPORT', 'import', ' ', ' '),
            ('LEFT_PARENTHESIS', '('),
            ('NAME', 'b'),
-           ('SPACE', ' '),
-           ('RIGHT_PARENTHESIS', ')')
+           ('RIGHT_PARENTHESIS', ')', ' ', ''),
           ],
           [from_import(
                        dotted_name([
@@ -408,12 +364,9 @@ def test_from_a_import_parenthesis_b_space():
 def test_from_a_import_star():
     "from a import *"
     parse([
-           ('FROM', 'from'),
-           ('SPACE', ' '),
+           ('FROM', 'from', '', ' '),
            ('NAME', 'a'),
-           ('SPACE', ' '),
-           ('IMPORT', 'import'),
-           ('SPACE', ' '),
+           ('IMPORT', 'import', ' ', ' '),
            ('STAR', '*')
           ],
           [from_import(
@@ -428,11 +381,9 @@ def test_from_a_import_star():
 def test_from_a_import_star_without_space():
     "from a import*"
     parse([
-           ('FROM', 'from'),
-           ('SPACE', ' '),
+           ('FROM', 'from', '', ' '),
            ('NAME', 'a'),
-           ('SPACE', ' '),
-           ('IMPORT', 'import'),
+           ('IMPORT', 'import', ' ', ''),
            ('STAR', '*')],
           [from_import(
                        dotted_name([
@@ -447,13 +398,10 @@ def test_from_a_import_star_without_space():
 def test_from_dot_a_import_b():
     "from .a import b"
     parse([
-           ('FROM', 'from'),
-           ('SPACE', ' '),
+           ('FROM', 'from', '', ' '),
            ('DOT', '.'),
            ('NAME', 'a'),
-           ('SPACE', ' '),
-           ('IMPORT', 'import'),
-           ('SPACE', ' '),
+           ('IMPORT', 'import', ' ', ' '),
            ('NAME', 'b')
           ],
           [from_import(
@@ -469,15 +417,12 @@ def test_from_dot_a_import_b():
 def test_from_dot_dot_dot_a_import_b():
     "from ...a import b"
     parse([
-           ('FROM', 'from'),
-           ('SPACE', ' '),
+           ('FROM', 'from', '', ' '),
            ('DOT', '.'),
            ('DOT', '.'),
            ('DOT', '.'),
            ('NAME', 'a'),
-           ('SPACE', ' '),
-           ('IMPORT', 'import'),
-           ('SPACE', ' '),
+           ('IMPORT', 'import', ' ', ' '),
            ('NAME', 'b')
           ],
           [from_import(
@@ -498,9 +443,7 @@ def test_from_no_space_dot_a_import_b():
            ('FROM', 'from'),
            ('DOT', '.'),
            ('NAME', 'a'),
-           ('SPACE', ' '),
-           ('IMPORT', 'import'),
-           ('SPACE', ' '),
+           ('IMPORT', 'import', ' ', ' '),
            ('NAME', 'b')
           ],
           [from_import(dotted_name([
@@ -516,12 +459,9 @@ def test_from_no_space_dot_a_import_b():
 def test_from_dot_import_b():
     "from . import b"
     parse([
-           ('FROM', 'from'),
-           ('SPACE', ' '),
+           ('FROM', 'from', '', ' '),
            ('DOT', '.'),
-           ('SPACE', ' '),
-           ('IMPORT', 'import'),
-           ('SPACE', ' '),
+           ('IMPORT', 'import', ' ', ' '),
            ('NAME', 'b')
           ],
           [from_import(
@@ -536,11 +476,9 @@ def test_from_dot_import_b():
 def test_from_dot_no_space_import_b():
     "from .import b"
     parse([
-           ('FROM', 'from'),
-           ('SPACE', ' '),
+           ('FROM', 'from', '', ' '),
            ('DOT', '.'),
-           ('IMPORT', 'import'),
-           ('SPACE', ' '),
+           ('IMPORT', 'import', '', ' '),
            ('NAME', 'b')
           ],
           [from_import(dotted_name([
@@ -557,9 +495,7 @@ def test_from_no_space_dot_import_b():
     parse([
            ('FROM', 'from'),
            ('DOT', '.'),
-           ('SPACE', ' '),
-           ('IMPORT', 'import'),
-           ('SPACE', ' '),
+           ('IMPORT', 'import', ' ', ' '),
            ('NAME', 'b')
           ],
           [from_import(
@@ -577,8 +513,7 @@ def test_from_no_space_dot_no_sapceimport_b():
     parse([
            ('FROM', 'from'),
            ('DOT', '.'),
-           ('IMPORT', 'import'),
-           ('SPACE', ' '),
+           ('IMPORT', 'import', '', ' '),
            ('NAME', 'b')],
           [from_import(dotted_name([
                                     dot()
@@ -589,6 +524,8 @@ def test_from_no_space_dot_no_sapceimport_b():
                        middle_space="",
                        before_space=""
                       )])
+
+# TODO: 'from. .import*
 
 def test_simple_power():
     "a**b"
@@ -609,8 +546,7 @@ def test_first_space_power():
     "a  **b"
     parse([
            ('NAME', 'a'),
-           ('SPACE', '  '),
-           ('DOUBLE_STAR', '**'),
+           ('DOUBLE_STAR', '**', '  ', ''),
            ('NAME', 'b')
           ],
           [binary_operator(
@@ -625,8 +561,7 @@ def test_second_space_power():
     "a** b"
     parse([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**'),
-           ('SPACE', ' '),
+           ('DOUBLE_STAR', '**', '', ' '),
            ('NAME', 'b')],
           [binary_operator(
                            '**',
@@ -640,9 +575,7 @@ def test_spaces_power():
     "a **  b"
     parse([
            ('NAME', 'a'),
-           ('SPACE', ' '),
-           ('DOUBLE_STAR', '**'),
-           ('SPACE', '  '),
+           ('DOUBLE_STAR', '**', ' ', '  '),
            ('NAME', 'b')
           ],
           [binary_operator(
@@ -657,13 +590,9 @@ def test_power_power():
     "a **  b   **    c"
     parse([
            ('NAME', 'a'),
-           ('SPACE', ' '),
-           ('DOUBLE_STAR', '**'),
-           ('SPACE', '  '),
+           ('DOUBLE_STAR', '**', ' ', '  '),
            ('NAME', 'b'),
-           ('SPACE', '   '),
-           ('DOUBLE_STAR', '**'),
-           ('SPACE', '    '),
+           ('DOUBLE_STAR', '**', '   ', '    '),
            ('NAME', 'c')
           ],
           [binary_operator(
@@ -684,12 +613,9 @@ def test_power_power_spaces():
     "a**  b   **    c"
     parse([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**'),
-           ('SPACE', '  '),
+           ('DOUBLE_STAR', '**', '', '  '),
            ('NAME', 'b'),
-           ('SPACE', '   '),
-           ('DOUBLE_STAR', '**'),
-           ('SPACE', '    '),
+           ('DOUBLE_STAR', '**', '   ', '    '),
            ('NAME', 'c')
           ],
           [binary_operator(
@@ -708,12 +634,9 @@ def test_power_power_spaces():
     "a **b   **    c"
     parse([
            ('NAME', 'a'),
-           ('SPACE', ' '),
-           ('DOUBLE_STAR', '**'),
+           ('DOUBLE_STAR', '**', ' ', ''),
            ('NAME', 'b'),
-           ('SPACE', '   '),
-           ('DOUBLE_STAR', '**'),
-           ('SPACE', '    '),
+           ('DOUBLE_STAR', '**', '   ', '    '),
            ('NAME', 'c')
           ],
           [binary_operator(
@@ -755,9 +678,7 @@ def test_power_factor():
     "a **  +b"
     parse([
            ('NAME', 'a'),
-           ('SPACE', ' '),
-           ('DOUBLE_STAR', '**'),
-           ('SPACE', '  '),
+           ('DOUBLE_STAR', '**', ' ', '  '),
            ('PLUS', '+'),
            ('NAME', 'b')
           ],
@@ -773,9 +694,7 @@ def test_power_factor_minus():
     "a **  -b"
     parse([
            ('NAME', 'a'),
-           ('SPACE', ' '),
-           ('DOUBLE_STAR', '**'),
-           ('SPACE', '  '),
+           ('DOUBLE_STAR', '**', ' ', '  '),
            ('MINUS', '-'),
            ('NAME', 'b')
           ],
@@ -791,9 +710,7 @@ def test_power_factor_tild():
     "a **  ~b"
     parse([
            ('NAME', 'a'),
-           ('SPACE', ' '),
-           ('DOUBLE_STAR', '**'),
-           ('SPACE', '  '),
+           ('DOUBLE_STAR', '**', ' ', '  '),
            ('TILDE', '~'),
            ('NAME', 'b')
           ],
@@ -809,9 +726,7 @@ def test_power_operator_madness():
     "a **  ~+-b"
     parse([
            ('NAME', 'a'),
-           ('SPACE', ' '),
-           ('DOUBLE_STAR', '**'),
-           ('SPACE', '  '),
+           ('DOUBLE_STAR', '**', ' ', '  '),
            ('TILDE', '~'),
            ('PLUS', '+'),
            ('MINUS', '-'),
@@ -841,11 +756,8 @@ def test_power_factor_tild_space():
     "a **  ~ b"
     parse([
            ('NAME', 'a'),
-           ('SPACE', ' '),
-           ('DOUBLE_STAR', '**'),
-           ('SPACE', '  '),
-           ('TILDE', '~'),
-           ('SPACE', ' '),
+           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('TILDE', '~', '', ' '),
            ('NAME', 'b')
           ],
           [binary_operator(
@@ -876,8 +788,7 @@ def test_power_trailer_spaces():
     "a  .   b"
     parse([
            ('NAME', 'a'),
-           ('SPACE', ' '),
-           ('DOT', '.'),
+           ('DOT', '.', ' ', ''),
            ('NAME', 'b'),
           ],
           [atomtrailers([
@@ -890,8 +801,7 @@ def test_power_trailer_spaces():
 
     parse([
            ('NAME', 'a'),
-           ('DOT', '.'),
-           ('SPACE', '  '),
+           ('DOT', '.', '', '  '),
            ('NAME', 'b'),
           ],
           [atomtrailers([
@@ -904,9 +814,7 @@ def test_power_trailer_spaces():
 
     parse([
            ('NAME', 'a'),
-           ('SPACE', '   '),
-           ('DOT', '.'),
-           ('SPACE', '    '),
+           ('DOT', '.', '   ', '    '),
            ('NAME', 'b'),
           ],
           [atomtrailers([
@@ -964,13 +872,9 @@ def test_power_trailers_space():
     "a . b . c"
     parse([
            ('NAME', 'a'),
-           ('SPACE', ' '),
-           ('DOT', '.'),
-           ('SPACE', ' '),
+           ('DOT', '.', ' ', ' '),
            ('NAME', 'b'),
-           ('SPACE', ' '),
-           ('DOT', '.'),
-           ('SPACE', ' '),
+           ('DOT', '.', ' ', ' '),
            ('NAME', 'c'),
           ],
           [atomtrailers([
@@ -1023,9 +927,7 @@ def test_power_trailer_getitem_empty_with_space():
     "a [ ]"
     parse([
            ('NAME', 'a'),
-           ('SPACE', ' '),
-           ('LEFT_SQUARE_BRACKET', '['),
-           ('SPACE', ' '),
+           ('LEFT_SQUARE_BRACKET', '[', ' ', ' '),
            ('RIGHT_SQUARE_BRACKET', ']'),
           ],
           [atomtrailers([
@@ -1052,9 +954,7 @@ def test_power_trailer_call_empty_with_space():
     "a ( )"
     parse([
            ('NAME', 'a'),
-           ('SPACE', ' '),
-           ('LEFT_PARENTHESIS', '('),
-           ('SPACE', ' '),
+           ('LEFT_PARENTHESIS', '(', ' ', ' '),
            ('RIGHT_PARENTHESIS', ')'),
           ],
           [atomtrailers([
@@ -1077,6 +977,68 @@ def test_term_mult():
                            second=name('b'),
                            first_space="",
                            second_space="",
+                          )])
+
+def test_term_mult_first_space():
+    "a *b"
+    parse([
+           ('NAME', 'a'),
+           ('STAR', '*', ' ', ''),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('*',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space=" ",
+                           second_space="",
+                          )])
+
+def test_term_mult_second_space():
+    "a* b"
+    parse([
+           ('NAME', 'a'),
+           ('STAR', '*', '', ' '),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('*',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space="",
+                           second_space=" ",
+                          )])
+
+def test_term_mult_spaces():
+    "a * b"
+    parse([
+           ('NAME', 'a'),
+           ('STAR', '*', ' ', ' '),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('*',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space=" ",
+                           second_space=" ",
+                          )])
+
+def test_term_mult_spaces_atomtrailers():
+    "a.b * c"
+    parse([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('STAR', '*', ' ', ' '),
+           ('NAME', 'c'),
+          ],
+          [binary_operator('*',
+                           first=atomtrailers([
+                                               name('a'),
+                                               dot(),
+                                               name('b'),
+                                              ]),
+                           second=name('c'),
+                           first_space=" ",
+                           second_space=" ",
                           )])
 
 # stmt: simple_stmt
