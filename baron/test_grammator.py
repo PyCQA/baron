@@ -1193,6 +1193,82 @@ def test_term_modulo_spaces_atomtrailers():
                            second_space=" ",
                           )])
 
+def test_term_floor_division():
+    "a//b"
+    parse([
+           ('NAME', 'a'),
+           ('DOUBLE_SLASH', '//'),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('//',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space="",
+                           second_space="",
+                          )])
+
+def test_term_floor_division_first_space():
+    "a //b"
+    parse([
+           ('NAME', 'a'),
+           ('DOUBLE_SLASH', '//', ' ', ''),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('//',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space=" ",
+                           second_space="",
+                          )])
+
+def test_term_floor_division_second_space():
+    "a// b"
+    parse([
+           ('NAME', 'a'),
+           ('DOUBLE_SLASH', '//', '', ' '),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('//',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space="",
+                           second_space=" ",
+                          )])
+
+def test_term_floor_division_spaces():
+    "a // b"
+    parse([
+           ('NAME', 'a'),
+           ('DOUBLE_SLASH', '//', ' ', ' '),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('//',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space=" ",
+                           second_space=" ",
+                          )])
+
+def test_term_floor_division_spaces_atomtrailers():
+    "a.b // c"
+    parse([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('DOUBLE_SLASH', '//', ' ', ' '),
+           ('NAME', 'c'),
+          ],
+          [binary_operator('//',
+                           first=atomtrailers([
+                                               name('a'),
+                                               dot(),
+                                               name('b'),
+                                              ]),
+                           second=name('c'),
+                           first_space=" ",
+                           second_space=" ",
+                          )])
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt
