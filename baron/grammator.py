@@ -578,7 +578,7 @@ def end((space, endmarker)):
 @pg.production("statement : separator")
 @pg.production("statement : import")
 @pg.production("statement : from_import")
-@pg.production("statement : factor")
+@pg.production("statement : term")
 def separator((statement,)):
     return [statement]
 
@@ -740,6 +740,10 @@ def dotted_name_element((dotted_name_element,)):
 @pg.production("dotted_name_element : SPACE")
 def dotted_name((token,)):
     return [create_node_from_token(token)]
+
+@pg.production("term : factor")
+def term_factor((factor,)):
+    return factor
 
 @pg.production("factor : power")
 def factor_atom((power,)):
