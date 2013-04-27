@@ -1622,6 +1622,27 @@ def test_arith_expr_right_shift_spaces_atomtrailers():
                            second_space=" ",
                           )])
 
+def test_chained_left_right_shift():
+    "a<<b>>c"
+    parse([
+           ('NAME', 'a'),
+           ('LEFT_SHIFT', '<<'),
+           ('NAME', 'b'),
+           ('RIGHT_SHIFT', '>>'),
+           ('NAME', 'c'),
+          ],
+          [binary_operator('<<',
+                           first=name('a'),
+                           second=binary_operator('>>',
+                                                  first=name("b"),
+                                                  second=name("c"),
+                                                  first_space="",
+                                                  second_space=""
+                                                 ),
+                           first_space="",
+                           second_space="",
+                          )])
+
 
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
