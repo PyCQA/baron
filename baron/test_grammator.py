@@ -1740,6 +1740,103 @@ def test_chained_left_and_expr():
                            second_space="",
                           )])
 
+def test_xor_expr():
+    "a^b"
+    parse([
+           ('NAME', 'a'),
+           ('CIRCUMFLEX', '^'),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('^',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space="",
+                           second_space="",
+                          )])
+
+def test_xor_expr_first_space():
+    "a ^b"
+    parse([
+           ('NAME', 'a'),
+           ('CIRCUMFLEX', '^', ' ', ''),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('^',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space=" ",
+                           second_space="",
+                          )])
+
+def test_xor_expr_second_space():
+    "a^ b"
+    parse([
+           ('NAME', 'a'),
+           ('CIRCUMFLEX', '^', '', ' '),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('^',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space="",
+                           second_space=" ",
+                          )])
+
+def test_xor_expr_spaces():
+    "a ^ b"
+    parse([
+           ('NAME', 'a'),
+           ('CIRCUMFLEX', '^', ' ', ' '),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('^',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space=" ",
+                           second_space=" ",
+                          )])
+
+def test_xor_expr_spaces_atomtrailers():
+    "a.b ^ c"
+    parse([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('CIRCUMFLEX', '^', ' ', ' '),
+           ('NAME', 'c'),
+          ],
+          [binary_operator('^',
+                           first=atomtrailers([
+                                               name('a'),
+                                               dot(),
+                                               name('b'),
+                                              ]),
+                           second=name('c'),
+                           first_space=" ",
+                           second_space=" ",
+                          )])
+
+def test_chained_left_xor_expr():
+    "a^b^c"
+    parse([
+           ('NAME', 'a'),
+           ('CIRCUMFLEX', '^'),
+           ('NAME', 'b'),
+           ('CIRCUMFLEX', '^'),
+           ('NAME', 'c'),
+          ],
+          [binary_operator('^',
+                           first=name('a'),
+                           second=binary_operator('^',
+                                                  first=name("b"),
+                                                  second=name("c"),
+                                                  first_space="",
+                                                  second_space=""
+                                                 ),
+                           first_space="",
+                           second_space="",
+                          )])
+
 
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
