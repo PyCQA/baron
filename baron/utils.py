@@ -54,3 +54,34 @@ class FlexibleIterator():
                 escaped = True
 
         return to_return
+
+
+def create_node_from_token(token, **kwargs):
+    result = {"type": token.name.lower(), "value": token.value}
+    if kwargs:
+        result.update(kwargs)
+    return result
+
+def create_node(name, value, **kwargs):
+    result = {"type": name, "value": value}
+    if kwargs:
+        result.update(kwargs)
+    return result
+
+def binary_operator(operator, first, second, first_space="", second_space=""):
+    return {
+        "type": "binary_operator",
+        "value": operator,
+        "first": first,
+        "second": second,
+        "first_space": first_space,
+        "second_space": second_space,
+    }
+
+def unitary_operator(operator, target, space=""):
+    return {
+        "type": "unitary_operator",
+        "value": operator,
+        "target": target,
+        "space": space,
+    }
