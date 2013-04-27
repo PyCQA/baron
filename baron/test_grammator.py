@@ -1041,6 +1041,82 @@ def test_term_mult_spaces_atomtrailers():
                            second_space=" ",
                           )])
 
+def test_term_div():
+    "a/b"
+    parse([
+           ('NAME', 'a'),
+           ('SLASH', '/'),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('/',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space="",
+                           second_space="",
+                          )])
+
+def test_term_div_first_space():
+    "a /b"
+    parse([
+           ('NAME', 'a'),
+           ('SLASH', '/', ' ', ''),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('/',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space=" ",
+                           second_space="",
+                          )])
+
+def test_term_div_second_space():
+    "a/ b"
+    parse([
+           ('NAME', 'a'),
+           ('SLASH', '/', '', ' '),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('/',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space="",
+                           second_space=" ",
+                          )])
+
+def test_term_div_spaces():
+    "a / b"
+    parse([
+           ('NAME', 'a'),
+           ('SLASH', '/', ' ', ' '),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('/',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space=" ",
+                           second_space=" ",
+                          )])
+
+def test_term_div_spaces_atomtrailers():
+    "a.b / c"
+    parse([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('SLASH', '/', ' ', ' '),
+           ('NAME', 'c'),
+          ],
+          [binary_operator('/',
+                           first=atomtrailers([
+                                               name('a'),
+                                               dot(),
+                                               name('b'),
+                                              ]),
+                           second=name('c'),
+                           first_space=" ",
+                           second_space=" ",
+                          )])
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt
