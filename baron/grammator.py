@@ -583,10 +583,10 @@ def space_endl((space, endl,)):
             "before_space": space.value if space else ""
            }
 
-@pg.production("term : factor STAR factor")
-@pg.production("term : factor SLASH factor")
-@pg.production("term : factor PERCENT factor")
-@pg.production("term : factor DOUBLE_SLASH factor")
+@pg.production("term : factor STAR term")
+@pg.production("term : factor SLASH term")
+@pg.production("term : factor PERCENT term")
+@pg.production("term : factor DOUBLE_SLASH term")
 def term_binary_operator((factor, operator, factor2)):
     return binary_operator(
                            operator.value,
@@ -707,5 +707,5 @@ if __name__ == '__main__':
             yield Token(*i)
 
     #print pouet('1')
-    print json.dumps(parse(pouetpouet('a.B * c')), indent=4)
+    print json.dumps(parse(pouetpouet('a/B*c')), indent=4)
     #print json.dumps(parser.parse(pouetpouetpouet([('ENDMARKER', ''), None])), indent=4)

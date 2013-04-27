@@ -1269,6 +1269,34 @@ def test_term_floor_division_spaces_atomtrailers():
                            second_space=" ",
                           )])
 
+def test_combine_div_modulo_mult():
+    "a/b%c*d"
+    parse([
+           ('NAME', 'a'),
+           ('SLASH', '/'),
+           ('NAME', 'b'),
+           ('PERCENT', '%'),
+           ('NAME', 'c'),
+           ('STAR', '*'),
+           ('NAME', 'd'),
+          ],
+          [binary_operator('/',
+                           first= name('a'),
+                           second=binary_operator('%',
+                                  first=name('b'),
+                                  second=binary_operator('*',
+                                             first=name("c"),
+                                             second=name('d'),
+                                             first_space="",
+                                             second_space="",
+                                            ),
+                                  first_space="",
+                                  second_space="",
+                                 ),
+                           first_space="",
+                           second_space="",
+                          )])
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt
@@ -1380,8 +1408,8 @@ def test_term_floor_division_spaces_atomtrailers():
 
 ### term: factor
 ### -> factor
-# term: factor ([SPACE] ('*'|'/'|'%'|'//') [SPACE] factor)*
-# -> binop(('*'|'/'|'%'|'//'), factor, factor)
+### term: factor ([SPACE] ('*'|'/'|'%'|'//') [SPACE] factor)*
+### -> binop(('*'|'/'|'%'|'//'), factor, factor)
 
 ### factor: ('+'|'-'|'~') [SPACE] factor
 ### -> uniatryop(('+'|'-'|'~'), factor)
