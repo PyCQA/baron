@@ -1067,22 +1067,22 @@ def test_power_trailer_call_empty_with_space():
 
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
-# small_stmt: expr_stmt
-# expr_stmt: testlist
-# testlist: test
-# test: or_test
-# or_test: and_test
-# and_test: not_test
-# not_test: comparison
-# comparison: expr
-# expr: xor_expr
-# xor_expr: and_expr
-# and_expr: shift_expr
-# shift_expr: arith_expr
-# arith_expr: term
-# term: factor
-# factor: power
-# power: atom
+### small_stmt: expr_stmt
+### expr_stmt: testlist
+### testlist: test
+### test: or_test
+### or_test: and_test
+### and_test: not_test
+### not_test: comparison
+### comparison: expr
+### expr: xor_expr
+### xor_expr: and_expr
+### and_expr: shift_expr
+### shift_expr: arith_expr
+### arith_expr: term
+### term: factor
+### factor: power
+### power: atom
 
 # stmt: simple_stmt
 # stmt: compound_stmt
@@ -1092,7 +1092,7 @@ def test_power_trailer_call_empty_with_space():
 # simple_stmt: small_stmt [SPACE] ';' small_stmt [SPACE] ';' [SPACE] NEWLINE
 # simple_stmt: small_stmt ([SPACE] ';' small_stmt [SPACE] ';') [SPACE] NEWLINE
 
-# small_stmt: expr_stmt
+### small_stmt: expr_stmt
 # small_stmt: print_stmt
 # small_stmt: del_stmt
 # small_stmt: pass_stmt
@@ -1102,7 +1102,7 @@ def test_power_trailer_call_empty_with_space():
 # small_stmt: exec_stmt
 # small_stmt: assert_stmt
 
-# expr_stmt: testlist
+### expr_stmt: testlist
 # expr_stmt: testlist ([SPACE] '=' [SPACE] testlist)*
 # -> assign(testlist, testlist)
 # expr_stmt: testlist ([SPACE] '=' [SPACE] yield_expr)*
@@ -1112,30 +1112,30 @@ def test_power_trailer_call_empty_with_space():
 # expr_stmt: testlist augassign testlist
 # -> augassign(testlist, testlist)
 
-# testlist: test
+### testlist: test
 # testlist: test [SPACE] [',']
 # testlist: test ([SPACE] ',' [SPACE] test)*
 # testlist: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
 # -> testlist([...])
 
 # test: lambdef
-# test: or_test
+### test: or_test
 # test: or_test [SPACE 'if' SPACE or_test SPACE 'else' SPACE test]
 # -> ternaryOp(or_test, or_test, test)
 
-# or_test: and_test
+### or_test: and_test
 # or_test: and_test (SPACE 'or' SPACE and_test)*
 # -> boolOP('or', not_test, not_test)
 
-# and_test: not_test
+### and_test: not_test
 # and_test: not_test (SPACE 'and' SPACE not_test)*
 # -> boolOP('and', not_test, not_test)
 
-# not_test: comparison
+##### not_test: comparison
 # not_test: 'not' SPACE not_test
 # -> unitaryOp('not', not_test)
 
-# comparison: expr
+### comparison: expr
 # -> expr
 # comparison: expr (comp_op expr)*
 # -> comparison(comp_or, expr, expr)
@@ -1153,29 +1153,29 @@ def test_power_trailer_call_empty_with_space():
 # comp_op: 'is' SPACE 'not'
 # -> comp_op
 
-# expr: xor_expr
+### expr: xor_expr
 # expr: xor_expr ([SPACE] '|' [SPACE] xor_expr)*
 # -> binop('|', term, term)
 
-# xor_expr: and_expr
+### xor_expr: and_expr
 # xor_expr: and_expr ([SPACE] '^' [SPACE] and_expr)*
 # -> binop('^', term, term)
 
-# and_expr: shift_expr
+### and_expr: shift_expr
 # and_expr: shift_expr ([SPACE] '&' [SPACE] shift_expr)*
 # -> binop('&', term, term)
 
-# shift_expr: arith_expr
+### shift_expr: arith_expr
 # shift_expr: arith_expr ([SPACE] ('<<'|'>>') [SPACE] arith_expr)*
 # -> binop(('<<'|'>>'), term, term)
 
-# arith_expr: term
-# -> term
+### arith_expr: term
+### -> term
 # arith_expr: term ([SPACE] ('+'|'-') [SPACE] term)*
 # -> binop(('+'|'-'), term, term)
 
-# term: factor
-# -> factor
+### term: factor
+### -> factor
 # term: factor ([SPACE] ('*'|'/'|'%'|'//') [SPACE] factor)*
 # -> binop(('*'|'/'|'%'|'//'), factor, factor)
 

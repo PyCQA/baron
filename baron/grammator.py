@@ -578,9 +578,28 @@ def end((space, endmarker)):
 @pg.production("statement : separator")
 @pg.production("statement : import")
 @pg.production("statement : from_import")
-@pg.production("statement : term")
+@pg.production("statement : small_stmt")
 def separator((statement,)):
     return [statement]
+
+@pg.production("small_stmt : expr_stmt")
+@pg.production("expr_stmt : testlist")
+@pg.production("testlist : test")
+@pg.production("test : or_test")
+@pg.production("or_test : and_test")
+@pg.production("and_test : not_test")
+@pg.production("not_test : comparison")
+@pg.production("comparison : expr")
+@pg.production("expr : xor_expr")
+@pg.production("xor_expr : and_expr")
+@pg.production("and_expr : shift_expr")
+@pg.production("shift_expr : arith_expr")
+@pg.production("arith_expr : term")
+@pg.production("term : factor")
+@pg.production("factor : power")
+@pg.production("power : atom")
+def term_factor((level,)):
+    return level
 
 @pg.production("separator : SPACE? ENDL")
 def space_endl((space, endl,)):
@@ -741,23 +760,11 @@ def dotted_name_element((dotted_name_element,)):
 def dotted_name((token,)):
     return [create_node_from_token(token)]
 
-@pg.production("term : factor")
-def term_factor((factor,)):
-    return factor
-
-@pg.production("factor : power")
-def factor_atom((power,)):
-    return power
-
 @pg.production("factor : PLUS SPACE? factor")
 @pg.production("factor : MINUS SPACE? factor")
 @pg.production("factor : TILDE SPACE? factor")
 def factor_unitary_operator_space((operator, space, factor,)):
     return unitary_operator(operator.value, factor, space=space.value if space else "")
-
-@pg.production("power : atom")
-def power_atom((atom,)):
-    return atom
 
 @pg.production("power : atom SPACE? DOUBLE_STAR SPACE? factor")
 @pg.production("power : atom SPACE? DOUBLE_STAR SPACE? power")
