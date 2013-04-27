@@ -66,3 +66,6 @@ def unitary_operator(operator, target, space):
 
 def atomtrailers(value):
     return _node("atomtrailers", value)
+
+def getitem(value=None, first_space="", second_space=""):
+    return _node("getitem", value, first_space=first_space, second_space=second_space)

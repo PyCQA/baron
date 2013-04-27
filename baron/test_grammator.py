@@ -1019,6 +1019,23 @@ def test_power_trailer_getitem_empty():
                          getitem(),
                         ])])
 
+def test_power_trailer_getitem_empty_with_space():
+    "a [ ]"
+    parse([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('LEFT_SQUARE_BRACKET', '['),
+           ('SPACE', ' '),
+           ('RIGHT_SQUARE_BRACKET', ']'),
+          ],
+          [atomtrailers([
+                         name('a'),
+                         space(),
+                         getitem(
+                                 first_space=" "
+                         ),
+                        ])])
+
 # stmt: simple_stmt
 # stmt: compound_stmt
 
@@ -1133,7 +1150,7 @@ def test_power_trailer_getitem_empty():
 ### power: atom [SPACE] trailer* [[SPACE] '**' [SPACE] factor]
 
 ### trailer: '.' [SPACE] NAME
-# trailer: '[' [SPACE] ']'
+### trailer: '[' [SPACE] ']'
 # trailer: '[' [SPACE] subscriptlist [SPACE] ']'
 # trailer: '(' [SPACE] [arglist] [SPACE] ')'
 
