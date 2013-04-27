@@ -589,6 +589,7 @@ def space_endl((space, endl,)):
 def factor_unitary_operator_space((operator, factor,)):
     return unitary_operator(operator.value, factor, space=operator.after_space)
 
+@pg.production("expr : xor_expr VBAR expr")
 @pg.production("xor_expr : and_expr CIRCUMFLEX xor_expr")
 @pg.production("and_expr : shift_expr AMPER and_expr")
 @pg.production("shift_expr : arith_expr RIGHT_SHIFT shift_expr")

@@ -1837,6 +1837,103 @@ def test_chained_left_xor_expr():
                            second_space="",
                           )])
 
+def test_expr():
+    "a|b"
+    parse([
+           ('NAME', 'a'),
+           ('VBAR', '|'),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('|',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space="",
+                           second_space="",
+                          )])
+
+def test_expr_first_space():
+    "a |b"
+    parse([
+           ('NAME', 'a'),
+           ('VBAR', '|', ' ', ''),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('|',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space=" ",
+                           second_space="",
+                          )])
+
+def test_expr_second_space():
+    "a| b"
+    parse([
+           ('NAME', 'a'),
+           ('VBAR', '|', '', ' '),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('|',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space="",
+                           second_space=" ",
+                          )])
+
+def test_expr_spaces():
+    "a | b"
+    parse([
+           ('NAME', 'a'),
+           ('VBAR', '|', ' ', ' '),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('|',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space=" ",
+                           second_space=" ",
+                          )])
+
+def test_expr_spaces_atomtrailers():
+    "a.b | c"
+    parse([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('VBAR', '|', ' ', ' '),
+           ('NAME', 'c'),
+          ],
+          [binary_operator('|',
+                           first=atomtrailers([
+                                               name('a'),
+                                               dot(),
+                                               name('b'),
+                                              ]),
+                           second=name('c'),
+                           first_space=" ",
+                           second_space=" ",
+                          )])
+
+def test_chained_left_expr():
+    "a|b|c"
+    parse([
+           ('NAME', 'a'),
+           ('VBAR', '|'),
+           ('NAME', 'b'),
+           ('VBAR', '|'),
+           ('NAME', 'c'),
+          ],
+          [binary_operator('|',
+                           first=name('a'),
+                           second=binary_operator('|',
+                                                  first=name("b"),
+                                                  second=name("c"),
+                                                  first_space="",
+                                                  second_space=""
+                                                 ),
+                           first_space="",
+                           second_space="",
+                          )])
+
 
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
@@ -1909,7 +2006,7 @@ def test_chained_left_xor_expr():
 # -> unitaryOp('not', not_test)
 
 ### comparison: expr
-# -> expr
+### -> expr
 # comparison: expr (comp_op expr)*
 # -> comparison(comp_or, expr, expr)
 
@@ -1927,12 +2024,12 @@ def test_chained_left_xor_expr():
 # -> comp_op
 
 ### expr: xor_expr
-# expr: xor_expr ([SPACE] '|' [SPACE] xor_expr)*
-# -> binop('|', term, term)
+### expr: xor_expr ([SPACE] '|' [SPACE] xor_expr)*
+### -> binop('|', term, term)
 
 ### xor_expr: and_expr
-# xor_expr: and_expr ([SPACE] '^' [SPACE] and_expr)*
-# -> binop('^', term, term)
+### xor_expr: and_expr ([SPACE] '^' [SPACE] and_expr)*
+### -> binop('^', term, term)
 
 ### and_expr: shift_expr
 ### and_expr: shift_expr ([SPACE] '&' [SPACE] shift_expr)*
