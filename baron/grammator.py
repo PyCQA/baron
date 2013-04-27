@@ -583,6 +583,16 @@ def space_endl((space, endl,)):
             "before_space": space.value if space else ""
            }
 
+@pg.production("arith_expr : term PLUS term")
+def arith_expr((term, operator, term2)):
+    return binary_operator(
+                           operator.value,
+                           first=term,
+                           second=term2,
+                           first_space=operator.before_space,
+                           second_space=operator.after_space,
+    )
+
 @pg.production("term : factor STAR term")
 @pg.production("term : factor SLASH term")
 @pg.production("term : factor PERCENT term")

@@ -1297,6 +1297,82 @@ def test_combine_div_modulo_mult():
                            second_space="",
                           )])
 
+def test_arith_expr_plus():
+    "a+b"
+    parse([
+           ('NAME', 'a'),
+           ('PLUS', '+'),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('+',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space="",
+                           second_space="",
+                          )])
+
+def test_arith_expr_add_first_space():
+    "a +b"
+    parse([
+           ('NAME', 'a'),
+           ('PLUS', '+', ' ', ''),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('+',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space=" ",
+                           second_space="",
+                          )])
+
+def test_arith_expr_add_second_space():
+    "a+ b"
+    parse([
+           ('NAME', 'a'),
+           ('PLUS', '+', '', ' '),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('+',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space="",
+                           second_space=" ",
+                          )])
+
+def test_arith_expr_add_spaces():
+    "a + b"
+    parse([
+           ('NAME', 'a'),
+           ('PLUS', '+', ' ', ' '),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('+',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space=" ",
+                           second_space=" ",
+                          )])
+
+def test_arith_expr_add_spaces_atomtrailers():
+    "a.b + c"
+    parse([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('PLUS', '+', ' ', ' '),
+           ('NAME', 'c'),
+          ],
+          [binary_operator('+',
+                           first=atomtrailers([
+                                               name('a'),
+                                               dot(),
+                                               name('b'),
+                                              ]),
+                           second=name('c'),
+                           first_space=" ",
+                           second_space=" ",
+                          )])
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt
