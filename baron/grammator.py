@@ -760,6 +760,16 @@ def dotted_name_element((dotted_name_element,)):
 def dotted_name((token,)):
     return [create_node_from_token(token)]
 
+@pg.production("term : factor STAR factor")
+def term_binary_operator((factor, star, factor2)):
+    return binary_operator(
+                           star.value,
+                           first=factor,
+                           second=factor2,
+                           first_space="",
+                           second_space="",
+                          )
+
 @pg.production("factor : PLUS SPACE? factor")
 @pg.production("factor : MINUS SPACE? factor")
 @pg.production("factor : TILDE SPACE? factor")

@@ -1065,6 +1065,20 @@ def test_power_trailer_call_empty_with_space():
                          ),
                         ])])
 
+def test_term_mult():
+    "a*b"
+    parse([
+           ('NAME', 'a'),
+           ('STAR', '*'),
+           ('NAME', 'b'),
+          ],
+          [binary_operator('*',
+                           first=name('a'),
+                           second=name('b'),
+                           first_space="",
+                           second_space="",
+                          )])
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt
