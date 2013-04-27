@@ -523,7 +523,7 @@ from rply.token import Token
 from rply import ParserGenerator
 
 from tokenizer import TOKENS, KEYWORDS, tokenize
-from utils import create_node_from_token, binary_operator, unitary_operator
+from utils import create_node_from_token, binary_operator, unitary_operator, comparison
 from grammator_imports import include_imports
 
 
@@ -588,6 +588,23 @@ def space_endl((space, endl,)):
 @pg.production("factor : TILDE factor")
 def factor_unitary_operator_space((operator, factor,)):
     return unitary_operator(operator.value, factor, space=operator.after_space)
+
+@pg.production("comparison : expr LESS comparison")
+@pg.production("comparison : expr GREATER comparison")
+@pg.production("comparison : expr EQUAL_EQUAL comparison")
+@pg.production("comparison : expr LESS_EQUAL comparison")
+@pg.production("comparison : expr GREATER_EQUAL comparison")
+@pg.production("comparison : expr LESS_GREATER comparison")
+@pg.production("comparison : expr NOT_EQUAL comparison")
+@pg.production("comparison : expr IN comparison")
+@pg.production("comparison : expr IS comparison")
+def comparison_node((expr, comparison_operator, comparison_)):
+    return comparison(comparison_operator.value,
+                      first=expr,
+                      second=comparison_,
+                      first_space=comparison_operator.before_space,
+                      second_space=comparison_operator.after_space
+                     )
 
 @pg.production("expr : xor_expr VBAR expr")
 @pg.production("xor_expr : and_expr CIRCUMFLEX xor_expr")

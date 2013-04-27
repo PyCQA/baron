@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
 
+from utils import comparison
 from test_utils import (parse, space, inteu, endl, name, string, importeu,
                         dotted_as_name, dotted_name, dot, comma, from_import,
                         name_as_name, left_parenthesis, right_parenthesis,
@@ -1933,6 +1934,123 @@ def test_chained_left_expr():
                            first_space="",
                            second_space="",
                           )])
+
+comparison_tokens = (
+    ('LESS', '<'),
+    ('GREATER', '>'),
+    ('EQUAL_EQUAL', '=='),
+    ('LESS_EQUAL', '<='),
+    ('GREATER_EQUAL', '>='),
+    ('LESS_GREATER', '<>'),
+    ('NOT_EQUAL', '!='),
+    ('IN', 'in'),
+    ('IS', 'is'),
+)
+# TODO: not in
+# TODO: is not
+
+def test_comparison():
+    "a<b"
+    for token_name, value in comparison_tokens:
+        parse([
+               ('NAME', 'a'),
+               (token_name, value),
+               ('NAME', 'b'),
+              ],
+              [comparison(value,
+                          first=name('a'),
+                          second=name('b'),
+                          first_space="",
+                          second_space="",
+                         )])
+
+def test_comparison_first_space():
+    "a <b"
+    for token_name, value in comparison_tokens:
+        parse([
+               ('NAME', 'a'),
+               (token_name, value, ' ', ''),
+               ('NAME', 'b'),
+              ],
+              [comparison(value,
+                          first=name('a'),
+                          second=name('b'),
+                          first_space=" ",
+                          second_space="",
+                         )])
+
+def test_comparison_second_space():
+    "a< b"
+    for token_name, value in comparison_tokens:
+        parse([
+               ('NAME', 'a'),
+               (token_name, value, '', ' '),
+               ('NAME', 'b'),
+              ],
+              [comparison(value,
+                          first=name('a'),
+                          second=name('b'),
+                          first_space="",
+                          second_space=" ",
+                         )])
+
+def test_comparison_spaces():
+    "a < b"
+    for token_name, value in comparison_tokens:
+        parse([
+               ('NAME', 'a'),
+               (token_name, value, ' ', ' '),
+               ('NAME', 'b'),
+              ],
+              [comparison(value,
+                          first=name('a'),
+                          second=name('b'),
+                          first_space=" ",
+                          second_space=" ",
+                         )])
+
+def test_comparison_spaces_atomtrailers():
+    "a.b < c"
+    for token_name, value in comparison_tokens:
+        parse([
+               ('NAME', 'a'),
+               ('DOT', '.'),
+               ('NAME', 'b'),
+               (token_name, value, ' ', ' '),
+               ('NAME', 'c'),
+              ],
+              [comparison(value,
+                          first=atomtrailers([
+                                              name('a'),
+                                              dot(),
+                                              name('b'),
+                                             ]),
+                          second=name('c'),
+                          first_space=" ",
+                          second_space=" ",
+                         )])
+
+def test_chained_comparison():
+    "a<b<c"
+    for token_name, value in comparison_tokens:
+        parse([
+               ('NAME', 'a'),
+               (token_name, value),
+               ('NAME', 'b'),
+               (token_name, value),
+               ('NAME', 'c'),
+              ],
+              [comparison(value,
+                          first=name('a'),
+                          second=comparison(value,
+                                            first=name("b"),
+                                            second=name("c"),
+                                            first_space="",
+                                            second_space=""
+                                           ),
+                          first_space="",
+                          second_space="",
+                         )])
 
 
 # stmt: simple_stmt
