@@ -812,11 +812,12 @@ def trailer((space, dot, space2, name,)):
     return to_return
 
 @pg.production("trailer : SPACE? LEFT_SQUARE_BRACKET SPACE? RIGHT_SQUARE_BRACKET")
-def trailer_getitem((space, left_square_bracket, space2, right_square_bracket)):
+@pg.production("trailer : SPACE? LEFT_PARENTHESIS SPACE? RIGHT_PARENTHESIS")
+def trailer_getitem((space, left, space2, right)):
     to_return = []
     if space:
         to_return += [create_node_from_token(space)]
-    to_return += [{"type": "getitem", "value": None, "first_space": space2.value if space2 else "", "second_space": ""}]
+    to_return += [{"type": "getitem" if left.value == "[" else "call", "value": None, "first_space": space2.value if space2 else "", "second_space": ""}]
     return to_return
 
 @pg.production("atom : INT")
