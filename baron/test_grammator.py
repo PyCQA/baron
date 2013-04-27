@@ -1449,6 +1449,29 @@ def test_arith_expr_substract_spaces_atomtrailers():
                            second_space=" ",
                           )])
 
+
+def test_chained_add_substract():
+    "a+b-c"
+    "a - b"
+    parse([
+           ('NAME', 'a'),
+           ('PLUS', '+'),
+           ('NAME', 'b'),
+           ('MINUS', '-'),
+           ('NAME', 'c'),
+          ],
+          [binary_operator('+',
+                           first=name('a'),
+                           second=binary_operator('-',
+                                                  first=name("b"),
+                                                  second=name("c"),
+                                                  first_space="",
+                                                  second_space=""
+                                                 ),
+                           first_space="",
+                           second_space="",
+                          )])
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt
@@ -1555,8 +1578,8 @@ def test_arith_expr_substract_spaces_atomtrailers():
 
 ### arith_expr: term
 ### -> term
-# arith_expr: term ([SPACE] ('+'|'-') [SPACE] term)*
-# -> binop(('+'|'-'), term, term)
+### arith_expr: term ([SPACE] ('+'|'-') [SPACE] term)*
+### -> binop(('+'|'-'), term, term)
 
 ### term: factor
 ### -> factor

@@ -583,8 +583,8 @@ def space_endl((space, endl,)):
             "before_space": space.value if space else ""
            }
 
-@pg.production("arith_expr : term PLUS term")
-@pg.production("arith_expr : term MINUS term")
+@pg.production("arith_expr : term PLUS arith_expr")
+@pg.production("arith_expr : term MINUS arith_expr")
 def arith_expr((term, operator, term2)):
     return binary_operator(
                            operator.value,
