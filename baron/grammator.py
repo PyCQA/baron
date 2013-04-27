@@ -583,45 +583,27 @@ def space_endl((space, endl,)):
             "before_space": space.value if space else ""
            }
 
-@pg.production("arith_expr : term PLUS arith_expr")
-@pg.production("arith_expr : term MINUS arith_expr")
-def arith_expr((term, operator, term2)):
-    return binary_operator(
-                           operator.value,
-                           first=term,
-                           second=term2,
-                           first_space=operator.before_space,
-                           second_space=operator.after_space,
-    )
-
-@pg.production("term : factor STAR term")
-@pg.production("term : factor SLASH term")
-@pg.production("term : factor PERCENT term")
-@pg.production("term : factor DOUBLE_SLASH term")
-def term_binary_operator((factor, operator, factor2)):
-    return binary_operator(
-                           operator.value,
-                           first=factor,
-                           second=factor2,
-                           first_space=operator.before_space,
-                           second_space=operator.after_space,
-                          )
-
 @pg.production("factor : PLUS factor")
 @pg.production("factor : MINUS factor")
 @pg.production("factor : TILDE factor")
 def factor_unitary_operator_space((operator, factor,)):
     return unitary_operator(operator.value, factor, space=operator.after_space)
 
+@pg.production("arith_expr : term PLUS arith_expr")
+@pg.production("arith_expr : term MINUS arith_expr")
+@pg.production("term : factor STAR term")
+@pg.production("term : factor SLASH term")
+@pg.production("term : factor PERCENT term")
+@pg.production("term : factor DOUBLE_SLASH term")
 @pg.production("power : atom DOUBLE_STAR factor")
 @pg.production("power : atom DOUBLE_STAR power")
-def power((atom, double_star, factor)):
+def binary_operator_node((first, operator, second)):
     return binary_operator(
-                           double_star.value,
-                           atom,
-                           factor,
-                           first_space=double_star.before_space,
-                           second_space=double_star.after_space
+                           operator.value,
+                           first,
+                           second,
+                           first_space=operator.before_space,
+                           second_space=operator.after_space
                           )
 
 @pg.production("power : atomtrailers DOUBLE_STAR factor")
