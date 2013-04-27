@@ -1452,7 +1452,6 @@ def test_arith_expr_substract_spaces_atomtrailers():
 
 def test_chained_add_substract():
     "a+b-c"
-    "a - b"
     parse([
            ('NAME', 'a'),
            ('PLUS', '+'),
