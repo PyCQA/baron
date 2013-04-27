@@ -1066,6 +1066,25 @@ def test_power_trailer_call_empty_with_space():
                         ])])
 
 # stmt: simple_stmt
+# simple_stmt: small_stmt [SPACE] NEWLINE
+# small_stmt: expr_stmt
+# expr_stmt: testlist
+# testlist: test
+# test: or_test
+# or_test: and_test
+# and_test: not_test
+# not_test: comparison
+# comparison: expr
+# expr: xor_expr
+# xor_expr: and_expr
+# and_expr: shift_expr
+# shift_expr: arith_expr
+# arith_expr: term
+# term: factor
+# factor: power
+# power: atom
+
+# stmt: simple_stmt
 # stmt: compound_stmt
 
 # simple_stmt: small_stmt [SPACE] NEWLINE
