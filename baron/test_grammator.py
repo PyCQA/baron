@@ -2573,10 +2573,10 @@ def test_implicit_tuple_trailing_comma():
 ### augassign: '//='
 
 ### testlist: test
-# testlist: test [SPACE] [',']
-# testlist: test ([SPACE] ',' [SPACE] test)*
-# testlist: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
-# -> tuple([...])
+### testlist: test [SPACE] [',']
+### testlist: test ([SPACE] ',' [SPACE] test)*
+### testlist: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
+### -> tuple([...])
 
 # test: lambdef
 ### test: or_test
