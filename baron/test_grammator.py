@@ -3,7 +3,7 @@
 
 import pytest
 from utils import (comparison, boolean_operator, ternary_operator, assignment,
-                   augmented_assignment)
+                   augmented_assignment, tuple_)
 from test_utils import (parse, space, inteu, endl, name, string, importeu,
                         dotted_as_name, dotted_name, dot, comma, from_import,
                         name_as_name, left_parenthesis, right_parenthesis,
@@ -2390,6 +2390,72 @@ def test_augmented_assignment_augmented_assignment():
                                 second_space=" ",
                                )])
 
+def test_expr_comma_list():
+    "a or b,c+d"
+    parse([
+           ('NAME', 'a'),
+           ('OR', 'or', ' ', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ','),
+           ('NAME', 'c'),
+           ('PLUS', '+'),
+           ('NAME', 'd'),
+          ],
+          [tuple_([
+                   boolean_operator(
+                                    'or',
+                                    first=name('a'),
+                                    second=name('b'),
+                                    first_space=" ",
+                                    second_space=" ",
+                                   ),
+                   comma(),
+                   binary_operator(
+                                   '+',
+                                   first=name('c'),
+                                   second=name('d'),
+                                   first_space="",
+                                   second_space="",
+                                  )
+                  ],
+                  with_parenthesis=False,
+                 )])
+
+def test_expr_comma_list_3_items():
+    "a or b,c+d,e"
+    parse([
+           ('NAME', 'a'),
+           ('OR', 'or', ' ', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ','),
+           ('NAME', 'c'),
+           ('PLUS', '+'),
+           ('NAME', 'd'),
+           ('COMMA', ','),
+           ('NAME', 'e'),
+          ],
+          [tuple_([
+                   boolean_operator(
+                                    'or',
+                                    first=name('a'),
+                                    second=name('b'),
+                                    first_space=" ",
+                                    second_space=" ",
+                                   ),
+                   comma(),
+                   binary_operator(
+                                   '+',
+                                   first=name('c'),
+                                   second=name('d'),
+                                   first_space="",
+                                   second_space="",
+                                  ),
+                   comma(),
+                   name('e'),
+                  ],
+                  with_parenthesis=False,
+                 )])
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt
@@ -2454,7 +2520,7 @@ def test_augmented_assignment_augmented_assignment():
 # testlist: test [SPACE] [',']
 # testlist: test ([SPACE] ',' [SPACE] test)*
 # testlist: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
-# -> testlist([...])
+# -> tuple([...])
 
 # test: lambdef
 ### test: or_test

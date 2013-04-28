@@ -527,7 +527,7 @@ from rply import ParserGenerator
 from tokenizer import TOKENS, KEYWORDS, tokenize
 from utils import (create_node_from_token, binary_operator, unitary_operator,
                    comparison, boolean_operator, ternary_operator, assignment,
-                   augmented_assignment)
+                   augmented_assignment, tuple_)
 from grammator_imports import include_imports
 
 
@@ -586,6 +586,18 @@ def space_endl((space, endl,)):
 @pg.production("power : atom")
 def term_factor((level,)):
     return level
+
+@pg.production("testlist : test testlist_part")
+def implicit_tuple((test, testlist_part)):
+    return tuple_([test] + testlist_part, with_parenthesis=False)
+
+@pg.production("testlist_part : COMMA test")
+def testlist_part((comma, test)):
+    return [create_node_from_token(comma), test]
+
+@pg.production("testlist_part : COMMA test testlist_part")
+def testlist_part_next((comma, test, testlist_part)):
+    return [create_node_from_token(comma), test] + testlist_part
 
 @pg.production("expr_stmt : testlist PLUS_EQUAL testlist")
 @pg.production("expr_stmt : testlist MINUS_EQUAL testlist")
