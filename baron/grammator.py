@@ -593,11 +593,25 @@ def implicit_tuple((test, testlist_part)):
 
 @pg.production("testlist_part : COMMA test")
 def testlist_part((comma, test)):
-    return [create_node_from_token(comma), test]
+    to_return = []
+    if comma.before_space:
+        to_return += [{"type": "space", "value": comma.before_space}]
+    to_return += [create_node_from_token(comma)]
+    if comma.after_space:
+        to_return += [{"type": "space", "value": comma.after_space}]
+    to_return += [test]
+    return to_return
 
 @pg.production("testlist_part : COMMA test testlist_part")
 def testlist_part_next((comma, test, testlist_part)):
-    return [create_node_from_token(comma), test] + testlist_part
+    to_return = []
+    if comma.before_space:
+        to_return += [{"type": "space", "value": comma.before_space}]
+    to_return += [create_node_from_token(comma)]
+    if comma.after_space:
+        to_return += [{"type": "space", "value": comma.after_space}]
+    to_return += [test] + testlist_part
+    return to_return
 
 @pg.production("expr_stmt : testlist PLUS_EQUAL testlist")
 @pg.production("expr_stmt : testlist MINUS_EQUAL testlist")

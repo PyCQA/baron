@@ -2456,6 +2456,29 @@ def test_expr_comma_list_3_items():
                   with_parenthesis=False,
                  )])
 
+def test_implicit_tuple_space():
+    "a, b , c"
+    parse([
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', ' ', ' '),
+           ('NAME', 'c'),
+          ],
+          [tuple_([
+                   name('a'),
+                   comma(),
+                   space(),
+                   name('b'),
+                   space(),
+                   comma(),
+                   space(),
+                   name('c'),
+                  ],
+                  with_parenthesis=False,
+                 )])
+
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt
