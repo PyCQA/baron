@@ -2239,6 +2239,44 @@ def test_and_and():
                             second_space=" ",
                            )])
 
+def test_or():
+    "a or b"
+    parse([
+           ('NAME', 'a'),
+           ('OR', 'or', ' ', ' '),
+           ('NAME', 'b'),
+          ],
+          [boolean_operator(
+                            'or',
+                            first=name('a'),
+                            second=name('b'),
+                            first_space=" ",
+                            second_space=" ",
+                           )])
+
+def test_or_or():
+    "a or b or c"
+    parse([
+           ('NAME', 'a'),
+           ('OR', 'or', ' ', ' '),
+           ('NAME', 'b'),
+           ('OR', 'or', ' ', ' '),
+           ('NAME', 'c'),
+          ],
+          [boolean_operator(
+                            'or',
+                            first=name('a'),
+                            second=boolean_operator(
+                                                    'or',
+                                                    first=name('b'),
+                                                    second=name('c'),
+                                                    first_space=" ",
+                                                    second_space=" ",
+                            ),
+                            first_space=" ",
+                            second_space=" ",
+                           )])
+
 
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
@@ -2299,12 +2337,12 @@ def test_and_and():
 # -> ternaryOp(or_test, or_test, test)
 
 ### or_test: and_test
-# or_test: and_test (SPACE 'or' SPACE and_test)*
-# -> boolOP('or', not_test, not_test)
+### or_test: and_test (SPACE 'or' SPACE and_test)*
+### -> boolOP('or', not_test, not_test)
 
 ### and_test: not_test
-# and_test: not_test (SPACE 'and' SPACE not_test)*
-# -> boolOP('and', not_test, not_test)
+### and_test: not_test (SPACE 'and' SPACE not_test)*
+### -> boolOP('and', not_test, not_test)
 
 ### not_test: comparison
 ### not_test: 'not' SPACE not_test

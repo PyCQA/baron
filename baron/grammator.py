@@ -583,6 +583,7 @@ def space_endl((space, endl,)):
 def term_factor((level,)):
     return level
 
+@pg.production("or_test : not_test OR or_test")
 @pg.production("and_test : not_test AND and_test")
 def and_node((first, operator, second)):
     return boolean_operator(
