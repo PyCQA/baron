@@ -106,3 +106,15 @@ def unitary_operator(operator, target, space=""):
         "target": target,
         "space": space,
     }
+
+def ternary_operator(test, first, second, first_space, second_space, third_space, forth_space):
+    return {
+        "type": "ternary_operator",
+        "value": test,
+        "first": first,
+        "second": second,
+        "first_space": first_space,
+        "second_space": second_space,
+        "third_space": third_space,
+        "forth_space": forth_space,
+    }

@@ -523,7 +523,7 @@ from rply.token import Token
 from rply import ParserGenerator
 
 from tokenizer import TOKENS, KEYWORDS, tokenize
-from utils import create_node_from_token, binary_operator, unitary_operator, comparison, boolean_operator
+from utils import create_node_from_token, binary_operator, unitary_operator, comparison, boolean_operator, ternary_operator
 from grammator_imports import include_imports
 
 
@@ -582,6 +582,19 @@ def space_endl((space, endl,)):
 @pg.production("power : atom")
 def term_factor((level,)):
     return level
+
+
+@pg.production("test : or_test IF or_test ELSE test")
+def ternary_operator_node((first, if_, second, else_, third)):
+    return ternary_operator(
+                            second,
+                            first=first,
+                            second=third,
+                            first_space=if_.before_space,
+                            second_space=if_.after_space,
+                            third_space=else_.before_space,
+                            forth_space=else_.after_space,
+    )
 
 @pg.production("or_test : not_test OR or_test")
 @pg.production("and_test : not_test AND and_test")

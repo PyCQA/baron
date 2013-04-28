@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
 
-from utils import comparison, boolean_operator
+from utils import comparison, boolean_operator, ternary_operator
 from test_utils import (parse, space, inteu, endl, name, string, importeu,
                         dotted_as_name, dotted_name, dot, comma, from_import,
                         name_as_name, left_parenthesis, right_parenthesis,
@@ -2278,6 +2278,26 @@ def test_or_or():
                            )])
 
 
+def test_ternary_operator():
+    "a if b else c"
+    parse([
+           ('NAME', 'a'),
+           ('IF', 'if', ' ', ' '),
+           ('NAME', 'b'),
+           ('ELSE', 'else', ' ', ' '),
+           ('NAME', 'c'),
+          ],
+          [ternary_operator(
+                            name('b'),
+                            first=name('a'),
+                            second=name('c'),
+                            first_space=" ",
+                            second_space=" ",
+                            third_space=" ",
+                            forth_space=" ",
+                           )])
+
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt
@@ -2333,8 +2353,8 @@ def test_or_or():
 
 # test: lambdef
 ### test: or_test
-# test: or_test [SPACE 'if' SPACE or_test SPACE 'else' SPACE test]
-# -> ternaryOp(or_test, or_test, test)
+### test: or_test [SPACE -> 'if' <- SPACE or_test SPACE -> 'else' <- SPACE test]
+### -> ternaryOp(or_test, or_test, test)
 
 ### or_test: and_test
 ### or_test: and_test (SPACE 'or' SPACE and_test)*
