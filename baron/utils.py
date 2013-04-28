@@ -68,7 +68,7 @@ def create_node(name, value, **kwargs):
         result.update(kwargs)
     return result
 
-def comparison(operator, first, second, first_space="", second_space=""):
+def comparison(operator, first, second, first_space="", second_space="", middle_space=""):
     return {
         "type": "comparison",
         "value": operator,
@@ -76,6 +76,7 @@ def comparison(operator, first, second, first_space="", second_space=""):
         "second": second,
         "first_space": first_space,
         "second_space": second_space,
+        "middle_space": middle_space,
     }
 
 def binary_operator(operator, first, second, first_space="", second_space=""):

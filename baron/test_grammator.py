@@ -1946,8 +1946,6 @@ comparison_tokens = (
     ('IN', 'in'),
     ('IS', 'is'),
 )
-# TODO: not in
-# TODO: is not
 
 def test_comparison():
     "a<b"
@@ -2052,6 +2050,127 @@ def test_chained_comparison():
                           second_space="",
                          )])
 
+advanced_comparison_tokens = (
+    (('NOT', 'not', '', ' '), ('IN', 'in')),
+    (('IS', 'is', '', ' '), ('NOT', 'not')),
+)
+
+def test_advanced_comparison():
+    "a<b"
+    for (token_name, value, _, after_space), (token_name2, value2) in advanced_comparison_tokens:
+        parse([
+               ('NAME', 'a'),
+               (token_name, value, "", after_space),
+               (token_name2, value2),
+               ('NAME', 'b'),
+              ],
+              [comparison(value + " " + value2,
+                          first=name('a'),
+                          second=name('b'),
+                          first_space="",
+                          second_space="",
+                          middle_space=after_space,
+                         )])
+
+def test_advanced_comparison_first_space():
+    "a <b"
+    for (token_name, value, _, after_space), (token_name2, value2) in advanced_comparison_tokens:
+        parse([
+               ('NAME', 'a'),
+               (token_name, value, " ", after_space),
+               (token_name2, value2),
+               ('NAME', 'b'),
+              ],
+              [comparison(value + " " + value2,
+                          first=name('a'),
+                          second=name('b'),
+                          first_space=" ",
+                          second_space="",
+                          middle_space=after_space,
+                         )])
+
+def test_advanced_comparison_second_space():
+    "a< b"
+    for (token_name, value, _, after_space), (token_name2, value2) in advanced_comparison_tokens:
+        parse([
+               ('NAME', 'a'),
+               (token_name, value, "", after_space),
+               (token_name2, value2, "", " "),
+               ('NAME', 'b'),
+              ],
+              [comparison(value + " " + value2,
+                          first=name('a'),
+                          second=name('b'),
+                          first_space="",
+                          second_space=" ",
+                          middle_space=after_space,
+                         )])
+
+def test_advanced_comparison_spaces():
+    "a < b"
+    for (token_name, value, _, after_space), (token_name2, value2) in advanced_comparison_tokens:
+        parse([
+               ('NAME', 'a'),
+               (token_name, value, " ", after_space),
+               (token_name2, value2, "", " "),
+               ('NAME', 'b'),
+              ],
+              [comparison(value + " " + value2,
+                          first=name('a'),
+                          second=name('b'),
+                          first_space=" ",
+                          second_space=" ",
+                          middle_space=after_space,
+                         )])
+
+def test_advanced_comparison_spaces_atomtrailers():
+    "a.b < c"
+    for (token_name, value, _, after_space), (token_name2, value2) in advanced_comparison_tokens:
+        parse([
+               ('NAME', 'a'),
+               ('DOT', '.'),
+               ('NAME', 'b'),
+               (token_name, value, " ", after_space),
+               (token_name2, value2, "", " "),
+               ('NAME', 'c'),
+              ],
+              [comparison(value + " " + value2,
+                          first=atomtrailers([
+                                              name('a'),
+                                              dot(),
+                                              name('b'),
+                                             ]),
+                          second=name('c'),
+                          first_space=" ",
+                          second_space=" ",
+                          middle_space=after_space,
+                         )])
+
+def test_chained_advanced_comparison():
+    "a<b<c"
+    for (token_name, value, _, after_space), (token_name2, value2) in advanced_comparison_tokens:
+        parse([
+               ('NAME', 'a'),
+               (token_name, value, "", after_space),
+               (token_name2, value2),
+               ('NAME', 'b'),
+               (token_name, value, "", after_space),
+               (token_name2, value2),
+               ('NAME', 'c'),
+              ],
+              [comparison(value + " " + value2,
+                          first=name('a'),
+                          second=comparison(value + " " + value2,
+                                            first=name("b"),
+                                            second=name("c"),
+                                            first_space="",
+                                            second_space="",
+                                            middle_space=after_space,
+                                           ),
+                          first_space="",
+                          second_space="",
+                          middle_space=after_space,
+                         )])
 
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
@@ -2125,21 +2244,21 @@ def test_chained_comparison():
 
 ### comparison: expr
 ### -> expr
-# comparison: expr (comp_op expr)*
-# -> comparison(comp_or, expr, expr)
+### comparison: expr (comp_op expr)*
+### -> comparison(comp_or, expr, expr)
 
-# comp_op: '<'
-# comp_op: '>'
-# comp_op: '=='
-# comp_op: '>='
-# comp_op: '<='
-# comp_op: '<>'
-# comp_op: '!='
-# comp_op: 'in'
-# comp_op: 'not' SPACE 'in'
-# comp_op: 'is'
-# comp_op: 'is' SPACE 'not'
-# -> comp_op
+### comp_op: '<'
+### comp_op: '>'
+### comp_op: '=='
+### comp_op: '>='
+### comp_op: '<='
+### comp_op: '<>'
+### comp_op: '!='
+### comp_op: 'in'
+### comp_op: 'not' SPACE 'in'
+### comp_op: 'is'
+### comp_op: 'is' SPACE 'not'
+### -> comp_op
 
 ### expr: xor_expr
 ### expr: xor_expr ([SPACE] '|' [SPACE] xor_expr)*

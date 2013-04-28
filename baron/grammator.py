@@ -606,6 +606,17 @@ def comparison_node((expr, comparison_operator, comparison_)):
                       second_space=comparison_operator.after_space
                      )
 
+@pg.production("comparison : expr IS NOT comparison")
+@pg.production("comparison : expr NOT IN comparison")
+def comparison_advanced_node((expr, comparison_operator, comparison_operator2, comparison_)):
+    return comparison(comparison_operator.value + " " + comparison_operator2.value,
+                      first=expr,
+                      second=comparison_,
+                      first_space=comparison_operator.before_space,
+                      second_space=comparison_operator2.after_space,
+                      middle_space=comparison_operator.after_space,
+                     )
+
 @pg.production("expr : xor_expr VBAR expr")
 @pg.production("xor_expr : and_expr CIRCUMFLEX xor_expr")
 @pg.production("and_expr : shift_expr AMPER and_expr")
