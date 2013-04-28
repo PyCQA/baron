@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
 
-from utils import comparison
+from utils import comparison, boolean_operator
 from test_utils import (parse, space, inteu, endl, name, string, importeu,
                         dotted_as_name, dotted_name, dot, comma, from_import,
                         name_as_name, left_parenthesis, right_parenthesis,
@@ -2200,6 +2200,45 @@ def test_not_not():
                             ),
                             space=" ",
                            )])
+
+def test_and():
+    "a and b"
+    parse([
+           ('NAME', 'a'),
+           ('AND', 'and', ' ', ' '),
+           ('NAME', 'b'),
+          ],
+          [boolean_operator(
+                            'and',
+                            first=name('a'),
+                            second=name('b'),
+                            first_space=" ",
+                            second_space=" ",
+                           )])
+
+def test_and_and():
+    "a and b and c"
+    parse([
+           ('NAME', 'a'),
+           ('AND', 'and', ' ', ' '),
+           ('NAME', 'b'),
+           ('AND', 'and', ' ', ' '),
+           ('NAME', 'c'),
+          ],
+          [boolean_operator(
+                            'and',
+                            first=name('a'),
+                            second=boolean_operator(
+                                                    'and',
+                                                    first=name('b'),
+                                                    second=name('c'),
+                                                    first_space=" ",
+                                                    second_space=" ",
+                            ),
+                            first_space=" ",
+                            second_space=" ",
+                           )])
+
 
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE

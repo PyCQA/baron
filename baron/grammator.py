@@ -523,7 +523,7 @@ from rply.token import Token
 from rply import ParserGenerator
 
 from tokenizer import TOKENS, KEYWORDS, tokenize
-from utils import create_node_from_token, binary_operator, unitary_operator, comparison
+from utils import create_node_from_token, binary_operator, unitary_operator, comparison, boolean_operator
 from grammator_imports import include_imports
 
 
@@ -582,6 +582,16 @@ def space_endl((space, endl,)):
 @pg.production("power : atom")
 def term_factor((level,)):
     return level
+
+@pg.production("and_test : not_test AND and_test")
+def and_node((first, operator, second)):
+    return boolean_operator(
+                            operator.value,
+                            first=first,
+                            second=second,
+                            first_space=operator.before_space,
+                            second_space=operator.after_space,
+                           )
 
 @pg.production("not_test : NOT not_test")
 def not_node((not_, comparison)):
@@ -737,5 +747,5 @@ if __name__ == '__main__':
             yield Token(*i)
 
     #print pouet('1')
-    print json.dumps(parse(pouetpouet('a+1*2')), indent=4, sort_keys=True)
+    print json.dumps(parse(pouetpouet('a and b and c')), indent=4, sort_keys=True)
     #print json.dumps(parser.parse(pouetpouetpouet([('ENDMARKER', ''), None])), indent=4)
