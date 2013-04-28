@@ -523,7 +523,8 @@ from rply.token import Token
 from rply import ParserGenerator
 
 from tokenizer import TOKENS, KEYWORDS, tokenize
-from utils import create_node_from_token, binary_operator, unitary_operator, comparison, boolean_operator, ternary_operator
+from utils import (create_node_from_token, binary_operator, unitary_operator,
+                   comparison, boolean_operator, ternary_operator, assignment)
 from grammator_imports import include_imports
 
 
@@ -583,6 +584,10 @@ def space_endl((space, endl,)):
 def term_factor((level,)):
     return level
 
+
+@pg.production("expr_stmt : testlist EQUAL expr_stmt")
+def assignment_node((target, equal, value)):
+    return assignment(value, target, equal.before_space, equal.after_space)
 
 @pg.production("test : or_test IF or_test ELSE test")
 def ternary_operator_node((first, if_, second, else_, third)):

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
 
-from utils import comparison, boolean_operator, ternary_operator
+from utils import comparison, boolean_operator, ternary_operator, assignment
 from test_utils import (parse, space, inteu, endl, name, string, importeu,
                         dotted_as_name, dotted_name, dot, comma, from_import,
                         name_as_name, left_parenthesis, right_parenthesis,
@@ -2297,6 +2297,40 @@ def test_ternary_operator():
                             forth_space=" ",
                            )])
 
+def test_assignment():
+    "a = b"
+    parse([
+           ('NAME', 'a'),
+           ('EQUAL', '=', ' ', ' '),
+           ('NAME', 'b'),
+          ],
+          [assignment(
+                      value=name('b'),
+                      target=name('a'),
+                      first_space=" ",
+                      second_space=" ",
+                     )])
+
+def test_assignment_assignment():
+    "a = b"
+    parse([
+           ('NAME', 'a'),
+           ('EQUAL', '=', ' ', ' '),
+           ('NAME', 'b'),
+           ('EQUAL', '=', ' ', ' '),
+           ('NAME', 'c'),
+          ],
+          [assignment(
+                      value=assignment(
+                                       value=name('c'),
+                                       target=name('b'),
+                                       first_space=" ",
+                                       second_space=" ",
+                                      ),
+                      target=name('a'),
+                      first_space=" ",
+                      second_space=" ",
+                     )])
 
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
@@ -2336,8 +2370,8 @@ def test_ternary_operator():
 # small_stmt: assert_stmt
 
 ### expr_stmt: testlist
-# expr_stmt: testlist ([SPACE] '=' [SPACE] testlist)*
-# -> assign(testlist, testlist)
+### expr_stmt: testlist ([SPACE] '=' [SPACE] testlist)*
+### -> assign(testlist, testlist)
 # expr_stmt: testlist ([SPACE] '=' [SPACE] yield_expr)*
 # -> assign(testlist, testlist)
 # expr_stmt: testlist augassign yield_expr
