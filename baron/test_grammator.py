@@ -2478,6 +2478,20 @@ def test_implicit_tuple_space():
                   with_parenthesis=False,
                  )])
 
+def test_implicit_tuple_one_item():
+    "a ,"
+    parse([
+           ('NAME', 'a'),
+           ('COMMA', ',', ' ', ''),
+          ],
+          [tuple_([
+                   name('a'),
+                   space(),
+                   comma(),
+                  ],
+                  with_parenthesis=False,
+                 )])
+
 
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE

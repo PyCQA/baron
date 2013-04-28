@@ -591,6 +591,14 @@ def term_factor((level,)):
 def implicit_tuple((test, testlist_part)):
     return tuple_([test] + testlist_part, with_parenthesis=False)
 
+@pg.production("testlist : test COMMA")
+def implicit_tuple_alone((test, comma)):
+    tuple_content = [test]
+    if comma.before_space:
+        tuple_content += [{"type": "space", "value": comma.before_space}]
+    tuple_content += [create_node_from_token(comma)]
+    return tuple_(tuple_content, with_parenthesis=False)
+
 @pg.production("testlist_part : COMMA test")
 def testlist_part((comma, test)):
     to_return = []
