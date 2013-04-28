@@ -2492,6 +2492,25 @@ def test_implicit_tuple_one_item():
                   with_parenthesis=False,
                  )])
 
+def test_implicit_tuple_trailing_comma():
+    "a, b ,"
+    parse([
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', ' ', ''),
+          ],
+          [tuple_([
+                   name('a'),
+                   comma(),
+                   space(),
+                   name('b'),
+                   space(),
+                   comma(),
+                  ],
+                  with_parenthesis=False,
+                 )])
+
 
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE

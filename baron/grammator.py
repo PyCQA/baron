@@ -599,8 +599,8 @@ def implicit_tuple_alone((test, comma)):
     tuple_content += [create_node_from_token(comma)]
     return tuple_(tuple_content, with_parenthesis=False)
 
-@pg.production("testlist_part : COMMA test")
-def testlist_part((comma, test)):
+@pg.production("testlist_part : COMMA test COMMA?")
+def testlist_part((comma, test, comma2)):
     to_return = []
     if comma.before_space:
         to_return += [{"type": "space", "value": comma.before_space}]
@@ -608,6 +608,10 @@ def testlist_part((comma, test)):
     if comma.after_space:
         to_return += [{"type": "space", "value": comma.after_space}]
     to_return += [test]
+    if comma2 and comma2.before_space:
+        to_return += [{"type": "space", "value": comma2.before_space}]
+    if comma2:
+        to_return += [create_node_from_token(comma2)]
     return to_return
 
 @pg.production("testlist_part : COMMA test testlist_part")
