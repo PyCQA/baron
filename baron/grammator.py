@@ -556,6 +556,14 @@ def separator((statement,)):
 
 include_imports(pg)
 
+@pg.production("separator : SPACE? ENDL")
+def space_endl((space, endl,)):
+    return {
+            "type": endl.name.lower(),
+            "value": endl.value,
+            "before_space": space.value if space else ""
+           }
+
 @pg.production("small_stmt : expr_stmt")
 @pg.production("expr_stmt : testlist")
 @pg.production("testlist : test")
@@ -574,20 +582,6 @@ include_imports(pg)
 @pg.production("power : atom")
 def term_factor((level,)):
     return level
-
-@pg.production("separator : SPACE? ENDL")
-def space_endl((space, endl,)):
-    return {
-            "type": endl.name.lower(),
-            "value": endl.value,
-            "before_space": space.value if space else ""
-           }
-
-@pg.production("factor : PLUS factor")
-@pg.production("factor : MINUS factor")
-@pg.production("factor : TILDE factor")
-def factor_unitary_operator_space((operator, factor,)):
-    return unitary_operator(operator.value, factor, space=operator.after_space)
 
 @pg.production("comparison : expr LESS comparison")
 @pg.production("comparison : expr GREATER comparison")
@@ -638,6 +632,12 @@ def binary_operator_node((first, operator, second)):
                            first_space=operator.before_space,
                            second_space=operator.after_space
                           )
+
+@pg.production("factor : PLUS factor")
+@pg.production("factor : MINUS factor")
+@pg.production("factor : TILDE factor")
+def factor_unitary_operator_space((operator, factor,)):
+    return unitary_operator(operator.value, factor, space=operator.after_space)
 
 @pg.production("power : atomtrailers DOUBLE_STAR factor")
 @pg.production("power : atomtrailers DOUBLE_STAR power")
