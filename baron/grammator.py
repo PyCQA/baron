@@ -2,33 +2,33 @@
 
 # TODO/TOTEST
 
-# dotted_name: NAME
-# dotted_name: NAME.NAME
-# dotted_name: NAME([NAME] -> . <- [NAME] NAME)+
+### dotted_name: NAME
+### dotted_name: NAME.NAME
+### dotted_name: NAME([NAME] -> . <- [NAME] NAME)+
 
-# dotted_as_name: dotted_name
-# dotted_as_name: dotted_name SPACE -> 'as' <- SPACE NAME
+### dotted_as_name: dotted_name
+### dotted_as_name: dotted_name SPACE -> 'as' <- SPACE NAME
 
-# dotted_as_names: dotted_as_name
-# dotted_as_names: dotted_as_name [SPACE] -> ',' <- [SPACE] dotted_as_name
-# dotted_as_names: dotted_as_name ([SPACE] -> ',' <- [SPACE] dotted_as_name)*
+### dotted_as_names: dotted_as_name
+### dotted_as_names: dotted_as_name [SPACE] -> ',' <- [SPACE] dotted_as_name
+### dotted_as_names: dotted_as_name ([SPACE] -> ',' <- [SPACE] dotted_as_name)*
 
-# import_as_name: NAME
-# import_as_name: NAME SPACE -> 'as' <- SPACE NAME
+### import_as_name: NAME
+### import_as_name: NAME SPACE -> 'as' <- SPACE NAME
 
-# import_as_names: import_as_name
-# import_as_names: import_as_name [SPACE] -> ',' <- [SPACE] import_as_name
-# import_as_names: import_as_name ([SPACE] -> ',' <- [SPACE] import_as_name)*
-# import_as_names: import_as_name ([SPACE] -> ',' <- [SPACE] import_as_name)* [SPACE] -> [',']
+### import_as_names: import_as_name
+### import_as_names: import_as_name [SPACE] -> ',' <- [SPACE] import_as_name
+### import_as_names: import_as_name ([SPACE] -> ',' <- [SPACE] import_as_name)*
+### import_as_names: import_as_name ([SPACE] -> ',' <- [SPACE] import_as_name)* [SPACE] -> [',']
 
-# import_name: 'import' <- SPACE dotted_as_names
+### import_name: 'import' <- SPACE dotted_as_names
 
-# import_from: 'from' <- SPACE dotted_name SPACE -> 'import' <- SPACE import_as_names
-# import_from: 'from' <- SPACE dotted_name SPACE -> 'import' <- [SPACE] '(' <- [SPACE] import_as_names [SPACE] -> ')'
-# import_from: 'from' <- SPACE dotted_name SPACE -> 'import' <- [SPACE] '*'
+### import_from: 'from' <- SPACE dotted_name SPACE -> 'import' <- SPACE import_as_names
+### import_from: 'from' <- SPACE dotted_name SPACE -> 'import' <- [SPACE] '(' <- [SPACE] import_as_names [SPACE] -> ')'
+### import_from: 'from' <- SPACE dotted_name SPACE -> 'import' <- [SPACE] '*'
 
-# import_from: 'from' <- [SPACE] '.'* <- [SPACE] dotted_name SPACE 'import' ...........
-# import_from: 'from' <- [SPACE] '.'+ <- [SPACE] 'import' ...........
+### import_from: 'from' <- [SPACE] '.'* <- [SPACE] dotted_name SPACE 'import' ...........
+### import_from: 'from' <- [SPACE] '.'+ <- [SPACE] 'import' ...........
 
 # -
 
@@ -114,7 +114,7 @@
 
 # -
 
-# stmt: simple_stmt
+### stmt: simple_stmt
 # stmt: compound_stmt
 
 # -
@@ -126,7 +126,7 @@
 
 # -
 
-# small_stmt: expr_stmt
+### small_stmt: expr_stmt
 # small_stmt: print_stmt
 # small_stmt: del_stmt
 # small_stmt: pass_stmt
@@ -138,26 +138,26 @@
 
 # -
 
-# expr_stmt: testlist
-# expr_stmt: testlist ([SPACE] '=' [SPACE] testlist)*
+### expr_stmt: testlist
+### expr_stmt: testlist ([SPACE] '=' [SPACE] testlist)*
 # expr_stmt: testlist ([SPACE] '=' [SPACE] yield_expr)*
 # expr_stmt: testlist augassign yield_expr
-# expr_stmt: testlist augassign testlist
+### expr_stmt: testlist augassign testlist
 
 # -
 
-# augassign: '+='
-# augassign: '-='
-# augassign: '*='
-# augassign: '/='
-# augassign: '%='
-# augassign: '&='
-# augassign: '|='
-# augassign: '^='
-# augassign: '<<='
-# augassign: '>>='
-# augassign: '**='
-# augassign: '//='
+### augassign: '+='
+### augassign: '-='
+### augassign: '*='
+### augassign: '/='
+### augassign: '%='
+### augassign: '&='
+### augassign: '|='
+### augassign: '^='
+### augassign: '<<='
+### augassign: '>>='
+### augassign: '**='
+### augassign: '//='
 
 # -
 
@@ -277,81 +277,81 @@
 # -
 
 # test: lambdef
-# test: or_test
-# test: or_test [SPACE 'if' SPACE or_test SPACE 'else' SPACE test]
+### test: or_test
+### test: or_test [SPACE 'if' SPACE or_test SPACE 'else' SPACE test]
 
 # -
 
-# or_test: and_test
-# or_test: and_test (SPACE 'or' SPACE and_test)*
+### or_test: and_test
+### or_test: and_test (SPACE 'or' SPACE and_test)*
 
 # -
 
-# and_test: not_test
-# and_test: not_test (SPACE 'and' SPACE not_test)*
+### and_test: not_test
+### and_test: not_test (SPACE 'and' SPACE not_test)*
 
 # -
 
-# not_test: 'not' SPACE not_test
-# not_test: comparison
+### not_test: 'not' SPACE not_test
+### not_test: comparison
 
 # -
 
-# comparison: expr
-# comparison: expr (comp_op expr)*
+### comparison: expr
+### comparison: expr (comp_op expr)*
 
 # -
 
-# comp_op: '<'
-# comp_op: '>'
-# comp_op: '=='
-# comp_op: '>='
-# comp_op: '<='
-# comp_op: '<>'
-# comp_op: '!='
-# comp_op: 'in'
-# comp_op: 'not' SPACE 'in'
-# comp_op: 'is'
-# comp_op: 'is' SPACE 'not'
+### comp_op: '<'
+### comp_op: '>'
+### comp_op: '=='
+### comp_op: '>='
+### comp_op: '<='
+### comp_op: '<>'
+### comp_op: '!='
+### comp_op: 'in'
+### comp_op: 'not' SPACE 'in'
+### comp_op: 'is'
+### comp_op: 'is' SPACE 'not'
 
 # -
 
-# expr: xor_expr
-# expr: xor_expr ([SPACE] '|' [SPACE] xor_expr)*
+### expr: xor_expr
+### expr: xor_expr ([SPACE] '|' [SPACE] xor_expr)*
 
 # -
 
-# xor_expr: and_expr
-# xor_expr: and_expr ([SPACE] '^' [SPACE] and_expr)*
+### xor_expr: and_expr
+### xor_expr: and_expr ([SPACE] '^' [SPACE] and_expr)*
 
 # -
 
-# and_expr: shift_expr
-# and_expr: shift_expr ([SPACE] '&' [SPACE] shift_expr)*
+### and_expr: shift_expr
+### and_expr: shift_expr ([SPACE] '&' [SPACE] shift_expr)*
 
 # -
 
-# shift_expr: arith_expr
-# shift_expr: arith_expr ([SPACE] ('<<'|'>>') [SPACE] arith_expr)*
+### shift_expr: arith_expr
+### shift_expr: arith_expr ([SPACE] ('<<'|'>>') [SPACE] arith_expr)*
 
 # -
 
-# arith_expr: term
-# arith_expr: term ([SPACE] ('+'|'-') [SPACE] term)*
+### arith_expr: term
+### arith_expr: term ([SPACE] ('+'|'-') [SPACE] term)*
 
 # -
 
-# term: factor
-# term: factor ([SPACE] ('*'|'/'|'%'|'//') [SPACE] factor)*
+### term: factor
+### term: factor ([SPACE] ('*'|'/'|'%'|'//') [SPACE] factor)*
 
 # -
 
-# factor: ('+'|'-'|'~') [SPACE] factor
-# factor: power
+### factor: ('+'|'-'|'~') [SPACE] factor
+### factor: power
 
 # -
 
-# power: atom [SPACE] trailer* [[SPACE] '**' [SPACE] factor]
+### power: atom [SPACE] trailer* [[SPACE] '**' [SPACE] factor]
 
 # -
 
@@ -360,9 +360,9 @@
 # atom: '[' [SPACE] [listmaker] [SPACE] ']'
 # atom: '{' [SPACE] [dictorsetmaker] [SPACE] '}'
 # atom: '`' [SPACE] testlist1 [SPACE] '`'
-# atom: NAME
-# atom: NUMBER
-# atom: STRING+
+### atom: NAME
+### atom: NUMBER
+### atom: STRING+
 
 # -
 
@@ -385,8 +385,10 @@
 
 # -
 
-# trailer: '.' [SPACE] NAME
+### trailer: '.' [SPACE] NAME
+### trailer: '[' [SPACE] ']'
 # trailer: '[' [SPACE] subscriptlist [SPACE] ']'
+### trailer: '(' [SPACE] ')'
 # trailer: '(' [SPACE] [arglist] [SPACE] ')'
 
 # -
