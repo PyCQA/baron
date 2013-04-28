@@ -2172,6 +2172,35 @@ def test_chained_advanced_comparison():
                           middle_space=after_space,
                          )])
 
+def test_not():
+    "not a"
+    parse([
+           ('NOT', 'not', '', ' '),
+           ('NAME', 'a'),
+          ],
+          [unitary_operator(
+                            'not',
+                            target=name('a'),
+                            space=" ",
+                           )])
+
+def test_not_not():
+    "not not a"
+    parse([
+           ('NOT', 'not', '', ' '),
+           ('NOT', 'not', '', ' '),
+           ('NAME', 'a'),
+          ],
+          [unitary_operator(
+                            'not',
+                            target=unitary_operator(
+                                                    'not',
+                                                    target=name('a'),
+                                                    space=" ",
+                            ),
+                            space=" ",
+                           )])
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt
@@ -2238,9 +2267,9 @@ def test_chained_advanced_comparison():
 # and_test: not_test (SPACE 'and' SPACE not_test)*
 # -> boolOP('and', not_test, not_test)
 
-##### not_test: comparison
-# not_test: 'not' SPACE not_test
-# -> unitaryOp('not', not_test)
+### not_test: comparison
+### not_test: 'not' SPACE not_test
+### -> unitaryOp('not', not_test)
 
 ### comparison: expr
 ### -> expr

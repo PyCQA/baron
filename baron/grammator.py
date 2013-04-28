@@ -583,6 +583,10 @@ def space_endl((space, endl,)):
 def term_factor((level,)):
     return level
 
+@pg.production("not_test : NOT not_test")
+def not_node((not_, comparison)):
+    return unitary_operator('not', target=comparison, space=not_.after_space)
+
 @pg.production("comparison : expr LESS comparison")
 @pg.production("comparison : expr GREATER comparison")
 @pg.production("comparison : expr EQUAL_EQUAL comparison")
