@@ -524,7 +524,8 @@ from rply import ParserGenerator
 
 from tokenizer import TOKENS, KEYWORDS, tokenize
 from utils import (create_node_from_token, binary_operator, unitary_operator,
-                   comparison, boolean_operator, ternary_operator, assignment)
+                   comparison, boolean_operator, ternary_operator, assignment,
+                   augmented_assignment)
 from grammator_imports import include_imports
 
 
@@ -584,6 +585,20 @@ def space_endl((space, endl,)):
 def term_factor((level,)):
     return level
 
+@pg.production("expr_stmt : testlist PLUS_EQUAL testlist")
+@pg.production("expr_stmt : testlist MINUS_EQUAL testlist")
+@pg.production("expr_stmt : testlist STAR_EQUAL testlist")
+@pg.production("expr_stmt : testlist SLASH_EQUAL testlist")
+@pg.production("expr_stmt : testlist PERCENT_EQUAL testlist")
+@pg.production("expr_stmt : testlist AMPER_EQUAL testlist")
+@pg.production("expr_stmt : testlist VBAR_EQUAL testlist")
+@pg.production("expr_stmt : testlist CIRCUMFLEX_EQUAL testlist")
+@pg.production("expr_stmt : testlist LEFT_SHIFT_EQUAL testlist")
+@pg.production("expr_stmt : testlist RIGHT_SHIFT_EQUAL testlist")
+@pg.production("expr_stmt : testlist DOUBLE_STAR_EQUAL testlist")
+@pg.production("expr_stmt : testlist DOUBLE_SLASH_EQUAL testlist")
+def augmented_assignment_node((target, operator, value)):
+    return augmented_assignment(operator.value[:-1], value, target, operator.before_space, operator.after_space)
 
 @pg.production("expr_stmt : testlist EQUAL expr_stmt")
 def assignment_node((target, equal, value)):

@@ -108,6 +108,16 @@ def assignment(value, target, first_space="", second_space=""):
         "second_space": second_space,
     }
 
+def augmented_assignment(operator, value, target, first_space="", second_space=""):
+    return {
+        "type": "assign",
+        "operator": operator,
+        "value": value,
+        "target": target,
+        "first_space": first_space,
+        "second_space": second_space,
+    }
+
 def unitary_operator(operator, target, space=""):
     return {
         "type": "unitary_operator",

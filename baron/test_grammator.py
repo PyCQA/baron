@@ -1,7 +1,9 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
 
-from utils import comparison, boolean_operator, ternary_operator, assignment
+import pytest
+from utils import (comparison, boolean_operator, ternary_operator, assignment,
+                   augmented_assignment)
 from test_utils import (parse, space, inteu, endl, name, string, importeu,
                         dotted_as_name, dotted_name, dot, comma, from_import,
                         name_as_name, left_parenthesis, right_parenthesis,
@@ -2332,6 +2334,62 @@ def test_assignment_assignment():
                       second_space=" ",
                      )])
 
+augmented_assignment_tokens = (
+    ('PLUS_EQUAL', '+='),
+    ('MINUS_EQUAL', '-='),
+    ('STAR_EQUAL', '*='),
+    ('SLASH_EQUAL', '/='),
+    ('PERCENT_EQUAL', '%='),
+    ('AMPER_EQUAL', '&='),
+    ('VBAR_EQUAL', '|='),
+    ('CIRCUMFLEX_EQUAL', '^='),
+    ('LEFT_SHIFT_EQUAL', '<<='),
+    ('RIGHT_SHIFT_EQUAL', '>>='),
+    ('DOUBLE_STAR_EQUAL', '**='),
+    ('DOUBLE_SLASH_EQUAL', '//='),
+)
+
+def test_augmented_assignment():
+    "a += b"
+    for token_name, value in augmented_assignment_tokens:
+        parse([
+               ('NAME', 'a'),
+               (token_name, value, ' ', ' '),
+               ('NAME', 'b'),
+              ],
+              [augmented_assignment(
+                                    operator=value[:-1],
+                                    value=name('b'),
+                                    target=name('a'),
+                                    first_space=" ",
+                                    second_space=" ",
+                                   )])
+
+def test_augmented_assignment_augmented_assignment():
+    "a += b"
+    for token_name, value in augmented_assignment_tokens:
+        with pytest.raises(Exception):
+            parse([
+                   ('NAME', 'a'),
+                   (token_name, value, ' ', ' '),
+                   ('NAME', 'b'),
+                   (token_name, value, ' ', ' '),
+                   ('NAME', 'c'),
+                  ],
+                  [augmented_assignment(
+                                operator=value[:-1],
+                                value=augmented_assignment(
+                                                       operator=value[:-1],
+                                                       value=name('c'),
+                                                       target=name('b'),
+                                                       first_space=" ",
+                                                       second_space=" ",
+                                                      ),
+                                target=name('a'),
+                                first_space=" ",
+                                second_space=" ",
+                               )])
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt
@@ -2376,8 +2434,21 @@ def test_assignment_assignment():
 # -> assign(testlist, testlist)
 # expr_stmt: testlist augassign yield_expr
 # -> augassign(testlist, testlist)
-# expr_stmt: testlist augassign testlist
-# -> augassign(testlist, testlist)
+### expr_stmt: testlist augassign testlist
+### -> augassign(testlist, testlist)
+
+### augassign: '+='
+### augassign: '-='
+### augassign: '*='
+### augassign: '/='
+### augassign: '%='
+### augassign: '&='
+### augassign: '|='
+### augassign: '^='
+### augassign: '<<='
+### augassign: '>>='
+### augassign: '**='
+### augassign: '//='
 
 ### testlist: test
 # testlist: test [SPACE] [',']
