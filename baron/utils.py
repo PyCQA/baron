@@ -144,3 +144,10 @@ def tuple_(value, with_parenthesis):
         "value": value,
         "with_parenthesis": with_parenthesis,
     }
+
+def return_(value=None, space=""):
+    return {
+        "type": "return",
+        "value": value,
+        "space": space,
+    }

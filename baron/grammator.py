@@ -527,7 +527,7 @@ from rply import ParserGenerator
 from tokenizer import TOKENS, KEYWORDS, tokenize
 from utils import (create_node_from_token, binary_operator, unitary_operator,
                    comparison, boolean_operator, ternary_operator, assignment,
-                   augmented_assignment, tuple_)
+                   augmented_assignment, tuple_, return_)
 from grammator_imports import include_imports
 
 
@@ -555,6 +555,7 @@ def end((space, endmarker)):
 
 @pg.production("statement : separator")
 @pg.production("statement : small_stmt")
+@pg.production("statement : flow_stmt")
 def separator((statement,)):
     return [statement]
 
@@ -567,6 +568,21 @@ def space_endl((space, endl,)):
             "value": endl.value,
             "before_space": space.value if space else ""
            }
+
+@pg.production("flow_stmt : return_stmt")
+def flow((flow_stmt,)):
+    return flow_stmt
+
+@pg.production("return_stmt : RETURN")
+def return_empty((return_token)):
+    return return_()
+
+@pg.production("return_stmt : RETURN testlist")
+def return_testlist((return_token, testlist)):
+    return return_(
+                   testlist,
+                   space=return_token.after_space,
+    )
 
 @pg.production("small_stmt : expr_stmt")
 @pg.production("expr_stmt : testlist")

@@ -3,7 +3,7 @@
 
 import pytest
 from utils import (comparison, boolean_operator, ternary_operator, assignment,
-                   augmented_assignment, tuple_)
+                   augmented_assignment, tuple_, return_)
 from test_utils import (parse, space, inteu, endl, name, string, importeu,
                         dotted_as_name, dotted_name, dot, comma, from_import,
                         name_as_name, left_parenthesis, right_parenthesis,
@@ -2511,6 +2511,20 @@ def test_implicit_tuple_trailing_comma():
                   with_parenthesis=False,
                  )])
 
+def test_return():
+    "return"
+    parse([
+           ('RETURN', 'return'),
+          ],
+         [return_()])
+
+def test_return_a():
+    "return a"
+    parse([
+           ('RETURN', 'return', '', ' '),
+           ('NAME', 'a'),
+          ],
+         [return_(name('a'), space=" ")])
 
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
@@ -2548,6 +2562,49 @@ def test_implicit_tuple_trailing_comma():
 # small_stmt: global_stmt
 # small_stmt: exec_stmt
 # small_stmt: assert_stmt
+
+# global_stmt: 'global' SPACE NAME
+# global_stmt: 'global' SPACE NAME ([SPACE] ',' [SPACE] NAME)*
+
+# break_stmt: 'break'
+# pass_stmt: 'pass'
+# continue_stmt: 'continue'
+
+# yield_stmt: yield_expr
+
+# yield_expr: 'yield'
+# yield_expr: 'yield' SPACE [testlist]
+
+# print_stmt: 'print'
+# print_stmt: 'print' SPACE [ test ]
+# print_stmt: 'print' SPACE [ test [SPACE] [','] ]
+# print_stmt: 'print' SPACE [ test ([SPACE] ',' [SPACE] test)* [SPACE] [','] ]
+# print_stmt: 'print' [SPACE] '>>' [SPACE] test
+# print_stmt: 'print' [SPACE] '>>' [SPACE] test [ ([SPACE] ',' [SPACE] test)+ ]
+# print_stmt: 'print' [SPACE] '>>' [SPACE] test [ ([SPACE] ',' [SPACE] test)+ [SPACE] [',']]
+
+# del_stmt: 'del' SPACE exprlist
+
+# flow_stmt: break_stmt
+# flow_stmt: continue_stmt
+### flow_stmt: return_stmt
+# flow_stmt: raise_stmt
+# flow_stmt: yield_stmt
+
+### return_stmt: 'return'
+### return_stmt: 'return' SPACE [testlist]
+
+# raise_stmt: 'raise'
+# raise_stmt: 'raise' SPACE [test]
+# raise_stmt: 'raise' [SPACE test [[SPACE] ',' [SPACE] test]]
+# raise_stmt: 'raise' [SPACE test [[SPACE] ',' [SPACE] test [[SPACE] ',' [SPACE] test]]]
+
+# exec_stmt: 'exec' SPACE expr
+# exec_stmt: 'exec' SPACE expr [SPACE 'in' SPACE test]
+# exec_stmt: 'exec' SPACE expr [SPACE 'in' SPACE test [[SPACE] ',' [SPACE] test]]
+
+# assert_stmt: 'assert' SPACE test
+# assert_stmt: 'assert' SPACE test [[SPACE] ',' [SPACE] test]
 
 ### expr_stmt: testlist
 ### expr_stmt: testlist ([SPACE] '=' [SPACE] testlist)*
