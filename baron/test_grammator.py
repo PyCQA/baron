@@ -2581,10 +2581,6 @@ def test_yield_a():
 # global_stmt: 'global' SPACE NAME
 # global_stmt: 'global' SPACE NAME ([SPACE] ',' [SPACE] NAME)*
 
-# break_stmt: 'break'
-# pass_stmt: 'pass'
-# continue_stmt: 'continue'
-
 # print_stmt: 'print'
 # print_stmt: 'print' SPACE [ test ]
 # print_stmt: 'print' SPACE [ test [SPACE] [','] ]
@@ -2600,6 +2596,10 @@ def test_yield_a():
 ### flow_stmt: return_stmt
 # flow_stmt: raise_stmt
 ### flow_stmt: yield_stmt
+
+# break_stmt: 'break'
+# pass_stmt: 'pass'
+# continue_stmt: 'continue'
 
 ### return_stmt: 'return'
 ### return_stmt: 'return' SPACE [testlist]

@@ -28,11 +28,6 @@ def include_imports(pg):
                          }
                }
 
-    @pg.production("from_import_module : dotted_name")
-    def from_import_module((dotted_name)):
-        return {
-               }
-
     @pg.production("from_import_target : name_as_names")
     def from_import_target_name_as_names((name_as_names,)):
         return name_as_names
