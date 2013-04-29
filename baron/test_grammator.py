@@ -2564,6 +2564,15 @@ def test_break():
             "type": "break",
           }])
 
+def test_continue():
+    "continue"
+    parse([
+           ('CONTINUE', 'continue'),
+          ],
+          [{
+            "type": "continue",
+          }])
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt
@@ -2620,14 +2629,14 @@ def test_break():
 ### exprlist: expr ([SPACE] ',' [SPACE] expr)* [SPACE] [',']
 
 ### flow_stmt: break_stmt
-# flow_stmt: continue_stmt
+### flow_stmt: continue_stmt
 ### flow_stmt: return_stmt
 # flow_stmt: raise_stmt
 ### flow_stmt: yield_stmt
 
 ### break_stmt: 'break'
 # pass_stmt: 'pass'
-# continue_stmt: 'continue'
+### continue_stmt: 'continue'
 
 ### return_stmt: 'return'
 ### return_stmt: 'return' SPACE [testlist]
