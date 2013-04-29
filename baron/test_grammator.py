@@ -2541,6 +2541,20 @@ def test_yield_a():
           ],
          [yield_(name('a'), space=" ")])
 
+def test_del():
+    "del a"
+    parse([
+           ('DEL', 'del', '', ' '),
+           ('NAME', 'a'),
+          ],
+          [
+           {
+            "type": "del",
+            "value": name('a'),
+            "space": " ",
+           }
+          ])
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt
@@ -2570,7 +2584,7 @@ def test_yield_a():
 
 ### small_stmt: expr_stmt
 # small_stmt: print_stmt
-# small_stmt: del_stmt
+### small_stmt: del_stmt
 # small_stmt: pass_stmt
 # small_stmt: flow_stmt
 # small_stmt: import_stmt
@@ -2589,7 +2603,12 @@ def test_yield_a():
 # print_stmt: 'print' [SPACE] '>>' [SPACE] test [ ([SPACE] ',' [SPACE] test)+ ]
 # print_stmt: 'print' [SPACE] '>>' [SPACE] test [ ([SPACE] ',' [SPACE] test)+ [SPACE] [',']]
 
-# del_stmt: 'del' SPACE exprlist
+### del_stmt: 'del' SPACE exprlist
+
+### exprlist: expr
+### exprlist: expr [SPACE] [',']
+### exprlist: expr ([SPACE] ',' [SPACE] expr)*
+### exprlist: expr ([SPACE] ',' [SPACE] expr)* [SPACE] [',']
 
 # flow_stmt: break_stmt
 # flow_stmt: continue_stmt

@@ -556,6 +556,7 @@ def end((space, endmarker)):
 @pg.production("statement : separator")
 @pg.production("statement : small_stmt")
 @pg.production("statement : flow_stmt")
+@pg.production("statement : del_stmt")
 def separator((statement,)):
     return [statement]
 
@@ -586,6 +587,7 @@ def return_empty((token,)):
 
 @pg.production("return_stmt : RETURN testlist")
 @pg.production("yield_expr : YIELD testlist")
+@pg.production("del_stmt : DEL exprlist")
 def return_testlist((token, testlist)):
     return {
         "type": token.name.lower(),
@@ -609,14 +611,17 @@ def return_testlist((token, testlist)):
 @pg.production("term : factor")
 @pg.production("factor : power")
 @pg.production("power : atom")
+@pg.production("exprlist : expr")
 def term_factor((level,)):
     return level
 
 @pg.production("testlist : test testlist_part")
+@pg.production("exprlist : expr exprlist_part")
 def implicit_tuple((test, testlist_part)):
     return tuple_([test] + testlist_part, with_parenthesis=False)
 
 @pg.production("testlist : test COMMA")
+@pg.production("exprlist : expr COMMA")
 def implicit_tuple_alone((test, comma)):
     tuple_content = [test]
     if comma.before_space:
@@ -625,6 +630,7 @@ def implicit_tuple_alone((test, comma)):
     return tuple_(tuple_content, with_parenthesis=False)
 
 @pg.production("testlist_part : COMMA test COMMA?")
+@pg.production("exprlist_part : COMMA expr COMMA?")
 def testlist_part((comma, test, comma2)):
     to_return = []
     if comma.before_space:
@@ -640,6 +646,7 @@ def testlist_part((comma, test, comma2)):
     return to_return
 
 @pg.production("testlist_part : COMMA test testlist_part")
+@pg.production("exprlist_part : COMMA expr exprlist_part")
 def testlist_part_next((comma, test, testlist_part)):
     to_return = []
     if comma.before_space:
