@@ -571,6 +571,7 @@ def space_endl((space, endl,)):
            }
 
 @pg.production("flow_stmt : return_stmt")
+@pg.production("flow_stmt : break_stmt")
 @pg.production("flow_stmt : yield_stmt")
 @pg.production("yield_stmt : yield_expr")
 def flow((flow_stmt,)):
@@ -584,6 +585,10 @@ def return_empty((token,)):
         "value": None,
         "space": ""
     }
+
+@pg.production("break_stmt : BREAK")
+def break_stmt((token,)):
+    return {"type": token.name.lower()}
 
 @pg.production("return_stmt : RETURN testlist")
 @pg.production("yield_expr : YIELD testlist")

@@ -2555,6 +2555,15 @@ def test_del():
            }
           ])
 
+def test_break():
+    "break"
+    parse([
+           ('BREAK', 'break'),
+          ],
+          [{
+            "type": "break",
+          }])
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt
@@ -2610,13 +2619,13 @@ def test_del():
 ### exprlist: expr ([SPACE] ',' [SPACE] expr)*
 ### exprlist: expr ([SPACE] ',' [SPACE] expr)* [SPACE] [',']
 
-# flow_stmt: break_stmt
+### flow_stmt: break_stmt
 # flow_stmt: continue_stmt
 ### flow_stmt: return_stmt
 # flow_stmt: raise_stmt
 ### flow_stmt: yield_stmt
 
-# break_stmt: 'break'
+### break_stmt: 'break'
 # pass_stmt: 'pass'
 # continue_stmt: 'continue'
 
