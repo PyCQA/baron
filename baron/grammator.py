@@ -527,7 +527,7 @@ from rply import ParserGenerator
 from tokenizer import TOKENS, KEYWORDS, tokenize
 from utils import (create_node_from_token, binary_operator, unitary_operator,
                    comparison, boolean_operator, ternary_operator, assignment,
-                   augmented_assignment, tuple_, return_)
+                   augmented_assignment, tuple_)
 from grammator_imports import include_imports
 
 
@@ -570,19 +570,28 @@ def space_endl((space, endl,)):
            }
 
 @pg.production("flow_stmt : return_stmt")
+@pg.production("flow_stmt : yield_stmt")
+@pg.production("yield_stmt : yield_expr")
 def flow((flow_stmt,)):
     return flow_stmt
 
 @pg.production("return_stmt : RETURN")
-def return_empty((return_token)):
-    return return_()
+@pg.production("yield_expr : YIELD")
+def return_empty((token,)):
+    return {
+        "type": token.name.lower(),
+        "value": None,
+        "space": ""
+    }
 
 @pg.production("return_stmt : RETURN testlist")
-def return_testlist((return_token, testlist)):
-    return return_(
-                   testlist,
-                   space=return_token.after_space,
-    )
+@pg.production("yield_expr : YIELD testlist")
+def return_testlist((token, testlist)):
+    return {
+        "type": token.name.lower(),
+        "value": testlist,
+        "space": token.after_space,
+    }
 
 @pg.production("small_stmt : expr_stmt")
 @pg.production("expr_stmt : testlist")

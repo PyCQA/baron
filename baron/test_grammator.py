@@ -3,7 +3,7 @@
 
 import pytest
 from utils import (comparison, boolean_operator, ternary_operator, assignment,
-                   augmented_assignment, tuple_, return_)
+                   augmented_assignment, tuple_, return_, yield_)
 from test_utils import (parse, space, inteu, endl, name, string, importeu,
                         dotted_as_name, dotted_name, dot, comma, from_import,
                         name_as_name, left_parenthesis, right_parenthesis,
@@ -2526,6 +2526,21 @@ def test_return_a():
           ],
          [return_(name('a'), space=" ")])
 
+def test_yield():
+    "yield"
+    parse([
+           ('YIELD', 'yield'),
+          ],
+         [yield_()])
+
+def test_yield_a():
+    "yield a"
+    parse([
+           ('YIELD', 'yield', '', ' '),
+           ('NAME', 'a'),
+          ],
+         [yield_(name('a'), space=" ")])
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt
@@ -2570,11 +2585,6 @@ def test_return_a():
 # pass_stmt: 'pass'
 # continue_stmt: 'continue'
 
-# yield_stmt: yield_expr
-
-# yield_expr: 'yield'
-# yield_expr: 'yield' SPACE [testlist]
-
 # print_stmt: 'print'
 # print_stmt: 'print' SPACE [ test ]
 # print_stmt: 'print' SPACE [ test [SPACE] [','] ]
@@ -2589,10 +2599,15 @@ def test_return_a():
 # flow_stmt: continue_stmt
 ### flow_stmt: return_stmt
 # flow_stmt: raise_stmt
-# flow_stmt: yield_stmt
+### flow_stmt: yield_stmt
 
 ### return_stmt: 'return'
 ### return_stmt: 'return' SPACE [testlist]
+
+### yield_stmt: yield_expr
+
+### yield_expr: 'yield'
+### yield_expr: 'yield' SPACE [testlist]
 
 # raise_stmt: 'raise'
 # raise_stmt: 'raise' SPACE [test]
