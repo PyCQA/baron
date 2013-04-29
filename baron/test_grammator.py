@@ -2573,6 +2573,15 @@ def test_continue():
             "type": "continue",
           }])
 
+def test_pass():
+    "pass"
+    parse([
+           ('PASS', 'pass'),
+          ],
+          [{
+            "type": "pass",
+          }])
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt
@@ -2603,7 +2612,7 @@ def test_continue():
 ### small_stmt: expr_stmt
 # small_stmt: print_stmt
 ### small_stmt: del_stmt
-# small_stmt: pass_stmt
+### small_stmt: pass_stmt
 # small_stmt: flow_stmt
 # small_stmt: import_stmt
 # small_stmt: global_stmt
@@ -2635,7 +2644,7 @@ def test_continue():
 ### flow_stmt: yield_stmt
 
 ### break_stmt: 'break'
-# pass_stmt: 'pass'
+### pass_stmt: 'pass'
 ### continue_stmt: 'continue'
 
 ### return_stmt: 'return'
