@@ -596,17 +596,60 @@ def return_empty((token,)):
 def break_stmt((token,)):
     return {"type": token.name.lower()}
 
-@pg.production("raise_stmt : RAISE test")
-def raise_stmt((raise_, test)):
+@pg.production("raise_stmt : RAISE")
+def raise_stmt_empty((raise_,)):
     return {
         "type": "raise",
-        "value": test,
-        "message": None,
+        "value": None,
+        "instance": None,
+        "traceback": None,
         "first_space": raise_.after_space,
         "second_space": "",
         "third_space": "",
         "forth_space": "",
         "fith_space": ""
+    }
+
+@pg.production("raise_stmt : RAISE test")
+def raise_stmt((raise_, test)):
+    return {
+        "type": "raise",
+        "value": test,
+        "instance": None,
+        "traceback": None,
+        "first_space": raise_.after_space,
+        "second_space": "",
+        "third_space": "",
+        "forth_space": "",
+        "fith_space": ""
+    }
+
+@pg.production("raise_stmt : RAISE test COMMA test")
+def raise_stmt_instance((raise_, test, comma, test2)):
+    return {
+        "type": "raise",
+        "value": test,
+        "instance": test2,
+        "traceback": None,
+        "first_space": raise_.after_space,
+        "second_space": comma.before_space,
+        "third_space": comma.after_space,
+        "forth_space": "",
+        "fith_space": ""
+    }
+
+@pg.production("raise_stmt : RAISE test COMMA test COMMA test")
+def raise_stmt_instance_traceback((raise_, test, comma, test2, comma2, test3)):
+    return {
+        "type": "raise",
+        "value": test,
+        "instance": test2,
+        "traceback": test3,
+        "first_space": raise_.after_space,
+        "second_space": comma.before_space,
+        "third_space": comma.after_space,
+        "forth_space": comma2.before_space,
+        "fith_space": comma2.after_space
     }
 
 @pg.production("assert_stmt : ASSERT test")

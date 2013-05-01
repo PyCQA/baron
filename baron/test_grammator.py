@@ -2614,6 +2614,23 @@ def test_assert_message():
             "third_space": " "
           }])
 
+def test_raise_empty():
+    "raise"
+    parse([
+           ('RAISE', 'raise', '', ' '),
+          ],
+          [{
+            "type": "raise",
+            "value": None,
+            "instance": None,
+            "traceback": None,
+            "first_space": " ",
+            "second_space": "",
+            "third_space": "",
+            "forth_space": "",
+            "fith_space": ""
+          }])
+
 def test_raise():
     "raise a"
     parse([
@@ -2623,12 +2640,55 @@ def test_raise():
           [{
             "type": "raise",
             "value": name('a'),
-            "message": None,
+            "instance": None,
+            "traceback": None,
             "first_space": " ",
             "second_space": "",
             "third_space": "",
             "forth_space": "",
             "fith_space": ""
+          }])
+
+def test_raise_instance():
+    "raise a, b"
+    parse([
+           ('RAISE', 'raise', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', 'comma', '', ' '),
+           ('NAME', 'b'),
+          ],
+          [{
+            "type": "raise",
+            "value": name('a'),
+            "instance": name('b'),
+            "traceback": None,
+            "first_space": " ",
+            "second_space": "",
+            "third_space": " ",
+            "forth_space": "",
+            "fith_space": ""
+          }])
+
+def test_raise_instance_traceback():
+    "raise a, b, c"
+    parse([
+           ('RAISE', 'raise', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', 'comma', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', 'comma', '', ' '),
+           ('NAME', 'c'),
+          ],
+          [{
+            "type": "raise",
+            "value": name('a'),
+            "instance": name('b'),
+            "traceback": name('c'),
+            "first_space": " ",
+            "second_space": "",
+            "third_space": " ",
+            "forth_space": "",
+            "fith_space": " "
           }])
 
 # stmt: simple_stmt
@@ -2689,7 +2749,7 @@ def test_raise():
 ### flow_stmt: break_stmt
 ### flow_stmt: continue_stmt
 ### flow_stmt: return_stmt
-# flow_stmt: raise_stmt
+### flow_stmt: raise_stmt
 ### flow_stmt: yield_stmt
 
 ### break_stmt: 'break'
@@ -2704,10 +2764,10 @@ def test_raise():
 ### yield_expr: 'yield'
 ### yield_expr: 'yield' SPACE [testlist]
 
-# raise_stmt: 'raise'
-# raise_stmt: 'raise' SPACE [test]
-# raise_stmt: 'raise' [SPACE test [[SPACE] ',' [SPACE] test]]
-# raise_stmt: 'raise' [SPACE test [[SPACE] ',' [SPACE] test [[SPACE] ',' [SPACE] test]]]
+### raise_stmt: 'raise'
+### raise_stmt: 'raise' SPACE [test]
+### raise_stmt: 'raise' [SPACE test [[SPACE] ',' [SPACE] test]]
+### raise_stmt: 'raise' [SPACE test [[SPACE] ',' [SPACE] test [[SPACE] ',' [SPACE] test]]]
 
 # exec_stmt: 'exec' SPACE expr
 # exec_stmt: 'exec' SPACE expr [SPACE 'in' SPACE test]
