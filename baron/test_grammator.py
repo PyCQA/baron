@@ -2583,7 +2583,7 @@ def test_pass():
           }])
 
 def test_assert():
-    "pass"
+    "assert a"
     parse([
            ('ASSERT', 'assert', '', ' '),
            ('NAME', 'a'),
@@ -2595,6 +2595,23 @@ def test_assert():
             "first_space": " ",
             "second_space": "",
             "third_space": ""
+          }])
+
+def test_assert_message():
+    "assert a , b"
+    parse([
+           ('ASSERT', 'assert', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', ' ', ' '),
+           ('NAME', 'b'),
+          ],
+          [{
+            "type": "assert",
+            "value": name('a'),
+            "message": name('b'),
+            "first_space": " ",
+            "second_space": " ",
+            "third_space": " "
           }])
 
 # stmt: simple_stmt
@@ -2679,8 +2696,8 @@ def test_assert():
 # exec_stmt: 'exec' SPACE expr [SPACE 'in' SPACE test]
 # exec_stmt: 'exec' SPACE expr [SPACE 'in' SPACE test [[SPACE] ',' [SPACE] test]]
 
-# assert_stmt: 'assert' SPACE test
-# assert_stmt: 'assert' SPACE test [[SPACE] ',' [SPACE] test]
+### assert_stmt: 'assert' SPACE test
+### assert_stmt: 'assert' SPACE test [[SPACE] ',' [SPACE] test]
 
 ### expr_stmt: testlist
 ### expr_stmt: testlist ([SPACE] '=' [SPACE] testlist)*

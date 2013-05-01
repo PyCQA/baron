@@ -606,6 +606,17 @@ def assert_stmt((assert_, test)):
         "third_space": ""
     }
 
+@pg.production("assert_stmt : ASSERT test COMMA test")
+def assert_stmt_message((assert_, test, comma, test2)):
+    return {
+        "type": "assert",
+        "value": test,
+        "message": test2,
+        "first_space": assert_.after_space,
+        "second_space": comma.before_space,
+        "third_space": comma.after_space
+    }
+
 @pg.production("return_stmt : RETURN testlist")
 @pg.production("yield_expr : YIELD testlist")
 @pg.production("del_stmt : DEL exprlist")
