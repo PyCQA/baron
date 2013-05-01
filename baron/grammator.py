@@ -557,6 +557,9 @@ def end((space, endmarker)):
 @pg.production("statement : small_stmt")
 @pg.production("statement : flow_stmt")
 @pg.production("statement : del_stmt")
+@pg.production("statement : pass_stmt")
+@pg.production("statement : assert_stmt")
+@pg.production("statement : raise_stmt")
 def separator((statement,)):
     return [statement]
 
@@ -573,10 +576,7 @@ def space_endl((space, endl,)):
 @pg.production("flow_stmt : return_stmt")
 @pg.production("flow_stmt : break_stmt")
 @pg.production("flow_stmt : continue_stmt")
-@pg.production("flow_stmt : pass_stmt")
 @pg.production("flow_stmt : yield_stmt")
-@pg.production("flow_stmt : assert_stmt")
-@pg.production("flow_stmt : raise_stmt")
 @pg.production("yield_stmt : yield_expr")
 def flow((flow_stmt,)):
     return flow_stmt
