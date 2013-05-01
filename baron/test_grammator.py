@@ -2582,6 +2582,21 @@ def test_pass():
             "type": "pass",
           }])
 
+def test_assert():
+    "pass"
+    parse([
+           ('ASSERT', 'assert', '', ' '),
+           ('NAME', 'a'),
+          ],
+          [{
+            "type": "assert",
+            "value": name('a'),
+            "message": None,
+            "first_space": " ",
+            "second_space": "",
+            "third_space": ""
+          }])
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt
