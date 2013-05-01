@@ -2723,10 +2723,10 @@ def test_raise_instance_traceback():
 ### small_stmt: del_stmt
 ### small_stmt: pass_stmt
 ### small_stmt: flow_stmt
-# small_stmt: import_stmt
+### small_stmt: import_stmt
 # small_stmt: global_stmt
 # small_stmt: exec_stmt
-# small_stmt: assert_stmt
+### small_stmt: assert_stmt
 
 # global_stmt: 'global' SPACE NAME
 # global_stmt: 'global' SPACE NAME ([SPACE] ',' [SPACE] NAME)*

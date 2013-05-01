@@ -37,16 +37,16 @@
 
 # -
 
-# break_stmt: 'break'
-# pass_stmt: 'pass'
-# continue_stmt: 'continue'
+### break_stmt: 'break'
+### pass_stmt: 'pass'
+### continue_stmt: 'continue'
 
 # -
 
-# yield_stmt: yield_expr
+### yield_stmt: yield_expr
 
-# yield_expr: 'yield'
-# yield_expr: 'yield' SPACE [testlist]
+### yield_expr: 'yield'
+### yield_expr: 'yield' SPACE [testlist]
 
 # -
 
@@ -128,13 +128,13 @@
 
 ### small_stmt: expr_stmt
 # small_stmt: print_stmt
-# small_stmt: del_stmt
-# small_stmt: pass_stmt
-# small_stmt: flow_stmt
-# small_stmt: import_stmt
+### small_stmt: del_stmt
+### small_stmt: pass_stmt
+### small_stmt: flow_stmt
+### small_stmt: import_stmt
 # small_stmt: global_stmt
 # small_stmt: exec_stmt
-# small_stmt: assert_stmt
+### small_stmt: assert_stmt
 
 # -
 
@@ -171,31 +171,31 @@
 
 # -
 
-# del_stmt: 'del' SPACE exprlist
+### del_stmt: 'del' SPACE exprlist
 
 # -
 
-# flow_stmt: break_stmt
-# flow_stmt: continue_stmt
-# flow_stmt: return_stmt
-# flow_stmt: raise_stmt
-# flow_stmt: yield_stmt
+### flow_stmt: break_stmt
+### flow_stmt: continue_stmt
+### flow_stmt: return_stmt
+### flow_stmt: raise_stmt
+### flow_stmt: yield_stmt
 
 # -
 
-# return_stmt: 'return'
-# return_stmt: 'return' SPACE [testlist]
+### return_stmt: 'return'
+### return_stmt: 'return' SPACE [testlist]
 
 # -
 
-# yield_stmt: yield_expr
+### yield_stmt: yield_expr
 
 # -
 
-# raise_stmt: 'raise'
-# raise_stmt: 'raise' SPACE [test]
-# raise_stmt: 'raise' [SPACE test [[SPACE] ',' [SPACE] test]]
-# raise_stmt: 'raise' [SPACE test [[SPACE] ',' [SPACE] test [[SPACE] ',' [SPACE] test]]]
+### raise_stmt: 'raise'
+### raise_stmt: 'raise' SPACE [test]
+### raise_stmt: 'raise' [SPACE test [[SPACE] ',' [SPACE] test]]
+### raise_stmt: 'raise' [SPACE test [[SPACE] ',' [SPACE] test [[SPACE] ',' [SPACE] test]]]
 
 # -
 
@@ -205,8 +205,8 @@
 
 # -
 
-# assert_stmt: 'assert' SPACE test
-# assert_stmt: 'assert' SPACE test [[SPACE] ',' [SPACE] test]
+### assert_stmt: 'assert' SPACE test
+### assert_stmt: 'assert' SPACE test [[SPACE] ',' [SPACE] test]
 
 # -
 
@@ -500,8 +500,8 @@
 
 # -
 
-# yield_expr: 'yield'
-# yield_expr: 'yield' [SPACE testlist]
+### yield_expr: 'yield'
+### yield_expr: 'yield' [SPACE testlist]
 
 # -
 
