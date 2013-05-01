@@ -576,6 +576,7 @@ def space_endl((space, endl,)):
 @pg.production("flow_stmt : pass_stmt")
 @pg.production("flow_stmt : yield_stmt")
 @pg.production("flow_stmt : assert_stmt")
+@pg.production("flow_stmt : raise_stmt")
 @pg.production("yield_stmt : yield_expr")
 def flow((flow_stmt,)):
     return flow_stmt
@@ -594,6 +595,19 @@ def return_empty((token,)):
 @pg.production("pass_stmt : PASS")
 def break_stmt((token,)):
     return {"type": token.name.lower()}
+
+@pg.production("raise_stmt : RAISE test")
+def raise_stmt((raise_, test)):
+    return {
+        "type": "raise",
+        "value": test,
+        "message": None,
+        "first_space": raise_.after_space,
+        "second_space": "",
+        "third_space": "",
+        "forth_space": "",
+        "fith_space": ""
+    }
 
 @pg.production("assert_stmt : ASSERT test")
 def assert_stmt((assert_, test)):

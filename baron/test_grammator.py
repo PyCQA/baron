@@ -2614,6 +2614,23 @@ def test_assert_message():
             "third_space": " "
           }])
 
+def test_raise():
+    "raise a"
+    parse([
+           ('RAISE', 'raise', '', ' '),
+           ('NAME', 'a'),
+          ],
+          [{
+            "type": "raise",
+            "value": name('a'),
+            "message": None,
+            "first_space": " ",
+            "second_space": "",
+            "third_space": "",
+            "forth_space": "",
+            "fith_space": ""
+          }])
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt
