@@ -2691,6 +2691,24 @@ def test_raise_instance_traceback():
             "fith_space": " "
           }])
 
+def test_exec():
+    "exec a"
+    parse([
+           ('EXEC', 'exec', '', ' '),
+           ('NAME', 'a'),
+          ],
+          [{
+            "type": "exec",
+            "value": name('a'),
+            "globals": None,
+            "locals": None,
+            "first_space": " ",
+            "second_space": "",
+            "third_space": "",
+            "forth_space": "",
+            "fith_space": ""
+          }])
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt

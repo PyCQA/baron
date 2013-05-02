@@ -652,6 +652,20 @@ def raise_stmt_instance_traceback((raise_, test, comma, test2, comma2, test3)):
         "fith_space": comma2.after_space
     }
 
+@pg.production("assert_stmt : EXEC expr")
+def exec_stmt((exec_, expr)):
+    return {
+        "type": "exec",
+        "value": expr,
+        "globals": None,
+        "locals": None,
+        "first_space": exec_.after_space,
+        "second_space": "",
+        "third_space": "",
+        "forth_space": "",
+        "fith_space": ""
+    }
+
 @pg.production("assert_stmt : ASSERT test")
 def assert_stmt((assert_, test)):
     return {
