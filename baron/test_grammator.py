@@ -2751,6 +2751,64 @@ def test_exec_in_c():
             "fith_space": " "
           }])
 
+def test_global():
+    "global a"
+    parse([
+           ('GLOBAL', 'global', '', ' '),
+           ('NAME', 'a'),
+          ],
+          [{
+            "type": "global",
+            "space": " ",
+            "value": [
+                      name('a'),
+                     ]
+          }])
+
+def test_global_one():
+    "global a, b"
+    parse([
+           ('GLOBAL', 'global', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+          ],
+          [{
+            "type": "global",
+            "space": " ",
+            "value": [
+                      name('a'),
+                      comma(),
+                      space(),
+                      name('b'),
+                     ]
+          }])
+
+def test_global_two():
+    "global a, b ,  c"
+    parse([
+           ('GLOBAL', 'global', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', ' ', '  '),
+           ('NAME', 'c'),
+          ],
+          [{
+            "type": "global",
+            "space": " ",
+            "value": [
+                      name('a'),
+                      comma(),
+                      space(),
+                      name('b'),
+                      space(),
+                      comma(),
+                      space("  "),
+                      name('c'),
+                     ]
+          }])
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt
@@ -2784,12 +2842,12 @@ def test_exec_in_c():
 ### small_stmt: pass_stmt
 ### small_stmt: flow_stmt
 ### small_stmt: import_stmt
-# small_stmt: global_stmt
+### small_stmt: global_stmt
 ### small_stmt: exec_stmt
 ### small_stmt: assert_stmt
 
-# global_stmt: 'global' SPACE NAME
-# global_stmt: 'global' SPACE NAME ([SPACE] ',' [SPACE] NAME)*
+### global_stmt: 'global' SPACE NAME
+### global_stmt: 'global' SPACE NAME ([SPACE] ',' [SPACE] NAME)*
 
 # print_stmt: 'print'
 # print_stmt: 'print' SPACE [ test ]

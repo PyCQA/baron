@@ -560,6 +560,7 @@ def end((space, endmarker)):
 @pg.production("statement : pass_stmt")
 @pg.production("statement : assert_stmt")
 @pg.production("statement : raise_stmt")
+@pg.production("statement : global_stmt")
 def separator((statement,)):
     return [statement]
 
@@ -715,6 +716,29 @@ def assert_stmt_message((assert_, test, comma, test2)):
         "second_space": comma.before_space,
         "third_space": comma.after_space
     }
+
+@pg.production("global_stmt : GLOBAL names")
+def global_stmt((global_, names)):
+    return {
+        "type": "global",
+        "space": global_.after_space,
+        "value": names,
+    }
+
+@pg.production("names : NAME")
+def names_name((name,)):
+    return [create_node_from_token(name)]
+
+@pg.production("names : names COMMA NAME")
+def names_names_name((names, comma, name,)):
+    to_return = names
+    if comma.before_space:
+        to_return += [{"type": "space", "value": comma.before_space}]
+    to_return += [create_node_from_token(comma)]
+    if comma.after_space:
+        to_return += [{"type": "space", "value": comma.after_space}]
+    to_return += [create_node_from_token(name)]
+    return to_return
 
 @pg.production("return_stmt : RETURN testlist")
 @pg.production("yield_expr : YIELD testlist")
