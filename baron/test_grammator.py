@@ -2709,6 +2709,48 @@ def test_exec():
             "fith_space": ""
           }])
 
+def test_exec_in():
+    "exec a in b"
+    parse([
+           ('EXEC', 'exec', '', ' '),
+           ('NAME', 'a'),
+           ('IN', 'in', ' ', ' '),
+           ('NAME', 'b'),
+          ],
+          [{
+            "type": "exec",
+            "value": name('a'),
+            "globals": name('b'),
+            "locals": None,
+            "first_space": " ",
+            "second_space": " ",
+            "third_space": " ",
+            "forth_space": "",
+            "fith_space": ""
+          }])
+
+def test_exec_in_c():
+    "exec a in b, c"
+    parse([
+           ('EXEC', 'exec', '', ' '),
+           ('NAME', 'a'),
+           ('IN', 'in', ' ', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'c'),
+          ],
+          [{
+            "type": "exec",
+            "value": name('a'),
+            "globals": name('b'),
+            "locals": name('c'),
+            "first_space": " ",
+            "second_space": " ",
+            "third_space": " ",
+            "forth_space": "",
+            "fith_space": " "
+          }])
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt
@@ -2743,7 +2785,7 @@ def test_exec():
 ### small_stmt: flow_stmt
 ### small_stmt: import_stmt
 # small_stmt: global_stmt
-# small_stmt: exec_stmt
+### small_stmt: exec_stmt
 ### small_stmt: assert_stmt
 
 # global_stmt: 'global' SPACE NAME
@@ -2787,9 +2829,9 @@ def test_exec():
 ### raise_stmt: 'raise' [SPACE test [[SPACE] ',' [SPACE] test]]
 ### raise_stmt: 'raise' [SPACE test [[SPACE] ',' [SPACE] test [[SPACE] ',' [SPACE] test]]]
 
-# exec_stmt: 'exec' SPACE expr
-# exec_stmt: 'exec' SPACE expr [SPACE 'in' SPACE test]
-# exec_stmt: 'exec' SPACE expr [SPACE 'in' SPACE test [[SPACE] ',' [SPACE] test]]
+### exec_stmt: 'exec' SPACE expr
+### exec_stmt: 'exec' SPACE expr [SPACE 'in' SPACE test]
+### exec_stmt: 'exec' SPACE expr [SPACE 'in' SPACE test [[SPACE] ',' [SPACE] test]]
 
 ### assert_stmt: 'assert' SPACE test
 ### assert_stmt: 'assert' SPACE test [[SPACE] ',' [SPACE] test]

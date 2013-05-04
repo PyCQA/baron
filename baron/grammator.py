@@ -666,6 +666,34 @@ def exec_stmt((exec_, expr)):
         "fith_space": ""
     }
 
+@pg.production("assert_stmt : EXEC expr IN test")
+def exec_stmt_in((exec_, expr, in_, test)):
+    return {
+        "type": "exec",
+        "value": expr,
+        "globals": test,
+        "locals": None,
+        "first_space": exec_.after_space,
+        "second_space": in_.before_space,
+        "third_space": in_.after_space,
+        "forth_space": "",
+        "fith_space": ""
+    }
+
+@pg.production("assert_stmt : EXEC expr IN test COMMA test")
+def exec_stmt_in_comma((exec_, expr, in_, test, comma, test2)):
+    return {
+        "type": "exec",
+        "value": expr,
+        "globals": test,
+        "locals": test2,
+        "first_space": exec_.after_space,
+        "second_space": in_.before_space,
+        "third_space": in_.after_space,
+        "forth_space": comma.before_space,
+        "fith_space": comma.after_space
+    }
+
 @pg.production("assert_stmt : ASSERT test")
 def assert_stmt((assert_, test)):
     return {
