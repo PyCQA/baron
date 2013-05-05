@@ -32,8 +32,8 @@
 
 # -
 
-# global_stmt: 'global' SPACE NAME
-# global_stmt: 'global' SPACE NAME ([SPACE] ',' [SPACE] NAME)*
+### global_stmt: 'global' SPACE NAME
+### global_stmt: 'global' SPACE NAME ([SPACE] ',' [SPACE] NAME)*
 
 # -
 
@@ -127,13 +127,13 @@
 # -
 
 ### small_stmt: expr_stmt
-# small_stmt: print_stmt
+### small_stmt: print_stmt
 ### small_stmt: del_stmt
 ### small_stmt: pass_stmt
 ### small_stmt: flow_stmt
 ### small_stmt: import_stmt
-# small_stmt: global_stmt
-# small_stmt: exec_stmt
+### small_stmt: global_stmt
+### small_stmt: exec_stmt
 ### small_stmt: assert_stmt
 
 # -
@@ -161,13 +161,13 @@
 
 # -
 
-# print_stmt: 'print'
-# print_stmt: 'print' SPACE [ test ]
-# print_stmt: 'print' SPACE [ test [SPACE] [','] ]
-# print_stmt: 'print' SPACE [ test ([SPACE] ',' [SPACE] test)* [SPACE] [','] ]
-# print_stmt: 'print' [SPACE] '>>' [SPACE] test
-# print_stmt: 'print' [SPACE] '>>' [SPACE] test [ ([SPACE] ',' [SPACE] test)+ ]
-# print_stmt: 'print' [SPACE] '>>' [SPACE] test [ ([SPACE] ',' [SPACE] test)+ [SPACE] [',']]
+### print_stmt: 'print'
+### print_stmt: 'print' SPACE [ test ]
+### print_stmt: 'print' SPACE [ test [SPACE] [','] ]
+### print_stmt: 'print' SPACE [ test ([SPACE] ',' [SPACE] test)* [SPACE] [','] ]
+### print_stmt: 'print' [SPACE] '>>' [SPACE] test
+### print_stmt: 'print' [SPACE] '>>' [SPACE] test [ ([SPACE] ',' [SPACE] test)+ ]
+### print_stmt: 'print' [SPACE] '>>' [SPACE] test [ ([SPACE] ',' [SPACE] test)+ [SPACE] [',']]
 
 # -
 
@@ -199,9 +199,9 @@
 
 # -
 
-# exec_stmt: 'exec' SPACE expr
-# exec_stmt: 'exec' SPACE expr [SPACE 'in' SPACE test]
-# exec_stmt: 'exec' SPACE expr [SPACE 'in' SPACE test [[SPACE] ',' [SPACE] test]]
+### exec_stmt: 'exec' SPACE expr
+### exec_stmt: 'exec' SPACE expr [SPACE 'in' SPACE test]
+### exec_stmt: 'exec' SPACE expr [SPACE 'in' SPACE test [[SPACE] ',' [SPACE] test]]
 
 # -
 
