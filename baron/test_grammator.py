@@ -2809,6 +2809,139 @@ def test_global_two():
                      ]
           }])
 
+def test_print():
+    "print"
+    parse([
+           ('PRINT', 'print', '', ''),
+          ],
+          [{
+            "type": "print",
+            "space": "",
+            "value": None,
+            "destination_space": "",
+            "destination": None,
+          }])
+
+def test_print_a():
+    "print a"
+    parse([
+           ('PRINT', 'print', '', ' '),
+           ('NAME', 'a'),
+          ],
+          [{
+            "type": "print",
+            "space": " ",
+            "value": [name('a')],
+            "destination_space": "",
+            "destination": None,
+          }])
+
+def test_print_a_b():
+    "print a, b"
+    parse([
+           ('PRINT', 'print', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+          ],
+          [{
+            "type": "print",
+            "space": " ",
+            "value": [
+                      name('a'),
+                      comma(),
+                      space(),
+                      name('b'),
+                     ],
+            "destination_space": "",
+            "destination": None,
+          }])
+
+def test_print_a_b_comma():
+    "print a, b,"
+    parse([
+           ('PRINT', 'print', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', '', ''),
+          ],
+          [{
+            "type": "print",
+            "space": " ",
+            "value": [
+                      name('a'),
+                      comma(),
+                      space(),
+                      name('b'),
+                      comma(),
+                     ],
+            "destination_space": "",
+            "destination": None,
+          }])
+
+def test_print_redirect():
+    "print >> a"
+    parse([
+           ('PRINT', 'print', '', ' '),
+           ('RIGHT_SHIFT', '>>', '', ' '),
+           ('NAME', 'a'),
+          ],
+          [{
+            "type": "print",
+            "space": " ",
+            "value": None,
+            "destination_space": " ",
+            "destination": name('a'),
+          }])
+
+def test_print_redirect_ab():
+    "print >> a , b"
+    parse([
+           ('PRINT', 'print', '', ' '),
+           ('RIGHT_SHIFT', '>>', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', ' ', ' '),
+           ('NAME', 'b'),
+          ],
+          [{
+            "type": "print",
+            "space": " ",
+            "value": [
+                      space(),
+                      comma(),
+                      space(),
+                      name('b'),
+                     ],
+            "destination": name('a'),
+            "destination_space": " ",
+          }])
+
+def test_print_redirect_ab_comma():
+    "print >> a , b ,"
+    parse([
+           ('PRINT', 'print', '', ' '),
+           ('RIGHT_SHIFT', '>>', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', ' ', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', ' ', ''),
+          ],
+          [{
+            "type": "print",
+            "space": " ",
+            "value": [
+                      space(),
+                      comma(),
+                      space(),
+                      name('b'),
+                      space(),
+                      comma(),
+                     ],
+            "destination": name('a'),
+            "destination_space": " ",
+          }])
+
 # stmt: simple_stmt
 # simple_stmt: small_stmt [SPACE] NEWLINE
 ### small_stmt: expr_stmt
@@ -2837,7 +2970,7 @@ def test_global_two():
 # simple_stmt: small_stmt ([SPACE] ';' small_stmt [SPACE] ';') [SPACE] NEWLINE
 
 ### small_stmt: expr_stmt
-# small_stmt: print_stmt
+### small_stmt: print_stmt
 ### small_stmt: del_stmt
 ### small_stmt: pass_stmt
 ### small_stmt: flow_stmt
@@ -2849,13 +2982,13 @@ def test_global_two():
 ### global_stmt: 'global' SPACE NAME
 ### global_stmt: 'global' SPACE NAME ([SPACE] ',' [SPACE] NAME)*
 
-# print_stmt: 'print'
-# print_stmt: 'print' SPACE [ test ]
-# print_stmt: 'print' SPACE [ test [SPACE] [','] ]
-# print_stmt: 'print' SPACE [ test ([SPACE] ',' [SPACE] test)* [SPACE] [','] ]
-# print_stmt: 'print' [SPACE] '>>' [SPACE] test
-# print_stmt: 'print' [SPACE] '>>' [SPACE] test [ ([SPACE] ',' [SPACE] test)+ ]
-# print_stmt: 'print' [SPACE] '>>' [SPACE] test [ ([SPACE] ',' [SPACE] test)+ [SPACE] [',']]
+### print_stmt: 'print'
+### print_stmt: 'print' SPACE [ test ]
+### print_stmt: 'print' SPACE [ test [SPACE] [','] ]
+### print_stmt: 'print' SPACE [ test ([SPACE] ',' [SPACE] test)* [SPACE] [','] ]
+### print_stmt: 'print' [SPACE] '>>' [SPACE] test
+### print_stmt: 'print' [SPACE] '>>' [SPACE] test [ ([SPACE] ',' [SPACE] test)+ ]
+### print_stmt: 'print' [SPACE] '>>' [SPACE] test [ ([SPACE] ',' [SPACE] test)+ [SPACE] [',']]
 
 ### del_stmt: 'del' SPACE exprlist
 

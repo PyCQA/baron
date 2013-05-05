@@ -561,10 +561,59 @@ def end((space, endmarker)):
 @pg.production("statement : assert_stmt")
 @pg.production("statement : raise_stmt")
 @pg.production("statement : global_stmt")
+@pg.production("statement : print_stmt")
 def separator((statement,)):
     return [statement]
 
 include_imports(pg)
+
+@pg.production("print_stmt : PRINT")
+def print_stmt_empty((print_,)):
+    return {
+        "type": "print",
+        "value": None,
+        "destination": None,
+        "destination_space": "",
+        "space": "",
+    }
+
+@pg.production("print_stmt : PRINT testlist")
+def print_stmt((print_, testlist)):
+    return {
+        "type": "print",
+        "value": testlist["value"] if testlist["type"] == "tuple" else [testlist],
+        "destination": None,
+        "destination_space": "",
+        "space": print_.after_space,
+    }
+
+@pg.production("print_stmt : PRINT RIGHT_SHIFT test")
+def print_stmt_redirect((print_, right_shift, test)):
+    return {
+        "type": "print",
+        "value": None,
+        "destination": test,
+        "destination_space": right_shift.after_space,
+        "space": print_.after_space,
+    }
+
+@pg.production("print_stmt : PRINT RIGHT_SHIFT test COMMA testlist")
+def print_stmt_redirect_testlist((print_, right_shift, test, comma, testlist)):
+    value = []
+    if comma.before_space:
+        value += [{"type": "space", "value": comma.before_space}]
+    value += [create_node_from_token(comma)]
+    if comma.after_space:
+        value += [{"type": "space", "value": comma.after_space}]
+    print testlist
+    value += testlist["value"] if testlist["type"] == "tuple" else [testlist]
+    return {
+        "type": "print",
+        "value": value,
+        "destination": test,
+        "destination_space": right_shift.after_space,
+        "space": print_.after_space,
+    }
 
 @pg.production("separator : SPACE? ENDL")
 def space_endl((space, endl,)):
