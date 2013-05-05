@@ -553,17 +553,25 @@ def end((space, endmarker)):
         return [create_node_from_token(space)]
     return [None]
 
-@pg.production("statement : separator")
-@pg.production("statement : small_stmt")
-@pg.production("statement : flow_stmt")
-@pg.production("statement : del_stmt")
-@pg.production("statement : pass_stmt")
-@pg.production("statement : assert_stmt")
-@pg.production("statement : raise_stmt")
-@pg.production("statement : global_stmt")
-@pg.production("statement : print_stmt")
+@pg.production("statement : simple_stmt")
+def statement_simple_statement((simple_stmt,)):
+    return [simple_stmt]
+
+@pg.production("simple_stmt : small_stmt")
+def simple_stmt((small_stmt,)):
+    return small_stmt
+
+@pg.production("small_stmt : separator")
+@pg.production("small_stmt : small_stmt")
+@pg.production("small_stmt : flow_stmt")
+@pg.production("small_stmt : del_stmt")
+@pg.production("small_stmt : pass_stmt")
+@pg.production("small_stmt : assert_stmt")
+@pg.production("small_stmt : raise_stmt")
+@pg.production("small_stmt : global_stmt")
+@pg.production("small_stmt : print_stmt")
 def separator((statement,)):
-    return [statement]
+    return statement
 
 include_imports(pg)
 
