@@ -16,12 +16,6 @@ def test_empty():
 
     ], [])
 
-def test_space():
-    "   "
-    parse([
-           ('SPACE', '   ')],
-          [space("   ")])
-
 def test_int():
     "1"
     parse([
