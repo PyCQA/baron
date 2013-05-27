@@ -22,11 +22,12 @@ def test_int():
            ('INT', '1')],
           [inteu("1")])
 
-def test_endl():
-    "\n"
-    parse([
-           ('ENDL', '\n')],
-          [endl("\n", before_space="")])
+# TODO: will be done in file_input
+#def test_endl():
+    #"\n"
+    #parse([
+           #('ENDL', '\n')],
+          #[endl("\n", before_space="")])
 
 def test_name():
     "a"

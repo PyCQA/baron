@@ -547,10 +547,8 @@ def statements_statement((statements, statement)):
 def statement((statement,)):
     return statement
 
-@pg.production("statement : SPACE? ENDMARKER")
-def end((space, endmarker)):
-    if space:
-        return [create_node_from_token(space)]
+@pg.production("statement : ENDMARKER")
+def end((endmarker)):
     return [None]
 
 @pg.production("statement : simple_stmt")
@@ -561,8 +559,6 @@ def statement_simple_statement((simple_stmt,)):
 def simple_stmt((small_stmt, endl)):
     return small_stmt
 
-@pg.production("small_stmt : separator")
-@pg.production("small_stmt : small_stmt")
 @pg.production("small_stmt : flow_stmt")
 @pg.production("small_stmt : del_stmt")
 @pg.production("small_stmt : pass_stmt")
@@ -622,14 +618,6 @@ def print_stmt_redirect_testlist((print_, right_shift, test, comma, testlist)):
         "destination_space": right_shift.after_space,
         "space": print_.after_space,
     }
-
-@pg.production("separator : SPACE? ENDL")
-def space_endl((space, endl,)):
-    return {
-            "type": endl.name.lower(),
-            "value": endl.value,
-            "before_space": space.value if space else ""
-           }
 
 @pg.production("flow_stmt : return_stmt")
 @pg.production("flow_stmt : break_stmt")

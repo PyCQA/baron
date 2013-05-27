@@ -1,10 +1,10 @@
 from utils import create_node_from_token
 
 def include_imports(pg):
-    @pg.production("statement : import")
-    @pg.production("statement : from_import")
+    @pg.production("small_stmt : import")
+    @pg.production("small_stmt : from_import")
     def separator((statement,)):
-        return [statement]
+        return statement
 
     @pg.production("import : IMPORT dotted_as_names")
     def importeu((import_, dotted_as_names)):
