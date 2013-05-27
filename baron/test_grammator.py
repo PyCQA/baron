@@ -2937,6 +2937,8 @@ def test_print_redirect_ab_comma():
             "destination_space": " ",
           }])
 
+# file_input: ([SPACE] NEWLINE | stmt)* [SPACE] ENDMARKER
+
 # stmt: simple_stmt
 # stmt: compound_stmt
 
