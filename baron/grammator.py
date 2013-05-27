@@ -119,7 +119,7 @@
 
 # -
 
-# simple_stmt: small_stmt [SPACE] NEWLINE
+### simple_stmt: small_stmt [SPACE] NEWLINE
 # simple_stmt: small_stmt [SPACE] ';' [SPACE] NEWLINE
 # simple_stmt: small_stmt [SPACE] ';' small_stmt [SPACE] ';' [SPACE] NEWLINE
 # simple_stmt: small_stmt ([SPACE] ';' small_stmt [SPACE] ';') [SPACE] NEWLINE
@@ -557,8 +557,8 @@ def end((space, endmarker)):
 def statement_simple_statement((simple_stmt,)):
     return [simple_stmt]
 
-@pg.production("simple_stmt : small_stmt")
-def simple_stmt((small_stmt,)):
+@pg.production("simple_stmt : small_stmt ENDL")
+def simple_stmt((small_stmt, endl)):
     return small_stmt
 
 @pg.production("small_stmt : separator")

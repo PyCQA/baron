@@ -1,6 +1,8 @@
 from grammator import parser, Token
 
 def parse(tokens, result):
+    if tokens and tokens[-1][0] != "ENDL":
+        tokens += [('ENDL', '\n')]
     assert parser.parse(iter(map(lambda x: Token(*x) if x else x, tokens + [('ENDMARKER', ''), None]))) == result
 
 def _node(typeu, value, **kwargs):
