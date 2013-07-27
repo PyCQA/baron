@@ -70,3 +70,18 @@ def test_import_more_dot():
            ('NAME', 'blob'),
            ('DOT', '.', ' '),
            ('NAME', 'plop')])
+
+
+def test_import_as():
+    "import   pouet as  b"
+    group([('IMPORT', 'import', '', '  '),
+           ('SPACE', '  '),
+           ('NAME', 'pouet'),
+           ('SPACE', ' '),
+           ('AS', 'as'),
+           ('SPACE', '  '),
+           ('NAME', 'b')],
+          [('IMPORT', 'import', '', '  '),
+           ('NAME', 'pouet'),
+           ('AS', 'as', ' ', '  '),
+           ('NAME', 'b')])
