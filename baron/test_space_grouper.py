@@ -2040,3 +2040,24 @@ def test_or_or():
            ('NAME', 'c'),
           ])
 
+
+def test_ternary_operator():
+    "a if b else c"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('IF', 'if'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+           ('SPACE', ' '),
+           ('ELSE', 'else'),
+           ('SPACE', ' '),
+           ('NAME', 'c'),
+          ],
+          [('NAME', 'a'),
+           ('IF', 'if', ' ', ' '),
+           ('NAME', 'b'),
+           ('ELSE', 'else', ' ', ' '),
+           ('NAME', 'c'),
+          ])
+
