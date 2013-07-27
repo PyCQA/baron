@@ -162,3 +162,157 @@ def test_from_a_import_b():
            ('NAME', 'a'),
            ('IMPORT', 'import', ' ', ' '),
            ('NAME', 'b')])
+
+
+def test_from_a_dot_c_import_b():
+    "from a.C import b"
+    group([('FROM', 'from', '', ' '),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'c'),
+           ('SPACE', ' '),
+           ('IMPORT', 'import'),
+           ('SPACE', ' '),
+           ('NAME', 'b')],
+          [('FROM', 'from', '', ' '),
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'c'),
+           ('IMPORT', 'import', ' ', ' '),
+           ('NAME', 'b')])
+
+
+def test_from_a_dot_c_import_b_d():
+    "from a.c import b, d"
+    group([('FROM', 'from'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'c'),
+           ('SPACE', ' '),
+           ('IMPORT', 'import'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ','),
+           ('SPACE', ' '),
+           ('NAME', 'd')],
+          [('FROM', 'from', '', ' '),
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'c'),
+           ('IMPORT', 'import', ' ', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'd')])
+
+
+def test_from_a_import_b_as_d():
+    "from a import b as d"
+    group([('FROM', 'from'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('IMPORT', 'import'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+           ('SPACE', ' '),
+           ('AS', 'as'),
+           ('SPACE', ' '),
+           ('NAME', 'd')
+          ],
+          [('FROM', 'from', '', ' '),
+           ('NAME', 'a'),
+           ('IMPORT', 'import', ' ', ' '),
+           ('NAME', 'b'),
+           ('AS', 'as', ' ', ' '),
+           ('NAME', 'd')
+          ])
+
+def test_from_a_import_parenthesis_b():
+    "from a import (b)"
+    group([('FROM', 'from'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('IMPORT', 'import'),
+           ('SPACE', ' '),
+           ('LEFT_PARENTHESIS', '('),
+           ('NAME', 'b'),
+           ('RIGHT_PARENTHESIS', ')')
+          ],
+          [('FROM', 'from', '', ' '),
+           ('NAME', 'a'),
+           ('IMPORT', 'import', ' ', ' '),
+           ('LEFT_PARENTHESIS', '('),
+           ('NAME', 'b'),
+           ('RIGHT_PARENTHESIS', ')')
+          ])
+
+
+def test_from_a_import_parenthesis_b_without_space():
+    "from a import(b)"
+    group([('FROM', 'from'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('IMPORT', 'import'),
+           ('LEFT_PARENTHESIS', '('),
+           ('NAME', 'b'),
+           ('RIGHT_PARENTHESIS', ')')
+          ],
+          [('FROM', 'from', '', ' '),
+           ('NAME', 'a'),
+           ('IMPORT', 'import', ' '),
+           ('LEFT_PARENTHESIS', '('),
+           ('NAME', 'b'),
+           ('RIGHT_PARENTHESIS', ')')
+          ])
+
+
+
+def test_from_a_import_parenthesis_b_comma():
+    "from a import (b,)"
+    group([
+           ('FROM', 'from'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('IMPORT', 'import'),
+           ('SPACE', ' '),
+           ('LEFT_PARENTHESIS', '('),
+           ('NAME', 'b'),
+           ('COMMA', ','),
+           ('RIGHT_PARENTHESIS', ')')
+          ],
+          [('FROM', 'from', '', ' '),
+           ('NAME', 'a'),
+           ('IMPORT', 'import', ' ', ' '),
+           ('LEFT_PARENTHESIS', '('),
+           ('NAME', 'b'),
+           ('COMMA', ','),
+           ('RIGHT_PARENTHESIS', ')')
+          ])
+
+
+def test_from_a_import_parenthesis_b_space():
+    "from a import (b )"
+    group([
+           ('FROM', 'from'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('IMPORT', 'import'),
+           ('SPACE', ' '),
+           ('LEFT_PARENTHESIS', '('),
+           ('NAME', 'b'),
+           ('SPACE', ' '),
+           ('RIGHT_PARENTHESIS', ')'),
+          ],
+          [('FROM', 'from', '', ' '),
+           ('NAME', 'a'),
+           ('IMPORT', 'import', ' ', ' '),
+           ('LEFT_PARENTHESIS', '('),
+           ('NAME', 'b'),
+           ('RIGHT_PARENTHESIS', ')', ' '),
+          ])
