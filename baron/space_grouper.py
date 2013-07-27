@@ -36,6 +36,7 @@ BOTH = (
     "OR",
     "IF",
     "ELSE",
+    "EQUAL",
 )
 
 GROUP_SPACE_BEFORE = BOTH + (

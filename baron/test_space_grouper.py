@@ -2061,3 +2061,38 @@ def test_ternary_operator():
            ('NAME', 'c'),
           ])
 
+
+def test_assignment():
+    "a = b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('EQUAL', '='),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('EQUAL', '=', ' ', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_assignment_assignment():
+    "a = b = c"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('EQUAL', '='),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+           ('SPACE', ' '),
+           ('EQUAL', '='),
+           ('SPACE', ' '),
+           ('NAME', 'c'),
+          ],
+          [('NAME', 'a'),
+           ('EQUAL', '=', ' ', ' '),
+           ('NAME', 'b'),
+           ('EQUAL', '=', ' ', ' '),
+           ('NAME', 'c'),
+          ])
