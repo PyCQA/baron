@@ -1438,3 +1438,95 @@ def test_arith_expr_left_shift_spaces():
            ('LEFT_SHIFT', '<<', ' ', ' '),
            ('NAME', 'b'),
           ])
+
+
+def test_arith_expr_right_shift():
+    "a>>b"
+    group([
+           ('NAME', 'a'),
+           ('RIGHT_SHIFT', '>>'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('RIGHT_SHIFT', '>>'),
+           ('NAME', 'b'),
+          ])
+
+
+def test_arith_expr_right_shift_first_space():
+    "a >>b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('RIGHT_SHIFT', '>>'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('RIGHT_SHIFT', '>>', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_arith_expr_right_shift_second_space():
+    "a>> b"
+    group([
+           ('NAME', 'a'),
+           ('RIGHT_SHIFT', '>>'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('RIGHT_SHIFT', '>>', '', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_arith_expr_right_shift_spaces():
+    "a >> b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('RIGHT_SHIFT', '>>'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('RIGHT_SHIFT', '>>', ' ', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_arith_expr_right_shift_spaces_atomtrailers():
+    "a.b >> c"
+    group([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('SPACE', ' '),
+           ('RIGHT_SHIFT', '>>'),
+           ('SPACE', ' '),
+           ('NAME', 'c'),
+          ],
+          [('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('RIGHT_SHIFT', '>>', ' ', ' '),
+           ('NAME', 'c'),
+          ])
+
+
+def test_chained_left_right_shift():
+    "a<<b>>c"
+    group([
+           ('NAME', 'a'),
+           ('LEFT_SHIFT', '<<'),
+           ('NAME', 'b'),
+           ('RIGHT_SHIFT', '>>'),
+           ('NAME', 'c'),
+          ],
+          [('NAME', 'a'),
+           ('LEFT_SHIFT', '<<'),
+           ('NAME', 'b'),
+           ('RIGHT_SHIFT', '>>'),
+           ('NAME', 'c'),
+          ])
