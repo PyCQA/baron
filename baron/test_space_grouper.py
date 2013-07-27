@@ -1806,3 +1806,112 @@ def test_chained_left_expr():
            ('VBAR', '|'),
            ('NAME', 'c'),
           ])
+
+
+comparison_tokens = (
+    ('LESS', '<'),
+    ('GREATER', '>'),
+    ('EQUAL_EQUAL', '=='),
+    ('LESS_EQUAL', '<='),
+    ('GREATER_EQUAL', '>='),
+    ('LESS_GREATER', '<>'),
+    ('NOT_EQUAL', '!='),
+    ('IN', 'in'),
+    ('IS', 'is'),
+)
+
+
+def test_comparison():
+    "a<b"
+    for token_name, value in comparison_tokens:
+        group([
+               ('NAME', 'a'),
+               (token_name, value),
+               ('NAME', 'b'),
+              ],
+              [('NAME', 'a'),
+               (token_name, value),
+               ('NAME', 'b'),
+              ])
+
+
+def test_comparison_first_space():
+    "a <b"
+    for token_name, value in comparison_tokens:
+        group([
+               ('NAME', 'a'),
+               ('SPACE', ' '),
+               (token_name, value, ' '),
+               ('NAME', 'b'),
+              ],
+              [('NAME', 'a'),
+               (token_name, value, ' '),
+               ('NAME', 'b'),
+              ])
+
+def test_comparison_second_space():
+    "a< b"
+    for token_name, value in comparison_tokens:
+        group([
+               ('NAME', 'a'),
+               (token_name, value),
+               ('SPACE', ' '),
+               ('NAME', 'b'),
+              ],
+              [('NAME', 'a'),
+               (token_name, value, '', ' '),
+               ('NAME', 'b'),
+              ])
+
+def test_comparison_spaces():
+    "a < b"
+    for token_name, value in comparison_tokens:
+        group([
+               ('NAME', 'a'),
+               ('SPACE', ' '),
+               (token_name, value),
+               ('SPACE', ' '),
+               ('NAME', 'b'),
+              ],
+              [('NAME', 'a'),
+               (token_name, value, ' ', ' '),
+               ('NAME', 'b'),
+              ])
+
+def test_comparison_spaces_atomtrailers():
+
+    "a.b < c"
+    for token_name, value in comparison_tokens:
+        group([
+               ('NAME', 'a'),
+               ('DOT', '.'),
+               ('NAME', 'b'),
+               ('SPACE', ' '),
+               (token_name, value),
+               ('SPACE', ' '),
+               ('NAME', 'c'),
+              ],
+              [('NAME', 'a'),
+               ('DOT', '.'),
+               ('NAME', 'b'),
+               (token_name, value, ' ', ' '),
+               ('NAME', 'c'),
+              ])
+
+
+def test_chained_comparison():
+    "a<b<c"
+    for token_name, value in comparison_tokens:
+        group([
+               ('NAME', 'a'),
+               (token_name, value),
+               ('NAME', 'b'),
+               (token_name, value),
+               ('NAME', 'c'),
+              ],
+              [('NAME', 'a'),
+               (token_name, value),
+               ('NAME', 'b'),
+               (token_name, value),
+               ('NAME', 'c'),
+              ])

@@ -22,6 +22,15 @@ BOTH = (
     "AMPER",
     "CIRCUMFLEX",
     "VBAR",
+    "LESS",
+    "GREATER",
+    "EQUAL_EQUAL",
+    "LESS_EQUAL",
+    "GREATER_EQUAL",
+    "LESS_GREATER",
+    "NOT_EQUAL",
+    "IN",
+    "IS",
 )
 
 GROUP_SPACE_BEFORE = BOTH + (
