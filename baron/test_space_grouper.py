@@ -52,3 +52,21 @@ def test_import_basic_dot():
            ('NAME', 'pouet'),
            ('DOT', '.'),
            ('NAME', 'blob')])
+
+
+def test_import_more_dot():
+    "import   pouet.blob .plop"
+    group([('IMPORT', 'import'),
+           ('SPACE', '  '),
+           ('NAME', 'pouet'),
+           ('DOT', '.'),
+           ('NAME', 'blob'),
+           ('SPACE', ' '),
+           ('DOT', '.'),
+           ('NAME', 'plop')],
+          [('IMPORT', 'import', '', '  '),
+           ('NAME', 'pouet'),
+           ('DOT', '.'),
+           ('NAME', 'blob'),
+           ('DOT', '.', ' '),
+           ('NAME', 'plop')])
