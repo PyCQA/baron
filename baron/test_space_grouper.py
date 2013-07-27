@@ -697,3 +697,54 @@ def test_power_factor_tild_space():
            ('NAME', 'b')
           ])
 
+
+def test_power_trailer():
+    "a.b"
+    group([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+          ])
+
+
+def test_power_trailer_spaces():
+    "a .b"
+    "a.  b"
+    "a  .   b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('DOT', '.', ' '),
+           ('NAME', 'b'),
+          ])
+
+    group([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('SPACE', '  '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('DOT', '.', '', '  '),
+           ('NAME', 'b'),
+          ])
+
+    group([
+           ('NAME', 'a'),
+           ('SPACE', '   '),
+           ('DOT', '.'),
+           ('SPACE', '    '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('DOT', '.', '   ', '    '),
+           ('NAME', 'b'),
+          ])
