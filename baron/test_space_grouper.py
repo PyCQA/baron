@@ -1108,3 +1108,77 @@ def test_term_modulo_spaces_atomtrailers():
            ('NAME', 'c'),
           ])
 
+
+def test_term_floor_division():
+    "a//b"
+    group([
+           ('NAME', 'a'),
+           ('DOUBLE_SLASH', '//'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('DOUBLE_SLASH', '//'),
+           ('NAME', 'b'),
+          ])
+
+
+def test_term_floor_division_first_space():
+    "a //b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('DOUBLE_SLASH', '//'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('DOUBLE_SLASH', '//', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_term_floor_division_second_space():
+    "a// b"
+    group([
+           ('NAME', 'a'),
+           ('DOUBLE_SLASH', '//'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('DOUBLE_SLASH', '//', '', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_term_floor_division_spaces():
+    "a // b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('DOUBLE_SLASH', '//'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('DOUBLE_SLASH', '//', ' ', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_term_floor_division_spaces_atomtrailers():
+    "a.b // c"
+    group([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('SPACE', ' '),
+           ('DOUBLE_SLASH', '//'),
+           ('SPACE', ' '),
+           ('NAME', 'c'),
+          ],
+          [('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('DOUBLE_SLASH', '//', ' ', ' '),
+           ('NAME', 'c'),
+          ])
