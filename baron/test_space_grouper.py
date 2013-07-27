@@ -1915,3 +1915,29 @@ def test_chained_comparison():
                (token_name, value),
                ('NAME', 'c'),
               ])
+
+
+advanced_comparison_tokens = (
+    (('NOT', 'not', '', ' '), ('IN', 'in')),
+    (('IS', 'is', '', ' '), ('NOT', 'not')),
+)
+
+
+def test_advanced_comparison():
+    "a not in b"
+    "a is not b"
+    for (token_name, value, _, after_space), (token_name2, value2) in advanced_comparison_tokens:
+        group([
+               ('NAME', 'a'),
+               ('SPACE', ' '),
+               (token_name, value),
+               ('SPACE', after_space),
+               (token_name2, value2),
+               ('SPACE', ' '),
+               ('NAME', 'b'),
+              ],
+              [('NAME', 'a'),
+               (token_name, value, " ", after_space),
+               (token_name2, value2, "", " "),
+               ('NAME', 'b'),
+              ])

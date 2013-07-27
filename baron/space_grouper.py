@@ -31,6 +31,7 @@ BOTH = (
     "NOT_EQUAL",
     "IN",
     "IS",
+    "NOT",
 )
 
 GROUP_SPACE_BEFORE = BOTH + (
