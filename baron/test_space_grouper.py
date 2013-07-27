@@ -1941,3 +1941,30 @@ def test_advanced_comparison():
                (token_name2, value2, "", " "),
                ('NAME', 'b'),
               ])
+
+
+def test_not():
+    "not a"
+    group([
+           ('NOT', 'not'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+          ],
+          [('NOT', 'not', '', ' '),
+           ('NAME', 'a'),
+          ])
+
+
+def test_not_not():
+    "not not a"
+    group([
+           ('NOT', 'not'),
+           ('SPACE', ' '),
+           ('NOT', 'not'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+          ],
+          [('NOT', 'not', '', ' '),
+           ('NOT', 'not', '', ' '),
+           ('NAME', 'a'),
+          ])
