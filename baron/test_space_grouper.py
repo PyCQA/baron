@@ -2096,3 +2096,35 @@ def test_assignment_assignment():
            ('EQUAL', '=', ' ', ' '),
            ('NAME', 'c'),
           ])
+
+
+augmented_assignment_tokens = (
+    ('PLUS_EQUAL', '+='),
+    ('MINUS_EQUAL', '-='),
+    ('STAR_EQUAL', '*='),
+    ('SLASH_EQUAL', '/='),
+    ('PERCENT_EQUAL', '%='),
+    ('AMPER_EQUAL', '&='),
+    ('VBAR_EQUAL', '|='),
+    ('CIRCUMFLEX_EQUAL', '^='),
+    ('LEFT_SHIFT_EQUAL', '<<='),
+    ('RIGHT_SHIFT_EQUAL', '>>='),
+    ('DOUBLE_STAR_EQUAL', '**='),
+    ('DOUBLE_SLASH_EQUAL', '//='),
+)
+
+
+def test_augmented_assignment():
+    "a += b"
+    for token_name, value in augmented_assignment_tokens:
+        group([
+               ('NAME', 'a'),
+               ('SPACE', ' '),
+               (token_name, value),
+               ('SPACE', ' '),
+               ('NAME', 'b'),
+              ],
+              [('NAME', 'a'),
+               (token_name, value, ' ', ' '),
+               ('NAME', 'b'),
+              ])
