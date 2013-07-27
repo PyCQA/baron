@@ -2226,3 +2226,24 @@ def test_implicit_tuple_trailing_comma():
            ('NAME', 'b'),
            ('COMMA', ',', ' '),
           ])
+
+
+def test_return():
+    "return"
+    group([
+           ('RETURN', 'return'),
+          ],
+         [('RETURN', 'return'),
+          ])
+
+
+def test_return_a():
+    "return a"
+    group([
+           ('RETURN', 'return'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+          ],
+         [('RETURN', 'return', '', ' '),
+           ('NAME', 'a'),
+          ])

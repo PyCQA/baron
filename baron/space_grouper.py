@@ -59,6 +59,7 @@ GROUP_SPACE_BEFORE = BOTH + (
 GROUP_SPACE_AFTER = BOTH + (
     "FROM",
     "TILDE",
+    "RETURN",
 )
 
 def less_prioritary_than(a, b):
