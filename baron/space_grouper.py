@@ -1,5 +1,9 @@
 from utils import FlexibleIterator
 
+PRIORITY_ORDER = (
+    "IMPORT",
+)
+
 BOTH = (
     "AS",
     "IMPORT",
@@ -16,6 +20,15 @@ GROUP_SPACE_AFTER = BOTH + (
     "FROM",
     "TILDE",
 )
+
+def less_prioritary_than(a, b):
+    if b not in PRIORITY_ORDER:
+        return False
+
+    if a not in PRIORITY_ORDER:
+        return True
+
+    return PRIORITY_ORDER.index(a) < PRIORITY_ORDER.index(b)
 
 def group(sequence):
     return list(group_generator(sequence))
