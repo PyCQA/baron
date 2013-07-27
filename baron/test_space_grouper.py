@@ -1714,3 +1714,95 @@ def test_chained_left_xor_expr():
            ('CIRCUMFLEX', '^'),
            ('NAME', 'c'),
           ])
+
+
+def test_expr():
+    "a|b"
+    group([
+           ('NAME', 'a'),
+           ('VBAR', '|'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('VBAR', '|'),
+           ('NAME', 'b'),
+          ])
+
+
+def test_expr_first_space():
+    "a |b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('VBAR', '|'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('VBAR', '|', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_expr_second_space():
+    "a| b"
+    group([
+           ('NAME', 'a'),
+           ('VBAR', '|'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('VBAR', '|', '', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_expr_spaces():
+    "a | b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('VBAR', '|'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('VBAR', '|', ' ', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_expr_spaces_atomtrailers():
+    "a.b | c"
+    group([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('SPACE', ' '),
+           ('VBAR', '|'),
+           ('SPACE', ' '),
+           ('NAME', 'c'),
+          ],
+          [('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('VBAR', '|', ' ', ' '),
+           ('NAME', 'c'),
+          ])
+
+
+def test_chained_left_expr():
+    "a|b|c"
+    group([
+           ('NAME', 'a'),
+           ('VBAR', '|'),
+           ('NAME', 'b'),
+           ('VBAR', '|'),
+           ('NAME', 'c'),
+          ],
+          [('NAME', 'a'),
+           ('VBAR', '|'),
+           ('NAME', 'b'),
+           ('VBAR', '|'),
+           ('NAME', 'c'),
+          ])

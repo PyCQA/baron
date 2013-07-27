@@ -21,6 +21,7 @@ BOTH = (
     "RIGHT_SHIFT",
     "AMPER",
     "CIRCUMFLEX",
+    "VBAR",
 )
 
 GROUP_SPACE_BEFORE = BOTH + (
