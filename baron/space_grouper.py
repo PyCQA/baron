@@ -13,6 +13,7 @@ BOTH = (
     "LEFT_PARENTHESIS",
     "STAR",
     "SLASH",
+    "PERCENT",
 )
 
 GROUP_SPACE_BEFORE = BOTH + (

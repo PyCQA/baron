@@ -1033,3 +1033,78 @@ def test_term_div_spaces_atomtrailers():
            ('NAME', 'c'),
           ])
 
+
+def test_term_modulo():
+    "a%b"
+    group([
+           ('NAME', 'a'),
+           ('PERCENT', '%'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('PERCENT', '%'),
+           ('NAME', 'b'),
+          ])
+
+
+def test_term_modulo_first_space():
+    "a %b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('PERCENT', '%'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('PERCENT', '%', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_term_modulo_second_space():
+    "a% b"
+    group([
+           ('NAME', 'a'),
+           ('PERCENT', '%'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('PERCENT', '%', '', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_term_modulo_spaces():
+    "a % b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('PERCENT', '%'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('PERCENT', '%', ' ', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_term_modulo_spaces_atomtrailers():
+    "a.b % c"
+    group([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('SPACE', ' '),
+           ('PERCENT', '%'),
+           ('SPACE', ' '),
+           ('NAME', 'c'),
+          ],
+          [('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('PERCENT', '%', ' ', ' '),
+           ('NAME', 'c'),
+          ])
+
