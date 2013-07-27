@@ -1622,3 +1622,95 @@ def test_chained_left_and_expr():
            ('AMPER', '&'),
            ('NAME', 'c'),
           ])
+
+
+def test_xor_expr():
+    "a^b"
+    group([
+           ('NAME', 'a'),
+           ('CIRCUMFLEX', '^'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('CIRCUMFLEX', '^'),
+           ('NAME', 'b'),
+          ])
+
+
+def test_xor_expr_first_space():
+    "a ^b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('CIRCUMFLEX', '^'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('CIRCUMFLEX', '^', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_xor_expr_second_space():
+    "a^ b"
+    group([
+           ('NAME', 'a'),
+           ('CIRCUMFLEX', '^'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('CIRCUMFLEX', '^', '', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_xor_expr_spaces():
+    "a ^ b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('CIRCUMFLEX', '^'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('CIRCUMFLEX', '^', ' ', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_xor_expr_spaces_atomtrailers():
+    "a.b ^ c"
+    group([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('SPACE', ' '),
+           ('CIRCUMFLEX', '^'),
+           ('SPACE', ' '),
+           ('NAME', 'c'),
+          ],
+          [('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('CIRCUMFLEX', '^', ' ', ' '),
+           ('NAME', 'c'),
+          ])
+
+
+def test_chained_left_xor_expr():
+    "a^b^c"
+    group([
+           ('NAME', 'a'),
+           ('CIRCUMFLEX', '^'),
+           ('NAME', 'b'),
+           ('CIRCUMFLEX', '^'),
+           ('NAME', 'c'),
+          ],
+          [('NAME', 'a'),
+           ('CIRCUMFLEX', '^'),
+           ('NAME', 'b'),
+           ('CIRCUMFLEX', '^'),
+           ('NAME', 'c'),
+          ])

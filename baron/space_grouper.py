@@ -20,6 +20,7 @@ BOTH = (
     "LEFT_SHIFT",
     "RIGHT_SHIFT",
     "AMPER",
+    "CIRCUMFLEX",
 )
 
 GROUP_SPACE_BEFORE = BOTH + (
