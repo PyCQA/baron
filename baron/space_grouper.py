@@ -12,6 +12,7 @@ BOTH = (
     "LEFT_SQUARE_BRACKET",
     "LEFT_PARENTHESIS",
     "STAR",
+    "SLASH",
 )
 
 GROUP_SPACE_BEFORE = BOTH + (

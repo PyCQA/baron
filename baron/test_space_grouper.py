@@ -938,3 +938,98 @@ def test_term_mult_spaces():
            ('STAR', '*', ' ', ' '),
            ('NAME', 'b'),
           ])
+
+
+def test_term_mult_spaces_atomtrailers():
+    "a.b * c"
+    group([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('SPACE', ' '),
+           ('STAR', '*'),
+           ('SPACE', ' '),
+           ('NAME', 'c'),
+          ],
+          [('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('STAR', '*', ' ', ' '),
+           ('NAME', 'c'),
+          ])
+
+
+def test_term_div():
+    "a/b"
+    group([
+           ('NAME', 'a'),
+           ('SLASH', '/'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('SLASH', '/'),
+           ('NAME', 'b'),
+          ])
+
+
+def test_term_div_first_space():
+    "a /b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('SLASH', '/'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('SLASH', '/', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_term_div_second_space():
+    "a/ b"
+    group([
+           ('NAME', 'a'),
+           ('SLASH', '/'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('SLASH', '/', '', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_term_div_spaces():
+    "a / b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('SLASH', '/'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('SLASH', '/', ' ', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_term_div_spaces_atomtrailers():
+    "a.b / c"
+    group([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('SPACE', ' '),
+           ('SLASH', '/'),
+           ('SPACE', ' '),
+           ('NAME', 'c'),
+          ],
+          [('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('SLASH', '/', ' ', ' '),
+           ('NAME', 'c'),
+          ])
+
