@@ -19,6 +19,7 @@ BOTH = (
     "MINUS",
     "LEFT_SHIFT",
     "RIGHT_SHIFT",
+    "AMPER",
 )
 
 GROUP_SPACE_BEFORE = BOTH + (

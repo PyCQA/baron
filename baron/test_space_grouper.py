@@ -1530,3 +1530,95 @@ def test_chained_left_right_shift():
            ('RIGHT_SHIFT', '>>'),
            ('NAME', 'c'),
           ])
+
+
+def test_and_expr():
+    "a&b"
+    group([
+           ('NAME', 'a'),
+           ('AMPER', '&'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('AMPER', '&'),
+           ('NAME', 'b'),
+          ])
+
+
+def test_and_expr_first_space():
+    "a &b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('AMPER', '&'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('AMPER', '&', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_and_expr_second_space():
+    "a& b"
+    group([
+           ('NAME', 'a'),
+           ('AMPER', '&'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('AMPER', '&', '', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_and_expr_spaces():
+    "a & b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('AMPER', '&'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('AMPER', '&', ' ', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_and_expr_spaces_atomtrailers():
+    "a.b & c"
+    group([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('SPACE', ' '),
+           ('AMPER', '&'),
+           ('SPACE', ' '),
+           ('NAME', 'c'),
+          ],
+          [('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('AMPER', '&', ' ', ' '),
+           ('NAME', 'c'),
+          ])
+
+
+def test_chained_left_and_expr():
+    "a&b&c"
+    group([
+           ('NAME', 'a'),
+           ('AMPER', '&'),
+           ('NAME', 'b'),
+           ('AMPER', '&'),
+           ('NAME', 'c'),
+          ],
+          [('NAME', 'a'),
+           ('AMPER', '&'),
+           ('NAME', 'b'),
+           ('AMPER', '&'),
+           ('NAME', 'c'),
+          ])
