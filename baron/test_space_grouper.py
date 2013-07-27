@@ -854,3 +854,32 @@ def test_power_trailer_getitem_empty_with_space():
            ('LEFT_SQUARE_BRACKET', '[', ' ', ' '),
            ('RIGHT_SQUARE_BRACKET', ']'),
           ])
+
+
+def test_power_trailer_call_empty():
+    "a()"
+    group([
+           ('NAME', 'a'),
+           ('LEFT_PARENTHESIS', '('),
+           ('RIGHT_PARENTHESIS', ')'),
+          ],
+          [('NAME', 'a'),
+           ('LEFT_PARENTHESIS', '('),
+           ('RIGHT_PARENTHESIS', ')'),
+          ])
+
+
+def test_power_trailer_call_empty_with_space():
+    "a ( )"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('LEFT_PARENTHESIS', '('),
+           ('SPACE', ' '),
+           ('RIGHT_PARENTHESIS', ')'),
+          ],
+          [('NAME', 'a'),
+           ('LEFT_PARENTHESIS', '(', ' ', ' '),
+           ('RIGHT_PARENTHESIS', ')'),
+          ])
+
