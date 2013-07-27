@@ -30,3 +30,25 @@ def test_string():
           [('STRING', '"pouet pouet"')])
     group([('STRING', '"""pouet pouet"""')],
           [('STRING', '"""pouet pouet"""')])
+
+
+def test_simple_import():
+    "import   pouet"
+    group([('IMPORT', 'import'),
+           ('SPACE', '  '),
+           ('NAME', 'pouet')],
+          [('IMPORT', 'import', '', '  '),
+           ('NAME', 'pouet')])
+
+
+def test_import_basic_dot():
+    "import   pouet.blob"
+    group([('IMPORT', 'import'),
+           ('SPACE', '  '),
+           ('NAME', 'pouet'),
+           ('DOT', '.'),
+           ('NAME', 'blob')],
+          [('IMPORT', 'import', '', '  '),
+           ('NAME', 'pouet'),
+           ('DOT', '.'),
+           ('NAME', 'blob')])
