@@ -883,3 +883,58 @@ def test_power_trailer_call_empty_with_space():
            ('RIGHT_PARENTHESIS', ')'),
           ])
 
+
+def test_term_mult():
+    "a*b"
+    group([
+           ('NAME', 'a'),
+           ('STAR', '*'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('STAR', '*'),
+           ('NAME', 'b'),
+          ])
+
+
+def test_term_mult_first_space():
+    "a *b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('STAR', '*'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('STAR', '*', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_term_mult_second_space():
+    "a* b"
+    group([
+           ('NAME', 'a'),
+           ('STAR', '*'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('STAR', '*', '', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_term_mult_spaces():
+    "a * b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('STAR', '*'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('STAR', '*', ' ', ' '),
+           ('NAME', 'b'),
+          ])
