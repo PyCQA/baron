@@ -2501,3 +2501,120 @@ def test_global_two():
            ('COMMA', ',', ' ', '  '),
            ('NAME', 'c'),
           ])
+
+
+def test_print():
+    "print"
+    group([
+           ('PRINT', 'print', '', ''),
+          ],
+          [('PRINT', 'print', '', ''),
+          ])
+
+
+def test_print_a():
+    "print a"
+    group([
+           ('PRINT', 'print'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+          ],
+          [('PRINT', 'print', '', ' '),
+           ('NAME', 'a'),
+          ])
+
+
+def test_print_a_b():
+    "print a, b"
+    group([
+           ('PRINT', 'print'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ','),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('PRINT', 'print', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_print_a_b_comma():
+    "print a, b,"
+    group([
+           ('PRINT', 'print'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ','),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', '', ''),
+          ],
+          [('PRINT', 'print', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', '', ''),
+          ])
+
+
+def test_print_redirect():
+    "print >> a"
+    group([
+           ('PRINT', 'print'),
+           ('SPACE', ' '),
+           ('RIGHT_SHIFT', '>>'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+          ],
+          [('PRINT', 'print', '', ' '),
+           ('RIGHT_SHIFT', '>>', '', ' '),
+           ('NAME', 'a'),
+          ])
+
+
+def test_print_redirect_ab():
+    "print >> a , b"
+    group([
+           ('PRINT', 'print'),
+           ('SPACE', ' '),
+           ('RIGHT_SHIFT', '>>'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('COMMA', ','),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('PRINT', 'print', '', ' '),
+           ('RIGHT_SHIFT', '>>', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', ' ', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_print_redirect_ab_comma():
+    "print >> a , b ,"
+    group([
+           ('PRINT', 'print'),
+           ('SPACE', ' '),
+           ('RIGHT_SHIFT', '>>'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('COMMA', ','),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+           ('SPACE', ' '),
+           ('COMMA', ','),
+          ],
+          [('PRINT', 'print', '', ' '),
+           ('RIGHT_SHIFT', '>>', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', ' ', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', ' '),
+          ])

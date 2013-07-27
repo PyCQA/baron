@@ -66,6 +66,7 @@ GROUP_SPACE_AFTER = BOTH + (
     "RAISE",
     "EXEC",
     "GLOBAL",
+    "PRINT",
 )
 
 def less_prioritary_than(a, b):
