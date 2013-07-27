@@ -2128,3 +2128,101 @@ def test_augmented_assignment():
                (token_name, value, ' ', ' '),
                ('NAME', 'b'),
               ])
+
+
+def test_expr_comma_list():
+    "a or b,c+d"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('OR', 'or'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ','),
+           ('NAME', 'c'),
+           ('PLUS', '+'),
+           ('NAME', 'd'),
+          ],
+          [('NAME', 'a'),
+           ('OR', 'or', ' ', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ','),
+           ('NAME', 'c'),
+           ('PLUS', '+'),
+           ('NAME', 'd'),
+          ])
+
+def test_expr_comma_list_3_items():
+    "a or b,c+d,e"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('OR', 'or'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ','),
+           ('NAME', 'c'),
+           ('PLUS', '+'),
+           ('NAME', 'd'),
+           ('COMMA', ','),
+           ('NAME', 'e'),
+          ],
+          [('NAME', 'a'),
+           ('OR', 'or', ' ', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ','),
+           ('NAME', 'c'),
+           ('PLUS', '+'),
+           ('NAME', 'd'),
+           ('COMMA', ','),
+           ('NAME', 'e'),
+          ])
+
+
+def test_implicit_tuple_space():
+    "a, b , c"
+    group([
+           ('NAME', 'a'),
+           ('COMMA', ','),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+           ('SPACE', ' '),
+           ('COMMA', ','),
+           ('SPACE', ' '),
+           ('NAME', 'c'),
+          ],
+          [('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', ' ', ' '),
+           ('NAME', 'c'),
+          ])
+
+
+def test_implicit_tuple_one_item():
+    "a ,"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('COMMA', ','),
+          ],
+          [('NAME', 'a'),
+           ('COMMA', ',', ' '),
+          ])
+
+
+def test_implicit_tuple_trailing_comma():
+    "a, b ,"
+    group([
+           ('NAME', 'a'),
+           ('COMMA', ','),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+           ('SPACE', ' '),
+           ('COMMA', ','),
+          ],
+          [('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', ' '),
+          ])

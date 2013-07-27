@@ -49,6 +49,7 @@ BOTH = (
     "RIGHT_SHIFT_EQUAL",
     "DOUBLE_STAR_EQUAL",
     "DOUBLE_SLASH_EQUAL",
+    "COMMA",
 )
 
 GROUP_SPACE_BEFORE = BOTH + (
@@ -56,7 +57,6 @@ GROUP_SPACE_BEFORE = BOTH + (
 )
 
 GROUP_SPACE_AFTER = BOTH + (
-    "COMMA",
     "FROM",
     "TILDE",
 )
