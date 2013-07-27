@@ -532,32 +532,38 @@ from grammator_imports import include_imports
 
 
 pg = ParserGenerator(tuple(map(lambda x: x.upper(), KEYWORDS)) + zip(*TOKENS)[1] + ("ENDMARKER",), cache_id="baron")
-        #precedence=[("left", ['PLUS', 'MINUS'])], cache_id="baron")
+        # precedence=[("left", ['PLUS', 'MINUS'])], cache_id="baron")
 
 
 @pg.production("main : statements")
 def main((statements,)):
     return filter(None, statements) if statements else []
 
+
 @pg.production("statements : statements statement")
 def statements_statement((statements, statement)):
     return statements + statement
+
 
 @pg.production("statements : statement")
 def statement((statement,)):
     return statement
 
+
 @pg.production("statement : ENDMARKER")
 def end((endmarker)):
     return [None]
+
 
 @pg.production("statement : simple_stmt")
 def statement_simple_statement((simple_stmt,)):
     return [simple_stmt]
 
+
 @pg.production("simple_stmt : small_stmt ENDL")
 def simple_stmt((small_stmt, endl)):
     return small_stmt
+
 
 @pg.production("small_stmt : flow_stmt")
 @pg.production("small_stmt : del_stmt")
@@ -571,6 +577,7 @@ def separator((statement,)):
 
 include_imports(pg)
 
+
 @pg.production("print_stmt : PRINT")
 def print_stmt_empty((print_,)):
     return {
@@ -580,6 +587,7 @@ def print_stmt_empty((print_,)):
         "destination_space": "",
         "space": "",
     }
+
 
 @pg.production("print_stmt : PRINT testlist")
 def print_stmt((print_, testlist)):
@@ -591,6 +599,7 @@ def print_stmt((print_, testlist)):
         "space": print_.after_space,
     }
 
+
 @pg.production("print_stmt : PRINT RIGHT_SHIFT test")
 def print_stmt_redirect((print_, right_shift, test)):
     return {
@@ -600,6 +609,7 @@ def print_stmt_redirect((print_, right_shift, test)):
         "destination_space": right_shift.after_space,
         "space": print_.after_space,
     }
+
 
 @pg.production("print_stmt : PRINT RIGHT_SHIFT test COMMA testlist")
 def print_stmt_redirect_testlist((print_, right_shift, test, comma, testlist)):
@@ -619,6 +629,7 @@ def print_stmt_redirect_testlist((print_, right_shift, test, comma, testlist)):
         "space": print_.after_space,
     }
 
+
 @pg.production("flow_stmt : return_stmt")
 @pg.production("flow_stmt : break_stmt")
 @pg.production("flow_stmt : continue_stmt")
@@ -626,6 +637,7 @@ def print_stmt_redirect_testlist((print_, right_shift, test, comma, testlist)):
 @pg.production("yield_stmt : yield_expr")
 def flow((flow_stmt,)):
     return flow_stmt
+
 
 @pg.production("return_stmt : RETURN")
 @pg.production("yield_expr : YIELD")
@@ -636,11 +648,13 @@ def return_empty((token,)):
         "space": ""
     }
 
+
 @pg.production("break_stmt : BREAK")
 @pg.production("continue_stmt : CONTINUE")
 @pg.production("pass_stmt : PASS")
 def break_stmt((token,)):
     return {"type": token.name.lower()}
+
 
 @pg.production("raise_stmt : RAISE")
 def raise_stmt_empty((raise_,)):
@@ -656,6 +670,7 @@ def raise_stmt_empty((raise_,)):
         "fith_space": ""
     }
 
+
 @pg.production("raise_stmt : RAISE test")
 def raise_stmt((raise_, test)):
     return {
@@ -669,6 +684,7 @@ def raise_stmt((raise_, test)):
         "forth_space": "",
         "fith_space": ""
     }
+
 
 @pg.production("raise_stmt : RAISE test COMMA test")
 def raise_stmt_instance((raise_, test, comma, test2)):
@@ -684,6 +700,7 @@ def raise_stmt_instance((raise_, test, comma, test2)):
         "fith_space": ""
     }
 
+
 @pg.production("raise_stmt : RAISE test COMMA test COMMA test")
 def raise_stmt_instance_traceback((raise_, test, comma, test2, comma2, test3)):
     return {
@@ -697,6 +714,7 @@ def raise_stmt_instance_traceback((raise_, test, comma, test2, comma2, test3)):
         "forth_space": comma2.before_space,
         "fith_space": comma2.after_space
     }
+
 
 @pg.production("assert_stmt : EXEC expr")
 def exec_stmt((exec_, expr)):
@@ -712,6 +730,7 @@ def exec_stmt((exec_, expr)):
         "fith_space": ""
     }
 
+
 @pg.production("assert_stmt : EXEC expr IN test")
 def exec_stmt_in((exec_, expr, in_, test)):
     return {
@@ -725,6 +744,7 @@ def exec_stmt_in((exec_, expr, in_, test)):
         "forth_space": "",
         "fith_space": ""
     }
+
 
 @pg.production("assert_stmt : EXEC expr IN test COMMA test")
 def exec_stmt_in_comma((exec_, expr, in_, test, comma, test2)):
@@ -740,6 +760,7 @@ def exec_stmt_in_comma((exec_, expr, in_, test, comma, test2)):
         "fith_space": comma.after_space
     }
 
+
 @pg.production("assert_stmt : ASSERT test")
 def assert_stmt((assert_, test)):
     return {
@@ -750,6 +771,7 @@ def assert_stmt((assert_, test)):
         "second_space": "",
         "third_space": ""
     }
+
 
 @pg.production("assert_stmt : ASSERT test COMMA test")
 def assert_stmt_message((assert_, test, comma, test2)):
@@ -762,6 +784,7 @@ def assert_stmt_message((assert_, test, comma, test2)):
         "third_space": comma.after_space
     }
 
+
 @pg.production("global_stmt : GLOBAL names")
 def global_stmt((global_, names)):
     return {
@@ -770,9 +793,11 @@ def global_stmt((global_, names)):
         "value": names,
     }
 
+
 @pg.production("names : NAME")
 def names_name((name,)):
     return [create_node_from_token(name)]
+
 
 @pg.production("names : names COMMA NAME")
 def names_names_name((names, comma, name,)):
@@ -785,6 +810,7 @@ def names_names_name((names, comma, name,)):
     to_return += [create_node_from_token(name)]
     return to_return
 
+
 @pg.production("return_stmt : RETURN testlist")
 @pg.production("yield_expr : YIELD testlist")
 @pg.production("del_stmt : DEL exprlist")
@@ -794,6 +820,7 @@ def return_testlist((token, testlist)):
         "value": testlist,
         "space": token.after_space,
     }
+
 
 @pg.production("small_stmt : expr_stmt")
 @pg.production("expr_stmt : testlist")
@@ -815,10 +842,12 @@ def return_testlist((token, testlist)):
 def term_factor((level,)):
     return level
 
+
 @pg.production("testlist : test testlist_part")
 @pg.production("exprlist : expr exprlist_part")
 def implicit_tuple((test, testlist_part)):
     return tuple_([test] + testlist_part, with_parenthesis=False)
+
 
 @pg.production("testlist : test COMMA")
 @pg.production("exprlist : expr COMMA")
@@ -828,6 +857,7 @@ def implicit_tuple_alone((test, comma)):
         tuple_content += [{"type": "space", "value": comma.before_space}]
     tuple_content += [create_node_from_token(comma)]
     return tuple_(tuple_content, with_parenthesis=False)
+
 
 @pg.production("testlist_part : COMMA test COMMA?")
 @pg.production("exprlist_part : COMMA expr COMMA?")
@@ -845,6 +875,7 @@ def testlist_part((comma, test, comma2)):
         to_return += [create_node_from_token(comma2)]
     return to_return
 
+
 @pg.production("testlist_part : COMMA test testlist_part")
 @pg.production("exprlist_part : COMMA expr exprlist_part")
 def testlist_part_next((comma, test, testlist_part)):
@@ -856,6 +887,7 @@ def testlist_part_next((comma, test, testlist_part)):
         to_return += [{"type": "space", "value": comma.after_space}]
     to_return += [test] + testlist_part
     return to_return
+
 
 @pg.production("expr_stmt : testlist PLUS_EQUAL testlist")
 @pg.production("expr_stmt : testlist MINUS_EQUAL testlist")
@@ -872,36 +904,41 @@ def testlist_part_next((comma, test, testlist_part)):
 def augmented_assignment_node((target, operator, value)):
     return augmented_assignment(operator.value[:-1], value, target, operator.before_space, operator.after_space)
 
+
 @pg.production("expr_stmt : testlist EQUAL expr_stmt")
 def assignment_node((target, equal, value)):
     return assignment(value, target, equal.before_space, equal.after_space)
 
+
 @pg.production("test : or_test IF or_test ELSE test")
 def ternary_operator_node((first, if_, second, else_, third)):
     return ternary_operator(
-                            second,
-                            first=first,
-                            second=third,
-                            first_space=if_.before_space,
-                            second_space=if_.after_space,
-                            third_space=else_.before_space,
-                            forth_space=else_.after_space,
+        second,
+        first=first,
+        second=third,
+        first_space=if_.before_space,
+        second_space=if_.after_space,
+        third_space=else_.before_space,
+        forth_space=else_.after_space,
     )
+
 
 @pg.production("or_test : not_test OR or_test")
 @pg.production("and_test : not_test AND and_test")
 def and_node((first, operator, second)):
     return boolean_operator(
-                            operator.value,
-                            first=first,
-                            second=second,
-                            first_space=operator.before_space,
-                            second_space=operator.after_space,
-                           )
+        operator.value,
+        first=first,
+        second=second,
+        first_space=operator.before_space,
+        second_space=operator.after_space,
+    )
+
 
 @pg.production("not_test : NOT not_test")
 def not_node((not_, comparison)):
     return unitary_operator('not', target=comparison, space=not_.after_space)
+
 
 @pg.production("comparison : expr LESS comparison")
 @pg.production("comparison : expr GREATER comparison")
@@ -918,7 +955,8 @@ def comparison_node((expr, comparison_operator, comparison_)):
                       second=comparison_,
                       first_space=comparison_operator.before_space,
                       second_space=comparison_operator.after_space
-                     )
+                      )
+
 
 @pg.production("comparison : expr IS NOT comparison")
 @pg.production("comparison : expr NOT IN comparison")
@@ -929,7 +967,8 @@ def comparison_advanced_node((expr, comparison_operator, comparison_operator2, c
                       first_space=comparison_operator.before_space,
                       second_space=comparison_operator2.after_space,
                       middle_space=comparison_operator.after_space,
-                     )
+                      )
+
 
 @pg.production("expr : xor_expr VBAR expr")
 @pg.production("xor_expr : and_expr CIRCUMFLEX xor_expr")
@@ -946,12 +985,13 @@ def comparison_advanced_node((expr, comparison_operator, comparison_operator2, c
 @pg.production("power : atom DOUBLE_STAR power")
 def binary_operator_node((first, operator, second)):
     return binary_operator(
-                           operator.value,
-                           first,
-                           second,
-                           first_space=operator.before_space,
-                           second_space=operator.after_space
-                          )
+        operator.value,
+        first,
+        second,
+        first_space=operator.before_space,
+        second_space=operator.after_space
+    )
+
 
 @pg.production("factor : PLUS factor")
 @pg.production("factor : MINUS factor")
@@ -959,39 +999,46 @@ def binary_operator_node((first, operator, second)):
 def factor_unitary_operator_space((operator, factor,)):
     return unitary_operator(operator.value, factor, space=operator.after_space)
 
+
 @pg.production("power : atomtrailers DOUBLE_STAR factor")
 @pg.production("power : atomtrailers DOUBLE_STAR power")
 def power_atomtrailer_power((atomtrailers, double_star, factor)):
     return binary_operator(
-                           double_star.value,
-                           {
-                            "type": "atomtrailers",
-                            "value": atomtrailers,
-                           },
-                           factor,
-                           first_space=double_star.before_space,
-                           second_space=double_star.after_space
-                          )
+        double_star.value,
+        {
+            "type": "atomtrailers",
+            "value": atomtrailers,
+        },
+        factor,
+        first_space=double_star.before_space,
+        second_space=double_star.after_space
+    )
+
 
 @pg.production("power : atomtrailers")
 def power_atomtrailers((atomtrailers,)):
     return {"type": "atomtrailers", "value": atomtrailers}
 
+
 @pg.production("atomtrailers : atom")
 def atomtrailers_atom((atom,)):
     return [atom]
+
 
 @pg.production("atomtrailers : atom trailers")
 def atomtrailer((atom, trailers)):
     return [atom] + trailers
 
+
 @pg.production("trailers : trailer")
 def trailers((trailer,)):
     return trailer
 
+
 @pg.production("trailers : trailers trailer")
 def trailers_trailer((trailers, trailer)):
     return trailers + trailer
+
 
 @pg.production("trailer : DOT NAME")
 def trailer((dot, name,)):
@@ -1004,6 +1051,7 @@ def trailer((dot, name,)):
     to_return += [create_node_from_token(name)]
     return to_return
 
+
 @pg.production("trailer : LEFT_SQUARE_BRACKET RIGHT_SQUARE_BRACKET")
 @pg.production("trailer : LEFT_PARENTHESIS RIGHT_PARENTHESIS")
 def trailer_getitem((left, right)):
@@ -1013,13 +1061,16 @@ def trailer_getitem((left, right)):
     to_return += [{"type": "getitem" if left.value == "[" else "call", "value": None, "first_space": left.after_space, "second_space": ""}]
     return to_return
 
+
 @pg.production("atom : INT")
 def int((int_,)):
     return create_node_from_token(int_, section="number")
 
+
 @pg.production("atom : NAME")
 def name((name,)):
     return create_node_from_token(name)
+
 
 @pg.production("atom : STRING")
 def string((string_,)):
@@ -1027,11 +1078,13 @@ def string((string_,)):
 
 parser = pg.build()
 
+
 def fake_lexer(sequence):
     for i in tokenize(sequence):
         if i is None:
             yield None
         yield Token(*i)
+
 
 def parse(sequence):
     return parser.parse(fake_lexer(sequence))
@@ -1040,6 +1093,7 @@ if __name__ == '__main__':
     import json
     from grouper import group
     from spliter import split
+
     def pouet(sequence):
         return tokenize(group(split(sequence)))
 
@@ -1052,6 +1106,6 @@ if __name__ == '__main__':
                 yield None
             yield Token(*i)
 
-    #print pouet('1')
+    # print pouet('1')
     print json.dumps(parse(pouetpouet('a and b and c')), indent=4, sort_keys=True)
-    #print json.dumps(parser.parse(pouetpouetpouet([('ENDMARKER', ''), None])), indent=4)
+    # print json.dumps(parser.parse(pouetpouetpouet([('ENDMARKER', ''), None])), indent=4)
