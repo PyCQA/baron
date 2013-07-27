@@ -2449,3 +2449,55 @@ def test_exec_in_c():
            ('COMMA', ',', '', ' '),
            ('NAME', 'c'),
           ])
+
+
+def test_global():
+    "global a"
+    group([
+           ('GLOBAL', 'global'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+          ],
+          [('GLOBAL', 'global', '', ' '),
+           ('NAME', 'a'),
+          ])
+
+
+def test_global_one():
+    "global a, b"
+    group([
+           ('GLOBAL', 'global'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ','),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('GLOBAL', 'global', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_global_two():
+    "global a, b ,  c"
+    group([
+           ('GLOBAL', 'global'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ','),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+           ('SPACE', ' '),
+           ('COMMA', ','),
+           ('SPACE', '  '),
+           ('NAME', 'c'),
+          ],
+          [('GLOBAL', 'global', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', ' ', '  '),
+           ('NAME', 'c'),
+          ])
