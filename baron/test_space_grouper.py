@@ -2247,3 +2247,25 @@ def test_return_a():
          [('RETURN', 'return', '', ' '),
            ('NAME', 'a'),
           ])
+
+
+def test_yield():
+    "yield"
+    group([
+           ('YIELD', 'yield'),
+          ],
+         [('YIELD', 'yield'),
+          ])
+
+
+def test_yield_a():
+    "yield a"
+    group([
+           ('YIELD', 'yield'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+          ],
+         [('YIELD', 'yield', '', ' '),
+           ('NAME', 'a'),
+          ])
+
