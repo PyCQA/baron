@@ -1544,6 +1544,7 @@ def test_arith_expr_left_shift_spaces_atomtrailers():
                            first_space=" ",
                            second_space=" ",
                           )])
+
 def test_arith_expr_right_shift():
     "a>>b"
     parse([

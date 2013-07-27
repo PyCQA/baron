@@ -1283,3 +1283,158 @@ def test_arith_expr_add_spaces_atomtrailers():
            ('PLUS', '+', ' ', ' '),
            ('NAME', 'c'),
           ])
+
+
+def test_arith_expr_substract():
+    "a-b"
+    group([
+           ('NAME', 'a'),
+           ('MINUS', '-'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('MINUS', '-'),
+           ('NAME', 'b'),
+          ])
+
+
+
+def test_arith_expr_substract_first_space():
+    "a -b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('MINUS', '-'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('MINUS', '-', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+
+def test_arith_expr_substract_second_space():
+    "a- b"
+    group([
+           ('NAME', 'a'),
+           ('MINUS', '-'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('MINUS', '-', '', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+
+def test_arith_expr_substract_spaces():
+    "a - b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('MINUS', '-'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('MINUS', '-', ' ', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+
+def test_arith_expr_substract_spaces_atomtrailers():
+    "a.b - c"
+    group([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('SPACE', ' '),
+           ('MINUS', '-'),
+           ('SPACE', ' '),
+           ('NAME', 'c'),
+          ],
+          [('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('MINUS', '-', ' ', ' '),
+           ('NAME', 'c'),
+          ])
+
+
+def test_chained_add_substract():
+    "a+b-c"
+    group([
+           ('NAME', 'a'),
+           ('PLUS', '+'),
+           ('NAME', 'b'),
+           ('MINUS', '-'),
+           ('NAME', 'c'),
+          ],
+          [('NAME', 'a'),
+           ('PLUS', '+'),
+           ('NAME', 'b'),
+           ('MINUS', '-'),
+           ('NAME', 'c'),
+          ])
+
+
+def test_arith_expr_left_shift():
+    "a<<b"
+    group([
+           ('NAME', 'a'),
+           ('LEFT_SHIFT', '<<'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('LEFT_SHIFT', '<<'),
+           ('NAME', 'b'),
+          ])
+
+
+
+def test_arith_expr_left_shift_first_space():
+    "a <<b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('LEFT_SHIFT', '<<'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('LEFT_SHIFT', '<<', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+
+def test_arith_expr_left_shift_second_space():
+    "a<< b"
+    group([
+           ('NAME', 'a'),
+           ('LEFT_SHIFT', '<<'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('LEFT_SHIFT', '<<', '', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+
+def test_arith_expr_left_shift_spaces():
+    "a << b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('LEFT_SHIFT', '<<'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('LEFT_SHIFT', '<<', ' ', ' '),
+           ('NAME', 'b'),
+          ])
