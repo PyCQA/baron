@@ -1,8 +1,10 @@
+from itertools import izip_longest
 from space_grouper import group as _group
 
 
 def group(inp, out):
-    assert _group(inp) == out
+    for i, j in izip_longest(_group(inp), out):
+        assert i == j
 
 
 def test_empty():
