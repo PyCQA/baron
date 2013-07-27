@@ -1968,3 +1968,39 @@ def test_not_not():
            ('NOT', 'not', '', ' '),
            ('NAME', 'a'),
           ])
+
+
+def test_and():
+    "a and b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('AND', 'and'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('AND', 'and', ' ', ' '),
+           ('NAME', 'b'),
+          ])
+
+def test_and_and():
+    "a and b and c"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('AND', 'and'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+           ('SPACE', ' '),
+           ('AND', 'and'),
+           ('SPACE', ' '),
+           ('NAME', 'c'),
+          ],
+          [('NAME', 'a'),
+           ('AND', 'and', ' ', ' '),
+           ('NAME', 'b'),
+           ('AND', 'and', ' ', ' '),
+           ('NAME', 'c'),
+          ])
+

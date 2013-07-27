@@ -32,6 +32,7 @@ BOTH = (
     "IN",
     "IS",
     "NOT",
+    "AND",
 )
 
 GROUP_SPACE_BEFORE = BOTH + (
