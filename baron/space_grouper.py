@@ -14,6 +14,7 @@ GROUP_SPACE_BEFORE = BOTH + (
 GROUP_SPACE_AFTER = BOTH + (
     "COMMA",
     "FROM",
+    "TILDE",
 )
 
 def group(sequence):

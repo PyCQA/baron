@@ -517,3 +517,181 @@ def test_second_space_power():
           [('NAME', 'a'),
            ('DOUBLE_STAR', '**', '', ' '),
            ('NAME', 'b')])
+
+
+def test_spaces_power():
+    "a **  b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('DOUBLE_STAR', '**'),
+           ('SPACE', '  '),
+           ('NAME', 'b')
+          ],
+          [('NAME', 'a'),
+           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('NAME', 'b')
+          ])
+
+
+def test_power_power():
+    "a **  b   **    c"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('DOUBLE_STAR', '**'),
+           ('SPACE', '  '),
+           ('NAME', 'b'),
+           ('SPACE', '   '),
+           ('DOUBLE_STAR', '**'),
+           ('SPACE', '    '),
+           ('NAME', 'c')
+          ],
+          [('NAME', 'a'),
+           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('NAME', 'b'),
+           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('NAME', 'c')
+          ])
+
+
+def test_power_power_spaces():
+    "a**  b   **    c"
+    group([
+           ('NAME', 'a'),
+           ('DOUBLE_STAR', '**'),
+           ('SPACE', '  '),
+           ('NAME', 'b'),
+           ('SPACE', '   '),
+           ('DOUBLE_STAR', '**'),
+           ('SPACE', '    '),
+           ('NAME', 'c')
+          ],
+          [('NAME', 'a'),
+           ('DOUBLE_STAR', '**', '', '  '),
+           ('NAME', 'b'),
+           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('NAME', 'c')
+          ])
+    "a **b   **    c"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('DOUBLE_STAR', '**'),
+           ('NAME', 'b'),
+           ('SPACE', '   '),
+           ('DOUBLE_STAR', '**'),
+           ('SPACE', '    '),
+           ('NAME', 'c')
+          ],
+          [('NAME', 'a'),
+           ('DOUBLE_STAR', '**', ' '),
+           ('NAME', 'b'),
+           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('NAME', 'c')
+          ])
+    "a**b**c"
+    group([
+           ('NAME', 'a'),
+           ('DOUBLE_STAR', '**'),
+           ('NAME', 'b'),
+           ('DOUBLE_STAR', '**'),
+           ('NAME', 'c')
+          ],
+          [('NAME', 'a'),
+           ('DOUBLE_STAR', '**'),
+           ('NAME', 'b'),
+           ('DOUBLE_STAR', '**'),
+           ('NAME', 'c')
+          ])
+
+
+def test_power_factor():
+    "a **  +b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('DOUBLE_STAR', '**'),
+           ('SPACE', '  '),
+           ('PLUS', '+'),
+           ('NAME', 'b')
+          ],
+          [('NAME', 'a'),
+           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('PLUS', '+'),
+           ('NAME', 'b')
+          ])
+
+
+def test_power_factor_minus():
+    "a **  -b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('DOUBLE_STAR', '**'),
+           ('SPACE', '  '),
+           ('MINUS', '-'),
+           ('NAME', 'b')
+          ],
+          [('NAME', 'a'),
+           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('MINUS', '-'),
+           ('NAME', 'b')
+          ])
+
+
+def test_power_factor_tild():
+    "a **  ~b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('DOUBLE_STAR', '**'),
+           ('SPACE', '  '),
+           ('TILDE', '~'),
+           ('NAME', 'b')
+          ],
+          [('NAME', 'a'),
+           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('TILDE', '~'),
+           ('NAME', 'b')
+          ])
+
+
+def test_power_operator_madness():
+    "a **  ~+-b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('DOUBLE_STAR', '**'),
+           ('SPACE', '  '),
+           ('TILDE', '~'),
+           ('PLUS', '+'),
+           ('MINUS', '-'),
+           ('NAME', 'b')
+          ],
+          [('NAME', 'a'),
+           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('TILDE', '~'),
+           ('PLUS', '+'),
+           ('MINUS', '-'),
+           ('NAME', 'b')
+          ])
+
+
+def test_power_factor_tild_space():
+    "a **  ~ b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('DOUBLE_STAR', '**'),
+           ('SPACE', '  '),
+           ('TILDE', '~'),
+           ('SPACE', ' '),
+           ('NAME', 'b')
+          ],
+          [('NAME', 'a'),
+           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('TILDE', '~', '', ' '),
+           ('NAME', 'b')
+          ])
+
