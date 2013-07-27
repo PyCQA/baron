@@ -2269,3 +2269,14 @@ def test_yield_a():
            ('NAME', 'a'),
           ])
 
+
+def test_del():
+    "del a"
+    group([
+           ('DEL', 'del'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+          ],
+          [('DEL', 'del', '', ' '),
+           ('NAME', 'a'),
+          ])
