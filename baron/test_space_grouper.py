@@ -2280,3 +2280,59 @@ def test_del():
           [('DEL', 'del', '', ' '),
            ('NAME', 'a'),
           ])
+
+
+def test_break():
+    "break"
+    group([
+           ('BREAK', 'break'),
+          ],
+          [('BREAK', 'break'),
+          ])
+
+
+def test_continue():
+    "continue"
+    group([
+           ('CONTINUE', 'continue'),
+          ],
+          [('CONTINUE', 'continue'),
+          ])
+
+
+def test_pass():
+    "pass"
+    group([
+           ('PASS', 'pass'),
+          ],
+          [('PASS', 'pass'),
+          ])
+
+
+def test_assert():
+    "assert a"
+    group([
+           ('ASSERT', 'assert'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+          ],
+          [('ASSERT', 'assert', '', ' '),
+           ('NAME', 'a'),
+          ])
+
+
+def test_assert_message():
+    "assert a , b"
+    group([
+           ('ASSERT', 'assert', '', ' '),
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('COMMA', ','),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('ASSERT', 'assert', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', ' ', ' '),
+           ('NAME', 'b'),
+          ])
