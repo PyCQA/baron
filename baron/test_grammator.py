@@ -2310,7 +2310,7 @@ def test_assignment():
                      )])
 
 def test_assignment_assignment():
-    "a = b"
+    "a = b = c"
     parse([
            ('NAME', 'a'),
            ('EQUAL', '=', ' ', ' '),
