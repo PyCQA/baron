@@ -85,3 +85,17 @@ def test_import_as():
            ('NAME', 'pouet'),
            ('AS', 'as', ' ', '  '),
            ('NAME', 'b')])
+
+
+def test_import_a_b():
+    "import a, b"
+    group([('IMPORT', 'import'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ','),
+           ('SPACE', ' '),
+           ('NAME', 'b')],
+          [('IMPORT', 'import', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b')])
