@@ -1182,3 +1182,104 @@ def test_term_floor_division_spaces_atomtrailers():
            ('DOUBLE_SLASH', '//', ' ', ' '),
            ('NAME', 'c'),
           ])
+
+
+def test_combine_div_modulo_mult():
+    "a/b%c*d"
+    group([
+           ('NAME', 'a'),
+           ('SLASH', '/'),
+           ('NAME', 'b'),
+           ('PERCENT', '%'),
+           ('NAME', 'c'),
+           ('STAR', '*'),
+           ('NAME', 'd'),
+          ],
+          [('NAME', 'a'),
+           ('SLASH', '/'),
+           ('NAME', 'b'),
+           ('PERCENT', '%'),
+           ('NAME', 'c'),
+           ('STAR', '*'),
+           ('NAME', 'd'),
+          ])
+
+
+
+def test_arith_expr_plus():
+    "a+b"
+    group([
+           ('NAME', 'a'),
+           ('PLUS', '+'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('PLUS', '+'),
+           ('NAME', 'b'),
+          ])
+
+
+
+def test_arith_expr_add_first_space():
+    "a +b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('PLUS', '+'),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('PLUS', '+', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+
+def test_arith_expr_add_second_space():
+    "a+ b"
+    group([
+           ('NAME', 'a'),
+           ('PLUS', '+'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('PLUS', '+', '', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+
+def test_arith_expr_add_spaces():
+    "a + b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('PLUS', '+'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('PLUS', '+', ' ', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+
+def test_arith_expr_add_spaces_atomtrailers():
+    "a.b + c"
+    group([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('SPACE', ' '),
+           ('PLUS', '+'),
+           ('SPACE', ' '),
+           ('NAME', 'c'),
+          ],
+          [('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('PLUS', '+', ' ', ' '),
+           ('NAME', 'c'),
+          ])

@@ -15,6 +15,7 @@ BOTH = (
     "SLASH",
     "PERCENT",
     "DOUBLE_SLASH",
+    "PLUS",
 )
 
 GROUP_SPACE_BEFORE = BOTH + (
