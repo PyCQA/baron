@@ -316,3 +316,204 @@ def test_from_a_import_parenthesis_b_space():
            ('NAME', 'b'),
            ('RIGHT_PARENTHESIS', ')', ' '),
           ])
+
+
+def test_from_a_import_star():
+    "from a import *"
+    group([
+           ('FROM', 'from'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('IMPORT', 'import'),
+           ('SPACE', ' '),
+           ('STAR', '*')
+          ],
+          [('FROM', 'from', '', ' '),
+           ('NAME', 'a'),
+           ('IMPORT', 'import', ' ', ' '),
+           ('STAR', '*')
+          ])
+
+
+def test_from_a_import_star_without_space():
+    "from a import*"
+    group([
+           ('FROM', 'from'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('IMPORT', 'import'),
+           ('STAR', '*')],
+          [('FROM', 'from', '', ' '),
+           ('NAME', 'a'),
+           ('IMPORT', 'import', ' '),
+           ('STAR', '*')])
+
+
+def test_from_dot_a_import_b():
+    "from .a import b"
+    group([
+           ('FROM', 'from'),
+           ('SPACE', ' '),
+           ('DOT', '.'),
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('IMPORT', 'import'),
+           ('SPACE', ' '),
+           ('NAME', 'b')
+          ],
+          [('FROM', 'from', '', ' '),
+           ('DOT', '.'),
+           ('NAME', 'a'),
+           ('IMPORT', 'import', ' ', ' '),
+           ('NAME', 'b')
+          ])
+
+
+def test_from_dot_dot_dot_a_import_b():
+    "from ...a import b"
+    group([
+           ('FROM', 'from'),
+           ('SPACE', ' '),
+           ('DOT', '.'),
+           ('DOT', '.'),
+           ('DOT', '.'),
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('IMPORT', 'import'),
+           ('SPACE', ' '),
+           ('NAME', 'b')
+          ],
+          [('FROM', 'from', '', ' '),
+           ('DOT', '.'),
+           ('DOT', '.'),
+           ('DOT', '.'),
+           ('NAME', 'a'),
+           ('IMPORT', 'import', ' ', ' '),
+           ('NAME', 'b')
+          ])
+
+
+def test_from_no_space_dot_a_import_b():
+    "from.a import b"
+    group([
+           ('FROM', 'from'),
+           ('DOT', '.'),
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('IMPORT', 'import'),
+           ('SPACE', ' '),
+           ('NAME', 'b')
+          ],
+          [('FROM', 'from'),
+           ('DOT', '.'),
+           ('NAME', 'a'),
+           ('IMPORT', 'import', ' ', ' '),
+           ('NAME', 'b')
+          ])
+
+
+def test_from_dot_import_b():
+    "from . import b"
+    group([
+           ('FROM', 'from'),
+           ('SPACE', ' '),
+           ('DOT', '.'),
+           ('SPACE', ' '),
+           ('IMPORT', 'import'),
+           ('SPACE', ' '),
+           ('NAME', 'b')
+          ],
+          [('FROM', 'from', '', ' '),
+           ('DOT', '.'),
+           ('IMPORT', 'import', ' ', ' '),
+           ('NAME', 'b')
+          ])
+
+
+def test_from_dot_no_space_import_b():
+    "from .import b"
+    group([
+           ('FROM', 'from'),
+           ('SPACE', ' '),
+           ('DOT', '.'),
+           ('IMPORT', 'import'),
+           ('SPACE', ' '),
+           ('NAME', 'b')
+          ],
+          [('FROM', 'from', '', ' '),
+           ('DOT', '.'),
+           ('IMPORT', 'import', '', ' '),
+           ('NAME', 'b')
+          ])
+
+
+def test_from_no_space_dot_import_b():
+    "from. import b"
+    group([
+           ('FROM', 'from'),
+           ('DOT', '.'),
+           ('SPACE', ' '),
+           ('IMPORT', 'import'),
+           ('SPACE', ' '),
+           ('NAME', 'b')
+          ],
+          [('FROM', 'from'),
+           ('DOT', '.'),
+           ('IMPORT', 'import', ' ', ' '),
+           ('NAME', 'b')
+          ])
+
+
+def test_from_no_space_dot_no_sapceimport_b():
+    "from.import b"
+    group([
+           ('FROM', 'from'),
+           ('DOT', '.'),
+           ('IMPORT', 'import'),
+           ('SPACE', ' '),
+           ('NAME', 'b')],
+          [('FROM', 'from'),
+           ('DOT', '.'),
+           ('IMPORT', 'import', '', ' '),
+           ('NAME', 'b')])
+
+
+def test_simple_power():
+    "a**b"
+    group([
+           ('NAME', 'a'),
+           ('DOUBLE_STAR', '**'),
+           ('NAME', 'b')
+          ],
+          [('NAME', 'a'),
+           ('DOUBLE_STAR', '**'),
+           ('NAME', 'b')
+          ])
+
+
+def test_first_space_power():
+    "a  **b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', '  '),
+           ('DOUBLE_STAR', '**'),
+           ('NAME', 'b')
+          ],
+          [('NAME', 'a'),
+           ('DOUBLE_STAR', '**', '  '),
+           ('NAME', 'b')
+          ])
+
+
+def test_second_space_power():
+    "a** b"
+    group([
+           ('NAME', 'a'),
+           ('DOUBLE_STAR', '**'),
+           ('SPACE', ' '),
+           ('NAME', 'b')],
+          [('NAME', 'a'),
+           ('DOUBLE_STAR', '**', '', ' '),
+           ('NAME', 'b')])

@@ -3,6 +3,7 @@ from utils import FlexibleIterator
 BOTH = (
     "AS",
     "IMPORT",
+    "DOUBLE_STAR"
 )
 
 GROUP_SPACE_BEFORE = BOTH + (
