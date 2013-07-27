@@ -38,4 +38,5 @@ def group_generator(sequence):
             _, space_value = iterator.next()
             current = (current[0], current[1], current[2] if len(current) > 2 else '', space_value)
 
+        assert current[0] != "SPACE"
         yield current
