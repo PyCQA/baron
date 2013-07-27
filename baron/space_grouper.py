@@ -14,11 +14,11 @@ def group_generator(sequence):
 
         current = iterator.next()
 
-        if current[0] == "SPACE" and iterator.show_next()[0] in ("DOT", "AS"):
+        if current[0] == "SPACE" and iterator.show_next()[0] in ("DOT", "AS", "IMPORT"):
             new_current = iterator.next()
             current = (new_current[0], new_current[1], current[1])
 
-        if current[0] in ("IMPORT", "AS", "COMMA") and iterator.show_next()[0] == "SPACE":
+        if current[0] in ("IMPORT", "AS", "COMMA", "FROM") and iterator.show_next()[0] == "SPACE":
             _, space_value = iterator.next()
             current = (current[0], current[1], current[2] if len(current) > 2 else '', space_value)
 

@@ -99,3 +99,66 @@ def test_import_a_b():
            ('NAME', 'a'),
            ('COMMA', ',', '', ' '),
            ('NAME', 'b')])
+
+
+def test_import_a_b_as_c():
+    "import a, b.d as  c"
+    group([('IMPORT', 'import', '', ' '),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ','),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+           ('DOT', '.'),
+           ('NAME', 'd'),
+           ('SPACE', ' '),
+           ('AS', 'as'),
+           ('SPACE', '  '),
+           ('NAME', 'c')],
+          [('IMPORT', 'import', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('DOT', '.'),
+           ('NAME', 'd'),
+           ('AS', 'as', ' ', '  '),
+           ('NAME', 'c')])
+
+
+def test_import_a_b_c_d():
+    "import a, b, c, d"
+    group([('IMPORT', 'import', '', ' '),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ','),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ','),
+           ('SPACE', ' '),
+           ('NAME', 'c'),
+           ('COMMA', ','),
+           ('SPACE', ' '),
+           ('NAME', 'd')],
+          [('IMPORT', 'import', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'c'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'd')])
+
+
+def test_from_a_import_b():
+    "from a import b"
+    group([('FROM', 'from'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('IMPORT', 'import'),
+           ('SPACE', ' '),
+           ('NAME', 'b')],
+          [('FROM', 'from', '', ' '),
+           ('NAME', 'a'),
+           ('IMPORT', 'import', ' ', ' '),
+           ('NAME', 'b')])
