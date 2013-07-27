@@ -2336,3 +2336,63 @@ def test_assert_message():
            ('COMMA', ',', ' ', ' '),
            ('NAME', 'b'),
           ])
+
+
+def test_raise_empty():
+    "raise"
+    group([
+           ('RAISE', 'raise'),
+          ],
+          [('RAISE', 'raise'),
+          ])
+
+
+def test_raise():
+    "raise a"
+    group([
+           ('RAISE', 'raise'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+          ],
+          [('RAISE', 'raise', '', ' '),
+           ('NAME', 'a'),
+          ])
+
+
+def test_raise_instance():
+    "raise a, b"
+    group([
+           ('RAISE', 'raise'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('COMMA', 'comma'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('RAISE', 'raise', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', 'comma', '', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_raise_instance_traceback():
+    "raise a, b, c"
+    group([
+           ('RAISE', 'raise'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('COMMA', 'comma'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+           ('COMMA', 'comma'),
+           ('SPACE', ' '),
+           ('NAME', 'c'),
+          ],
+          [('RAISE', 'raise', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', 'comma', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', 'comma', '', ' '),
+           ('NAME', 'c'),
+          ])
