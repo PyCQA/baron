@@ -3,4 +3,4 @@ def group(sequence):
 
 
 def group_generator(sequence):
-    return []
+    return sequence

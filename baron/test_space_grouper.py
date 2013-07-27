@@ -7,3 +7,9 @@ def group(inp, out):
 
 def test_empty():
     group([], [])
+
+
+def test_int():
+    "1"
+    group([('INT', '1')],
+          [('INT', '1')])
