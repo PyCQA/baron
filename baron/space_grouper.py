@@ -33,6 +33,7 @@ BOTH = (
     "IS",
     "NOT",
     "AND",
+    "OR",
 )
 
 GROUP_SPACE_BEFORE = BOTH + (

@@ -2004,3 +2004,39 @@ def test_and_and():
            ('NAME', 'c'),
           ])
 
+
+def test_or():
+    "a or b"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('OR', 'or'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('NAME', 'a'),
+           ('OR', 'or', ' ', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_or_or():
+    "a or b or c"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('OR', 'or'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+           ('SPACE', ' '),
+           ('OR', 'or'),
+           ('SPACE', ' '),
+           ('NAME', 'c'),
+          ],
+          [('NAME', 'a'),
+           ('OR', 'or', ' ', ' '),
+           ('NAME', 'b'),
+           ('OR', 'or', ' ', ' '),
+           ('NAME', 'c'),
+          ])
+
