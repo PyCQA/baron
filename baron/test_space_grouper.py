@@ -2396,3 +2396,56 @@ def test_raise_instance_traceback():
            ('COMMA', 'comma', '', ' '),
            ('NAME', 'c'),
           ])
+
+
+def test_exec():
+    "exec a"
+    group([
+           ('EXEC', 'exec'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+          ],
+          [('EXEC', 'exec', '', ' '),
+           ('NAME', 'a'),
+          ])
+
+
+def test_exec_in():
+    "exec a in b"
+    group([
+           ('EXEC', 'exec'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('IN', 'in'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+          ],
+          [('EXEC', 'exec', '', ' '),
+           ('NAME', 'a'),
+           ('IN', 'in', ' ', ' '),
+           ('NAME', 'b'),
+          ])
+
+
+def test_exec_in_c():
+    "exec a in b, c"
+    group([
+           ('EXEC', 'exec'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('IN', 'in'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ','),
+           ('SPACE', ' '),
+           ('NAME', 'c'),
+          ],
+          [('EXEC', 'exec', '', ' '),
+           ('NAME', 'a'),
+           ('IN', 'in', ' ', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'c'),
+          ])
