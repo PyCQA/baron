@@ -9,6 +9,7 @@ BOTH = (
     "IMPORT",
     "DOUBLE_STAR",
     "DOT",
+    "LEFT_SQUARE_BRACKET",
 )
 
 GROUP_SPACE_BEFORE = BOTH + (

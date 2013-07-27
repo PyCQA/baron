@@ -748,3 +748,109 @@ def test_power_trailer_spaces():
            ('DOT', '.', '   ', '    '),
            ('NAME', 'b'),
           ])
+
+
+def test_power_trailers():
+    "a.b.c"
+    group([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('DOT', '.'),
+           ('NAME', 'c'),
+          ],
+          [('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('DOT', '.'),
+           ('NAME', 'c'),
+          ])
+    "a.b.c.d.e"
+    group([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('DOT', '.'),
+           ('NAME', 'c'),
+           ('DOT', '.'),
+           ('NAME', 'd'),
+           ('DOT', '.'),
+           ('NAME', 'e'),
+          ],
+          [('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('DOT', '.'),
+           ('NAME', 'c'),
+           ('DOT', '.'),
+           ('NAME', 'd'),
+           ('DOT', '.'),
+           ('NAME', 'e'),
+          ])
+
+
+def test_power_trailers_space():
+    "a . b . c"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('DOT', '.'),
+           ('SPACE', ' '),
+           ('NAME', 'b'),
+           ('SPACE', ' '),
+           ('DOT', '.'),
+           ('SPACE', ' '),
+           ('NAME', 'c'),
+          ],
+          [('NAME', 'a'),
+           ('DOT', '.', ' ', ' '),
+           ('NAME', 'b'),
+           ('DOT', '.', ' ', ' '),
+           ('NAME', 'c'),
+          ])
+
+
+def test_power_trailer_power():
+    "a.b**c"
+    group([
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('DOUBLE_STAR', '**'),
+           ('NAME', 'c'),
+          ],
+          [('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'b'),
+           ('DOUBLE_STAR', '**'),
+           ('NAME', 'c'),
+          ])
+
+
+def test_power_trailer_getitem_empty():
+    "a[]"
+    group([
+           ('NAME', 'a'),
+           ('LEFT_SQUARE_BRACKET', '['),
+           ('RIGHT_SQUARE_BRACKET', ']'),
+          ],
+          [('NAME', 'a'),
+           ('LEFT_SQUARE_BRACKET', '['),
+           ('RIGHT_SQUARE_BRACKET', ']'),
+          ])
+
+
+def test_power_trailer_getitem_empty_with_space():
+    "a [ ]"
+    group([
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('LEFT_SQUARE_BRACKET', '['),
+           ('SPACE', ' '),
+           ('RIGHT_SQUARE_BRACKET', ']'),
+          ],
+          [
+           ('NAME', 'a'),
+           ('LEFT_SQUARE_BRACKET', '[', ' ', ' '),
+           ('RIGHT_SQUARE_BRACKET', ']'),
+          ])
