@@ -7,6 +7,10 @@ def group(inp, out):
         assert i == j
 
 
+def test_none():
+    group([None], [])
+
+
 def test_empty():
     group([], [])
 

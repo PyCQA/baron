@@ -91,6 +91,9 @@ def group_generator(sequence):
 
         current = iterator.next()
 
+        if current is None:
+            return
+
         if current[0] == "SPACE" and iterator.show_next()[0] in GROUP_SPACE_BEFORE:
             new_current = iterator.next()
             current = (new_current[0], new_current[1], current[1])
