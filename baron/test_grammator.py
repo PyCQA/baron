@@ -2275,6 +2275,29 @@ def test_or_or():
                             second_space=" ",
                            )])
 
+def test_or_and():
+    "a or b and c"
+    parse([
+           ('NAME', 'a'),
+           ('OR', 'or', ' ', ' '),
+           ('NAME', 'b'),
+           ('AND', 'and', ' ', ' '),
+           ('NAME', 'c'),
+          ],
+          [boolean_operator(
+                            'or',
+                            first=name('a'),
+                            second=boolean_operator(
+                                                    'and',
+                                                    first=name('b'),
+                                                    second=name('c'),
+                                                    first_space=" ",
+                                                    second_space=" ",
+                            ),
+                            first_space=" ",
+                            second_space=" ",
+                           )])
+
 
 def test_ternary_operator():
     "a if b else c"
