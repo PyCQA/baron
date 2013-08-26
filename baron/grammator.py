@@ -1076,6 +1076,17 @@ def name((name,)):
 def string((string_,)):
     return create_node_from_token(string_)
 
+
+@pg.production("atom : LEFT_PARENTHESIS RIGHT_PARENTHESIS")
+def tuple((left_parenthesis, right_parenthesis,)):
+    return {
+            "type": "tuple",
+            "first_space": "",
+            "second_space": "",
+            "value": []
+           }
+
+
 parser = pg.build()
 
 

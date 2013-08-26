@@ -2961,6 +2961,18 @@ def test_print_redirect_ab_comma():
             "destination_space": " ",
           }])
 
+def test_empty_tuple():
+    "()"
+    parse([
+           ('LEFT_PARENTHESIS', '('),
+           ('RIGHT_PARENTHESIS', ')'),
+          ],
+          [{
+            "type": "tuple",
+            "first_space": "",
+            "second_space": "",
+            "value": [],
+          }])
 ### atom: '(' ')'
 ### atom: '(' SPACE ')'
 # atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
