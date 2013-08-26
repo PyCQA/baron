@@ -2961,6 +2961,53 @@ def test_print_redirect_ab_comma():
             "destination_space": " ",
           }])
 
+### atom: '(' ')'
+### atom: '(' SPACE ')'
+# atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
+
+# testlist_comp: test
+# testlist_comp: test [SPACE] comp_for
+# testlist_comp: test ([SPACE] ',' [SPACE] test)*
+# testlist_comp: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
+
+# test: lambdef
+### test: or_test
+### test: or_test [SPACE 'if' SPACE or_test SPACE 'else' SPACE test]
+
+# lambdef: 'lambda' [SPACE] ':' [SPACE] test
+# lambdef: 'lambda' [SPACE] [varargslist] [SPACE] ':' [SPACE] test
+
+# comp_for: 'for' SPACE exprlist SPACE 'in' SPACE or_test
+# comp_for: 'for' SPACE exprlist SPACE 'in' SPACE or_test [SPACE comp_iter]
+
+# exprlist: expr
+# exprlist: expr [SPACE] [',']
+# exprlist: expr ([SPACE] ',' [SPACE] expr)*
+# exprlist: expr ([SPACE] ',' [SPACE] expr)* [SPACE] [',']
+
+### expr: xor_expr
+### expr: xor_expr ([SPACE] '|' [SPACE] xor_expr)*
+
+### or_test: and_test
+### or_test: and_test (SPACE 'or' SPACE and_test)*
+
+# comp_iter: comp_if
+# comp_iter: comp_for
+
+# comp_if: 'if' SPACE old_test
+# comp_if: 'if' SPACE old_test [SPACE comp_iter]
+
+# comp_for: 'for' SPACE exprlist SPACE 'in' SPACE or_test
+# comp_for: 'for' SPACE exprlist SPACE 'in' SPACE or_test [SPACE comp_iter]
+
+# old_test: or_test
+# old_test: old_lambdef
+
+# old_lambdef: 'lambda' [SPACE] ':' [SPACE] old_test
+# old_lambdef: 'lambda' SPACE [varargslist] [SPACE] ':' [SPACE] old_test
+
+# ---------------------
+
 # file_input: ([SPACE] NEWLINE | stmt)* [SPACE] ENDMARKER
 
 # stmt: simple_stmt
