@@ -2973,6 +2973,20 @@ def test_empty_tuple():
             "second_space": "",
             "value": [],
           }])
+
+def test_empty_tuple_space():
+    "(  )"
+    parse([
+           ('LEFT_PARENTHESIS', '(', '', '  '),
+           ('RIGHT_PARENTHESIS', ')'),
+          ],
+          [{
+            "type": "tuple",
+            "first_space": "  ",
+            "second_space": "",
+            "value": [],
+          }])
+
 ### atom: '(' ')'
 ### atom: '(' SPACE ')'
 # atom: '(' [SPACE] [testlist_comp] [SPACE] ')'

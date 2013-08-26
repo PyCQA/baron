@@ -1081,7 +1081,7 @@ def string((string_,)):
 def tuple((left_parenthesis, right_parenthesis,)):
     return {
             "type": "tuple",
-            "first_space": "",
+            "first_space": left_parenthesis.after_space,
             "second_space": "",
             "value": []
            }
