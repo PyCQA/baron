@@ -6,7 +6,7 @@ from grammator import parser, Token
 
 
 def _parse(tokens):
-    return parser.parse(iter(map(lambda x: Token(*x) if x else x, tokens)))
+    return parser.parse(iter(map(lambda x: Token(*x) if x else x, tokens) + [None]))
 
 
 def parse(pouet):
