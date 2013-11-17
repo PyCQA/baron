@@ -8,7 +8,7 @@ from test_utils import (parse_simple, space, inteu, endl, name, string, importeu
                         dotted_as_name, dotted_name, dot, comma, from_import,
                         name_as_name, left_parenthesis, right_parenthesis,
                         star, binary_operator, unitary_operator, atomtrailers,
-                        getitem, call, parse_multi)
+                        getitem, call, parse_multi, semicolon)
 
 def test_empty():
     ""
@@ -2991,8 +2991,6 @@ def test_empty_tuple_space():
 # too long time I haven't coded on this
 # don't see the difference between tuple and () with a comma in it
 
-# file_input: ([SPACE] NEWLINE | stmt)* [SPACE] ENDMARKER
-
 def test_file_input_empty():
     ""
     parse_multi([
@@ -3034,6 +3032,16 @@ def test_file_input_two_items_endl():
            name('a'), endl("\n"),
            endl("\n"),
            name('a'), endl("\n"),
+          ])
+
+def test_file_input_simple_stmt_one_item_semicolon():
+    """
+    a;
+    """
+    parse_multi([
+           ('NAME', 'a'), ('SEMICOLON', ';'), ('ENDL', '\n'),
+        ],[
+           name('a'), semicolon(), endl("\n"),
           ])
 
 ### atom: '(' ')'
@@ -3083,13 +3091,13 @@ def test_file_input_two_items_endl():
 
 # ---------------------
 
-# file_input: ([SPACE] NEWLINE | stmt)* [SPACE] ENDMARKER
+### file_input: ([SPACE] NEWLINE | stmt)* [SPACE] ENDMARKER
 
 ### stmt: simple_stmt
 # stmt: compound_stmt
 
 ### simple_stmt: small_stmt [SPACE] NEWLINE
-# simple_stmt: small_stmt [SPACE] ';' [SPACE] NEWLINE
+### simple_stmt: small_stmt [SPACE] ';' [SPACE] NEWLINE
 # simple_stmt: small_stmt [SPACE] ';' small_stmt [SPACE] ';' [SPACE] NEWLINE
 # simple_stmt: small_stmt ([SPACE] ';' small_stmt [SPACE] ';') [SPACE] NEWLINE
 
