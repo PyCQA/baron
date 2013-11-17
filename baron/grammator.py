@@ -565,8 +565,9 @@ def end((endmarker)):
 
 
 @pg.production("statement : simple_stmt")
-def statement_simple_statement((simple_stmt,)):
-    return simple_stmt
+@pg.production("statement : compound_stmt")
+def statement_simple_statement((stmt,)):
+    return stmt
 
 
 @pg.production("simple_stmt : small_stmt SEMICOLON? ENDL")
@@ -588,8 +589,25 @@ def simple_stmt_semicolon((small_stmt, semicolon, simple_stmt)):
 @pg.production("small_stmt : raise_stmt")
 @pg.production("small_stmt : global_stmt")
 @pg.production("small_stmt : print_stmt")
-def separator((statement,)):
+@pg.production("compound_stmt : if_stmt")
+def small_stmt((statement,)):
     return statement
+
+
+@pg.production("if_stmt : IF test COLON suite")
+def if_stmt((if_, test, colon, suite)):
+    return [{
+        "type": "if",
+        "value": suite,
+        "test": test,
+        "first_space": if_.after_space,
+        "second_space": colon.before_space,
+    }]
+
+@pg.production("suite : simple_stmt")
+def suite((simple_stmt,)):
+    return simple_stmt
+
 
 include_imports(pg)
 

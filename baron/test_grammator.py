@@ -3074,6 +3074,31 @@ def test_file_input_simple_stmt_one_item_semicolon_space():
            name('a'), semicolon(' ', ' '), endl("\n"),
           ])
 
+def test_if_stmt():
+    "if a: pass"
+    parse_multi([
+           ('IF', 'if', '', ' '),
+           ('NAME', 'a'),
+           ('COLON', ':'),
+           ('PASS', 'pass'),
+           ('ENDL', '\n'),
+          ],
+          [{
+            "type": "if",
+            "first_space": " ",
+            "second_space": "",
+            "test": {
+                "type": "name",
+                "value": "a",
+            },
+            "value": [{
+                "type": "pass",
+            },{
+               "type": "endl",
+               "value": "\n"
+            }],
+          }])
+
 ### atom: '(' ')'
 ### atom: '(' SPACE ')'
 # atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
