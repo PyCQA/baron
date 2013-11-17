@@ -10,3 +10,11 @@ def check(input, output):
 
 def test_empty():
     check([], [])
+
+
+def test_dummy():
+    check([
+        ('NAME', 'a'),
+    ], [
+        ('NAME', 'a'),
+    ])
