@@ -120,9 +120,9 @@
 # -
 
 ### simple_stmt: small_stmt [SPACE] NEWLINE
-# simple_stmt: small_stmt [SPACE] ';' [SPACE] NEWLINE
-# simple_stmt: small_stmt [SPACE] ';' small_stmt [SPACE] ';' [SPACE] NEWLINE
-# simple_stmt: small_stmt ([SPACE] ';' small_stmt [SPACE] ';') [SPACE] NEWLINE
+### simple_stmt: small_stmt [SPACE] ';' [SPACE] NEWLINE
+### simple_stmt: small_stmt [SPACE] ';' small_stmt [SPACE] ';' [SPACE] NEWLINE
+### simple_stmt: small_stmt ([SPACE] ';' small_stmt [SPACE] ';') [SPACE] NEWLINE
 
 # -
 
@@ -505,16 +505,18 @@
 
 # -
 
+# don't think I'm going to do this one
 # single_input: NEWLINE
 # single_input: simple_stmt
 # single_input: compound_stmt [SPACE] NEWLINE
 
 # -
 
-# file_input: ([SPACE] NEWLINE | stmt)* [SPACE] ENDMARKER
+### file_input: ([SPACE] NEWLINE | stmt)* [SPACE] ENDMARKER
 
 # -
 
+# don't think I'm going to do this one
 # eval_input: testlist ([SPACE] NEWLINE)* [SPACE] ENDMARKER
 
 # ---
