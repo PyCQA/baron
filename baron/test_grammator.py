@@ -3099,95 +3099,101 @@ def test_if_stmt():
             }],
           }])
 
-### atom: '(' ')'
-### atom: '(' SPACE ')'
-# atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
+def test_if_stmt_indent():
+    """
+    if a:
+        pass
+    """
+    parse_multi
+    parse_multi
+    parse_multi([
+           ('IF', 'if', '', ' '),
+           ('NAME', 'a'),
+           ('COLON', ':'),
+           ('ENDL', '\n', '', '    '),
+           ('INDENT', ''),
+           ('PASS', 'pass'),
+           ('ENDL', '\n'),
+           ('DEDENT', ''),
+          ],
+          [{
+            "type": "if",
+            "first_space": " ",
+            "second_space": "",
+            "test": {
+                "type": "name",
+                "value": "a",
+            },
+            "value": [{
+               "type": "endl",
+               "value": "\n",
+               "indent": "    "
+            },{
+                "type": "pass",
+            },{
+               "type": "endl",
+               "value": "\n"
+            }],
+          }])
 
-# testlist_comp: test
-# testlist_comp: test [SPACE] comp_for
-# testlist_comp: test ([SPACE] ',' [SPACE] test)*
-# testlist_comp: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
 
-# test: lambdef
-### test: or_test
-### test: or_test [SPACE 'if' SPACE or_test SPACE 'else' SPACE test]
 
-# lambdef: 'lambda' [SPACE] ':' [SPACE] test
-# lambdef: 'lambda' [SPACE] [varargslist] [SPACE] ':' [SPACE] test
 
-# comp_for: 'for' SPACE exprlist SPACE 'in' SPACE or_test
-# comp_for: 'for' SPACE exprlist SPACE 'in' SPACE or_test [SPACE comp_iter]
 
-# exprlist: expr
-# exprlist: expr [SPACE] [',']
-# exprlist: expr ([SPACE] ',' [SPACE] expr)*
-# exprlist: expr ([SPACE] ',' [SPACE] expr)* [SPACE] [',']
 
-### expr: xor_expr
-### expr: xor_expr ([SPACE] '|' [SPACE] xor_expr)*
-
-### or_test: and_test
-### or_test: and_test (SPACE 'or' SPACE and_test)*
-
-# comp_iter: comp_if
-# comp_iter: comp_for
-
-# comp_if: 'if' SPACE old_test
-# comp_if: 'if' SPACE old_test [SPACE comp_iter]
-
-# comp_for: 'for' SPACE exprlist SPACE 'in' SPACE or_test
-# comp_for: 'for' SPACE exprlist SPACE 'in' SPACE or_test [SPACE comp_iter]
-
-# old_test: or_test
-# old_test: old_lambdef
-
-# old_lambdef: 'lambda' [SPACE] ':' [SPACE] old_test
-# old_lambdef: 'lambda' SPACE [varargslist] [SPACE] ':' [SPACE] old_test
-
-# ---------------------
-
-### file_input: ([SPACE] NEWLINE | stmt)* [SPACE] ENDMARKER
 
 ### stmt: simple_stmt
-# stmt: compound_stmt
+### stmt: compound_stmt
 
-### simple_stmt: small_stmt [SPACE] NEWLINE
-### simple_stmt: small_stmt [SPACE] ';' [SPACE] NEWLINE
-### simple_stmt: small_stmt [SPACE] ';' small_stmt [SPACE] ';' [SPACE] NEWLINE
-### simple_stmt: small_stmt ([SPACE] ';' small_stmt [SPACE] ';') [SPACE] NEWLINE
+### compound_stmt: if_stmt
+# compound_stmt: while_stmt
+# compound_stmt: for_stmt
+# compound_stmt: try_stmt
+# compound_stmt: with_stmt
+# compound_stmt: funcdef
+# compound_stmt: classdef
+# compound_stmt: decorated
 
-### expr_stmt: testlist
-### expr_stmt: testlist ([SPACE] '=' [SPACE] testlist)*
-### -> assign(testlist, testlist)
-# expr_stmt: testlist ([SPACE] '=' [SPACE] yield_expr)*
-# -> assign(testlist, testlist)
-# expr_stmt: testlist augassign yield_expr
-# -> augassign(testlist, testlist)
-### expr_stmt: testlist augassign testlist
-### -> augassign(testlist, testlist)
+# -
 
-# test: lambdef
-### test: or_test
-### test: or_test [SPACE -> 'if' <- SPACE or_test SPACE -> 'else' <- SPACE test]
-### -> ternaryOp(or_test, or_test, test)
+### if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite
+# if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite ('elif' SPACE test [SPACE] ':' [SPACE] suite)*
+# if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite ['else' SPACE ':' [SPACE] suite]
+# if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite ('elif' SPACE test [SPACE] ':' [SPACE] suite)* ['else' SPACE ':' [SPACE] suite]
 
-### trailer: '.' [SPACE] NAME
-### trailer: '[' [SPACE] ']'
-# trailer: '[' [SPACE] subscriptlist [SPACE] ']'
-### trailer: '(' [SPACE] ')'
-# trailer: '(' [SPACE] [arglist] [SPACE] ')'
+# -
 
-# atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
-# -> tuple([values])
-# atom: '(' [SPACE] [yield_expr] [SPACE] ')'
-# -> ???(yieldexpr) a("yield a") == a("(yield a)"))
-# atom: '[' [SPACE] [listmaker] [SPACE] ']'
-# -> list([values])
-# atom: '{' [SPACE] [dictorsetmaker] [SPACE] '}'
-# -> dict(zip([keys], [values]))
-# atom: '`' [SPACE] testlist1 [SPACE] '`'
-# -> repr([testlist1])
-### atom: NAME
-### atom: NUMBER
-# all sort of numbers!
-### atom: STRING+
+# while_stmt: 'while' SPACE test [SPACE] ':' [SPACE] suite
+# while_stmt: 'while' SPACE test [SPACE] ':' [SPACE] suite ['else' [SPACE] ':' [SPACE] suite]
+
+# -
+
+# for_stmt: 'for' SPACE exprlist SPACE 'in' SPACE testlist [SPACE] ':' [SPACE] suite
+# for_stmt: 'for' SPACE exprlist SPACE 'in' SPACE testlist [SPACE] ':' [SPACE] suite ['else' [SPACE] ':' [SPACE] suite]
+
+# -
+
+# try_stmt: 'try' [SPACE] ':' [SPACE] suite 'finally' [SPACE] ':' suite
+# try_stmt: 'try' [SPACE] ':' [SPACE] suite (except_clause [SPACE] ':' [SPACE] suite)+
+# try_stmt: 'try' [SPACE] ':' [SPACE] suite (except_clause [SPACE] ':' [SPACE] suite)+ ['else' [SPACE] ':' [SPACE] suite]
+# try_stmt: 'try' [SPACE] ':' [SPACE] suite (except_clause [SPACE] ':' [SPACE] suite)+ ['finally' [SPACE] ':' suite]
+# try_stmt: 'try' [SPACE] ':' [SPACE] suite (except_clause [SPACE] ':' [SPACE] suite)+ ['else' [SPACE] ':' [SPACE] suite] ['finally' [SPACE] ':' suite]
+
+# -
+
+# with_stmt: 'with' SPACE with_item [SPACE] ':' [SPACE] suite
+# with_stmt: 'with' SPACE with_item ([SPACE] ',' [SPACE] with_item)* [SPACE] ':' [SPACE] suite
+
+# -
+
+# with_item: test
+# with_item: test [SPACE 'as' SPACE expr]
+
+# -
+
+# except_clause: 'except' [SPACE test [(SPACE 'as' SPACE | [SPACE] ',' [SPACE]) test]]
+
+# -
+
+### suite: simple_stmt
+# suite: [SPACE] NEWLINE INDENT stmt+ DEDENT

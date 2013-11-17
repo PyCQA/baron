@@ -533,7 +533,7 @@ from utils import (create_node_from_token, binary_operator, unitary_operator,
 from grammator_imports import include_imports
 
 
-pg = ParserGenerator(tuple(map(lambda x: x.upper(), KEYWORDS)) + zip(*TOKENS)[1] + ("ENDMARKER",), cache_id="baron")
+pg = ParserGenerator(tuple(map(lambda x: x.upper(), KEYWORDS)) + zip(*TOKENS)[1] + ("ENDMARKER", "INDENT", "DEDENT"), cache_id="baron")
         # precedence=[("left", ['PLUS', 'MINUS'])], cache_id="baron")
 
 
@@ -607,6 +607,11 @@ def if_stmt((if_, test, colon, suite)):
 @pg.production("suite : simple_stmt")
 def suite((simple_stmt,)):
     return simple_stmt
+
+
+@pg.production("suite : ENDL INDENT statements DEDENT")
+def suite_indent((endl_, indent, statements, dedent,)):
+    return [{"type": "endl", "value": "\n", "indent": endl_.after_space}] + statements
 
 
 include_imports(pg)
