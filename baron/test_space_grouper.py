@@ -2622,3 +2622,22 @@ def test_print_redirect_ab_comma():
            ('NAME', 'b'),
            ('COMMA', ',', ' '),
           ])
+
+
+def test_if_a_pass():
+    "if a : pass"
+    group([
+           ('IF', 'if'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('COLON', ':'),
+           ('SPACE', ' '),
+           ('PASS', 'pass'),
+          ],
+          [
+           ('IF', 'if', '', ' '),
+           ('NAME', 'a'),
+           ('COLON', ':', ' ', ' '),
+           ('PASS', 'pass'),
+          ])

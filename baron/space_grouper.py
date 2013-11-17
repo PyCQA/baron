@@ -50,6 +50,7 @@ BOTH = (
     "DOUBLE_STAR_EQUAL",
     "DOUBLE_SLASH_EQUAL",
     "COMMA",
+    "COLON"
 )
 
 GROUP_SPACE_BEFORE = BOTH + (
