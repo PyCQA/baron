@@ -574,6 +574,11 @@ def simple_stmt((small_stmt, semicolon, endl_)):
     return [small_stmt] + endl((endl_,))
 
 
+@pg.production("simple_stmt : small_stmt SEMICOLON simple_stmt")
+def simple_stmt_semicolon((small_stmt, semicolon, simple_stmt)):
+    return [small_stmt, {"type": "semicolon", "value": ";"}] + simple_stmt
+
+
 @pg.production("small_stmt : flow_stmt")
 @pg.production("small_stmt : del_stmt")
 @pg.production("small_stmt : pass_stmt")

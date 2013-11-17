@@ -3044,6 +3044,26 @@ def test_file_input_simple_stmt_one_item_semicolon():
            name('a'), semicolon(), endl("\n"),
           ])
 
+def test_file_input_simple_stmt_two_items_semicolon():
+    """
+    a;a
+    """
+    parse_multi([
+           ('NAME', 'a'), ('SEMICOLON', ';'), ('NAME', 'a'), ('ENDL', '\n'),
+        ],[
+           name('a'), semicolon(), name('a'), endl("\n"),
+          ])
+
+def test_file_input_simple_stmt_three_items_semicolon():
+    """
+    a;b;a
+    """
+    parse_multi([
+           ('NAME', 'a'), ('SEMICOLON', ';'), ('NAME', 'b'), ('SEMICOLON', ';'), ('NAME', 'a'), ('ENDL', '\n'),
+        ],[
+           name('a'), semicolon(), name('b'), semicolon(), name('a'), endl("\n"),
+          ])
+
 ### atom: '(' ')'
 ### atom: '(' SPACE ')'
 # atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
@@ -3098,8 +3118,8 @@ def test_file_input_simple_stmt_one_item_semicolon():
 
 ### simple_stmt: small_stmt [SPACE] NEWLINE
 ### simple_stmt: small_stmt [SPACE] ';' [SPACE] NEWLINE
-# simple_stmt: small_stmt [SPACE] ';' small_stmt [SPACE] ';' [SPACE] NEWLINE
-# simple_stmt: small_stmt ([SPACE] ';' small_stmt [SPACE] ';') [SPACE] NEWLINE
+### simple_stmt: small_stmt [SPACE] ';' small_stmt [SPACE] ';' [SPACE] NEWLINE
+### simple_stmt: small_stmt ([SPACE] ';' small_stmt [SPACE] ';') [SPACE] NEWLINE
 
 ### expr_stmt: testlist
 ### expr_stmt: testlist ([SPACE] '=' [SPACE] testlist)*
