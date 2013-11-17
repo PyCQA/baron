@@ -550,18 +550,23 @@ def statement((statement,)):
     return statement
 
 
+@pg.production("statement : ENDL")
+def endl((endl,)):
+    return [{"type": "endl", "value": endl.value}]
+
+
 @pg.production("statement : ENDMARKER")
 def end((endmarker)):
     return [None]
 
 
-@pg.production("statement : simple_stmt")
-def statement_simple_statement((simple_stmt,)):
-    return [simple_stmt]
+@pg.production("statement : simple_stmt ENDL")
+def statement_simple_statement((simple_stmt, endl_)):
+    return [simple_stmt] + endl((endl_,))
 
 
-@pg.production("simple_stmt : small_stmt ENDL")
-def simple_stmt((small_stmt, endl)):
+@pg.production("simple_stmt : small_stmt")
+def simple_stmt((small_stmt,)):
     return small_stmt
 
 

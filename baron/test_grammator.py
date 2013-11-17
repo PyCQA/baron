@@ -4,34 +4,34 @@
 import pytest
 from utils import (comparison, boolean_operator, ternary_operator, assignment,
                    augmented_assignment, tuple_, return_, yield_)
-from test_utils import (parse, space, inteu, endl, name, string, importeu,
+from test_utils import (parse_simple, space, inteu, endl, name, string, importeu,
                         dotted_as_name, dotted_name, dot, comma, from_import,
                         name_as_name, left_parenthesis, right_parenthesis,
                         star, binary_operator, unitary_operator, atomtrailers,
-                        getitem, call)
+                        getitem, call, parse_multi)
 
 def test_empty():
     ""
-    parse([
+    parse_simple([
 
     ], [])
 
 def test_int():
     "1"
-    parse([
+    parse_simple([
            ('INT', '1')],
           [inteu("1")])
 
 # TODO: will be done in file_input
 #def test_endl():
     #"\n"
-    #parse([
+    #parse_simple([
            #('ENDL', '\n')],
           #[endl("\n", before_space="")])
 
 def test_name():
     "a"
-    parse([
+    parse_simple([
            ('NAME', 'a')],
           [name("a")])
 
@@ -40,16 +40,16 @@ def test_string():
     "pouet pouet"
     """pouet pouet"""
     '''
-    parse([
+    parse_simple([
            ('STRING', '"pouet pouet"')],
           [string('"pouet pouet"')])
-    parse([
+    parse_simple([
            ('STRING', '"""pouet pouet"""')],
           [string('"""pouet pouet"""')])
 
 def test_simple_import():
     "import   pouet"
-    parse([
+    parse_simple([
            ('IMPORT', 'import', '', '  '),
            ('NAME', 'pouet')],
           [importeu([
@@ -59,7 +59,7 @@ def test_simple_import():
 
 def test_import_basic_dot():
     "import   pouet.blob"
-    parse([
+    parse_simple([
            ('IMPORT', 'import', '', '  '),
            ('NAME', 'pouet'),
            ('DOT', '.'),
@@ -77,7 +77,7 @@ def test_import_basic_dot():
 
 def test_import_more_dot():
     "import   pouet.blob .plop"
-    parse([
+    parse_simple([
            ('IMPORT', 'import', '', '  '),
            ('NAME', 'pouet'),
            ('DOT', '.'),
@@ -99,7 +99,7 @@ def test_import_more_dot():
 
 def test_import_as():
     "import   pouet as  b"
-    parse([
+    parse_simple([
            ('IMPORT', 'import', '', '  '),
            ('NAME', 'pouet'),
            ('AS', 'as', ' ', '  '),
@@ -116,7 +116,7 @@ def test_import_as():
 
 def test_import_a_b():
     "import a, b"
-    parse([
+    parse_simple([
            ('IMPORT', 'import', '', ' '),
            ('NAME', 'a'),
            ('COMMA', ',', '', ' '),
@@ -131,7 +131,7 @@ def test_import_a_b():
 
 def test_import_a_b_as_c():
     "import a, b.d as  c"
-    parse([
+    parse_simple([
            ('IMPORT', 'import', '', ' '),
            ('NAME', 'a'),
            ('COMMA', ',', '', ' '),
@@ -161,7 +161,7 @@ def test_import_a_b_as_c():
 
 def test_import_a_b_c_d():
     "import a, b, c, d"
-    parse([
+    parse_simple([
            ('IMPORT', 'import', '', ' '),
            ('NAME', 'a'),
            ('COMMA', ',', '', ' '),
@@ -187,7 +187,7 @@ def test_import_a_b_c_d():
 
 def test_from_a_import_b():
     "from a import b"
-    parse([
+    parse_simple([
            ('FROM', 'from', '', ' '),
            ('NAME', 'a'),
            ('IMPORT', 'import', ' ', ' '),
@@ -203,7 +203,7 @@ def test_from_a_import_b():
 
 def test_from_a_dot_c_import_b():
     "from a.C import b"
-    parse([
+    parse_simple([
            ('FROM', 'from', '', ' '),
            ('NAME', 'a'),
            ('DOT', '.'),
@@ -223,7 +223,7 @@ def test_from_a_dot_c_import_b():
 
 def test_from_a_dot_c_import_b_d():
     "from a.c import b, d"
-    parse([
+    parse_simple([
            ('FROM', 'from', '', ' '),
            ('NAME', 'a'),
            ('DOT', '.'),
@@ -248,7 +248,7 @@ def test_from_a_dot_c_import_b_d():
 
 def test_from_a_import_b_as_d():
     "from a import b as d"
-    parse([
+    parse_simple([
            ('FROM', 'from', '', ' '),
            ('NAME', 'a'),
            ('IMPORT', 'import', ' ', ' '),
@@ -273,7 +273,7 @@ def test_from_a_import_b_as_d():
 
 def test_from_a_import_parenthesis_b():
     "from a import (b)"
-    parse([
+    parse_simple([
            ('FROM', 'from', '', ' '),
            ('NAME', 'a'),
            ('IMPORT', 'import', ' ', ' '),
@@ -294,7 +294,7 @@ def test_from_a_import_parenthesis_b():
 
 def test_from_a_import_parenthesis_b_without_space():
     "from a import(b)"
-    parse([
+    parse_simple([
            ('FROM', 'from', '', ' '),
            ('NAME', 'a'),
            ('IMPORT', 'import', ' ', ''),
@@ -316,7 +316,7 @@ def test_from_a_import_parenthesis_b_without_space():
 
 def test_from_a_import_parenthesis_b_comma():
     "from a import (b,)"
-    parse([
+    parse_simple([
            ('FROM', 'from', '', ' '),
            ('NAME', 'a'),
            ('IMPORT', 'import', ' ', ' '),
@@ -339,7 +339,7 @@ def test_from_a_import_parenthesis_b_comma():
 
 def test_from_a_import_parenthesis_b_space():
     "from a import (b )"
-    parse([
+    parse_simple([
            ('FROM', 'from', '', ' '),
            ('NAME', 'a'),
            ('IMPORT', 'import', ' ', ' '),
@@ -361,7 +361,7 @@ def test_from_a_import_parenthesis_b_space():
 
 def test_from_a_import_star():
     "from a import *"
-    parse([
+    parse_simple([
            ('FROM', 'from', '', ' '),
            ('NAME', 'a'),
            ('IMPORT', 'import', ' ', ' '),
@@ -378,7 +378,7 @@ def test_from_a_import_star():
 
 def test_from_a_import_star_without_space():
     "from a import*"
-    parse([
+    parse_simple([
            ('FROM', 'from', '', ' '),
            ('NAME', 'a'),
            ('IMPORT', 'import', ' ', ''),
@@ -395,7 +395,7 @@ def test_from_a_import_star_without_space():
 
 def test_from_dot_a_import_b():
     "from .a import b"
-    parse([
+    parse_simple([
            ('FROM', 'from', '', ' '),
            ('DOT', '.'),
            ('NAME', 'a'),
@@ -414,7 +414,7 @@ def test_from_dot_a_import_b():
 
 def test_from_dot_dot_dot_a_import_b():
     "from ...a import b"
-    parse([
+    parse_simple([
            ('FROM', 'from', '', ' '),
            ('DOT', '.'),
            ('DOT', '.'),
@@ -437,7 +437,7 @@ def test_from_dot_dot_dot_a_import_b():
 
 def test_from_no_space_dot_a_import_b():
     "from.a import b"
-    parse([
+    parse_simple([
            ('FROM', 'from'),
            ('DOT', '.'),
            ('NAME', 'a'),
@@ -456,7 +456,7 @@ def test_from_no_space_dot_a_import_b():
 
 def test_from_dot_import_b():
     "from . import b"
-    parse([
+    parse_simple([
            ('FROM', 'from', '', ' '),
            ('DOT', '.'),
            ('IMPORT', 'import', ' ', ' '),
@@ -473,7 +473,7 @@ def test_from_dot_import_b():
 
 def test_from_dot_no_space_import_b():
     "from .import b"
-    parse([
+    parse_simple([
            ('FROM', 'from', '', ' '),
            ('DOT', '.'),
            ('IMPORT', 'import', '', ' '),
@@ -490,7 +490,7 @@ def test_from_dot_no_space_import_b():
 
 def test_from_no_space_dot_import_b():
     "from. import b"
-    parse([
+    parse_simple([
            ('FROM', 'from'),
            ('DOT', '.'),
            ('IMPORT', 'import', ' ', ' '),
@@ -508,7 +508,7 @@ def test_from_no_space_dot_import_b():
 
 def test_from_no_space_dot_no_sapceimport_b():
     "from.import b"
-    parse([
+    parse_simple([
            ('FROM', 'from'),
            ('DOT', '.'),
            ('IMPORT', 'import', '', ' '),
@@ -527,7 +527,7 @@ def test_from_no_space_dot_no_sapceimport_b():
 
 def test_simple_power():
     "a**b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**'),
            ('NAME', 'b')
@@ -542,7 +542,7 @@ def test_simple_power():
 
 def test_first_space_power():
     "a  **b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**', '  ', ''),
            ('NAME', 'b')
@@ -557,7 +557,7 @@ def test_first_space_power():
 
 def test_second_space_power():
     "a** b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**', '', ' '),
            ('NAME', 'b')],
@@ -571,7 +571,7 @@ def test_second_space_power():
 
 def test_spaces_power():
     "a **  b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**', ' ', '  '),
            ('NAME', 'b')
@@ -586,7 +586,7 @@ def test_spaces_power():
 
 def test_power_power():
     "a **  b   **    c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**', ' ', '  '),
            ('NAME', 'b'),
@@ -609,7 +609,7 @@ def test_power_power():
 
 def test_power_power_spaces():
     "a**  b   **    c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**', '', '  '),
            ('NAME', 'b'),
@@ -630,7 +630,7 @@ def test_power_power_spaces():
                            second_space="  "
                           )])
     "a **b   **    c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**', ' ', ''),
            ('NAME', 'b'),
@@ -651,7 +651,7 @@ def test_power_power_spaces():
                            second_space=""
                           )])
     "a**b**c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**'),
            ('NAME', 'b'),
@@ -674,7 +674,7 @@ def test_power_power_spaces():
 
 def test_power_factor():
     "a **  +b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**', ' ', '  '),
            ('PLUS', '+'),
@@ -690,7 +690,7 @@ def test_power_factor():
 
 def test_power_factor_minus():
     "a **  -b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**', ' ', '  '),
            ('MINUS', '-'),
@@ -706,7 +706,7 @@ def test_power_factor_minus():
 
 def test_power_factor_tild():
     "a **  ~b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**', ' ', '  '),
            ('TILDE', '~'),
@@ -722,7 +722,7 @@ def test_power_factor_tild():
 
 def test_power_operator_madness():
     "a **  ~+-b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**', ' ', '  '),
            ('TILDE', '~'),
@@ -752,7 +752,7 @@ def test_power_operator_madness():
 
 def test_power_factor_tild_space():
     "a **  ~ b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**', ' ', '  '),
            ('TILDE', '~', '', ' '),
@@ -768,7 +768,7 @@ def test_power_factor_tild_space():
 
 def test_power_trailer():
     "a.b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
@@ -784,7 +784,7 @@ def test_power_trailer_spaces():
     "a .b"
     "a.  b"
     "a  .   b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOT', '.', ' ', ''),
            ('NAME', 'b'),
@@ -797,7 +797,7 @@ def test_power_trailer_spaces():
                  ]
                 )])
 
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOT', '.', '', '  '),
            ('NAME', 'b'),
@@ -810,7 +810,7 @@ def test_power_trailer_spaces():
                  ]
                 )])
 
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOT', '.', '   ', '    '),
            ('NAME', 'b'),
@@ -826,7 +826,7 @@ def test_power_trailer_spaces():
 
 def test_power_trailers():
     "a.b.c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
@@ -842,7 +842,7 @@ def test_power_trailers():
                  ]
                 )])
     "a.b.c.d.e"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
@@ -868,7 +868,7 @@ def test_power_trailers():
 
 def test_power_trailers_space():
     "a . b . c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOT', '.', ' ', ' '),
            ('NAME', 'b'),
@@ -890,7 +890,7 @@ def test_power_trailers_space():
 
 def test_power_trailer_power():
     "a.b**c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
@@ -911,7 +911,7 @@ def test_power_trailer_power():
 
 def test_power_trailer_getitem_empty():
     "a[]"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('LEFT_SQUARE_BRACKET', '['),
            ('RIGHT_SQUARE_BRACKET', ']'),
@@ -923,7 +923,7 @@ def test_power_trailer_getitem_empty():
 
 def test_power_trailer_getitem_empty_with_space():
     "a [ ]"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('LEFT_SQUARE_BRACKET', '[', ' ', ' '),
            ('RIGHT_SQUARE_BRACKET', ']'),
@@ -938,7 +938,7 @@ def test_power_trailer_getitem_empty_with_space():
 
 def test_power_trailer_call_empty():
     "a()"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('LEFT_PARENTHESIS', '('),
            ('RIGHT_PARENTHESIS', ')'),
@@ -950,7 +950,7 @@ def test_power_trailer_call_empty():
 
 def test_power_trailer_call_empty_with_space():
     "a ( )"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('LEFT_PARENTHESIS', '(', ' ', ' '),
            ('RIGHT_PARENTHESIS', ')'),
@@ -965,7 +965,7 @@ def test_power_trailer_call_empty_with_space():
 
 def test_term_mult():
     "a*b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('STAR', '*'),
            ('NAME', 'b'),
@@ -979,7 +979,7 @@ def test_term_mult():
 
 def test_term_mult_first_space():
     "a *b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('STAR', '*', ' ', ''),
            ('NAME', 'b'),
@@ -993,7 +993,7 @@ def test_term_mult_first_space():
 
 def test_term_mult_second_space():
     "a* b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('STAR', '*', '', ' '),
            ('NAME', 'b'),
@@ -1007,7 +1007,7 @@ def test_term_mult_second_space():
 
 def test_term_mult_spaces():
     "a * b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('STAR', '*', ' ', ' '),
            ('NAME', 'b'),
@@ -1021,7 +1021,7 @@ def test_term_mult_spaces():
 
 def test_term_mult_spaces_atomtrailers():
     "a.b * c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
@@ -1041,7 +1041,7 @@ def test_term_mult_spaces_atomtrailers():
 
 def test_term_div():
     "a/b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('SLASH', '/'),
            ('NAME', 'b'),
@@ -1055,7 +1055,7 @@ def test_term_div():
 
 def test_term_div_first_space():
     "a /b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('SLASH', '/', ' ', ''),
            ('NAME', 'b'),
@@ -1069,7 +1069,7 @@ def test_term_div_first_space():
 
 def test_term_div_second_space():
     "a/ b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('SLASH', '/', '', ' '),
            ('NAME', 'b'),
@@ -1083,7 +1083,7 @@ def test_term_div_second_space():
 
 def test_term_div_spaces():
     "a / b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('SLASH', '/', ' ', ' '),
            ('NAME', 'b'),
@@ -1097,7 +1097,7 @@ def test_term_div_spaces():
 
 def test_term_div_spaces_atomtrailers():
     "a.b / c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
@@ -1117,7 +1117,7 @@ def test_term_div_spaces_atomtrailers():
 
 def test_term_modulo():
     "a%b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('PERCENT', '%'),
            ('NAME', 'b'),
@@ -1131,7 +1131,7 @@ def test_term_modulo():
 
 def test_term_modulo_first_space():
     "a %b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('PERCENT', '%', ' ', ''),
            ('NAME', 'b'),
@@ -1145,7 +1145,7 @@ def test_term_modulo_first_space():
 
 def test_term_modulo_second_space():
     "a% b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('PERCENT', '%', '', ' '),
            ('NAME', 'b'),
@@ -1159,7 +1159,7 @@ def test_term_modulo_second_space():
 
 def test_term_modulo_spaces():
     "a % b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('PERCENT', '%', ' ', ' '),
            ('NAME', 'b'),
@@ -1173,7 +1173,7 @@ def test_term_modulo_spaces():
 
 def test_term_modulo_spaces_atomtrailers():
     "a.b % c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
@@ -1193,7 +1193,7 @@ def test_term_modulo_spaces_atomtrailers():
 
 def test_term_floor_division():
     "a//b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_SLASH', '//'),
            ('NAME', 'b'),
@@ -1207,7 +1207,7 @@ def test_term_floor_division():
 
 def test_term_floor_division_first_space():
     "a //b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_SLASH', '//', ' ', ''),
            ('NAME', 'b'),
@@ -1221,7 +1221,7 @@ def test_term_floor_division_first_space():
 
 def test_term_floor_division_second_space():
     "a// b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_SLASH', '//', '', ' '),
            ('NAME', 'b'),
@@ -1235,7 +1235,7 @@ def test_term_floor_division_second_space():
 
 def test_term_floor_division_spaces():
     "a // b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_SLASH', '//', ' ', ' '),
            ('NAME', 'b'),
@@ -1249,7 +1249,7 @@ def test_term_floor_division_spaces():
 
 def test_term_floor_division_spaces_atomtrailers():
     "a.b // c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
@@ -1269,7 +1269,7 @@ def test_term_floor_division_spaces_atomtrailers():
 
 def test_combine_div_modulo_mult():
     "a/b%c*d"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('SLASH', '/'),
            ('NAME', 'b'),
@@ -1297,7 +1297,7 @@ def test_combine_div_modulo_mult():
 
 def test_arith_expr_plus():
     "a+b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('PLUS', '+'),
            ('NAME', 'b'),
@@ -1311,7 +1311,7 @@ def test_arith_expr_plus():
 
 def test_arith_expr_add_first_space():
     "a +b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('PLUS', '+', ' ', ''),
            ('NAME', 'b'),
@@ -1325,7 +1325,7 @@ def test_arith_expr_add_first_space():
 
 def test_arith_expr_add_second_space():
     "a+ b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('PLUS', '+', '', ' '),
            ('NAME', 'b'),
@@ -1339,7 +1339,7 @@ def test_arith_expr_add_second_space():
 
 def test_arith_expr_add_spaces():
     "a + b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('PLUS', '+', ' ', ' '),
            ('NAME', 'b'),
@@ -1353,7 +1353,7 @@ def test_arith_expr_add_spaces():
 
 def test_arith_expr_add_spaces_atomtrailers():
     "a.b + c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
@@ -1373,7 +1373,7 @@ def test_arith_expr_add_spaces_atomtrailers():
 
 def test_arith_expr_substract():
     "a-b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('MINUS', '-'),
            ('NAME', 'b'),
@@ -1387,7 +1387,7 @@ def test_arith_expr_substract():
 
 def test_arith_expr_substract_first_space():
     "a -b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('MINUS', '-', ' ', ''),
            ('NAME', 'b'),
@@ -1401,7 +1401,7 @@ def test_arith_expr_substract_first_space():
 
 def test_arith_expr_substract_second_space():
     "a- b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('MINUS', '-', '', ' '),
            ('NAME', 'b'),
@@ -1415,7 +1415,7 @@ def test_arith_expr_substract_second_space():
 
 def test_arith_expr_substract_spaces():
     "a - b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('MINUS', '-', ' ', ' '),
            ('NAME', 'b'),
@@ -1429,7 +1429,7 @@ def test_arith_expr_substract_spaces():
 
 def test_arith_expr_substract_spaces_atomtrailers():
     "a.b - c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
@@ -1450,7 +1450,7 @@ def test_arith_expr_substract_spaces_atomtrailers():
 
 def test_chained_add_substract():
     "a+b-c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('PLUS', '+'),
            ('NAME', 'b'),
@@ -1471,7 +1471,7 @@ def test_chained_add_substract():
 
 def test_arith_expr_left_shift():
     "a<<b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('LEFT_SHIFT', '<<'),
            ('NAME', 'b'),
@@ -1485,7 +1485,7 @@ def test_arith_expr_left_shift():
 
 def test_arith_expr_left_shift_first_space():
     "a <<b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('LEFT_SHIFT', '<<', ' ', ''),
            ('NAME', 'b'),
@@ -1499,7 +1499,7 @@ def test_arith_expr_left_shift_first_space():
 
 def test_arith_expr_left_shift_second_space():
     "a<< b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('LEFT_SHIFT', '<<', '', ' '),
            ('NAME', 'b'),
@@ -1513,7 +1513,7 @@ def test_arith_expr_left_shift_second_space():
 
 def test_arith_expr_left_shift_spaces():
     "a << b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('LEFT_SHIFT', '<<', ' ', ' '),
            ('NAME', 'b'),
@@ -1527,7 +1527,7 @@ def test_arith_expr_left_shift_spaces():
 
 def test_arith_expr_left_shift_spaces_atomtrailers():
     "a.b << c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
@@ -1547,7 +1547,7 @@ def test_arith_expr_left_shift_spaces_atomtrailers():
 
 def test_arith_expr_right_shift():
     "a>>b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('RIGHT_SHIFT', '>>'),
            ('NAME', 'b'),
@@ -1561,7 +1561,7 @@ def test_arith_expr_right_shift():
 
 def test_arith_expr_right_shift_first_space():
     "a >>b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('RIGHT_SHIFT', '>>', ' ', ''),
            ('NAME', 'b'),
@@ -1575,7 +1575,7 @@ def test_arith_expr_right_shift_first_space():
 
 def test_arith_expr_right_shift_second_space():
     "a>> b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('RIGHT_SHIFT', '>>', '', ' '),
            ('NAME', 'b'),
@@ -1589,7 +1589,7 @@ def test_arith_expr_right_shift_second_space():
 
 def test_arith_expr_right_shift_spaces():
     "a >> b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('RIGHT_SHIFT', '>>', ' ', ' '),
            ('NAME', 'b'),
@@ -1603,7 +1603,7 @@ def test_arith_expr_right_shift_spaces():
 
 def test_arith_expr_right_shift_spaces_atomtrailers():
     "a.b >> c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
@@ -1623,7 +1623,7 @@ def test_arith_expr_right_shift_spaces_atomtrailers():
 
 def test_chained_left_right_shift():
     "a<<b>>c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('LEFT_SHIFT', '<<'),
            ('NAME', 'b'),
@@ -1644,7 +1644,7 @@ def test_chained_left_right_shift():
 
 def test_and_expr():
     "a&b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('AMPER', '&'),
            ('NAME', 'b'),
@@ -1658,7 +1658,7 @@ def test_and_expr():
 
 def test_and_expr_first_space():
     "a &b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('AMPER', '&', ' ', ''),
            ('NAME', 'b'),
@@ -1672,7 +1672,7 @@ def test_and_expr_first_space():
 
 def test_and_expr_second_space():
     "a& b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('AMPER', '&', '', ' '),
            ('NAME', 'b'),
@@ -1686,7 +1686,7 @@ def test_and_expr_second_space():
 
 def test_and_expr_spaces():
     "a & b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('AMPER', '&', ' ', ' '),
            ('NAME', 'b'),
@@ -1700,7 +1700,7 @@ def test_and_expr_spaces():
 
 def test_and_expr_spaces_atomtrailers():
     "a.b & c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
@@ -1720,7 +1720,7 @@ def test_and_expr_spaces_atomtrailers():
 
 def test_chained_left_and_expr():
     "a&b&c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('AMPER', '&'),
            ('NAME', 'b'),
@@ -1741,7 +1741,7 @@ def test_chained_left_and_expr():
 
 def test_xor_expr():
     "a^b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('CIRCUMFLEX', '^'),
            ('NAME', 'b'),
@@ -1755,7 +1755,7 @@ def test_xor_expr():
 
 def test_xor_expr_first_space():
     "a ^b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('CIRCUMFLEX', '^', ' ', ''),
            ('NAME', 'b'),
@@ -1769,7 +1769,7 @@ def test_xor_expr_first_space():
 
 def test_xor_expr_second_space():
     "a^ b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('CIRCUMFLEX', '^', '', ' '),
            ('NAME', 'b'),
@@ -1783,7 +1783,7 @@ def test_xor_expr_second_space():
 
 def test_xor_expr_spaces():
     "a ^ b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('CIRCUMFLEX', '^', ' ', ' '),
            ('NAME', 'b'),
@@ -1797,7 +1797,7 @@ def test_xor_expr_spaces():
 
 def test_xor_expr_spaces_atomtrailers():
     "a.b ^ c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
@@ -1817,7 +1817,7 @@ def test_xor_expr_spaces_atomtrailers():
 
 def test_chained_left_xor_expr():
     "a^b^c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('CIRCUMFLEX', '^'),
            ('NAME', 'b'),
@@ -1838,7 +1838,7 @@ def test_chained_left_xor_expr():
 
 def test_expr():
     "a|b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('VBAR', '|'),
            ('NAME', 'b'),
@@ -1852,7 +1852,7 @@ def test_expr():
 
 def test_expr_first_space():
     "a |b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('VBAR', '|', ' ', ''),
            ('NAME', 'b'),
@@ -1866,7 +1866,7 @@ def test_expr_first_space():
 
 def test_expr_second_space():
     "a| b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('VBAR', '|', '', ' '),
            ('NAME', 'b'),
@@ -1880,7 +1880,7 @@ def test_expr_second_space():
 
 def test_expr_spaces():
     "a | b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('VBAR', '|', ' ', ' '),
            ('NAME', 'b'),
@@ -1894,7 +1894,7 @@ def test_expr_spaces():
 
 def test_expr_spaces_atomtrailers():
     "a.b | c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
@@ -1914,7 +1914,7 @@ def test_expr_spaces_atomtrailers():
 
 def test_chained_left_expr():
     "a|b|c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('VBAR', '|'),
            ('NAME', 'b'),
@@ -1948,7 +1948,7 @@ comparison_tokens = (
 def test_comparison():
     "a<b"
     for token_name, value in comparison_tokens:
-        parse([
+        parse_simple([
                ('NAME', 'a'),
                (token_name, value),
                ('NAME', 'b'),
@@ -1963,7 +1963,7 @@ def test_comparison():
 def test_comparison_first_space():
     "a <b"
     for token_name, value in comparison_tokens:
-        parse([
+        parse_simple([
                ('NAME', 'a'),
                (token_name, value, ' ', ''),
                ('NAME', 'b'),
@@ -1978,7 +1978,7 @@ def test_comparison_first_space():
 def test_comparison_second_space():
     "a< b"
     for token_name, value in comparison_tokens:
-        parse([
+        parse_simple([
                ('NAME', 'a'),
                (token_name, value, '', ' '),
                ('NAME', 'b'),
@@ -1993,7 +1993,7 @@ def test_comparison_second_space():
 def test_comparison_spaces():
     "a < b"
     for token_name, value in comparison_tokens:
-        parse([
+        parse_simple([
                ('NAME', 'a'),
                (token_name, value, ' ', ' '),
                ('NAME', 'b'),
@@ -2008,7 +2008,7 @@ def test_comparison_spaces():
 def test_comparison_spaces_atomtrailers():
     "a.b < c"
     for token_name, value in comparison_tokens:
-        parse([
+        parse_simple([
                ('NAME', 'a'),
                ('DOT', '.'),
                ('NAME', 'b'),
@@ -2029,7 +2029,7 @@ def test_comparison_spaces_atomtrailers():
 def test_chained_comparison():
     "a<b<c"
     for token_name, value in comparison_tokens:
-        parse([
+        parse_simple([
                ('NAME', 'a'),
                (token_name, value),
                ('NAME', 'b'),
@@ -2056,7 +2056,7 @@ advanced_comparison_tokens = (
 def test_advanced_comparison():
     "a<b"
     for (token_name, value, _, after_space), (token_name2, value2) in advanced_comparison_tokens:
-        parse([
+        parse_simple([
                ('NAME', 'a'),
                (token_name, value, "", after_space),
                (token_name2, value2),
@@ -2073,7 +2073,7 @@ def test_advanced_comparison():
 def test_advanced_comparison_first_space():
     "a <b"
     for (token_name, value, _, after_space), (token_name2, value2) in advanced_comparison_tokens:
-        parse([
+        parse_simple([
                ('NAME', 'a'),
                (token_name, value, " ", after_space),
                (token_name2, value2),
@@ -2090,7 +2090,7 @@ def test_advanced_comparison_first_space():
 def test_advanced_comparison_second_space():
     "a< b"
     for (token_name, value, _, after_space), (token_name2, value2) in advanced_comparison_tokens:
-        parse([
+        parse_simple([
                ('NAME', 'a'),
                (token_name, value, "", after_space),
                (token_name2, value2, "", " "),
@@ -2107,7 +2107,7 @@ def test_advanced_comparison_second_space():
 def test_advanced_comparison_spaces():
     "a < b"
     for (token_name, value, _, after_space), (token_name2, value2) in advanced_comparison_tokens:
-        parse([
+        parse_simple([
                ('NAME', 'a'),
                (token_name, value, " ", after_space),
                (token_name2, value2, "", " "),
@@ -2124,7 +2124,7 @@ def test_advanced_comparison_spaces():
 def test_advanced_comparison_spaces_atomtrailers():
     "a.b < c"
     for (token_name, value, _, after_space), (token_name2, value2) in advanced_comparison_tokens:
-        parse([
+        parse_simple([
                ('NAME', 'a'),
                ('DOT', '.'),
                ('NAME', 'b'),
@@ -2147,7 +2147,7 @@ def test_advanced_comparison_spaces_atomtrailers():
 def test_chained_advanced_comparison():
     "a<b<c"
     for (token_name, value, _, after_space), (token_name2, value2) in advanced_comparison_tokens:
-        parse([
+        parse_simple([
                ('NAME', 'a'),
                (token_name, value, "", after_space),
                (token_name2, value2),
@@ -2172,7 +2172,7 @@ def test_chained_advanced_comparison():
 
 def test_not():
     "not a"
-    parse([
+    parse_simple([
            ('NOT', 'not', '', ' '),
            ('NAME', 'a'),
           ],
@@ -2184,7 +2184,7 @@ def test_not():
 
 def test_not_not():
     "not not a"
-    parse([
+    parse_simple([
            ('NOT', 'not', '', ' '),
            ('NOT', 'not', '', ' '),
            ('NAME', 'a'),
@@ -2201,7 +2201,7 @@ def test_not_not():
 
 def test_and():
     "a and b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('AND', 'and', ' ', ' '),
            ('NAME', 'b'),
@@ -2216,7 +2216,7 @@ def test_and():
 
 def test_and_and():
     "a and b and c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('AND', 'and', ' ', ' '),
            ('NAME', 'b'),
@@ -2239,7 +2239,7 @@ def test_and_and():
 
 def test_or():
     "a or b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('OR', 'or', ' ', ' '),
            ('NAME', 'b'),
@@ -2254,7 +2254,7 @@ def test_or():
 
 def test_or_or():
     "a or b or c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('OR', 'or', ' ', ' '),
            ('NAME', 'b'),
@@ -2277,7 +2277,7 @@ def test_or_or():
 
 def test_or_and():
     "a or b and c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('OR', 'or', ' ', ' '),
            ('NAME', 'b'),
@@ -2301,7 +2301,7 @@ def test_or_and():
 
 def test_ternary_operator():
     "a if b else c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('IF', 'if', ' ', ' '),
            ('NAME', 'b'),
@@ -2320,7 +2320,7 @@ def test_ternary_operator():
 
 def test_assignment():
     "a = b"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('EQUAL', '=', ' ', ' '),
            ('NAME', 'b'),
@@ -2334,7 +2334,7 @@ def test_assignment():
 
 def test_assignment_assignment():
     "a = b = c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('EQUAL', '=', ' ', ' '),
            ('NAME', 'b'),
@@ -2371,7 +2371,7 @@ augmented_assignment_tokens = (
 def test_augmented_assignment():
     "a += b"
     for token_name, value in augmented_assignment_tokens:
-        parse([
+        parse_simple([
                ('NAME', 'a'),
                (token_name, value, ' ', ' '),
                ('NAME', 'b'),
@@ -2388,7 +2388,7 @@ def test_augmented_assignment_augmented_assignment():
     "a += b"
     for token_name, value in augmented_assignment_tokens:
         with pytest.raises(Exception):
-            parse([
+            parse_simple([
                    ('NAME', 'a'),
                    (token_name, value, ' ', ' '),
                    ('NAME', 'b'),
@@ -2411,7 +2411,7 @@ def test_augmented_assignment_augmented_assignment():
 
 def test_expr_comma_list():
     "a or b,c+d"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('OR', 'or', ' ', ' '),
            ('NAME', 'b'),
@@ -2442,7 +2442,7 @@ def test_expr_comma_list():
 
 def test_expr_comma_list_3_items():
     "a or b,c+d,e"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('OR', 'or', ' ', ' '),
            ('NAME', 'b'),
@@ -2477,7 +2477,7 @@ def test_expr_comma_list_3_items():
 
 def test_implicit_tuple_space():
     "a, b , c"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('COMMA', ',', '', ' '),
            ('NAME', 'b'),
@@ -2499,7 +2499,7 @@ def test_implicit_tuple_space():
 
 def test_implicit_tuple_one_item():
     "a ,"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('COMMA', ',', ' ', ''),
           ],
@@ -2513,7 +2513,7 @@ def test_implicit_tuple_one_item():
 
 def test_implicit_tuple_trailing_comma():
     "a, b ,"
-    parse([
+    parse_simple([
            ('NAME', 'a'),
            ('COMMA', ',', '', ' '),
            ('NAME', 'b'),
@@ -2532,14 +2532,14 @@ def test_implicit_tuple_trailing_comma():
 
 def test_return():
     "return"
-    parse([
+    parse_simple([
            ('RETURN', 'return'),
           ],
          [return_()])
 
 def test_return_a():
     "return a"
-    parse([
+    parse_simple([
            ('RETURN', 'return', '', ' '),
            ('NAME', 'a'),
           ],
@@ -2547,14 +2547,14 @@ def test_return_a():
 
 def test_yield():
     "yield"
-    parse([
+    parse_simple([
            ('YIELD', 'yield'),
           ],
          [yield_()])
 
 def test_yield_a():
     "yield a"
-    parse([
+    parse_simple([
            ('YIELD', 'yield', '', ' '),
            ('NAME', 'a'),
           ],
@@ -2562,7 +2562,7 @@ def test_yield_a():
 
 def test_del():
     "del a"
-    parse([
+    parse_simple([
            ('DEL', 'del', '', ' '),
            ('NAME', 'a'),
           ],
@@ -2576,7 +2576,7 @@ def test_del():
 
 def test_break():
     "break"
-    parse([
+    parse_simple([
            ('BREAK', 'break'),
           ],
           [{
@@ -2585,7 +2585,7 @@ def test_break():
 
 def test_continue():
     "continue"
-    parse([
+    parse_simple([
            ('CONTINUE', 'continue'),
           ],
           [{
@@ -2594,7 +2594,7 @@ def test_continue():
 
 def test_pass():
     "pass"
-    parse([
+    parse_simple([
            ('PASS', 'pass'),
           ],
           [{
@@ -2603,7 +2603,7 @@ def test_pass():
 
 def test_assert():
     "assert a"
-    parse([
+    parse_simple([
            ('ASSERT', 'assert', '', ' '),
            ('NAME', 'a'),
           ],
@@ -2618,7 +2618,7 @@ def test_assert():
 
 def test_assert_message():
     "assert a , b"
-    parse([
+    parse_simple([
            ('ASSERT', 'assert', '', ' '),
            ('NAME', 'a'),
            ('COMMA', ',', ' ', ' '),
@@ -2635,7 +2635,7 @@ def test_assert_message():
 
 def test_raise_empty():
     "raise"
-    parse([
+    parse_simple([
            ('RAISE', 'raise', '', ' '),
           ],
           [{
@@ -2652,7 +2652,7 @@ def test_raise_empty():
 
 def test_raise():
     "raise a"
-    parse([
+    parse_simple([
            ('RAISE', 'raise', '', ' '),
            ('NAME', 'a'),
           ],
@@ -2670,7 +2670,7 @@ def test_raise():
 
 def test_raise_instance():
     "raise a, b"
-    parse([
+    parse_simple([
            ('RAISE', 'raise', '', ' '),
            ('NAME', 'a'),
            ('COMMA', 'comma', '', ' '),
@@ -2690,7 +2690,7 @@ def test_raise_instance():
 
 def test_raise_instance_traceback():
     "raise a, b, c"
-    parse([
+    parse_simple([
            ('RAISE', 'raise', '', ' '),
            ('NAME', 'a'),
            ('COMMA', 'comma', '', ' '),
@@ -2712,7 +2712,7 @@ def test_raise_instance_traceback():
 
 def test_exec():
     "exec a"
-    parse([
+    parse_simple([
            ('EXEC', 'exec', '', ' '),
            ('NAME', 'a'),
           ],
@@ -2730,7 +2730,7 @@ def test_exec():
 
 def test_exec_in():
     "exec a in b"
-    parse([
+    parse_simple([
            ('EXEC', 'exec', '', ' '),
            ('NAME', 'a'),
            ('IN', 'in', ' ', ' '),
@@ -2750,7 +2750,7 @@ def test_exec_in():
 
 def test_exec_in_c():
     "exec a in b, c"
-    parse([
+    parse_simple([
            ('EXEC', 'exec', '', ' '),
            ('NAME', 'a'),
            ('IN', 'in', ' ', ' '),
@@ -2772,7 +2772,7 @@ def test_exec_in_c():
 
 def test_global():
     "global a"
-    parse([
+    parse_simple([
            ('GLOBAL', 'global', '', ' '),
            ('NAME', 'a'),
           ],
@@ -2786,7 +2786,7 @@ def test_global():
 
 def test_global_one():
     "global a, b"
-    parse([
+    parse_simple([
            ('GLOBAL', 'global', '', ' '),
            ('NAME', 'a'),
            ('COMMA', ',', '', ' '),
@@ -2805,7 +2805,7 @@ def test_global_one():
 
 def test_global_two():
     "global a, b ,  c"
-    parse([
+    parse_simple([
            ('GLOBAL', 'global', '', ' '),
            ('NAME', 'a'),
            ('COMMA', ',', '', ' '),
@@ -2830,7 +2830,7 @@ def test_global_two():
 
 def test_print():
     "print"
-    parse([
+    parse_simple([
            ('PRINT', 'print', '', ''),
           ],
           [{
@@ -2843,7 +2843,7 @@ def test_print():
 
 def test_print_a():
     "print a"
-    parse([
+    parse_simple([
            ('PRINT', 'print', '', ' '),
            ('NAME', 'a'),
           ],
@@ -2857,7 +2857,7 @@ def test_print_a():
 
 def test_print_a_b():
     "print a, b"
-    parse([
+    parse_simple([
            ('PRINT', 'print', '', ' '),
            ('NAME', 'a'),
            ('COMMA', ',', '', ' '),
@@ -2878,7 +2878,7 @@ def test_print_a_b():
 
 def test_print_a_b_comma():
     "print a, b,"
-    parse([
+    parse_simple([
            ('PRINT', 'print', '', ' '),
            ('NAME', 'a'),
            ('COMMA', ',', '', ' '),
@@ -2901,7 +2901,7 @@ def test_print_a_b_comma():
 
 def test_print_redirect():
     "print >> a"
-    parse([
+    parse_simple([
            ('PRINT', 'print', '', ' '),
            ('RIGHT_SHIFT', '>>', '', ' '),
            ('NAME', 'a'),
@@ -2916,7 +2916,7 @@ def test_print_redirect():
 
 def test_print_redirect_ab():
     "print >> a , b"
-    parse([
+    parse_simple([
            ('PRINT', 'print', '', ' '),
            ('RIGHT_SHIFT', '>>', '', ' '),
            ('NAME', 'a'),
@@ -2938,7 +2938,7 @@ def test_print_redirect_ab():
 
 def test_print_redirect_ab_comma():
     "print >> a , b ,"
-    parse([
+    parse_simple([
            ('PRINT', 'print', '', ' '),
            ('RIGHT_SHIFT', '>>', '', ' '),
            ('NAME', 'a'),
@@ -2963,7 +2963,7 @@ def test_print_redirect_ab_comma():
 
 def test_empty_tuple():
     "()"
-    parse([
+    parse_simple([
            ('LEFT_PARENTHESIS', '('),
            ('RIGHT_PARENTHESIS', ')'),
           ],
@@ -2976,7 +2976,7 @@ def test_empty_tuple():
 
 def test_empty_tuple_space():
     "(  )"
-    parse([
+    parse_simple([
            ('LEFT_PARENTHESIS', '(', '', '  '),
            ('RIGHT_PARENTHESIS', ')'),
           ],
@@ -2986,6 +2986,39 @@ def test_empty_tuple_space():
             "second_space": "",
             "value": [],
           }])
+
+# XXX finish tuples
+# too long time I haven't coded on this
+# don't see the difference between tuple and () with a comma in it
+
+# file_input: ([SPACE] NEWLINE | stmt)* [SPACE] ENDMARKER
+
+def test_file_input_empty():
+    ""
+    parse_multi([
+        ],[
+        ])
+
+def test_file_input_one_item():
+    "a"
+    parse_multi([
+           ('NAME', 'a'), ('ENDL', '\n'),
+        ],[
+           name('a'), endl("\n"),
+          ])
+
+def test_file_input_two_items():
+    """
+    a
+    a
+    """
+    parse_multi([
+           ('NAME', 'a'), ('ENDL', '\n'),
+           ('NAME', 'a'), ('ENDL', '\n'),
+        ],[
+           name('a'), endl("\n"),
+           name('a'), endl("\n"),
+          ])
 
 ### atom: '(' ')'
 ### atom: '(' SPACE ')'
@@ -3036,7 +3069,7 @@ def test_empty_tuple_space():
 
 # file_input: ([SPACE] NEWLINE | stmt)* [SPACE] ENDMARKER
 
-# stmt: simple_stmt
+### stmt: simple_stmt
 # stmt: compound_stmt
 
 ### simple_stmt: small_stmt [SPACE] NEWLINE
