@@ -3020,6 +3020,22 @@ def test_file_input_two_items():
            name('a'), endl("\n"),
           ])
 
+def test_file_input_two_items_endl():
+    """
+    a
+
+    a
+    """
+    parse_multi([
+           ('NAME', 'a'), ('ENDL', '\n'),
+           ('ENDL', '\n'),
+           ('NAME', 'a'), ('ENDL', '\n'),
+        ],[
+           name('a'), endl("\n"),
+           endl("\n"),
+           name('a'), endl("\n"),
+          ])
+
 ### atom: '(' ')'
 ### atom: '(' SPACE ')'
 # atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
