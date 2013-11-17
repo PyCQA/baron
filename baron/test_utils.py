@@ -78,5 +78,5 @@ def getitem(value=None, first_space="", second_space=""):
 def call(value=None, first_space="", second_space=""):
     return _node("call", value, first_space=first_space, second_space=second_space)
 
-def semicolon():
-    return _node("semicolon", ";")
+def semicolon(first_space="", second_space=""):
+    return _node("semicolon", ";", before_space=first_space, after_space=second_space)

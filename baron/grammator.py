@@ -570,13 +570,13 @@ def statement_simple_statement((simple_stmt,)):
 @pg.production("simple_stmt : small_stmt SEMICOLON? ENDL")
 def simple_stmt((small_stmt, semicolon, endl_)):
     if semicolon:
-        return [small_stmt, {"type": "semicolon", "value": ";"}] + endl((endl_,))
+        return [small_stmt, {"type": "semicolon", "value": ";", "before_space": semicolon.before_space, "after_space": semicolon.after_space}] + endl((endl_,))
     return [small_stmt] + endl((endl_,))
 
 
 @pg.production("simple_stmt : small_stmt SEMICOLON simple_stmt")
 def simple_stmt_semicolon((small_stmt, semicolon, simple_stmt)):
-    return [small_stmt, {"type": "semicolon", "value": ";"}] + simple_stmt
+    return [small_stmt, {"type": "semicolon", "value": ";", "before_space": semicolon.before_space, "after_space": semicolon.after_space}] + simple_stmt
 
 
 @pg.production("small_stmt : flow_stmt")

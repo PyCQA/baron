@@ -3064,6 +3064,16 @@ def test_file_input_simple_stmt_three_items_semicolon():
            name('a'), semicolon(), name('b'), semicolon(), name('a'), endl("\n"),
           ])
 
+def test_file_input_simple_stmt_one_item_semicolon_space():
+    """
+    a ; 
+    """
+    parse_multi([
+           ('NAME', 'a'), ('SEMICOLON', ';', ' ', ' '), ('ENDL', '\n'),
+        ],[
+           name('a'), semicolon(' ', ' '), endl("\n"),
+          ])
+
 ### atom: '(' ')'
 ### atom: '(' SPACE ')'
 # atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
