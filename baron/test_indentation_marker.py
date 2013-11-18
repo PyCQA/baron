@@ -48,3 +48,44 @@ def test_dumy_if():
         ('PASS', 'pass'),
         ('DEDENT', ''),
     ])
+
+
+def test_dumy_if_if():
+    """
+    if a:
+        if b:
+            pass
+    """
+    check([
+        ('IF', 'if'),
+        ('SPACE', ' '),
+        ('NAME', 'a'),
+        ('COLON', ':'),
+        ('ENDL', '\n'),
+        ('SPACE', '    '),
+        ('IF', 'if'),
+        ('SPACE', ' '),
+        ('NAME', 'b'),
+        ('COLON', ':'),
+        ('ENDL', '\n'),
+        ('SPACE', '        '),
+        ('PASS', 'pass'),
+    ], [
+        ('IF', 'if'),
+        ('SPACE', ' '),
+        ('NAME', 'a'),
+        ('COLON', ':'),
+        ('ENDL', '\n'),
+        ('INDENT', ''),
+        ('SPACE', '    '),
+        ('IF', 'if'),
+        ('SPACE', ' '),
+        ('NAME', 'b'),
+        ('COLON', ':'),
+        ('ENDL', '\n'),
+        ('INDENT', ''),
+        ('SPACE', '        '),
+        ('PASS', 'pass'),
+        ('DEDENT', ''),
+        ('DEDENT', ''),
+    ])

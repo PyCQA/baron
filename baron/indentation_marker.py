@@ -37,7 +37,7 @@ def mark_indentation_generator(sequence):
             return
 
         if current[0] == "ENDMARKER" and indent:
-            #while indent > 0:
+            while indent > 0:
                 yield ('DEDENT', '')
                 indent -= 1
 
