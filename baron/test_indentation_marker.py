@@ -77,3 +77,29 @@ def test_dumy_if_if():
         ('DEDENT', ''),
         ('DEDENT', ''),
     ])
+
+def test_dummy_if_followed():
+    """
+    if a:
+        pass
+    pouet
+    """
+    check([
+        ('IF', 'if', '', ' '),
+        ('NAME', 'a'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', '    '),
+        ('PASS', 'pass'),
+        ('ENDL', '\n', '', ''),
+        ('NAME', 'pouet'),
+    ], [
+        ('IF', 'if', '', ' '),
+        ('NAME', 'a'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', '    '),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n', '', ''),
+        ('DEDENT', ''),
+        ('NAME', 'pouet'),
+    ])
