@@ -13,4 +13,4 @@ def _parse(tokens):
 def parse(pouet):
     if pouet and pouet[-1] != "\n":
         pouet += "\n"
-    return _parse(space_group(mark_indentation(tokenize(group(split(pouet))))))
+    return _parse(mark_indentation(space_group(tokenize(group(split(pouet))))))
