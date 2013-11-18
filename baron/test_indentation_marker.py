@@ -11,10 +11,12 @@ def check(input, output):
 
 
 def test_empty():
+    ""
     check([], [])
 
 
 def test_dummy():
+    "a"
     check([
         ('NAME', 'a'),
     ], [
@@ -23,6 +25,10 @@ def test_dummy():
 
 
 def test_dumy_if():
+    """
+    if a:
+        pass
+    """
     check([
         ('IF', 'if'),
         ('SPACE', ' '),
