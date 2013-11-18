@@ -26,10 +26,27 @@ def mark_indentation(sequence):
 def mark_indentation_generator(sequence):
     iterator = FlexibleIterator(sequence)
     current = None, None
+    indent = 0
     while True:
         if iterator.end():
             return
 
         current = iterator.next()
 
-        yield current
+        if current is None:
+            return
+
+        if current[0] == "ENDMARKER" and indent:
+            #while indent > 0:
+                yield ('DEDENT', '')
+                indent -= 1
+
+        print current, iterator.show_next()
+        if current[0] == "COLON" and iterator.show_next()[0] == "ENDL":
+            indent += 1
+            yield current
+            yield iterator.next()
+            yield ('INDENT', '')
+
+        else:
+            yield current

@@ -2641,3 +2641,29 @@ def test_if_a_pass():
            ('COLON', ':', ' ', ' '),
            ('PASS', 'pass'),
           ])
+
+
+def test_if_a_pass_indent():
+    """
+    if a:
+        pass
+    """
+    group([
+           ('IF', 'if'),
+           ('SPACE', ' '),
+           ('NAME', 'a'),
+           ('SPACE', ' '),
+           ('COLON', ':'),
+           ('ENDL', '\n'),
+           ('INDENT', ''),
+           ('SPACE', '    '),
+           ('PASS', 'pass'),
+          ],
+          [
+           ('IF', 'if', '', ' '),
+           ('NAME', 'a'),
+           ('COLON', ':', ' '),
+           ('ENDL', '\n'),
+           ('INDENT', '', '', '    '),
+           ('PASS', 'pass'),
+          ])
