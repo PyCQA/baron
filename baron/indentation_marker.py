@@ -60,7 +60,7 @@ def mark_indentation_generator(sequence):
                     yield i
                 continue
 
-        if indentations and current[0] == "ENDL" and current[3] != indentations[-1] and iterator.show_next()[0] != "ENDL":
+        if indentations and current[0] == "ENDL" and (len(current) != 4 or current[3] != indentations[-1]) and iterator.show_next()[0] != "ENDL":
             indentations.pop()
             yield current
             yield ('DEDENT', '')
