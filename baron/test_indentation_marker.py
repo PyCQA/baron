@@ -7,6 +7,7 @@ from itertools import izip_longest
 
 def check(input, output):
     for i, j in izip_longest(mark_indentation(input + [('ENDMARKER', ''), None]), output + [('ENDMARKER', ''), None]):
+        print "DEBUG", i, j
         assert i == j
 
 
@@ -102,4 +103,30 @@ def test_dummy_if_followed():
         ('ENDL', '\n', '', ''),
         ('DEDENT', ''),
         ('NAME', 'pouet'),
+    ])
+
+def test_dummy_if_followed_blank_line():
+    """
+    if a:
+
+        pass
+    """
+    check([
+        ('IF', 'if', '', ' '),
+        ('NAME', 'a'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', ''),
+        ('ENDL', '\n', '', '    '),
+        ('PASS', 'pass'),
+        ('ENDL', '\n', '', ''),
+    ], [
+        ('IF', 'if', '', ' '),
+        ('NAME', 'a'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', ''),
+        ('INDENT', ''),
+        ('ENDL', '\n', '', '    '),
+        ('PASS', 'pass'),
+        ('ENDL', '\n', '', ''),
+        ('DEDENT', ''),
     ])

@@ -41,17 +41,26 @@ def mark_indentation_generator(sequence):
                 yield ('DEDENT', '')
                 indentations.pop()
 
-        print current, iterator.show_next()
-        if current[0] == "COLON" and\
-                iterator.show_next()[0] == "ENDL" and\
-                iterator.show_next()[3]:
-            indentations.append(iterator.show_next()[3])
-            yield current
-            yield iterator.next()
-            yield ('INDENT', '')
-            continue
+        #print current, iterator.show_next()
+        if current[0] == "COLON" and iterator.show_next()[0] == "ENDL":
+            if iterator.show_next(2)[0] not in ("ENDL",):
+                indentations.append(iterator.show_next()[3])
+                yield current
+                yield iterator.next()
+                yield ('INDENT', '')
+                continue
+            else:
+                yield current
+                for i in iterator:
+                    if i[0] == 'ENDL' and iterator.show_next()[0] not in ('ENDL',):
+                        indentations.append(i[3])
+                        yield ('INDENT', '')
+                        yield i
+                        break
+                    yield i
+                continue
 
-        if indentations and current[0] == "ENDL" and current[3] != indentations[-1]:
+        if indentations and current[0] == "ENDL" and current[3] != indentations[-1] and iterator.show_next()[0] != "ENDL":
             indentations.pop()
             yield current
             yield ('DEDENT', '')
