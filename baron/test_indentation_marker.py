@@ -63,6 +63,7 @@ def test_dumy_if_if():
         ('COLON', ':'),
         ('ENDL', '\n', '', '        '),
         ('PASS', 'pass'),
+        ('ENDL', '\n'),
     ], [
         ('IF', 'if', '', ' '),
         ('NAME', 'a'),
@@ -75,6 +76,7 @@ def test_dumy_if_if():
         ('ENDL', '\n', '',  '        '),
         ('INDENT', ''),
         ('PASS', 'pass'),
+        ('ENDL', '\n'),
         ('DEDENT', ''),
         ('DEDENT', ''),
     ])
@@ -129,4 +131,138 @@ def test_dummy_if_followed_blank_line():
         ('PASS', 'pass'),
         ('ENDL', '\n'),
         ('DEDENT', ''),
+    ])
+
+def test_dumy_if_dendent_quite_a_lot():
+    """
+    if a:
+        if b:
+            if c:
+                pass
+
+    pouet
+    """
+    check([
+        ('IF', 'if', '', ' '),
+        ('NAME', 'a'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', '    '*1),
+        ('IF', 'if', '', ' '),
+        ('NAME', 'b'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', '    '*2),
+        ('IF', 'if', '', ' '),
+        ('NAME', 'c'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', '    '*3),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('ENDL', '\n'),
+        ('NAME', 'pouet'),
+    ], [
+        ('IF', 'if', '', ' '),
+        ('NAME', 'a'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', '    '*1),
+        ('INDENT', ''),
+        ('IF', 'if', '', ' '),
+        ('NAME', 'b'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', '    '*2),
+        ('INDENT', ''),
+        ('IF', 'if', '', ' '),
+        ('NAME', 'c'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', '    '*3),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+        ('DEDENT', ''),
+        ('DEDENT', ''),
+        ('NAME', 'pouet'),
+    ])
+
+def test_dumy_if_dendent_a_lot():
+    """
+    if a:
+        if b:
+            if c:
+                pass
+        if d:
+            pass
+            if e:
+                pass
+
+    pouet
+    """
+    check([
+        ('IF', 'if', '', ' '),
+        ('NAME', 'a'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', '    '*1),
+        ('IF', 'if', '', ' '),
+        ('NAME', 'b'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', '    '*2),
+        ('IF', 'if', '', ' '),
+        ('NAME', 'c'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', '    '*3),
+        ('PASS', 'pass'),
+        ('ENDL', '\n', '', '    '*1),
+        ('IF', 'if', '', ' '),
+        ('NAME', 'd'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', '    '*2),
+        ('PASS', 'pass'),
+        ('ENDL', '\n', '', '    '*2),
+        ('IF', 'if', '', ' '),
+        ('NAME', 'e'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', '    '*3),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('ENDL', '\n'),
+        ('NAME', 'pouet'),
+    ], [
+        ('IF', 'if', '', ' '),
+        ('NAME', 'a'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', '    '*1),
+        ('INDENT', ''),
+        ('IF', 'if', '', ' '),
+        ('NAME', 'b'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', '    '*2),
+        ('INDENT', ''),
+        ('IF', 'if', '', ' '),
+        ('NAME', 'c'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', '    '*3),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n', '', '    '*1),
+        ('DEDENT', ''),
+        ('DEDENT', ''),
+        ('IF', 'if', '', ' '),
+        ('NAME', 'd'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', '    '*2),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n', '', '    '*2),
+        ('IF', 'if', '', ' '),
+        ('NAME', 'e'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', '    '*3),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+        ('DEDENT', ''),
+        ('DEDENT', ''),
+        ('NAME', 'pouet'),
     ])
