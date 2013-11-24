@@ -2667,3 +2667,17 @@ def test_if_a_pass_indent():
            ('INDENT', '', '', '    '),
            ('PASS', 'pass'),
           ])
+
+
+def test_endl():
+    """
+        """
+    group([
+           ('ENDL', '\n'),
+           ('SPACE', '    '),
+           ('ENDL', '\n'),
+         ],
+         [
+           ('ENDL', '\n', '', '    '),
+           ('ENDL', '\n'),
+         ])
