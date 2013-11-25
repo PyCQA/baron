@@ -3104,8 +3104,6 @@ def test_if_stmt_indent():
     if a:
         pass
     """
-    parse_multi
-    parse_multi
     parse_multi([
            ('IF', 'if', '', ' '),
            ('NAME', 'a'),
