@@ -266,3 +266,43 @@ def test_dumy_if_dendent_a_lot():
         ('DEDENT', ''),
         ('NAME', 'pouet'),
     ])
+
+def test_trailing_spaces():
+    """
+    if a:
+        if b:
+            
+        
+            pass
+    """
+    check([
+        ('IF', 'if', '', ' '),
+        ('NAME', 'a'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', '    '),
+        ('IF', 'if', '', ' '),
+        ('NAME', 'b'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', '    '*2),
+        ('ENDL', '\n', '', '    '),
+        ('ENDL', '\n', '', '    '*2),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+    ], [
+        ('IF', 'if', '', ' '),
+        ('NAME', 'a'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', '    '),
+        ('INDENT', ''),
+        ('IF', 'if', '', ' '),
+        ('NAME', 'b'),
+        ('COLON', ':'),
+        ('ENDL', '\n', '', '    '*2),
+        ('ENDL', '\n', '', '    '),
+        ('INDENT', ''),
+        ('ENDL', '\n', '', '    '*2),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+        ('DEDENT', ''),
+    ])
