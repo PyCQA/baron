@@ -1138,24 +1138,3 @@ def fake_lexer(sequence):
 
 def parse(sequence):
     return parser.parse(fake_lexer(sequence))
-
-if __name__ == '__main__':
-    import json
-    from grouper import group
-    from spliter import split
-
-    def pouet(sequence):
-        return tokenize(group(split(sequence)))
-
-    def pouetpouet(sequence):
-        return group(split(sequence))
-
-    def pouetpouetpouet(sequence):
-        for i in sequence:
-            if i is None:
-                yield None
-            yield Token(*i)
-
-    # print pouet('1')
-    print json.dumps(parse(pouetpouet('a and b and c')), indent=4, sort_keys=True)
-    # print json.dumps(parser.parse(pouetpouetpouet([('ENDMARKER', ''), None])), indent=4)
