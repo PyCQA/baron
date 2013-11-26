@@ -609,10 +609,16 @@ def suite((simple_stmt,)):
     return simple_stmt
 
 
-@pg.production("suite : ENDL INDENT statements DEDENT")
-def suite_indent((endl_, indent, statements, dedent,)):
-    return [{"type": "endl", "value": "\n", "indent": endl_.after_space}] + statements
+@pg.production("suite : endls INDENT statements DEDENT")
+def suite_indent((endls, indent, statements, dedent,)):
+    return endls + statements
 
+@pg.production("endls : endls ENDL")
+@pg.production("endls : ENDL")
+def endls(p):
+    if len(p) == 1:
+        return [{"type": "endl", "value": "\n", "indent": p[0].after_space}]
+    return p[0] + [{"type": "endl", "value": "\n", "indent": p[1].after_space}]
 
 include_imports(pg)
 

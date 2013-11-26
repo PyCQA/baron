@@ -3134,6 +3134,94 @@ def test_if_stmt_indent():
             }],
           }])
 
+def test_if_stmt_indent_two_endls():
+    """
+    if a:
+
+        pass
+    """
+    parse_multi([
+           ('IF', 'if', '', ' '),
+           ('NAME', 'a'),
+           ('COLON', ':'),
+           ('ENDL', '\n'),
+           ('ENDL', '\n', '', '    '),
+           ('INDENT', ''),
+           ('PASS', 'pass'),
+           ('ENDL', '\n'),
+           ('DEDENT', ''),
+          ],
+          [{
+            "type": "if",
+            "first_space": " ",
+            "second_space": "",
+            "test": {
+                "type": "name",
+                "value": "a",
+            },
+            "value": [{
+               "type": "endl",
+               "value": "\n",
+               "indent": ""
+            },{
+               "type": "endl",
+               "value": "\n",
+               "indent": "    "
+            },{
+                "type": "pass",
+            },{
+               "type": "endl",
+               "value": "\n"
+            }],
+          }])
+
+def test_if_stmt_indent_multiple_endls():
+    """
+    if a:
+
+
+        pass
+    """
+    parse_multi([
+           ('IF', 'if', '', ' '),
+           ('NAME', 'a'),
+           ('COLON', ':'),
+           ('ENDL', '\n'),
+           ('ENDL', '\n', '', '  '),
+           ('ENDL', '\n', '', '    '),
+           ('INDENT', ''),
+           ('PASS', 'pass'),
+           ('ENDL', '\n'),
+           ('DEDENT', ''),
+          ],
+          [{
+            "type": "if",
+            "first_space": " ",
+            "second_space": "",
+            "test": {
+                "type": "name",
+                "value": "a",
+            },
+            "value": [{
+               "type": "endl",
+               "value": "\n",
+               "indent": ""
+            },{
+               "type": "endl",
+               "value": "\n",
+               "indent": "  "
+            },{
+               "type": "endl",
+               "value": "\n",
+               "indent": "    "
+            },{
+                "type": "pass",
+            },{
+               "type": "endl",
+               "value": "\n"
+            }],
+          }])
+
 
 
 
