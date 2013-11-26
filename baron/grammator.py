@@ -613,6 +613,7 @@ def suite((simple_stmt,)):
 def suite_indent((endls, indent, statements, dedent,)):
     return endls + statements
 
+
 @pg.production("endls : endls ENDL")
 @pg.production("endls : ENDL")
 def endls(p):
