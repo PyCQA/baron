@@ -607,6 +607,23 @@ def if_stmt((if_, test, colon, suite)):
                       }]
            }]
 
+@pg.production("if_stmt : IF test COLON suite ELSE COLON suite")
+def if_else_stmt((if_, test, colon, suite, else_, colon2, suite2)):
+    return [{
+            "type": "ifelseblock",
+            "value": [{
+                       "type": "if",
+                       "value": suite,
+                       "test": test,
+                       "first_space": if_.after_space,
+                       "second_space": colon.before_space,
+                      },{
+                         "type": "else",
+                         "value": suite2,
+                         "space": colon2.before_space,
+                      }]
+           }]
+
 @pg.production("suite : simple_stmt")
 def suite((simple_stmt,)):
     return simple_stmt

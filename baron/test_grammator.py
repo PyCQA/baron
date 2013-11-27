@@ -3231,6 +3231,66 @@ def test_if_stmt_indent_multiple_endls():
               }],
           }]}])
 
+def test_if_else_stmt_indent():
+    """
+    if a:
+        pass
+    else:
+        pass
+    """
+    parse_multi([
+           ('IF', 'if', '', ' '),
+           ('NAME', 'a'),
+           ('COLON', ':'),
+           ('ENDL', '\n', '', '    '),
+           ('INDENT', ''),
+           ('PASS', 'pass'),
+           ('ENDL', '\n'),
+           ('DEDENT', ''),
+           ('ELSE', 'else'),
+           ('COLON', ':', " "),
+           ('ENDL', '\n', '', '    '),
+           ('INDENT', ''),
+           ('PASS', 'pass'),
+           ('ENDL', '\n'),
+           ('DEDENT', ''),
+          ],
+          [{
+            "type": "ifelseblock",
+            "value": [{
+              "type": "if",
+              "first_space": " ",
+              "second_space": "",
+              "test": {
+                  "type": "name",
+                  "value": "a",
+              },
+              "value": [{
+                 "type": "endl",
+                 "value": "\n",
+                 "indent": "    "
+                },{
+                 "type": "pass",
+                },{
+                 "type": "endl",
+                 "value": "\n"
+                }],
+            },{
+               "type": "else",
+               "space": " ",
+               "value": [{
+                 "type": "endl",
+                 "value": "\n",
+                 "indent": "    "
+                 },{
+                 "type": "pass",
+                 },{
+                 "type": "endl",
+                 "value": "\n",
+                 }
+               ]
+            }]
+           }])
 
 
 
