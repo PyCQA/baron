@@ -3292,10 +3292,216 @@ def test_if_else_stmt_indent():
             }]
            }])
 
+def test_if_elif_elif_stmt_indent():
+    """
+    if a:
+        pass
+    elif b:
+        pass
+    elif c :
+        pass
+    """
+    parse_multi([
+           ('IF', 'if', '', ' '),
+           ('NAME', 'a'),
+           ('COLON', ':'),
+           ('ENDL', '\n', '', '    '),
+           ('INDENT', ''),
+           ('PASS', 'pass'),
+           ('ENDL', '\n'),
+           ('DEDENT', ''),
+           ('ELIF', 'elif', '', ' '),
+           ('NAME', 'b'),
+           ('COLON', ':'),
+           ('ENDL', '\n', '', '    '),
+           ('INDENT', ''),
+           ('PASS', 'pass'),
+           ('ENDL', '\n'),
+           ('DEDENT', ''),
+           ('ELIF', 'elif', '', ' '),
+           ('NAME', 'c'),
+           ('COLON', ':', " "),
+           ('ENDL', '\n', '', '    '),
+           ('INDENT', ''),
+           ('PASS', 'pass'),
+           ('ENDL', '\n'),
+           ('DEDENT', ''),
+          ],
+          [{
+            "type": "ifelseblock",
+            "value": [{
+              "type": "if",
+              "first_space": " ",
+              "second_space": "",
+              "test": {
+                  "type": "name",
+                  "value": "a",
+              },
+              "value": [{
+                 "type": "endl",
+                 "value": "\n",
+                 "indent": "    "
+                },{
+                 "type": "pass",
+                },{
+                 "type": "endl",
+                 "value": "\n"
+                }],
+            },{
+              "type": "elif",
+              "first_space": " ",
+              "second_space": "",
+              "test": {
+                  "type": "name",
+                  "value": "b",
+              },
+              "value": [{
+                 "type": "endl",
+                 "value": "\n",
+                 "indent": "    "
+                },{
+                 "type": "pass",
+                },{
+                 "type": "endl",
+                 "value": "\n"
+                }],
+            },{
+              "type": "elif",
+              "first_space": " ",
+              "second_space": " ",
+              "test": {
+                  "type": "name",
+                  "value": "c",
+              },
+              "value": [{
+                 "type": "endl",
+                 "value": "\n",
+                 "indent": "    "
+                },{
+                 "type": "pass",
+                },{
+                 "type": "endl",
+                 "value": "\n"
+                }],
+            }]
+           }])
 
-
-
-
+def test_if_elif_elif_else_stmt_indent():
+    """
+    if a:
+        pass
+    elif b:
+        pass
+    elif c :
+        pass
+    else:
+        pass
+    """
+    parse_multi([
+           ('IF', 'if', '', ' '),
+           ('NAME', 'a'),
+           ('COLON', ':'),
+           ('ENDL', '\n', '', '    '),
+           ('INDENT', ''),
+           ('PASS', 'pass'),
+           ('ENDL', '\n'),
+           ('DEDENT', ''),
+           ('ELIF', 'elif', '', ' '),
+           ('NAME', 'b'),
+           ('COLON', ':'),
+           ('ENDL', '\n', '', '    '),
+           ('INDENT', ''),
+           ('PASS', 'pass'),
+           ('ENDL', '\n'),
+           ('DEDENT', ''),
+           ('ELIF', 'elif', '', ' '),
+           ('NAME', 'c'),
+           ('COLON', ':', " "),
+           ('ENDL', '\n', '', '    '),
+           ('INDENT', ''),
+           ('PASS', 'pass'),
+           ('ENDL', '\n'),
+           ('DEDENT', ''),
+           ('ELSE', 'else'),
+           ('COLON', ':', " "),
+           ('ENDL', '\n', '', '    '),
+           ('INDENT', ''),
+           ('PASS', 'pass'),
+           ('ENDL', '\n'),
+           ('DEDENT', ''),
+          ],
+          [{
+            "type": "ifelseblock",
+            "value": [{
+              "type": "if",
+              "first_space": " ",
+              "second_space": "",
+              "test": {
+                  "type": "name",
+                  "value": "a",
+              },
+              "value": [{
+                 "type": "endl",
+                 "value": "\n",
+                 "indent": "    "
+                },{
+                 "type": "pass",
+                },{
+                 "type": "endl",
+                 "value": "\n"
+                }],
+            },{
+              "type": "elif",
+              "first_space": " ",
+              "second_space": "",
+              "test": {
+                  "type": "name",
+                  "value": "b",
+              },
+              "value": [{
+                 "type": "endl",
+                 "value": "\n",
+                 "indent": "    "
+                },{
+                 "type": "pass",
+                },{
+                 "type": "endl",
+                 "value": "\n"
+                }],
+            },{
+              "type": "elif",
+              "first_space": " ",
+              "second_space": " ",
+              "test": {
+                  "type": "name",
+                  "value": "c",
+              },
+              "value": [{
+                 "type": "endl",
+                 "value": "\n",
+                 "indent": "    "
+                },{
+                 "type": "pass",
+                },{
+                 "type": "endl",
+                 "value": "\n"
+                }],
+            },{
+               "type": "else",
+               "space": " ",
+               "value": [{
+                 "type": "endl",
+                 "value": "\n",
+                 "indent": "    "
+                 },{
+                 "type": "pass",
+                 },{
+                 "type": "endl",
+                 "value": "\n",
+                 }
+               ]
+            }]
+           }])
 
 
 ### stmt: simple_stmt
@@ -3313,9 +3519,9 @@ def test_if_else_stmt_indent():
 # -
 
 ### if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite
-# if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite ('elif' SPACE test [SPACE] ':' [SPACE] suite)*
-# if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite ['else' SPACE ':' [SPACE] suite]
-# if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite ('elif' SPACE test [SPACE] ':' [SPACE] suite)* ['else' SPACE ':' [SPACE] suite]
+### if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite ('elif' SPACE test [SPACE] ':' [SPACE] suite)*
+### if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite ['else' SPACE ':' [SPACE] suite]
+### if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite ('elif' SPACE test [SPACE] ':' [SPACE] suite)* ['else' SPACE ':' [SPACE] suite]
 
 # -
 

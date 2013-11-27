@@ -607,6 +607,39 @@ def if_stmt((if_, test, colon, suite)):
                       }]
            }]
 
+@pg.production("if_stmt : IF test COLON suite elifs")
+def if_elif_stmt((if_, test, colon, suite, elifs)):
+    return [{
+            "type": "ifelseblock",
+            "value": [{
+                       "type": "if",
+                       "value": suite,
+                       "test": test,
+                       "first_space": if_.after_space,
+                       "second_space": colon.before_space,
+                      }] + elifs
+           }]
+
+@pg.production("elifs : elifs ELIF test COLON suite")
+def elifs_elif((elifs, elif_, test, colon, suite),):
+    return elifs + [{
+        "type": "elif",
+        "first_space": elif_.after_space,
+        "second_space": colon.before_space,
+        "value": suite,
+        "test": test,
+    }]
+
+@pg.production("elifs : ELIF test COLON suite")
+def elif_((elif_, test, colon, suite),):
+    return [{
+        "type": "elif",
+        "first_space": elif_.after_space,
+        "second_space": colon.before_space,
+        "value": suite,
+        "test": test,
+    }]
+
 @pg.production("if_stmt : IF test COLON suite ELSE COLON suite")
 def if_else_stmt((if_, test, colon, suite, else_, colon2, suite2)):
     return [{
@@ -618,6 +651,23 @@ def if_else_stmt((if_, test, colon, suite, else_, colon2, suite2)):
                        "first_space": if_.after_space,
                        "second_space": colon.before_space,
                       },{
+                         "type": "else",
+                         "value": suite2,
+                         "space": colon2.before_space,
+                      }]
+           }]
+
+@pg.production("if_stmt : IF test COLON suite elifs ELSE COLON suite")
+def if_elif_else_stmt((if_, test, colon, suite, elifs, else_, colon2, suite2)):
+    return [{
+            "type": "ifelseblock",
+            "value": [{
+                       "type": "if",
+                       "value": suite,
+                       "test": test,
+                       "first_space": if_.after_space,
+                       "second_space": colon.before_space,
+                      }] + elifs + [{
                          "type": "else",
                          "value": suite2,
                          "space": colon2.before_space,
