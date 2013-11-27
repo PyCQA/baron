@@ -3084,19 +3084,22 @@ def test_if_stmt():
            ('ENDL', '\n'),
           ],
           [{
-            "type": "if",
-            "first_space": " ",
-            "second_space": "",
-            "test": {
-                "type": "name",
-                "value": "a",
-            },
+            "type": "ifelseblock",
             "value": [{
-                "type": "pass",
-            },{
-               "type": "endl",
-               "value": "\n"
-            }],
+              "type": "if",
+              "first_space": " ",
+              "second_space": "",
+              "test": {
+                  "type": "name",
+                  "value": "a",
+              },
+              "value": [{
+                  "type": "pass",
+              },{
+                 "type": "endl",
+                 "value": "\n"
+              }],
+             }],
           }])
 
 def test_if_stmt_indent():
@@ -3115,24 +3118,26 @@ def test_if_stmt_indent():
            ('DEDENT', ''),
           ],
           [{
-            "type": "if",
-            "first_space": " ",
-            "second_space": "",
-            "test": {
-                "type": "name",
-                "value": "a",
-            },
+            "type": "ifelseblock",
             "value": [{
-               "type": "endl",
-               "value": "\n",
-               "indent": "    "
-            },{
-                "type": "pass",
-            },{
-               "type": "endl",
-               "value": "\n"
-            }],
-          }])
+              "type": "if",
+              "first_space": " ",
+              "second_space": "",
+              "test": {
+                  "type": "name",
+                  "value": "a",
+              },
+              "value": [{
+                 "type": "endl",
+                 "value": "\n",
+                 "indent": "    "
+              },{
+                  "type": "pass",
+              },{
+                 "type": "endl",
+                 "value": "\n"
+              }],
+          }]}])
 
 def test_if_stmt_indent_two_endls():
     """
@@ -3152,28 +3157,30 @@ def test_if_stmt_indent_two_endls():
            ('DEDENT', ''),
           ],
           [{
-            "type": "if",
-            "first_space": " ",
-            "second_space": "",
-            "test": {
-                "type": "name",
-                "value": "a",
-            },
+            "type": "ifelseblock",
             "value": [{
-               "type": "endl",
-               "value": "\n",
-               "indent": ""
-            },{
-               "type": "endl",
-               "value": "\n",
-               "indent": "    "
-            },{
-                "type": "pass",
-            },{
-               "type": "endl",
-               "value": "\n"
-            }],
-          }])
+              "type": "if",
+              "first_space": " ",
+              "second_space": "",
+              "test": {
+                  "type": "name",
+                  "value": "a",
+              },
+              "value": [{
+                 "type": "endl",
+                 "value": "\n",
+                 "indent": ""
+              },{
+                 "type": "endl",
+                 "value": "\n",
+                 "indent": "    "
+              },{
+                  "type": "pass",
+              },{
+                 "type": "endl",
+                 "value": "\n"
+              }],
+          }]}])
 
 def test_if_stmt_indent_multiple_endls():
     """
@@ -3195,32 +3202,35 @@ def test_if_stmt_indent_multiple_endls():
            ('DEDENT', ''),
           ],
           [{
-            "type": "if",
-            "first_space": " ",
-            "second_space": "",
-            "test": {
-                "type": "name",
-                "value": "a",
-            },
+            "type": "ifelseblock",
             "value": [{
-               "type": "endl",
-               "value": "\n",
-               "indent": ""
-            },{
-               "type": "endl",
-               "value": "\n",
-               "indent": "  "
-            },{
-               "type": "endl",
-               "value": "\n",
-               "indent": "    "
-            },{
-                "type": "pass",
-            },{
-               "type": "endl",
-               "value": "\n"
-            }],
-          }])
+              "type": "if",
+              "first_space": " ",
+              "second_space": "",
+              "test": {
+                  "type": "name",
+                  "value": "a",
+              },
+              "value": [{
+                 "type": "endl",
+                 "value": "\n",
+                 "indent": ""
+              },{
+                 "type": "endl",
+                 "value": "\n",
+                 "indent": "  "
+              },{
+                 "type": "endl",
+                 "value": "\n",
+                 "indent": "    "
+              },{
+                  "type": "pass",
+              },{
+                 "type": "endl",
+                 "value": "\n"
+              }],
+          }]}])
+
 
 
 

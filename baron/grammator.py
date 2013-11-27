@@ -597,12 +597,15 @@ def small_stmt((statement,)):
 @pg.production("if_stmt : IF test COLON suite")
 def if_stmt((if_, test, colon, suite)):
     return [{
-        "type": "if",
-        "value": suite,
-        "test": test,
-        "first_space": if_.after_space,
-        "second_space": colon.before_space,
-    }]
+            "type": "ifelseblock",
+            "value": [{
+                       "type": "if",
+                       "value": suite,
+                       "test": test,
+                       "first_space": if_.after_space,
+                       "second_space": colon.before_space,
+                      }]
+           }]
 
 @pg.production("suite : simple_stmt")
 def suite((simple_stmt,)):
