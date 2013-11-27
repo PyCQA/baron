@@ -605,6 +605,21 @@ def while_stmt((while_, test, colon, suite)):
              "second_space": colon.before_space,
            }]
 
+@pg.production("while_stmt : WHILE test COLON suite ELSE COLON suite")
+def while_stmt_else((while_, test, colon, suite, else_, colon2, suite2)):
+    return [{
+             "type": "while",
+             "value": suite,
+             "test": test,
+             "else": {
+                "type": "else",
+                "space": colon2.before_space,
+                "value": suite2,
+             },
+             "first_space": while_.after_space,
+             "second_space": colon.before_space,
+           }]
+
 @pg.production("if_stmt : IF test COLON suite")
 def if_stmt((if_, test, colon, suite)):
     return [{

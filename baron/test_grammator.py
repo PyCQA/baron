@@ -3539,6 +3539,64 @@ def test_while_stmt_indent():
              }],
           }])
 
+def test_while_else_stmt_indent():
+    """
+    while a:
+        pass
+    else:
+        pass
+    """
+    parse_multi([
+           ('WHILE', 'while', '', ' '),
+           ('NAME', 'a'),
+           ('COLON', ':'),
+           ('ENDL', '\n', '', '    '),
+           ('INDENT', ''),
+           ('PASS', 'pass'),
+           ('ENDL', '\n'),
+           ('DEDENT', ''),
+           ('ELSE', 'else'),
+           ('COLON', ':', " "),
+           ('ENDL', '\n', '', '    '),
+           ('INDENT', ''),
+           ('PASS', 'pass'),
+           ('ENDL', '\n'),
+           ('DEDENT', ''),
+          ],
+          [{
+            "type": "while",
+            "first_space": " ",
+            "second_space": "",
+            "test": {
+                "type": "name",
+                "value": "a",
+            },
+            "value": [{
+               "type": "endl",
+               "value": "\n",
+               "indent": "    "
+              },{
+               "type": "pass",
+              },{
+               "type": "endl",
+               "value": "\n"
+              }],
+            "else": {
+             "type": "else",
+             "space": " ",
+             "value": [{
+               "type": "endl",
+               "value": "\n",
+               "indent": "    "
+               },{
+               "type": "pass",
+               },{
+               "type": "endl",
+               "value": "\n",
+               }]
+             }
+           }])
+
 ### stmt: simple_stmt
 ### stmt: compound_stmt
 
@@ -3560,8 +3618,8 @@ def test_while_stmt_indent():
 
 # -
 
-# while_stmt: 'while' SPACE test [SPACE] ':' [SPACE] suite
-# while_stmt: 'while' SPACE test [SPACE] ':' [SPACE] suite ['else' [SPACE] ':' [SPACE] suite]
+### while_stmt: 'while' SPACE test [SPACE] ':' [SPACE] suite
+### while_stmt: 'while' SPACE test [SPACE] ':' [SPACE] suite ['else' [SPACE] ':' [SPACE] suite]
 
 # -
 
