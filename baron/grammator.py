@@ -590,9 +590,20 @@ def simple_stmt_semicolon((small_stmt, semicolon, simple_stmt)):
 @pg.production("small_stmt : global_stmt")
 @pg.production("small_stmt : print_stmt")
 @pg.production("compound_stmt : if_stmt")
+@pg.production("compound_stmt : while_stmt")
 def small_stmt((statement,)):
     return statement
 
+@pg.production("while_stmt : WHILE test COLON suite")
+def while_stmt((while_, test, colon, suite)):
+    return [{
+             "type": "while",
+             "value": suite,
+             "test": test,
+             "else": {},
+             "first_space": while_.after_space,
+             "second_space": colon.before_space,
+           }]
 
 @pg.production("if_stmt : IF test COLON suite")
 def if_stmt((if_, test, colon, suite)):

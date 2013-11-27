@@ -3503,12 +3503,47 @@ def test_if_elif_elif_else_stmt_indent():
             }]
            }])
 
+def test_while_stmt_indent():
+    """
+    while a:
+        pass
+    """
+    parse_multi([
+           ('WHILE', 'while', '', ' '),
+           ('NAME', 'a'),
+           ('COLON', ':'),
+           ('ENDL', '\n', '', '    '),
+           ('INDENT', ''),
+           ('PASS', 'pass'),
+           ('ENDL', '\n'),
+           ('DEDENT', ''),
+          ],
+          [{
+            "type": "while",
+            "first_space": " ",
+            "second_space": "",
+            "else": {},
+            "test": {
+                "type": "name",
+                "value": "a",
+            },
+             "value": [{
+                "type": "endl",
+                "value": "\n",
+                "indent": "    "
+             },{
+                 "type": "pass",
+             },{
+                "type": "endl",
+                "value": "\n"
+             }],
+          }])
 
 ### stmt: simple_stmt
 ### stmt: compound_stmt
 
 ### compound_stmt: if_stmt
-# compound_stmt: while_stmt
+### compound_stmt: while_stmt
 # compound_stmt: for_stmt
 # compound_stmt: try_stmt
 # compound_stmt: with_stmt
