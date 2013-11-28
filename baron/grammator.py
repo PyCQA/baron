@@ -595,6 +595,15 @@ def simple_stmt_semicolon((small_stmt, semicolon, simple_stmt)):
 def small_and_compound_stmt((statement,)):
     return statement
 
+
+@pg.production("else_stmt : ELSE COLON suite")
+def else_stmt((else_, colon, suite)):
+    return {
+        "type": "else",
+        "value": suite,
+        "space": else_.after_space,
+    }
+
 @pg.production("for_stmt : FOR exprlist IN testlist COLON suite")
 def for_stmt((for_, exprlist, in_, testlist, colon, suite),):
     return [{
@@ -603,6 +612,20 @@ def for_stmt((for_, exprlist, in_, testlist, colon, suite),):
              "iterator": exprlist,
              "target": testlist,
              "else": {},
+             "first_space": for_.after_space,
+             "second_space": in_.before_space,
+             "third_space": in_.after_space,
+             "forth_space": colon.before_space,
+           }]
+
+@pg.production("for_stmt : FOR exprlist IN testlist COLON suite else_stmt")
+def for_else_stmt((for_, exprlist, in_, testlist, colon, suite, else_stmt),):
+    return [{
+             "type": "for",
+             "value": suite,
+             "iterator": exprlist,
+             "target": testlist,
+             "else": else_stmt,
              "first_space": for_.after_space,
              "second_space": in_.before_space,
              "third_space": in_.after_space,

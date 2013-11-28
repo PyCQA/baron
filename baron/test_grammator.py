@@ -3641,6 +3641,72 @@ def test_for_stmt_indent():
              }],
           }])
 
+def test_for_else_stmt_indent():
+    """
+    for i in b:
+        pass
+    else:
+        pass
+    """
+    parse_multi([
+             ('FOR', 'for', '', ' '),
+             ('NAME', 'i'),
+             ('IN', 'in', ' ', ' '),
+             ('NAME', 'b'),
+             ('COLON', ':'),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+             ('ELSE', 'else'),
+             ('COLON', ':'),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+          ],
+          [{
+            "type": "for",
+            "first_space": " ",
+            "second_space": " ",
+            "third_space": " ",
+            "forth_space": "",
+            "else": {
+              "type": "else",
+              "space": "",
+              "value": [{
+                 "type": "endl",
+                 "value": "\n",
+                 "indent": "    "
+                },{
+                  "type": "pass",
+                },{
+                  "type": "endl",
+                  "value": "\n",
+                }]
+            },
+            "iterator": {
+                "type": "name",
+                "value": "i",
+            },
+            "target": {
+                "type": "name",
+                "value": "b",
+            },
+             "value": [{
+                "type": "endl",
+                "value": "\n",
+                "indent": "    "
+             },{
+                 "type": "pass",
+             },{
+                "type": "endl",
+                "value": "\n"
+             }],
+          }])
+
 ### stmt: simple_stmt
 ### stmt: compound_stmt
 
