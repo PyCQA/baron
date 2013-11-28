@@ -34,6 +34,10 @@ def diff(left, right):
     to_return += [""]
     to_return += [`left`, "==", `right`]
     to_return += [""]
+    with open("/tmp/a", "w") as a:
+        a.write(json.dumps(left, indent=4, sort_keys=True))
+    with open("/tmp/b", "w") as b:
+        b.write(json.dumps(right, indent=4, sort_keys=True))
     a = 0
     for first, second in zip(left, right):
         if first == second:
