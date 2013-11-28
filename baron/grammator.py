@@ -591,8 +591,23 @@ def simple_stmt_semicolon((small_stmt, semicolon, simple_stmt)):
 @pg.production("small_stmt : print_stmt")
 @pg.production("compound_stmt : if_stmt")
 @pg.production("compound_stmt : while_stmt")
-def small_stmt((statement,)):
+@pg.production("compound_stmt : for_stmt")
+def small_and_compound_stmt((statement,)):
     return statement
+
+@pg.production("for_stmt : FOR exprlist IN testlist COLON suite")
+def for_stmt((for_, exprlist, in_, testlist, colon, suite),):
+    return [{
+             "type": "for",
+             "value": suite,
+             "iterator": exprlist,
+             "target": testlist,
+             "else": {},
+             "first_space": for_.after_space,
+             "second_space": in_.before_space,
+             "third_space": in_.after_space,
+             "forth_space": colon.before_space,
+           }]
 
 @pg.production("while_stmt : WHILE test COLON suite")
 def while_stmt((while_, test, colon, suite)):

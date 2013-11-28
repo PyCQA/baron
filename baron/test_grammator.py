@@ -3597,6 +3597,50 @@ def test_while_else_stmt_indent():
              }
            }])
 
+def test_for_stmt_indent():
+    """
+    for i in a:
+        pass
+    """
+    parse_multi([
+            ('FOR', 'for', '', ' '),
+            ('NAME', 'i'),
+            ('IN', 'in', ' ', ' '),
+            ('NAME', 'a'),
+            ('COLON', ':', '', ' '),
+            ('ENDL', '\n', '', '    '),
+            ('INDENT', ''),
+            ('PASS', 'pass'),
+            ('ENDL', '\n'),
+            ('DEDENT', ''),
+          ],
+          [{
+            "type": "for",
+            "first_space": " ",
+            "second_space": " ",
+            "third_space": " ",
+            "forth_space": "",
+            "else": {},
+            "iterator": {
+                "type": "name",
+                "value": "i",
+            },
+            "target": {
+                "type": "name",
+                "value": "a",
+            },
+             "value": [{
+                "type": "endl",
+                "value": "\n",
+                "indent": "    "
+             },{
+                 "type": "pass",
+             },{
+                "type": "endl",
+                "value": "\n"
+             }],
+          }])
+
 ### stmt: simple_stmt
 ### stmt: compound_stmt
 
