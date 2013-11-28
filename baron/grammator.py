@@ -597,20 +597,24 @@ def small_and_compound_stmt((statement,)):
     return statement
 
 
-@pg.production("try_stmt : TRY COLON suite FINALLY COLON suite")
-def try_stmt((try_, colon, suite, finally_, colon2, suite2)):
+@pg.production("try_stmt : TRY COLON suite finally_stmt")
+def try_stmt((try_, colon, suite, finally_stmt)):
     return [{
         "type": "try",
         "value": suite,
         "space": colon.before_space,
         "else": {},
-        "finally": {
-            "type": "finally",
-            "value": suite2,
-            "space": colon2.before_space,
-        },
+        "finally": finally_stmt,
         "excepts": [],
     }]
+
+@pg.production("finally_stmt : FINALLY COLON suite")
+def finally_stmt((finally_, colon, suite)):
+    return {
+        "type": "finally",
+        "value": suite,
+        "space": colon.before_space,
+    }
 
 @pg.production("else_stmt : ELSE COLON suite")
 def else_stmt((else_, colon, suite)):
