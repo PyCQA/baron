@@ -1,3 +1,3 @@
 import grouper
 import spliter
-from baron import parse
+from baron import parse, tokenize
