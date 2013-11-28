@@ -2707,3 +2707,16 @@ def test_elif():
            ('ELIF', 'elif', '', '    '),
            ('NAME', 'a'),
          ])
+
+def test_for():
+    """
+        """
+    group([
+           ('FOR', 'for'),
+           ('SPACE', '    '),
+           ('NAME', 'a'),
+         ],
+         [
+           ('FOR', 'for', '', '    '),
+           ('NAME', 'a'),
+         ])
