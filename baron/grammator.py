@@ -83,8 +83,8 @@
 
 # -
 
-# suite: simple_stmt
-# suite: [SPACE] NEWLINE INDENT stmt+ DEDENT
+### suite: simple_stmt
+### suite: [SPACE] NEWLINE INDENT stmt+ DEDENT
 
 # -
 
@@ -115,7 +115,7 @@
 # -
 
 ### stmt: simple_stmt
-# stmt: compound_stmt
+### stmt: compound_stmt
 
 # -
 
@@ -210,9 +210,9 @@
 
 # -
 
-# compound_stmt: if_stmt
-# compound_stmt: while_stmt
-# compound_stmt: for_stmt
+### compound_stmt: if_stmt
+### compound_stmt: while_stmt
+### compound_stmt: for_stmt
 # compound_stmt: try_stmt
 # compound_stmt: with_stmt
 # compound_stmt: funcdef
@@ -221,20 +221,20 @@
 
 # -
 
-# if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite
-# if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite ('elif' SPACE test [SPACE] ':' [SPACE] suite)*
-# if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite ['else' SPACE ':' [SPACE] suite]
-# if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite ('elif' SPACE test [SPACE] ':' [SPACE] suite)* ['else' SPACE ':' [SPACE] suite]
+### if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite
+### if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite ('elif' SPACE test [SPACE] ':' [SPACE] suite)*
+### if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite ['else' SPACE ':' [SPACE] suite]
+### if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite ('elif' SPACE test [SPACE] ':' [SPACE] suite)* ['else' SPACE ':' [SPACE] suite]
 
 # -
 
-# while_stmt: 'while' SPACE test [SPACE] ':' [SPACE] suite
-# while_stmt: 'while' SPACE test [SPACE] ':' [SPACE] suite ['else' [SPACE] ':' [SPACE] suite]
+### while_stmt: 'while' SPACE test [SPACE] ':' [SPACE] suite
+### while_stmt: 'while' SPACE test [SPACE] ':' [SPACE] suite ['else' [SPACE] ':' [SPACE] suite]
 
 # -
 
-# for_stmt: 'for' SPACE exprlist SPACE 'in' SPACE testlist [SPACE] ':' [SPACE] suite
-# for_stmt: 'for' SPACE exprlist SPACE 'in' SPACE testlist [SPACE] ':' [SPACE] suite ['else' [SPACE] ':' [SPACE] suite]
+### for_stmt: 'for' SPACE exprlist SPACE 'in' SPACE testlist [SPACE] ':' [SPACE] suite
+### for_stmt: 'for' SPACE exprlist SPACE 'in' SPACE testlist [SPACE] ':' [SPACE] suite ['else' [SPACE] ':' [SPACE] suite]
 
 # -
 

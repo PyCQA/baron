@@ -3712,7 +3712,7 @@ def test_for_else_stmt_indent():
 
 ### compound_stmt: if_stmt
 ### compound_stmt: while_stmt
-# compound_stmt: for_stmt
+### compound_stmt: for_stmt
 # compound_stmt: try_stmt
 # compound_stmt: with_stmt
 # compound_stmt: funcdef
@@ -3733,8 +3733,8 @@ def test_for_else_stmt_indent():
 
 # -
 
-# for_stmt: 'for' SPACE exprlist SPACE 'in' SPACE testlist [SPACE] ':' [SPACE] suite
-# for_stmt: 'for' SPACE exprlist SPACE 'in' SPACE testlist [SPACE] ':' [SPACE] suite ['else' [SPACE] ':' [SPACE] suite]
+### for_stmt: 'for' SPACE exprlist SPACE 'in' SPACE testlist [SPACE] ':' [SPACE] suite
+### for_stmt: 'for' SPACE exprlist SPACE 'in' SPACE testlist [SPACE] ':' [SPACE] suite ['else' [SPACE] ':' [SPACE] suite]
 
 # -
 
