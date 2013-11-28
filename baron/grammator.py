@@ -601,7 +601,7 @@ def else_stmt((else_, colon, suite)):
     return {
         "type": "else",
         "value": suite,
-        "space": else_.after_space,
+        "space": colon.before_space,
     }
 
 @pg.production("for_stmt : FOR exprlist IN testlist COLON suite")
@@ -643,17 +643,13 @@ def while_stmt((while_, test, colon, suite)):
              "second_space": colon.before_space,
            }]
 
-@pg.production("while_stmt : WHILE test COLON suite ELSE COLON suite")
-def while_stmt_else((while_, test, colon, suite, else_, colon2, suite2)):
+@pg.production("while_stmt : WHILE test COLON suite else_stmt")
+def while_stmt_else((while_, test, colon, suite, else_stmt)):
     return [{
              "type": "while",
              "value": suite,
              "test": test,
-             "else": {
-                "type": "else",
-                "space": colon2.before_space,
-                "value": suite2,
-             },
+             "else": else_stmt,
              "first_space": while_.after_space,
              "second_space": colon.before_space,
            }]
@@ -704,8 +700,8 @@ def elif_((elif_, test, colon, suite),):
         "test": test,
     }]
 
-@pg.production("if_stmt : IF test COLON suite ELSE COLON suite")
-def if_else_stmt((if_, test, colon, suite, else_, colon2, suite2)):
+@pg.production("if_stmt : IF test COLON suite else_stmt")
+def if_else_stmt((if_, test, colon, suite, else_stmt)):
     return [{
             "type": "ifelseblock",
             "value": [{
@@ -714,15 +710,11 @@ def if_else_stmt((if_, test, colon, suite, else_, colon2, suite2)):
                        "test": test,
                        "first_space": if_.after_space,
                        "second_space": colon.before_space,
-                      },{
-                         "type": "else",
-                         "value": suite2,
-                         "space": colon2.before_space,
-                      }]
+                      }, else_stmt]
            }]
 
-@pg.production("if_stmt : IF test COLON suite elifs ELSE COLON suite")
-def if_elif_else_stmt((if_, test, colon, suite, elifs, else_, colon2, suite2)):
+@pg.production("if_stmt : IF test COLON suite elifs else_stmt")
+def if_elif_else_stmt((if_, test, colon, suite, elifs, else_stmt)):
     return [{
             "type": "ifelseblock",
             "value": [{
@@ -731,11 +723,7 @@ def if_elif_else_stmt((if_, test, colon, suite, elifs, else_, colon2, suite2)):
                        "test": test,
                        "first_space": if_.after_space,
                        "second_space": colon.before_space,
-                      }] + elifs + [{
-                         "type": "else",
-                         "value": suite2,
-                         "space": colon2.before_space,
-                      }]
+                      }] + elifs + [else_stmt]
            }]
 
 @pg.production("suite : simple_stmt")
