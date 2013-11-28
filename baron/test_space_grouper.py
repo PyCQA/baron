@@ -2694,3 +2694,16 @@ def test_while():
            ('WHILE', 'while', '', '    '),
            ('NAME', 'a'),
          ])
+
+def test_elif():
+    """
+        """
+    group([
+           ('ELIF', 'elif'),
+           ('SPACE', '    '),
+           ('NAME', 'a'),
+         ],
+         [
+           ('ELIF', 'elif', '', '    '),
+           ('NAME', 'a'),
+         ])
