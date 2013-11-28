@@ -70,6 +70,7 @@ GROUP_SPACE_AFTER = BOTH + (
     "PRINT",
     "INDENT",
     "ENDL",
+    "WHILE",
 )
 
 def less_prioritary_than(a, b):

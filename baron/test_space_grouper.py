@@ -2681,3 +2681,16 @@ def test_endl():
            ('ENDL', '\n', '', '    '),
            ('ENDL', '\n'),
          ])
+
+def test_while():
+    """
+        """
+    group([
+           ('WHILE', 'while'),
+           ('SPACE', '    '),
+           ('NAME', 'a'),
+         ],
+         [
+           ('WHILE', 'while', '', '    '),
+           ('NAME', 'a'),
+         ])
