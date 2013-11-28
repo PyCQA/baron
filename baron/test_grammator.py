@@ -3707,6 +3707,60 @@ def test_for_else_stmt_indent():
              }],
           }])
 
+def test_try_finally_stmt_indent():
+    """
+    try :
+        pass
+    finally :
+        pass
+    """
+    parse_multi([
+             ('TRY', 'try'),
+             ('COLON', ':', ' '),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+             ('FINALLY', 'finally'),
+             ('COLON', ':', ' '),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+          ],
+          [{
+            "type": "try",
+            "space": " ",
+            "else": {},
+            "finally": {
+                "type": "finally",
+                "value": [{
+                "type": "endl",
+                "value": "\n",
+                "indent": "    "
+                },{
+                  "type": "pass",
+                },{
+                  "type": "endl",
+                  "value": "\n"
+                }],
+                "space": " ",
+            },
+            "excepts": [],
+            "value": [{
+                "type": "endl",
+                "value": "\n",
+                "indent": "    "
+             },{
+                 "type": "pass",
+             },{
+                "type": "endl",
+                "value": "\n"
+             }],
+          }])
+
 ### stmt: simple_stmt
 ### stmt: compound_stmt
 

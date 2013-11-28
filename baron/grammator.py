@@ -592,9 +592,25 @@ def simple_stmt_semicolon((small_stmt, semicolon, simple_stmt)):
 @pg.production("compound_stmt : if_stmt")
 @pg.production("compound_stmt : while_stmt")
 @pg.production("compound_stmt : for_stmt")
+@pg.production("compound_stmt : try_stmt")
 def small_and_compound_stmt((statement,)):
     return statement
 
+
+@pg.production("try_stmt : TRY COLON suite FINALLY COLON suite")
+def try_stmt((try_, colon, suite, finally_, colon2, suite2)):
+    return [{
+        "type": "try",
+        "value": suite,
+        "space": colon.before_space,
+        "else": {},
+        "finally": {
+            "type": "finally",
+            "value": suite2,
+            "space": colon2.before_space,
+        },
+        "excepts": [],
+    }]
 
 @pg.production("else_stmt : ELSE COLON suite")
 def else_stmt((else_, colon, suite)):
