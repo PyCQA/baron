@@ -4304,6 +4304,38 @@ def test_try_except_as_stmt_indent():
 
 # -
 
+# funcdef: 'def' SPACE NAME [SPACE] parameters [SPACE] ':' [SPACE] suite
+
+# -
+
+# parameters: '(' [SPACE] [varargslist] [SPACE] ')'
+
+# -
+
+# varargslist: [SPACE]
+
+# varargslist: fpdef
+# varargslist: fpdef [SPACE] '=' [SPACE] test
+# varargslist: fpdef [SPACE] '=' [SPACE] test [SPACE] ','
+# varargslist: fpdef [SPACE] '=' [SPACE] test [SPACE] ',' [SPACE] fpdef
+# varargslist: fpdef [SPACE] '=' [SPACE] test [SPACE] ',' [SPACE] fpdef [SPACE] '=' [SPACE] test
+# varargslist: fpdef [SPACE] '=' [SPACE] test [SPACE] ',' [SPACE] fpdef [SPACE] '=' [SPACE] test [SPACE] ','
+
+# varargslist: '*' [SPACE] NAME
+# varargslist: '**' [SPACE] NAME
+# varargslist: '*' NAME [SPACE] ',' [SPACE] '**' [SPACE] NAME
+
+# varargslist: fpdef [SPACE] ',' [SPACE] '*' [SPACE] NAME
+# varargslist: fpdef [SPACE] '=' [SPACE] test [SPACE] ',' [SPACE] '*' [SPACE] NAME
+
+# varargslist: fpdef [SPACE] ',' [SPACE] '**' [SPACE] NAME
+# varargslist: fpdef [SPACE] '=' [SPACE] test [SPACE] ',' [SPACE] '**' [SPACE] NAME
+
+# varargslist: fpdef [SPACE] ',' [SPACE] '*' [SPACE] NAME [SPACE] ',' [SPACE] '**' [SPACE] NAME
+# varargslist: fpdef [SPACE] '=' [SPACE] test [SPACE] ',' [SPACE] '*' [SPACE] NAME [SPACE] ',' [SPACE] '**' [SPACE] NAME
+
+# -
+
 ### if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite
 ### if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite ('elif' SPACE test [SPACE] ':' [SPACE] suite)*
 ### if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite ['else' SPACE ':' [SPACE] suite]
