@@ -4290,6 +4290,44 @@ def test_try_except_as_stmt_indent():
              }],
           }])
 
+def test_funcdef_stmt_indent():
+    """
+    def a () :
+        pass
+    """
+    parse_multi([
+             ('DEF', 'def', '', ' '),
+             ('NAME', 'a'),
+             ('LEFT_PARENTHESIS', '(', ' '),
+             ('RIGHT_PARENTHESIS', ')'),
+             ('COLON', ':', ' '),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+          ],
+          [{
+            "type": "funcdef",
+            "name": "a",
+            "first_space": " ",
+            "second_space": " ",
+            "third_space": "",
+            "forth_space": "",
+            "fith_space": " ",
+            "arguments": [],
+            "value": [{
+               "type": "endl",
+               "value": "\n",
+               "indent": "    "
+            },{
+                "type": "pass",
+            },{
+               "type": "endl",
+               "value": "\n"
+            }],
+          }])
+
 ### stmt: simple_stmt
 ### stmt: compound_stmt
 
@@ -4298,7 +4336,7 @@ def test_try_except_as_stmt_indent():
 ### compound_stmt: for_stmt
 ### compound_stmt: try_stmt
 # compound_stmt: with_stmt
-# compound_stmt: funcdef
+### compound_stmt: funcdef
 # compound_stmt: classdef
 # compound_stmt: decorated
 

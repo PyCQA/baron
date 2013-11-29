@@ -593,9 +593,28 @@ def simple_stmt_semicolon((small_stmt, semicolon, simple_stmt)):
 @pg.production("compound_stmt : while_stmt")
 @pg.production("compound_stmt : for_stmt")
 @pg.production("compound_stmt : try_stmt")
+@pg.production("compound_stmt : funcdef")
 def small_and_compound_stmt((statement,)):
     return statement
 
+
+@pg.production("funcdef : DEF NAME LEFT_PARENTHESIS parameters RIGHT_PARENTHESIS COLON suite")
+def function_definition((def_, name, left_parenthesis, parameters, right_parenthesis, colon, suite)):
+    return [{
+        "type": "funcdef",
+        "name": name.value,
+        "first_space": def_.after_space,
+        "second_space": left_parenthesis.before_space,
+        "third_space": left_parenthesis.after_space,
+        "forth_space": right_parenthesis.before_space,
+        "fith_space": colon.before_space,
+        "arguments": parameters,
+        "value": suite,
+    }]
+
+@pg.production("parameters : ")
+def parameters_empty(p):
+    return []
 
 @pg.production("try_stmt : TRY COLON suite excepts")
 def try_excepts_stmt((try_, colon, suite, excepts)):
@@ -901,7 +920,7 @@ def print_stmt_redirect_testlist((print_, right_shift, test, comma, testlist)):
     value += [create_node_from_token(comma)]
     if comma.after_space:
         value += [{"type": "space", "value": comma.after_space}]
-    print testlist
+    #print testlist
     value += testlist["value"] if testlist["type"] == "tuple" else [testlist]
     return {
         "type": "print",
