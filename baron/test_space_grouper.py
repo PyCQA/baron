@@ -2733,3 +2733,16 @@ def test_except():
           ('EXCEPT', 'except', '', '    '),
            ('NAME', 'a'),
          ])
+
+def test_def():
+    """
+        """
+    group([
+           ('DEF', 'def'),
+           ('SPACE', '    '),
+           ('NAME', 'a'),
+         ],
+         [
+          ('DEF', 'def', '', '    '),
+           ('NAME', 'a'),
+         ])
