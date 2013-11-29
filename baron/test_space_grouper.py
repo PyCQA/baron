@@ -2720,3 +2720,16 @@ def test_for():
            ('FOR', 'for', '', '    '),
            ('NAME', 'a'),
          ])
+
+def test_except():
+    """
+        """
+    group([
+           ('EXCEPT', 'except'),
+           ('SPACE', '    '),
+           ('NAME', 'a'),
+         ],
+         [
+          ('EXCEPT', 'except', '', '    '),
+           ('NAME', 'a'),
+         ])

@@ -3761,13 +3761,542 @@ def test_try_finally_stmt_indent():
              }],
           }])
 
+def test_try_excepts_stmt_indent():
+    """
+    try :
+        pass
+    except IOError:
+        pass
+    except Exception:
+        pass
+    """
+    parse_multi([
+             ('TRY', 'try'),
+             ('COLON', ':', ' '),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+             ('EXCEPT', 'except', '', ' '),
+             ('NAME', 'IOError'),
+             ('COLON', ':'),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+             ('EXCEPT', 'except', '', ' '),
+             ('NAME', 'Exception'),
+             ('COLON', ':'),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+          ],
+          [{
+            "type": "try",
+            "space": " ",
+            "else": {},
+            "finally": {},
+            "excepts": [{
+               "type": "except",
+               "first_space": " ",
+               "second_space": "",
+               "third_space": "",
+               "forth_space": "",
+               "delimiteur": "",
+               "target": {},
+               "exceptions": {
+                  "type": "name",
+                  "value": "IOError",
+               },
+                "value": [{
+                    "type": "endl",
+                    "value": "\n",
+                    "indent": "    "
+                 },{
+                     "type": "pass",
+                 },{
+                    "type": "endl",
+                    "value": "\n"
+                 }]
+            },{
+               "type": "except",
+               "first_space": " ",
+               "second_space": "",
+               "third_space": "",
+               "forth_space": "",
+               "delimiteur": "",
+               "target": {},
+               "exceptions": {
+                  "type": "name",
+                  "value": "Exception",
+               },
+               "value": [{
+                  "type": "endl",
+                  "value": "\n",
+                  "indent": "    "
+               },{
+                   "type": "pass",
+               },{
+                  "type": "endl",
+                  "value": "\n"
+               }]
+            }],
+            "value": [{
+                "type": "endl",
+                "value": "\n",
+                "indent": "    "
+             },{
+                 "type": "pass",
+             },{
+                "type": "endl",
+                "value": "\n"
+             }],
+          }])
+
+def test_try_except_comma_stmt_indent():
+    """
+    try :
+        pass
+    except IOError, e:
+        pass
+    """
+    parse_multi([
+             ('TRY', 'try'),
+             ('COLON', ':', ' '),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+             ('EXCEPT', 'except', '', ' '),
+             ('NAME', 'IOError'),
+             ('COMMA', ',', '', ' '),
+             ('NAME', 'a'),
+             ('COLON', ':'),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+          ],
+          [{
+            "type": "try",
+            "space": " ",
+            "else": {},
+            "finally": {},
+            "excepts": [{
+               "type": "except",
+               "first_space": " ",
+               "second_space": "",
+               "third_space": " ",
+               "forth_space": "",
+               "delimiteur": ",",
+               "target": {
+                    "type": "name",
+                    "value": "a"
+               },
+               "exceptions": {
+                  "type": "name",
+                  "value": "IOError",
+               },
+                "value": [{
+                    "type": "endl",
+                    "value": "\n",
+                    "indent": "    "
+                 },{
+                     "type": "pass",
+                 },{
+                    "type": "endl",
+                    "value": "\n"
+                 }]
+            }],
+            "value": [{
+                "type": "endl",
+                "value": "\n",
+                "indent": "    "
+             },{
+                 "type": "pass",
+             },{
+                "type": "endl",
+                "value": "\n"
+             }],
+          }])
+
+def test_try_except_comma_stmt_else_indent():
+    """
+    try :
+        pass
+    except IOError, e:
+        pass
+    else:
+        pass
+    """
+    parse_multi([
+             ('TRY', 'try'),
+             ('COLON', ':', ' '),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+             ('EXCEPT', 'except', '', ' '),
+             ('NAME', 'IOError'),
+             ('COMMA', ',', '', ' '),
+             ('NAME', 'a'),
+             ('COLON', ':'),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+             ('ELSE', 'else'),
+             ('COLON', ':'),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+          ],
+          [{
+            "type": "try",
+            "space": " ",
+            "else": {
+              "type": "else",
+              "space": "",
+              "value": [{
+                 "type": "endl",
+                 "value": "\n",
+                 "indent": "    "
+                },{
+                  "type": "pass",
+                },{
+                  "type": "endl",
+                  "value": "\n",
+                }]
+            },
+            "finally": {},
+            "excepts": [{
+               "type": "except",
+               "first_space": " ",
+               "second_space": "",
+               "third_space": " ",
+               "forth_space": "",
+               "delimiteur": ",",
+               "target": {
+                    "type": "name",
+                    "value": "a"
+               },
+               "exceptions": {
+                  "type": "name",
+                  "value": "IOError",
+               },
+                "value": [{
+                    "type": "endl",
+                    "value": "\n",
+                    "indent": "    "
+                 },{
+                     "type": "pass",
+                 },{
+                    "type": "endl",
+                    "value": "\n"
+                 }]
+            }],
+            "value": [{
+                "type": "endl",
+                "value": "\n",
+                "indent": "    "
+             },{
+                 "type": "pass",
+             },{
+                "type": "endl",
+                "value": "\n"
+             }],
+          }])
+
+def test_try_except_comma_stmt_else_finally_indent():
+    """
+    try :
+        pass
+    except IOError, e:
+        pass
+    else:
+        pass
+    finally:
+        pass
+    """
+    parse_multi([
+             ('TRY', 'try'),
+             ('COLON', ':', ' '),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+             ('EXCEPT', 'except', '', ' '),
+             ('NAME', 'IOError'),
+             ('COMMA', ',', '', ' '),
+             ('NAME', 'a'),
+             ('COLON', ':'),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+             ('ELSE', 'else'),
+             ('COLON', ':'),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+             ('FINALLY', 'finally'),
+             ('COLON', ':'),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+          ],
+          [{
+            "type": "try",
+            "space": " ",
+            "else": {
+              "type": "else",
+              "space": "",
+              "value": [{
+                 "type": "endl",
+                 "value": "\n",
+                 "indent": "    "
+                },{
+                  "type": "pass",
+                },{
+                  "type": "endl",
+                  "value": "\n",
+                }]
+            },
+            "finally": {
+                "type": "finally",
+                "value": [{
+                "type": "endl",
+                "value": "\n",
+                "indent": "    "
+                },{
+                  "type": "pass",
+                },{
+                  "type": "endl",
+                  "value": "\n"
+                }],
+                "space": "",
+            },
+            "excepts": [{
+               "type": "except",
+               "first_space": " ",
+               "second_space": "",
+               "third_space": " ",
+               "forth_space": "",
+               "delimiteur": ",",
+               "target": {
+                    "type": "name",
+                    "value": "a"
+               },
+               "exceptions": {
+                  "type": "name",
+                  "value": "IOError",
+               },
+                "value": [{
+                    "type": "endl",
+                    "value": "\n",
+                    "indent": "    "
+                 },{
+                     "type": "pass",
+                 },{
+                    "type": "endl",
+                    "value": "\n"
+                 }]
+            }],
+            "value": [{
+                "type": "endl",
+                "value": "\n",
+                "indent": "    "
+             },{
+                 "type": "pass",
+             },{
+                "type": "endl",
+                "value": "\n"
+             }],
+          }])
+
+def test_try_except_comma_stmt_finally_indent():
+    """
+    try :
+        pass
+    except IOError, e:
+        pass
+    finally:
+        pass
+    """
+    parse_multi([
+             ('TRY', 'try'),
+             ('COLON', ':', ' '),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+             ('EXCEPT', 'except', '', ' '),
+             ('NAME', 'IOError'),
+             ('COMMA', ',', '', ' '),
+             ('NAME', 'a'),
+             ('COLON', ':'),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+             ('FINALLY', 'finally'),
+             ('COLON', ':'),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+          ],
+          [{
+            "type": "try",
+            "space": " ",
+            "else": {},
+            "finally": {
+                "type": "finally",
+                "value": [{
+                "type": "endl",
+                "value": "\n",
+                "indent": "    "
+                },{
+                  "type": "pass",
+                },{
+                  "type": "endl",
+                  "value": "\n"
+                }],
+                "space": "",
+            },
+            "excepts": [{
+               "type": "except",
+               "first_space": " ",
+               "second_space": "",
+               "third_space": " ",
+               "forth_space": "",
+               "delimiteur": ",",
+               "target": {
+                    "type": "name",
+                    "value": "a"
+               },
+               "exceptions": {
+                  "type": "name",
+                  "value": "IOError",
+               },
+                "value": [{
+                    "type": "endl",
+                    "value": "\n",
+                    "indent": "    "
+                 },{
+                     "type": "pass",
+                 },{
+                    "type": "endl",
+                    "value": "\n"
+                 }]
+            }],
+            "value": [{
+                "type": "endl",
+                "value": "\n",
+                "indent": "    "
+             },{
+                 "type": "pass",
+             },{
+                "type": "endl",
+                "value": "\n"
+             }],
+          }])
+
+def test_try_except_as_stmt_indent():
+    """
+    try :
+        pass
+    except IOError as e:
+        pass
+    """
+    parse_multi([
+             ('TRY', 'try'),
+             ('COLON', ':', ' '),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+             ('EXCEPT', 'except', '', ' '),
+             ('NAME', 'IOError'),
+             ('AS', 'as', ' ', ' '),
+             ('NAME', 'a'),
+             ('COLON', ':'),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+          ],
+          [{
+            "type": "try",
+            "space": " ",
+            "else": {},
+            "finally": {},
+            "excepts": [{
+               "type": "except",
+               "first_space": " ",
+               "second_space": " ",
+               "third_space": " ",
+               "forth_space": "",
+               "delimiteur": "as",
+               "target": {
+                    "type": "name",
+                    "value": "a"
+               },
+               "exceptions": {
+                  "type": "name",
+                  "value": "IOError",
+               },
+                "value": [{
+                    "type": "endl",
+                    "value": "\n",
+                    "indent": "    "
+                 },{
+                     "type": "pass",
+                 },{
+                    "type": "endl",
+                    "value": "\n"
+                 }]
+            }],
+            "value": [{
+                "type": "endl",
+                "value": "\n",
+                "indent": "    "
+             },{
+                 "type": "pass",
+             },{
+                "type": "endl",
+                "value": "\n"
+             }],
+          }])
+
 ### stmt: simple_stmt
 ### stmt: compound_stmt
 
 ### compound_stmt: if_stmt
 ### compound_stmt: while_stmt
 ### compound_stmt: for_stmt
-# compound_stmt: try_stmt
+### compound_stmt: try_stmt
 # compound_stmt: with_stmt
 # compound_stmt: funcdef
 # compound_stmt: classdef
@@ -3792,11 +4321,15 @@ def test_try_finally_stmt_indent():
 
 # -
 
-# try_stmt: 'try' [SPACE] ':' [SPACE] suite 'finally' [SPACE] ':' suite
-# try_stmt: 'try' [SPACE] ':' [SPACE] suite (except_clause [SPACE] ':' [SPACE] suite)+
-# try_stmt: 'try' [SPACE] ':' [SPACE] suite (except_clause [SPACE] ':' [SPACE] suite)+ ['else' [SPACE] ':' [SPACE] suite]
-# try_stmt: 'try' [SPACE] ':' [SPACE] suite (except_clause [SPACE] ':' [SPACE] suite)+ ['finally' [SPACE] ':' suite]
-# try_stmt: 'try' [SPACE] ':' [SPACE] suite (except_clause [SPACE] ':' [SPACE] suite)+ ['else' [SPACE] ':' [SPACE] suite] ['finally' [SPACE] ':' suite]
+### try_stmt: 'try' [SPACE] ':' [SPACE] suite 'finally' [SPACE] ':' suite
+### try_stmt: 'try' [SPACE] ':' [SPACE] suite (except_clause [SPACE] ':' [SPACE] suite)+
+### try_stmt: 'try' [SPACE] ':' [SPACE] suite (except_clause [SPACE] ':' [SPACE] suite)+ ['else' [SPACE] ':' [SPACE] suite]
+### try_stmt: 'try' [SPACE] ':' [SPACE] suite (except_clause [SPACE] ':' [SPACE] suite)+ ['finally' [SPACE] ':' suite]
+### try_stmt: 'try' [SPACE] ':' [SPACE] suite (except_clause [SPACE] ':' [SPACE] suite)+ ['else' [SPACE] ':' [SPACE] suite] ['finally' [SPACE] ':' suite]
+
+# -
+
+### except_clause: 'except' [SPACE test [(SPACE 'as' SPACE | [SPACE] ',' [SPACE]) test]]
 
 # -
 
@@ -3807,10 +4340,6 @@ def test_try_finally_stmt_indent():
 
 # with_item: test
 # with_item: test [SPACE 'as' SPACE expr]
-
-# -
-
-# except_clause: 'except' [SPACE test [(SPACE 'as' SPACE | [SPACE] ',' [SPACE]) test]]
 
 # -
 
