@@ -4328,6 +4328,52 @@ def test_funcdef_stmt_indent():
             }],
           }])
 
+def test_funcdef_stmt_one_parameter_indent():
+    """
+    def a ( x ) :
+        pass
+    """
+    parse_multi([
+             ('DEF', 'def', '', ' '),
+             ('NAME', 'a'),
+             ('LEFT_PARENTHESIS', '(', ' ', ' '),
+             ('NAME', 'x'),
+             ('RIGHT_PARENTHESIS', ')', ' '),
+             ('COLON', ':', ' '),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+          ],
+          [{
+            "type": "funcdef",
+            "name": "a",
+            "first_space": " ",
+            "second_space": " ",
+            "third_space": " ",
+            "forth_space": " ",
+            "fith_space": " ",
+            "arguments": [{
+                "type": "argument",
+                "value": {
+                    "type": "name",
+                    "value": "x",
+                },
+                "default": {},
+            }],
+            "value": [{
+               "type": "endl",
+               "value": "\n",
+               "indent": "    "
+            },{
+                "type": "pass",
+            },{
+               "type": "endl",
+               "value": "\n"
+            }],
+          }])
+
 ### stmt: simple_stmt
 ### stmt: compound_stmt
 

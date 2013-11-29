@@ -616,6 +616,17 @@ def function_definition((def_, name, left_parenthesis, parameters, right_parenth
 def parameters_empty(p):
     return []
 
+@pg.production("parameters : NAME")
+def parameters_one((name,)):
+    return [{
+        "type": "argument",
+        "default": {},
+        "value": {
+            "type": "name",
+            "value": name.value
+        }
+    }]
+
 @pg.production("try_stmt : TRY COLON suite excepts")
 def try_excepts_stmt((try_, colon, suite, excepts)):
     return [{
