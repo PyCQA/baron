@@ -4356,6 +4356,8 @@ def test_funcdef_stmt_one_parameter_indent():
             "fith_space": " ",
             "arguments": [{
                 "type": "argument",
+                "first_space": "",
+                "second_space": "",
                 "value": {
                     "type": "name",
                     "value": "x",
@@ -4403,6 +4405,8 @@ def test_funcdef_stmt_one_parameter_comma_indent():
             "fith_space": " ",
             "arguments": [{
                 "type": "argument",
+                "first_space": "",
+                "second_space": "",
                 "value": {
                     "type": "name",
                     "value": "x",
@@ -4439,15 +4443,15 @@ def test_funcdef_stmt_one_parameter_comma_indent():
 
 # -
 
-# funcdef: 'def' SPACE NAME [SPACE] parameters [SPACE] ':' [SPACE] suite
+### funcdef: 'def' SPACE NAME [SPACE] parameters [SPACE] ':' [SPACE] suite
 
 # -
 
-# parameters: '(' [SPACE] [varargslist] [SPACE] ')'
+### parameters: '(' [SPACE] [varargslist] [SPACE] ')'
 
 # -
 
-# varargslist: [SPACE]
+### varargslist: [SPACE]
 
 # varargslist: fpdef
 # varargslist: fpdef [SPACE] '=' [SPACE] test
@@ -4468,6 +4472,18 @@ def test_funcdef_stmt_one_parameter_comma_indent():
 
 # varargslist: fpdef [SPACE] ',' [SPACE] '*' [SPACE] NAME [SPACE] ',' [SPACE] '**' [SPACE] NAME
 # varargslist: fpdef [SPACE] '=' [SPACE] test [SPACE] ',' [SPACE] '*' [SPACE] NAME [SPACE] ',' [SPACE] '**' [SPACE] NAME
+
+# -
+
+# fpdef: NAME
+# fpdef: '(' [SPACE] fplist [SPACE] ')'
+
+# -
+
+# fplist: fpdef
+# fplist: fpdef [SPACE] ',' [SPACE] fpdef
+# fplist: fpdef ([SPACE] ',' [SPACE] fpdef)*
+# fplist: fpdef ([SPACE] ',' [SPACE] fpdef)* [SPACE] [',']
 
 # -
 

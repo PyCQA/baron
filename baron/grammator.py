@@ -628,6 +628,8 @@ def parameter_empty(p):
 def parameter_one((name,)):
     return [{
         "type": "argument",
+        "first_space": "",
+        "second_space": "",
         "default": {},
         "value": {
             "type": "name",
