@@ -612,12 +612,20 @@ def function_definition((def_, name, left_parenthesis, parameters, right_parenth
         "value": suite,
     }]
 
-@pg.production("parameters : ")
-def parameters_empty(p):
+@pg.production("parameters : parameters parameter")
+def parameters_parameters_parameter((parameters, parameter,),):
+    return parameters + parameter
+
+@pg.production("parameters : parameter")
+def parameters_parameter((parameter,),):
+    return parameter
+
+@pg.production("parameter : ")
+def parameter_empty(p):
     return []
 
-@pg.production("parameters : NAME")
-def parameters_one((name,)):
+@pg.production("parameter : NAME")
+def parameter_one((name,)):
     return [{
         "type": "argument",
         "default": {},
@@ -625,6 +633,14 @@ def parameters_one((name,)):
             "type": "name",
             "value": name.value
         }
+    }]
+
+@pg.production("parameter : COMMA")
+def parameter_comma((comma,)):
+    return [{
+        "type": "comma",
+        "first_space": comma.before_space,
+        "second_space": comma.after_space,
     }]
 
 @pg.production("try_stmt : TRY COLON suite excepts")
