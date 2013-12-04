@@ -707,6 +707,15 @@ def parameter_star((star, name,)):
         "name": name.value,
     }]
 
+@pg.production("parameter : STAR STAR NAME")
+def parameter_star_star((star, star2, name,)):
+    return [{
+        "type": "dict_argument",
+        "first_space": star.after_space,
+        "second_space": star2.after_space,
+        "name": name.value,
+    }]
+
 @pg.production("parameter : COMMA")
 def parameter_comma((comma,)):
     return [{
