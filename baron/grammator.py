@@ -699,6 +699,14 @@ def parameter_with_default((name, equal, test)):
         }
     }]
 
+@pg.production("parameter : STAR NAME")
+def parameter_star((star, name,)):
+    return [{
+        "type": "list_argument",
+        "first_space": star.after_space,
+        "name": name.value,
+    }]
+
 @pg.production("parameter : COMMA")
 def parameter_comma((comma,)):
     return [{

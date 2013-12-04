@@ -4607,6 +4607,50 @@ def test_class_inherit():
             }],
           }])
 
+def test_funcdef_stmt_one_start_parameter_indent():
+    """
+    def a (*b):
+        pass
+    """
+    parse_multi([
+             ('DEF', 'def', '', ' '),
+             ('NAME', 'a'),
+             ('LEFT_PARENTHESIS', '('),
+             ('STAR', '*'),
+             ('NAME', 'b'),
+             ('RIGHT_PARENTHESIS', ')'),
+             ('COLON', ':', '', ' '),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+          ],
+          [{
+            "type": "funcdef",
+            "name": "a",
+            "first_space": " ",
+            "second_space": "",
+            "third_space": "",
+            "forth_space": "",
+            "fith_space": "",
+            "arguments": [{
+                "type": "list_argument",
+                "first_space": "",
+                "name": "b",
+            }],
+            "value": [{
+               "type": "endl",
+               "value": "\n",
+               "indent": "    "
+            },{
+                "type": "pass",
+            },{
+               "type": "endl",
+               "value": "\n"
+            }],
+          }])
+
 ### stmt: simple_stmt
 ### stmt: compound_stmt
 
