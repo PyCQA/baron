@@ -4586,4 +4586,4 @@ def test_funcdef_stmt_one_parameter_comma_default_indent():
 # -
 
 ### suite: simple_stmt
-# suite: [SPACE] NEWLINE INDENT stmt+ DEDENT
+### suite: [SPACE] NEWLINE INDENT stmt+ DEDENT

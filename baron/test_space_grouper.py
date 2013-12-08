@@ -2682,6 +2682,19 @@ def test_endl():
            ('ENDL', '\n'),
          ])
 
+def test_endl_import():
+    """
+        """
+    group([
+           ('ENDL', '\n'),
+           ('SPACE', '    '),
+           ('IMPORT', 'import'),
+         ],
+         [
+           ('ENDL', '\n', '', '    '),
+           ('IMPORT', 'import'),
+         ])
+
 def test_while():
     """
         """

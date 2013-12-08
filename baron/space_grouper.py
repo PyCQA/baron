@@ -2,6 +2,7 @@ from utils import FlexibleIterator
 
 PRIORITY_ORDER = (
     "IMPORT",
+    "ENDL",
 )
 
 BOTH = (
