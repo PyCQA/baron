@@ -2759,3 +2759,16 @@ def test_def():
           ('DEF', 'def', '', '    '),
            ('NAME', 'a'),
          ])
+
+def test_class():
+    """
+        """
+    group([
+           ('CLASS', 'class'),
+           ('SPACE', '    '),
+           ('NAME', 'a'),
+         ],
+         [
+           ('CLASS', 'class', '', '    '),
+           ('NAME', 'a'),
+         ])
