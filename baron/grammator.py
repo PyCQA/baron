@@ -594,8 +594,14 @@ def simple_stmt_semicolon((small_stmt, semicolon, simple_stmt)):
 @pg.production("compound_stmt : for_stmt")
 @pg.production("compound_stmt : try_stmt")
 @pg.production("compound_stmt : funcdef")
+@pg.production("compound_stmt : classdef")
 def small_and_compound_stmt((statement,)):
     return statement
+
+
+@pg.production("classdef : CLASS NAME COLON suite")
+def class_stmt((class_, name, colon, suite),):
+    return {}
 
 
 @pg.production("funcdef : DEF NAME LEFT_PARENTHESIS parameters RIGHT_PARENTHESIS COLON suite")

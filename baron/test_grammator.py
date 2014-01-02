@@ -4488,6 +4488,41 @@ def test_funcdef_stmt_one_parameter_comma_default_indent():
             }],
           }])
 
+def test_class_empty():
+    """
+    class A:
+        pass
+    """
+    parse_multi([
+             ('CLASS', 'class', '', ' '),
+             ('NAME', 'A'),
+             ('COLON', ':'),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('DEDENT', ''),
+          ],
+          [{
+            "type": "class",
+            "name": "a",
+            "parenthesis": False,
+            "first_space": " ",
+            "second_space": "",
+            "third_space": "",
+            "forth_space": "",
+            "inherit_from": [],
+            "value": [{
+               "type": "endl",
+               "value": "\n",
+               "indent": "    "
+            },{
+                "type": "pass",
+            },{
+               "type": "endl",
+               "value": "\n"
+            }],
+          }])
+
 ### stmt: simple_stmt
 ### stmt: compound_stmt
 
@@ -4503,6 +4538,10 @@ def test_funcdef_stmt_one_parameter_comma_default_indent():
 # -
 
 ### funcdef: 'def' SPACE NAME [SPACE] parameters [SPACE] ':' [SPACE] suite
+
+# -
+
+# classdef: 'class' SPACE NAME [SPACE] ['(' [SPACE] [testlist] [SPACE] ')'] [SPACE] ':' [SPACE] suite
 
 # -
 
