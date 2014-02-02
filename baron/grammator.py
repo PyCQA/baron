@@ -601,7 +601,18 @@ def small_and_compound_stmt((statement,)):
 
 @pg.production("classdef : CLASS NAME COLON suite")
 def class_stmt((class_, name, colon, suite),):
-    return {}
+    return [{
+        "type": "class",
+        "name": name.value,
+        "parenthesis": False,
+        "first_space": class_.after_space,
+        "second_space": "",
+        "third_space": "",
+        "forth_space": "",
+        "fith_space": "",
+        "inherit_from": [],
+        "value": suite,
+    }]
 
 
 @pg.production("funcdef : DEF NAME LEFT_PARENTHESIS parameters RIGHT_PARENTHESIS COLON suite")
