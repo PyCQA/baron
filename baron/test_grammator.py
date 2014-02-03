@@ -4697,28 +4697,6 @@ def test_funcdef_stmt_one_star_star_parameter_indent():
             }],
           }])
 
-### stmt: simple_stmt
-### stmt: compound_stmt
-
-### compound_stmt: if_stmt
-### compound_stmt: while_stmt
-### compound_stmt: for_stmt
-### compound_stmt: try_stmt
-# compound_stmt: with_stmt
-### compound_stmt: funcdef
-# compound_stmt: classdef
-# compound_stmt: decorated
-
-# -
-
-### funcdef: 'def' SPACE NAME [SPACE] parameters [SPACE] ':' [SPACE] suite
-
-# -
-
-# classdef: 'class' SPACE NAME [SPACE] ['(' [SPACE] [testlist] [SPACE] ')'] [SPACE] ':' [SPACE] suite
-
-# -
-
 ### parameters: '(' [SPACE] [varargslist] [SPACE] ')'
 
 # -
@@ -4759,32 +4737,8 @@ def test_funcdef_stmt_one_star_star_parameter_indent():
 
 # -
 
-### if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite
-### if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite ('elif' SPACE test [SPACE] ':' [SPACE] suite)*
-### if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite ['else' SPACE ':' [SPACE] suite]
-### if_stmt: 'if' SPACE test [SPACE] ':' [SPACE] suite ('elif' SPACE test [SPACE] ':' [SPACE] suite)* ['else' SPACE ':' [SPACE] suite]
-
-# -
-
-### while_stmt: 'while' SPACE test [SPACE] ':' [SPACE] suite
-### while_stmt: 'while' SPACE test [SPACE] ':' [SPACE] suite ['else' [SPACE] ':' [SPACE] suite]
-
-# -
-
-### for_stmt: 'for' SPACE exprlist SPACE 'in' SPACE testlist [SPACE] ':' [SPACE] suite
-### for_stmt: 'for' SPACE exprlist SPACE 'in' SPACE testlist [SPACE] ':' [SPACE] suite ['else' [SPACE] ':' [SPACE] suite]
-
-# -
-
-### try_stmt: 'try' [SPACE] ':' [SPACE] suite 'finally' [SPACE] ':' suite
-### try_stmt: 'try' [SPACE] ':' [SPACE] suite (except_clause [SPACE] ':' [SPACE] suite)+
-### try_stmt: 'try' [SPACE] ':' [SPACE] suite (except_clause [SPACE] ':' [SPACE] suite)+ ['else' [SPACE] ':' [SPACE] suite]
-### try_stmt: 'try' [SPACE] ':' [SPACE] suite (except_clause [SPACE] ':' [SPACE] suite)+ ['finally' [SPACE] ':' suite]
-### try_stmt: 'try' [SPACE] ':' [SPACE] suite (except_clause [SPACE] ':' [SPACE] suite)+ ['else' [SPACE] ':' [SPACE] suite] ['finally' [SPACE] ':' suite]
-
-# -
-
-### except_clause: 'except' [SPACE test [(SPACE 'as' SPACE | [SPACE] ',' [SPACE]) test]]
+# compound_stmt: with_stmt
+# compound_stmt: decorated
 
 # -
 
@@ -4795,8 +4749,3 @@ def test_funcdef_stmt_one_star_star_parameter_indent():
 
 # with_item: test
 # with_item: test [SPACE 'as' SPACE expr]
-
-# -
-
-### suite: simple_stmt
-### suite: [SPACE] NEWLINE INDENT stmt+ DEDENT

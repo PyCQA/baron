@@ -215,8 +215,8 @@
 ### compound_stmt: for_stmt
 ### compound_stmt: try_stmt
 # compound_stmt: with_stmt
-# compound_stmt: funcdef
-# compound_stmt: classdef
+### compound_stmt: funcdef
+### compound_stmt: classdef
 # compound_stmt: decorated
 
 # -
@@ -440,7 +440,7 @@
 
 # -
 
-# classdef: 'class' SPACE NAME [SPACE] ['(' [SPACE] [testlist] [SPACE] ')'] [SPACE] ':' [SPACE] suite
+### classdef: 'class' SPACE NAME [SPACE] ['(' [SPACE] [testlist] [SPACE] ')'] [SPACE] ':' [SPACE] suite
 
 # -
 
