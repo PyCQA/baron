@@ -4564,6 +4564,49 @@ def test_class_empty_parenthesis():
             }],
           }])
 
+def test_class_inherit():
+    """
+    class A ( B ) :
+        pass
+    """
+    parse_multi([
+             ('CLASS', 'class', '', ' '),
+             ('NAME', 'A'),
+             ('LEFT_PARENTHESIS', '(', ' ', ' '),
+             ('NAME', 'B'),
+             ('RIGHT_PARENTHESIS', ')', ' ', ' '),
+             ('COLON', ':'),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n', '', ''),
+             ('DEDENT', ''),
+          ],
+          [{
+            "type": "class",
+            "name": "A",
+            "parenthesis": True,
+            "first_space": " ",
+            "second_space": " ",
+            "third_space": " ",
+            "forth_space": " ",
+            "fith_space": " ",
+            "inherit_from": [{
+                "type": "name",
+                "value": "B"
+            }],
+            "value": [{
+               "type": "endl",
+               "value": "\n",
+               "indent": "    "
+            },{
+                "type": "pass",
+            },{
+               "type": "endl",
+               "value": "\n"
+            }],
+          }])
+
 ### stmt: simple_stmt
 ### stmt: compound_stmt
 
