@@ -4525,6 +4525,45 @@ def test_class_empty():
             }],
           }])
 
+def test_class_empty_parenthesis():
+    """
+    class A ( ) :
+        pass
+    """
+    parse_multi([
+             ('CLASS', 'class', '', ' '),
+             ('NAME', 'A'),
+             ('LEFT_PARENTHESIS', '(', ' ', ' '),
+             ('RIGHT_PARENTHESIS', ')', '', ' '),
+             ('COLON', ':'),
+             ('ENDL', '\n', '', '    '),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n', '', ''),
+             ('DEDENT', ''),
+          ],
+          [{
+            "type": "class",
+            "name": "A",
+            "parenthesis": True,
+            "first_space": " ",
+            "second_space": " ",
+            "third_space": " ",
+            "forth_space": "",
+            "fith_space": " ",
+            "inherit_from": [],
+            "value": [{
+               "type": "endl",
+               "value": "\n",
+               "indent": "    "
+            },{
+                "type": "pass",
+            },{
+               "type": "endl",
+               "value": "\n"
+            }],
+          }])
+
 ### stmt: simple_stmt
 ### stmt: compound_stmt
 

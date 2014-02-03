@@ -615,6 +615,22 @@ def class_stmt((class_, name, colon, suite),):
     }]
 
 
+@pg.production("classdef : CLASS NAME LEFT_PARENTHESIS RIGHT_PARENTHESIS COLON suite")
+def class_stmt_parenthesis((class_, name, left_parenthesis, right_parenthesis, colon, suite),):
+    return [{
+        "type": "class",
+        "name": name.value,
+        "parenthesis": True,
+        "first_space": class_.after_space,
+        "second_space": left_parenthesis.before_space,
+        "third_space": left_parenthesis.after_space,
+        "forth_space": right_parenthesis.before_space,
+        "fith_space": right_parenthesis.after_space,
+        "inherit_from": [],
+        "value": suite,
+    }]
+
+
 @pg.production("funcdef : DEF NAME LEFT_PARENTHESIS parameters RIGHT_PARENTHESIS COLON suite")
 def function_definition((def_, name, left_parenthesis, parameters, right_parenthesis, colon, suite)):
     return [{
