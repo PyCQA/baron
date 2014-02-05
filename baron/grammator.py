@@ -50,36 +50,36 @@
 
 # -
 
-# funcdef: 'def' SPACE NAME [SPACE] parameters [SPACE] ':' [SPACE] suite
+### funcdef: 'def' SPACE NAME [SPACE] parameters [SPACE] ':' [SPACE] suite
 
 # -
 
 ### should the SPACE really be there?
-# parameters: '(' [SPACE] [varargslist] [SPACE] ')'
+### parameters: '(' [SPACE] [varargslist] [SPACE] ')'
 
 # -
 
-# varargslist: [SPACE]
+### varargslist: [SPACE]
 
-# varargslist: fpdef
-# varargslist: fpdef [SPACE] '=' [SPACE] test
-# varargslist: fpdef [SPACE] '=' [SPACE] test [SPACE] ','
-# varargslist: fpdef [SPACE] '=' [SPACE] test [SPACE] ',' [SPACE] fpdef
-# varargslist: fpdef [SPACE] '=' [SPACE] test [SPACE] ',' [SPACE] fpdef [SPACE] '=' [SPACE] test
-# varargslist: fpdef [SPACE] '=' [SPACE] test [SPACE] ',' [SPACE] fpdef [SPACE] '=' [SPACE] test [SPACE] ','
-
-# varargslist: '*' [SPACE] NAME
-# varargslist: '**' [SPACE] NAME
-# varargslist: '*' NAME [SPACE] ',' [SPACE] '**' [SPACE] NAME
-
-# varargslist: fpdef [SPACE] ',' [SPACE] '*' [SPACE] NAME
-# varargslist: fpdef [SPACE] '=' [SPACE] test [SPACE] ',' [SPACE] '*' [SPACE] NAME
-
-# varargslist: fpdef [SPACE] ',' [SPACE] '**' [SPACE] NAME
-# varargslist: fpdef [SPACE] '=' [SPACE] test [SPACE] ',' [SPACE] '**' [SPACE] NAME
-
-# varargslist: fpdef [SPACE] ',' [SPACE] '*' [SPACE] NAME [SPACE] ',' [SPACE] '**' [SPACE] NAME
-# varargslist: fpdef [SPACE] '=' [SPACE] test [SPACE] ',' [SPACE] '*' [SPACE] NAME [SPACE] ',' [SPACE] '**' [SPACE] NAME
+### varargslist: fpdef
+### varargslist: fpdef [SPACE] '=' [SPACE] test
+### varargslist: fpdef [SPACE] '=' [SPACE] test [SPACE] ','
+### varargslist: fpdef [SPACE] '=' [SPACE] test [SPACE] ',' [SPACE] fpdef
+### varargslist: fpdef [SPACE] '=' [SPACE] test [SPACE] ',' [SPACE] fpdef [SPACE] '=' [SPACE] test
+### varargslist: fpdef [SPACE] '=' [SPACE] test [SPACE] ',' [SPACE] fpdef [SPACE] '=' [SPACE] test [SPACE] ','
+##
+### varargslist: '*' [SPACE] NAME
+### varargslist: '**' [SPACE] NAME
+### varargslist: '*' NAME [SPACE] ',' [SPACE] '**' [SPACE] NAME
+##
+### varargslist: fpdef [SPACE] ',' [SPACE] '*' [SPACE] NAME
+### varargslist: fpdef [SPACE] '=' [SPACE] test [SPACE] ',' [SPACE] '*' [SPACE] NAME
+##
+### varargslist: fpdef [SPACE] ',' [SPACE] '**' [SPACE] NAME
+### varargslist: fpdef [SPACE] '=' [SPACE] test [SPACE] ',' [SPACE] '**' [SPACE] NAME
+##
+### varargslist: fpdef [SPACE] ',' [SPACE] '*' [SPACE] NAME [SPACE] ',' [SPACE] '**' [SPACE] NAME
+### varargslist: fpdef [SPACE] '=' [SPACE] test [SPACE] ',' [SPACE] '*' [SPACE] NAME [SPACE] ',' [SPACE] '**' [SPACE] NAME
 
 # -
 
@@ -88,7 +88,7 @@
 
 # -
 
-# fpdef: NAME
+### fpdef: NAME
 # fpdef: '(' [SPACE] fplist [SPACE] ')'
 
 # -
