@@ -2961,36 +2961,6 @@ def test_print_redirect_ab_comma():
             "destination_space": " ",
           }])
 
-def test_empty_tuple():
-    "()"
-    parse_simple([
-           ('LEFT_PARENTHESIS', '('),
-           ('RIGHT_PARENTHESIS', ')'),
-          ],
-          [{
-            "type": "tuple",
-            "first_space": "",
-            "second_space": "",
-            "value": [],
-          }])
-
-def test_empty_tuple_space():
-    "(  )"
-    parse_simple([
-           ('LEFT_PARENTHESIS', '(', '', '  '),
-           ('RIGHT_PARENTHESIS', ')'),
-          ],
-          [{
-            "type": "tuple",
-            "first_space": "  ",
-            "second_space": "",
-            "value": [],
-          }])
-
-# XXX finish tuples
-# too long time I haven't coded on this
-# don't see the difference between tuple and () with a comma in it
-
 def test_file_input_empty():
     ""
     parse_multi([

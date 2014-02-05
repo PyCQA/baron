@@ -1496,6 +1496,16 @@ def tuple((left_parenthesis, right_parenthesis,)):
            }
 
 
+@pg.production("atom : LEFT_PARENTHESIS test COMMA RIGHT_PARENTHESIS")
+def tuple_one((left_parenthesis, test, comma, right_parenthesis,)):
+    return {
+            "type": "tuple",
+            "first_space": left_parenthesis.after_space,
+            "second_space": right_parenthesis.before_space,
+            "value": [test, {"type": "comma", "value": ","}]
+           }
+
+
 parser = pg.build()
 
 
