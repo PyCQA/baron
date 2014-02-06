@@ -532,6 +532,7 @@ from grammator_imports import include_imports
 from grammator_control_structures import include_control_structures
 from grammator_primitives import include_primivites
 from grammator_operators import include_operators
+from grammator_data_structures import include_data_structures
 
 
 pg = ParserGenerator(tuple(map(lambda x: x.upper(), KEYWORDS)) + zip(*TOKENS)[1] + ("ENDMARKER", "INDENT", "DEDENT"), cache_id="baron")
@@ -746,6 +747,7 @@ include_imports(pg)
 include_control_structures(pg)
 include_primivites(pg)
 include_operators(pg)
+include_data_structures(pg)
 
 
 @pg.production("atom : INT")
@@ -761,31 +763,6 @@ def name((name,)):
 @pg.production("atom : STRING")
 def string((string_,)):
     return create_node_from_token(string_)
-
-
-@pg.production("atom : LEFT_PARENTHESIS RIGHT_PARENTHESIS")
-def tuple((left_parenthesis, right_parenthesis,)):
-    return {
-            "type": "tuple",
-            "first_space": left_parenthesis.after_space,
-            "second_space": "",
-            "value": []
-           }
-
-
-@pg.production("atom : LEFT_PARENTHESIS testlist_comp RIGHT_PARENTHESIS")
-def tuple_one((left_parenthesis, testlist_comp, right_parenthesis,)):
-    return {
-            "type": "tuple",
-            "first_space": left_parenthesis.after_space,
-            "second_space": right_parenthesis.before_space,
-            "value": testlist_comp
-           }
-
-
-@pg.production("testlist_comp : test COMMA")
-def testlist_comp((test, comma)):
-    return [test, {"type": "comma", "value": ","}]
 
 
 parser = pg.build()
