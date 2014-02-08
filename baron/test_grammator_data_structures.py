@@ -92,8 +92,8 @@ def test_tuple_many():
 def test_empty_list():
     "[ ]"
     parse_simple([
-           ('LEFT_BRACKET', '[', '', ' '),
-           ('RIGHT_BRACKET', ']', '', ''),
+           ('LEFT_SQUARE_BRACKET', '[', '', ' '),
+           ('RIGHT_SQUARE_BRACKET', ']', '', ''),
           ],
           [{
             "type": "list",
@@ -105,9 +105,9 @@ def test_empty_list():
 def test_empty_one():
     "[ a ]"
     parse_simple([
-           ('LEFT_BRACKET', '[', '', ' '),
+           ('LEFT_SQUARE_BRACKET', '[', '', ' '),
            ('NAME', 'a'),
-           ('RIGHT_BRACKET', ']', ' ', ''),
+           ('RIGHT_SQUARE_BRACKET', ']', ' ', ''),
           ],
           [{
             "type": "list",
@@ -119,9 +119,46 @@ def test_empty_one():
             }],
           }])
 
+def test_empty_more():
+    "[a, b, c]"
+    parse_simple([
+           ('LEFT_SQUARE_BRACKET', '[', '', ''),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'c'),
+           ('RIGHT_SQUARE_BRACKET', ']', '', ''),
+          ],
+          [{
+            "type": "list",
+            "first_space": "",
+            "second_space": "",
+            "value": [{
+               "type": "name",
+               "value": "a",
+            },{
+               "type": "comma",
+               "value": ",",
+               "first_space": "",
+               "second_space": " ",
+            },{
+               "type": "name",
+               "value": "b",
+            },{
+               "type": "comma",
+               "value": ",",
+               "first_space": "",
+               "second_space": " ",
+            },{
+               "type": "name",
+               "value": "c",
+            }],
+          }])
+
 ### atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
 # atom: '(' [SPACE] [yield_expr] [SPACE] ')'
-# atom: '[' [SPACE] [listmaker] [SPACE] ']'
+### atom: '[' [SPACE] [listmaker] [SPACE] ']'
 # atom: '{' [SPACE] [dictorsetmaker] [SPACE] '}'
 # atom: '`' [SPACE] testlist1 [SPACE] '`'
 
@@ -138,10 +175,10 @@ def test_empty_one():
 
 # -
 
-# listmaker: test
+### listmaker: test
 # listmaker: test [SPACE] list_for
-# listmaker: test ([SPACE] ',' [SPACE] test)*
-# listmaker: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
+### listmaker: test ([SPACE] ',' [SPACE] test)*
+### listmaker: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
 
 # -
 

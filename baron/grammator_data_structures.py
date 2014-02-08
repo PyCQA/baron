@@ -34,7 +34,7 @@ def include_data_structures(pg):
         return [test, {"type": "comma", "value": ",", "first_space": comma.before_space, "second_space": comma.after_space}] + testlist_comp
 
 
-    @pg.production("atom : LEFT_BRACKET listmaker RIGHT_BRACKET")
+    @pg.production("atom : LEFT_SQUARE_BRACKET listmaker RIGHT_SQUARE_BRACKET")
     def list((left_bracket, listmaker, right_bracket,)):
         return {
                 "type": "list",
@@ -52,3 +52,8 @@ def include_data_structures(pg):
     @pg.production("listmaker : test")
     def listmaker_one((test,)):
         return [test]
+
+
+    @pg.production("listmaker : test COMMA listmaker")
+    def listmaker_more((test, comma, listmaker)):
+        return [test, {"type": "comma", "value": ",", "first_space": comma.before_space, "second_space": comma.after_space}] + listmaker
