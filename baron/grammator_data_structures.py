@@ -73,3 +73,14 @@ def include_data_structures(pg):
             "value": test2,
             "type": "dictitem"
         }]
+
+
+    @pg.production("dictmaker : test COLON test comma dictmaker")
+    def dict_more((test, colon, test2, comma, dictmaker)):
+        return [{
+            "first_space": colon.before_space,
+            "second_space": colon.after_space,
+            "key": test,
+            "value": test2,
+            "type": "dictitem"
+        }, comma] + dictmaker

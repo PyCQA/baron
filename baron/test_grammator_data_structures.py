@@ -192,6 +192,74 @@ def test_dict_one():
             }],
           }])
 
+def test_dict_more():
+    "{a: b, b: c, c: d}"
+    parse_simple([
+           ('LEFT_BRACKET', '{', '', ''),
+           ('NAME', 'a'),
+           ('COLON', ':', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COLON', ':', '', ' '),
+           ('NAME', 'c'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'c'),
+           ('COLON', ':', '', ' '),
+           ('NAME', 'd'),
+           ('RIGHT_BRACKET', '}', '', ''),
+          ],
+          [{
+            "type": "dict",
+            "first_space": "",
+            "second_space": "",
+            "value": [{
+                "type": "dictitem",
+                "first_space": "",
+                "second_space": " ",
+                "key": {
+                    "type": "name",
+                    "value": "a",
+                },
+                "value": {
+                    "type": "name",
+                    "value": "b",
+                }
+            },{
+               "type": "comma",
+               "first_space": "",
+               "second_space": " ",
+            },{
+                "type": "dictitem",
+                "first_space": "",
+                "second_space": " ",
+                "key": {
+                    "type": "name",
+                    "value": "b",
+                },
+                "value": {
+                    "type": "name",
+                    "value": "c",
+                }
+            },{
+               "type": "comma",
+               "first_space": "",
+               "second_space": " ",
+            },{
+                "type": "dictitem",
+                "first_space": "",
+                "second_space": " ",
+                "key": {
+                    "type": "name",
+                    "value": "c",
+                },
+                "value": {
+                    "type": "name",
+                    "value": "d",
+                }
+            }],
+          }])
+
 ### atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
 # atom: '(' [SPACE] [yield_expr] [SPACE] ')'
 ### atom: '[' [SPACE] [listmaker] [SPACE] ']'
