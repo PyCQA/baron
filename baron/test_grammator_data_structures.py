@@ -50,6 +50,39 @@ def test_tuple_one():
             }],
           }])
 
+def test_tuple_many():
+    "(a, b, c)"
+    parse_simple([
+           ('LEFT_PARENTHESIS', '(', '', ''),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'c'),
+           ('RIGHT_PARENTHESIS', ')', '', ''),
+          ],
+          [{
+            "type": "tuple",
+            "first_space": "",
+            "second_space": "",
+            "value": [{
+               "type": "name",
+               "value": "a",
+            },{
+               "type": "comma",
+               "value": ",",
+            },{
+               "type": "name",
+               "value": "b",
+            },{
+               "type": "comma",
+               "value": ",",
+            },{
+               "type": "name",
+               "value": "c",
+            }],
+          }])
+
 ### atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
 # atom: '(' [SPACE] [yield_expr] [SPACE] ')'
 # atom: '[' [SPACE] [listmaker] [SPACE] ']'
@@ -58,10 +91,10 @@ def test_tuple_one():
 
 # -
 
-# testlist_comp: test
+### testlist_comp: test
 # testlist_comp: test [SPACE] comp_for
 ### testlist_comp: test ([SPACE] ',' [SPACE] test)*
-# testlist_comp: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
+### testlist_comp: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
 
 # -
 
