@@ -57,3 +57,13 @@ def include_data_structures(pg):
     @pg.production("listmaker : test COMMA listmaker")
     def listmaker_more((test, comma, listmaker)):
         return [test, {"type": "comma", "value": ",", "first_space": comma.before_space, "second_space": comma.after_space}] + listmaker
+
+
+    @pg.production("atom : LEFT_BRACKET RIGHT_BRACKET")
+    def dict((left_bracket, right_bracket,)):
+        return {
+                "type": "dict",
+                "first_space": left_bracket.after_space,
+                "second_space": right_bracket.before_space,
+                "value": []
+               }

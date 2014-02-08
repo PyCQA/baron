@@ -156,6 +156,19 @@ def test_empty_more():
             }],
           }])
 
+def test_dict_empty():
+    "{ }"
+    parse_simple([
+           ('LEFT_BRACKET', '{', '', ' '),
+           ('RIGHT_BRACKET', '}', '', ''),
+          ],
+          [{
+            "type": "dict",
+            "first_space": " ",
+            "second_space": "",
+            "value": [],
+          }])
+
 ### atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
 # atom: '(' [SPACE] [yield_expr] [SPACE] ')'
 ### atom: '[' [SPACE] [listmaker] [SPACE] ']'
