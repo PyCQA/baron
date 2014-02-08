@@ -46,7 +46,6 @@ def test_tuple_one():
                "value": "a",
             },{
                "type": "comma",
-               "value": ",",
                "first_space": "",
                "second_space": " ",
             }],
@@ -72,7 +71,6 @@ def test_tuple_many():
                "value": "a",
             },{
                "type": "comma",
-               "value": ",",
                "first_space": "",
                "second_space": " ",
             },{
@@ -80,7 +78,6 @@ def test_tuple_many():
                "value": "b",
             },{
                "type": "comma",
-               "value": ",",
                "first_space": "",
                "second_space": " ",
             },{
@@ -102,7 +99,7 @@ def test_empty_list():
             "value": [],
           }])
 
-def test_empty_one():
+def test_list_one():
     "[ a ]"
     parse_simple([
            ('LEFT_SQUARE_BRACKET', '[', '', ' '),
@@ -119,7 +116,7 @@ def test_empty_one():
             }],
           }])
 
-def test_empty_more():
+def test_list_more():
     "[a, b, c]"
     parse_simple([
            ('LEFT_SQUARE_BRACKET', '[', '', ''),
@@ -139,7 +136,6 @@ def test_empty_more():
                "value": "a",
             },{
                "type": "comma",
-               "value": ",",
                "first_space": "",
                "second_space": " ",
             },{
@@ -147,7 +143,6 @@ def test_empty_more():
                "value": "b",
             },{
                "type": "comma",
-               "value": ",",
                "first_space": "",
                "second_space": " ",
             },{

@@ -14,14 +14,14 @@ def include_data_structures(pg):
         return []
 
 
-    @pg.production("testlist_comp : test COMMA test")
+    @pg.production("testlist_comp : test comma test")
     def testlist_comp_two((test, comma, test2)):
-        return [test, {"type": "comma", "value": ",", "first_space": comma.before_space, "second_space": comma.after_space}, test2]
+        return [test, comma, test2]
 
 
-    @pg.production("testlist_comp : test COMMA testlist_comp")
+    @pg.production("testlist_comp : test comma testlist_comp")
     def testlist_comp_more((test, comma, testlist_comp)):
-        return [test, {"type": "comma", "value": ",", "first_space": comma.before_space, "second_space": comma.after_space}] + testlist_comp
+        return [test, comma] + testlist_comp
 
 
     @pg.production("atom : LEFT_SQUARE_BRACKET listmaker RIGHT_SQUARE_BRACKET")
@@ -44,9 +44,9 @@ def include_data_structures(pg):
         return [test]
 
 
-    @pg.production("listmaker : test COMMA listmaker")
+    @pg.production("listmaker : test comma listmaker")
     def listmaker_more((test, comma, listmaker)):
-        return [test, {"type": "comma", "value": ",", "first_space": comma.before_space, "second_space": comma.after_space}] + listmaker
+        return [test, comma] + listmaker
 
 
     @pg.production("atom : LEFT_BRACKET dictmaker RIGHT_BRACKET")

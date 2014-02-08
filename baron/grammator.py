@@ -718,13 +718,9 @@ def parameter_star_star((star, star2, name,)):
         "name": name.value,
     }]
 
-@pg.production("parameter : COMMA")
+@pg.production("parameter : comma")
 def parameter_comma((comma,)):
-    return [{
-        "type": "comma",
-        "first_space": comma.before_space,
-        "second_space": comma.after_space,
-    }]
+    return [comma]
 
 @pg.production("suite : simple_stmt")
 def suite((simple_stmt,)):
@@ -764,6 +760,14 @@ def name((name,)):
 def string((string_,)):
     return create_node_from_token(string_)
 
+
+@pg.production("comma : COMMA")
+def comma((comma,)):
+    return {
+        "type": "comma",
+        "first_space": comma.before_space,
+        "second_space": comma.after_space,
+    }
 
 parser = pg.build()
 
