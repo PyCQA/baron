@@ -83,6 +83,19 @@ def test_tuple_many():
             }],
           }])
 
+def test_empty_list():
+    "[ ]"
+    parse_simple([
+           ('LEFT_BRACKET', '[', '', ' '),
+           ('RIGHT_BRACKET', ']', '', ''),
+          ],
+          [{
+            "type": "list",
+            "first_space": " ",
+            "second_space": "",
+            "value": [],
+          }])
+
 ### atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
 # atom: '(' [SPACE] [yield_expr] [SPACE] ')'
 # atom: '[' [SPACE] [listmaker] [SPACE] ']'

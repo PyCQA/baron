@@ -32,3 +32,13 @@ def include_data_structures(pg):
     @pg.production("testlist_comp : test COMMA testlist_comp")
     def testlist_comp_more((test, comma, testlist_comp)):
         return [test, {"type": "comma", "value": ","}] + testlist_comp
+
+
+    @pg.production("atom : LEFT_BRACKET RIGHT_BRACKET")
+    def list((left_bracket, right_bracket,)):
+        return {
+                "type": "list",
+                "first_space": left_bracket.after_space,
+                "second_space": "",
+                "value": []
+               }
