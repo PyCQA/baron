@@ -96,6 +96,23 @@ def test_empty_list():
             "value": [],
           }])
 
+def test_empty_one():
+    "[ a ]"
+    parse_simple([
+           ('LEFT_BRACKET', '[', '', ' '),
+           ('NAME', 'a'),
+           ('RIGHT_BRACKET', ']', ' ', ''),
+          ],
+          [{
+            "type": "list",
+            "first_space": " ",
+            "second_space": " ",
+            "value": [{
+               "type": "name",
+               "value": "a",
+            }],
+          }])
+
 ### atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
 # atom: '(' [SPACE] [yield_expr] [SPACE] ')'
 # atom: '[' [SPACE] [listmaker] [SPACE] ']'

@@ -34,11 +34,21 @@ def include_data_structures(pg):
         return [test, {"type": "comma", "value": ","}] + testlist_comp
 
 
-    @pg.production("atom : LEFT_BRACKET RIGHT_BRACKET")
-    def list((left_bracket, right_bracket,)):
+    @pg.production("atom : LEFT_BRACKET listmaker RIGHT_BRACKET")
+    def list((left_bracket, listmaker, right_bracket,)):
         return {
                 "type": "list",
                 "first_space": left_bracket.after_space,
-                "second_space": "",
-                "value": []
+                "second_space": right_bracket.before_space,
+                "value": listmaker
                }
+
+
+    @pg.production("listmaker :")
+    def listmaker_empty(empty):
+        return []
+
+
+    @pg.production("listmaker : test")
+    def listmaker_one((test,)):
+        return [test]
