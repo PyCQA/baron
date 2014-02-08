@@ -169,6 +169,34 @@ def test_dict_empty():
             "value": [],
           }])
 
+def test_dict_one():
+    "{a: b}"
+    parse_simple([
+           ('LEFT_BRACKET', '{', '', ''),
+           ('NAME', 'a'),
+           ('COLON', ':', '', ' '),
+           ('NAME', 'b'),
+           ('RIGHT_BRACKET', '}', '', ''),
+          ],
+          [{
+            "type": "dict",
+            "first_space": "",
+            "second_space": "",
+            "value": [{
+                "type": "dictitem",
+                "first_space": "",
+                "second_space": " ",
+                "key": {
+                    "type": "name",
+                    "value": "a",
+                },
+                "value": {
+                    "type": "name",
+                    "value": "b",
+                }
+            }],
+          }])
+
 ### atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
 # atom: '(' [SPACE] [yield_expr] [SPACE] ')'
 ### atom: '[' [SPACE] [listmaker] [SPACE] ']'

@@ -49,11 +49,27 @@ def include_data_structures(pg):
         return [test, {"type": "comma", "value": ",", "first_space": comma.before_space, "second_space": comma.after_space}] + listmaker
 
 
-    @pg.production("atom : LEFT_BRACKET RIGHT_BRACKET")
-    def dict((left_bracket, right_bracket,)):
+    @pg.production("atom : LEFT_BRACKET dictmaker RIGHT_BRACKET")
+    def dict((left_bracket, dictmaker, right_bracket,)):
         return {
                 "type": "dict",
                 "first_space": left_bracket.after_space,
                 "second_space": right_bracket.before_space,
-                "value": []
+                "value": dictmaker
                }
+
+
+    @pg.production("dictmaker : ")
+    def dict_empty(empty):
+        return []
+
+
+    @pg.production("dictmaker : test COLON test")
+    def dict_one((test, colon, test2)):
+        return [{
+            "first_space": colon.before_space,
+            "second_space": colon.after_space,
+            "key": test,
+            "value": test2,
+            "type": "dictitem"
+        }]
