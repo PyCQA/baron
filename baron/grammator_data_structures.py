@@ -21,17 +21,17 @@ def include_data_structures(pg):
 
     @pg.production("testlist_comp : test COMMA")
     def testlist_comp((test, comma)):
-        return [test, {"type": "comma", "value": ","}]
+        return [test, {"type": "comma", "value": ",", "first_space": comma.before_space, "second_space": comma.after_space}]
 
 
     @pg.production("testlist_comp : test COMMA test")
     def testlist_comp_two((test, comma, test2)):
-        return [test, {"type": "comma", "value": ","}, test2]
+        return [test, {"type": "comma", "value": ",", "first_space": comma.before_space, "second_space": comma.after_space}, test2]
 
 
     @pg.production("testlist_comp : test COMMA testlist_comp")
     def testlist_comp_more((test, comma, testlist_comp)):
-        return [test, {"type": "comma", "value": ","}] + testlist_comp
+        return [test, {"type": "comma", "value": ",", "first_space": comma.before_space, "second_space": comma.after_space}] + testlist_comp
 
 
     @pg.production("atom : LEFT_BRACKET listmaker RIGHT_BRACKET")

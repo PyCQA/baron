@@ -34,19 +34,21 @@ def test_tuple_one():
     parse_simple([
            ('LEFT_PARENTHESIS', '(', '', ' '),
            ('NAME', 'a'),
-           ('COMMA', ','),
-           ('RIGHT_PARENTHESIS', ')', ' ', ''),
+           ('COMMA', ',', '', ' '),
+           ('RIGHT_PARENTHESIS', ')', '', ''),
           ],
           [{
             "type": "tuple",
             "first_space": " ",
-            "second_space": " ",
+            "second_space": "",
             "value": [{
                "type": "name",
                "value": "a",
             },{
                "type": "comma",
                "value": ",",
+               "first_space": "",
+               "second_space": " ",
             }],
           }])
 
@@ -71,12 +73,16 @@ def test_tuple_many():
             },{
                "type": "comma",
                "value": ",",
+               "first_space": "",
+               "second_space": " ",
             },{
                "type": "name",
                "value": "b",
             },{
                "type": "comma",
                "value": ",",
+               "first_space": "",
+               "second_space": " ",
             },{
                "type": "name",
                "value": "c",
