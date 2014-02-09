@@ -260,6 +260,23 @@ def test_dict_more():
             }],
           }])
 
+def test_set_one():
+    "{a}"
+    parse_simple([
+           ('LEFT_BRACKET', '{', '', ''),
+           ('NAME', 'a'),
+           ('RIGHT_BRACKET', '}', '', ''),
+          ],
+          [{
+            "type": "set",
+            "first_space": "",
+            "second_space": "",
+            "value": [{
+                "type": "name",
+                "value": "a",
+            }],
+          }])
+
 ### atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
 # atom: '(' [SPACE] [yield_expr] [SPACE] ')'
 ### atom: '[' [SPACE] [listmaker] [SPACE] ']'

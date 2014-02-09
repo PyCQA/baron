@@ -84,3 +84,18 @@ def include_data_structures(pg):
             "value": test2,
             "type": "dictitem"
         }, comma] + dictmaker
+
+
+    @pg.production("atom : LEFT_BRACKET setmaker RIGHT_BRACKET")
+    def set((left_bracket, setmaker, right_bracket,)):
+        return {
+                "type": "set",
+                "first_space": left_bracket.after_space,
+                "second_space": right_bracket.before_space,
+                "value": setmaker
+               }
+
+
+    @pg.production("setmaker : test")
+    def set_one((test,)):
+        return [test]
