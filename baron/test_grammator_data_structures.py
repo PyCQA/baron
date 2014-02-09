@@ -277,6 +277,41 @@ def test_set_one():
             }],
           }])
 
+def test_set_more():
+    "{a, b, c}"
+    parse_simple([
+           ('LEFT_BRACKET', '{', '', ''),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'c'),
+           ('RIGHT_BRACKET', '}', '', ''),
+          ],
+          [{
+            "type": "set",
+            "first_space": "",
+            "second_space": "",
+            "value": [{
+                "type": "name",
+                "value": "a",
+            },{
+               "type": "comma",
+               "first_space": "",
+               "second_space": " ",
+            },{
+                "type": "name",
+                "value": "b",
+            },{
+               "type": "comma",
+               "first_space": "",
+               "second_space": " ",
+            },{
+                "type": "name",
+                "value": "c",
+            }],
+          }])
+
 ### atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
 # atom: '(' [SPACE] [yield_expr] [SPACE] ')'
 ### atom: '[' [SPACE] [listmaker] [SPACE] ']'

@@ -96,6 +96,11 @@ def include_data_structures(pg):
                }
 
 
+    @pg.production("setmaker : test comma setmaker")
+    def set_more((test, comma, setmaker)):
+        return [test, comma] + setmaker
+
+
     @pg.production("setmaker : test")
     def set_one((test,)):
         return [test]
