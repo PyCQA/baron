@@ -128,3 +128,25 @@ def include_data_structures(pg):
             "iterator": exprlist,
             "ifs": [],
         }
+
+    @pg.production("comp_for : FOR exprlist IN or_test comp_iter")
+    def comp_for_iter((for_, exprlist, in_, or_test, comp_iter)):
+        return {
+            "type": "generator_comprehension_loop",
+            "first_space": for_.before_space,
+            "second_space": for_.after_space,
+            "third_space": in_.before_space,
+            "forth_space": in_.after_space,
+            "target": or_test,
+            "iterator": exprlist,
+            "ifs": [comp_iter],
+        }
+
+    @pg.production("comp_iter : IF test")
+    def comp_iter((if_, old_test)):
+        return {
+            "type": "comprehension_if",
+            "first_space": if_.before_space,
+            "second_space": if_.after_space,
+            "value": old_test
+        }

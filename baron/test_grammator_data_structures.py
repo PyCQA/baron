@@ -349,6 +349,53 @@ def test_generator_comprehension():
             }
           }])
 
+def test_generator_comprehension_if():
+    "( a for b in c if d )"
+    parse_simple([
+           ('LEFT_PARENTHESIS', '(', '', ' '),
+           ('NAME', 'a'),
+           ('FOR', 'for', ' ', ' '),
+           ('NAME', 'b'),
+           ('IN', 'in', ' ', ' '),
+           ('NAME', 'c'),
+           ('IF', 'if', ' ', ' '),
+           ('NAME', 'd'),
+           ('RIGHT_PARENTHESIS', ')', ' ', ''),
+          ],
+          [{
+            "type": "generator_comprehension",
+            "first_space": " ",
+            "second_space": " ",
+            "result": {
+               "type": "name",
+               "value": "a",
+            },
+            "generator": {
+                "type": "generator_comprehension_loop",
+                "first_space": " ",
+                "second_space": " ",
+                "third_space": " ",
+                "forth_space": " ",
+                "iterator": {
+                   "type": "name",
+                   "value": "b",
+                },
+                "target": {
+                   "type": "name",
+                   "value": "c",
+                },
+                "ifs": [{
+                    "type": "comprehension_if",
+                    "first_space": " ",
+                    "second_space": " ",
+                    "value": {
+                        "type": "name",
+                        "value": "d"
+                    },
+                }],
+            }
+          }])
+
 ### atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
 # atom: '(' [SPACE] [yield_expr] [SPACE] ')'
 ### atom: '[' [SPACE] [listmaker] [SPACE] ']'
@@ -358,7 +405,7 @@ def test_generator_comprehension():
 # -
 
 ### testlist_comp: test
-# testlist_comp: test [SPACE] comp_for
+### testlist_comp: test [SPACE] comp_for
 ### testlist_comp: test ([SPACE] ',' [SPACE] test)*
 ### testlist_comp: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
 
@@ -475,13 +522,13 @@ def test_generator_comprehension():
 
 # -
 
-# comp_iter: comp_if
+### comp_iter: comp_if
 # comp_iter: comp_for
 
 # -
 
-# comp_for: 'for' SPACE exprlist SPACE 'in' SPACE or_test
-# comp_for: 'for' SPACE exprlist SPACE 'in' SPACE or_test [SPACE comp_iter]
+### comp_for: 'for' SPACE exprlist SPACE 'in' SPACE or_test
+### comp_for: 'for' SPACE exprlist SPACE 'in' SPACE or_test [SPACE comp_iter]
 
 # -
 
