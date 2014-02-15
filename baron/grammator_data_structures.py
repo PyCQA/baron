@@ -104,3 +104,27 @@ def include_data_structures(pg):
     @pg.production("setmaker : test")
     def set_one((test,)):
         return [test]
+
+
+    @pg.production("atom : LEFT_PARENTHESIS test comp_for RIGHT_PARENTHESIS")
+    def generator_comprehension((left_parenthesis, test, comp_for, right_parenthesis,)):
+        return {
+            "type": "generator_comprehension",
+            "first_space": left_parenthesis.after_space,
+            "second_space": right_parenthesis.before_space,
+            "result": test,
+            "generator": comp_for,
+          }
+
+    @pg.production("comp_for : FOR exprlist IN or_test")
+    def comp_for((for_, exprlist, in_, or_test)):
+        return {
+            "type": "generator_comprehension_loop",
+            "first_space": for_.before_space,
+            "second_space": for_.after_space,
+            "third_space": in_.before_space,
+            "forth_space": in_.after_space,
+            "target": or_test,
+            "iterator": exprlist,
+            "ifs": [],
+        }

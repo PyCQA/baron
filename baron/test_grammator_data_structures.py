@@ -312,6 +312,43 @@ def test_set_more():
             }],
           }])
 
+def test_generator_comprehension():
+    "( a for b in c )"
+    parse_simple([
+           ('LEFT_PARENTHESIS', '(', '', ' '),
+           ('NAME', 'a'),
+           ('FOR', 'for', ' ', ' '),
+           ('NAME', 'b'),
+           ('IN', 'in', ' ', ' '),
+           ('NAME', 'c'),
+           ('RIGHT_PARENTHESIS', ')', ' ', ''),
+          ],
+          [{
+            "type": "generator_comprehension",
+            "first_space": " ",
+            "second_space": " ",
+            "result": {
+               "type": "name",
+               "value": "a",
+            },
+            "generator": {
+                "type": "generator_comprehension_loop",
+                "first_space": " ",
+                "second_space": " ",
+                "third_space": " ",
+                "forth_space": " ",
+                "iterator": {
+                   "type": "name",
+                   "value": "b",
+                },
+                "target": {
+                   "type": "name",
+                   "value": "c",
+                },
+                "ifs": [],
+            }
+          }])
+
 ### atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
 # atom: '(' [SPACE] [yield_expr] [SPACE] ')'
 ### atom: '[' [SPACE] [listmaker] [SPACE] ']'
