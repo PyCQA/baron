@@ -352,7 +352,7 @@ def test_generator_comprehension():
 ### atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
 # atom: '(' [SPACE] [yield_expr] [SPACE] ')'
 ### atom: '[' [SPACE] [listmaker] [SPACE] ']'
-# atom: '{' [SPACE] [dictorsetmaker] [SPACE] '}'
+### atom: '{' [SPACE] [dictorsetmaker] [SPACE] '}'
 # atom: '`' [SPACE] testlist1 [SPACE] '`'
 
 # -
@@ -419,19 +419,19 @@ def test_generator_comprehension():
 
 # -
 
-# dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE]
-# dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE] [SPACE] [',']
-# dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE] ([SPACE] ',' [SPACE] test [SPACE] ':' [SPACE] test)*)
-# dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE] ([SPACE] ',' [SPACE] test [SPACE] ':' [SPACE] test)* [SPACE] [','])
+### dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE]
+### dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE] [SPACE] [',']
+### dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE] ([SPACE] ',' [SPACE] test [SPACE] ':' [SPACE] test)*)
+### dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE] ([SPACE] ',' [SPACE] test [SPACE] ':' [SPACE] test)* [SPACE] [','])
 
 # dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE] comp_for
 
 # dictorsetmaker: test [SPACE] comp_for
 
-# dictorsetmaker: test [SPACE]
-# dictorsetmaker: test [SPACE] [SPACE] [',']
-# dictorsetmaker: test [SPACE] ([SPACE] ',' [SPACE] test)*
-# dictorsetmaker: test [SPACE] ([SPACE] ',' [SPACE] test)* [SPACE] [',']
+### dictorsetmaker: test [SPACE]
+### dictorsetmaker: test [SPACE] [SPACE] [',']
+### dictorsetmaker: test [SPACE] ([SPACE] ',' [SPACE] test)*
+### dictorsetmaker: test [SPACE] ([SPACE] ',' [SPACE] test)* [SPACE] [',']
 
 # -
 
@@ -455,7 +455,7 @@ def test_generator_comprehension():
 # -
 
 # argument: test
-# argument: test [SPACE comp_for]
+# argument: test [SPACE] comp_for
 # argument: test [SPACE] '=' [SPACE] test
 
 # -
