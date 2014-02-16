@@ -938,22 +938,6 @@ def test_dict_comprehension():
 
 # -
 
-### dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE]
-### dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE] [SPACE] [',']
-### dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE] ([SPACE] ',' [SPACE] test [SPACE] ':' [SPACE] test)*)
-### dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE] ([SPACE] ',' [SPACE] test [SPACE] ':' [SPACE] test)* [SPACE] [','])
-
-# dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE] comp_for
-
-# dictorsetmaker: test [SPACE] comp_for
-
-### dictorsetmaker: test [SPACE]
-### dictorsetmaker: test [SPACE] [SPACE] [',']
-### dictorsetmaker: test [SPACE] ([SPACE] ',' [SPACE] test)*
-### dictorsetmaker: test [SPACE] ([SPACE] ',' [SPACE] test)* [SPACE] [',']
-
-# -
-
 # for reference
 # arglist: (argument [SPACE] ',' [SPACE])* (argument [SPACE] [','] |'*' [SPACE] test ([SPACE] ',' [SPACE] argument)* [[SPACE] ',' [SPACE] '**' [SPACE] test] |'**' [SPACE] test)
 
