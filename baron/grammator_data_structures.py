@@ -60,6 +60,17 @@ def include_data_structures(pg):
           }
 
 
+    @pg.production("atom : LEFT_SQUARE_BRACKET test list_for list_iter RIGHT_SQUARE_BRACKET")
+    def listmaker_list_for_list_iter((left_square_bracket, test, list_for, list_iter, right_square_bracket)):
+        return {
+            "type": "list_comprehension",
+            "first_space": left_square_bracket.after_space,
+            "second_space": right_square_bracket.before_space,
+            "result": test,
+            "generators": list_for,
+          }
+
+
     @pg.production("atom : LEFT_BRACKET dictmaker RIGHT_BRACKET")
     def dict((left_bracket, dictmaker, right_bracket,)):
         return {
@@ -143,6 +154,7 @@ def include_data_structures(pg):
         }]
 
     @pg.production("comp_for : FOR exprlist IN or_test comp_iter")
+    @pg.production("list_for : FOR exprlist IN or_test list_iter")
     def comp_for_iter((for_, exprlist, in_, or_test, comp_iter)):
         my_ifs = []
         for i in comp_iter:
@@ -163,10 +175,12 @@ def include_data_structures(pg):
             "ifs": my_ifs,
         }] + comp_iter
 
+    @pg.production("list_iter : list_for")
     @pg.production("comp_iter : comp_for")
     def comp_iter_comp_for((comp_for,)):
         return comp_for
 
+    @pg.production("list_iter : IF old_test")
     @pg.production("comp_iter : IF old_test")
     def comp_iter_if((if_, old_test)):
         return [{

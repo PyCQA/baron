@@ -622,6 +622,53 @@ def test_list_comprehension():
             }]
           }])
 
+def test_list_comprehension_if():
+    "[ a for b in c if d ]"
+    parse_simple([
+           ('LEFT_SQUARE_BRACKET', '[', '', ' '),
+           ('NAME', 'a'),
+           ('FOR', 'for', ' ', ' '),
+           ('NAME', 'b'),
+           ('IN', 'in', ' ', ' '),
+           ('NAME', 'c'),
+           ('IF', 'if', ' ', ' '),
+           ('NAME', 'd'),
+           ('RIGHT_SQUARE_BRACKET', ']', ' ', ''),
+          ],
+          [{
+            "type": "list_comprehension",
+            "first_space": " ",
+            "second_space": " ",
+            "result": {
+               "type": "name",
+               "value": "a",
+            },
+            "generators": [{
+                "type": "comprehension_loop",
+                "first_space": " ",
+                "second_space": " ",
+                "third_space": " ",
+                "forth_space": " ",
+                "iterator": {
+                   "type": "name",
+                   "value": "b",
+                },
+                "target": {
+                   "type": "name",
+                   "value": "c",
+                },
+                "ifs": [{
+                    "type": "comprehension_if",
+                    "first_space": " ",
+                    "second_space": " ",
+                    "value": {
+                        "type": "name",
+                        "value": "d"
+                    },
+                }],
+            }]
+          }])
+
 ### atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
 # atom: '(' [SPACE] [yield_expr] [SPACE] ')'
 ### atom: '[' [SPACE] [listmaker] [SPACE] ']'
@@ -635,7 +682,7 @@ def test_list_comprehension():
 # -
 
 ### listmaker: test
-# listmaker: test [SPACE] list_for
+### listmaker: test [SPACE] list_for
 ### listmaker: test ([SPACE] ',' [SPACE] test)*
 ### listmaker: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
 
@@ -719,21 +766,6 @@ def test_list_comprehension():
 # argument: test
 # argument: test [SPACE] comp_for
 # argument: test [SPACE] '=' [SPACE] test
-
-# -
-
-# list_iter: list_if
-# list_iter: list_for
-
-# -
-
-# list_for: 'for' SPACE exprlist SPACE 'in' SPACE testlist_safe
-# list_for: 'for' SPACE exprlist SPACE 'in' SPACE testlist_safe [SPACE list_iter]
-
-# -
-
-# list_if: 'if' SPACE old_test
-# list_if: 'if' SPACE old_test [SPACE list_iter]
 
 # -
 
