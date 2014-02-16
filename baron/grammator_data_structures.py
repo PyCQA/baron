@@ -126,6 +126,21 @@ def include_data_structures(pg):
             "generators": list_for,
           }
 
+    @pg.production("atom : LEFT_BRACKET test COLON test comp_for RIGHT_BRACKET")
+    def dict_comprehension((left_bracket, test, colon, test2, list_for, right_bracket)):
+        return {
+            "type": "dict_comprehension",
+            "first_space": left_bracket.after_space,
+            "second_space": right_bracket.before_space,
+            "result": {
+                "key": test,
+                "value": test2,
+                "first_space": colon.before_space,
+                "second_space": colon.after_space,
+            },
+            "generators": list_for,
+          }
+
     @pg.production("atom : LEFT_BRACKET test comp_for RIGHT_BRACKET")
     def set_comprehension((left_bracket, test, list_for, right_bracket)):
         return {
