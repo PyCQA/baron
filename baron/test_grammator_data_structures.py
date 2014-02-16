@@ -706,6 +706,129 @@ def test_set_comprehension():
             }]
           }])
 
+def test_set_comprehension_if():
+    "{ a for b in c if d }"
+    parse_simple([
+           ('LEFT_BRACKET', '{', '', ' '),
+           ('NAME', 'a'),
+           ('FOR', 'for', ' ', ' '),
+           ('NAME', 'b'),
+           ('IN', 'in', ' ', ' '),
+           ('NAME', 'c'),
+           ('IF', 'if', ' ', ' '),
+           ('NAME', 'd'),
+           ('RIGHT_BRACKET', '}', ' ', ''),
+          ],
+          [{
+            "type": "set_comprehension",
+            "first_space": " ",
+            "second_space": " ",
+            "result": {
+               "type": "name",
+               "value": "a",
+            },
+            "generators": [{
+                "type": "comprehension_loop",
+                "first_space": " ",
+                "second_space": " ",
+                "third_space": " ",
+                "forth_space": " ",
+                "iterator": {
+                   "type": "name",
+                   "value": "b",
+                },
+                "target": {
+                   "type": "name",
+                   "value": "c",
+                },
+                "ifs": [{
+                    "type": "comprehension_if",
+                    "first_space": " ",
+                    "second_space": " ",
+                    "value": {
+                        "type": "name",
+                        "value": "d"
+                    },
+                }],
+            }]
+          }])
+
+def test_set_comprehension_double_if_if():
+    "{ a for b in c if x for d in e if y }"
+    parse_simple([
+           ('LEFT_BRACKET', '{', '', ' '),
+           ('NAME', 'a'),
+           ('FOR', 'for', ' ', ' '),
+           ('NAME', 'b'),
+           ('IN', 'in', ' ', ' '),
+           ('NAME', 'c'),
+           ('IF', 'if', ' ', ' '),
+           ('NAME', 'x'),
+           ('FOR', 'for', ' ', ' '),
+           ('NAME', 'd'),
+           ('IN', 'in', ' ', ' '),
+           ('NAME', 'e'),
+           ('IF', 'if', ' ', ' '),
+           ('NAME', 'y'),
+           ('RIGHT_BRACKET', '}', ' ', ''),
+          ],
+          [{
+            "type": "set_comprehension",
+            "first_space": " ",
+            "second_space": " ",
+            "result": {
+               "type": "name",
+               "value": "a",
+            },
+            "generators": [{
+                "type": "comprehension_loop",
+                "first_space": " ",
+                "second_space": " ",
+                "third_space": " ",
+                "forth_space": " ",
+                "iterator": {
+                   "type": "name",
+                   "value": "b",
+                },
+                "target": {
+                   "type": "name",
+                   "value": "c",
+                },
+                "ifs": [{
+                    "type": "comprehension_if",
+                    "first_space": " ",
+                    "second_space": " ",
+                    "value": {
+                        "type": "name",
+                        "value": "x"
+                    },
+                }],
+            },{
+                "type": "comprehension_loop",
+                "first_space": " ",
+                "second_space": " ",
+                "third_space": " ",
+                "forth_space": " ",
+                "iterator": {
+                   "type": "name",
+                   "value": "d",
+                },
+                "target": {
+                   "type": "name",
+                   "value": "e",
+                },
+                "ifs": [{
+                    "type": "comprehension_if",
+                    "first_space": " ",
+                    "second_space": " ",
+                    "value": {
+                        "type": "name",
+                        "value": "y"
+                    },
+                }],
+            }]
+          }])
+
 ### atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
 # atom: '(' [SPACE] [yield_expr] [SPACE] ')'
 ### atom: '[' [SPACE] [listmaker] [SPACE] ']'
