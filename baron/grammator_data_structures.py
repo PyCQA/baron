@@ -49,6 +49,17 @@ def include_data_structures(pg):
         return [test, comma] + listmaker
 
 
+    @pg.production("atom : LEFT_SQUARE_BRACKET test list_for RIGHT_SQUARE_BRACKET")
+    def listmaker_list_for((left_square_bracket, test, list_for, right_square_bracket)):
+        return {
+            "type": "list_comprehension",
+            "first_space": left_square_bracket.after_space,
+            "second_space": right_square_bracket.before_space,
+            "result": test,
+            "generators": list_for,
+          }
+
+
     @pg.production("atom : LEFT_BRACKET dictmaker RIGHT_BRACKET")
     def dict((left_bracket, dictmaker, right_bracket,)):
         return {
@@ -116,6 +127,8 @@ def include_data_structures(pg):
             "generators": comp_for,
           }
 
+    #@pg.production("list_for : FOR exprlist IN testlist_safe")
+    @pg.production("list_for : FOR exprlist IN or_test")
     @pg.production("comp_for : FOR exprlist IN or_test")
     def comp_for((for_, exprlist, in_, or_test)):
         return [{
