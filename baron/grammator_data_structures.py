@@ -139,14 +139,23 @@ def include_data_structures(pg):
             "forth_space": in_.after_space,
             "target": or_test,
             "iterator": exprlist,
-            "ifs": [comp_iter],
+            "ifs": comp_iter,
         }
 
     @pg.production("comp_iter : IF old_test")
-    def comp_iter((if_, old_test)):
-        return {
+    def comp_iter_if((if_, old_test)):
+        return [{
             "type": "comprehension_if",
             "first_space": if_.before_space,
             "second_space": if_.after_space,
             "value": old_test
-        }
+        }]
+
+    @pg.production("comp_iter : IF old_test comp_iter")
+    def comp_iter_if_comp_iter((if_, old_test, comp_iter)):
+        return [{
+            "type": "comprehension_if",
+            "first_space": if_.before_space,
+            "second_space": if_.after_space,
+            "value": old_test
+        }] + comp_iter

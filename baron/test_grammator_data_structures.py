@@ -396,6 +396,63 @@ def test_generator_comprehension_if():
             }
           }])
 
+def test_generator_comprehension_if_if():
+    "( a for b in c if d if e )"
+    parse_simple([
+           ('LEFT_PARENTHESIS', '(', '', ' '),
+           ('NAME', 'a'),
+           ('FOR', 'for', ' ', ' '),
+           ('NAME', 'b'),
+           ('IN', 'in', ' ', ' '),
+           ('NAME', 'c'),
+           ('IF', 'if', ' ', ' '),
+           ('NAME', 'd'),
+           ('IF', 'if', ' ', ' '),
+           ('NAME', 'e'),
+           ('RIGHT_PARENTHESIS', ')', ' ', ''),
+          ],
+          [{
+            "type": "generator_comprehension",
+            "first_space": " ",
+            "second_space": " ",
+            "result": {
+               "type": "name",
+               "value": "a",
+            },
+            "generator": {
+                "type": "generator_comprehension_loop",
+                "first_space": " ",
+                "second_space": " ",
+                "third_space": " ",
+                "forth_space": " ",
+                "iterator": {
+                   "type": "name",
+                   "value": "b",
+                },
+                "target": {
+                   "type": "name",
+                   "value": "c",
+                },
+                "ifs": [{
+                    "type": "comprehension_if",
+                    "first_space": " ",
+                    "second_space": " ",
+                    "value": {
+                        "type": "name",
+                        "value": "d"
+                    },
+                },{
+                    "type": "comprehension_if",
+                    "first_space": " ",
+                    "second_space": " ",
+                    "value": {
+                        "type": "name",
+                        "value": "e"
+                    },
+                }],
+            }
+          }])
+
 ### atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
 # atom: '(' [SPACE] [yield_expr] [SPACE] ')'
 ### atom: '[' [SPACE] [listmaker] [SPACE] ']'
@@ -532,8 +589,8 @@ def test_generator_comprehension_if():
 
 # -
 
-# comp_if: 'if' SPACE old_test
-# comp_if: 'if' SPACE old_test [SPACE comp_iter]
+### comp_if: 'if' SPACE old_test
+### comp_if: 'if' SPACE old_test [SPACE comp_iter]
 
 # -
 
