@@ -453,6 +453,62 @@ def test_generator_comprehension_if_if():
             }]
           }])
 
+def test_generator_comprehension_double():
+    "( a for b in c for d in e )"
+    parse_simple([
+           ('LEFT_PARENTHESIS', '(', '', ' '),
+           ('NAME', 'a'),
+           ('FOR', 'for', ' ', ' '),
+           ('NAME', 'b'),
+           ('IN', 'in', ' ', ' '),
+           ('NAME', 'c'),
+           ('FOR', 'for', ' ', ' '),
+           ('NAME', 'd'),
+           ('IN', 'in', ' ', ' '),
+           ('NAME', 'e'),
+           ('RIGHT_PARENTHESIS', ')', ' ', ''),
+          ],
+          [{
+            "type": "generator_comprehension",
+            "first_space": " ",
+            "second_space": " ",
+            "result": {
+               "type": "name",
+               "value": "a",
+            },
+            "generators": [{
+                "type": "comprehension_loop",
+                "first_space": " ",
+                "second_space": " ",
+                "third_space": " ",
+                "forth_space": " ",
+                "iterator": {
+                   "type": "name",
+                   "value": "b",
+                },
+                "target": {
+                   "type": "name",
+                   "value": "c",
+                },
+                "ifs": [],
+            },{
+                "type": "comprehension_loop",
+                "first_space": " ",
+                "second_space": " ",
+                "third_space": " ",
+                "forth_space": " ",
+                "iterator": {
+                   "type": "name",
+                   "value": "d",
+                },
+                "target": {
+                   "type": "name",
+                   "value": "e",
+                },
+                "ifs": [],
+            }]
+          }])
+
 ### atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
 # atom: '(' [SPACE] [yield_expr] [SPACE] ')'
 ### atom: '[' [SPACE] [listmaker] [SPACE] ']'

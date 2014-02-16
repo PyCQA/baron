@@ -113,12 +113,12 @@ def include_data_structures(pg):
             "first_space": left_parenthesis.after_space,
             "second_space": right_parenthesis.before_space,
             "result": test,
-            "generators": [comp_for],
+            "generators": comp_for,
           }
 
     @pg.production("comp_for : FOR exprlist IN or_test")
     def comp_for((for_, exprlist, in_, or_test)):
-        return {
+        return [{
             "type": "comprehension_loop",
             "first_space": for_.before_space,
             "second_space": for_.after_space,
@@ -127,11 +127,19 @@ def include_data_structures(pg):
             "target": or_test,
             "iterator": exprlist,
             "ifs": [],
-        }
+        }]
 
     @pg.production("comp_for : FOR exprlist IN or_test comp_iter")
     def comp_for_iter((for_, exprlist, in_, or_test, comp_iter)):
-        return {
+        my_ifs = []
+        for i in comp_iter:
+            print i
+            if i["type"] != "comprehension_if":
+                break
+            my_ifs.append(i)
+            comp_iter = comp_iter[1:]
+
+        return [{
             "type": "comprehension_loop",
             "first_space": for_.before_space,
             "second_space": for_.after_space,
@@ -139,8 +147,12 @@ def include_data_structures(pg):
             "forth_space": in_.after_space,
             "target": or_test,
             "iterator": exprlist,
-            "ifs": comp_iter,
-        }
+            "ifs": my_ifs,
+        }] + comp_iter
+
+    @pg.production("comp_iter : comp_for")
+    def comp_iter_comp_for((comp_for,)):
+        return comp_for
 
     @pg.production("comp_iter : IF old_test")
     def comp_iter_if((if_, old_test)):
