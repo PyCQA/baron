@@ -24,6 +24,7 @@ def include_operators(pg):
     def term_factor((level,)):
         return level
 
+    @pg.production("testlist_safe : or_test")
     @pg.production("old_test : or_test")
     def old_test((level,)):
         return level

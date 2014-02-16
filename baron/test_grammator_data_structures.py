@@ -677,6 +677,12 @@ def test_list_comprehension_if():
 
 # -
 
+### testlist_safe: old_test
+# testlist_safe: old_test [([SPACE] ',' [SPACE] old_test)+]
+# testlist_safe: old_test [([SPACE] ',' [SPACE] old_test)+ [SPACE] [',']]
+
+# -
+
 # yield_expr: déjà fait
 
 # -

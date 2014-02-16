@@ -138,8 +138,7 @@ def include_data_structures(pg):
             "generators": comp_for,
           }
 
-    #@pg.production("list_for : FOR exprlist IN testlist_safe")
-    @pg.production("list_for : FOR exprlist IN or_test")
+    @pg.production("list_for : FOR exprlist IN testlist_safe")
     @pg.production("comp_for : FOR exprlist IN or_test")
     def comp_for((for_, exprlist, in_, or_test)):
         return [{
