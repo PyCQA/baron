@@ -593,13 +593,6 @@ def test_generator_comprehension_double_if_if():
 
 # -
 
-### testlist_comp: test
-### testlist_comp: test [SPACE] comp_for
-### testlist_comp: test ([SPACE] ',' [SPACE] test)*
-### testlist_comp: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
-
-# -
-
 # yield_expr: déjà fait
 
 # -
@@ -671,10 +664,6 @@ def test_generator_comprehension_double_if_if():
 
 # -
 
-### classdef: 'class' SPACE NAME [SPACE] ['(' [SPACE] [testlist] [SPACE] ')'] [SPACE] ':' [SPACE] suite
-
-# -
-
 # for reference
 # arglist: (argument [SPACE] ',' [SPACE])* (argument [SPACE] [','] |'*' [SPACE] test ([SPACE] ',' [SPACE] argument)* [[SPACE] ',' [SPACE] '**' [SPACE] test] |'**' [SPACE] test)
 
@@ -708,21 +697,6 @@ def test_generator_comprehension_double_if_if():
 
 # list_if: 'if' SPACE old_test
 # list_if: 'if' SPACE old_test [SPACE list_iter]
-
-# -
-
-### comp_iter: comp_if
-# comp_iter: comp_for
-
-# -
-
-### comp_for: 'for' SPACE exprlist SPACE 'in' SPACE or_test
-### comp_for: 'for' SPACE exprlist SPACE 'in' SPACE or_test [SPACE comp_iter]
-
-# -
-
-### comp_if: 'if' SPACE old_test
-### comp_if: 'if' SPACE old_test [SPACE comp_iter]
 
 # -
 
