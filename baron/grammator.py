@@ -271,8 +271,8 @@
 
 # -
 
-# old_lambdef: 'lambda' [SPACE] ':' [SPACE] old_test
-# old_lambdef: 'lambda' SPACE [varargslist] [SPACE] ':' [SPACE] old_test
+# old_lambdef: 'lambda' [space] ':' [space] old_test
+# old_lambdef: 'lambda' space [varargslist] [space] ':' [space] old_test
 
 # -
 

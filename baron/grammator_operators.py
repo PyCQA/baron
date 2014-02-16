@@ -24,6 +24,9 @@ def include_operators(pg):
     def term_factor((level,)):
         return level
 
+    @pg.production("old_test : or_test")
+    def old_test((level,)):
+        return level
 
     @pg.production("testlist : test testlist_part")
     @pg.production("exprlist : expr exprlist_part")

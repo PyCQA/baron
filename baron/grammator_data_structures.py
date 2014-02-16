@@ -142,7 +142,7 @@ def include_data_structures(pg):
             "ifs": [comp_iter],
         }
 
-    @pg.production("comp_iter : IF test")
+    @pg.production("comp_iter : IF old_test")
     def comp_iter((if_, old_test)):
         return {
             "type": "comprehension_if",

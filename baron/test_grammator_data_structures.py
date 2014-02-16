@@ -539,3 +539,13 @@ def test_generator_comprehension_if():
 
 # testlist1: test
 # testlist1: test ([SPACE] ',' [SPACE] test)*
+
+# -
+
+### old_test: or_test
+# old_test: old_lambdef
+
+# -
+
+# old_lambdef: 'lambda' [space] ':' [space] old_test
+# old_lambdef: 'lambda' space [varargslist] [space] ':' [space] old_test
