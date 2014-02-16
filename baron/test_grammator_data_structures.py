@@ -669,6 +669,43 @@ def test_list_comprehension_if():
             }]
           }])
 
+def test_set_comprehension():
+    "{ a for b in c }"
+    parse_simple([
+           ('LEFT_BRACKET', '{', '', ' '),
+           ('NAME', 'a'),
+           ('FOR', 'for', ' ', ' '),
+           ('NAME', 'b'),
+           ('IN', 'in', ' ', ' '),
+           ('NAME', 'c'),
+           ('RIGHT_BRACKET', '}', ' ', ''),
+          ],
+          [{
+            "type": "set_comprehension",
+            "first_space": " ",
+            "second_space": " ",
+            "result": {
+               "type": "name",
+               "value": "a",
+            },
+            "generators": [{
+                "type": "comprehension_loop",
+                "first_space": " ",
+                "second_space": " ",
+                "third_space": " ",
+                "forth_space": " ",
+                "iterator": {
+                   "type": "name",
+                   "value": "b",
+                },
+                "target": {
+                   "type": "name",
+                   "value": "c",
+                },
+                "ifs": [],
+            }]
+          }])
+
 ### atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
 # atom: '(' [SPACE] [yield_expr] [SPACE] ')'
 ### atom: '[' [SPACE] [listmaker] [SPACE] ']'

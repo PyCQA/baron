@@ -126,6 +126,16 @@ def include_data_structures(pg):
             "generators": list_for,
           }
 
+    @pg.production("atom : LEFT_BRACKET test comp_for RIGHT_BRACKET")
+    def set_comprehension((left_bracket, test, list_for, right_bracket)):
+        return {
+            "type": "set_comprehension",
+            "first_space": left_bracket.after_space,
+            "second_space": right_bracket.before_space,
+            "result": test,
+            "generators": list_for,
+          }
+
     @pg.production("list_for : FOR exprlist IN testlist_safe")
     @pg.production("comp_for : FOR exprlist IN or_test")
     def comp_for((for_, exprlist, in_, or_test)):
