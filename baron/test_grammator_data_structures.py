@@ -331,8 +331,8 @@ def test_generator_comprehension():
                "type": "name",
                "value": "a",
             },
-            "generator": {
-                "type": "generator_comprehension_loop",
+            "generators": [{
+                "type": "comprehension_loop",
                 "first_space": " ",
                 "second_space": " ",
                 "third_space": " ",
@@ -346,7 +346,7 @@ def test_generator_comprehension():
                    "value": "c",
                 },
                 "ifs": [],
-            }
+            }]
           }])
 
 def test_generator_comprehension_if():
@@ -370,8 +370,8 @@ def test_generator_comprehension_if():
                "type": "name",
                "value": "a",
             },
-            "generator": {
-                "type": "generator_comprehension_loop",
+            "generators": [{
+                "type": "comprehension_loop",
                 "first_space": " ",
                 "second_space": " ",
                 "third_space": " ",
@@ -393,7 +393,7 @@ def test_generator_comprehension_if():
                         "value": "d"
                     },
                 }],
-            }
+            }]
           }])
 
 def test_generator_comprehension_if_if():
@@ -419,8 +419,8 @@ def test_generator_comprehension_if_if():
                "type": "name",
                "value": "a",
             },
-            "generator": {
-                "type": "generator_comprehension_loop",
+            "generators": [{
+                "type": "comprehension_loop",
                 "first_space": " ",
                 "second_space": " ",
                 "third_space": " ",
@@ -450,7 +450,7 @@ def test_generator_comprehension_if_if():
                         "value": "e"
                     },
                 }],
-            }
+            }]
           }])
 
 ### atom: '(' [SPACE] [testlist_comp] [SPACE] ')'

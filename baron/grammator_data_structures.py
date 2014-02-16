@@ -113,13 +113,13 @@ def include_data_structures(pg):
             "first_space": left_parenthesis.after_space,
             "second_space": right_parenthesis.before_space,
             "result": test,
-            "generator": comp_for,
+            "generators": [comp_for],
           }
 
     @pg.production("comp_for : FOR exprlist IN or_test")
     def comp_for((for_, exprlist, in_, or_test)):
         return {
-            "type": "generator_comprehension_loop",
+            "type": "comprehension_loop",
             "first_space": for_.before_space,
             "second_space": for_.after_space,
             "third_space": in_.before_space,
@@ -132,7 +132,7 @@ def include_data_structures(pg):
     @pg.production("comp_for : FOR exprlist IN or_test comp_iter")
     def comp_for_iter((for_, exprlist, in_, or_test, comp_iter)):
         return {
-            "type": "generator_comprehension_loop",
+            "type": "comprehension_loop",
             "first_space": for_.before_space,
             "second_space": for_.after_space,
             "third_space": in_.before_space,
