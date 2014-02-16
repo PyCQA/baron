@@ -687,13 +687,6 @@ def test_list_comprehension_if():
 
 # -
 
-### listmaker: test
-### listmaker: test [SPACE] list_for
-### listmaker: test ([SPACE] ',' [SPACE] test)*
-### listmaker: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
-
-# -
-
 # lambdef: 'lambda' [SPACE] ':' [SPACE] test
 # lambdef: 'lambda' [SPACE] [varargslist] [SPACE] ':' [SPACE] test
 
