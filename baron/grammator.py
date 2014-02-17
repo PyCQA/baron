@@ -755,6 +755,16 @@ def yield_atom((left_parenthesis, yield_expr, right_parenthesis)):
         "third_space": yield_expr["space"]
     }
 
+#@pg.production("atom : BACKQUOTE testlist1 BACKQUOTE")
+@pg.production("atom : BACKQUOTE test BACKQUOTE")
+def repr_atom((backquote, testlist1, backquote2)):
+    return {
+        "type": "repr",
+        "value": testlist1,
+        "first_space": backquote.after_space,
+        "second_space": backquote2.before_space,
+    }
+
 @pg.production("atom : INT")
 def int((int_,)):
     return create_node_from_token(int_, section="number")

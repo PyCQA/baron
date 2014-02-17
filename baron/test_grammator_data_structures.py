@@ -895,8 +895,25 @@ def test_prioritizing_parenthesis():
             },
           }])
 
+def test_repr_quote():
+    "` a `"
+    parse_simple([
+           ('BACKQUOTE', '`', '', ' '),
+           ('NAME', 'a'),
+           ('BACKQUOTE', '`', ' ', ''),
+          ],
+          [{
+            "type": "repr",
+            "first_space": " ",
+            "second_space": " ",
+            "value": {
+                "type": "name",
+                "value": "a",
+            },
+          }])
+
 ### atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
-# atom: '(' [SPACE] [yield_expr] [SPACE] ')'
+### atom: '(' [SPACE] [yield_expr] [SPACE] ')'
 ### atom: '[' [SPACE] [listmaker] [SPACE] ']'
 ### atom: '{' [SPACE] [dictorsetmaker] [SPACE] '}'
 # atom: '`' [SPACE] testlist1 [SPACE] '`'
