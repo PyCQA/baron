@@ -877,7 +877,7 @@ def test_dict_comprehension():
           }])
 
 def test_prioritizing_parenthesis():
-    "( a )"
+    "( yield a )"
     parse_simple([
            ('LEFT_PARENTHESIS', '(', '', ' '),
            ('YIELD', 'yield', '', ' '),
