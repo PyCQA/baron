@@ -755,8 +755,7 @@ def yield_atom((left_parenthesis, yield_expr, right_parenthesis)):
         "third_space": yield_expr["space"]
     }
 
-#@pg.production("atom : BACKQUOTE testlist1 BACKQUOTE")
-@pg.production("atom : BACKQUOTE test BACKQUOTE")
+@pg.production("atom : BACKQUOTE testlist1 BACKQUOTE")
 def repr_atom((backquote, testlist1, backquote2)):
     return {
         "type": "repr",
@@ -764,6 +763,14 @@ def repr_atom((backquote, testlist1, backquote2)):
         "first_space": backquote.after_space,
         "second_space": backquote2.before_space,
     }
+
+@pg.production("testlist1 : test comma testlist1")
+def testlist1_double((test, comma, test2,)):
+    return [test, comma] + test2
+
+@pg.production("testlist1 : test")
+def testlist1((test,)):
+    return [test]
 
 @pg.production("atom : INT")
 def int((int_,)):

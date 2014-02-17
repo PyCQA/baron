@@ -906,10 +906,36 @@ def test_repr_quote():
             "type": "repr",
             "first_space": " ",
             "second_space": " ",
-            "value": {
+            "value": [{
                 "type": "name",
                 "value": "a",
-            },
+            }],
+          }])
+
+def test_repr_quote_double():
+    "` a, b `"
+    parse_simple([
+           ('BACKQUOTE', '`', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('BACKQUOTE', '`', ' ', ''),
+          ],
+          [{
+            "type": "repr",
+            "first_space": " ",
+            "second_space": " ",
+            "value": [{
+                "type": "name",
+                "value": "a",
+            },{
+                "first_space": "",
+                "second_space": " ",
+                "type": "comma",
+            },{
+                "type": "name",
+                "value": "b",
+            }],
           }])
 
 ### atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
