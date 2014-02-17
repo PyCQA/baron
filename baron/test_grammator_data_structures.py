@@ -938,21 +938,9 @@ def test_repr_quote_double():
             }],
           }])
 
-### atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
-### atom: '(' [SPACE] [yield_expr] [SPACE] ')'
-### atom: '[' [SPACE] [listmaker] [SPACE] ']'
-### atom: '{' [SPACE] [dictorsetmaker] [SPACE] '}'
-# atom: '`' [SPACE] testlist1 [SPACE] '`'
-
-# -
-
 ### testlist_safe: old_test
 # testlist_safe: old_test [([SPACE] ',' [SPACE] old_test)+]
 # testlist_safe: old_test [([SPACE] ',' [SPACE] old_test)+ [SPACE] [',']]
-
-# -
-
-# yield_expr: déjà fait
 
 # -
 
@@ -1018,11 +1006,6 @@ def test_repr_quote_double():
 # argument: test
 # argument: test [SPACE] comp_for
 # argument: test [SPACE] '=' [SPACE] test
-
-# -
-
-# testlist1: test
-# testlist1: test ([SPACE] ',' [SPACE] test)*
 
 # -
 
