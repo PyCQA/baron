@@ -876,6 +876,25 @@ def test_dict_comprehension():
             }]
           }])
 
+def test_prioritizing_parenthesis():
+    "( a )"
+    parse_simple([
+           ('LEFT_PARENTHESIS', '(', '', ' '),
+           ('YIELD', 'yield', '', ' '),
+           ('NAME', 'a'),
+           ('RIGHT_PARENTHESIS', ')', ' ', ''),
+          ],
+          [{
+            "type": "yield_atom",
+            "first_space": " ",
+            "second_space": " ",
+            "third_space": " ",
+            "value": {
+                "type": "name",
+                "value": "a",
+            },
+          }])
+
 ### atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
 # atom: '(' [SPACE] [yield_expr] [SPACE] ')'
 ### atom: '[' [SPACE] [listmaker] [SPACE] ']'

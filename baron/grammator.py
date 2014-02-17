@@ -745,6 +745,15 @@ include_primivites(pg)
 include_operators(pg)
 include_data_structures(pg)
 
+@pg.production("atom : LEFT_PARENTHESIS yield_expr RIGHT_PARENTHESIS")
+def yield_atom((left_parenthesis, yield_expr, right_parenthesis)):
+    return {
+        "type": "yield_atom",
+        "value": yield_expr["value"],
+        "first_space": left_parenthesis.after_space,
+        "second_space": right_parenthesis.before_space,
+        "third_space": yield_expr["space"]
+    }
 
 @pg.production("atom : INT")
 def int((int_,)):
