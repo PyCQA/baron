@@ -260,13 +260,13 @@
 
 # -
 
-# testlist_safe: old_test
+### testlist_safe: old_test
 # testlist_safe: old_test [([SPACE] ',' [SPACE] old_test)+]
 # testlist_safe: old_test [([SPACE] ',' [SPACE] old_test)+ [SPACE] [',']]
 
 # -
 
-# old_test: or_test
+### old_test: or_test
 # old_test: old_lambdef
 
 # -
@@ -355,28 +355,28 @@
 
 # -
 
-# atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
-# atom: '(' [SPACE] [yield_expr] [SPACE] ')'
-# atom: '[' [SPACE] [listmaker] [SPACE] ']'
-# atom: '{' [SPACE] [dictorsetmaker] [SPACE] '}'
-# atom: '`' [SPACE] testlist1 [SPACE] '`'
+### atom: '(' [SPACE] [testlist_comp] [SPACE] ')'
+### atom: '(' [SPACE] [yield_expr] [SPACE] ')'
+### atom: '[' [SPACE] [listmaker] [SPACE] ']'
+### atom: '{' [SPACE] [dictorsetmaker] [SPACE] '}'
+### atom: '`' [SPACE] testlist1 [SPACE] '`'
 ### atom: NAME
 ### atom: NUMBER
 ### atom: STRING+
 
 # -
 
-# listmaker: test
-# listmaker: test [SPACE] list_for
-# listmaker: test ([SPACE] ',' [SPACE] test)*
-# listmaker: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
+### listmaker: test
+### listmaker: test [SPACE] list_for
+### listmaker: test ([SPACE] ',' [SPACE] test)*
+### listmaker: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
 
 # -
 
-# testlist_comp: test
-# testlist_comp: test [SPACE] comp_for
-# testlist_comp: test ([SPACE] ',' [SPACE] test)*
-# testlist_comp: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
+### testlist_comp: test
+### testlist_comp: test [SPACE] comp_for
+### testlist_comp: test ([SPACE] ',' [SPACE] test)*
+### testlist_comp: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
 
 # -
 
@@ -424,19 +424,19 @@
 
 # -
 
-# dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE]
-# dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE] [SPACE] [',']
-# dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE] ([SPACE] ',' [SPACE] test [SPACE] ':' [SPACE] test)*)
-# dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE] ([SPACE] ',' [SPACE] test [SPACE] ':' [SPACE] test)* [SPACE] [','])
+### dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE]
+### dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE] [SPACE] [',']
+### dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE] ([SPACE] ',' [SPACE] test [SPACE] ':' [SPACE] test)*)
+### dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE] ([SPACE] ',' [SPACE] test [SPACE] ':' [SPACE] test)* [SPACE] [','])
 
-# dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE] comp_for
+### dictorsetmaker: test [SPACE] ':' [SPACE] test [SPACE] comp_for
 
-# dictorsetmaker: test [SPACE] comp_for
+### dictorsetmaker: test [SPACE] comp_for
 
-# dictorsetmaker: test [SPACE]
-# dictorsetmaker: test [SPACE] [SPACE] [',']
-# dictorsetmaker: test [SPACE] ([SPACE] ',' [SPACE] test)*
-# dictorsetmaker: test [SPACE] ([SPACE] ',' [SPACE] test)* [SPACE] [',']
+### dictorsetmaker: test [SPACE]
+### dictorsetmaker: test [SPACE] [SPACE] [',']
+### dictorsetmaker: test [SPACE] ([SPACE] ',' [SPACE] test)*
+### dictorsetmaker: test [SPACE] ([SPACE] ',' [SPACE] test)* [SPACE] [',']
 
 # -
 
@@ -465,37 +465,37 @@
 
 # -
 
-# list_iter: list_if
-# list_iter: list_for
+### list_iter: list_if
+### list_iter: list_for
 
 # -
 
-# list_for: 'for' SPACE exprlist SPACE 'in' SPACE testlist_safe
-# list_for: 'for' SPACE exprlist SPACE 'in' SPACE testlist_safe [SPACE list_iter]
+### list_for: 'for' SPACE exprlist SPACE 'in' SPACE testlist_safe
+### list_for: 'for' SPACE exprlist SPACE 'in' SPACE testlist_safe [SPACE list_iter]
 
 # -
 
-# list_if: 'if' SPACE old_test
-# list_if: 'if' SPACE old_test [SPACE list_iter]
+### list_if: 'if' SPACE old_test
+### list_if: 'if' SPACE old_test [SPACE list_iter]
 
 # -
 
-# comp_iter: comp_if
-# comp_iter: comp_for
+### comp_iter: comp_if
+### comp_iter: comp_for
 
 # -
 
-# comp_for: 'for' SPACE exprlist SPACE 'in' SPACE or_test
-# comp_for: 'for' SPACE exprlist SPACE 'in' SPACE or_test [SPACE comp_iter]
+### comp_for: 'for' SPACE exprlist SPACE 'in' SPACE or_test
+### comp_for: 'for' SPACE exprlist SPACE 'in' SPACE or_test [SPACE comp_iter]
 
 # -
 
-# comp_if: 'if' SPACE old_test
-# comp_if: 'if' SPACE old_test [SPACE comp_iter]
+### comp_if: 'if' SPACE old_test
+### comp_if: 'if' SPACE old_test [SPACE comp_iter]
 
 # -
 
-# testlist1: test
+### testlist1: test
 # testlist1: test ([SPACE] ',' [SPACE] test)*
 
 # -
