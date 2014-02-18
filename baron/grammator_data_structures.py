@@ -9,6 +9,16 @@ def include_data_structures(pg):
                }
 
 
+    @pg.production("testlist : test comma")
+    @pg.production("exprlist : expr comma")
+    def implicit_tuple_alone((test, comma)):
+        tuple_content = [test]
+        if comma.before_space:
+            tuple_content += [{"type": "space", "value": comma.before_space}]
+        tuple_content += [create_node_from_token(comma)]
+        return tuple_(tuple_content, with_parenthesis=False)
+
+
     @pg.production("testlist_comp :")
     def testlist_comp_empty(empty):
         return []

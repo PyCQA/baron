@@ -35,16 +35,6 @@ def include_operators(pg):
         return tuple_([test] + testlist_part, with_parenthesis=False)
 
 
-    @pg.production("testlist : test COMMA")
-    @pg.production("exprlist : expr COMMA")
-    def implicit_tuple_alone((test, comma)):
-        tuple_content = [test]
-        if comma.before_space:
-            tuple_content += [{"type": "space", "value": comma.before_space}]
-        tuple_content += [create_node_from_token(comma)]
-        return tuple_(tuple_content, with_parenthesis=False)
-
-
     @pg.production("testlist_part : COMMA test COMMA?")
     @pg.production("exprlist_part : COMMA expr COMMA?")
     def testlist_part((comma, test, comma2)):
