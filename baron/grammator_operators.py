@@ -1,6 +1,6 @@
 from utils import (create_node_from_token, binary_operator, unitary_operator,
                    comparison, boolean_operator, ternary_operator, assignment,
-                   augmented_assignment, tuple_)
+                   augmented_assignment)
 
 
 def include_operators(pg):
