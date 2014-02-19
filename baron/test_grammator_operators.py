@@ -1987,13 +1987,20 @@ def test_implicit_tuple_one_item():
            ('NAME', 'a'),
            ('COMMA', ',', ' ', ''),
           ],
-          [tuple_([
-                   name('a'),
-                   space(),
-                   comma(),
-                  ],
-                  with_parenthesis=False,
-                 )])
+          [{
+            "type": "tuple",
+            "with_parenthesis": False,
+            "first_space": "",
+            "second_space": "",
+            "value": [{
+                     "type": "name",
+                     "value": "a",
+                   },{
+                      "type": "comma",
+                      "first_space": " ",
+                      "second_space": "",
+                   }]
+           }])
 
 def test_implicit_tuple_trailing_comma():
     "a, b ,"
