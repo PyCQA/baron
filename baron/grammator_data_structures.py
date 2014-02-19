@@ -21,6 +21,52 @@ def include_data_structures(pg):
         }
 
 
+    @pg.production("testlist : test testlist_part")
+    @pg.production("exprlist : expr exprlist_part")
+    def implicit_tuple((test, testlist_part)):
+        return {
+            "type": "tuple",
+            "value": [test] + testlist_part,
+            "first_space": "",
+            "second_space": "",
+            "with_parenthesis": False,
+        }
+
+
+    @pg.production("testlist_part : COMMA test")
+    @pg.production("exprlist_part : COMMA expr")
+    def testlist_part((comma, test)):
+        return [{
+            "type": "comma",
+            "first_space": comma.before_space,
+            "second_space": comma.after_space,
+        }, test]
+
+
+    @pg.production("testlist_part : COMMA test COMMA")
+    @pg.production("exprlist_part : COMMA expr COMMA")
+    def testlist_part_comma((comma, test, comma2)):
+        return [{
+            "type": "comma",
+            "first_space": comma.before_space,
+            "second_space": comma.after_space,
+        }, test, {
+            "type": "comma",
+            "first_space": comma2.before_space,
+            "second_space": comma2.after_space,
+        }]
+
+
+    @pg.production("testlist_part : COMMA test testlist_part")
+    @pg.production("exprlist_part : COMMA expr exprlist_part")
+    def testlist_part_next((comma, test, testlist_part)):
+        return [{
+            "type": "comma",
+            "first_space": comma.before_space,
+            "second_space": comma.after_space,
+        }, test] + testlist_part
+
+
     @pg.production("testlist_comp :")
     def testlist_comp_empty(empty):
         return []

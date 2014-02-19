@@ -343,8 +343,7 @@ def test_print_a_b():
             "space": " ",
             "value": [
                       name('a'),
-                      comma(),
-                      space(),
+                      {"type": "comma", "first_space": "", "second_space": " "},
                       name('b'),
                      ],
             "destination_space": "",
@@ -365,10 +364,9 @@ def test_print_a_b_comma():
             "space": " ",
             "value": [
                       name('a'),
-                      comma(),
-                      space(),
+                      {"type": "comma", "first_space": "", "second_space": " "},
                       name('b'),
-                      comma(),
+                      {"type": "comma", "first_space": "", "second_space": ""},
                      ],
             "destination_space": "",
             "destination": None,
@@ -402,9 +400,7 @@ def test_print_redirect_ab():
             "type": "print",
             "space": " ",
             "value": [
-                      space(),
-                      comma(),
-                      space(),
+                      {"type": "comma", "first_space": " ", "second_space": " "},
                       name('b'),
                      ],
             "destination": name('a'),
@@ -425,14 +421,10 @@ def test_print_redirect_ab_comma():
             "type": "print",
             "space": " ",
             "value": [
-                      space(),
-                      comma(),
-                      space(),
+                      {"type": "comma", "first_space": " ", "second_space": " "},
                       name('b'),
-                      space(),
-                      comma(),
+                      {"type": "comma", "first_space": " ", "second_space": ""},
                      ],
             "destination": name('a'),
             "destination_space": " ",
           }])
-

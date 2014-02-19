@@ -1904,7 +1904,12 @@ def test_expr_comma_list():
            ('PLUS', '+'),
            ('NAME', 'd'),
           ],
-          [tuple_([
+          [{
+            "type": "tuple",
+            "with_parenthesis": False,
+            "first_space": "",
+            "second_space": "",
+            "value": [
                    boolean_operator(
                                     'or',
                                     first=name('a'),
@@ -1912,7 +1917,7 @@ def test_expr_comma_list():
                                     first_space=" ",
                                     second_space=" ",
                                    ),
-                   comma(),
+                   {"type": "comma", "first_space": "", "second_space": ""},
                    binary_operator(
                                    '+',
                                    first=name('c'),
@@ -1921,8 +1926,8 @@ def test_expr_comma_list():
                                    second_space="",
                                   )
                   ],
-                  with_parenthesis=False,
-                 )])
+           }
+                 ])
 
 def test_expr_comma_list_3_items():
     "a or b,c+d,e"
@@ -1937,15 +1942,19 @@ def test_expr_comma_list_3_items():
            ('COMMA', ','),
            ('NAME', 'e'),
           ],
-          [tuple_([
-                   boolean_operator(
+          [{
+            "type": "tuple",
+            "with_parenthesis": False,
+            "first_space": "",
+            "second_space": "",
+            "value": [boolean_operator(
                                     'or',
                                     first=name('a'),
                                     second=name('b'),
                                     first_space=" ",
                                     second_space=" ",
                                    ),
-                   comma(),
+                   {"type": "comma", "first_space": "", "second_space": ""},
                    binary_operator(
                                    '+',
                                    first=name('c'),
@@ -1953,11 +1962,10 @@ def test_expr_comma_list_3_items():
                                    first_space="",
                                    second_space="",
                                   ),
-                   comma(),
+                   {"type": "comma", "first_space": "", "second_space": ""},
                    name('e'),
                   ],
-                  with_parenthesis=False,
-                 )])
+            }])
 
 def test_implicit_tuple_space():
     "a, b , c"
@@ -1968,18 +1976,30 @@ def test_implicit_tuple_space():
            ('COMMA', ',', ' ', ' '),
            ('NAME', 'c'),
           ],
-          [tuple_([
-                   name('a'),
-                   comma(),
-                   space(),
-                   name('b'),
-                   space(),
-                   comma(),
-                   space(),
-                   name('c'),
-                  ],
-                  with_parenthesis=False,
-                 )])
+          [{
+            "type": "tuple",
+            "with_parenthesis": False,
+            "first_space": "",
+            "second_space": "",
+            "value": [{
+                "type": "name",
+                "value": "a",
+            },{
+               "type": "comma",
+               "first_space": "",
+               "second_space": " ",
+            },{
+                "type": "name",
+                "value": "b",
+            },{
+               "type": "comma",
+               "first_space": " ",
+               "second_space": " ",
+            },{
+                "type": "name",
+                "value": "c",
+            }],
+           }])
 
 def test_implicit_tuple_one_item():
     "a ,"
@@ -2010,13 +2030,24 @@ def test_implicit_tuple_trailing_comma():
            ('NAME', 'b'),
            ('COMMA', ',', ' ', ''),
           ],
-          [tuple_([
-                   name('a'),
-                   comma(),
-                   space(),
-                   name('b'),
-                   space(),
-                   comma(),
-                  ],
-                  with_parenthesis=False,
-                 )])
+          [{
+            "type": "tuple",
+            "with_parenthesis": False,
+            "first_space": "",
+            "second_space": "",
+            "value": [{
+                     "type": "name",
+                     "value": "a",
+                   },{
+                      "type": "comma",
+                      "first_space": "",
+                      "second_space": " ",
+                   },{
+                     "type": "name",
+                     "value": "b",
+                   },{
+                      "type": "comma",
+                      "first_space": " ",
+                      "second_space": "",
+                   }]
+           }])

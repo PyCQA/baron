@@ -37,12 +37,11 @@ def include_primivites(pg):
 
     @pg.production("print_stmt : PRINT RIGHT_SHIFT test COMMA testlist")
     def print_stmt_redirect_testlist((print_, right_shift, test, comma, testlist)):
-        value = []
-        if comma.before_space:
-            value += [{"type": "space", "value": comma.before_space}]
-        value += [create_node_from_token(comma)]
-        if comma.after_space:
-            value += [{"type": "space", "value": comma.after_space}]
+        value = [{
+            "type": "comma",
+            "first_space": comma.before_space,
+            "second_space": comma.after_space,
+        }]
         #print testlist
         value += testlist["value"] if testlist["type"] == "tuple" else [testlist]
         return {

@@ -29,40 +29,7 @@ def include_operators(pg):
     def old_test((level,)):
         return level
 
-    @pg.production("testlist : test testlist_part")
-    @pg.production("exprlist : expr exprlist_part")
-    def implicit_tuple((test, testlist_part)):
-        return tuple_([test] + testlist_part, with_parenthesis=False)
 
-
-    @pg.production("testlist_part : COMMA test COMMA?")
-    @pg.production("exprlist_part : COMMA expr COMMA?")
-    def testlist_part((comma, test, comma2)):
-        to_return = []
-        if comma.before_space:
-            to_return += [{"type": "space", "value": comma.before_space}]
-        to_return += [create_node_from_token(comma)]
-        if comma.after_space:
-            to_return += [{"type": "space", "value": comma.after_space}]
-        to_return += [test]
-        if comma2 and comma2.before_space:
-            to_return += [{"type": "space", "value": comma2.before_space}]
-        if comma2:
-            to_return += [create_node_from_token(comma2)]
-        return to_return
-
-
-    @pg.production("testlist_part : COMMA test testlist_part")
-    @pg.production("exprlist_part : COMMA expr exprlist_part")
-    def testlist_part_next((comma, test, testlist_part)):
-        to_return = []
-        if comma.before_space:
-            to_return += [{"type": "space", "value": comma.before_space}]
-        to_return += [create_node_from_token(comma)]
-        if comma.after_space:
-            to_return += [{"type": "space", "value": comma.after_space}]
-        to_return += [test] + testlist_part
-        return to_return
 
 
     @pg.production("expr_stmt : testlist PLUS_EQUAL testlist")
