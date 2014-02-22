@@ -2414,6 +2414,41 @@ def test_subscript_slice_empty_both():
             }]
            }])
 
+def test_subscript_slice_one():
+    "a[b :]"
+    parse_simple([
+           ('NAME', 'a'),
+           ('LEFT_SQUARE_BRACKET', '['),
+           ('NAME', 'b'),
+           ('COLON', ':', ' ', ''),
+           ('RIGHT_SQUARE_BRACKET', ']'),
+          ],
+          [{
+            "type": "atomtrailers",
+            "value": [{
+               "type": "name",
+               "value": "a",
+            },{
+               "type": "getitem",
+               "first_space": "",
+               "second_space": "",
+               "value": {
+                   "type": "slice",
+                   "lower": {
+                        "type": "name",
+                        "value": "b",
+                   },
+                   "upper": None,
+                   "step": None,
+                   "has_two_colons": False,
+                   "first_space": " ",
+                   "second_space": "",
+                   "third_space": "",
+                   "forth_space": "",
+               }
+            }]
+           }])
+
 ### trailer: '.' [SPACE] NAME
 ### trailer: '[' [SPACE] ']'
 ### trailer: '[' [SPACE] subscriptlist [SPACE] ']'
