@@ -5,6 +5,7 @@ from utils import (create_node_from_token, binary_operator, unitary_operator,
 
 def include_operators(pg):
     @pg.production("old_test : or_test")
+    @pg.production("old_test : old_lambdef")
     def old_test((level,)):
         return level
 

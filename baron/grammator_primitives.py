@@ -245,6 +245,7 @@ def include_primivites(pg):
         }
 
     @pg.production("lambdef : LAMBDA COLON test")
+    @pg.production("old_lambdef : LAMBDA COLON old_test")
     def lambdef((lambda_, colon, test)):
         return {
             "type": "lambda",

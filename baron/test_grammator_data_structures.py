@@ -782,6 +782,52 @@ def test_list_comprehension_tuple_more():
             }]
           }])
 
+def test_list_comprehension_lambda():
+    "[ a for b in lambda: c ]"
+    parse_simple([
+           ('LEFT_SQUARE_BRACKET', '[', '', ' '),
+           ('NAME', 'a'),
+           ('FOR', 'for', ' ', ' '),
+           ('NAME', 'b'),
+           ('IN', 'in', ' ', ' '),
+           ('LAMBDA', 'lambda', '', ''),
+           ('COLON', ':', '', ' '),
+           ('NAME', 'c'),
+           ('RIGHT_SQUARE_BRACKET', ']', ' ', ''),
+          ],
+          [{
+            "type": "list_comprehension",
+            "first_space": " ",
+            "second_space": " ",
+            "result": {
+               "type": "name",
+               "value": "a",
+            },
+            "generators": [{
+                "type": "comprehension_loop",
+                "first_space": " ",
+                "second_space": " ",
+                "third_space": " ",
+                "forth_space": " ",
+                "iterator": {
+                   "type": "name",
+                   "value": "b",
+                },
+                "target": {
+                   "type": "lambda",
+                   "first_space": "",
+                   "second_space": "",
+                   "third_space": " ",
+                   "arguments": [],
+                   "value": {
+                       "type": "name",
+                       "value": "c",
+                   }
+                },
+                "ifs": [],
+            }]
+          }])
+
 def test_set_comprehension():
     "{ a for b in c }"
     parse_simple([
