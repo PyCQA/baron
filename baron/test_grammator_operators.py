@@ -2298,6 +2298,30 @@ def test_subscript_ellipsis():
             }]
            }])
 
+def test_subscript_test():
+    "a[b]"
+    parse_simple([
+           ('NAME', 'a'),
+           ('LEFT_SQUARE_BRACKET', '['),
+           ('NAME', 'b'),
+           ('RIGHT_SQUARE_BRACKET', ']'),
+          ],
+          [{
+            "type": "atomtrailers",
+            "value": [{
+               "type": "name",
+               "value": "a",
+            },{
+               "type": "getitem",
+               "first_space": "",
+               "second_space": "",
+               "value": {
+                   "type": "name",
+                   "value": "b",
+               }
+            }]
+           }])
+
 ### trailer: '.' [SPACE] NAME
 ### trailer: '[' [SPACE] ']'
 ### trailer: '[' [SPACE] subscriptlist [SPACE] ']'

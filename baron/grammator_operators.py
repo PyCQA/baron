@@ -239,3 +239,8 @@ def include_operators(pg):
         return {
             "type": "ellipsis"
         }
+
+
+    @pg.production("subscript : test")
+    def subscript_test((test,)):
+        return test
