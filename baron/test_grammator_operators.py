@@ -2842,20 +2842,6 @@ def test_power_trailer_call_empty():
 
 # -
 
-# exprlist: expr
-# exprlist: expr [SPACE] [',']
-# exprlist: expr ([SPACE] ',' [SPACE] expr)*
-# exprlist: expr ([SPACE] ',' [SPACE] expr)* [SPACE] [',']
-
-# -
-
-# testlist: test
-# testlist: test [SPACE] [',']
-# testlist: test ([SPACE] ',' [SPACE] test)*
-# testlist: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
-
-# -
-
 # for reference
 # arglist: (argument [SPACE] ',' [SPACE])* (argument [SPACE] [','] |'*' [SPACE] test ([SPACE] ',' [SPACE] argument)* [[SPACE] ',' [SPACE] '**' [SPACE] test] |'**' [SPACE] test)
 
@@ -2874,3 +2860,17 @@ def test_power_trailer_call_empty():
 # argument: test
 # argument: test [SPACE] comp_for
 # argument: test [SPACE] '=' [SPACE] test
+
+# -
+
+# exprlist: expr
+# exprlist: expr [SPACE] [',']
+# exprlist: expr ([SPACE] ',' [SPACE] expr)*
+# exprlist: expr ([SPACE] ',' [SPACE] expr)* [SPACE] [',']
+
+# -
+
+# testlist: test
+# testlist: test [SPACE] [',']
+# testlist: test ([SPACE] ',' [SPACE] test)*
+# testlist: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
