@@ -1051,11 +1051,6 @@ def test_repr_quote_double():
             }],
           }])
 
-# lambdef: 'lambda' [SPACE] ':' [SPACE] test
-# lambdef: 'lambda' [SPACE] [varargslist] [SPACE] ':' [SPACE] test
-
-# -
-
 ### trailer: '.' [SPACE] NAME
 ### trailer: '[' [SPACE] ']'
 # trailer: '[' [SPACE] subscriptlist [SPACE] ']'

@@ -447,3 +447,32 @@ def test_lambda():
             },
             "arguments": []
           }])
+
+def test_lambda_arguments():
+    "lambda argument : a"
+    parse_simple([
+           ('LAMBDA', 'lambda', '', ' '),
+           ('NAME', 'argument'),
+           ('COLON', ':', ' ', ' '),
+           ('NAME', 'a'),
+          ],
+          [{
+            "type": "lambda",
+            "first_space": " ",
+            "second_space": " ",
+            "third_space": " ",
+            "value": {
+                "type": "name",
+                "value": "a",
+            },
+            "arguments": [{
+                "default": {},
+                "first_space": "",
+                "second_space": "",
+                "type": "argument",
+                "value": {
+                    "type": "name",
+                    "value": "argument",
+                },
+            }]
+          }])

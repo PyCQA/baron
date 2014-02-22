@@ -254,3 +254,14 @@ def include_primivites(pg):
             "third_space": colon.after_space,
             "value": test
         }
+
+    @pg.production("lambdef : LAMBDA parameters COLON test")
+    def lambdef_arguments((lambda_, parameters, colon, test)):
+        return {
+            "type": "lambda",
+            "arguments": parameters,
+            "first_space": lambda_.after_space,
+            "second_space": colon.before_space,
+            "third_space": colon.after_space,
+            "value": test
+        }
