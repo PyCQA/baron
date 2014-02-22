@@ -65,13 +65,14 @@ def include_operators(pg):
     @pg.production("or_test : and_test OR or_test")
     @pg.production("and_test : not_test AND and_test")
     def and_or_node((first, operator, second)):
-        return boolean_operator(
-            operator.value,
-            first=first,
-            second=second,
-            first_space=operator.before_space,
-            second_space=operator.after_space,
-        )
+        return {
+            "type": "boolean_operator",
+            "value": operator.value,
+            "first": first,
+            "second": second,
+            "first_space": operator.before_space,
+            "second_space": operator.after_space,
+        }
 
 
     @pg.production("not_test : NOT not_test")
