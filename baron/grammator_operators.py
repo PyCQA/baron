@@ -95,12 +95,15 @@ def include_operators(pg):
     @pg.production("comparison : expr IN comparison")
     @pg.production("comparison : expr IS comparison")
     def comparison_node((expr, comparison_operator, comparison_)):
-        return comparison(comparison_operator.value,
-                          first=expr,
-                          second=comparison_,
-                          first_space=comparison_operator.before_space,
-                          second_space=comparison_operator.after_space
-                          )
+        return {
+            "type": "comparison",
+            "value": comparison_operator.value,
+            "middle_space": "",
+            "first": expr,
+            "second": comparison_,
+            "first_space": comparison_operator.before_space,
+            "second_space": comparison_operator.after_space
+        }
 
 
     @pg.production("comparison : expr IS NOT comparison")
