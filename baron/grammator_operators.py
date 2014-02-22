@@ -289,3 +289,17 @@ def include_operators(pg):
             "third_space": colon2.before_space if colon2 else "",
             "forth_space": "",
         }
+
+    @pg.production("slice : COLON COLON test")
+    def slice_step((colon, colon2, test)):
+        return {
+            "type": "slice",
+            "lower": None,
+            "upper": None,
+            "step": test,
+            "has_two_colons": True,
+            "first_space": colon.before_space,
+            "second_space": colon.after_space,
+            "third_space": colon2.before_space,
+            "forth_space": colon2.after_space,
+        }
