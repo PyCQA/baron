@@ -325,7 +325,7 @@ def include_operators(pg):
             "lower": test,
             "upper": None,
             "step": test2,
-            "has_two_colons": bool(colon2),
+            "has_two_colons": True,
             "first_space": colon.before_space,
             "second_space": colon.after_space,
             "third_space": colon2.before_space,
