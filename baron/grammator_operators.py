@@ -205,14 +205,14 @@ def include_operators(pg):
 
     @pg.production("trailer : DOT NAME")
     def trailer((dot, name,)):
-        to_return = []
-        if dot.before_space:
-            to_return += [{"type": "space", "value": dot.before_space}]
-        to_return += [create_node_from_token(dot)]
-        if dot.after_space:
-            to_return += [{"type": "space", "value": dot.after_space}]
-        to_return += [create_node_from_token(name)]
-        return to_return
+        return [{
+            "type": "dot",
+            "first_space": dot.before_space,
+            "second_space": dot.after_space,
+        },{
+            "type": "name",
+            "value": name.value,
+        }]
 
 
     @pg.production("trailer : LEFT_PARENTHESIS RIGHT_PARENTHESIS")

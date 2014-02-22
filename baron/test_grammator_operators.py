@@ -257,12 +257,24 @@ def test_power_trailer():
            ('DOT', '.'),
            ('NAME', 'b'),
           ],
-          [atomtrailers([
-                  name('a'),
-                  dot(),
-                  name('b')
-                 ]
-                )])
+          [{
+            "type": "atomtrailers",
+            "value": [
+                {
+                    "type": "name",
+                    "value": "a",
+                },
+                {
+                    "type": "dot",
+                    "first_space": "",
+                    "second_space": "",
+                },
+                {
+                    "type": "name",
+                    "value": "b",
+                },
+            ],
+          }])
 
 def test_power_trailer_spaces():
     "a .b"
@@ -273,40 +285,72 @@ def test_power_trailer_spaces():
            ('DOT', '.', ' ', ''),
            ('NAME', 'b'),
           ],
-          [atomtrailers([
-                  name('a'),
-                  space(),
-                  dot(),
-                  name('b')
-                 ]
-                )])
+          [{
+            "type": "atomtrailers",
+            "value": [
+                {
+                    "type": "name",
+                    "value": "a",
+                },
+                {
+                    "type": "dot",
+                    "first_space": " ",
+                    "second_space": "",
+                },
+                {
+                    "type": "name",
+                    "value": "b",
+                },
+            ],
+          }])
 
     parse_simple([
            ('NAME', 'a'),
            ('DOT', '.', '', '  '),
            ('NAME', 'b'),
           ],
-          [atomtrailers([
-                  name('a'),
-                  dot(),
-                  space("  "),
-                  name('b')
-                 ]
-                )])
+          [{
+            "type": "atomtrailers",
+            "value": [
+                {
+                    "type": "name",
+                    "value": "a",
+                },
+                {
+                    "type": "dot",
+                    "first_space": "",
+                    "second_space": "  ",
+                },
+                {
+                    "type": "name",
+                    "value": "b",
+                },
+            ],
+          }])
 
     parse_simple([
            ('NAME', 'a'),
            ('DOT', '.', '   ', '    '),
            ('NAME', 'b'),
           ],
-          [atomtrailers([
-                  name('a'),
-                  space("   "),
-                  dot(),
-                  space("    "),
-                  name('b')
-                 ]
-                )])
+          [{
+            "type": "atomtrailers",
+            "value": [
+                {
+                    "type": "name",
+                    "value": "a",
+                },
+                {
+                    "type": "dot",
+                    "first_space": "   ",
+                    "second_space": "    ",
+                },
+                {
+                    "type": "name",
+                    "value": "b",
+                },
+            ],
+          }])
 
 def test_power_trailers():
     "a.b.c"
@@ -317,14 +361,33 @@ def test_power_trailers():
            ('DOT', '.'),
            ('NAME', 'c'),
           ],
-          [atomtrailers([
-                  name('a'),
-                  dot(),
-                  name('b'),
-                  dot(),
-                  name('c')
-                 ]
-                )])
+          [{
+            "type": "atomtrailers",
+            "value": [
+                {
+                    "type": "name",
+                    "value": "a",
+                },
+                {
+                    "type": "dot",
+                    "first_space": "",
+                    "second_space": "",
+                },
+                {
+                    "type": "name",
+                    "value": "b",
+                },
+                {
+                    "type": "dot",
+                    "first_space": "",
+                    "second_space": "",
+                },
+                {
+                    "type": "name",
+                    "value": "c",
+                },
+            ],
+          }])
     "a.b.c.d.e"
     parse_simple([
            ('NAME', 'a'),
@@ -337,18 +400,51 @@ def test_power_trailers():
            ('DOT', '.'),
            ('NAME', 'e'),
           ],
-          [atomtrailers([
-                  name('a'),
-                  dot(),
-                  name('b'),
-                  dot(),
-                  name('c'),
-                  dot(),
-                  name('d'),
-                  dot(),
-                  name('e'),
-                 ]
-                )])
+          [{
+            "type": "atomtrailers",
+            "value": [
+                {
+                    "type": "name",
+                    "value": "a",
+                },
+                {
+                    "type": "dot",
+                    "first_space": "",
+                    "second_space": "",
+                },
+                {
+                    "type": "name",
+                    "value": "b",
+                },
+                {
+                    "type": "dot",
+                    "first_space": "",
+                    "second_space": "",
+                },
+                {
+                    "type": "name",
+                    "value": "c",
+                },
+                {
+                    "type": "dot",
+                    "first_space": "",
+                    "second_space": "",
+                },
+                {
+                    "type": "name",
+                    "value": "d",
+                },
+                {
+                    "type": "dot",
+                    "first_space": "",
+                    "second_space": "",
+                },
+                {
+                    "type": "name",
+                    "value": "e",
+                },
+            ],
+          }])
 
 def test_power_trailers_space():
     "a . b . c"
@@ -359,18 +455,33 @@ def test_power_trailers_space():
            ('DOT', '.', ' ', ' '),
            ('NAME', 'c'),
           ],
-          [atomtrailers([
-                  name('a'),
-                  space(),
-                  dot(),
-                  space(),
-                  name('b'),
-                  space(),
-                  dot(),
-                  space(),
-                  name('c')
-                 ]
-                )])
+          [{
+            "type": "atomtrailers",
+            "value": [
+                {
+                    "type": "name",
+                    "value": "a",
+                },
+                {
+                    "type": "dot",
+                    "first_space": " ",
+                    "second_space": " ",
+                },
+                {
+                    "type": "name",
+                    "value": "b",
+                },
+                {
+                    "type": "dot",
+                    "first_space": " ",
+                    "second_space": " ",
+                },
+                {
+                    "type": "name",
+                    "value": "c",
+                },
+            ],
+          }])
 
 def test_power_trailer_power():
     "a.b**c"
@@ -381,17 +492,30 @@ def test_power_trailer_power():
            ('DOUBLE_STAR', '**'),
            ('NAME', 'c'),
           ],
-          [binary_operator(
-                           '**',
-                           first=atomtrailers([
-                                               name('a'),
-                                               dot(),
-                                               name('b')
-                                              ]),
-                           second=name('c'),
-                           first_space="",
-                           second_space="",
-                          )])
+          [{
+            "type": "binary_operator",
+            "value": "**",
+            "first_space": "",
+            "second_space": "",
+            "first": {
+                "type": "atomtrailers",
+                "value": [{
+                   "type": "name",
+                   "value": "a",
+                },{
+                   "type": "dot",
+                   "first_space": "",
+                   "second_space": "",
+                },{
+                   "type": "name",
+                   "value": "b",
+                }],
+            },
+            "second": {
+                "type": "name",
+                "value": "c",
+            }
+          }])
 
 def test_power_trailer_call_empty():
     "a()"
@@ -486,11 +610,20 @@ def test_term_mult_spaces_atomtrailers():
            ('NAME', 'c'),
           ],
           [binary_operator('*',
-                           first=atomtrailers([
-                                               name('a'),
-                                               dot(),
-                                               name('b'),
-                                              ]),
+                           first={
+                            "type": "atomtrailers",
+                            "value": [{
+                                "type": "name",
+                                "value": "a",
+                            },{
+                                "type": "dot",
+                                "first_space": "",
+                                "second_space": "",
+                            },{
+                               "type": "name",
+                               "value": "b",
+                            }],
+                           },
                            second=name('c'),
                            first_space=" ",
                            second_space=" ",
@@ -562,11 +695,20 @@ def test_term_div_spaces_atomtrailers():
            ('NAME', 'c'),
           ],
           [binary_operator('/',
-                           first=atomtrailers([
-                                               name('a'),
-                                               dot(),
-                                               name('b'),
-                                              ]),
+                           first={
+                                "type": "atomtrailers",
+                                "value": [{
+                                    "type": "name",
+                                    "value": "a",
+                                },{
+                                    "type": "dot",
+                                    "first_space": "",
+                                    "second_space": "",
+                                },{
+                                   "type": "name",
+                                   "value": "b",
+                                }],
+                           },
                            second=name('c'),
                            first_space=" ",
                            second_space=" ",
@@ -638,11 +780,20 @@ def test_term_modulo_spaces_atomtrailers():
            ('NAME', 'c'),
           ],
           [binary_operator('%',
-                           first=atomtrailers([
-                                               name('a'),
-                                               dot(),
-                                               name('b'),
-                                              ]),
+                           first={
+                            "type": "atomtrailers",
+                            "value": [{
+                                "type": "name",
+                                "value": "a",
+                            },{
+                                "type": "dot",
+                                "first_space": "",
+                                "second_space": "",
+                            },{
+                               "type": "name",
+                               "value": "b",
+                            }],
+                           },
                            second=name('c'),
                            first_space=" ",
                            second_space=" ",
@@ -714,11 +865,20 @@ def test_term_floor_division_spaces_atomtrailers():
            ('NAME', 'c'),
           ],
           [binary_operator('//',
-                           first=atomtrailers([
-                                               name('a'),
-                                               dot(),
-                                               name('b'),
-                                              ]),
+                           first={
+                            "type": "atomtrailers",
+                            "value": [{
+                                "type": "name",
+                                "value": "a",
+                            },{
+                                "type": "dot",
+                                "first_space": "",
+                                "second_space": "",
+                            },{
+                               "type": "name",
+                               "value": "b",
+                            }],
+                           },
                            second=name('c'),
                            first_space=" ",
                            second_space=" ",
@@ -818,11 +978,20 @@ def test_arith_expr_add_spaces_atomtrailers():
            ('NAME', 'c'),
           ],
           [binary_operator('+',
-                           first=atomtrailers([
-                                               name('a'),
-                                               dot(),
-                                               name('b'),
-                                              ]),
+                           first={
+                            "type": "atomtrailers",
+                            "value": [{
+                                "type": "name",
+                                "value": "a",
+                            },{
+                                "type": "dot",
+                                "first_space": "",
+                                "second_space": "",
+                            },{
+                               "type": "name",
+                               "value": "b",
+                            }],
+                           },
                            second=name('c'),
                            first_space=" ",
                            second_space=" ",
@@ -894,11 +1063,20 @@ def test_arith_expr_substract_spaces_atomtrailers():
            ('NAME', 'c'),
           ],
           [binary_operator('-',
-                           first=atomtrailers([
-                                               name('a'),
-                                               dot(),
-                                               name('b'),
-                                              ]),
+                           first={
+                            "type": "atomtrailers",
+                            "value": [{
+                                "type": "name",
+                                "value": "a",
+                            },{
+                                "type": "dot",
+                                "first_space": "",
+                                "second_space": "",
+                            },{
+                               "type": "name",
+                               "value": "b",
+                            }],
+                           },
                            second=name('c'),
                            first_space=" ",
                            second_space=" ",
@@ -992,11 +1170,20 @@ def test_arith_expr_left_shift_spaces_atomtrailers():
            ('NAME', 'c'),
           ],
           [binary_operator('<<',
-                           first=atomtrailers([
-                                               name('a'),
-                                               dot(),
-                                               name('b'),
-                                              ]),
+                           first={
+                            "type": "atomtrailers",
+                            "value": [{
+                                "type": "name",
+                                "value": "a",
+                            },{
+                                "type": "dot",
+                                "first_space": "",
+                                "second_space": "",
+                            },{
+                               "type": "name",
+                               "value": "b",
+                            }],
+                           },
                            second=name('c'),
                            first_space=" ",
                            second_space=" ",
@@ -1068,11 +1255,20 @@ def test_arith_expr_right_shift_spaces_atomtrailers():
            ('NAME', 'c'),
           ],
           [binary_operator('>>',
-                           first=atomtrailers([
-                                               name('a'),
-                                               dot(),
-                                               name('b'),
-                                              ]),
+                           first={
+                            "type": "atomtrailers",
+                            "value": [{
+                                "type": "name",
+                                "value": "a",
+                            },{
+                                "type": "dot",
+                                "first_space": "",
+                                "second_space": "",
+                            },{
+                               "type": "name",
+                               "value": "b",
+                            }],
+                           },
                            second=name('c'),
                            first_space=" ",
                            second_space=" ",
@@ -1165,11 +1361,20 @@ def test_and_expr_spaces_atomtrailers():
            ('NAME', 'c'),
           ],
           [binary_operator('&',
-                           first=atomtrailers([
-                                               name('a'),
-                                               dot(),
-                                               name('b'),
-                                              ]),
+                           first={
+                            "type": "atomtrailers",
+                            "value": [{
+                                "type": "name",
+                                "value": "a",
+                            },{
+                                "type": "dot",
+                                "first_space": "",
+                                "second_space": "",
+                            },{
+                               "type": "name",
+                               "value": "b",
+                            }],
+                           },
                            second=name('c'),
                            first_space=" ",
                            second_space=" ",
@@ -1262,11 +1467,20 @@ def test_xor_expr_spaces_atomtrailers():
            ('NAME', 'c'),
           ],
           [binary_operator('^',
-                           first=atomtrailers([
-                                               name('a'),
-                                               dot(),
-                                               name('b'),
-                                              ]),
+                           first={
+                            "type": "atomtrailers",
+                            "value": [{
+                                "type": "name",
+                                "value": "a",
+                            },{
+                                "type": "dot",
+                                "first_space": "",
+                                "second_space": "",
+                            },{
+                               "type": "name",
+                               "value": "b",
+                            }],
+                           },
                            second=name('c'),
                            first_space=" ",
                            second_space=" ",
@@ -1359,11 +1573,20 @@ def test_expr_spaces_atomtrailers():
            ('NAME', 'c'),
           ],
           [binary_operator('|',
-                           first=atomtrailers([
-                                               name('a'),
-                                               dot(),
-                                               name('b'),
-                                              ]),
+                           first={
+                            "type": "atomtrailers",
+                            "value": [{
+                                "type": "name",
+                                "value": "a",
+                            },{
+                                "type": "dot",
+                                "first_space": "",
+                                "second_space": "",
+                            },{
+                               "type": "name",
+                               "value": "b",
+                            }],
+                           },
                            second=name('c'),
                            first_space=" ",
                            second_space=" ",
@@ -1473,11 +1696,20 @@ def test_comparison_spaces_atomtrailers():
                ('NAME', 'c'),
               ],
               [comparison(value,
-                          first=atomtrailers([
-                                              name('a'),
-                                              dot(),
-                                              name('b'),
-                                             ]),
+                          first={
+                            "type": "atomtrailers",
+                            "value": [{
+                                "type": "name",
+                                "value": "a",
+                            },{
+                                "type": "dot",
+                                "first_space": "",
+                                "second_space": "",
+                            },{
+                               "type": "name",
+                               "value": "b",
+                            }],
+                           },
                           second=name('c'),
                           first_space=" ",
                           second_space=" ",
@@ -1590,11 +1822,20 @@ def test_advanced_comparison_spaces_atomtrailers():
                ('NAME', 'c'),
               ],
               [comparison(value + " " + value2,
-                          first=atomtrailers([
-                                              name('a'),
-                                              dot(),
-                                              name('b'),
-                                             ]),
+                          first={
+                            "type": "atomtrailers",
+                            "value": [{
+                                "type": "name",
+                                "value": "a",
+                            },{
+                                "type": "dot",
+                                "first_space": "",
+                                "second_space": "",
+                            },{
+                               "type": "name",
+                               "value": "b",
+                            }],
+                           },
                           second=name('c'),
                           first_space=" ",
                           second_space=" ",
