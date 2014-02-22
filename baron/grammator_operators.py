@@ -162,16 +162,17 @@ def include_operators(pg):
     @pg.production("power : atomtrailers DOUBLE_STAR factor")
     @pg.production("power : atomtrailers DOUBLE_STAR power")
     def power_atomtrailer_power((atomtrailers, double_star, factor)):
-        return binary_operator(
-            double_star.value,
-            {
+        return {
+            "type": "binary_operator",
+            "value": double_star.value,
+            "first": {
                 "type": "atomtrailers",
                 "value": atomtrailers,
             },
-            factor,
-            first_space=double_star.before_space,
-            second_space=double_star.after_space
-        )
+            "second": factor,
+            "first_space": double_star.before_space,
+            "second_space": double_star.after_space
+        }
 
 
     @pg.production("power : atomtrailers")
