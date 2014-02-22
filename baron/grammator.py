@@ -261,22 +261,22 @@
 # -
 
 ### testlist_safe: old_test
-# testlist_safe: old_test [([SPACE] ',' [SPACE] old_test)+]
-# testlist_safe: old_test [([SPACE] ',' [SPACE] old_test)+ [SPACE] [',']]
+### testlist_safe: old_test [([SPACE] ',' [SPACE] old_test)+]
+### testlist_safe: old_test [([SPACE] ',' [SPACE] old_test)+ [SPACE] [',']]
 
 # -
 
 ### old_test: or_test
-# old_test: old_lambdef
+### old_test: old_lambdef
 
 # -
 
-# old_lambdef: 'lambda' [space] ':' [space] old_test
-# old_lambdef: 'lambda' space [varargslist] [space] ':' [space] old_test
+### old_lambdef: 'lambda' [space] ':' [space] old_test
+### old_lambdef: 'lambda' space [varargslist] [space] ':' [space] old_test
 
 # -
 
-# test: lambdef
+### test: lambdef
 ### test: or_test
 ### test: or_test [SPACE 'if' SPACE or_test SPACE 'else' SPACE test]
 
@@ -380,8 +380,8 @@
 
 # -
 
-# lambdef: 'lambda' [SPACE] ':' [SPACE] test
-# lambdef: 'lambda' [SPACE] [varargslist] [SPACE] ':' [SPACE] test
+### lambdef: 'lambda' [SPACE] ':' [SPACE] test
+### lambdef: 'lambda' [SPACE] [varargslist] [SPACE] ':' [SPACE] test
 
 # -
 
@@ -410,17 +410,17 @@
 
 # -
 
-# exprlist: expr
-# exprlist: expr [SPACE] [',']
-# exprlist: expr ([SPACE] ',' [SPACE] expr)*
-# exprlist: expr ([SPACE] ',' [SPACE] expr)* [SPACE] [',']
+### exprlist: expr
+### exprlist: expr [SPACE] [',']
+### exprlist: expr ([SPACE] ',' [SPACE] expr)*
+### exprlist: expr ([SPACE] ',' [SPACE] expr)* [SPACE] [',']
 
 # -
 
-# testlist: test
-# testlist: test [SPACE] [',']
-# testlist: test ([SPACE] ',' [SPACE] test)*
-# testlist: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
+### testlist: test
+### testlist: test [SPACE] [',']
+### testlist: test ([SPACE] ',' [SPACE] test)*
+### testlist: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
 
 # -
 
@@ -496,7 +496,7 @@
 # -
 
 ### testlist1: test
-# testlist1: test ([SPACE] ',' [SPACE] test)*
+### testlist1: test ([SPACE] ',' [SPACE] test)*
 
 # -
 
