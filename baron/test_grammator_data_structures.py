@@ -721,6 +721,67 @@ def test_list_comprehension_tuple():
             }]
           }])
 
+def test_list_comprehension_tuple_more():
+    "[ a for b in c, d, e ]"
+    parse_simple([
+           ('LEFT_SQUARE_BRACKET', '[', '', ' '),
+           ('NAME', 'a'),
+           ('FOR', 'for', ' ', ' '),
+           ('NAME', 'b'),
+           ('IN', 'in', ' ', ' '),
+           ('NAME', 'c'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'd'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'e'),
+           ('RIGHT_SQUARE_BRACKET', ']', ' ', ''),
+          ],
+          [{
+            "type": "list_comprehension",
+            "first_space": " ",
+            "second_space": " ",
+            "result": {
+               "type": "name",
+               "value": "a",
+            },
+            "generators": [{
+                "type": "comprehension_loop",
+                "first_space": " ",
+                "second_space": " ",
+                "third_space": " ",
+                "forth_space": " ",
+                "iterator": {
+                   "type": "name",
+                   "value": "b",
+                },
+                "target": {
+                   "type": "tuple",
+                   "with_parenthesis": False,
+                   "first_space": "",
+                   "second_space": "",
+                   "value": [{
+                        "type": "name",
+                        "value": "c",
+                   },{
+                        "type": "comma",
+                        "first_space": "",
+                        "second_space": " ",
+                   },{
+                        "type": "name",
+                        "value": "d",
+                   },{
+                        "type": "comma",
+                        "first_space": "",
+                        "second_space": " ",
+                   },{
+                        "type": "name",
+                        "value": "e",
+                   }],
+                },
+                "ifs": [],
+            }]
+          }])
+
 def test_set_comprehension():
     "{ a for b in c }"
     parse_simple([
@@ -989,12 +1050,6 @@ def test_repr_quote_double():
                 "value": "b",
             }],
           }])
-
-### testlist_safe: old_test
-# testlist_safe: old_test [([SPACE] ',' [SPACE] old_test)+]
-# testlist_safe: old_test [([SPACE] ',' [SPACE] old_test)+ [SPACE] [',']]
-
-# -
 
 # lambdef: 'lambda' [SPACE] ':' [SPACE] test
 # lambdef: 'lambda' [SPACE] [varargslist] [SPACE] ':' [SPACE] test

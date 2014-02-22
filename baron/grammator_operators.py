@@ -34,6 +34,11 @@ def include_operators(pg):
         return [old_test, comma, old_test2]
 
 
+    @pg.production("testlist_safe : old_test comma testlist_safe")
+    def testlist_safe_more((old_test, comma, testlist_safe)):
+        return [old_test, comma] + testlist_safe
+
+
     @pg.production("expr_stmt : testlist PLUS_EQUAL testlist")
     @pg.production("expr_stmt : testlist MINUS_EQUAL testlist")
     @pg.production("expr_stmt : testlist STAR_EQUAL testlist")
