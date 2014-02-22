@@ -3,10 +3,8 @@
 
 
 import pytest
-from utils import (comparison, boolean_operator, ternary_operator, assignment,
-                   augmented_assignment, tuple_)
-from test_utils import (parse_simple, space, name, dot, comma, binary_operator,
-                        unitary_operator, atomtrailers, getitem, call)
+from utils import comparison, boolean_operator, ternary_operator, assignment, augmented_assignment
+from test_utils import parse_simple, name, binary_operator, unitary_operator, atomtrailers
 
 
 def test_simple_power():
