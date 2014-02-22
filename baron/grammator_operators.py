@@ -228,8 +228,11 @@ def include_operators(pg):
 
     @pg.production("trailer : LEFT_SQUARE_BRACKET DOT DOT DOT RIGHT_SQUARE_BRACKET")
     def trailer_getitem_ellipsis((left, dot1, dot2, dot3, right)):
-        to_return = []
-        if left.before_space:
-            to_return += [{"type": "space", "value": left.before_space}]
-        to_return += [{"type": "getitem" if left.value == "[" else "call", "value": {"type": "ellipsis"}, "first_space": left.after_space, "second_space": ""}]
-        return to_return
+        return [{
+            "type": "getitem" if left.value == "[" else "call",
+            "value": {
+                "type": "ellipsis"
+            },
+            "first_space": left.after_space,
+            "second_space": "",
+        }]
