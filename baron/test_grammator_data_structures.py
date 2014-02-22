@@ -828,6 +828,62 @@ def test_list_comprehension_lambda():
             }]
           }])
 
+def test_list_comprehension_lambda_with_arguments():
+    "[ a for b in lambda argument: c ]"
+    parse_simple([
+           ('LEFT_SQUARE_BRACKET', '[', '', ' '),
+           ('NAME', 'a'),
+           ('FOR', 'for', ' ', ' '),
+           ('NAME', 'b'),
+           ('IN', 'in', ' ', ' '),
+           ('LAMBDA', 'lambda', '', ' '),
+           ('NAME', 'argument'),
+           ('COLON', ':', '', ' '),
+           ('NAME', 'c'),
+           ('RIGHT_SQUARE_BRACKET', ']', ' ', ''),
+          ],
+          [{
+            "type": "list_comprehension",
+            "first_space": " ",
+            "second_space": " ",
+            "result": {
+               "type": "name",
+               "value": "a",
+            },
+            "generators": [{
+                "type": "comprehension_loop",
+                "first_space": " ",
+                "second_space": " ",
+                "third_space": " ",
+                "forth_space": " ",
+                "iterator": {
+                   "type": "name",
+                   "value": "b",
+                },
+                "target": {
+                   "type": "lambda",
+                   "first_space": " ",
+                   "second_space": "",
+                   "third_space": " ",
+                   "arguments": [{
+                        "default": {},
+                        "first_space": "",
+                        "second_space": "",
+                        "type": "argument",
+                        "value": {
+                            "type": "name",
+                            "value": "argument"
+                        },
+                   }],
+                   "value": {
+                       "type": "name",
+                       "value": "c",
+                   }
+                },
+                "ifs": [],
+            }]
+          }])
+
 def test_set_comprehension():
     "{ a for b in c }"
     parse_simple([
@@ -1154,13 +1210,3 @@ def test_repr_quote_double():
 # argument: test
 # argument: test [SPACE] comp_for
 # argument: test [SPACE] '=' [SPACE] test
-
-# -
-
-### old_test: or_test
-# old_test: old_lambdef
-
-# -
-
-# old_lambdef: 'lambda' [space] ':' [space] old_test
-# old_lambdef: 'lambda' space [varargslist] [space] ':' [space] old_test
