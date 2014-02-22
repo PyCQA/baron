@@ -601,6 +601,27 @@ def small_and_compound_stmt((statement,)):
     return statement
 
 
+@pg.production("small_stmt : expr_stmt")
+@pg.production("expr_stmt : testlist")
+@pg.production("testlist : test")
+@pg.production("test : or_test")
+@pg.production("or_test : and_test")
+@pg.production("and_test : not_test")
+@pg.production("not_test : comparison")
+@pg.production("comparison : expr")
+@pg.production("expr : xor_expr")
+@pg.production("xor_expr : and_expr")
+@pg.production("and_expr : shift_expr")
+@pg.production("shift_expr : arith_expr")
+@pg.production("arith_expr : term")
+@pg.production("term : factor")
+@pg.production("factor : power")
+@pg.production("power : atom")
+@pg.production("exprlist : expr")
+def term_factor((level,)):
+    return level
+
+
 @pg.production("classdef : CLASS NAME COLON suite")
 def class_stmt((class_, name, colon, suite),):
     return [{
