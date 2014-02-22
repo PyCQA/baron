@@ -2025,6 +2025,31 @@ def test_implicit_tuple_trailing_comma():
                    }]
            }])
 
+def test_subscript_ellipsis():
+    "a[...]"
+    parse_simple([
+           ('NAME', 'a'),
+           ('LEFT_SQUARE_BRACKET', '['),
+           ('DOT', '.'),
+           ('DOT', '.'),
+           ('DOT', '.'),
+           ('RIGHT_SQUARE_BRACKET', ']'),
+          ],
+          [{
+            "type": "atomtrailers",
+            "value": [{
+               "type": "name",
+               "value": "a",
+            },{
+               "type": "getitem",
+               "first_space": "",
+               "second_space": "",
+               "value": {
+                   "type": "ellipsis",
+               }
+            }]
+           }])
+
 ### trailer: '.' [SPACE] NAME
 ### trailer: '[' [SPACE] ']'
 # trailer: '[' [SPACE] subscriptlist [SPACE] ']'
