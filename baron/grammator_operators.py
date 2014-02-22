@@ -230,14 +230,16 @@ def include_operators(pg):
             "type": "getitem" if left.value == "[" else "call",
             "value": subscript,
             "first_space": left.after_space,
-            "second_space": "",
+            "second_space": right.before_space,
         }]
 
 
     @pg.production("subscript : DOT DOT DOT")
     def subscript_ellipsis((dot1, dot2, dot3)):
         return {
-            "type": "ellipsis"
+            "type": "ellipsis",
+            "first_space": dot1.after_space,
+            "second_space": dot2.after_space,
         }
 
 
