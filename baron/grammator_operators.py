@@ -244,5 +244,20 @@ def include_operators(pg):
 
 
     @pg.production("subscript : test")
+    @pg.production("subscript : slice")
     def subscript_test((test,)):
         return test
+
+    @pg.production("slice : COLON COLON?")
+    def slice((colon, colon2)):
+        return {
+            "type": "slice",
+            "lower": None,
+            "upper": None,
+            "step": None,
+            "has_two_colons": bool(colon2),
+            "first_space": "",
+            "second_space": colon.after_space,
+            "third_space": "",
+            "forth_space": "",
+        }
