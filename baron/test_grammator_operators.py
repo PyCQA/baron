@@ -2803,20 +2803,10 @@ def test_subscript_slice_lower_upper_step():
 
 # -
 
-# subscriptlist: subscript
+### subscriptlist: subscript
 # subscriptlist: subscript [SPACE] [',']
 # subscriptlist: subscript ([SPACE] ',' [SPACE] subscript)*
 # subscriptlist: subscript ([SPACE] ',' [SPACE] subscript)* [SPACE] [',']
-
-# -
-
-# subscript: test
-### subscript: '.' [SPACE] '.' [SPACE] '.'
-# subscript: [test] [SPACE] ':' [SPACE] [test] [SPACE] [sliceop]
-
-# -
-
-# sliceop: ':' [SPACE] [test]
 
 # -
 
