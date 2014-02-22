@@ -2485,6 +2485,41 @@ def test_subscript_slice_both_one():
             }]
            }])
 
+def test_subscript_slice_upper():
+    "a[:b]"
+    parse_simple([
+           ('NAME', 'a'),
+           ('LEFT_SQUARE_BRACKET', '['),
+           ('COLON', ':'),
+           ('NAME', 'b'),
+           ('RIGHT_SQUARE_BRACKET', ']'),
+          ],
+          [{
+            "type": "atomtrailers",
+            "value": [{
+               "type": "name",
+               "value": "a",
+            },{
+               "type": "getitem",
+               "first_space": "",
+               "second_space": "",
+               "value": {
+                   "type": "slice",
+                   "upper": {
+                        "type": "name",
+                        "value": "b",
+                   },
+                   "lower": None,
+                   "step": None,
+                   "has_two_colons": False,
+                   "first_space": "",
+                   "second_space": "",
+                   "third_space": "",
+                   "forth_space": "",
+               }
+            }]
+           }])
+
 ### trailer: '.' [SPACE] NAME
 ### trailer: '[' [SPACE] ']'
 ### trailer: '[' [SPACE] subscriptlist [SPACE] ']'
