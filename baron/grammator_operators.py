@@ -77,7 +77,12 @@ def include_operators(pg):
 
     @pg.production("not_test : NOT not_test")
     def not_node((not_, comparison)):
-        return unitary_operator('not', target=comparison, space=not_.after_space)
+        return {
+            "type": "unitary_operator",
+            "value": "not",
+            "target": comparison,
+            "space": not_.after_space
+        }
 
 
     @pg.production("comparison : expr LESS comparison")
