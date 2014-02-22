@@ -24,12 +24,14 @@ def include_operators(pg):
     def term_factor((level,)):
         return level
 
-    @pg.production("testlist_safe : or_test")
     @pg.production("old_test : or_test")
     def old_test((level,)):
         return level
 
 
+    @pg.production("testlist_safe : old_test comma old_test")
+    def testlist_safe((old_test, comma, old_test2)):
+        return [old_test, comma, old_test2]
 
 
     @pg.production("expr_stmt : testlist PLUS_EQUAL testlist")

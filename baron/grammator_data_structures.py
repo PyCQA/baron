@@ -209,7 +209,7 @@ def include_data_structures(pg):
             "generators": list_for,
           }
 
-    @pg.production("list_for : FOR exprlist IN testlist_safe")
+    @pg.production("list_for : FOR exprlist IN old_test")
     @pg.production("comp_for : FOR exprlist IN or_test")
     def comp_for((for_, exprlist, in_, or_test)):
         return [{
@@ -219,6 +219,25 @@ def include_data_structures(pg):
             "third_space": in_.before_space,
             "forth_space": in_.after_space,
             "target": or_test,
+            "iterator": exprlist,
+            "ifs": [],
+        }]
+
+    @pg.production("list_for : FOR exprlist IN testlist_safe")
+    def comp_for_implicite_tuple((for_, exprlist, in_, testlist_safe)):
+        return [{
+            "type": "comprehension_loop",
+            "first_space": for_.before_space,
+            "second_space": for_.after_space,
+            "third_space": in_.before_space,
+            "forth_space": in_.after_space,
+            "target": {
+                "type": "tuple",
+                "value": testlist_safe,
+                "with_parenthesis": False,
+                "first_space": "",
+                "second_space": "",
+            },
             "iterator": exprlist,
             "ifs": [],
         }]
