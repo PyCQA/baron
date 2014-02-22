@@ -109,13 +109,18 @@ def include_operators(pg):
     @pg.production("comparison : expr IS NOT comparison")
     @pg.production("comparison : expr NOT IN comparison")
     def comparison_advanced_node((expr, comparison_operator, comparison_operator2, comparison_)):
-        return comparison(comparison_operator.value + " " + comparison_operator2.value,
-                          first=expr,
-                          second=comparison_,
-                          first_space=comparison_operator.before_space,
-                          second_space=comparison_operator2.after_space,
-                          middle_space=comparison_operator.after_space,
-                          )
+        return {
+            "type": "comparison",
+            "value": "%s %s" % (
+                comparison_operator.value,
+                comparison_operator2.value
+            ),
+            "first": expr,
+            "second": comparison_,
+            "first_space": comparison_operator.before_space,
+            "second_space": comparison_operator2.after_space,
+            "middle_space": comparison_operator.after_space,
+        }
 
 
     @pg.production("expr : xor_expr VBAR expr")
