@@ -393,33 +393,6 @@ def test_power_trailer_power():
                            second_space="",
                           )])
 
-def test_power_trailer_getitem_empty():
-    "a[]"
-    parse_simple([
-           ('NAME', 'a'),
-           ('LEFT_SQUARE_BRACKET', '['),
-           ('RIGHT_SQUARE_BRACKET', ']'),
-          ],
-          [atomtrailers([
-                         name('a'),
-                         getitem(),
-                        ])])
-
-def test_power_trailer_getitem_empty_with_space():
-    "a [ ]"
-    parse_simple([
-           ('NAME', 'a'),
-           ('LEFT_SQUARE_BRACKET', '[', ' ', ' '),
-           ('RIGHT_SQUARE_BRACKET', ']'),
-          ],
-          [atomtrailers([
-                         name('a'),
-                         space(),
-                         getitem(
-                                 first_space=" "
-                         ),
-                        ])])
-
 def test_power_trailer_call_empty():
     "a()"
     parse_simple([

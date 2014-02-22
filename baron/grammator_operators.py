@@ -183,7 +183,6 @@ def include_operators(pg):
         return to_return
 
 
-    @pg.production("trailer : LEFT_SQUARE_BRACKET RIGHT_SQUARE_BRACKET")
     @pg.production("trailer : LEFT_PARENTHESIS RIGHT_PARENTHESIS")
     def trailer_getitem((left, right)):
         to_return = []
