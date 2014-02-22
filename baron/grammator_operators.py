@@ -224,13 +224,18 @@ def include_operators(pg):
         }]
 
 
-    @pg.production("trailer : LEFT_SQUARE_BRACKET DOT DOT DOT RIGHT_SQUARE_BRACKET")
-    def trailer_getitem_ellipsis((left, dot1, dot2, dot3, right)):
+    @pg.production("trailer : LEFT_SQUARE_BRACKET subscript RIGHT_SQUARE_BRACKET")
+    def trailer_getitem_ellipsis((left, subscript, right)):
         return [{
             "type": "getitem" if left.value == "[" else "call",
-            "value": {
-                "type": "ellipsis"
-            },
+            "value": subscript,
             "first_space": left.after_space,
             "second_space": "",
         }]
+
+
+    @pg.production("subscript : DOT DOT DOT")
+    def subscript_ellipsis((dot1, dot2, dot3)):
+        return {
+            "type": "ellipsis"
+        }
