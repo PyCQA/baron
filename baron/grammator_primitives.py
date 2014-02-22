@@ -243,3 +243,14 @@ def include_primivites(pg):
             "value": testlist,
             "space": token.after_space,
         }
+
+    @pg.production("lambdef : LAMBDA COLON test")
+    def lambdef((lambda_, colon, test)):
+        return {
+            "type": "lambda",
+            "arguments": [],
+            "first_space": lambda_.after_space,
+            "second_space": colon.before_space,
+            "third_space": colon.after_space,
+            "value": test
+        }

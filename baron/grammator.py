@@ -605,6 +605,7 @@ def small_and_compound_stmt((statement,)):
 @pg.production("expr_stmt : testlist")
 @pg.production("testlist : test")
 @pg.production("test : or_test")
+@pg.production("test : lambdef")
 @pg.production("or_test : and_test")
 @pg.production("and_test : not_test")
 @pg.production("not_test : comparison")

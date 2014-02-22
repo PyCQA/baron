@@ -428,3 +428,22 @@ def test_print_redirect_ab_comma():
             "destination": name('a'),
             "destination_space": " ",
           }])
+
+def test_lambda():
+    "lambda : a"
+    parse_simple([
+           ('LAMBDA', 'lambda', '', ' '),
+           ('COLON', ':', '', ' '),
+           ('NAME', 'a'),
+          ],
+          [{
+            "type": "lambda",
+            "first_space": " ",
+            "second_space": "",
+            "third_space": " ",
+            "value": {
+                "type": "name",
+                "value": "a",
+            },
+            "arguments": []
+          }])
