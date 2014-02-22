@@ -2300,7 +2300,7 @@ def test_subscript_ellipsis():
 
 ### trailer: '.' [SPACE] NAME
 ### trailer: '[' [SPACE] ']'
-# trailer: '[' [SPACE] subscriptlist [SPACE] ']'
+### trailer: '[' [SPACE] subscriptlist [SPACE] ']'
 ### trailer: '(' [SPACE] ')'
 # trailer: '(' [SPACE] [arglist] [SPACE] ')'
 
@@ -2314,7 +2314,7 @@ def test_subscript_ellipsis():
 # -
 
 # subscript: test
-# subscript: '.' [SPACE] '.' [SPACE] '.'
+### subscript: '.' [SPACE] '.' [SPACE] '.'
 # subscript: [test] [SPACE] ':' [SPACE] [test] [SPACE] [sliceop]
 
 # -
