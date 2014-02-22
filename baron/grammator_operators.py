@@ -177,7 +177,10 @@ def include_operators(pg):
 
     @pg.production("power : atomtrailers")
     def power_atomtrailers((atomtrailers,)):
-        return {"type": "atomtrailers", "value": atomtrailers}
+        return {
+            "type": "atomtrailers",
+            "value": atomtrailers
+        }
 
 
     @pg.production("atomtrailers : atom")
