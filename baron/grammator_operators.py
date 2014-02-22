@@ -50,15 +50,16 @@ def include_operators(pg):
 
     @pg.production("test : or_test IF or_test ELSE test")
     def ternary_operator_node((first, if_, second, else_, third)):
-        return ternary_operator(
-            second,
-            first=first,
-            second=third,
-            first_space=if_.before_space,
-            second_space=if_.after_space,
-            third_space=else_.before_space,
-            forth_space=else_.after_space,
-        )
+        return {
+            "type": "ternary_operator",
+            "first": first,
+            "second": third,
+            "value": second,
+            "first_space": if_.before_space,
+            "second_space": if_.after_space,
+            "third_space": else_.before_space,
+            "forth_space": else_.after_space,
+        }
 
 
     @pg.production("or_test : and_test OR or_test")
