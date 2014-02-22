@@ -526,7 +526,13 @@ def test_power_trailer_call_empty():
           ],
           [atomtrailers([
                          name('a'),
-                         call(),
+                         {
+                          "type": "call",
+                          "first_space": "",
+                          "second_space": "",
+                          "third_space": "",
+                          "value": None,
+                         }
                         ])])
 
 def test_power_trailer_call_empty_with_space():
@@ -538,10 +544,13 @@ def test_power_trailer_call_empty_with_space():
           ],
           [atomtrailers([
                          name('a'),
-                         space(),
-                         call(
-                              first_space=" "
-                         ),
+                         {
+                          "type": "call",
+                          "first_space": " ",
+                          "second_space": " ",
+                          "third_space": "",
+                          "value": None,
+                         }
                         ])])
 
 def test_term_mult():

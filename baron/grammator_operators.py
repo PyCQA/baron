@@ -217,11 +217,13 @@ def include_operators(pg):
 
     @pg.production("trailer : LEFT_PARENTHESIS RIGHT_PARENTHESIS")
     def trailer_call_empty((left, right)):
-        to_return = []
-        if left.before_space:
-            to_return += [{"type": "space", "value": left.before_space}]
-        to_return += [{"type": "call", "value": None, "first_space": left.after_space, "second_space": ""}]
-        return to_return
+        return [{
+            "type": "call",
+            "value": None,
+            "first_space": left.before_space,
+            "second_space": left.after_space,
+            "third_space": right.before_space,
+        }]
 
 
     @pg.production("trailer : LEFT_SQUARE_BRACKET DOT DOT DOT RIGHT_SQUARE_BRACKET")
