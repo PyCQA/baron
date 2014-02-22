@@ -137,13 +137,14 @@ def include_operators(pg):
     @pg.production("power : atom DOUBLE_STAR factor")
     @pg.production("power : atom DOUBLE_STAR power")
     def binary_operator_node((first, operator, second)):
-        return binary_operator(
-            operator.value,
-            first,
-            second,
-            first_space=operator.before_space,
-            second_space=operator.after_space
-        )
+        return {
+            "type": "binary_operator",
+            "value": operator.value,
+            "first": first,
+            "second": second,
+            "first_space": operator.before_space,
+            "second_space": operator.after_space
+        }
 
 
     @pg.production("factor : PLUS factor")
