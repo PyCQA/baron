@@ -515,24 +515,6 @@ def test_power_trailer_power():
             }
           }])
 
-def test_power_trailer_call_empty():
-    "a()"
-    parse_simple([
-           ('NAME', 'a'),
-           ('LEFT_PARENTHESIS', '('),
-           ('RIGHT_PARENTHESIS', ')'),
-          ],
-          [atomtrailers([
-                         name('a'),
-                         {
-                          "type": "call",
-                          "first_space": "",
-                          "second_space": "",
-                          "third_space": "",
-                          "value": None,
-                         }
-                        ])])
-
 def test_power_trailer_call_empty_with_space():
     "a ( )"
     parse_simple([
@@ -2833,6 +2815,24 @@ def test_subscript_test_implicit_tuple():
                }
             }]
            }])
+
+def test_power_trailer_call_empty():
+    "a()"
+    parse_simple([
+           ('NAME', 'a'),
+           ('LEFT_PARENTHESIS', '('),
+           ('RIGHT_PARENTHESIS', ')'),
+          ],
+          [atomtrailers([
+                         name('a'),
+                         {
+                          "type": "call",
+                          "first_space": "",
+                          "second_space": "",
+                          "third_space": "",
+                          "value": None,
+                         }
+                        ])])
 
 ### trailer: '.' [SPACE] NAME
 ### trailer: '[' [SPACE] ']'
