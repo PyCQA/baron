@@ -262,14 +262,14 @@ def include_operators(pg):
             "forth_space": "",
         }
 
-    @pg.production("slice : test COLON")
-    def slice_lower((test, colon,)):
+    @pg.production("slice : test COLON COLON?")
+    def slice_lower((test, colon, colon2)):
         return {
             "type": "slice",
             "lower": test,
             "upper": None,
             "step": None,
-            "has_two_colons": False,
+            "has_two_colons": bool(colon2),
             "first_space": colon.before_space,
             "second_space": colon.after_space,
             "third_space": "",
