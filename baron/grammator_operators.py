@@ -151,7 +151,12 @@ def include_operators(pg):
     @pg.production("factor : MINUS factor")
     @pg.production("factor : TILDE factor")
     def factor_unitary_operator_space((operator, factor,)):
-        return unitary_operator(operator.value, factor, space=operator.after_space)
+        return {
+            "type": "unitary_operator",
+            "value": operator.value,
+            "space": operator.after_space,
+            "target": factor,
+        }
 
 
     @pg.production("power : atomtrailers DOUBLE_STAR factor")
