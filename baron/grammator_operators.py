@@ -33,7 +33,14 @@ def include_operators(pg):
     @pg.production("expr_stmt : testlist DOUBLE_STAR_EQUAL testlist")
     @pg.production("expr_stmt : testlist DOUBLE_SLASH_EQUAL testlist")
     def augmented_assignment_node((target, operator, value)):
-        return augmented_assignment(operator.value[:-1], value, target, operator.before_space, operator.after_space)
+        return {
+            "type": "assign",
+            "first_space": operator.before_space,
+            "second_space": operator.after_space,
+            "operator": operator.value[:-1],
+            "target": target,
+            "value": value
+        }
 
 
     @pg.production("expr_stmt : testlist EQUAL expr_stmt")
