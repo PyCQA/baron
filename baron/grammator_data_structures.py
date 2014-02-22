@@ -11,6 +11,7 @@ def include_data_structures(pg):
 
     @pg.production("testlist : test comma")
     @pg.production("exprlist : expr comma")
+    @pg.production("subscriptlist : subscript comma")
     def implicit_tuple_alone((test, comma)):
         return {
             "type": "tuple",
@@ -23,6 +24,7 @@ def include_data_structures(pg):
 
     @pg.production("testlist : test testlist_part")
     @pg.production("exprlist : expr exprlist_part")
+    @pg.production("subscriptlist : subscript subscriptlist_part")
     def implicit_tuple((test, testlist_part)):
         return {
             "type": "tuple",
@@ -35,6 +37,7 @@ def include_data_structures(pg):
 
     @pg.production("testlist_part : COMMA test")
     @pg.production("exprlist_part : COMMA expr")
+    @pg.production("subscriptlist_part : COMMA subscript")
     def testlist_part((comma, test)):
         return [{
             "type": "comma",

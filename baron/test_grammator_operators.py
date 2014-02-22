@@ -2795,18 +2795,50 @@ def test_subscript_slice_lower_upper_step():
             }]
            }])
 
+def test_subscript_test_implicit_tuple():
+    "a[b, c]"
+    parse_simple([
+           ('NAME', 'a'),
+           ('LEFT_SQUARE_BRACKET', '['),
+           ('NAME', 'b'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'c'),
+           ('RIGHT_SQUARE_BRACKET', ']'),
+          ],
+          [{
+            "type": "atomtrailers",
+            "value": [{
+               "type": "name",
+               "value": "a",
+            },{
+               "type": "getitem",
+               "first_space": "",
+               "second_space": "",
+               "value": {
+                    "type": "tuple",
+                    "first_space": "",
+                    "second_space": "",
+                    "with_parenthesis": False,
+                    "value": [{
+                        "type": "name",
+                        "value": "b",
+                    },{
+                        "type": "comma",
+                        "first_space": "",
+                        "second_space": " ",
+                    },{
+                        "type": "name",
+                        "value": "c",
+                    }],
+               }
+            }]
+           }])
+
 ### trailer: '.' [SPACE] NAME
 ### trailer: '[' [SPACE] ']'
 ### trailer: '[' [SPACE] subscriptlist [SPACE] ']'
 ### trailer: '(' [SPACE] ')'
 # trailer: '(' [SPACE] [arglist] [SPACE] ')'
-
-# -
-
-### subscriptlist: subscript
-# subscriptlist: subscript [SPACE] [',']
-# subscriptlist: subscript ([SPACE] ',' [SPACE] subscript)*
-# subscriptlist: subscript ([SPACE] ',' [SPACE] subscript)* [SPACE] [',']
 
 # -
 
