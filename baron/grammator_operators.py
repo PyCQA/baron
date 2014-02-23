@@ -223,10 +223,6 @@ def include_operators(pg):
             "third_space": right.before_space,
         }]
 
-    @pg.production("argument : test")
-    def argument((test,)):
-        return [test]
-
     @pg.production("trailer : LEFT_SQUARE_BRACKET subscript RIGHT_SQUARE_BRACKET")
     @pg.production("trailer : LEFT_SQUARE_BRACKET subscriptlist RIGHT_SQUARE_BRACKET")
     def trailer_getitem_ellipsis((left, subscript, right)):

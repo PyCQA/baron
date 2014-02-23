@@ -700,17 +700,22 @@ def parameters_parameter((parameter,),):
 def parameter_empty(p):
     return []
 
-@pg.production("parameter : NAME")
+@pg.production("name : NAME")
+def name((name_,)):
+    return {
+        "type": "name",
+        "value": name_.value,
+    }
+
+@pg.production("argument : test")
+@pg.production("parameter : name")
 def parameter_one((name,)):
     return [{
         "type": "argument",
         "first_space": "",
         "second_space": "",
         "default": {},
-        "value": {
-            "type": "name",
-            "value": name.value
-        }
+        "value": name
     }]
 
 @pg.production("parameter : NAME EQUAL test")

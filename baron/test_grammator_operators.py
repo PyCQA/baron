@@ -2862,8 +2862,14 @@ def test_power_trailer_call_one():
                     "second_space": "",
                     "third_space": "",
                     "value": [{
-                        "type": "name",
-                        "value": "b",
+                        "default": {},
+                        "first_space": "",
+                        "second_space": "",
+                        "type": "argument",
+                        "value": {
+                            "type": "name",
+                            "value": "b",
+                        }
                     }],
                 }]
            }])
@@ -2890,15 +2896,27 @@ def test_power_trailer_call_two():
                     "second_space": "",
                     "third_space": "",
                     "value": [{
-                        "type": "name",
-                        "value": "b",
+                        "default": {},
+                        "first_space": "",
+                        "second_space": "",
+                        "type": "argument",
+                        "value": {
+                            "type": "name",
+                            "value": "b",
+                        }
                     },{
                         "type": "comma",
                         "first_space": "",
                         "second_space": " ",
                     },{
-                        "type": "name",
-                        "value": "c",
+                        "default": {},
+                        "first_space": "",
+                        "second_space": "",
+                        "type": "argument",
+                        "value": {
+                            "type": "name",
+                            "value": "c",
+                        }
                     }],
                 }]
            }])
@@ -2928,15 +2946,27 @@ def test_power_trailer_call_two_star_arg():
                     "second_space": "",
                     "third_space": "",
                     "value": [{
-                        "type": "name",
-                        "value": "b",
+                        "default": {},
+                        "first_space": "",
+                        "second_space": "",
+                        "type": "argument",
+                        "value": {
+                            "type": "name",
+                            "value": "b",
+                        }
                     },{
                         "type": "comma",
                         "first_space": "",
                         "second_space": " ",
                     },{
-                        "type": "name",
-                        "value": "c",
+                        "default": {},
+                        "first_space": "",
+                        "second_space": "",
+                        "type": "argument",
+                        "value": {
+                            "type": "name",
+                            "value": "c",
+                        }
                     },{
                         "type": "comma",
                         "first_space": "",
@@ -2981,15 +3011,27 @@ def test_power_trailer_call_two_star_arg_kwarg():
                     "second_space": "",
                     "third_space": "",
                     "value": [{
-                        "type": "name",
-                        "value": "b",
+                        "default": {},
+                        "first_space": "",
+                        "second_space": "",
+                        "type": "argument",
+                        "value": {
+                            "type": "name",
+                            "value": "b",
+                        }
                     },{
                         "type": "comma",
                         "first_space": "",
                         "second_space": " ",
                     },{
-                        "type": "name",
-                        "value": "c",
+                        "default": {},
+                        "first_space": "",
+                        "second_space": "",
+                        "type": "argument",
+                        "value": {
+                            "type": "name",
+                            "value": "c",
+                        }
                     },{
                         "type": "comma",
                         "first_space": "",
