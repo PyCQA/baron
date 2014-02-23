@@ -389,7 +389,7 @@
 ### trailer: '[' [SPACE] ']'
 ### trailer: '[' [SPACE] subscriptlist [SPACE] ']'
 ### trailer: '(' [SPACE] ')'
-# trailer: '(' [SPACE] [arglist] [SPACE] ')'
+### trailer: '(' [SPACE] [arglist] [SPACE] ')'
 
 # -
 
