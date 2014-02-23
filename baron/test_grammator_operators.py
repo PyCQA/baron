@@ -3145,12 +3145,6 @@ def test_call_generator():
                 }]
            }])
 
-### argument: test
-# argument: test [SPACE] comp_for
-# argument: test [SPACE] '=' [SPACE] test
-
-# -
-
 # exprlist: expr
 # exprlist: expr [SPACE] [',']
 # exprlist: expr ([SPACE] ',' [SPACE] expr)*
