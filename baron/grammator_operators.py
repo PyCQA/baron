@@ -217,12 +217,15 @@ def include_operators(pg):
     def trailer_call((left, argslist, right)):
         return [{
             "type": "call",
-            "value": [],
+            "value": argslist,
             "first_space": left.before_space,
             "second_space": left.after_space,
             "third_space": right.before_space,
         }]
 
+    @pg.production("argument : test")
+    def argument((test,)):
+        return [test]
 
     @pg.production("trailer : LEFT_SQUARE_BRACKET subscript RIGHT_SQUARE_BRACKET")
     @pg.production("trailer : LEFT_SQUARE_BRACKET subscriptlist RIGHT_SQUARE_BRACKET")

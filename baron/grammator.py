@@ -689,11 +689,12 @@ def function_definition((def_, name, left_parenthesis, parameters, right_parenth
 def parameters_parameters_parameter((parameters, parameter,),):
     return parameters + parameter
 
+@pg.production("argslist : argument")
 @pg.production("parameters : parameter")
 def parameters_parameter((parameter,),):
     return parameter
 
-@pg.production("argslist :")
+@pg.production("argument :")
 @pg.production("parameter : ")
 def parameter_empty(p):
     return []
