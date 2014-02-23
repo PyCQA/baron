@@ -3144,15 +3144,3 @@ def test_call_generator():
                     }],
                 }]
            }])
-
-# exprlist: expr
-# exprlist: expr [SPACE] [',']
-# exprlist: expr ([SPACE] ',' [SPACE] expr)*
-# exprlist: expr ([SPACE] ',' [SPACE] expr)* [SPACE] [',']
-
-# -
-
-# testlist: test
-# testlist: test [SPACE] [',']
-# testlist: test ([SPACE] ',' [SPACE] test)*
-# testlist: test ([SPACE] ',' [SPACE] test)* [SPACE] [',']
