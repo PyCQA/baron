@@ -745,6 +745,7 @@ def argument_star_star((star, star2, test,)):
         "value": test,
     }]
 
+# TODO refactor those 2 to uniformise with argument_star and argument_star_star
 @pg.production("parameter : STAR NAME")
 def parameter_star((star, name,)):
     return [{
