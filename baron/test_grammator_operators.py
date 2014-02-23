@@ -515,24 +515,6 @@ def test_power_trailer_power():
             }
           }])
 
-def test_power_trailer_call_empty_with_space():
-    "a ( )"
-    parse_simple([
-           ('NAME', 'a'),
-           ('LEFT_PARENTHESIS', '(', ' ', ' '),
-           ('RIGHT_PARENTHESIS', ')'),
-          ],
-          [atomtrailers([
-                         name('a'),
-                         {
-                          "type": "call",
-                          "first_space": " ",
-                          "second_space": " ",
-                          "third_space": "",
-                          "value": [],
-                         }
-                        ])])
-
 def test_term_mult():
     "a*b"
     parse_simple([
@@ -2829,6 +2811,24 @@ def test_power_trailer_call_empty():
                           "type": "call",
                           "first_space": "",
                           "second_space": "",
+                          "third_space": "",
+                          "value": [],
+                         }
+                        ])])
+
+def test_power_trailer_call_empty_with_space():
+    "a ( )"
+    parse_simple([
+           ('NAME', 'a'),
+           ('LEFT_PARENTHESIS', '(', ' ', ' '),
+           ('RIGHT_PARENTHESIS', ')'),
+          ],
+          [atomtrailers([
+                         name('a'),
+                         {
+                          "type": "call",
+                          "first_space": " ",
+                          "second_space": " ",
                           "third_space": "",
                           "value": [],
                          }
