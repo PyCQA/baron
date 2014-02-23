@@ -571,6 +571,15 @@ def end((endmarker)):
 def statement_simple_statement((stmt,)):
     return stmt
 
+@pg.production("statement : COMMENT ENDL")
+def comment((comment_, endl)):
+    return [{
+        "type": "comment",
+        "value": comment_.value,
+    }, {
+        "type": "endl",
+        "value": endl.value
+    }]
 
 @pg.production("simple_stmt : small_stmt SEMICOLON? ENDL")
 def simple_stmt((small_stmt, semicolon, endl_)):

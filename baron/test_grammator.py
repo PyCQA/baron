@@ -531,6 +531,22 @@ def test_funcdef_stmt_one_star_star_parameter_indent():
             }],
           }])
 
+def test_comment():
+    """
+    # comment
+    """
+    parse_multi([
+             ('COMMENT', '# comment'),
+             ('ENDL', '\n'),
+          ],
+          [{
+            "type": "comment",
+            "value": "# comment",
+          },{
+            "type": "endl",
+            "value": "\n",
+          }])
+
 
 ### fpdef: NAME
 # fpdef: '(' [SPACE] fplist [SPACE] ')'
