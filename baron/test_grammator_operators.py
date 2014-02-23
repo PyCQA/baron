@@ -3096,6 +3096,55 @@ def test_call_named():
                 }]
            }])
 
+def test_call_generator():
+    "a(x for y in z)"
+    parse_simple([
+           ('NAME', 'a'),
+           ('LEFT_PARENTHESIS', '('),
+           ('NAME', 'x'),
+           ('FOR', 'for', ' ', ' '),
+           ('NAME', 'y'),
+           ('IN', 'in', ' ', ' '),
+           ('NAME', 'z'),
+           ('RIGHT_PARENTHESIS', ')'),
+          ],
+          [{
+            "type": "atomtrailers",
+            "value": [{
+                    "type": "name",
+                    "value": "a",
+                },
+                {
+                    "type": "call",
+                    "first_space": "",
+                    "second_space": "",
+                    "third_space": "",
+                    "value": [{
+                        "generators": [{
+                            "first_space": " ",
+                            "second_space": " ",
+                            "third_space": " ",
+                            "forth_space": " ",
+                            "type": "comprehension_loop",
+                            "ifs": [],
+                            "target": {
+                                "type": "name",
+                                "value": "z",
+                            },
+                            "iterator": {
+                                "type": "name",
+                                "value": "y",
+                            },
+                        }],
+                        "type": "argument_generator_comprehension",
+                        "result": {
+                            "type": "name",
+                            "value": "x",
+                        }
+                    }],
+                }]
+           }])
+
 ### argument: test
 # argument: test [SPACE] comp_for
 # argument: test [SPACE] '=' [SPACE] test

@@ -742,6 +742,14 @@ def parameter_with_default((name, equal, test)):
         "value": name
     }]
 
+@pg.production("argument : test comp_for")
+def generator_comprehension((test, comp_for,)):
+    return [{
+        "type": "argument_generator_comprehension",
+        "result": test,
+        "generators": comp_for,
+    }]
+
 @pg.production("argument : STAR test")
 def argument_star((star, test,)):
     return [{
