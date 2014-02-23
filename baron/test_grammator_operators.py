@@ -2805,16 +2805,20 @@ def test_power_trailer_call_empty():
            ('LEFT_PARENTHESIS', '('),
            ('RIGHT_PARENTHESIS', ')'),
           ],
-          [atomtrailers([
-                         name('a'),
-                         {
-                          "type": "call",
-                          "first_space": "",
-                          "second_space": "",
-                          "third_space": "",
-                          "value": [],
-                         }
-                        ])])
+          [{
+            "type": "atomtrailers",
+            "value": [{
+                    "type": "name",
+                    "value": "a",
+                },
+                {
+                    "type": "call",
+                    "first_space": "",
+                    "second_space": "",
+                    "third_space": "",
+                    "value": [],
+                }]
+           }])
 
 def test_power_trailer_call_empty_with_space():
     "a ( )"
@@ -2823,16 +2827,21 @@ def test_power_trailer_call_empty_with_space():
            ('LEFT_PARENTHESIS', '(', ' ', ' '),
            ('RIGHT_PARENTHESIS', ')'),
           ],
-          [atomtrailers([
-                         name('a'),
-                         {
-                          "type": "call",
-                          "first_space": " ",
-                          "second_space": " ",
-                          "third_space": "",
-                          "value": [],
-                         }
-                        ])])
+          [{
+            "type": "atomtrailers",
+            "value": [{
+                    "type": "name",
+                    "value": "a",
+                },
+                {
+                    "type": "call",
+                    "first_space": " ",
+                    "second_space": " ",
+                    "third_space": "",
+                    "value": [],
+                }]
+           }])
+
 
 ### trailer: '.' [SPACE] NAME
 ### trailer: '[' [SPACE] ']'
