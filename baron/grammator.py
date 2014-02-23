@@ -718,17 +718,14 @@ def parameter_one((name,)):
         "value": name
     }]
 
-@pg.production("parameter : NAME EQUAL test")
+@pg.production("parameter : name EQUAL test")
 def parameter_with_default((name, equal, test)):
     return [{
         "type": "argument",
         "first_space": equal.before_space,
         "second_space": equal.after_space,
         "default": test,
-        "value": {
-            "type": "name",
-            "value": name.value
-        }
+        "value": name
     }]
 
 @pg.production("argument : STAR test")
