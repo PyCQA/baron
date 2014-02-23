@@ -2798,7 +2798,7 @@ def test_subscript_test_implicit_tuple():
             }]
            }])
 
-def test_power_trailer_call_empty():
+def test_call_empty():
     "a()"
     parse_simple([
            ('NAME', 'a'),
@@ -2820,7 +2820,7 @@ def test_power_trailer_call_empty():
                 }]
            }])
 
-def test_power_trailer_call_empty_with_space():
+def test_call_empty_with_space():
     "a ( )"
     parse_simple([
            ('NAME', 'a'),
@@ -2842,7 +2842,7 @@ def test_power_trailer_call_empty_with_space():
                 }]
            }])
 
-def test_power_trailer_call_one():
+def test_call_one():
     "a(b)"
     parse_simple([
            ('NAME', 'a'),
@@ -2874,7 +2874,7 @@ def test_power_trailer_call_one():
                 }]
            }])
 
-def test_power_trailer_call_two():
+def test_call_two():
     "a(b, c)"
     parse_simple([
            ('NAME', 'a'),
@@ -2921,7 +2921,7 @@ def test_power_trailer_call_two():
                 }]
            }])
 
-def test_power_trailer_call_two_star_arg():
+def test_call_two_star_arg():
     "a(b, c, *d)"
     parse_simple([
            ('NAME', 'a'),
@@ -2982,7 +2982,7 @@ def test_power_trailer_call_two_star_arg():
                 }]
            }])
 
-def test_power_trailer_call_two_star_arg_kwarg():
+def test_call_two_star_arg_kwarg():
     "a(b, c, *d, **e)"
     parse_simple([
            ('NAME', 'a'),
@@ -3059,7 +3059,7 @@ def test_power_trailer_call_two_star_arg_kwarg():
                 }]
            }])
 
-def test_power_trailer_call_named():
+def test_call_named():
     "a(b = c)"
     parse_simple([
            ('NAME', 'a'),
