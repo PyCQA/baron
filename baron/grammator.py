@@ -387,26 +387,26 @@
 
 ### trailer: '.' [SPACE] NAME
 ### trailer: '[' [SPACE] ']'
-# trailer: '[' [SPACE] subscriptlist [SPACE] ']'
+### trailer: '[' [SPACE] subscriptlist [SPACE] ']'
 ### trailer: '(' [SPACE] ')'
 # trailer: '(' [SPACE] [arglist] [SPACE] ')'
 
 # -
 
-# subscriptlist: subscript
-# subscriptlist: subscript [SPACE] [',']
-# subscriptlist: subscript ([SPACE] ',' [SPACE] subscript)*
-# subscriptlist: subscript ([SPACE] ',' [SPACE] subscript)* [SPACE] [',']
+### subscriptlist: subscript
+### subscriptlist: subscript [SPACE] [',']
+### subscriptlist: subscript ([SPACE] ',' [SPACE] subscript)*
+### subscriptlist: subscript ([SPACE] ',' [SPACE] subscript)* [SPACE] [',']
 
 # -
 
-# subscript: test
-# subscript: '.' [SPACE] '.' [SPACE] '.'
-# subscript: [test] [SPACE] ':' [SPACE] [test] [SPACE] [sliceop]
+### subscript: test
+### subscript: '.' [SPACE] '.' [SPACE] '.'
+### subscript: [test] [SPACE] ':' [SPACE] [test] [SPACE] [sliceop]
 
 # -
 
-# sliceop: ':' [SPACE] [test]
+### sliceop: ':' [SPACE] [test]
 
 # -
 
