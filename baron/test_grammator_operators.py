@@ -2845,15 +2845,12 @@ def test_power_trailer_call_empty_with_space():
 # for reference
 # arglist: (argument [SPACE] ',' [SPACE])* (argument [SPACE] [','] |'*' [SPACE] test ([SPACE] ',' [SPACE] argument)* [[SPACE] ',' [SPACE] '**' [SPACE] test] |'**' [SPACE] test)
 
-
-# arglist: (argument [SPACE] ',' [SPACE])*
-# arglist: argument [SPACE] [',']
-# arglist: (argument [SPACE] ',' [SPACE])* argument [SPACE] [',']
+# arglist:
+# arglist: argument
+# arglist: argument [SPACE] ','
+# arglist: (argument [SPACE] [','] [SPACE])*
+# arglist: '*' [SPACE] test # named arguments allowed after
 # arglist: '**' [SPACE] test
-# arglist: (argument [SPACE] ',' [SPACE])* '**' [SPACE] test
-
-# arglist: '*' [SPACE] test ([SPACE] ',' [SPACE] argument)* [[SPACE] ',' [SPACE] '**' [SPACE] test]
-# arglist: '*' [SPACE] test ([SPACE] ',' [SPACE] argument)* [[SPACE] ',' [SPACE] '**' [SPACE] test]
 
 # -
 
