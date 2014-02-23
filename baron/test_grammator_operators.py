@@ -2868,6 +2868,41 @@ def test_power_trailer_call_one():
                 }]
            }])
 
+def test_power_trailer_call_two():
+    "a(b, c)"
+    parse_simple([
+           ('NAME', 'a'),
+           ('LEFT_PARENTHESIS', '('),
+           ('NAME', 'b'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'c'),
+           ('RIGHT_PARENTHESIS', ')'),
+          ],
+          [{
+            "type": "atomtrailers",
+            "value": [{
+                    "type": "name",
+                    "value": "a",
+                },
+                {
+                    "type": "call",
+                    "first_space": "",
+                    "second_space": "",
+                    "third_space": "",
+                    "value": [{
+                        "type": "name",
+                        "value": "b",
+                    },{
+                        "type": "comma",
+                        "first_space": "",
+                        "second_space": " ",
+                    },{
+                        "type": "name",
+                        "value": "c",
+                    }],
+                }]
+           }])
+
 ### trailer: '.' [SPACE] NAME
 ### trailer: '[' [SPACE] ']'
 ### trailer: '[' [SPACE] subscriptlist [SPACE] ']'

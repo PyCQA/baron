@@ -685,6 +685,7 @@ def function_definition((def_, name, left_parenthesis, parameters, right_parenth
         "value": suite,
     }]
 
+@pg.production("argslist : argslist argument")
 @pg.production("parameters : parameters parameter")
 def parameters_parameters_parameter((parameters, parameter,),):
     return parameters + parameter
@@ -742,6 +743,7 @@ def parameter_star_star((star, star2, name,)):
         "name": name.value,
     }]
 
+@pg.production("argument : comma")
 @pg.production("parameter : comma")
 def parameter_comma((comma,)):
     return [comma]
