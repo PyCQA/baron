@@ -693,6 +693,7 @@ def parameters_parameters_parameter((parameters, parameter,),):
 def parameters_parameter((parameter,),):
     return parameter
 
+@pg.production("argslist :")
 @pg.production("parameter : ")
 def parameter_empty(p):
     return []

@@ -213,8 +213,8 @@ def include_operators(pg):
         }]
 
 
-    @pg.production("trailer : LEFT_PARENTHESIS RIGHT_PARENTHESIS")
-    def trailer_call_empty((left, right)):
+    @pg.production("trailer : LEFT_PARENTHESIS argslist RIGHT_PARENTHESIS")
+    def trailer_call((left, argslist, right)):
         return [{
             "type": "call",
             "value": [],
