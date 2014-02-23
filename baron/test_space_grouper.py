@@ -2772,3 +2772,16 @@ def test_class():
            ('CLASS', 'class', '', '    '),
            ('NAME', 'a'),
          ])
+
+def test_lambda():
+    """
+        """
+    group([
+           ('LAMBDA', 'lambda'),
+           ('SPACE', '    '),
+           ('NAME', 'a'),
+         ],
+         [
+           ('LAMBDA', 'lambda', '', '    '),
+           ('NAME', 'a'),
+         ])

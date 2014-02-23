@@ -80,6 +80,7 @@ GROUP_SPACE_AFTER = BOTH + (
     "EXCEPT",
     "DEF",
     "CLASS",
+    "LAMBDA",
 )
 
 def less_prioritary_than(a, b):
