@@ -3017,16 +3017,7 @@ def test_power_trailer_call_two_star_arg_kwarg():
                 }]
            }])
 
-# arglist:
-# arglist: argument
-# arglist: argument [SPACE] ','
-# arglist: (argument [SPACE] [','] [SPACE])*
-# arglist: '*' [SPACE] test # named arguments allowed after
-# arglist: '**' [SPACE] test
-
-# -
-
-# argument: test
+### argument: test
 # argument: test [SPACE] comp_for
 # argument: test [SPACE] '=' [SPACE] test
 
