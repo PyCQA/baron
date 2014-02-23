@@ -726,6 +726,14 @@ def parameter_with_default((name, equal, test)):
         }
     }]
 
+@pg.production("argument : STAR test")
+def argument_star((star, test,)):
+    return [{
+        "type": "list_argument",
+        "space": star.after_space,
+        "value": test,
+    }]
+
 @pg.production("parameter : STAR NAME")
 def parameter_star((star, name,)):
     return [{
