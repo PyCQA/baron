@@ -529,7 +529,7 @@ def test_power_trailer_call_empty_with_space():
                           "first_space": " ",
                           "second_space": " ",
                           "third_space": "",
-                          "value": None,
+                          "value": [],
                          }
                         ])])
 
@@ -2830,7 +2830,7 @@ def test_power_trailer_call_empty():
                           "first_space": "",
                           "second_space": "",
                           "third_space": "",
-                          "value": None,
+                          "value": [],
                          }
                         ])])
 

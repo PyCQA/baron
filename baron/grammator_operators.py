@@ -217,7 +217,7 @@ def include_operators(pg):
     def trailer_call_empty((left, right)):
         return [{
             "type": "call",
-            "value": None,
+            "value": [],
             "first_space": left.before_space,
             "second_space": left.after_space,
             "third_space": right.before_space,
