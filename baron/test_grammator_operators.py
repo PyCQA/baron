@@ -3059,6 +3059,43 @@ def test_power_trailer_call_two_star_arg_kwarg():
                 }]
            }])
 
+def test_power_trailer_call_named():
+    "a(b = c)"
+    parse_simple([
+           ('NAME', 'a'),
+           ('LEFT_PARENTHESIS', '('),
+           ('NAME', 'b'),
+           ('EQUAL', '=', ' ', ' '),
+           ('NAME', 'c'),
+           ('RIGHT_PARENTHESIS', ')'),
+          ],
+          [{
+            "type": "atomtrailers",
+            "value": [{
+                    "type": "name",
+                    "value": "a",
+                },
+                {
+                    "type": "call",
+                    "first_space": "",
+                    "second_space": "",
+                    "third_space": "",
+                    "value": [{
+                        "value": {
+                            "type": "name",
+                            "value": "c",
+                        },
+                        "first_space": " ",
+                        "second_space": " ",
+                        "type": "argument",
+                        "name": {
+                            "type": "name",
+                            "value": "b",
+                        }
+                    }],
+                }]
+           }])
+
 ### argument: test
 # argument: test [SPACE] comp_for
 # argument: test [SPACE] '=' [SPACE] test

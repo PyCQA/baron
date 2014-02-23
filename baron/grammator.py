@@ -718,6 +718,20 @@ def parameter_one((name,)):
         "value": name
     }]
 
+# really strange that left part of argument grammar can be a test
+# I guess it's yet another legacy mistake
+# python give me 'SyntaxError: keyword can't be an expression' when I try to
+# put something else than a name (looks like a custom SyntaxError)
+@pg.production("argument : test EQUAL test")
+def named_argument((name, equal, test)):
+    return [{
+        "type": "argument",
+        "first_space": equal.before_space,
+        "second_space": equal.after_space,
+        "value": test,
+        "name": name
+    }]
+
 @pg.production("parameter : name EQUAL test")
 def parameter_with_default((name, equal, test)):
     return [{
