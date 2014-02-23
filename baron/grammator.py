@@ -734,6 +734,15 @@ def argument_star((star, test,)):
         "value": test,
     }]
 
+@pg.production("argument : STAR STAR test")
+def argument_star_star((star, star2, test,)):
+    return [{
+        "type": "dict_argument",
+        "first_space": star.after_space,
+        "second_space": star2.after_space,
+        "value": test,
+    }]
+
 @pg.production("parameter : STAR NAME")
 def parameter_star((star, name,)):
     return [{

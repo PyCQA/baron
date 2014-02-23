@@ -2903,16 +2903,119 @@ def test_power_trailer_call_two():
                 }]
            }])
 
-### trailer: '.' [SPACE] NAME
-### trailer: '[' [SPACE] ']'
-### trailer: '[' [SPACE] subscriptlist [SPACE] ']'
-### trailer: '(' [SPACE] ')'
-# trailer: '(' [SPACE] [arglist] [SPACE] ')'
+def test_power_trailer_call_two_star_arg():
+    "a(b, c, *d)"
+    parse_simple([
+           ('NAME', 'a'),
+           ('LEFT_PARENTHESIS', '('),
+           ('NAME', 'b'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'c'),
+           ('COMMA', ',', '', ' '),
+           ('STAR', '*'),
+           ('NAME', 'd'),
+           ('RIGHT_PARENTHESIS', ')'),
+          ],
+          [{
+            "type": "atomtrailers",
+            "value": [{
+                    "type": "name",
+                    "value": "a",
+                },
+                {
+                    "type": "call",
+                    "first_space": "",
+                    "second_space": "",
+                    "third_space": "",
+                    "value": [{
+                        "type": "name",
+                        "value": "b",
+                    },{
+                        "type": "comma",
+                        "first_space": "",
+                        "second_space": " ",
+                    },{
+                        "type": "name",
+                        "value": "c",
+                    },{
+                        "type": "comma",
+                        "first_space": "",
+                        "second_space": " ",
+                    },{
+                        "type": "list_argument",
+                        "space": "",
+                        "value": {
+                            "type": "name",
+                            "value": "d",
+                        },
+                    }],
+                }]
+           }])
 
-# -
-
-# for reference
-# arglist: (argument [SPACE] ',' [SPACE])* (argument [SPACE] [','] |'*' [SPACE] test ([SPACE] ',' [SPACE] argument)* [[SPACE] ',' [SPACE] '**' [SPACE] test] |'**' [SPACE] test)
+def test_power_trailer_call_two_star_arg_kwarg():
+    "a(b, c, *d, **e)"
+    parse_simple([
+           ('NAME', 'a'),
+           ('LEFT_PARENTHESIS', '('),
+           ('NAME', 'b'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'c'),
+           ('COMMA', ',', '', ' '),
+           ('STAR', '*'),
+           ('NAME', 'd'),
+           ('COMMA', ',', '', ' '),
+           ('STAR', '*'),
+           ('STAR', '*'),
+           ('NAME', 'e'),
+           ('RIGHT_PARENTHESIS', ')'),
+          ],
+          [{
+            "type": "atomtrailers",
+            "value": [{
+                    "type": "name",
+                    "value": "a",
+                },
+                {
+                    "type": "call",
+                    "first_space": "",
+                    "second_space": "",
+                    "third_space": "",
+                    "value": [{
+                        "type": "name",
+                        "value": "b",
+                    },{
+                        "type": "comma",
+                        "first_space": "",
+                        "second_space": " ",
+                    },{
+                        "type": "name",
+                        "value": "c",
+                    },{
+                        "type": "comma",
+                        "first_space": "",
+                        "second_space": " ",
+                    },{
+                        "type": "list_argument",
+                        "space": "",
+                        "value": {
+                            "type": "name",
+                            "value": "d",
+                        },
+                    },{
+                        "type": "comma",
+                        "first_space": "",
+                        "second_space": " ",
+                    },{
+                        "type": "dict_argument",
+                        "first_space": "",
+                        "second_space": "",
+                        "value": {
+                            "type": "name",
+                            "value": "e",
+                        },
+                    }],
+                }]
+           }])
 
 # arglist:
 # arglist: argument
