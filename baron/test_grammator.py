@@ -533,13 +533,14 @@ def test_funcdef_stmt_one_star_star_parameter_indent():
 
 def test_comment():
     """
-    # comment
+      # comment
     """
     parse_multi([
-             ('COMMENT', '# comment'),
+             ('COMMENT', '# comment', '  ', ''),
              ('ENDL', '\n'),
           ],
           [{
+            "space": "  ",
             "type": "comment",
             "value": "# comment",
           },{

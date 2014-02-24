@@ -2786,3 +2786,14 @@ def test_lambda():
            ('LAMBDA', 'lambda', '', '    '),
            ('NAME', 'a'),
          ])
+
+def test_comment():
+    """
+        """
+    group([
+           ('SPACE', ' '),
+           ('COMMENT', '#'),
+         ],
+         [
+           ('COMMENT', '#', ' '),
+         ])

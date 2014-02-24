@@ -576,6 +576,7 @@ def comment((comment_, endl)):
     return [{
         "type": "comment",
         "value": comment_.value,
+        "space": comment_.before_space,
     }, {
         "type": "endl",
         "value": endl.value
