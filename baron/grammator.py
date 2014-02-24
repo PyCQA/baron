@@ -768,12 +768,12 @@ def argument_star((star, test,)):
         "value": test,
     }]
 
-@pg.production("argument : STAR STAR test")
-def argument_star_star((star, star2, test,)):
+@pg.production("argument : DOUBLE_STAR test")
+def argument_star_star((double_star, test,)):
     return [{
         "type": "dict_argument",
-        "first_space": star.after_space,
-        "second_space": star2.after_space,
+        "first_space": double_star.after_space,
+        "second_space": double_star.after_space,
         "value": test,
     }]
 
@@ -786,12 +786,12 @@ def parameter_star((star, name,)):
         "name": name.value,
     }]
 
-@pg.production("parameter : STAR STAR NAME")
-def parameter_star_star((star, star2, name,)):
+@pg.production("parameter : DOUBLE_STAR NAME")
+def parameter_star_star((double_star, name,)):
     return [{
         "type": "dict_argument",
-        "first_space": star.after_space,
-        "second_space": star2.after_space,
+        "first_space": double_star.after_space,
+        "second_space": double_star.after_space,
         "name": name.value,
     }]
 
