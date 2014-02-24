@@ -2725,12 +2725,13 @@ def test_for():
     """
         """
     group([
+           ('SPACE', '    '),
            ('FOR', 'for'),
            ('SPACE', '    '),
            ('NAME', 'a'),
          ],
          [
-           ('FOR', 'for', '', '    '),
+           ('FOR', 'for', '    ', '    '),
            ('NAME', 'a'),
          ])
 

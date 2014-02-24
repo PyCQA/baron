@@ -54,6 +54,7 @@ BOTH = (
     "DOUBLE_STAR_EQUAL",
     "DOUBLE_SLASH_EQUAL",
     "COMMA",
+    "FOR",
     "COLON"
 )
 
@@ -76,7 +77,6 @@ GROUP_SPACE_AFTER = BOTH + (
     "ENDL",
     "WHILE",
     "ELIF",
-    "FOR",
     "EXCEPT",
     "DEF",
     "CLASS",
