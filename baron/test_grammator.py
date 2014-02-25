@@ -547,6 +547,41 @@ def test_comment():
             "value": "\n",
           }])
 
+def test_with_a():
+    """
+    with a: pass
+    """
+    parse_multi([
+             ('WITH', 'with', '', ' '),
+             ('NAME', 'a'),
+             ('COLON', ':', '', ' '),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+          ],
+          [{
+            "first_space": " ",
+            "second_space": "",
+            "third_space": " ",
+            "type": "with",
+            "contexts": [{
+                "type": "with_context_item",
+                "value": {
+                    "type": "name",
+                    "value": "a",
+                },
+                "first_space": "",
+                "second_space": "",
+                "as": {},
+            }],
+            "value": [{
+               "type": "pass",
+            },{
+               "type": "endl",
+               "value": "\n",
+            }],
+          }])
+
+
 
 ### fpdef: NAME
 # fpdef: '(' [SPACE] fplist [SPACE] ')'

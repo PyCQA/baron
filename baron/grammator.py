@@ -607,6 +607,7 @@ def simple_stmt_semicolon((small_stmt, semicolon, simple_stmt)):
 @pg.production("compound_stmt : try_stmt")
 @pg.production("compound_stmt : funcdef")
 @pg.production("compound_stmt : classdef")
+@pg.production("compound_stmt : with_stmt")
 def small_and_compound_stmt((statement,)):
     return statement
 
@@ -631,6 +632,24 @@ def small_and_compound_stmt((statement,)):
 @pg.production("exprlist : expr")
 def term_factor((level,)):
     return level
+
+
+@pg.production("with_stmt : WITH test COLON suite")
+def with_stmt((with_, test, colon, suite)):
+    return [{
+        "type": "with",
+        "value": suite,
+        "first_space": with_.after_space,
+        "second_space": colon.before_space,
+        "third_space": colon.after_space,
+        "contexts": [{
+            "type": "with_context_item",
+            "as": {},
+            "first_space": "",
+            "second_space": "",
+            "value": test
+        }]
+    }]
 
 
 @pg.production("classdef : CLASS NAME COLON suite")
