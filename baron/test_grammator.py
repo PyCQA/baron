@@ -581,6 +581,47 @@ def test_with_a():
             }],
           }])
 
+def test_with_a_as_b():
+    """
+    with a as b: pass
+    """
+    parse_multi([
+             ('WITH', 'with', '', ' '),
+             ('NAME', 'a'),
+             ('AS', 'as', ' ', ' '),
+             ('NAME', 'b'),
+             ('COLON', ':', '', ' '),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+          ],
+          [{
+            "first_space": " ",
+            "second_space": "",
+            "third_space": " ",
+            "type": "with",
+            "contexts": [{
+                "type": "with_context_item",
+                "value": {
+                    "type": "name",
+                    "value": "a",
+                },
+                "first_space": " ",
+                "second_space": " ",
+                "as": {
+                    "type": "name",
+                    "value": "b",
+                },
+            }],
+            "value": [{
+               "type": "pass",
+            },{
+               "type": "endl",
+               "value": "\n",
+            }],
+          }])
+
+
+
 
 
 ### fpdef: NAME

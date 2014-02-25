@@ -657,6 +657,17 @@ def with_item((test,)):
     }
 
 
+@pg.production("with_item : test AS expr")
+def with_item_as((test, as_, expr)):
+    return {
+        "type": "with_context_item",
+        "as": expr,
+        "first_space": as_.before_space,
+        "second_space": as_.after_space,
+        "value": test
+    }
+
+
 @pg.production("classdef : CLASS NAME COLON suite")
 def class_stmt((class_, name, colon, suite),):
     return [{
