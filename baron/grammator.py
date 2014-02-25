@@ -634,16 +634,26 @@ def term_factor((level,)):
     return level
 
 
-@pg.production("with_stmt : WITH with_item COLON suite")
-def with_stmt((with_, with_item, colon, suite)):
+@pg.production("with_stmt : WITH with_items COLON suite")
+def with_stmt((with_, with_items, colon, suite)):
     return [{
         "type": "with",
         "value": suite,
         "first_space": with_.after_space,
         "second_space": colon.before_space,
         "third_space": colon.after_space,
-        "contexts": [with_item]
+        "contexts": with_items
     }]
+
+
+@pg.production("with_items : with_items comma with_item")
+def with_items_with_item((with_items, comma, with_item,)):
+    return with_items + [comma, with_item]
+
+
+@pg.production("with_items : with_item")
+def with_items((with_item,)):
+    return [with_item]
 
 
 @pg.production("with_item : test")

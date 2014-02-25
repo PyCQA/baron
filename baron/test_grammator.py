@@ -620,8 +620,59 @@ def test_with_a_as_b():
             }],
           }])
 
-
-
+def test_with_a_as_b_c():
+    """
+    with a as b, c: pass
+    """
+    parse_multi([
+             ('WITH', 'with', '', ' '),
+             ('NAME', 'a'),
+             ('AS', 'as', ' ', ' '),
+             ('NAME', 'b'),
+             ('COMMA', ',', '', ' '),
+             ('NAME', 'c'),
+             ('COLON', ':', '', ' '),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+          ],
+          [{
+            "first_space": " ",
+            "second_space": "",
+            "third_space": " ",
+            "type": "with",
+            "contexts": [{
+                "type": "with_context_item",
+                "value": {
+                    "type": "name",
+                    "value": "a",
+                },
+                "first_space": " ",
+                "second_space": " ",
+                "as": {
+                    "type": "name",
+                    "value": "b",
+                },
+            },{
+               "type": "comma",
+                "first_space": "",
+                "second_space": " ",
+            },{
+                "type": "with_context_item",
+                "value": {
+                    "type": "name",
+                    "value": "c",
+                },
+                "first_space": "",
+                "second_space": "",
+                "as": {},
+            }],
+            "value": [{
+               "type": "pass",
+            },{
+               "type": "endl",
+               "value": "\n",
+            }],
+          }])
 
 
 ### fpdef: NAME
@@ -662,17 +713,7 @@ def test_with_a_as_b():
 ### compound_stmt: while_stmt
 ### compound_stmt: for_stmt
 ### compound_stmt: try_stmt
-# compound_stmt: with_stmt
+### compound_stmt: with_stmt
 ### compound_stmt: funcdef
 ### compound_stmt: classdef
 # compound_stmt: decorated
-
-# -
-
-# with_stmt: 'with' SPACE with_item [SPACE] ':' [SPACE] suite
-# with_stmt: 'with' SPACE with_item ([SPACE] ',' [SPACE] with_item)* [SPACE] ':' [SPACE] suite
-
-# -
-
-# with_item: test
-# with_item: test [SPACE 'as' SPACE expr]
