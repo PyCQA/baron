@@ -2669,6 +2669,18 @@ def test_if_a_pass_indent():
           ])
 
 
+def test_endl_backward():
+    """
+        """
+    group([
+           ('SPACE', '    '),
+           ('ENDL', '\n'),
+         ],
+         [
+           ('ENDL', '\n', '    '),
+         ])
+
+
 def test_endl():
     """
         """

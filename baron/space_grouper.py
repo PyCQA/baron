@@ -53,6 +53,7 @@ BOTH = (
     "RIGHT_SHIFT_EQUAL",
     "DOUBLE_STAR_EQUAL",
     "DOUBLE_SLASH_EQUAL",
+    "ENDL",
     "COMMA",
     "FOR",
     "COLON"
@@ -75,7 +76,6 @@ GROUP_SPACE_AFTER = BOTH + (
     "GLOBAL",
     "PRINT",
     "INDENT",
-    "ENDL",
     "WHILE",
     "ELIF",
     "EXCEPT",
