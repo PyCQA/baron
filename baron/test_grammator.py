@@ -680,6 +680,54 @@ def test_with_a_as_b_c():
             }],
           }])
 
+def test_decorator():
+    """
+    @a
+    def b(): pass
+    """
+    parse_multi([
+             ('AT', '@', '', ''),
+             ('NAME', 'a'),
+             ('ENDL', '\n'),
+             ('DEF', 'def', '', ' '),
+             ('NAME', 'b'),
+             ('LEFT_PARENTHESIS', '('),
+             ('RIGHT_PARENTHESIS', ')'),
+             ('COLON', ':', '', ' '),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+          ],
+          [{
+            "first_space": " ",
+            "second_space": "",
+            "third_space": "",
+            "fith_space": "",
+            "forth_space": "",
+            "type": "funcdef",
+            "arguments": [],
+            "name": "b",
+            "decorators": [{
+                "type": "decorator",
+                "space": "",
+                "value": {
+                    "type": "dotted_name",
+                    "value": [{
+                    "type": "name",
+                    "value": "a",
+                    }],
+                }
+            },{
+               "type": "endl",
+               "value": "\n",
+            }],
+            "value": [{
+               "type": "pass",
+            },{
+               "type": "endl",
+               "value": "\n",
+            }],
+          }])
+
 
 ### fpdef: NAME
 # fpdef: '(' [SPACE] fplist [SPACE] ')'
