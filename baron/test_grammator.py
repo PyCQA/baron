@@ -116,7 +116,7 @@ def test_file_input_simple_stmt_three_items_semicolon():
 
 def test_file_input_simple_stmt_one_item_semicolon_space():
     """
-    a ; 
+    a ;
     """
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';', ' ', ' '), ('ENDL', '\n'),

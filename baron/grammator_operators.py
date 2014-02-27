@@ -41,6 +41,7 @@ def include_operators(pg):
         }
 
 
+    @pg.production("expr_stmt : testlist EQUAL yield_expr")
     @pg.production("expr_stmt : testlist EQUAL expr_stmt")
     def assignment_node((target, equal, value)):
         return assignment(value, target, equal.before_space, equal.after_space)

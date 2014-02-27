@@ -2078,6 +2078,35 @@ def test_augmented_assignment_augmented_assignment():
                                 second_space=" ",
                                )])
 
+def test_a_equal_yield_b():
+    """
+    a = yield b
+    """
+    parse_simple([
+             ('NAME', 'a'),
+             ('EQUAL', '=', ' ', ' '),
+             ('YIELD', '', '', ' '),
+             ('NAME', 'b'),
+          ],
+          [{
+            "first_space": " ",
+            "type": "assign",
+            "target": {
+                "type": "name",
+                "value": "a"
+            },
+            "value": {
+                "type": "yield",
+                "space": " ",
+                "value": {
+                    "type": "name",
+                    "value": "b"
+                },
+            },
+            "second_space": " "
+          }])
+
+
 def test_expr_comma_list():
     "a or b,c+d"
     parse_simple([
