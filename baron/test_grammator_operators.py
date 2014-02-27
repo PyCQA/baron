@@ -2078,6 +2078,30 @@ def test_augmented_assignment_augmented_assignment():
                                 second_space=" ",
                                )])
 
+def test_augmented_assignment_yield_b():
+    "a += yield b"
+    for token_name, value in augmented_assignment_tokens:
+        parse_simple([
+               ('NAME', 'a'),
+               (token_name, value, ' ', ' '),
+               ('YIELD', 'yield', '', ' '),
+               ('NAME', 'b'),
+              ],
+              [augmented_assignment(
+                            operator=value[:-1],
+                            value={
+                                "space": " ",
+                                "type": "yield",
+                                "value": {
+                                    "type": "name",
+                                    "value": "b",
+                                },
+                            },
+                            target=name('a'),
+                            first_space=" ",
+                            second_space=" ",
+                           )])
+
 def test_a_equal_yield_b():
     """
     a = yield b

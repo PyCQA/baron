@@ -30,6 +30,18 @@ def include_operators(pg):
     @pg.production("expr_stmt : testlist RIGHT_SHIFT_EQUAL testlist")
     @pg.production("expr_stmt : testlist DOUBLE_STAR_EQUAL testlist")
     @pg.production("expr_stmt : testlist DOUBLE_SLASH_EQUAL testlist")
+    @pg.production("expr_stmt : testlist PLUS_EQUAL yield_expr")
+    @pg.production("expr_stmt : testlist MINUS_EQUAL yield_expr")
+    @pg.production("expr_stmt : testlist STAR_EQUAL yield_expr")
+    @pg.production("expr_stmt : testlist SLASH_EQUAL yield_expr")
+    @pg.production("expr_stmt : testlist PERCENT_EQUAL yield_expr")
+    @pg.production("expr_stmt : testlist AMPER_EQUAL yield_expr")
+    @pg.production("expr_stmt : testlist VBAR_EQUAL yield_expr")
+    @pg.production("expr_stmt : testlist CIRCUMFLEX_EQUAL yield_expr")
+    @pg.production("expr_stmt : testlist LEFT_SHIFT_EQUAL yield_expr")
+    @pg.production("expr_stmt : testlist RIGHT_SHIFT_EQUAL yield_expr")
+    @pg.production("expr_stmt : testlist DOUBLE_STAR_EQUAL yield_expr")
+    @pg.production("expr_stmt : testlist DOUBLE_SLASH_EQUAL yield_expr")
     def augmented_assignment_node((target, operator, value)):
         return {
             "type": "assign",

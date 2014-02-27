@@ -703,8 +703,8 @@ def test_with_a_as_b_c():
 
 ### expr_stmt: testlist
 ### expr_stmt: testlist ([SPACE] '=' [SPACE] testlist)*
-# expr_stmt: testlist ([SPACE] '=' [SPACE] yield_expr)*
-# expr_stmt: testlist augassign yield_expr
+### expr_stmt: testlist ([SPACE] '=' [SPACE] yield_expr)*
+### expr_stmt: testlist augassign yield_expr
 ### expr_stmt: testlist augassign testlist
 
 # -
