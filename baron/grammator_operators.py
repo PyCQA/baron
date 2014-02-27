@@ -18,30 +18,8 @@ def include_operators(pg):
         return [old_test, comma] + testlist_safe
 
 
-    @pg.production("expr_stmt : testlist PLUS_EQUAL testlist")
-    @pg.production("expr_stmt : testlist MINUS_EQUAL testlist")
-    @pg.production("expr_stmt : testlist STAR_EQUAL testlist")
-    @pg.production("expr_stmt : testlist SLASH_EQUAL testlist")
-    @pg.production("expr_stmt : testlist PERCENT_EQUAL testlist")
-    @pg.production("expr_stmt : testlist AMPER_EQUAL testlist")
-    @pg.production("expr_stmt : testlist VBAR_EQUAL testlist")
-    @pg.production("expr_stmt : testlist CIRCUMFLEX_EQUAL testlist")
-    @pg.production("expr_stmt : testlist LEFT_SHIFT_EQUAL testlist")
-    @pg.production("expr_stmt : testlist RIGHT_SHIFT_EQUAL testlist")
-    @pg.production("expr_stmt : testlist DOUBLE_STAR_EQUAL testlist")
-    @pg.production("expr_stmt : testlist DOUBLE_SLASH_EQUAL testlist")
-    @pg.production("expr_stmt : testlist PLUS_EQUAL yield_expr")
-    @pg.production("expr_stmt : testlist MINUS_EQUAL yield_expr")
-    @pg.production("expr_stmt : testlist STAR_EQUAL yield_expr")
-    @pg.production("expr_stmt : testlist SLASH_EQUAL yield_expr")
-    @pg.production("expr_stmt : testlist PERCENT_EQUAL yield_expr")
-    @pg.production("expr_stmt : testlist AMPER_EQUAL yield_expr")
-    @pg.production("expr_stmt : testlist VBAR_EQUAL yield_expr")
-    @pg.production("expr_stmt : testlist CIRCUMFLEX_EQUAL yield_expr")
-    @pg.production("expr_stmt : testlist LEFT_SHIFT_EQUAL yield_expr")
-    @pg.production("expr_stmt : testlist RIGHT_SHIFT_EQUAL yield_expr")
-    @pg.production("expr_stmt : testlist DOUBLE_STAR_EQUAL yield_expr")
-    @pg.production("expr_stmt : testlist DOUBLE_SLASH_EQUAL yield_expr")
+    @pg.production("expr_stmt : testlist augassign_operator testlist")
+    @pg.production("expr_stmt : testlist augassign_operator yield_expr")
     def augmented_assignment_node((target, operator, value)):
         return {
             "type": "assign",
@@ -52,6 +30,20 @@ def include_operators(pg):
             "value": value
         }
 
+    @pg.production("augassign_operator : PLUS_EQUAL")
+    @pg.production("augassign_operator : MINUS_EQUAL")
+    @pg.production("augassign_operator : STAR_EQUAL")
+    @pg.production("augassign_operator : SLASH_EQUAL")
+    @pg.production("augassign_operator : PERCENT_EQUAL")
+    @pg.production("augassign_operator : AMPER_EQUAL")
+    @pg.production("augassign_operator : VBAR_EQUAL")
+    @pg.production("augassign_operator : CIRCUMFLEX_EQUAL")
+    @pg.production("augassign_operator : LEFT_SHIFT_EQUAL")
+    @pg.production("augassign_operator : RIGHT_SHIFT_EQUAL")
+    @pg.production("augassign_operator : DOUBLE_STAR_EQUAL")
+    @pg.production("augassign_operator : DOUBLE_SLASH_EQUAL")
+    def augassign_operator((operator,)):
+        return operator
 
     @pg.production("expr_stmt : testlist EQUAL yield_expr")
     @pg.production("expr_stmt : testlist EQUAL expr_stmt")
