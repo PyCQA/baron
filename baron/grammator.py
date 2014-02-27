@@ -140,8 +140,8 @@
 
 ### expr_stmt: testlist
 ### expr_stmt: testlist ([SPACE] '=' [SPACE] testlist)*
-# expr_stmt: testlist ([SPACE] '=' [SPACE] yield_expr)*
-# expr_stmt: testlist augassign yield_expr
+### expr_stmt: testlist ([SPACE] '=' [SPACE] yield_expr)*
+### expr_stmt: testlist augassign yield_expr
 ### expr_stmt: testlist augassign testlist
 
 # -
@@ -214,7 +214,7 @@
 ### compound_stmt: while_stmt
 ### compound_stmt: for_stmt
 ### compound_stmt: try_stmt
-# compound_stmt: with_stmt
+### compound_stmt: with_stmt
 ### compound_stmt: funcdef
 ### compound_stmt: classdef
 # compound_stmt: decorated
@@ -246,13 +246,13 @@
 
 # -
 
-# with_stmt: 'with' SPACE with_item [SPACE] ':' [SPACE] suite
-# with_stmt: 'with' SPACE with_item ([SPACE] ',' [SPACE] with_item)* [SPACE] ':' [SPACE] suite
+### with_stmt: 'with' SPACE with_item [SPACE] ':' [SPACE] suite
+### with_stmt: 'with' SPACE with_item ([SPACE] ',' [SPACE] with_item)* [SPACE] ':' [SPACE] suite
 
 # -
 
-# with_item: test
-# with_item: test [SPACE 'as' SPACE expr]
+### with_item: test
+### with_item: test [SPACE 'as' SPACE expr]
 
 # -
 
