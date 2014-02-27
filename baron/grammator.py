@@ -730,6 +730,7 @@ def class_stmt_inherit((class_, name, left_parenthesis, testlist, right_parenthe
 def function_definition((def_, name, left_parenthesis, parameters, right_parenthesis, colon, suite)):
     return [{
         "type": "funcdef",
+        "decorators": [],
         "name": name.value,
         "first_space": def_.after_space,
         "second_space": left_parenthesis.before_space,

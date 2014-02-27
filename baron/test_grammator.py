@@ -144,6 +144,7 @@ def test_funcdef_stmt_indent():
           [{
             "type": "funcdef",
             "name": "a",
+            "decorators": [],
             "first_space": " ",
             "second_space": " ",
             "third_space": "",
@@ -183,6 +184,7 @@ def test_funcdef_stmt_one_parameter_indent():
           [{
             "type": "funcdef",
             "name": "a",
+            "decorators": [],
             "first_space": " ",
             "second_space": " ",
             "third_space": " ",
@@ -231,6 +233,7 @@ def test_funcdef_stmt_one_parameter_comma_indent():
           ],
           [{
             "type": "funcdef",
+            "decorators": [],
             "name": "a",
             "first_space": " ",
             "second_space": " ",
@@ -286,6 +289,7 @@ def test_funcdef_stmt_one_parameter_comma_default_indent():
           ],
           [{
             "type": "funcdef",
+            "decorators": [],
             "name": "a",
             "first_space": " ",
             "second_space": " ",
@@ -463,6 +467,7 @@ def test_funcdef_stmt_one_start_parameter_indent():
           [{
             "type": "funcdef",
             "name": "a",
+            "decorators": [],
             "first_space": " ",
             "second_space": "",
             "third_space": "",
@@ -507,6 +512,7 @@ def test_funcdef_stmt_one_star_star_parameter_indent():
           [{
             "type": "funcdef",
             "name": "a",
+            "decorators": [],
             "first_space": " ",
             "second_space": "",
             "third_space": "",
