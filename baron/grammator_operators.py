@@ -7,16 +7,13 @@ def include_operators(pg):
     def old_test((level,)):
         return level
 
-
     @pg.production("testlist_safe : old_test comma old_test")
     def testlist_safe((old_test, comma, old_test2)):
         return [old_test, comma, old_test2]
 
-
     @pg.production("testlist_safe : old_test comma testlist_safe")
     def testlist_safe_more((old_test, comma, testlist_safe)):
         return [old_test, comma] + testlist_safe
-
 
     @pg.production("expr_stmt : testlist augassign_operator testlist")
     @pg.production("expr_stmt : testlist augassign_operator yield_expr")
@@ -50,7 +47,6 @@ def include_operators(pg):
     def assignment_node((target, equal, value)):
         return assignment(value, target, equal.before_space, equal.after_space)
 
-
     @pg.production("test : or_test IF or_test ELSE test")
     def ternary_operator_node((first, if_, second, else_, third)):
         return {
@@ -64,7 +60,6 @@ def include_operators(pg):
             "forth_space": else_.after_space,
         }
 
-
     @pg.production("or_test : and_test OR or_test")
     @pg.production("and_test : not_test AND and_test")
     def and_or_node((first, operator, second)):
@@ -77,7 +72,6 @@ def include_operators(pg):
             "second_space": operator.after_space,
         }
 
-
     @pg.production("not_test : NOT not_test")
     def not_node((not_, comparison)):
         return {
@@ -86,7 +80,6 @@ def include_operators(pg):
             "target": comparison,
             "space": not_.after_space
         }
-
 
     @pg.production("comparison : expr LESS comparison")
     @pg.production("comparison : expr GREATER comparison")
@@ -108,7 +101,6 @@ def include_operators(pg):
             "second_space": comparison_operator.after_space
         }
 
-
     @pg.production("comparison : expr IS NOT comparison")
     @pg.production("comparison : expr NOT IN comparison")
     def comparison_advanced_node((expr, comparison_operator, comparison_operator2, comparison_)):
@@ -124,7 +116,6 @@ def include_operators(pg):
             "second_space": comparison_operator2.after_space,
             "middle_space": comparison_operator.after_space,
         }
-
 
     @pg.production("expr : xor_expr VBAR expr")
     @pg.production("xor_expr : and_expr CIRCUMFLEX xor_expr")
@@ -149,7 +140,6 @@ def include_operators(pg):
             "second_space": operator.after_space
         }
 
-
     @pg.production("factor : PLUS factor")
     @pg.production("factor : MINUS factor")
     @pg.production("factor : TILDE factor")
@@ -160,7 +150,6 @@ def include_operators(pg):
             "space": operator.after_space,
             "target": factor,
         }
-
 
     @pg.production("power : atomtrailers DOUBLE_STAR factor")
     @pg.production("power : atomtrailers DOUBLE_STAR power")
@@ -177,7 +166,6 @@ def include_operators(pg):
             "second_space": double_star.after_space
         }
 
-
     @pg.production("power : atomtrailers")
     def power_atomtrailers((atomtrailers,)):
         return {
@@ -185,26 +173,21 @@ def include_operators(pg):
             "value": atomtrailers
         }
 
-
     @pg.production("atomtrailers : atom")
     def atomtrailers_atom((atom,)):
         return [atom]
-
 
     @pg.production("atomtrailers : atom trailers")
     def atomtrailer((atom, trailers)):
         return [atom] + trailers
 
-
     @pg.production("trailers : trailer")
     def trailers((trailer,)):
         return trailer
 
-
     @pg.production("trailers : trailers trailer")
     def trailers_trailer((trailers, trailer)):
         return trailers + trailer
-
 
     @pg.production("trailer : DOT NAME")
     def trailer((dot, name,)):
@@ -216,7 +199,6 @@ def include_operators(pg):
             "type": "name",
             "value": name.value,
         }]
-
 
     @pg.production("trailer : LEFT_PARENTHESIS argslist RIGHT_PARENTHESIS")
     def trailer_call((left, argslist, right)):
@@ -238,7 +220,6 @@ def include_operators(pg):
             "second_space": right.before_space,
         }]
 
-
     @pg.production("subscript : DOT DOT DOT")
     def subscript_ellipsis((dot1, dot2, dot3)):
         return {
@@ -246,7 +227,6 @@ def include_operators(pg):
             "first_space": dot1.after_space,
             "second_space": dot2.after_space,
         }
-
 
     @pg.production("subscript : test")
     @pg.production("subscript : slice")
