@@ -830,6 +830,77 @@ def test_decorator_parenthesis():
             }],
           }])
 
+def test_decorator_parenthesis_arg():
+    """
+    @a(c)
+    def b(): pass
+    """
+    parse_multi([
+             ('AT', '@', '', ''),
+             ('NAME', 'a'),
+             ('LEFT_PARENTHESIS', '('),
+             ('NAME', 'c'),
+             ('RIGHT_PARENTHESIS', ')'),
+             ('ENDL', '\n'),
+             ('DEF', 'def', '', ' '),
+             ('NAME', 'b'),
+             ('LEFT_PARENTHESIS', '('),
+             ('RIGHT_PARENTHESIS', ')'),
+             ('COLON', ':', '', ' '),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+          ],
+          [{
+            "first_space": " ",
+            "second_space": "",
+            "third_space": "",
+            "fith_space": "",
+            "forth_space": "",
+            "type": "funcdef",
+            "arguments": [],
+            "name": "b",
+            "decorators": [{
+                "type": "decorator",
+                "space": "",
+                "call": {
+                    "third_space": "",
+                    "type": "call",
+                    "first_space": "",
+                    "value": [{
+                        "default": {},
+                        "first_space": "",
+                        "second_space": "",
+                        "type": "argument",
+                        "value": {
+                            "type": "name",
+                            "value": "c",
+                        },
+                    }],
+                    "second_space": "",
+                },
+                "value": {
+                    "type": "dotted_name",
+                    "value": [{
+                    "type": "name",
+                    "value": "a",
+                    }],
+                }
+            },{
+               "space": "",
+               "indent": "",
+               "type": "endl",
+               "value": "\n",
+            }],
+            "value": [{
+               "type": "pass",
+            },{
+               "space": "",
+               "indent": "",
+               "type": "endl",
+               "value": "\n",
+            }],
+          }])
+
 def test_decorator_two():
     """
     @a

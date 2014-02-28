@@ -789,6 +789,25 @@ def decorator_empty_call((at, dotted_name, left_parenthesis, right_parenthesis, 
     }] + endl
 
 
+@pg.production("decorator : AT dotted_name LEFT_PARENTHESIS argslist RIGHT_PARENTHESIS endl")
+def decorator_call((at, dotted_name, left_parenthesis, argslist, right_parenthesis, endl)):
+    return [{
+        "type": "decorator",
+        "value": {
+            "value": dotted_name,
+            "type": "dotted_name",
+        },
+        "call": {
+            "third_space": right_parenthesis.before_space,
+            "type": "call",
+            "first_space": left_parenthesis.before_space,
+            "value": argslist,
+            "second_space": left_parenthesis.after_space
+        },
+        "space": at.after_space,
+    }] + endl
+
+
 @pg.production("funcdef : DEF NAME LEFT_PARENTHESIS parameters RIGHT_PARENTHESIS COLON suite")
 def function_definition((def_, name, left_parenthesis, parameters, right_parenthesis, colon, suite)):
     return [{
