@@ -29,6 +29,23 @@ def test_empty_tuple_space():
             "value": [],
           }])
 
+def test_associative_parenthesis():
+    "( a )"
+    parse_simple([
+           ('LEFT_PARENTHESIS', '(', '', ' '),
+           ('NAME', 'a'),
+           ('RIGHT_PARENTHESIS', ')', ' ', ''),
+          ],
+          [{
+            "type": "associative_parenthesis",
+            "first_space": " ",
+            "second_space": " ",
+            "value": {
+               "type": "name",
+               "value": "a",
+            },
+          }])
+
 def test_tuple_one():
     "( a, )"
     parse_simple([

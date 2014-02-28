@@ -9,6 +9,16 @@ def include_data_structures(pg):
                }
 
 
+    @pg.production("atom : LEFT_PARENTHESIS test RIGHT_PARENTHESIS")
+    def associative_parenthesis((left_parenthesis, test, right_parenthesis,)):
+        return {
+                "type": "associative_parenthesis",
+                "first_space": left_parenthesis.after_space,
+                "second_space": right_parenthesis.before_space,
+                "value": test
+               }
+
+
     @pg.production("testlist : test comma")
     @pg.production("exprlist : expr comma")
     @pg.production("subscriptlist : subscript comma")
