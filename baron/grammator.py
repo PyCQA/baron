@@ -727,18 +727,28 @@ def class_stmt_inherit((class_, name, left_parenthesis, testlist, right_parenthe
     }]
 
 
-@pg.production("decorated : AT dotted_name ENDL funcdef")
-def decorated((at, dotted_name, endl, funcdef)):
-    decorator = [{
+@pg.production("decorated : decorators funcdef")
+def decorated((decorators, funcdef)):
+    decorator = decorators + [{"type": "endl", "value": "\n"}]
+    funcdef[0]["decorators"] += decorator
+    return funcdef
+
+
+@pg.production("decorators : decorator")
+def decorators((decorator,)):
+    return [decorator]
+
+
+@pg.production("decorator : AT dotted_name ENDL")
+def decorator((at, dotted_name, endl)):
+    return {
         "type": "decorator",
         "value": {
             "value": dotted_name,
             "type": "dotted_name",
         },
         "space": "",
-    }, {"type": "endl", "value": "\n"}]
-    funcdef[0]["decorators"] += decorator
-    return funcdef
+    }
 
 
 @pg.production("funcdef : DEF NAME LEFT_PARENTHESIS parameters RIGHT_PARENTHESIS COLON suite")
