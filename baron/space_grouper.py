@@ -69,6 +69,7 @@ GROUP_SPACE_AFTER = BOTH + (
     "TILDE",
     "RETURN",
     "YIELD",
+    "WITH",
     "DEL",
     "ASSERT",
     "RAISE",

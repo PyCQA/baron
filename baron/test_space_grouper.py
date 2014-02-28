@@ -2786,6 +2786,19 @@ def test_class():
            ('NAME', 'a'),
          ])
 
+def test_with():
+    """
+        """
+    group([
+           ('WITH', 'with'),
+           ('SPACE', '    '),
+           ('NAME', 'a'),
+         ],
+         [
+           ('WITH', 'with', '', '    '),
+           ('NAME', 'a'),
+         ])
+
 def test_lambda():
     """
         """
