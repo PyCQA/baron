@@ -804,6 +804,33 @@ def parameter_one((name,)):
         "value": name
     }]
 
+
+@pg.production("parameter : LEFT_PARENTHESIS fplist RIGHT_PARENTHESIS")
+def parameter_fplist((left_parenthesis, fplist, right_parenthesis)):
+    return [{
+        "type": "argument",
+        "first_space": "",
+        "second_space": "",
+        "default": {},
+        "value": {
+            "type": "tuple",
+            "first_space": left_parenthesis.after_space,
+            "second_space": right_parenthesis.before_space,
+            "value": fplist
+        }
+    }]
+
+
+@pg.production("fplist : fplist parameter")
+def fplist_recur((fplist, parameter)):
+    return fplist + parameter
+
+
+@pg.production("fplist : parameter comma")
+def fplist((parameter, comma)):
+    return parameter + [comma]
+
+
 # really strange that left part of argument grammar can be a test
 # I guess it's yet another legacy mistake
 # python give me 'SyntaxError: keyword can't be an expression' when I try to

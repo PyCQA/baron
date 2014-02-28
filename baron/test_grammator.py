@@ -910,6 +910,139 @@ def test_class_decorator_two():
           }])
 
 
+def test_fplist():
+    """
+    def a((b,)): pass
+    """
+    parse_multi([
+            ('DEF', 'def', '', ' '),
+            ('NAME', 'a'),
+            ('LEFT_PARENTHESIS', '('),
+            ('LEFT_PARENTHESIS', '('),
+            ('NAME', 'b'),
+            ('COMMA', ','),
+            ('RIGHT_PARENTHESIS', ')'),
+            ('RIGHT_PARENTHESIS', ')'),
+            ('COLON', ':', '', ' '),
+            ('PASS', 'pass'),
+            ('ENDL', '\n'),
+          ],
+          [{
+            "first_space": " ",
+            "second_space": "",
+            "third_space": "",
+            "fith_space": "",
+            "forth_space": "",
+            "type": "funcdef",
+            "arguments": [{
+                "type": "argument",
+                "default": {},
+                "first_space": "",
+                "second_space": "",
+                "value": {
+                    "type": "tuple",
+                    "first_space": "",
+                    "second_space": "",
+                    "value": [{
+                        "type": "argument",
+                        "default": {},
+                        "first_space": "",
+                        "second_space": "",
+                        "value": {
+                            "type": "name",
+                            "value": "b",
+                        },
+                    },{
+                        "type": "comma",
+                        "first_space": "",
+                        "second_space": "",
+                    }],
+                }
+            }],
+            "name": "a",
+            "decorators": [],
+            "value": [{
+               "type": "pass",
+            },{
+               "type": "endl",
+               "value": "\n",
+            }],
+          }])
+
+
+
+
+def test_fplist_two():
+    """
+    def a((b,c)): pass
+    """
+    parse_multi([
+            ('DEF', 'def', '', ' '),
+            ('NAME', 'a'),
+            ('LEFT_PARENTHESIS', '('),
+            ('LEFT_PARENTHESIS', '('),
+            ('NAME', 'b'),
+            ('COMMA', ','),
+            ('NAME', 'c'),
+            ('RIGHT_PARENTHESIS', ')'),
+            ('RIGHT_PARENTHESIS', ')'),
+            ('COLON', ':', '', ' '),
+            ('PASS', 'pass'),
+            ('ENDL', '\n'),
+          ],
+          [{
+            "first_space": " ",
+            "second_space": "",
+            "third_space": "",
+            "fith_space": "",
+            "forth_space": "",
+            "type": "funcdef",
+            "arguments": [{
+                "type": "argument",
+                "default": {},
+                "first_space": "",
+                "second_space": "",
+                "value": {
+                    "type": "tuple",
+                    "first_space": "",
+                    "second_space": "",
+                    "value": [{
+                        "type": "argument",
+                        "default": {},
+                        "first_space": "",
+                        "second_space": "",
+                        "value": {
+                            "type": "name",
+                            "value": "b",
+                        },
+                    },{
+                        "type": "comma",
+                        "first_space": "",
+                        "second_space": "",
+                    },{
+                        "type": "argument",
+                        "default": {},
+                        "first_space": "",
+                        "second_space": "",
+                        "value": {
+                            "type": "name",
+                            "value": "c",
+                        },
+                    }],
+                }
+            }],
+            "name": "a",
+            "decorators": [],
+            "value": [{
+               "type": "pass",
+            },{
+               "type": "endl",
+               "value": "\n",
+            }],
+          }])
+
+
+
 
 ### fpdef: NAME
 # fpdef: '(' [SPACE] fplist [SPACE] ')'
