@@ -89,28 +89,28 @@
 # -
 
 ### fpdef: NAME
-# fpdef: '(' [SPACE] fplist [SPACE] ')'
+### fpdef: '(' [SPACE] fplist [SPACE] ')'
 
 # -
 
-# fplist: fpdef
-# fplist: fpdef [SPACE] ',' [SPACE] fpdef
-# fplist: fpdef ([SPACE] ',' [SPACE] fpdef)*
-# fplist: fpdef ([SPACE] ',' [SPACE] fpdef)* [SPACE] [',']
+### fplist: fpdef
+### fplist: fpdef [SPACE] ',' [SPACE] fpdef
+### fplist: fpdef ([SPACE] ',' [SPACE] fpdef)*
+### fplist: fpdef ([SPACE] ',' [SPACE] fpdef)* [SPACE] [',']
 
 # -
 
-# decorator: '@' [SPACE] dotted_name [SPACE] NEWLINE
-# decorator: '@' dotted_name [ [SPACE] '(' [SPACE] [arglist] [SPACE] ')' ] [SPACE] NEWLINE
+### decorator: '@' [SPACE] dotted_name [SPACE] NEWLINE
+### decorator: '@' dotted_name [ [SPACE] '(' [SPACE] [arglist] [SPACE] ')' ] [SPACE] NEWLINE
 
 # -
 
-# decorators: (decorator [BLANKLINE])+
+### decorators: (decorator [BLANKLINE])+
 
 # -
 
-# decorated: decorators classdef
-# decorated: decorators funcdef
+### decorated: decorators classdef
+### decorated: decorators funcdef
 
 # -
 
@@ -217,7 +217,7 @@
 ### compound_stmt: with_stmt
 ### compound_stmt: funcdef
 ### compound_stmt: classdef
-# compound_stmt: decorated
+### compound_stmt: decorated
 
 # -
 
