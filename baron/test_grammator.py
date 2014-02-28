@@ -920,36 +920,3 @@ def test_class_decorator_two():
 # fplist: fpdef [SPACE] ',' [SPACE] fpdef
 # fplist: fpdef ([SPACE] ',' [SPACE] fpdef)*
 # fplist: fpdef ([SPACE] ',' [SPACE] fpdef)* [SPACE] [',']
-
-# -
-
-# decorator: '@' [SPACE] dotted_name [SPACE] NEWLINE
-# decorator: '@' dotted_name [ [SPACE] '(' [SPACE] [arglist] [SPACE] ')' ] [SPACE] NEWLINE
-
-# -
-
-# decorators: (decorator [BLANKLINE])+
-
-# -
-
-# decorated: decorators classdef
-# decorated: decorators funcdef
-
-# -
-
-### expr_stmt: testlist
-### expr_stmt: testlist ([SPACE] '=' [SPACE] testlist)*
-### expr_stmt: testlist ([SPACE] '=' [SPACE] yield_expr)*
-### expr_stmt: testlist augassign yield_expr
-### expr_stmt: testlist augassign testlist
-
-# -
-
-### compound_stmt: if_stmt
-### compound_stmt: while_stmt
-### compound_stmt: for_stmt
-### compound_stmt: try_stmt
-### compound_stmt: with_stmt
-### compound_stmt: funcdef
-### compound_stmt: classdef
-# compound_stmt: decorated
