@@ -745,6 +745,7 @@ def test_decorator():
             "decorators": [{
                 "type": "decorator",
                 "space": "",
+                "call": {},
                 "value": {
                     "type": "dotted_name",
                     "value": [{
@@ -768,6 +769,66 @@ def test_decorator():
             }],
           }])
 
+def test_decorator_parenthesis():
+    """
+    @a()
+    def b(): pass
+    """
+    parse_multi([
+             ('AT', '@', '', ''),
+             ('NAME', 'a'),
+             ('LEFT_PARENTHESIS', '('),
+             ('RIGHT_PARENTHESIS', ')'),
+             ('ENDL', '\n'),
+             ('DEF', 'def', '', ' '),
+             ('NAME', 'b'),
+             ('LEFT_PARENTHESIS', '('),
+             ('RIGHT_PARENTHESIS', ')'),
+             ('COLON', ':', '', ' '),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+          ],
+          [{
+            "first_space": " ",
+            "second_space": "",
+            "third_space": "",
+            "fith_space": "",
+            "forth_space": "",
+            "type": "funcdef",
+            "arguments": [],
+            "name": "b",
+            "decorators": [{
+                "type": "decorator",
+                "space": "",
+                "call": {
+                    "third_space": "",
+                    "type": "call",
+                    "first_space": "",
+                    "value": [],
+                    "second_space": "",
+                },
+                "value": {
+                    "type": "dotted_name",
+                    "value": [{
+                    "type": "name",
+                    "value": "a",
+                    }],
+                }
+            },{
+               "space": "",
+               "indent": "",
+               "type": "endl",
+               "value": "\n",
+            }],
+            "value": [{
+               "type": "pass",
+            },{
+               "space": "",
+               "indent": "",
+               "type": "endl",
+               "value": "\n",
+            }],
+          }])
 
 def test_decorator_two():
     """
@@ -802,6 +863,7 @@ def test_decorator_two():
             "decorators": [{
                 "type": "decorator",
                 "space": "",
+                "call": {},
                 "value": {
                     "type": "dotted_name",
                     "value": [{
@@ -817,6 +879,7 @@ def test_decorator_two():
             },{
                 "type": "decorator",
                 "space": " ",
+                "call": {},
                 "value": {
                     "type": "dotted_name",
                     "value": [{
@@ -869,6 +932,7 @@ def test_class_decorator():
             "name": "b",
             "decorators": [{
                 "type": "decorator",
+                "call": {},
                 "space": "",
                 "value": {
                     "type": "dotted_name",
@@ -926,6 +990,7 @@ def test_class_decorator_two():
             "name": "b",
             "decorators": [{
                 "type": "decorator",
+                "call": {},
                 "space": "",
                 "value": {
                     "type": "dotted_name",
@@ -941,6 +1006,7 @@ def test_class_decorator_two():
                "value": "\n",
             },{
                 "type": "decorator",
+                "call": {},
                 "space": " ",
                 "value": {
                     "type": "dotted_name",
