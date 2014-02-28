@@ -729,6 +729,72 @@ def test_decorator():
           }])
 
 
+def test_decorator_two():
+    """
+    @a
+    @ c
+    def b(): pass
+    """
+    parse_multi([
+             ('AT', '@', '', ''),
+             ('NAME', 'a'),
+             ('ENDL', '\n'),
+             ('AT', '@', '', ' '),
+             ('NAME', 'c'),
+             ('ENDL', '\n'),
+             ('DEF', 'def', '', ' '),
+             ('NAME', 'b'),
+             ('LEFT_PARENTHESIS', '('),
+             ('RIGHT_PARENTHESIS', ')'),
+             ('COLON', ':', '', ' '),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+          ],
+          [{
+            "first_space": " ",
+            "second_space": "",
+            "third_space": "",
+            "fith_space": "",
+            "forth_space": "",
+            "type": "funcdef",
+            "arguments": [],
+            "name": "b",
+            "decorators": [{
+                "type": "decorator",
+                "space": "",
+                "value": {
+                    "type": "dotted_name",
+                    "value": [{
+                    "type": "name",
+                    "value": "a",
+                    }],
+                }
+            },{
+               "type": "endl",
+               "value": "\n",
+            },{
+                "type": "decorator",
+                "space": " ",
+                "value": {
+                    "type": "dotted_name",
+                    "value": [{
+                    "type": "name",
+                    "value": "c",
+                    }],
+                }
+            },{
+               "type": "endl",
+               "value": "\n",
+            }],
+            "value": [{
+               "type": "pass",
+            },{
+               "type": "endl",
+               "value": "\n",
+            }],
+          }])
+
+
 ### fpdef: NAME
 # fpdef: '(' [SPACE] fplist [SPACE] ')'
 
