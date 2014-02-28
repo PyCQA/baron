@@ -909,7 +909,6 @@ def test_class_decorator_two():
             }],
           }])
 
-
 def test_fplist():
     """
     def a((b,)): pass
@@ -968,9 +967,6 @@ def test_fplist():
                "value": "\n",
             }],
           }])
-
-
-
 
 def test_fplist_two():
     """
@@ -1041,15 +1037,50 @@ def test_fplist_two():
             }],
           }])
 
-
-
-
-### fpdef: NAME
-# fpdef: '(' [SPACE] fplist [SPACE] ')'
-
-# -
-
-# fplist: fpdef
-# fplist: fpdef [SPACE] ',' [SPACE] fpdef
-# fplist: fpdef ([SPACE] ',' [SPACE] fpdef)*
-# fplist: fpdef ([SPACE] ',' [SPACE] fpdef)* [SPACE] [',']
+def test_fplist_alone():
+    """
+    def a((b)): pass
+    """
+    parse_multi([
+            ('DEF', 'def', '', ' '),
+            ('NAME', 'a'),
+            ('LEFT_PARENTHESIS', '('),
+            ('LEFT_PARENTHESIS', '('),
+            ('NAME', 'b'),
+            ('RIGHT_PARENTHESIS', ')'),
+            ('RIGHT_PARENTHESIS', ')'),
+            ('COLON', ':', '', ' '),
+            ('PASS', 'pass'),
+            ('ENDL', '\n'),
+          ],
+          [{
+            "first_space": " ",
+            "second_space": "",
+            "third_space": "",
+            "fith_space": "",
+            "forth_space": "",
+            "type": "funcdef",
+            "arguments": [{
+                "type": "associative_parenthesis",
+                "first_space": "",
+                "second_space": "",
+                "value": {
+                    "default": {},
+                    "type": "argument",
+                    "first_space": "",
+                    "second_space": "",
+                    "value": {
+                        "type": "name",
+                        "value": "b",
+                    },
+                }
+            }],
+            "name": "a",
+            "decorators": [],
+            "value": [{
+               "type": "pass",
+            },{
+               "type": "endl",
+               "value": "\n",
+            }],
+          }])

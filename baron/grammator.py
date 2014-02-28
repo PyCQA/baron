@@ -805,6 +805,16 @@ def parameter_one((name,)):
     }]
 
 
+@pg.production("parameter : LEFT_PARENTHESIS parameter RIGHT_PARENTHESIS")
+def parameter_fpdef((left_parenthesis, parameter, right_parenthesis)):
+    return [{
+        "type": "associative_parenthesis",
+        "first_space": left_parenthesis.after_space,
+        "second_space": right_parenthesis.before_space,
+        "value": parameter[0]
+    }]
+
+
 @pg.production("parameter : LEFT_PARENTHESIS fplist RIGHT_PARENTHESIS")
 def parameter_fplist((left_parenthesis, fplist, right_parenthesis)):
     return [{
