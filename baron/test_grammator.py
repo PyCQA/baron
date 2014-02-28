@@ -52,7 +52,8 @@ def test_file_input_one_item():
     parse_multi([
            ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           name('a'), endl("\n"),
+           name('a'),
+           endl("\n"),
           ])
 
 def test_file_input_two_items():
@@ -154,11 +155,14 @@ def test_funcdef_stmt_indent():
             "value": [{
                "type": "endl",
                "value": "\n",
+               "space": "",
                "indent": "    "
             },{
                 "type": "pass",
             },{
                "type": "endl",
+               "space": "",
+               "indent": "",
                "value": "\n"
             }],
           }])
@@ -203,11 +207,14 @@ def test_funcdef_stmt_one_parameter_indent():
             "value": [{
                "type": "endl",
                "value": "\n",
+               "space": "",
                "indent": "    "
             },{
                 "type": "pass",
             },{
                "type": "endl",
+               "space": "",
+               "indent": "",
                "value": "\n"
             }],
           }])
@@ -257,11 +264,14 @@ def test_funcdef_stmt_one_parameter_comma_indent():
             "value": [{
                "type": "endl",
                "value": "\n",
+               "space": "",
                "indent": "    "
             },{
                 "type": "pass",
             },{
                "type": "endl",
+               "space": "",
+               "indent": "",
                "value": "\n"
             }],
           }])
@@ -317,10 +327,13 @@ def test_funcdef_stmt_one_parameter_comma_default_indent():
             "value": [{
                "type": "endl",
                "value": "\n",
+               "space": "",
                "indent": "    "
             },{
                 "type": "pass",
             },{
+               "space": "",
+               "indent": "",
                "type": "endl",
                "value": "\n"
             }],
@@ -353,11 +366,14 @@ def test_class_empty():
             "inherit_from": [],
             "value": [{
                "type": "endl",
+               "space": "",
                "value": "\n",
                "indent": "    "
             },{
                 "type": "pass",
             },{
+               "space": "",
+               "indent": "",
                "type": "endl",
                "value": "\n"
             }],
@@ -392,11 +408,14 @@ def test_class_empty_parenthesis():
             "inherit_from": [],
             "value": [{
                "type": "endl",
+               "space": "",
                "value": "\n",
                "indent": "    "
             },{
                 "type": "pass",
             },{
+               "space": "",
+               "indent": "",
                "type": "endl",
                "value": "\n"
             }],
@@ -436,10 +455,13 @@ def test_class_inherit():
             "value": [{
                "type": "endl",
                "value": "\n",
+               "space": "",
                "indent": "    "
             },{
                 "type": "pass",
             },{
+               "space": "",
+               "indent": "",
                "type": "endl",
                "value": "\n"
             }],
@@ -481,10 +503,13 @@ def test_funcdef_stmt_one_start_parameter_indent():
             "value": [{
                "type": "endl",
                "value": "\n",
+               "space": "",
                "indent": "    "
             },{
                 "type": "pass",
             },{
+               "space": "",
+               "indent": "",
                "type": "endl",
                "value": "\n"
             }],
@@ -526,11 +551,14 @@ def test_funcdef_stmt_one_star_star_parameter_indent():
             }],
             "value": [{
                "type": "endl",
+               "space": "",
                "value": "\n",
                "indent": "    "
             },{
                 "type": "pass",
             },{
+               "space": "",
+               "indent": "",
                "type": "endl",
                "value": "\n"
             }],
@@ -549,6 +577,8 @@ def test_comment():
             "type": "comment",
             "value": "# comment",
           },{
+            "space": "",
+            "indent": "",
             "type": "endl",
             "value": "\n",
           }])
@@ -582,6 +612,8 @@ def test_with_a():
             "value": [{
                "type": "pass",
             },{
+               "space": "",
+               "indent": "",
                "type": "endl",
                "value": "\n",
             }],
@@ -621,6 +653,8 @@ def test_with_a_as_b():
             "value": [{
                "type": "pass",
             },{
+               "space": "",
+               "indent": "",
                "type": "endl",
                "value": "\n",
             }],
@@ -675,6 +709,8 @@ def test_with_a_as_b_c():
             "value": [{
                "type": "pass",
             },{
+               "space": "",
+               "indent": "",
                "type": "endl",
                "value": "\n",
             }],
@@ -717,12 +753,16 @@ def test_decorator():
                     }],
                 }
             },{
+               "space": "",
+               "indent": "",
                "type": "endl",
                "value": "\n",
             }],
             "value": [{
                "type": "pass",
             },{
+               "space": "",
+               "indent": "",
                "type": "endl",
                "value": "\n",
             }],
@@ -770,6 +810,8 @@ def test_decorator_two():
                     }],
                 }
             },{
+               "space": "",
+               "indent": "",
                "type": "endl",
                "value": "\n",
             },{
@@ -783,12 +825,16 @@ def test_decorator_two():
                     }],
                 }
             },{
+               "space": "",
+               "indent": "",
                "type": "endl",
                "value": "\n",
             }],
             "value": [{
                "type": "pass",
             },{
+               "space": "",
+               "indent": "",
                "type": "endl",
                "value": "\n",
             }],
@@ -832,12 +878,16 @@ def test_class_decorator():
                     }],
                 }
             },{
+               "space": "",
+               "indent": "",
                "type": "endl",
                "value": "\n",
             }],
             "value": [{
                "type": "pass",
             },{
+               "space": "",
+               "indent": "",
                "type": "endl",
                "value": "\n",
             }],
@@ -885,6 +935,8 @@ def test_class_decorator_two():
                     }],
                 }
             },{
+               "space": "",
+               "indent": "",
                "type": "endl",
                "value": "\n",
             },{
@@ -898,12 +950,16 @@ def test_class_decorator_two():
                     }],
                 }
             },{
+               "space": "",
+               "indent": "",
                "type": "endl",
                "value": "\n",
             }],
             "value": [{
                "type": "pass",
             },{
+               "space": "",
+               "indent": "",
                "type": "endl",
                "value": "\n",
             }],
@@ -963,6 +1019,8 @@ def test_fplist():
             "value": [{
                "type": "pass",
             },{
+               "space": "",
+               "indent": "",
                "type": "endl",
                "value": "\n",
             }],
@@ -1032,6 +1090,8 @@ def test_fplist_two():
             "value": [{
                "type": "pass",
             },{
+               "space": "",
+               "indent": "",
                "type": "endl",
                "value": "\n",
             }],
@@ -1080,6 +1140,8 @@ def test_fplist_alone():
             "value": [{
                "type": "pass",
             },{
+               "space": "",
+               "indent": "",
                "type": "endl",
                "value": "\n",
             }],

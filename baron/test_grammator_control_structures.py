@@ -26,6 +26,8 @@ def test_if_stmt():
               "value": [{
                   "type": "pass",
               },{
+                 "space": "",
+                 "indent": "",
                  "type": "endl",
                  "value": "\n"
               }],
@@ -58,12 +60,15 @@ def test_if_stmt_indent():
                   "value": "a",
               },
               "value": [{
+                 "space": "",
                  "type": "endl",
                  "value": "\n",
                  "indent": "    "
               },{
                   "type": "pass",
               },{
+                 "space": "",
+                 "indent": "",
                  "type": "endl",
                  "value": "\n"
               }],
@@ -99,14 +104,18 @@ def test_if_stmt_indent_two_endls():
               "value": [{
                  "type": "endl",
                  "value": "\n",
+                 "space": "",
                  "indent": ""
               },{
                  "type": "endl",
                  "value": "\n",
+                 "space": "",
                  "indent": "    "
               },{
                   "type": "pass",
               },{
+                 "space": "",
+                 "indent": "",
                  "type": "endl",
                  "value": "\n"
               }],
@@ -143,19 +152,24 @@ def test_if_stmt_indent_multiple_endls():
               },
               "value": [{
                  "type": "endl",
+                 "space": "",
                  "value": "\n",
                  "indent": ""
               },{
                  "type": "endl",
+                 "space": "",
                  "value": "\n",
                  "indent": "  "
               },{
                  "type": "endl",
+                 "space": "",
                  "value": "\n",
                  "indent": "    "
               },{
                   "type": "pass",
               },{
+                 "space": "",
+                 "indent": "",
                  "type": "endl",
                  "value": "\n"
               }],
@@ -198,10 +212,13 @@ def test_if_else_stmt_indent():
               "value": [{
                  "type": "endl",
                  "value": "\n",
+                 "space": "",
                  "indent": "    "
                 },{
                  "type": "pass",
                 },{
+                 "space": "",
+                 "indent": "",
                  "type": "endl",
                  "value": "\n"
                 }],
@@ -211,10 +228,13 @@ def test_if_else_stmt_indent():
                "value": [{
                  "type": "endl",
                  "value": "\n",
+                 "space": "",
                  "indent": "    "
                  },{
                  "type": "pass",
                  },{
+                 "space": "",
+                 "indent": "",
                  "type": "endl",
                  "value": "\n",
                  }
@@ -270,10 +290,13 @@ def test_if_elif_elif_stmt_indent():
               "value": [{
                  "type": "endl",
                  "value": "\n",
+                 "space": "",
                  "indent": "    "
                 },{
                  "type": "pass",
                 },{
+                 "space": "",
+                 "indent": "",
                  "type": "endl",
                  "value": "\n"
                 }],
@@ -288,10 +311,13 @@ def test_if_elif_elif_stmt_indent():
               "value": [{
                  "type": "endl",
                  "value": "\n",
+                 "space": "",
                  "indent": "    "
                 },{
                  "type": "pass",
                 },{
+                 "space": "",
+                 "indent": "",
                  "type": "endl",
                  "value": "\n"
                 }],
@@ -305,11 +331,14 @@ def test_if_elif_elif_stmt_indent():
               },
               "value": [{
                  "type": "endl",
+                 "space": "",
                  "value": "\n",
                  "indent": "    "
                 },{
                  "type": "pass",
                 },{
+                 "space": "",
+                 "indent": "",
                  "type": "endl",
                  "value": "\n"
                 }],
@@ -372,11 +401,14 @@ def test_if_elif_elif_else_stmt_indent():
               },
               "value": [{
                  "type": "endl",
+                 "space": "",
                  "value": "\n",
                  "indent": "    "
                 },{
                  "type": "pass",
                 },{
+                 "space": "",
+                 "indent": "",
                  "type": "endl",
                  "value": "\n"
                 }],
@@ -391,12 +423,15 @@ def test_if_elif_elif_else_stmt_indent():
               "value": [{
                  "type": "endl",
                  "value": "\n",
+                 "space": "",
                  "indent": "    "
                 },{
                  "type": "pass",
                 },{
                  "type": "endl",
-                 "value": "\n"
+                 "value": "\n",
+                 "space": "",
+                 "indent": "",
                 }],
             },{
               "type": "elif",
@@ -408,11 +443,14 @@ def test_if_elif_elif_else_stmt_indent():
               },
               "value": [{
                  "type": "endl",
+                 "space": "",
                  "value": "\n",
                  "indent": "    "
                 },{
                  "type": "pass",
                 },{
+                 "space": "",
+                 "indent": "",
                  "type": "endl",
                  "value": "\n"
                 }],
@@ -420,12 +458,15 @@ def test_if_elif_elif_else_stmt_indent():
                "type": "else",
                "space": " ",
                "value": [{
+                 "space": "",
                  "type": "endl",
                  "value": "\n",
                  "indent": "    "
                  },{
                  "type": "pass",
                  },{
+                 "space": "",
+                 "indent": "",
                  "type": "endl",
                  "value": "\n",
                  }
@@ -459,11 +500,14 @@ def test_while_stmt_indent():
             },
              "value": [{
                 "type": "endl",
+                "space": "",
                 "value": "\n",
                 "indent": "    "
              },{
                  "type": "pass",
              },{
+                "space": "",
+                "indent": "",
                 "type": "endl",
                 "value": "\n"
              }],
@@ -504,10 +548,13 @@ def test_while_else_stmt_indent():
             "value": [{
                "type": "endl",
                "value": "\n",
+               "space": "",
                "indent": "    "
               },{
                "type": "pass",
               },{
+               "space": "",
+               "indent": "",
                "type": "endl",
                "value": "\n"
               }],
@@ -517,10 +564,13 @@ def test_while_else_stmt_indent():
              "value": [{
                "type": "endl",
                "value": "\n",
+               "space": "",
                "indent": "    "
                },{
                "type": "pass",
                },{
+               "indent": "",
+               "space": "",
                "type": "endl",
                "value": "\n",
                }]
@@ -562,10 +612,13 @@ def test_for_stmt_indent():
              "value": [{
                 "type": "endl",
                 "value": "\n",
+                "space": "",
                 "indent": "    "
              },{
                  "type": "pass",
              },{
+                "indent": "",
+                "space": "",
                 "type": "endl",
                 "value": "\n"
              }],
@@ -609,10 +662,13 @@ def test_for_else_stmt_indent():
               "value": [{
                  "type": "endl",
                  "value": "\n",
+                 "space": "",
                  "indent": "    "
                 },{
                   "type": "pass",
                 },{
+                  "indent": "",
+                  "space": "",
                   "type": "endl",
                   "value": "\n",
                 }]
@@ -627,11 +683,14 @@ def test_for_else_stmt_indent():
             },
              "value": [{
                 "type": "endl",
+                "space": "",
                 "value": "\n",
                 "indent": "    "
              },{
                  "type": "pass",
              },{
+                "indent": "",
+                "space": "",
                 "type": "endl",
                 "value": "\n"
              }],
@@ -669,10 +728,13 @@ def test_try_finally_stmt_indent():
                 "value": [{
                 "type": "endl",
                 "value": "\n",
+                "space": "",
                 "indent": "    "
                 },{
                   "type": "pass",
                 },{
+                  "indent": "",
+                  "space": "",
                   "type": "endl",
                   "value": "\n"
                 }],
@@ -682,10 +744,13 @@ def test_try_finally_stmt_indent():
             "value": [{
                 "type": "endl",
                 "value": "\n",
+                "space": "",
                 "indent": "    "
              },{
                  "type": "pass",
              },{
+                "indent": "",
+                "space": "",
                 "type": "endl",
                 "value": "\n"
              }],
@@ -744,11 +809,14 @@ def test_try_excepts_stmt_indent():
                },
                 "value": [{
                     "type": "endl",
+                    "space": "",
                     "value": "\n",
                     "indent": "    "
                  },{
                      "type": "pass",
                  },{
+                    "indent": "",
+                    "space": "",
                     "type": "endl",
                     "value": "\n"
                  }]
@@ -767,21 +835,27 @@ def test_try_excepts_stmt_indent():
                "value": [{
                   "type": "endl",
                   "value": "\n",
+                  "space": "",
                   "indent": "    "
                },{
                    "type": "pass",
                },{
+                  "indent": "",
+                  "space": "",
                   "type": "endl",
                   "value": "\n"
                }]
             }],
             "value": [{
                 "type": "endl",
+                "space": "",
                 "value": "\n",
                 "indent": "    "
              },{
                  "type": "pass",
              },{
+                "indent": "",
+                "space": "",
                 "type": "endl",
                 "value": "\n"
              }],
@@ -836,21 +910,27 @@ def test_try_except_comma_stmt_indent():
                 "value": [{
                     "type": "endl",
                     "value": "\n",
+                    "space": "",
                     "indent": "    "
                  },{
                      "type": "pass",
                  },{
+                    "indent": "",
+                    "space": "",
                     "type": "endl",
                     "value": "\n"
                  }]
             }],
             "value": [{
+                "space": "",
                 "type": "endl",
                 "value": "\n",
                 "indent": "    "
              },{
                  "type": "pass",
              },{
+                "space": "",
+                "indent": "",
                 "type": "endl",
                 "value": "\n"
              }],
@@ -900,12 +980,15 @@ def test_try_except_comma_stmt_else_indent():
               "value": [{
                  "type": "endl",
                  "value": "\n",
+                 "space": "",
                  "indent": "    "
                 },{
                   "type": "pass",
                 },{
                   "type": "endl",
                   "value": "\n",
+                  "space": "",
+                  "indent": ""
                 }]
             },
             "finally": {},
@@ -926,11 +1009,14 @@ def test_try_except_comma_stmt_else_indent():
                },
                 "value": [{
                     "type": "endl",
+                    "space": "",
                     "value": "\n",
                     "indent": "    "
                  },{
                      "type": "pass",
                  },{
+                    "space": "",
+                    "indent": "",
                     "type": "endl",
                     "value": "\n"
                  }]
@@ -938,10 +1024,13 @@ def test_try_except_comma_stmt_else_indent():
             "value": [{
                 "type": "endl",
                 "value": "\n",
+                "space": "",
                 "indent": "    "
              },{
                  "type": "pass",
              },{
+                "space": "",
+                "indent": "",
                 "type": "endl",
                 "value": "\n"
              }],
@@ -1000,25 +1089,31 @@ def test_try_except_comma_stmt_else_finally_indent():
               "value": [{
                  "type": "endl",
                  "value": "\n",
+                 "space": "",
                  "indent": "    "
                 },{
                   "type": "pass",
                 },{
                   "type": "endl",
                   "value": "\n",
+                  "space": "",
+                  "indent": ""
                 }]
             },
             "finally": {
                 "type": "finally",
                 "value": [{
                 "type": "endl",
+                "space": "",
                 "value": "\n",
                 "indent": "    "
                 },{
                   "type": "pass",
                 },{
                   "type": "endl",
-                  "value": "\n"
+                  "value": "\n",
+                  "space": "",
+                  "indent": "",
                 }],
                 "space": "",
             },
@@ -1039,11 +1134,14 @@ def test_try_except_comma_stmt_else_finally_indent():
                },
                 "value": [{
                     "type": "endl",
+                    "space": "",
                     "value": "\n",
                     "indent": "    "
                  },{
                      "type": "pass",
                  },{
+                    "space": "",
+                    "indent": "",
                     "type": "endl",
                     "value": "\n"
                  }]
@@ -1051,10 +1149,13 @@ def test_try_except_comma_stmt_else_finally_indent():
             "value": [{
                 "type": "endl",
                 "value": "\n",
+                "space": "",
                 "indent": "    "
              },{
                  "type": "pass",
              },{
+                "space": "",
+                "indent": "",
                 "type": "endl",
                 "value": "\n"
              }],
@@ -1103,11 +1204,14 @@ def test_try_except_comma_stmt_finally_indent():
                 "type": "finally",
                 "value": [{
                 "type": "endl",
+                "space": "",
                 "value": "\n",
                 "indent": "    "
                 },{
                   "type": "pass",
                 },{
+                  "space": "",
+                  "indent": "",
                   "type": "endl",
                   "value": "\n"
                 }],
@@ -1130,22 +1234,28 @@ def test_try_except_comma_stmt_finally_indent():
                },
                 "value": [{
                     "type": "endl",
+                    "space": "",
                     "value": "\n",
                     "indent": "    "
                  },{
                      "type": "pass",
                  },{
+                    "space": "",
+                    "indent": "",
                     "type": "endl",
                     "value": "\n"
                  }]
             }],
             "value": [{
                 "type": "endl",
+                "space": "",
                 "value": "\n",
                 "indent": "    "
              },{
                  "type": "pass",
              },{
+                "space": "",
+                "indent": "",
                 "type": "endl",
                 "value": "\n"
              }],
@@ -1200,10 +1310,13 @@ def test_try_except_as_stmt_indent():
                 "value": [{
                     "type": "endl",
                     "value": "\n",
+                    "space": "",
                     "indent": "    "
                  },{
                      "type": "pass",
                  },{
+                    "space": "",
+                    "indent": "",
                     "type": "endl",
                     "value": "\n"
                  }]
@@ -1211,10 +1324,13 @@ def test_try_except_as_stmt_indent():
             "value": [{
                 "type": "endl",
                 "value": "\n",
+                "space": "",
                 "indent": "    "
              },{
                  "type": "pass",
              },{
+                "space": "",
+                "indent": "",
                 "type": "endl",
                 "value": "\n"
              }],

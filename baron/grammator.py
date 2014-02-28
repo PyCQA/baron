@@ -563,7 +563,12 @@ def statement_endl((endl,)):
 
 @pg.production("endl : ENDL")
 def endl((endl,)):
-    return [{"type": "endl", "value": endl.value}]
+    return [{
+        "type": "endl",
+        "value": endl.value,
+        "space": endl.before_space,
+        "indent": endl.after_space,
+    }]
 
 
 @pg.production("endl : COMMENT ENDL")
@@ -574,6 +579,8 @@ def comment((comment_, endl)):
         "space": comment_.before_space,
     }, {
         "type": "endl",
+        "space": endl.before_space,
+        "indent": endl.after_space,
         "value": endl.value
     }]
 
@@ -929,12 +936,13 @@ def suite_indent((endls, indent, statements, dedent,)):
     return endls + statements
 
 
-@pg.production("endls : endls ENDL")
-@pg.production("endls : ENDL")
+@pg.production("endls : endls endl")
+@pg.production("endls : endl")
 def endls(p):
     if len(p) == 1:
-        return [{"type": "endl", "value": "\n", "indent": p[0].after_space}]
-    return p[0] + [{"type": "endl", "value": "\n", "indent": p[1].after_space}]
+        return p[0]
+    return p[0] + p[1]
+
 
 include_imports(pg)
 include_control_structures(pg)
