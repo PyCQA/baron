@@ -728,6 +728,7 @@ def class_stmt_inherit((class_, name, left_parenthesis, testlist, right_parenthe
 
 
 @pg.production("decorated : decorators funcdef")
+@pg.production("decorated : decorators classdef")
 def decorated((decorators, funcdef)):
     funcdef[0]["decorators"] = decorators
     return funcdef
