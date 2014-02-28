@@ -556,9 +556,26 @@ def statement((statement, semicolon)):
     return statement
 
 
-@pg.production("statement : ENDL")
+@pg.production("statement : endl")
+def statement_endl((endl,)):
+    return endl
+
+
+@pg.production("endl : ENDL")
 def endl((endl,)):
     return [{"type": "endl", "value": endl.value}]
+
+
+@pg.production("endl : COMMENT ENDL")
+def comment((comment_, endl)):
+    return [{
+        "type": "comment",
+        "value": comment_.value,
+        "space": comment_.before_space,
+    }, {
+        "type": "endl",
+        "value": endl.value
+    }]
 
 
 @pg.production("statement : ENDMARKER")
@@ -571,22 +588,11 @@ def end((endmarker)):
 def statement_simple_statement((stmt,)):
     return stmt
 
-@pg.production("statement : COMMENT ENDL")
-def comment((comment_, endl)):
-    return [{
-        "type": "comment",
-        "value": comment_.value,
-        "space": comment_.before_space,
-    }, {
-        "type": "endl",
-        "value": endl.value
-    }]
-
-@pg.production("simple_stmt : small_stmt SEMICOLON? ENDL")
-def simple_stmt((small_stmt, semicolon, endl_)):
+@pg.production("simple_stmt : small_stmt SEMICOLON? endl")
+def simple_stmt((small_stmt, semicolon, endl)):
     if semicolon:
-        return [small_stmt, {"type": "semicolon", "value": ";", "before_space": semicolon.before_space, "after_space": semicolon.after_space}] + endl((endl_,))
-    return [small_stmt] + endl((endl_,))
+        return [small_stmt, {"type": "semicolon", "value": ";", "before_space": semicolon.before_space, "after_space": semicolon.after_space}] + endl
+    return [small_stmt] + endl
 
 
 @pg.production("simple_stmt : small_stmt SEMICOLON simple_stmt")
@@ -744,7 +750,7 @@ def decorators((decorator,)):
     return decorator
 
 
-@pg.production("decorator : AT dotted_name ENDL")
+@pg.production("decorator : AT dotted_name endl")
 def decorator((at, dotted_name, endl)):
     return [{
         "type": "decorator",
@@ -753,7 +759,7 @@ def decorator((at, dotted_name, endl)):
             "type": "dotted_name",
         },
         "space": at.after_space,
-    }, {"type": "endl", "value": "\n"}]
+    }] + endl
 
 
 @pg.production("funcdef : DEF NAME LEFT_PARENTHESIS parameters RIGHT_PARENTHESIS COLON suite")
