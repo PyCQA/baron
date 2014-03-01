@@ -3,6 +3,7 @@
 
 from inner_formatting_grouper import group
 
+
 def test_empty():
     assert group([]) == []
 
@@ -16,4 +17,15 @@ def test_some_stuff():
         ('INT', '1'),
         ('PLUS', '+', ' ', ' '),
         ('INT', '2')
+    ]
+
+
+def test_parenthesis():
+    assert group([
+        ('LEFT_PARENTHESIS', '('),
+        ('ENDL', '\n'),
+        ('RIGHT_PARENTHESIS', ')'),
+    ]) == [
+        ('LEFT_PARENTHESIS', '(', '', '', [], [('ENDL', '\n')]),
+        ('RIGHT_PARENTHESIS', ')'),
     ]
