@@ -107,15 +107,16 @@ def group_generator(sequence):
             in_grouping_mode -= 1
 
         if in_grouping_mode:
-            if current[0] in GROUP_ON:
-                while iterator.show_next() and iterator.show_next()[0] in GROUP_THOSE:
-                    current = append_to_token_after(current, [iterator.next()])
-
-            elif current[0] in GROUP_THOSE:
+            if current[0] in GROUP_THOSE:
                 to_group = [current]
                 while iterator.show_next() and iterator.show_next()[0] in GROUP_THOSE:
                     to_group.append(iterator.next())
                 current = append_to_token_before(iterator.next(), to_group)
+
+            if current[0] in GROUP_ON:
+                while iterator.show_next() and iterator.show_next()[0] in GROUP_THOSE:
+                    current = append_to_token_after(current, [iterator.next()])
+
 
         print current
         yield current

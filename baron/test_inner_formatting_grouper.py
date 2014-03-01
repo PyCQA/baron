@@ -77,3 +77,23 @@ def test_two_parenthesis_comma():
         ('COMMA', ',', '', '', [], [('ENDL', '\n')]),
         ('RIGHT_PARENTHESIS', ')'),
     ]
+
+
+def test_tuple_one():
+    assert group([
+        ('LEFT_PARENTHESIS', '('),
+        ('ENDL', '\n'),
+        ('NAME', 'a'),
+        ('ENDL', '\n'),
+        ('COMMA', ','),
+        ('ENDL', '\n'),
+        ('NAME', 'a'),
+        ('ENDL', '\n'),
+        ('RIGHT_PARENTHESIS', ')'),
+    ]) == [
+        ('LEFT_PARENTHESIS', '(', '', '', [], [('ENDL', '\n'), ]),
+        ('NAME', 'a'),
+        ('COMMA', ',', '', '', [('ENDL', '\n')], [('ENDL', '\n')]),
+        ('NAME', 'a'),
+        ('RIGHT_PARENTHESIS', ')', '', '', [('ENDL', '\n')], []),
+    ]
