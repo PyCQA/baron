@@ -61,6 +61,8 @@ def append_to_token_after(token, to_append_list):
         return (token[0], token[1], '', '', [], to_append_list)
     elif len(token) == 3:
         return (token[0], token[1], token[2], '', [], to_append_list)
+    elif len(token) == 4:
+        return (token[0], token[1], token[2], token[3], [], to_append_list)
 
 
 def group(sequence):
