@@ -4,6 +4,7 @@ from tokenizer import tokenize as _tokenize
 from space_grouper import group as space_group
 from grammator import parser, Token
 from indentation_marker  import mark_indentation
+from inner_formatting_grouper import group as inner_group
 
 
 def _parse(tokens):
@@ -13,8 +14,8 @@ def _parse(tokens):
 def parse(pouet):
     if pouet and pouet[-1] != "\n":
         pouet += "\n"
-    return _parse(mark_indentation(space_group(_tokenize(group(split(pouet))))))
+    return _parse(inner_group(mark_indentation(space_group(_tokenize(group(split(pouet)))))))
 
 
 def tokenize(pouet):
-    return mark_indentation(space_group(_tokenize(group(split(pouet)))))
+    return inner_group(mark_indentation(space_group(_tokenize(group(split(pouet))))))
