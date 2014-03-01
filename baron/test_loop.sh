@@ -4,7 +4,7 @@ while true
 do
     clear
     py.test -x | tee /tmp/.baron_test_ouput
-    if [ "$(grep ': AssertionError' /tmp/.baron_test_ouput)" ]
+    if [ ! "$1" ] && [ "$(grep ': AssertionError' /tmp/.baron_test_ouput)" ]
     then
         grep "   def" /tmp/.baron_test_ouput | head -n 1 | sed 's/^ *//'
         sed 's/, *$//' /tmp/a > /tmp/aa
