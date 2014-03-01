@@ -63,6 +63,8 @@ def append_to_token_after(token, to_append_list):
         return (token[0], token[1], token[2], '', [], to_append_list)
     elif len(token) == 4:
         return (token[0], token[1], token[2], token[3], [], to_append_list)
+    elif len(token) == 6:
+        return (token[0], token[1], token[2], token[3], token[4], token[5] + to_append_list)
 
 
 def group(sequence):
@@ -79,6 +81,7 @@ def group_generator(sequence):
         current = iterator.next()
 
         if current[0] in GROUP_ON:
-            current = append_to_token_after(current, [iterator.next()])
+            while iterator.show_next() and iterator.show_next()[0] in GROUP_THOSE:
+                current = append_to_token_after(current, [iterator.next()])
 
         yield current

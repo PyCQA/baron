@@ -51,3 +51,15 @@ def test_parenthesis_two_space():
         ('LEFT_PARENTHESIS', '(', ' ', ' ', [], [('ENDL', '\n')]),
         ('RIGHT_PARENTHESIS', ')'),
     ]
+
+
+def test_two_parenthesis():
+    assert group([
+        ('LEFT_PARENTHESIS', '('),
+        ('ENDL', '\n'),
+        ('ENDL', '\n'),
+        ('RIGHT_PARENTHESIS', ')'),
+    ]) == [
+        ('LEFT_PARENTHESIS', '(', '', '', [], [('ENDL', '\n'), ('ENDL', '\n')]),
+        ('RIGHT_PARENTHESIS', ')'),
+    ]
