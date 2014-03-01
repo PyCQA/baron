@@ -6,6 +6,7 @@ GROUP_THOSE = (
 
 GROUP_ON = (
     "LEFT_PARENTHESIS",
+    "COMMA",
     #"AS",
     #"IMPORT",
     #"DOUBLE_STAR",
@@ -50,7 +51,6 @@ GROUP_ON = (
     #"DOUBLE_STAR_EQUAL",
     #"DOUBLE_SLASH_EQUAL",
     #"ENDL",
-    #"COMMA",
     #"FOR",
     #"COLON"
 )
