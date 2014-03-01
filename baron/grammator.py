@@ -496,9 +496,9 @@ def int((int_,)):
     return create_node_from_token(int_, section="number")
 
 
-@pg.production("atom : NAME")
-def name((name,)):
-    return create_node_from_token(name)
+@pg.production("atom : name")
+def atom_name((name,)):
+    return name
 
 
 @pg.production("atom : STRING")
