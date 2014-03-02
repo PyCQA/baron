@@ -4,7 +4,7 @@
 
 import pytest
 from utils import comparison, boolean_operator, ternary_operator, assignment, augmented_assignment
-from test_utils import parse_simple, name, binary_operator, unitary_operator, atomtrailers
+from test_utils import parse_simple, name, binary_operator, unitary_operator
 
 
 def test_simple_power():

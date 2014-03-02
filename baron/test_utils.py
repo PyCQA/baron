@@ -69,5 +69,3 @@ def binary_operator(operator, first, second, first_space, second_space):
 def unitary_operator(operator, target, space):
     return _node('unitary_operator', operator, target=target, space=space)
 
-def atomtrailers(value):
-    return _node("atomtrailers", value)
