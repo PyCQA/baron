@@ -85,12 +85,6 @@ def left_parenthesis():
         "value": "(",
     }
 
-def right_parenthesis():
-    return {
-        "type": "right_parenthesis",
-        "value": ")",
-    }
-
 def binary_operator(operator, first, second, first_space, second_space):
     return {
         "type": "binary_operator",

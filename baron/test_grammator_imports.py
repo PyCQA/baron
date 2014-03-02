@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
-from test_utils import parse_simple, space, name, importeu, dotted_as_name, dotted_name, dot, comma, from_import, name_as_name, left_parenthesis, right_parenthesis
+from test_utils import parse_simple, space, name, importeu, dotted_as_name, dotted_name, dot, comma, from_import, name_as_name, left_parenthesis
 
 
 def test_simple_import():
@@ -244,7 +244,7 @@ def test_from_a_import_parenthesis_b():
                        targets=[
                                 left_parenthesis(),
                                 name_as_name('b'),
-                                right_parenthesis()
+                                { "type": "right_parenthesis", "value": ")", }
                                ]
                       )])
 
@@ -265,7 +265,7 @@ def test_from_a_import_parenthesis_b_without_space():
                        targets=[
                                 left_parenthesis(),
                                 name_as_name('b'),
-                                right_parenthesis()
+                                { "type": "right_parenthesis", "value": ")", }
                                ],
                        after_space=""
                       )])
@@ -289,7 +289,7 @@ def test_from_a_import_parenthesis_b_comma():
                                 left_parenthesis(),
                                 name_as_name('b'),
                                 comma(),
-                                right_parenthesis()
+                                { "type": "right_parenthesis", "value": ")", }
                                ]
                       )])
 
@@ -311,7 +311,7 @@ def test_from_a_import_parenthesis_b_space():
                                 left_parenthesis(),
                                 name_as_name('b'),
                                 space(),
-                                right_parenthesis()
+                                { "type": "right_parenthesis", "value": ")", }
                                ]
                       )])
 
