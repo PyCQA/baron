@@ -74,6 +74,3 @@ def atomtrailers(value):
 
 def getitem(value=None, first_space="", second_space=""):
     return _node("getitem", value, first_space=first_space, second_space=second_space)
-
-def call(value=None, first_space="", second_space=""):
-    return _node("call", value, first_space=first_space, second_space=second_space)
