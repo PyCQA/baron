@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
-from test_utils import parse_simple, inteu, endl, name, string, parse_multi
+from test_utils import parse_simple, inteu, endl, name, parse_multi
 
 def test_empty():
     ""
@@ -34,10 +34,10 @@ def test_string():
     '''
     parse_simple([
            ('STRING', '"pouet pouet"')],
-          [string('"pouet pouet"')])
+          [{ "type": "string", "value": '"pouet pouet"', }])
     parse_simple([
            ('STRING', '"""pouet pouet"""')],
-          [string('"""pouet pouet"""')])
+          [{ "type": "string", "value": '"""pouet pouet"""', }])
 
 def test_file_input_empty():
     ""

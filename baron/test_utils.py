@@ -34,12 +34,6 @@ def inteu(value):
         "section": "number",
     }
 
-def string(value):
-    return {
-        "type": "string",
-        "value": value,
-    }
-
 def endl(value, **kwargs):
     return _node("endl", value, space="", indent="", **kwargs)
 
