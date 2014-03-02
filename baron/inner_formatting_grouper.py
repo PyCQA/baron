@@ -114,6 +114,7 @@ def group_generator(sequence):
                 to_group = [current]
                 while iterator.show_next() and iterator.show_next()[0] in GROUP_THOSE:
                     to_group.append(iterator.next())
+                assert iterator.show_next()[0] in GROUP_ON
                 current = append_to_token_before(iterator.next(), to_group)
 
             if current[0] in GROUP_ON:
