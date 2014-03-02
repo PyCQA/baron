@@ -14,13 +14,6 @@ def test_int():
            ('INT', '1')],
           [inteu("1")])
 
-# TODO: will be done in file_input
-#def test_endl():
-    #"\n"
-    #parse_simple([
-           #('ENDL', '\n')],
-          #[endl("\n", before_space="")])
-
 def test_name():
     "a"
     parse_simple([
