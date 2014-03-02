@@ -16,28 +16,50 @@ def _node(typeu, value, **kwargs):
     return {"type": typeu, "value": value}
 
 def space(value=" "):
-    return _node("space", value)
+    return {
+        "type": "space",
+        "value": value,
+    }
 
 def name(value):
-    return _node("name", value)
+    return {
+        "type": "name",
+        "value": value,
+    }
 
 def inteu(value):
-    return _node("int", value, section="number")
+    return {
+        "type": "int",
+        "value": value,
+        "section": "number",
+    }
 
 def string(value):
-    return _node("string", value)
+    return {
+        "type": "string",
+        "value": value,
+    }
 
 def endl(value, **kwargs):
     return _node("endl", value, space="", indent="", **kwargs)
 
 def dot():
-    return _node("dot", ".")
+    return {
+        "type": "dot",
+        "value": ".",
+    }
 
 def expression(value):
-    return _node("expression", value)
+    return {
+        "type": "expression",
+        "value": value,
+    }
 
 def dotted_name(value):
-    return _node("dotted_name", value)
+    return {
+        "type": "dotted_name",
+        "value": value,
+    }
 
 def importeu(value, **kwargs):
     return _node("import", value, **kwargs)
@@ -46,7 +68,10 @@ def dotted_as_name(value, before_space="", after_space="", **kwargs):
     return _node("dotted_as_name", value, before_space=before_space, after_space=after_space, **kwargs)
 
 def comma():
-    return _node("comma", ",")
+    return {
+        "type": "comma",
+        "value": ",",
+    }
 
 def from_import(value, targets, before_space=" ", middle_space=" ", after_space=" ", **kwargs):
     return _node("from_import", value, targets=targets, before_space=before_space, middle_space=middle_space, after_space=after_space, **kwargs)
@@ -55,11 +80,24 @@ def name_as_name(value, before_space="", after_space="", **kwargs):
     return _node("name_as_name", value, before_space=before_space, after_space=after_space, **kwargs)
 
 def left_parenthesis():
-    return _node('left_parenthesis', '(')
+    return {
+        "type": "left_parenthesis",
+        "value": "(",
+    }
 
 def right_parenthesis():
-    return _node('right_parenthesis', ')')
+    return {
+        "type": "right_parenthesis",
+        "value": ")",
+    }
 
 def binary_operator(operator, first, second, first_space, second_space):
-    return _node('binary_operator', operator, first=first, second=second, first_space=first_space, second_space=second_space)
+    return {
+        "type": "binary_operator",
+        "value": operator,
+        "first": first,
+        "second": second,
+        "first_space": first_space,
+        "second_space": second_space
+    }
 
