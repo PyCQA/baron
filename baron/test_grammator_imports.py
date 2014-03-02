@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
-from test_utils import parse_simple, space, name, importeu, dotted_as_name, dotted_name, dot, comma, from_import, name_as_name, left_parenthesis
+from test_utils import parse_simple, space, name, importeu, dotted_as_name, dotted_name, dot, comma, from_import, name_as_name
 
 
 def test_simple_import():
@@ -242,7 +242,7 @@ def test_from_a_import_parenthesis_b():
                                     name('a')
                                    ]),
                        targets=[
-                                left_parenthesis(),
+                                { "type": "left_parenthesis", "value": "(", },
                                 name_as_name('b'),
                                 { "type": "right_parenthesis", "value": ")", }
                                ]
@@ -263,7 +263,7 @@ def test_from_a_import_parenthesis_b_without_space():
                                     name('a')
                                    ]),
                        targets=[
-                                left_parenthesis(),
+                                { "type": "left_parenthesis", "value": "(", },
                                 name_as_name('b'),
                                 { "type": "right_parenthesis", "value": ")", }
                                ],
@@ -286,7 +286,7 @@ def test_from_a_import_parenthesis_b_comma():
                                     name('a')
                                    ]),
                        targets=[
-                                left_parenthesis(),
+                                { "type": "left_parenthesis", "value": "(", },
                                 name_as_name('b'),
                                 comma(),
                                 { "type": "right_parenthesis", "value": ")", }
@@ -308,7 +308,7 @@ def test_from_a_import_parenthesis_b_space():
                                     name('a')
                                    ]),
                        targets=[
-                                left_parenthesis(),
+                                { "type": "left_parenthesis", "value": "(", },
                                 name_as_name('b'),
                                 space(),
                                 { "type": "right_parenthesis", "value": ")", }

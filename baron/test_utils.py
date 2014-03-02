@@ -79,12 +79,6 @@ def from_import(value, targets, before_space=" ", middle_space=" ", after_space=
 def name_as_name(value, before_space="", after_space="", **kwargs):
     return _node("name_as_name", value, before_space=before_space, after_space=after_space, **kwargs)
 
-def left_parenthesis():
-    return {
-        "type": "left_parenthesis",
-        "value": "(",
-    }
-
 def binary_operator(operator, first, second, first_space, second_space):
     return {
         "type": "binary_operator",
