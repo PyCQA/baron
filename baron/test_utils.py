@@ -21,12 +21,6 @@ def space(value=" "):
         "value": value,
     }
 
-def name(value):
-    return {
-        "type": "name",
-        "value": value,
-    }
-
 def endl(value, **kwargs):
     return _node("endl", value, space="", indent="", **kwargs)
 
