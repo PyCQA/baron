@@ -117,3 +117,29 @@ def test_set_one():
         ('NAME', 'a'),
         ('RIGHT_BRACKET', '}', '', '', [('ENDL', '\n')], []),
     ]
+
+
+def test_dict_one():
+    assert group([
+        ('LEFT_BRACKET', '{'),
+        ('ENDL', '\n'),
+        ('NAME', 'a'),
+        ('ENDL', '\n'),
+        ('COLON', ':'),
+        ('ENDL', '\n'),
+        ('NAME', 'a'),
+        ('ENDL', '\n'),
+        ('COMMA', ','),
+        ('ENDL', '\n'),
+        ('NAME', 'a'),
+        ('ENDL', '\n'),
+        ('RIGHT_BRACKET', '}'),
+    ]) == [
+        ('LEFT_BRACKET', '{', '', '', [], [('ENDL', '\n')]),
+        ('NAME', 'a'),
+        ('COLON', ':', '', '', [('ENDL', '\n')], [('ENDL', '\n')]),
+        ('NAME', 'a'),
+        ('COMMA', ',', '', '', [('ENDL', '\n')], [('ENDL', '\n')]),
+        ('NAME', 'a'),
+        ('RIGHT_BRACKET', '}', '', '', [('ENDL', '\n')], []),
+    ]

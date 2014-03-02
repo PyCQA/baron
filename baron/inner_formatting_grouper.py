@@ -16,6 +16,7 @@ QUIT_GROUPING_MODE = (
 
 GROUP_ON = (
     "COMMA",
+    "COLON",
     #"AS",
     #"IMPORT",
     #"DOUBLE_STAR",
