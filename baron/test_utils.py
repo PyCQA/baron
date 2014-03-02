@@ -15,12 +15,6 @@ def _node(typeu, value, **kwargs):
         return to_return
     return {"type": typeu, "value": value}
 
-def space(value=" "):
-    return {
-        "type": "space",
-        "value": value,
-    }
-
 def endl(value, **kwargs):
     return _node("endl", value, space="", indent="", **kwargs)
 

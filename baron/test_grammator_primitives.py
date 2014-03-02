@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
 from utils import return_, yield_
-from test_utils import parse_simple, space
+from test_utils import parse_simple
 
 
 def test_return():
@@ -396,7 +396,7 @@ def test_global_one():
             "value": [
                       { "type": "name", "value": 'a', },
                       { "type": "comma", "value": ",", },
-                      space(),
+                      { "type": "space", "value": " ", },
                       {"type": "name", "value": 'b'},
                      ]
           }])
@@ -412,7 +412,7 @@ def test_global_one():
             "value": [
                       {"type": "name", "value": 'a'},
                       { "type": "comma", "value": ",", },
-                      space(),
+                      { "type": "space", "value": " ", },
                       { "type": "name", "value": 'b', },
                      ]
           }])
@@ -431,14 +431,14 @@ def test_global_two():
             "type": "global",
             "space": " ",
             "value": [
-                      { "type": "name", "value": 'a', },
-                      { "type": "comma", "value": ",", },
-                      space(),
-                      {"type": "name", "value": 'b'},
-                      space(),
-                     { "type": "comma", "value": ",", },
-                      space("  "),
-                      {"type": "name", "value": 'c'},
+                      {"type": "name", "value": "a"},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": " "},
+                      {"type": "name", "value": "b"},
+                      {"type": "space", "value": " "},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": "  "},
+                      {"type": "name", "value": "c"},
                      ]
           }])
     parse_simple([
@@ -453,14 +453,14 @@ def test_global_two():
             "type": "global",
             "space": " ",
             "value": [
-                      {"type": "name", "value": 'a'},
-                      { "type": "comma", "value": ",", },
-                      space(),
-                      { "type": "name", "value": 'b', },
-                      space(),
-                     { "type": "comma", "value": ",", },
-                      space("  "),
-                      {"type": "name", "value": 'c'},
+                      {"type": "name", "value": "a"},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": " "},
+                      {"type": "name", "value": "b"},
+                      {"type": "space", "value": " "},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": "  "},
+                      {"type": "name", "value": "c"},
                      ]
           }])
     parse_simple([
@@ -475,14 +475,14 @@ def test_global_two():
             "type": "global",
             "space": " ",
             "value": [
-                      {"type": "name", "value": 'a'},
-                      { "type": "comma", "value": ",", },
-                      space(),
-                      {"type": "name", "value": 'b'},
-                      space(),
-                     { "type": "comma", "value": ",", },
-                      space("  "),
-                      { "type": "name", "value": 'c', },
+                      {"type": "name", "value": "a"},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": " "},
+                      {"type": "name", "value": "b"},
+                      {"type": "space", "value": " "},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": "  "},
+                      {"type": "name", "value": "c"},
                      ]
           }])
     parse_simple([
@@ -497,14 +497,14 @@ def test_global_two():
             "type": "global",
             "space": " ",
             "value": [
-                      { "type": "name", "value": 'a', },
-                     { "type": "comma", "value": ",", },
-                      space(),
-                      {"type": "name", "value": 'b'},
-                      space(),
-                      { "type": "comma", "value": ",", },
-                      space("  "),
-                      {"type": "name", "value": 'c'},
+                      {"type": "name", "value": "a"},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": " "},
+                      {"type": "name", "value": "b"},
+                      {"type": "space", "value": " "},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": "  "},
+                      {"type": "name", "value": "c"},
                      ]
           }])
     parse_simple([
@@ -519,14 +519,14 @@ def test_global_two():
             "type": "global",
             "space": " ",
             "value": [
-                      {"type": "name", "value": 'a'},
-                     { "type": "comma", "value": ",", },
-                      space(),
-                      { "type": "name", "value": 'b', },
-                      space(),
-                      { "type": "comma", "value": ",", },
-                      space("  "),
-                      {"type": "name", "value": 'c'},
+                      {"type": "name", "value": "a"},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": " "},
+                      {"type": "name", "value": "b"},
+                      {"type": "space", "value": " "},
+                     {"type": "comma", "value": ","},
+                      {"type": "space", "value": "  "},
+                      {"type": "name", "value": "c"},
                      ]
           }])
     parse_simple([
@@ -541,14 +541,278 @@ def test_global_two():
             "type": "global",
             "space": " ",
             "value": [
-                      {"type": "name", "value": 'a'},
-                     { "type": "comma", "value": ",", },
-                      space(),
-                      {"type": "name", "value": 'b'},
-                      space(),
-                      { "type": "comma", "value": ",", },
-                      space("  "),
-                      { "type": "name", "value": 'c', },
+                      {"type": "name", "value": "a"},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": " "},
+                      {"type": "name", "value": "b"},
+                      {"type": "space", "value": " "},
+                     {"type": "comma", "value": ","},
+                      {"type": "space", "value": "  "},
+                      {"type": "name", "value": "c"},
+                     ]
+          }])
+    parse_simple([
+           ('GLOBAL', 'global', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', ' ', '  '),
+           ('NAME', 'c'),
+          ],
+          [{
+            "type": "global",
+            "space": " ",
+            "value": [
+                      {"type": "name", "value": "a"},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": " "},
+                      {"type": "name", "value": "b"},
+                      {"type": "space", "value": " "},
+                     {"type": "comma", "value": ","},
+                      {"type": "space", "value": "  "},
+                      {"type": "name", "value": "c"},
+                     ]
+          }])
+    parse_simple([
+           ('GLOBAL', 'global', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', ' ', '  '),
+           ('NAME', 'c'),
+          ],
+          [{
+            "type": "global",
+            "space": " ",
+            "value": [
+                      {"type": "name", "value": "a"},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": " "},
+                      {"type": "name", "value": "b"},
+                      {"type": "space", "value": " "},
+                     {"type": "comma", "value": ","},
+                      {"type": "space", "value": "  "},
+                      {"type": "name", "value": "c"},
+                     ]
+          }])
+    parse_simple([
+           ('GLOBAL', 'global', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', ' ', '  '),
+           ('NAME', 'c'),
+          ],
+          [{
+            "type": "global",
+            "space": " ",
+            "value": [
+                      {"type": "name", "value": "a"},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": " "},
+                      {"type": "name", "value": "b"},
+                      {"type": "space", "value": " "},
+                     {"type": "comma", "value": ","},
+                      {"type": "space", "value": "  "},
+                      {"type": "name", "value": "c"},
+                     ]
+          }])
+    parse_simple([
+           ('GLOBAL', 'global', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', ' ', '  '),
+           ('NAME', 'c'),
+          ],
+          [{
+            "type": "global",
+            "space": " ",
+            "value": [
+                      {"type": "name", "value": "a"},
+                     {"type": "comma", "value": ","},
+                      {"type": "space", "value": " "},
+                      {"type": "name", "value": "b"},
+                      {"type": "space", "value": " "},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": "  "},
+                      {"type": "name", "value": "c"},
+                     ]
+          }])
+    parse_simple([
+           ('GLOBAL', 'global', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', ' ', '  '),
+           ('NAME', 'c'),
+          ],
+          [{
+            "type": "global",
+            "space": " ",
+            "value": [
+                      {"type": "name", "value": "a"},
+                     {"type": "comma", "value": ","},
+                      {"type": "space", "value": " "},
+                      {"type": "name", "value": "b"},
+                      {"type": "space", "value": " "},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": "  "},
+                      {"type": "name", "value": "c"},
+                     ]
+          }])
+    parse_simple([
+           ('GLOBAL', 'global', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', ' ', '  '),
+           ('NAME', 'c'),
+          ],
+          [{
+            "type": "global",
+            "space": " ",
+            "value": [
+                      {"type": "name", "value": "a"},
+                     {"type": "comma", "value": ","},
+                      {"type": "space", "value": " "},
+                      {"type": "name", "value": "b"},
+                      {"type": "space", "value": " "},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": "  "},
+                      {"type": "name", "value": "c"},
+                     ]
+          }])
+    parse_simple([
+           ('GLOBAL', 'global', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', ' ', '  '),
+           ('NAME', 'c'),
+          ],
+          [{
+            "type": "global",
+            "space": " ",
+            "value": [
+                      {"type": "name", "value": "a"},
+                     {"type": "comma", "value": ","},
+                      {"type": "space", "value": " "},
+                      {"type": "name", "value": "b"},
+                      {"type": "space", "value": " "},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": "  "},
+                      {"type": "name", "value": "c"},
+                     ]
+          }])
+    parse_simple([
+           ('GLOBAL', 'global', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', ' ', '  '),
+           ('NAME', 'c'),
+          ],
+          [{
+            "type": "global",
+            "space": " ",
+            "value": [
+                      {"type": "name", "value": "a"},
+                     {"type": "comma", "value": ","},
+                      {"type": "space", "value": " "},
+                      {"type": "name", "value": "b"},
+                      {"type": "space", "value": " "},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": "  "},
+                      {"type": "name", "value": "c"},
+                     ]
+          }])
+    parse_simple([
+           ('GLOBAL', 'global', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', ' ', '  '),
+           ('NAME', 'c'),
+          ],
+          [{
+            "type": "global",
+            "space": " ",
+            "value": [
+                      {"type": "name", "value": "a"},
+                     {"type": "comma", "value": ","},
+                      {"type": "space", "value": " "},
+                      {"type": "name", "value": "b"},
+                      {"type": "space", "value": " "},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": "  "},
+                      {"type": "name", "value": "c"},
+                     ]
+          }])
+    parse_simple([
+           ('GLOBAL', 'global', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', ' ', '  '),
+           ('NAME', 'c'),
+          ],
+          [{
+            "type": "global",
+            "space": " ",
+            "value": [
+                      {"type": "name", "value": "a"},
+                     {"type": "comma", "value": ","},
+                      {"type": "space", "value": " "},
+                      {"type": "name", "value": "b"},
+                      {"type": "space", "value": " "},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": "  "},
+                      {"type": "name", "value": "c"},
+                     ]
+          }])
+    parse_simple([
+           ('GLOBAL', 'global', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', ' ', '  '),
+           ('NAME', 'c'),
+          ],
+          [{
+            "type": "global",
+            "space": " ",
+            "value": [
+                      {"type": "name", "value": "a"},
+                     {"type": "comma", "value": ","},
+                      {"type": "space", "value": " "},
+                      {"type": "name", "value": "b"},
+                      {"type": "space", "value": " "},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": "  "},
+                      {"type": "name", "value": "c"},
+                     ]
+          }])
+    parse_simple([
+           ('GLOBAL', 'global', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', ' ', '  '),
+           ('NAME', 'c'),
+          ],
+          [{
+            "type": "global",
+            "space": " ",
+            "value": [
+                      {"type": "name", "value": "a"},
+                     {"type": "comma", "value": ","},
+                      {"type": "space", "value": " "},
+                      {"type": "name", "value": "b"},
+                      {"type": "space", "value": " "},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": "  "},
+                      {"type": "name", "value": "c"},
                      ]
           }])
 
