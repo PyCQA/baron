@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
-from test_utils import parse_simple, dotted_as_name, from_import, name_as_name
+from test_utils import parse_simple, dotted_as_name, from_import
 
 
 def test_simple_import():
@@ -1636,7 +1636,7 @@ def test_from_a_import_b():
                                  ],
                        },
                        targets=[
-                                name_as_name('b')
+                                { "type": "name_as_name", "value": 'b', "before_space": "", "after_space": "", "as_": False, "target": None, }
                                ]
                       )])
 
@@ -1652,7 +1652,7 @@ def test_from_a_dot_c_import_b():
           [from_import(
                        { "type": "dotted_name", "value": [                                     { "type": "name", "value": 'a', },                                     { "type": "dot", "value": ".", },                                     {"type": "name", "value": 'c'}                                    ], },
                        targets=[
-                                name_as_name('b')
+                                { "type": "name_as_name", "value": 'b', "before_space": "", "after_space": "", "as_": False, "target": None, }
                                ]
                       )])
     parse_simple([
@@ -1665,7 +1665,7 @@ def test_from_a_dot_c_import_b():
           [from_import(
                        { "type": "dotted_name", "value": [                                     {"type": "name", "value": 'a'},                                     { "type": "dot", "value": ".", },                                     { "type": "name", "value": 'c', }                                    ], },
                        targets=[
-                                name_as_name('b')
+                                { "type": "name_as_name", "value": 'b', "before_space": "", "after_space": "", "as_": False, "target": None, }
                                ]
                       )])
 
@@ -1683,10 +1683,28 @@ def test_from_a_dot_c_import_b_d():
           [from_import(
                        { "type": "dotted_name", "value": [                                     { "type": "name", "value": 'a', },                                     { "type": "dot", "value": ".", },                                     {"type": "name", "value": 'c'}                                    ], },
                        targets=[
-                                name_as_name('b'),
+                                { "type": "name_as_name", "value": 'b', "before_space": "", "after_space": "", "as_": False, "target": None, },
                                 { "type": "comma", "value": ",", },
                                 { "type": "space", "value": " ", },
-                                name_as_name('d')
+                                {"type": "name_as_name", "value": 'd', "before_space": "", "after_space": "", "as_": False, "target": None}
+                               ]
+                      )])
+    parse_simple([
+           ('FROM', 'from', '', ' '),
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'c'),
+           ('IMPORT', 'import', ' ', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'd')],
+          [from_import(
+                       { "type": "dotted_name", "value": [                                     { "type": "name", "value": 'a', },                                     { "type": "dot", "value": ".", },                                     {"type": "name", "value": 'c'}                                    ], },
+                       targets=[
+                                {"type": "name_as_name", "value": 'b', "before_space": "", "after_space": "", "as_": False, "target": None},
+                                { "type": "comma", "value": ",", },
+                                { "type": "space", "value": " ", },
+                                { "type": "name_as_name", "value": 'd', "before_space": "", "after_space": "", "as_": False, "target": None, }
                                ]
                       )])
     parse_simple([
@@ -1701,10 +1719,28 @@ def test_from_a_dot_c_import_b_d():
           [from_import(
                        { "type": "dotted_name", "value": [                                     {"type": "name", "value": 'a'},                                     { "type": "dot", "value": ".", },                                     { "type": "name", "value": 'c', }                                    ], },
                        targets=[
-                                name_as_name('b'),
+                                { "type": "name_as_name", "value": 'b', "before_space": "", "after_space": "", "as_": False, "target": None, },
                                 { "type": "comma", "value": ",", },
                                 { "type": "space", "value": " ", },
-                                name_as_name('d')
+                                {"type": "name_as_name", "value": 'd', "before_space": "", "after_space": "", "as_": False, "target": None}
+                               ]
+                      )])
+    parse_simple([
+           ('FROM', 'from', '', ' '),
+           ('NAME', 'a'),
+           ('DOT', '.'),
+           ('NAME', 'c'),
+           ('IMPORT', 'import', ' ', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'd')],
+          [from_import(
+                       { "type": "dotted_name", "value": [                                     {"type": "name", "value": 'a'},                                     { "type": "dot", "value": ".", },                                     { "type": "name", "value": 'c', }                                    ], },
+                       targets=[
+                                {"type": "name_as_name", "value": 'b', "before_space": "", "after_space": "", "as_": False, "target": None},
+                                { "type": "comma", "value": ",", },
+                                { "type": "space", "value": " ", },
+                                { "type": "name_as_name", "value": 'd', "before_space": "", "after_space": "", "as_": False, "target": None, }
                                ]
                       )])
 
@@ -1729,13 +1765,7 @@ def test_from_a_import_b_as_d():
                                  ],
                        },
                        targets=[
-                                name_as_name(
-                                             'b',
-                                             as_=True,
-                                             before_space=" ",
-                                             after_space=" ",
-                                             target="d"
-                                            )
+                                { "type": "name_as_name", "value": 'b', "before_space": " ", "after_space": " ", "as_": True, "target": "d", }
                                ]
                       )])
 
@@ -1750,11 +1780,30 @@ def test_from_a_import_parenthesis_b():
            ('RIGHT_PARENTHESIS', ')')
           ],
           [from_import(
-                       { "type": "dotted_name", "value": [                                     { "type": "name", "value": 'a', }                                    ], },
+                       {
+                        "type": "dotted_name",
+                        "value": [{
+                                   "type": "name",
+                                   "value": 'a',
+                                  }],
+                       },
                        targets=[
-                                { "type": "left_parenthesis", "value": "(", },
-                                name_as_name('b'),
-                                { "type": "right_parenthesis", "value": ")", }
+                                {
+                                 "type": "left_parenthesis",
+                                 "value": "(",
+                                },
+                                {
+                                 "type": "name_as_name",
+                                 "value": 'b',
+                                 "before_space": "",
+                                 "after_space": "",
+                                 "as_": False,
+                                 "target": None,
+                                },
+                                {
+                                 "type": "right_parenthesis",
+                                 "value": ")",
+                                }
                                ]
                       )])
 
@@ -1769,11 +1818,32 @@ def test_from_a_import_parenthesis_b_without_space():
            ('RIGHT_PARENTHESIS', ')')
           ],
           [from_import(
-                       { "type": "dotted_name", "value": [                                     { "type": "name", "value": 'a', }                                    ], },
+                       {
+                        "type": "dotted_name",
+                        "value": [
+                                  {
+                                   "type": "name",
+                                   "value": 'a',
+                                  }
+                                 ],
+                       },
                        targets=[
-                                { "type": "left_parenthesis", "value": "(", },
-                                name_as_name('b'),
-                                { "type": "right_parenthesis", "value": ")", }
+                                {
+                                 "type": "left_parenthesis",
+                                 "value": "(",
+                                },
+                                {
+                                 "type": "name_as_name",
+                                 "value": 'b',
+                                 "before_space": "",
+                                 "after_space": "",
+                                 "as_": False,
+                                 "target": None,
+                                },
+                                {
+                                 "type": "right_parenthesis",
+                                 "value": ")",
+                                }
                                ],
                        after_space=""
                       )])
@@ -1790,12 +1860,36 @@ def test_from_a_import_parenthesis_b_comma():
            ('RIGHT_PARENTHESIS', ')')
           ],
           [from_import(
-                       { "type": "dotted_name", "value": [                                     { "type": "name", "value": 'a', }                                    ], },
+                       {
+                        "type": "dotted_name",
+                        "value": [
+                                  {
+                                   "type": "name",
+                                   "value": 'a',
+                                  }
+                                 ],
+                       },
                        targets=[
-                                { "type": "left_parenthesis", "value": "(", },
-                                name_as_name('b'),
-                                { "type": "comma", "value": ",", },
-                                { "type": "right_parenthesis", "value": ")", }
+                                {
+                                 "type": "left_parenthesis",
+                                 "value": "(",
+                                },
+                                {
+                                 "type": "name_as_name",
+                                 "value": 'b',
+                                 "before_space": "",
+                                 "after_space": "",
+                                 "as_": False,
+                                 "target": None,
+                                },
+                                {
+                                 "type": "comma",
+                                 "value": ",",
+                                },
+                                {
+                                 "type": "right_parenthesis",
+                                 "value": ")",
+                                }
                                ]
                       )])
 
@@ -1810,12 +1904,36 @@ def test_from_a_import_parenthesis_b_space():
            ('RIGHT_PARENTHESIS', ')', ' ', ''),
           ],
           [from_import(
-                       { "type": "dotted_name", "value": [                                     { "type": "name", "value": 'a', }                                    ], },
+                       {
+                        "type": "dotted_name",
+                        "value": [
+                                  {
+                                   "type": "name",
+                                   "value": 'a',
+                                  }
+                                 ],
+                       },
                        targets=[
-                                { "type": "left_parenthesis", "value": "(", },
-                                name_as_name('b'),
-                                { "type": "space", "value": " ", },
-                                { "type": "right_parenthesis", "value": ")", }
+                                {
+                                 "type": "left_parenthesis",
+                                 "value": "(",
+                                },
+                                {
+                                 "type": "name_as_name",
+                                 "value": 'b',
+                                 "before_space": "",
+                                 "after_space": "",
+                                 "as_": False,
+                                 "target": None,
+                                },
+                                {
+                                 "type": "space",
+                                 "value": " ",
+                                },
+                                {
+                                 "type": "right_parenthesis",
+                                 "value": ")",
+                                }
                                ]
                       )])
 
@@ -1828,9 +1946,20 @@ def test_from_a_import_star():
            ('STAR', '*')
           ],
           [from_import(
-                       { "type": "dotted_name", "value": [                                     { "type": "name", "value": 'a', }                                    ], },
+                       {
+                        "type": "dotted_name",
+                        "value": [
+                                  {
+                                   "type": "name",
+                                   "value": 'a',
+                                  }
+                                 ],
+                       },
                        targets=[
-                                { "type": "star", "value": "*", }
+                                {
+                                 "type": "star",
+                                 "value": "*",
+                                }
                                ]
                       )])
 
@@ -1859,9 +1988,28 @@ def test_from_dot_a_import_b():
            ('NAME', 'b')
           ],
           [from_import(
-                       { "type": "dotted_name", "value": [                                     { "type": "dot", "value": ".", },                                     { "type": "name", "value": 'a', }                                    ], },
+                       {
+                        "type": "dotted_name",
+                        "value": [
+                                  {
+                                   "type": "dot",
+                                   "value": ".",
+                                  },
+                                  {
+                                   "type": "name",
+                                   "value": 'a',
+                                  }
+                                 ],
+                       },
                        targets=[
-                                name_as_name('b')
+                                {
+                                 "type": "name_as_name",
+                                 "value": 'b',
+                                 "before_space": "",
+                                 "after_space": "",
+                                 "as_": False,
+                                 "target": None,
+                                }
                                ]
                       )])
 
@@ -1879,7 +2027,14 @@ def test_from_dot_dot_dot_a_import_b():
           [from_import(
                        { "type": "dotted_name", "value": [                                     { "type": "dot", "value": ".", },                                                  { "type": "dot", "value": ".", },                                                  { "type": "dot", "value": ".", },                                     { "type": "name", "value": 'a', }                                    ], },
                        targets=[
-                                name_as_name('b')
+                                {
+                                 "type": "name_as_name",
+                                 "value": 'b',
+                                 "before_space": "",
+                                 "after_space": "",
+                                 "as_": False,
+                                 "target": None,
+                                }
                                ]
                       )])
     parse_simple([
@@ -1894,7 +2049,14 @@ def test_from_dot_dot_dot_a_import_b():
           [from_import(
                        { "type": "dotted_name", "value": [                                                  { "type": "dot", "value": ".", },                                     { "type": "dot", "value": ".", },                                                  { "type": "dot", "value": ".", },                                     { "type": "name", "value": 'a', }                                    ], },
                        targets=[
-                                name_as_name('b')
+                                {
+                                 "type": "name_as_name",
+                                 "value": 'b',
+                                 "before_space": "",
+                                 "after_space": "",
+                                 "as_": False,
+                                 "target": None,
+                                }
                                ]
                       )])
     parse_simple([
@@ -1909,7 +2071,14 @@ def test_from_dot_dot_dot_a_import_b():
           [from_import(
                        { "type": "dotted_name", "value": [                                     { "type": "dot", "value": ".", },                                     { "type": "dot", "value": ".", },                                     { "type": "dot", "value": ".", },                                     { "type": "name", "value": 'a', }                                    ], },
                        targets=[
-                                name_as_name('b')
+                                {
+                                 "type": "name_as_name",
+                                 "value": 'b',
+                                 "before_space": "",
+                                 "after_space": "",
+                                 "as_": False,
+                                 "target": None,
+                                }
                                ]
                       )])
 
@@ -1924,7 +2093,14 @@ def test_from_no_space_dot_a_import_b():
           ],
           [from_import({ "type": "dotted_name", "value": [                                     { "type": "dot", "value": ".", },                                     { "type": "name", "value": 'a', }                                    ], },
                        targets=[
-                                name_as_name('b')
+                                {
+                                 "type": "name_as_name",
+                                 "value": 'b',
+                                 "before_space": "",
+                                 "after_space": "",
+                                 "as_": False,
+                                 "target": None,
+                                }
                                ],
                        before_space=""
                       )])
@@ -1940,7 +2116,14 @@ def test_from_dot_import_b():
           [from_import(
                        { "type": "dotted_name", "value": [                                     { "type": "dot", "value": ".", }                                    ], },
                        targets=[
-                                name_as_name('b')
+                                {
+                                 "type": "name_as_name",
+                                 "value": 'b',
+                                 "before_space": "",
+                                 "after_space": "",
+                                 "as_": False,
+                                 "target": None,
+                                }
                                ]
                       )])
 
@@ -1954,7 +2137,14 @@ def test_from_dot_no_space_import_b():
           ],
           [from_import({ "type": "dotted_name", "value": [                                     { "type": "dot", "value": ".", }                                    ], },
                        targets=[
-                                name_as_name('b')
+                                {
+                                 "type": "name_as_name",
+                                 "value": 'b',
+                                 "before_space": "",
+                                 "after_space": "",
+                                 "as_": False,
+                                 "target": None,
+                                }
                                ],
                        middle_space=""
                       )])
@@ -1970,7 +2160,14 @@ def test_from_no_space_dot_import_b():
           [from_import(
                        { "type": "dotted_name", "value": [                                     { "type": "dot", "value": ".", }                                    ], },
                        targets=[
-                                name_as_name('b')
+                                {
+                                 "type": "name_as_name",
+                                 "value": 'b',
+                                 "before_space": "",
+                                 "after_space": "",
+                                 "as_": False,
+                                 "target": None,
+                                }
                                ],
                        before_space=""
                       )])
@@ -1984,7 +2181,14 @@ def test_from_no_space_dot_no_sapceimport_b():
            ('NAME', 'b')],
           [from_import({ "type": "dotted_name", "value": [                                     { "type": "dot", "value": ".", }                                    ], },
                        targets=[
-                                name_as_name('b')
+                                {
+                                 "type": "name_as_name",
+                                 "value": 'b',
+                                 "before_space": "",
+                                 "after_space": "",
+                                 "as_": False,
+                                 "target": None,
+                                }
                                ],
                        middle_space="",
                        before_space=""
