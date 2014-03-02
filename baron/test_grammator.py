@@ -1,8 +1,6 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
-
-from test_utils import (parse_simple, inteu, endl, name,
-                        string, parse_multi, semicolon)
+from test_utils import parse_simple, inteu, endl, name, string, parse_multi
 
 def test_empty():
     ""
@@ -92,7 +90,7 @@ def test_file_input_simple_stmt_one_item_semicolon():
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';'), ('ENDL', '\n'),
         ],[
-           name('a'), semicolon(), endl("\n"),
+           name('a'), { "type": "semicolon", "value": ";", "before_space": "", "after_space": "", }, endl("\n"),
           ])
 
 def test_file_input_simple_stmt_two_items_semicolon():
@@ -102,7 +100,7 @@ def test_file_input_simple_stmt_two_items_semicolon():
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';'), ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           name('a'), semicolon(), name('a'), endl("\n"),
+           name('a'), { "type": "semicolon", "value": ";", "before_space": "", "after_space": "", }, name('a'), endl("\n"),
           ])
 
 def test_file_input_simple_stmt_three_items_semicolon():
@@ -112,7 +110,12 @@ def test_file_input_simple_stmt_three_items_semicolon():
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';'), ('NAME', 'b'), ('SEMICOLON', ';'), ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           name('a'), semicolon(), name('b'), semicolon(), name('a'), endl("\n"),
+           name('a'), {"type": "semicolon", "value": ";", "before_space": "", "after_space": ""}, name('b'), { "type": "semicolon", "value": ";", "before_space": "", "after_space": "", }, name('a'), endl("\n"),
+          ])
+    parse_multi([
+           ('NAME', 'a'), ('SEMICOLON', ';'), ('NAME', 'b'), ('SEMICOLON', ';'), ('NAME', 'a'), ('ENDL', '\n'),
+        ],[
+           name('a'), {"type": "semicolon", "value": ";", "before_space": "", "after_space": ""}, name('b'), { "type": "semicolon", "value": ";", "before_space": "", "after_space": "", }, name('a'), endl("\n"),
           ])
 
 def test_file_input_simple_stmt_one_item_semicolon_space():
@@ -122,7 +125,7 @@ def test_file_input_simple_stmt_one_item_semicolon_space():
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';', ' ', ' '), ('ENDL', '\n'),
         ],[
-           name('a'), semicolon(' ', ' '), endl("\n"),
+           name('a'), { "type": "semicolon", "value": ";", "before_space": ' ', "after_space": ' ', }, endl("\n"),
           ])
 
 def test_funcdef_stmt_indent():
