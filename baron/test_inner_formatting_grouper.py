@@ -119,6 +119,26 @@ def test_set_one():
     ]
 
 
+def test_list_one():
+    assert group([
+        ('LEFT_SQUARE_BRACKET', '['),
+        ('ENDL', '\n'),
+        ('NAME', 'a'),
+        ('ENDL', '\n'),
+        ('COMMA', ','),
+        ('ENDL', '\n'),
+        ('NAME', 'a'),
+        ('ENDL', '\n'),
+        ('RIGHT_SQUARE_BRACKET', ']'),
+    ]) == [
+        ('LEFT_SQUARE_BRACKET', '[', '', '', [], [('ENDL', '\n'), ]),
+        ('NAME', 'a'),
+        ('COMMA', ',', '', '', [('ENDL', '\n')], [('ENDL', '\n')]),
+        ('NAME', 'a'),
+        ('RIGHT_SQUARE_BRACKET', ']', '', '', [('ENDL', '\n')], []),
+    ]
+
+
 def test_dict_one():
     assert group([
         ('LEFT_BRACKET', '{'),
