@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
-from test_utils import parse_simple, space, name, importeu, dotted_as_name, dotted_name, dot, comma, from_import, name_as_name
+from test_utils import parse_simple, space, name, importeu, dotted_as_name, dotted_name, dot, from_import, name_as_name
 
 
 def test_simple_import():
@@ -79,7 +79,7 @@ def test_import_a_b():
            ('NAME', 'b')],
           [importeu([
                      dotted_as_name(dotted_name([name('a')])),
-                     comma(),
+                     { "type": "comma", "value": ",", },
                      space(),
                      dotted_as_name(dotted_name([name('b')]))
                     ],
@@ -98,7 +98,7 @@ def test_import_a_b_as_c():
            ('NAME', 'c')],
           [importeu([
                      dotted_as_name(dotted_name([name('a')])),
-                     comma(),
+                     { "type": "comma", "value": ",", },
                      space(),
                      dotted_as_name(
                                     dotted_name([
@@ -128,13 +128,59 @@ def test_import_a_b_c_d():
            ('NAME', 'd')],
           [importeu([
                      dotted_as_name(dotted_name([name('a')])),
-                     comma(),
+                     { "type": "comma", "value": ",", },
                      space(),
                      dotted_as_name(dotted_name([name('b')])),
-                     comma(),
+                     { "type": "comma", "value": ",", },
                      space(),
                      dotted_as_name(dotted_name([name('c')])),
-                     comma(),
+                     { "type": "comma", "value": ",", },
+                     space(),
+                     dotted_as_name(dotted_name([name('d')]))
+                    ],
+                    space=" "
+                   )])
+    parse_simple([
+           ('IMPORT', 'import', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'c'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'd')],
+          [importeu([
+                     dotted_as_name(dotted_name([name('a')])),
+                     { "type": "comma", "value": ",", },
+                     space(),
+                     dotted_as_name(dotted_name([name('b')])),
+                     { "type": "comma", "value": ",", },
+                     space(),
+                     dotted_as_name(dotted_name([name('c')])),
+                     { "type": "comma", "value": ",", },
+                     space(),
+                     dotted_as_name(dotted_name([name('d')]))
+                    ],
+                    space=" "
+                   )])
+    parse_simple([
+           ('IMPORT', 'import', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'c'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'd')],
+          [importeu([
+                     dotted_as_name(dotted_name([name('a')])),
+                     { "type": "comma", "value": ",", },
+                     space(),
+                     dotted_as_name(dotted_name([name('b')])),
+                     { "type": "comma", "value": ",", },
+                     space(),
+                     dotted_as_name(dotted_name([name('c')])),
+                     { "type": "comma", "value": ",", },
                      space(),
                      dotted_as_name(dotted_name([name('d')]))
                     ],
@@ -196,7 +242,7 @@ def test_from_a_dot_c_import_b_d():
                                    ]),
                        targets=[
                                 name_as_name('b'),
-                                comma(),
+                                { "type": "comma", "value": ",", },
                                 space(),
                                 name_as_name('d')
                                ]
@@ -288,7 +334,7 @@ def test_from_a_import_parenthesis_b_comma():
                        targets=[
                                 { "type": "left_parenthesis", "value": "(", },
                                 name_as_name('b'),
-                                comma(),
+                                { "type": "comma", "value": ",", },
                                 { "type": "right_parenthesis", "value": ")", }
                                ]
                       )])

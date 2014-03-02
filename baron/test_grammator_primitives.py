@@ -1,8 +1,7 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
-
 from utils import return_, yield_
-from test_utils import parse_simple, space, name, comma
+from test_utils import parse_simple, space, name
 
 
 def test_return():
@@ -272,7 +271,7 @@ def test_global_one():
             "space": " ",
             "value": [
                       name('a'),
-                      comma(),
+                      { "type": "comma", "value": ",", },
                       space(),
                       name('b'),
                      ]
@@ -293,11 +292,33 @@ def test_global_two():
             "space": " ",
             "value": [
                       name('a'),
-                      comma(),
+                      { "type": "comma", "value": ",", },
                       space(),
                       name('b'),
                       space(),
-                      comma(),
+                     { "type": "comma", "value": ",", },
+                      space("  "),
+                      name('c'),
+                     ]
+          }])
+    parse_simple([
+           ('GLOBAL', 'global', '', ' '),
+           ('NAME', 'a'),
+           ('COMMA', ',', '', ' '),
+           ('NAME', 'b'),
+           ('COMMA', ',', ' ', '  '),
+           ('NAME', 'c'),
+          ],
+          [{
+            "type": "global",
+            "space": " ",
+            "value": [
+                      name('a'),
+                     { "type": "comma", "value": ",", },
+                      space(),
+                      name('b'),
+                      space(),
+                      { "type": "comma", "value": ",", },
                       space("  "),
                       name('c'),
                      ]
