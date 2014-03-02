@@ -27,13 +27,6 @@ def name(value):
         "value": value,
     }
 
-def inteu(value):
-    return {
-        "type": "int",
-        "value": value,
-        "section": "number",
-    }
-
 def endl(value, **kwargs):
     return _node("endl", value, space="", indent="", **kwargs)
 

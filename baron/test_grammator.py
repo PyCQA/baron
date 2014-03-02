@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
-from test_utils import parse_simple, inteu, endl, name, parse_multi
+from test_utils import parse_simple, endl, name, parse_multi
 
 def test_empty():
     ""
@@ -12,7 +12,11 @@ def test_int():
     "1"
     parse_simple([
            ('INT', '1')],
-          [inteu("1")])
+          [{
+            "type": "int",
+            "section": "number",
+            "value": "1",
+           }])
 
 def test_name():
     "a"
