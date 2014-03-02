@@ -1,10 +1,6 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
-
-
-from test_utils import (parse_simple, space, name, importeu, dotted_as_name,
-                        dotted_name, dot, comma, from_import, name_as_name,
-                        left_parenthesis, right_parenthesis, star)
+from test_utils import parse_simple, space, name, importeu, dotted_as_name, dotted_name, dot, comma, from_import, name_as_name, left_parenthesis, right_parenthesis
 
 
 def test_simple_import():
@@ -332,7 +328,7 @@ def test_from_a_import_star():
                                     name('a')
                                    ]),
                        targets=[
-                                star()
+                                { "type": "star", "value": "*", }
                                ]
                       )])
 
@@ -348,7 +344,7 @@ def test_from_a_import_star_without_space():
                                     name('a')
                                    ]),
                        targets=[
-                                star()
+                                { "type": "star", "value": "*", }
                                ],
                        after_space=""
                       )])

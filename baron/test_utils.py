@@ -60,9 +60,6 @@ def left_parenthesis():
 def right_parenthesis():
     return _node('right_parenthesis', ')')
 
-def star():
-    return _node('star', '*')
-
 def binary_operator(operator, first, second, first_space, second_space):
     return _node('binary_operator', operator, first=first, second=second, first_space=first_space, second_space=second_space)
 
