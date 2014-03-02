@@ -1626,7 +1626,15 @@ def test_from_a_import_b():
            ('IMPORT', 'import', ' ', ' '),
            ('NAME', 'b')],
           [from_import(
-                       { "type": "dotted_name", "value": [                                     { "type": "name", "value": 'a', }                                    ], },
+                       {
+                        "type": "dotted_name",
+                        "value": [
+                                  {
+                                   "type": "name",
+                                   "value": 'a',
+                                  }
+                                 ],
+                       },
                        targets=[
                                 name_as_name('b')
                                ]
@@ -1711,7 +1719,15 @@ def test_from_a_import_b_as_d():
            ('NAME', 'd')
           ],
           [from_import(
-                       { "type": "dotted_name", "value": [                                     { "type": "name", "value": 'a', }                                    ], },
+                       {
+                        "type": "dotted_name",
+                        "value": [
+                                  {
+                                   "type": "name",
+                                   "value": 'a'
+                                  }
+                                 ],
+                       },
                        targets=[
                                 name_as_name(
                                              'b',

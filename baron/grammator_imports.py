@@ -75,6 +75,8 @@ def include_imports(pg):
         return [{
                  "type": "name_as_name",
                  "value": name.value,
+                 "as_": False,
+                 "target": None,
                  "before_space": "",
                  "after_space": ""
                 }]
@@ -83,6 +85,7 @@ def include_imports(pg):
     def name_as_name_name_space((name, space)):
         return [{
                  "type": "name_as_name",
+                 "target": None,
                  "value": name.value,
                  "before_space": "",
                  "after_space": ""

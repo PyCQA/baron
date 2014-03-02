@@ -21,5 +21,12 @@ def dotted_as_name(value, before_space="", after_space="", **kwargs):
 def from_import(value, targets, before_space=" ", middle_space=" ", after_space=" ", **kwargs):
     return _node("from_import", value, targets=targets, before_space=before_space, middle_space=middle_space, after_space=after_space, **kwargs)
 
-def name_as_name(value, before_space="", after_space="", **kwargs):
-    return _node("name_as_name", value, before_space=before_space, after_space=after_space, **kwargs)
+def name_as_name(value, before_space="", after_space="", as_=False, target=None):
+    return {
+        "type": "name_as_name",
+        "value": value,
+        "before_space": before_space,
+        "after_space": after_space,
+        "as_": as_,
+        "target": target,
+    }
