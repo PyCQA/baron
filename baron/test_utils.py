@@ -30,12 +30,6 @@ def name(value):
 def endl(value, **kwargs):
     return _node("endl", value, space="", indent="", **kwargs)
 
-def expression(value):
-    return {
-        "type": "expression",
-        "value": value,
-    }
-
 def importeu(value, **kwargs):
     return _node("import", value, **kwargs)
 
