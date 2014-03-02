@@ -46,6 +46,12 @@ def endl((endl,)):
     }]
 
 
+@pg.production("left_parenthesis : LEFT_PARENTHESIS")
+def left_parenthesis((lp,)):
+    lp.hidden_tokens_after = map(lambda x: endl([x])[0], lp.hidden_tokens_after)
+    return lp
+
+
 @pg.production("endl : COMMENT ENDL")
 def comment((comment_, endl)):
     return [{

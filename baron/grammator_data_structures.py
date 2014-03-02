@@ -1,15 +1,15 @@
 def include_data_structures(pg):
-    @pg.production("atom : LEFT_PARENTHESIS testlist_comp RIGHT_PARENTHESIS")
+    @pg.production("atom : left_parenthesis testlist_comp RIGHT_PARENTHESIS")
     def tuple((left_parenthesis, testlist_comp, right_parenthesis,)):
         return {
                 "type": "tuple",
                 "first_space": left_parenthesis.after_space,
                 "second_space": right_parenthesis.before_space,
-                "value": testlist_comp
+                "value": left_parenthesis.hidden_tokens_after + testlist_comp
                }
 
 
-    @pg.production("atom : LEFT_PARENTHESIS test RIGHT_PARENTHESIS")
+    @pg.production("atom : left_parenthesis test RIGHT_PARENTHESIS")
     def associative_parenthesis((left_parenthesis, test, right_parenthesis,)):
         return {
                 "type": "associative_parenthesis",
@@ -177,7 +177,7 @@ def include_data_structures(pg):
         return [test]
 
 
-    @pg.production("atom : LEFT_PARENTHESIS test comp_for RIGHT_PARENTHESIS")
+    @pg.production("atom : left_parenthesis test comp_for RIGHT_PARENTHESIS")
     def generator_comprehension((left_parenthesis, test, comp_for, right_parenthesis,)):
         return {
             "type": "generator_comprehension",

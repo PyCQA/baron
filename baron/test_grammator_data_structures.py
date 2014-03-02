@@ -1169,3 +1169,21 @@ def test_repr_quote_double():
                 "value": "b",
             }],
           }])
+
+def test_empty_tuple_endl():
+    "(\n)"
+    parse_simple([
+           ('LEFT_PARENTHESIS', '(', '', '', [], [('ENDL', '\n')]),
+           ('RIGHT_PARENTHESIS', ')'),
+          ],
+          [{
+            "type": "tuple",
+            "first_space": "",
+            "second_space": "",
+            "value": [{
+                "indent": "",
+                "space": "",
+                "type": "endl",
+                "value": "\n",
+            }],
+          }])
