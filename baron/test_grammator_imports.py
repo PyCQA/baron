@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
-from test_utils import parse_simple, space, name, importeu, dotted_as_name, dotted_name, dot, from_import, name_as_name
+from test_utils import parse_simple, space, name, importeu, dotted_as_name, dotted_name, from_import, name_as_name
 
 
 def test_simple_import():
@@ -23,7 +23,7 @@ def test_import_basic_dot():
           [importeu([
                      dotted_as_name(dotted_name([
                                                  name("pouet"),
-                                                 dot(),
+                                                 { "type": "dot", "value": ".", },
                                                  name("blob")
                                                 ])
                                    )
@@ -43,10 +43,29 @@ def test_import_more_dot():
           [importeu([
                      dotted_as_name(dotted_name([
                                                  name("pouet"),
-                                                 dot(),
+                                                 { "type": "dot", "value": ".", },
                                                  name("blob"),
                                                  space(" "),
-                                                 dot(),
+                                                 { "type": "dot", "value": ".", },
+                                                 name("plop")
+                                                ])
+                                   )
+                    ],
+                    space="  ")])
+    parse_simple([
+           ('IMPORT', 'import', '', '  '),
+           ('NAME', 'pouet'),
+           ('DOT', '.'),
+           ('NAME', 'blob'),
+           ('DOT', '.', ' '),
+           ('NAME', 'plop')],
+          [importeu([
+                     dotted_as_name(dotted_name([
+                                                 name("pouet"),
+                                                 { "type": "dot", "value": ".", },
+                                                 name("blob"),
+                                                 space(" "),
+                                                 { "type": "dot", "value": ".", },
                                                  name("plop")
                                                 ])
                                    )
@@ -103,7 +122,7 @@ def test_import_a_b_as_c():
                      dotted_as_name(
                                     dotted_name([
                                                  name('b'),
-                                                 dot(),
+                                                 { "type": "dot", "value": ".", },
                                                  name('d')
                                                 ]),
                                     as_=True,
@@ -215,7 +234,7 @@ def test_from_a_dot_c_import_b():
           [from_import(
                        dotted_name([
                                     name('a'),
-                                    dot(),
+                                    { "type": "dot", "value": ".", },
                                     name('c')
                                    ]),
                        targets=[
@@ -237,7 +256,7 @@ def test_from_a_dot_c_import_b_d():
           [from_import(
                        dotted_name([
                                     name('a'),
-                                    dot(),
+                                    { "type": "dot", "value": ".", },
                                     name('c')
                                    ]),
                        targets=[
@@ -406,7 +425,7 @@ def test_from_dot_a_import_b():
           ],
           [from_import(
                        dotted_name([
-                                    dot(),
+                                    { "type": "dot", "value": ".", },
                                     name('a')
                                    ]),
                        targets=[
@@ -427,9 +446,49 @@ def test_from_dot_dot_dot_a_import_b():
           ],
           [from_import(
                        dotted_name([
-                                    dot(),
-                                    dot(),
-                                    dot(),
+                                    { "type": "dot", "value": ".", },
+                                                 { "type": "dot", "value": ".", },
+                                                 { "type": "dot", "value": ".", },
+                                    name('a')
+                                   ]),
+                       targets=[
+                                name_as_name('b')
+                               ]
+                      )])
+    parse_simple([
+           ('FROM', 'from', '', ' '),
+           ('DOT', '.'),
+           ('DOT', '.'),
+           ('DOT', '.'),
+           ('NAME', 'a'),
+           ('IMPORT', 'import', ' ', ' '),
+           ('NAME', 'b')
+          ],
+          [from_import(
+                       dotted_name([
+                                                 { "type": "dot", "value": ".", },
+                                    { "type": "dot", "value": ".", },
+                                                 { "type": "dot", "value": ".", },
+                                    name('a')
+                                   ]),
+                       targets=[
+                                name_as_name('b')
+                               ]
+                      )])
+    parse_simple([
+           ('FROM', 'from', '', ' '),
+           ('DOT', '.'),
+           ('DOT', '.'),
+           ('DOT', '.'),
+           ('NAME', 'a'),
+           ('IMPORT', 'import', ' ', ' '),
+           ('NAME', 'b')
+          ],
+          [from_import(
+                       dotted_name([
+                                    { "type": "dot", "value": ".", },
+                                    { "type": "dot", "value": ".", },
+                                    { "type": "dot", "value": ".", },
                                     name('a')
                                    ]),
                        targets=[
@@ -447,7 +506,7 @@ def test_from_no_space_dot_a_import_b():
            ('NAME', 'b')
           ],
           [from_import(dotted_name([
-                                    dot(),
+                                    { "type": "dot", "value": ".", },
                                     name('a')
                                    ]),
                        targets=[
@@ -466,7 +525,7 @@ def test_from_dot_import_b():
           ],
           [from_import(
                        dotted_name([
-                                    dot()
+                                    { "type": "dot", "value": ".", }
                                    ]),
                        targets=[
                                 name_as_name('b')
@@ -482,7 +541,7 @@ def test_from_dot_no_space_import_b():
            ('NAME', 'b')
           ],
           [from_import(dotted_name([
-                                    dot()
+                                    { "type": "dot", "value": ".", }
                                    ]),
                        targets=[
                                 name_as_name('b')
@@ -500,7 +559,7 @@ def test_from_no_space_dot_import_b():
           ],
           [from_import(
                        dotted_name([
-                                    dot()
+                                    { "type": "dot", "value": ".", }
                                    ]),
                        targets=[
                                 name_as_name('b')
@@ -516,7 +575,7 @@ def test_from_no_space_dot_no_sapceimport_b():
            ('IMPORT', 'import', '', ' '),
            ('NAME', 'b')],
           [from_import(dotted_name([
-                                    dot()
+                                    { "type": "dot", "value": ".", }
                                    ]),
                        targets=[
                                 name_as_name('b')

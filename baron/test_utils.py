@@ -43,12 +43,6 @@ def string(value):
 def endl(value, **kwargs):
     return _node("endl", value, space="", indent="", **kwargs)
 
-def dot():
-    return {
-        "type": "dot",
-        "value": ".",
-    }
-
 def expression(value):
     return {
         "type": "expression",
@@ -82,4 +76,3 @@ def binary_operator(operator, first, second, first_space, second_space):
         "first_space": first_space,
         "second_space": second_space
     }
-
