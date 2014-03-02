@@ -66,6 +66,3 @@ def star():
 def binary_operator(operator, first, second, first_space, second_space):
     return _node('binary_operator', operator, first=first, second=second, first_space=first_space, second_space=second_space)
 
-def unitary_operator(operator, target, space):
-    return _node('unitary_operator', operator, target=target, space=space)
-

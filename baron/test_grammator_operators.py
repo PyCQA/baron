@@ -1,10 +1,8 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
-
-
 import pytest
 from utils import comparison, boolean_operator, ternary_operator, assignment, augmented_assignment
-from test_utils import parse_simple, name, binary_operator, unitary_operator
+from test_utils import parse_simple, name, binary_operator, space
 
 
 def test_simple_power():
@@ -165,7 +163,7 @@ def test_power_factor():
           [binary_operator(
                            '**',
                            first=name('a'),
-                           second=unitary_operator('+', name('b'), space=""),
+                           second={ "type": "unitary_operator", "value": '+', "target": name('b'), "space": "", },
                            first_space=" ",
                            second_space="  "
                           )])
@@ -181,7 +179,7 @@ def test_power_factor_minus():
           [binary_operator(
                            '**',
                            first=name('a'),
-                           second=unitary_operator('-', name('b'), space=""),
+                           second={ "type": "unitary_operator", "value": '-', "target": name('b'), "space": "", },
                            first_space=" ",
                            second_space="  "
                           )])
@@ -197,7 +195,7 @@ def test_power_factor_tild():
           [binary_operator(
                            '**',
                            first=name('a'),
-                           second=unitary_operator('~', name('b'), space=""),
+                           second={ "type": "unitary_operator", "value": '~', "target": name('b'), "space": "", },
                            first_space=" ",
                            second_space="  "
                           )])
@@ -205,32 +203,95 @@ def test_power_factor_tild():
 def test_power_operator_madness():
     "a **  ~+-b"
     parse_simple([
-           ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
-           ('TILDE', '~'),
-           ('PLUS', '+'),
-           ('MINUS', '-'),
-           ('NAME', 'b')
-          ],
-          [binary_operator(
-                   '**',
-                   first=name('a'),
-                   second=unitary_operator(
-                                           '~',
-                                           unitary_operator(
-                                                           '+',
-                                                           unitary_operator(
-                                                                    '-',
-                                                                    name('b'),
-                                                                    space=""
-                                                                   ),
-                                                           space=""
-                                           ),
-                                           space=""
-                                          ),
-                   first_space=" ",
-                   second_space="  "
-              )])
+         ('NAME', 'a'),
+         ('DOUBLE_STAR', '**', ' ', '  '),
+         ('TILDE', '~'),
+         ('PLUS', '+'),
+         ('MINUS', '-'),
+         ('NAME', 'b')
+        ],
+        [binary_operator(
+            '**',
+            first=name('a'),
+            second={
+                "type": "unitary_operator",
+                "value": '~',
+                "target": {
+                    "type": "unitary_operator",
+                    "value": '+',
+                    "target": {
+                        "type": "unitary_operator",
+                        "value": "-",
+                        "target": name('b'),
+                        "space": "",
+                    },
+                    "space": "",
+                },
+                "space": ""
+            },
+            first_space=" ",
+            second_space="  "
+            )])
+    parse_simple([
+         ('NAME', 'a'),
+         ('DOUBLE_STAR', '**', ' ', '  '),
+         ('TILDE', '~'),
+         ('PLUS', '+'),
+         ('MINUS', '-'),
+         ('NAME', 'b')
+        ],
+        [binary_operator(
+                 '**',
+                 first=name('a'),
+                 second={
+                    "type": "unitary_operator",
+                    "value": '~',
+                    "target": {
+                        "type": "unitary_operator",
+                        "value": '+',
+                        "target": {
+                            "type": "unitary_operator",
+                            "value": "-",
+                            "target": name('b'),
+                            "space": "",
+                        },
+                        "space": ""
+                    },
+                    "space": "",
+                },
+                 first_space=" ",
+                 second_space="  "
+            )])
+    parse_simple([
+         ('NAME', 'a'),
+         ('DOUBLE_STAR', '**', ' ', '  '),
+         ('TILDE', '~'),
+         ('PLUS', '+'),
+         ('MINUS', '-'),
+         ('NAME', 'b')
+        ],
+        [binary_operator(
+            '**',
+            first=name('a'),
+            second={
+                "type": "unitary_operator",
+                "value": "~",
+                "target": {
+                    "type": "unitary_operator",
+                    "value": '+',
+                    "target": {
+                        "type": "unitary_operator",
+                        "value": "-",
+                        "target": name('b'),
+                        "space": ""
+                    },
+                    "space": "",
+                },
+                "space": "",
+            },
+            first_space=" ",
+            second_space="  "
+        )])
 
 def test_power_factor_tild_space():
     "a **  ~ b"
@@ -243,7 +304,7 @@ def test_power_factor_tild_space():
           [binary_operator(
                            '**',
                            first=name('a'),
-                           second=unitary_operator('~', name('b'), space=" "),
+                           second={ "type": "unitary_operator", "value": '~', "target": name('b'), "space": " ", },
                            first_space=" ",
                            second_space="  "
                           )])
@@ -1845,28 +1906,42 @@ def test_not():
            ('NOT', 'not', '', ' '),
            ('NAME', 'a'),
           ],
-          [unitary_operator(
-                            'not',
-                            target=name('a'),
-                            space=" ",
-                           )])
+          [{ "type": "unitary_operator", "value": 'not', "target": name('a'), "space": " ", }])
 
 def test_not_not():
     "not not a"
     parse_simple([
-           ('NOT', 'not', '', ' '),
-           ('NOT', 'not', '', ' '),
-           ('NAME', 'a'),
-          ],
-          [unitary_operator(
-                            'not',
-                            target=unitary_operator(
-                                                    'not',
-                                                    target=name('a'),
-                                                    space=" ",
-                            ),
-                            space=" ",
-                           )])
+         ('NOT', 'not', '', ' '),
+         ('NOT', 'not', '', ' '),
+         ('NAME', 'a'),
+        ],
+        [{
+            "type": "unitary_operator",
+            "value": 'not',
+            "target": {
+                "type": "unitary_operator",
+                "value": 'not',
+                "target": name('a'),
+                "space": " "
+            },
+            "space": " "
+        }])
+    parse_simple([
+         ('NOT', 'not', '', ' '),
+         ('NOT', 'not', '', ' '),
+         ('NAME', 'a'),
+        ],
+        [{
+            "type": "unitary_operator",
+            "value": 'not',
+            "target": {
+                "type": "unitary_operator",
+                "value": 'not',
+                "target": name('a'),
+                "space": " "
+            },
+            "space": " ",
+        }])
 
 def test_and():
     "a and b"
