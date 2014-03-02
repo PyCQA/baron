@@ -97,3 +97,23 @@ def test_tuple_one():
         ('NAME', 'a'),
         ('RIGHT_PARENTHESIS', ')', '', '', [('ENDL', '\n')], []),
     ]
+
+
+def test_set_one():
+    assert group([
+        ('LEFT_BRACKET', '{'),
+        ('ENDL', '\n'),
+        ('NAME', 'a'),
+        ('ENDL', '\n'),
+        ('COMMA', ','),
+        ('ENDL', '\n'),
+        ('NAME', 'a'),
+        ('ENDL', '\n'),
+        ('RIGHT_BRACKET', '}'),
+    ]) == [
+        ('LEFT_BRACKET', '{', '', '', [], [('ENDL', '\n'), ]),
+        ('NAME', 'a'),
+        ('COMMA', ',', '', '', [('ENDL', '\n')], [('ENDL', '\n')]),
+        ('NAME', 'a'),
+        ('RIGHT_BRACKET', '}', '', '', [('ENDL', '\n')], []),
+    ]
