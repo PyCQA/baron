@@ -49,12 +49,6 @@ def expression(value):
         "value": value,
     }
 
-def dotted_name(value):
-    return {
-        "type": "dotted_name",
-        "value": value,
-    }
-
 def importeu(value, **kwargs):
     return _node("import", value, **kwargs)
 
