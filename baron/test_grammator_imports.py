@@ -8,7 +8,19 @@ def test_simple_import():
     parse_simple([
            ('IMPORT', 'import', '', '  '),
            ('NAME', 'pouet')],
-          [{ "type": "import", "value": [                      dotted_as_name({ "type": "dotted_name", "value": [{ "type": "name", "value": "pouet", }], })                     ], "space": "  ", }])
+          [{
+            "type": "import",
+            "value": [
+                      dotted_as_name({
+                                      "type": "dotted_name",
+                                      "value": [{
+                                                 "type": "name",
+                                                 "value": "pouet",
+                                                }],
+                                     })
+                     ],
+            "space": "  ",
+           }])
 
 def test_import_basic_dot():
     "import   pouet.blob"

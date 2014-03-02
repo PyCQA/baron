@@ -141,7 +141,9 @@ def include_imports(pg):
                            "value": dotted_name
                           },
                  "before_space": "",
-                 "after_space": ""
+                 "after_space": "",
+                 "as_": False,
+                 "target": None
                 }]
 
     @pg.production("dotted_name : dotted_name dotted_name_element")
