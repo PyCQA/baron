@@ -211,7 +211,7 @@ def test_file_input_simple_stmt_one_item_semicolon_space():
     a ;
     """
     parse_multi([
-           ('NAME', 'a'), ('SEMICOLON', ';', ' ', ' '), ('ENDL', '\n'),
+           ('NAME', 'a'), ('SEMICOLON', ';', [('SPACE', ' ')], [('SPACE', ' ')]), ('ENDL', '\n'),
         ],[
            { "type": "name", "value": 'a', }, { "type": "semicolon", "value": ";", "before_space": ' ', "after_space": ' ', }, { "type": "endl", "value": "\n", "space": "", "indent": "", },
           ])
@@ -222,12 +222,12 @@ def test_funcdef_stmt_indent():
         pass
     """
     parse_multi([
-             ('DEF', 'def', '', ' '),
+             ('DEF', 'def', [], [('SPACE', ' ')]),
              ('NAME', 'a'),
-             ('LEFT_PARENTHESIS', '(', ' '),
+             ('LEFT_PARENTHESIS', '(', [('SPACE', ' ')]),
              ('RIGHT_PARENTHESIS', ')'),
-             ('COLON', ':', ' '),
-             ('ENDL', '\n', '', '    '),
+             ('COLON', ':', [('SPACE', ' ')]),
+             ('ENDL', '\n', [], [('SPACE', '    ')]),
              ('INDENT', ''),
              ('PASS', 'pass'),
              ('ENDL', '\n'),
@@ -264,13 +264,13 @@ def test_funcdef_stmt_one_parameter_indent():
         pass
     """
     parse_multi([
-             ('DEF', 'def', '', ' '),
+             ('DEF', 'def', [], [('SPACE', ' ')]),
              ('NAME', 'a'),
-             ('LEFT_PARENTHESIS', '(', ' ', ' '),
+             ('LEFT_PARENTHESIS', '(', [('SPACE', ' ')], [('SPACE', ' ')]),
              ('NAME', 'x'),
-             ('RIGHT_PARENTHESIS', ')', ' '),
-             ('COLON', ':', ' '),
-             ('ENDL', '\n', '', '    '),
+             ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+             ('COLON', ':', [('SPACE', ' ')]),
+             ('ENDL', '\n', [], [('SPACE', '    ')]),
              ('INDENT', ''),
              ('PASS', 'pass'),
              ('ENDL', '\n'),
@@ -316,14 +316,14 @@ def test_funcdef_stmt_one_parameter_comma_indent():
         pass
     """
     parse_multi([
-             ('DEF', 'def', '', ' '),
+             ('DEF', 'def', [], [('SPACE', ' ')]),
              ('NAME', 'a'),
-             ('LEFT_PARENTHESIS', '(', ' ', ' '),
+             ('LEFT_PARENTHESIS', '(', [('SPACE', ' ')], [('SPACE', ' ')]),
              ('NAME', 'x'),
-             ('COMMA', ',', ' ', ' '),
-             ('RIGHT_PARENTHESIS', ')', ' '),
-             ('COLON', ':', ' '),
-             ('ENDL', '\n', '', '    '),
+             ('COMMA', ',', [('SPACE', ' ')], [('SPACE', ' ')]),
+             ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+             ('COLON', ':', [('SPACE', ' ')]),
+             ('ENDL', '\n', [], [('SPACE', '    ')]),
              ('INDENT', ''),
              ('PASS', 'pass'),
              ('ENDL', '\n'),
@@ -373,16 +373,16 @@ def test_funcdef_stmt_one_parameter_comma_default_indent():
         pass
     """
     parse_multi([
-             ('DEF', 'def', '', ' '),
+             ('DEF', 'def', [], [('SPACE', ' ')]),
              ('NAME', 'a'),
-             ('LEFT_PARENTHESIS', '(', ' ', ' '),
+             ('LEFT_PARENTHESIS', '(', [('SPACE', ' ')], [('SPACE', ' ')]),
              ('NAME', 'x'),
              ('EQUAL', '='),
              ('INT', '1'),
-             ('COMMA', ',', ' ', ' '),
-             ('RIGHT_PARENTHESIS', ')', ' '),
-             ('COLON', ':', ' '),
-             ('ENDL', '\n', '', '    '),
+             ('COMMA', ',', [('SPACE', ' ')], [('SPACE', ' ')]),
+             ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+             ('COLON', ':', [('SPACE', ' ')]),
+             ('ENDL', '\n', [], [('SPACE', '    ')]),
              ('INDENT', ''),
              ('PASS', 'pass'),
              ('ENDL', '\n'),
@@ -436,13 +436,13 @@ def test_class_empty():
         pass
     """
     parse_multi([
-             ('CLASS', 'class', '', ' '),
+             ('CLASS', 'class', [], [('SPACE', ' ')]),
              ('NAME', 'A'),
              ('COLON', ':'),
-             ('ENDL', '\n', '', '    '),
+             ('ENDL', '\n', [], [('SPACE', '    ')]),
              ('INDENT', ''),
              ('PASS', 'pass'),
-             ('ENDL', '\n', '', ''),
+             ('ENDL', '\n', [], []),
              ('DEDENT', ''),
           ],
           [{
@@ -476,15 +476,15 @@ def test_class_empty_parenthesis():
         pass
     """
     parse_multi([
-             ('CLASS', 'class', '', ' '),
+             ('CLASS', 'class', [], [('SPACE', ' ')]),
              ('NAME', 'A'),
-             ('LEFT_PARENTHESIS', '(', ' ', ' '),
-             ('RIGHT_PARENTHESIS', ')', '', ' '),
+             ('LEFT_PARENTHESIS', '(', [('SPACE', ' ')], [('SPACE', ' ')]),
+             ('RIGHT_PARENTHESIS', ')', [], [('SPACE', ' ')]),
              ('COLON', ':'),
-             ('ENDL', '\n', '', '    '),
+             ('ENDL', '\n', [], [('SPACE', '    ')]),
              ('INDENT', ''),
              ('PASS', 'pass'),
-             ('ENDL', '\n', '', ''),
+             ('ENDL', '\n', [], []),
              ('DEDENT', ''),
           ],
           [{
@@ -518,16 +518,16 @@ def test_class_inherit():
         pass
     """
     parse_multi([
-             ('CLASS', 'class', '', ' '),
+             ('CLASS', 'class', [], [('SPACE', ' ')]),
              ('NAME', 'A'),
-             ('LEFT_PARENTHESIS', '(', ' ', ' '),
+             ('LEFT_PARENTHESIS', '(', [('SPACE', ' ')], [('SPACE', ' ')]),
              ('NAME', 'B'),
-             ('RIGHT_PARENTHESIS', ')', ' ', ' '),
+             ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')], [('SPACE', ' ')]),
              ('COLON', ':'),
-             ('ENDL', '\n', '', '    '),
+             ('ENDL', '\n', [], [('SPACE', '    ')]),
              ('INDENT', ''),
              ('PASS', 'pass'),
-             ('ENDL', '\n', '', ''),
+             ('ENDL', '\n', [], []),
              ('DEDENT', ''),
           ],
           [{
@@ -564,14 +564,14 @@ def test_funcdef_stmt_one_start_parameter_indent():
         pass
     """
     parse_multi([
-             ('DEF', 'def', '', ' '),
+             ('DEF', 'def', [], [('SPACE', ' ')]),
              ('NAME', 'a'),
              ('LEFT_PARENTHESIS', '('),
              ('STAR', '*'),
              ('NAME', 'b'),
              ('RIGHT_PARENTHESIS', ')'),
-             ('COLON', ':', '', ' '),
-             ('ENDL', '\n', '', '    '),
+             ('COLON', ':', [], [('SPACE', ' ')]),
+             ('ENDL', '\n', [], [('SPACE', '    ')]),
              ('INDENT', ''),
              ('PASS', 'pass'),
              ('ENDL', '\n'),
@@ -612,14 +612,14 @@ def test_funcdef_stmt_one_star_star_parameter_indent():
         pass
     """
     parse_multi([
-             ('DEF', 'def', '', ' '),
+             ('DEF', 'def', [], [('SPACE', ' ')]),
              ('NAME', 'a'),
              ('LEFT_PARENTHESIS', '('),
              ('DOUBLE_STAR', '**'),
              ('NAME', 'b'),
              ('RIGHT_PARENTHESIS', ')'),
-             ('COLON', ':', '', ' '),
-             ('ENDL', '\n', '', '    '),
+             ('COLON', ':', [], [('SPACE', ' ')]),
+             ('ENDL', '\n', [], [('SPACE', '    ')]),
              ('INDENT', ''),
              ('PASS', 'pass'),
              ('ENDL', '\n'),
@@ -660,7 +660,7 @@ def test_comment():
       # comment
     """
     parse_multi([
-             ('COMMENT', '# comment', '  ', ''),
+             ('COMMENT', '# comment', [('SPACE', '  ')]),
              ('ENDL', '\n'),
           ],
           [{
@@ -679,9 +679,9 @@ def test_with_a():
     with a: pass
     """
     parse_multi([
-             ('WITH', 'with', '', ' '),
+             ('WITH', 'with', [], [('SPACE', ' ')]),
              ('NAME', 'a'),
-             ('COLON', ':', '', ' '),
+             ('COLON', ':', [], [('SPACE', ' ')]),
              ('PASS', 'pass'),
              ('ENDL', '\n'),
           ],
@@ -715,11 +715,11 @@ def test_with_a_as_b():
     with a as b: pass
     """
     parse_multi([
-             ('WITH', 'with', '', ' '),
+             ('WITH', 'with', [], [('SPACE', ' ')]),
              ('NAME', 'a'),
-             ('AS', 'as', ' ', ' '),
+             ('AS', 'as', [('SPACE', ' ')], [('SPACE', ' ')]),
              ('NAME', 'b'),
-             ('COLON', ':', '', ' '),
+             ('COLON', ':', [], [('SPACE', ' ')]),
              ('PASS', 'pass'),
              ('ENDL', '\n'),
           ],
@@ -756,13 +756,13 @@ def test_with_a_as_b_c():
     with a as b, c: pass
     """
     parse_multi([
-             ('WITH', 'with', '', ' '),
+             ('WITH', 'with', [], [('SPACE', ' ')]),
              ('NAME', 'a'),
-             ('AS', 'as', ' ', ' '),
+             ('AS', 'as', [('SPACE', ' ')], [('SPACE', ' ')]),
              ('NAME', 'b'),
-             ('COMMA', ',', '', ' '),
+             ('COMMA', ',', [], [('SPACE', ' ')]),
              ('NAME', 'c'),
-             ('COLON', ':', '', ' '),
+             ('COLON', ':', [], [('SPACE', ' ')]),
              ('PASS', 'pass'),
              ('ENDL', '\n'),
           ],
@@ -813,14 +813,14 @@ def test_decorator():
     def b(): pass
     """
     parse_multi([
-             ('AT', '@', '', ''),
+             ('AT', '@', [], []),
              ('NAME', 'a'),
              ('ENDL', '\n'),
-             ('DEF', 'def', '', ' '),
+             ('DEF', 'def', [], [('SPACE', ' ')]),
              ('NAME', 'b'),
              ('LEFT_PARENTHESIS', '('),
              ('RIGHT_PARENTHESIS', ')'),
-             ('COLON', ':', '', ' '),
+             ('COLON', ':', [], [('SPACE', ' ')]),
              ('PASS', 'pass'),
              ('ENDL', '\n'),
           ],
@@ -866,16 +866,16 @@ def test_decorator_parenthesis():
     def b(): pass
     """
     parse_multi([
-             ('AT', '@', '', ''),
+             ('AT', '@', [], []),
              ('NAME', 'a'),
              ('LEFT_PARENTHESIS', '('),
              ('RIGHT_PARENTHESIS', ')'),
              ('ENDL', '\n'),
-             ('DEF', 'def', '', ' '),
+             ('DEF', 'def', [], [('SPACE', ' ')]),
              ('NAME', 'b'),
              ('LEFT_PARENTHESIS', '('),
              ('RIGHT_PARENTHESIS', ')'),
-             ('COLON', ':', '', ' '),
+             ('COLON', ':', [], [('SPACE', ' ')]),
              ('PASS', 'pass'),
              ('ENDL', '\n'),
           ],
@@ -927,17 +927,17 @@ def test_decorator_parenthesis_arg():
     def b(): pass
     """
     parse_multi([
-             ('AT', '@', '', ''),
+             ('AT', '@', [], []),
              ('NAME', 'a'),
              ('LEFT_PARENTHESIS', '('),
              ('NAME', 'c'),
              ('RIGHT_PARENTHESIS', ')'),
              ('ENDL', '\n'),
-             ('DEF', 'def', '', ' '),
+             ('DEF', 'def', [], [('SPACE', ' ')]),
              ('NAME', 'b'),
              ('LEFT_PARENTHESIS', '('),
              ('RIGHT_PARENTHESIS', ')'),
-             ('COLON', ':', '', ' '),
+             ('COLON', ':', [], [('SPACE', ' ')]),
              ('PASS', 'pass'),
              ('ENDL', '\n'),
           ],
@@ -999,17 +999,17 @@ def test_decorator_two():
     def b(): pass
     """
     parse_multi([
-             ('AT', '@', '', ''),
+             ('AT', '@', [], []),
              ('NAME', 'a'),
              ('ENDL', '\n'),
-             ('AT', '@', '', ' '),
+             ('AT', '@', [], [('SPACE', ' ')]),
              ('NAME', 'c'),
              ('ENDL', '\n'),
-             ('DEF', 'def', '', ' '),
+             ('DEF', 'def', [], [('SPACE', ' ')]),
              ('NAME', 'b'),
              ('LEFT_PARENTHESIS', '('),
              ('RIGHT_PARENTHESIS', ')'),
-             ('COLON', ':', '', ' '),
+             ('COLON', ':', [], [('SPACE', ' ')]),
              ('PASS', 'pass'),
              ('ENDL', '\n'),
           ],
@@ -1071,14 +1071,14 @@ def test_class_decorator():
     class b(): pass
     """
     parse_multi([
-             ('AT', '@', '', ''),
+             ('AT', '@', [], []),
              ('NAME', 'a'),
              ('ENDL', '\n'),
-             ('CLASS', 'class', '', ' '),
+             ('CLASS', 'class', [], [('SPACE', ' ')]),
              ('NAME', 'b'),
              ('LEFT_PARENTHESIS', '('),
              ('RIGHT_PARENTHESIS', ')'),
-             ('COLON', ':', '', ' '),
+             ('COLON', ':', [], [('SPACE', ' ')]),
              ('PASS', 'pass'),
              ('ENDL', '\n'),
           ],
@@ -1126,17 +1126,17 @@ def test_class_decorator_two():
     class b(): pass
     """
     parse_multi([
-             ('AT', '@', '', ''),
+             ('AT', '@', [], []),
              ('NAME', 'a'),
              ('ENDL', '\n'),
-             ('AT', '@', '', ' '),
+             ('AT', '@', [], [('SPACE', ' ')]),
              ('NAME', 'c'),
              ('ENDL', '\n'),
-             ('CLASS', 'class', '', ' '),
+             ('CLASS', 'class', [], [('SPACE', ' ')]),
              ('NAME', 'b'),
              ('LEFT_PARENTHESIS', '('),
              ('RIGHT_PARENTHESIS', ')'),
-             ('COLON', ':', '', ' '),
+             ('COLON', ':', [], [('SPACE', ' ')]),
              ('PASS', 'pass'),
              ('ENDL', '\n'),
           ],
@@ -1198,7 +1198,7 @@ def test_fplist():
     def a((b,)): pass
     """
     parse_multi([
-            ('DEF', 'def', '', ' '),
+            ('DEF', 'def', [], [('SPACE', ' ')]),
             ('NAME', 'a'),
             ('LEFT_PARENTHESIS', '('),
             ('LEFT_PARENTHESIS', '('),
@@ -1206,7 +1206,7 @@ def test_fplist():
             ('COMMA', ','),
             ('RIGHT_PARENTHESIS', ')'),
             ('RIGHT_PARENTHESIS', ')'),
-            ('COLON', ':', '', ' '),
+            ('COLON', ':', [], [('SPACE', ' ')]),
             ('PASS', 'pass'),
             ('ENDL', '\n'),
           ],
@@ -1259,7 +1259,7 @@ def test_fplist_two():
     def a((b,c)): pass
     """
     parse_multi([
-            ('DEF', 'def', '', ' '),
+            ('DEF', 'def', [], [('SPACE', ' ')]),
             ('NAME', 'a'),
             ('LEFT_PARENTHESIS', '('),
             ('LEFT_PARENTHESIS', '('),
@@ -1268,7 +1268,7 @@ def test_fplist_two():
             ('NAME', 'c'),
             ('RIGHT_PARENTHESIS', ')'),
             ('RIGHT_PARENTHESIS', ')'),
-            ('COLON', ':', '', ' '),
+            ('COLON', ':', [], [('SPACE', ' ')]),
             ('PASS', 'pass'),
             ('ENDL', '\n'),
           ],
@@ -1330,14 +1330,14 @@ def test_fplist_alone():
     def a((b)): pass
     """
     parse_multi([
-            ('DEF', 'def', '', ' '),
+            ('DEF', 'def', [], [('SPACE', ' ')]),
             ('NAME', 'a'),
             ('LEFT_PARENTHESIS', '('),
             ('LEFT_PARENTHESIS', '('),
             ('NAME', 'b'),
             ('RIGHT_PARENTHESIS', ')'),
             ('RIGHT_PARENTHESIS', ')'),
-            ('COLON', ':', '', ' '),
+            ('COLON', ':', [], [('SPACE', ' ')]),
             ('PASS', 'pass'),
             ('ENDL', '\n'),
           ],

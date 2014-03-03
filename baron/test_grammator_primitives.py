@@ -14,7 +14,7 @@ def test_return():
 def test_return_a():
     "return a"
     parse_simple([
-           ('RETURN', 'return', '', ' '),
+           ('RETURN', 'return', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ],
          [return_({ "type": "name", "value": 'a', }, space=" ")])
@@ -29,7 +29,7 @@ def test_yield():
 def test_yield_a():
     "yield a"
     parse_simple([
-           ('YIELD', 'yield', '', ' '),
+           ('YIELD', 'yield', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ],
          [yield_({ "type": "name", "value": 'a', }, space=" ")])
@@ -37,7 +37,7 @@ def test_yield_a():
 def test_del():
     "del a"
     parse_simple([
-           ('DEL', 'del', '', ' '),
+           ('DEL', 'del', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ],
           [
@@ -78,7 +78,7 @@ def test_pass():
 def test_assert():
     "assert a"
     parse_simple([
-           ('ASSERT', 'assert', '', ' '),
+           ('ASSERT', 'assert', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ],
           [{
@@ -93,9 +93,9 @@ def test_assert():
 def test_assert_message():
     "assert a , b"
     parse_simple([
-           ('ASSERT', 'assert', '', ' '),
+           ('ASSERT', 'assert', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', ' ', ' '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{
@@ -107,9 +107,9 @@ def test_assert_message():
             "third_space": " "
           }])
     parse_simple([
-           ('ASSERT', 'assert', '', ' '),
+           ('ASSERT', 'assert', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', ' ', ' '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{
@@ -124,7 +124,7 @@ def test_assert_message():
 def test_raise_empty():
     "raise"
     parse_simple([
-           ('RAISE', 'raise', '', ' '),
+           ('RAISE', 'raise', [], [('SPACE', ' ')]),
           ],
           [{
             "type": "raise",
@@ -141,7 +141,7 @@ def test_raise_empty():
 def test_raise():
     "raise a"
     parse_simple([
-           ('RAISE', 'raise', '', ' '),
+           ('RAISE', 'raise', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ],
           [{
@@ -159,9 +159,9 @@ def test_raise():
 def test_raise_instance():
     "raise a, b"
     parse_simple([
-           ('RAISE', 'raise', '', ' '),
+           ('RAISE', 'raise', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', 'comma', '', ' '),
+           ('COMMA', 'comma', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{
@@ -176,9 +176,9 @@ def test_raise_instance():
             "fith_space": ""
           }])
     parse_simple([
-           ('RAISE', 'raise', '', ' '),
+           ('RAISE', 'raise', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', 'comma', '', ' '),
+           ('COMMA', 'comma', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{
@@ -196,11 +196,11 @@ def test_raise_instance():
 def test_raise_instance_traceback():
     "raise a, b, c"
     parse_simple([
-           ('RAISE', 'raise', '', ' '),
+           ('RAISE', 'raise', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', 'comma', '', ' '),
+           ('COMMA', 'comma', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', 'comma', '', ' '),
+           ('COMMA', 'comma', [], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -215,11 +215,11 @@ def test_raise_instance_traceback():
             "fith_space": " "
           }])
     parse_simple([
-           ('RAISE', 'raise', '', ' '),
+           ('RAISE', 'raise', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', 'comma', '', ' '),
+           ('COMMA', 'comma', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', 'comma', '', ' '),
+           ('COMMA', 'comma', [], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -234,11 +234,11 @@ def test_raise_instance_traceback():
             "fith_space": " "
           }])
     parse_simple([
-           ('RAISE', 'raise', '', ' '),
+           ('RAISE', 'raise', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', 'comma', '', ' '),
+           ('COMMA', 'comma', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', 'comma', '', ' '),
+           ('COMMA', 'comma', [], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -256,7 +256,7 @@ def test_raise_instance_traceback():
 def test_exec():
     "exec a"
     parse_simple([
-           ('EXEC', 'exec', '', ' '),
+           ('EXEC', 'exec', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ],
           [{
@@ -274,9 +274,9 @@ def test_exec():
 def test_exec_in():
     "exec a in b"
     parse_simple([
-           ('EXEC', 'exec', '', ' '),
+           ('EXEC', 'exec', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{
@@ -291,9 +291,9 @@ def test_exec_in():
             "fith_space": ""
           }])
     parse_simple([
-           ('EXEC', 'exec', '', ' '),
+           ('EXEC', 'exec', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{
@@ -311,11 +311,11 @@ def test_exec_in():
 def test_exec_in_c():
     "exec a in b, c"
     parse_simple([
-           ('EXEC', 'exec', '', ' '),
+           ('EXEC', 'exec', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -330,11 +330,11 @@ def test_exec_in_c():
             "fith_space": " "
           }])
     parse_simple([
-           ('EXEC', 'exec', '', ' '),
+           ('EXEC', 'exec', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -349,11 +349,11 @@ def test_exec_in_c():
             "fith_space": " "
           }])
     parse_simple([
-           ('EXEC', 'exec', '', ' '),
+           ('EXEC', 'exec', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -371,7 +371,7 @@ def test_exec_in_c():
 def test_global():
     "global a"
     parse_simple([
-           ('GLOBAL', 'global', '', ' '),
+           ('GLOBAL', 'global', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ],
           [{
@@ -385,9 +385,9 @@ def test_global():
 def test_global_one():
     "global a, b"
     parse_simple([
-           ('GLOBAL', 'global', '', ' '),
+           ('GLOBAL', 'global', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{
@@ -401,9 +401,9 @@ def test_global_one():
                      ]
           }])
     parse_simple([
-           ('GLOBAL', 'global', '', ' '),
+           ('GLOBAL', 'global', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{
@@ -420,11 +420,11 @@ def test_global_one():
 def test_global_two():
     "global a, b ,  c"
     parse_simple([
-           ('GLOBAL', 'global', '', ' '),
+           ('GLOBAL', 'global', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' ', '  '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -442,11 +442,11 @@ def test_global_two():
                      ]
           }])
     parse_simple([
-           ('GLOBAL', 'global', '', ' '),
+           ('GLOBAL', 'global', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' ', '  '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -464,11 +464,11 @@ def test_global_two():
                      ]
           }])
     parse_simple([
-           ('GLOBAL', 'global', '', ' '),
+           ('GLOBAL', 'global', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' ', '  '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -486,11 +486,11 @@ def test_global_two():
                      ]
           }])
     parse_simple([
-           ('GLOBAL', 'global', '', ' '),
+           ('GLOBAL', 'global', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' ', '  '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -508,33 +508,11 @@ def test_global_two():
                      ]
           }])
     parse_simple([
-           ('GLOBAL', 'global', '', ' '),
+           ('GLOBAL', 'global', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' ', '  '),
-           ('NAME', 'c'),
-          ],
-          [{
-            "type": "global",
-            "space": " ",
-            "value": [
-                      {"type": "name", "value": "a"},
-                      {"type": "comma", "value": ","},
-                      {"type": "space", "value": " "},
-                      {"type": "name", "value": "b"},
-                      {"type": "space", "value": " "},
-                     {"type": "comma", "value": ","},
-                      {"type": "space", "value": "  "},
-                      {"type": "name", "value": "c"},
-                     ]
-          }])
-    parse_simple([
-           ('GLOBAL', 'global', '', ' '),
-           ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
-           ('NAME', 'b'),
-           ('COMMA', ',', ' ', '  '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -552,11 +530,11 @@ def test_global_two():
                      ]
           }])
     parse_simple([
-           ('GLOBAL', 'global', '', ' '),
+           ('GLOBAL', 'global', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' ', '  '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -574,11 +552,11 @@ def test_global_two():
                      ]
           }])
     parse_simple([
-           ('GLOBAL', 'global', '', ' '),
+           ('GLOBAL', 'global', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' ', '  '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -596,11 +574,11 @@ def test_global_two():
                      ]
           }])
     parse_simple([
-           ('GLOBAL', 'global', '', ' '),
+           ('GLOBAL', 'global', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' ', '  '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -618,11 +596,33 @@ def test_global_two():
                      ]
           }])
     parse_simple([
-           ('GLOBAL', 'global', '', ' '),
+           ('GLOBAL', 'global', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' ', '  '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', '  ')]),
+           ('NAME', 'c'),
+          ],
+          [{
+            "type": "global",
+            "space": " ",
+            "value": [
+                      {"type": "name", "value": "a"},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": " "},
+                      {"type": "name", "value": "b"},
+                      {"type": "space", "value": " "},
+                     {"type": "comma", "value": ","},
+                      {"type": "space", "value": "  "},
+                      {"type": "name", "value": "c"},
+                     ]
+          }])
+    parse_simple([
+           ('GLOBAL', 'global', [], [('SPACE', ' ')]),
+           ('NAME', 'a'),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
+           ('NAME', 'b'),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -640,11 +640,11 @@ def test_global_two():
                      ]
           }])
     parse_simple([
-           ('GLOBAL', 'global', '', ' '),
+           ('GLOBAL', 'global', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' ', '  '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -662,11 +662,11 @@ def test_global_two():
                      ]
           }])
     parse_simple([
-           ('GLOBAL', 'global', '', ' '),
+           ('GLOBAL', 'global', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' ', '  '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -684,11 +684,11 @@ def test_global_two():
                      ]
           }])
     parse_simple([
-           ('GLOBAL', 'global', '', ' '),
+           ('GLOBAL', 'global', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' ', '  '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -706,11 +706,11 @@ def test_global_two():
                      ]
           }])
     parse_simple([
-           ('GLOBAL', 'global', '', ' '),
+           ('GLOBAL', 'global', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' ', '  '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -728,11 +728,11 @@ def test_global_two():
                      ]
           }])
     parse_simple([
-           ('GLOBAL', 'global', '', ' '),
+           ('GLOBAL', 'global', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' ', '  '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -750,11 +750,11 @@ def test_global_two():
                      ]
           }])
     parse_simple([
-           ('GLOBAL', 'global', '', ' '),
+           ('GLOBAL', 'global', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' ', '  '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -772,11 +772,11 @@ def test_global_two():
                      ]
           }])
     parse_simple([
-           ('GLOBAL', 'global', '', ' '),
+           ('GLOBAL', 'global', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' ', '  '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -794,11 +794,11 @@ def test_global_two():
                      ]
           }])
     parse_simple([
-           ('GLOBAL', 'global', '', ' '),
+           ('GLOBAL', 'global', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' ', '  '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -819,7 +819,7 @@ def test_global_two():
 def test_print():
     "print"
     parse_simple([
-           ('PRINT', 'print', '', ''),
+           ('PRINT', 'print', [], []),
           ],
           [{
             "type": "print",
@@ -832,7 +832,7 @@ def test_print():
 def test_print_a():
     "print a"
     parse_simple([
-           ('PRINT', 'print', '', ' '),
+           ('PRINT', 'print', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ],
           [{
@@ -846,9 +846,9 @@ def test_print_a():
 def test_print_a_b():
     "print a, b"
     parse_simple([
-           ('PRINT', 'print', '', ' '),
+           ('PRINT', 'print', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{
@@ -863,9 +863,9 @@ def test_print_a_b():
             "destination": None,
           }])
     parse_simple([
-           ('PRINT', 'print', '', ' '),
+           ('PRINT', 'print', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{
@@ -883,11 +883,11 @@ def test_print_a_b():
 def test_print_a_b_comma():
     "print a, b,"
     parse_simple([
-           ('PRINT', 'print', '', ' '),
+           ('PRINT', 'print', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', '', ''),
+           ('COMMA', ',', [], []),
           ],
           [{
             "type": "print",
@@ -902,11 +902,11 @@ def test_print_a_b_comma():
             "destination": None,
           }])
     parse_simple([
-           ('PRINT', 'print', '', ' '),
+           ('PRINT', 'print', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', '', ''),
+           ('COMMA', ',', [], []),
           ],
           [{
             "type": "print",
@@ -924,8 +924,8 @@ def test_print_a_b_comma():
 def test_print_redirect():
     "print >> a"
     parse_simple([
-           ('PRINT', 'print', '', ' '),
-           ('RIGHT_SHIFT', '>>', '', ' '),
+           ('PRINT', 'print', [], [('SPACE', ' ')]),
+           ('RIGHT_SHIFT', '>>', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ],
           [{
@@ -939,10 +939,10 @@ def test_print_redirect():
 def test_print_redirect_ab():
     "print >> a , b"
     parse_simple([
-           ('PRINT', 'print', '', ' '),
-           ('RIGHT_SHIFT', '>>', '', ' '),
+           ('PRINT', 'print', [], [('SPACE', ' ')]),
+           ('RIGHT_SHIFT', '>>', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', ' ', ' '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{
@@ -956,10 +956,10 @@ def test_print_redirect_ab():
             "destination_space": " ",
           }])
     parse_simple([
-           ('PRINT', 'print', '', ' '),
-           ('RIGHT_SHIFT', '>>', '', ' '),
+           ('PRINT', 'print', [], [('SPACE', ' ')]),
+           ('RIGHT_SHIFT', '>>', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', ' ', ' '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{
@@ -976,12 +976,12 @@ def test_print_redirect_ab():
 def test_print_redirect_ab_comma():
     "print >> a , b ,"
     parse_simple([
-           ('PRINT', 'print', '', ' '),
-           ('RIGHT_SHIFT', '>>', '', ' '),
+           ('PRINT', 'print', [], [('SPACE', ' ')]),
+           ('RIGHT_SHIFT', '>>', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', ' ', ' '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' ', ''),
+           ('COMMA', ',', [('SPACE', ' ')]),
           ],
           [{
             "type": "print",
@@ -995,12 +995,12 @@ def test_print_redirect_ab_comma():
             "destination_space": " ",
           }])
     parse_simple([
-           ('PRINT', 'print', '', ' '),
-           ('RIGHT_SHIFT', '>>', '', ' '),
+           ('PRINT', 'print', [], [('SPACE', ' ')]),
+           ('RIGHT_SHIFT', '>>', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', ' ', ' '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' ', ''),
+           ('COMMA', ',', [('SPACE', ' ')]),
           ],
           [{
             "type": "print",
@@ -1017,8 +1017,8 @@ def test_print_redirect_ab_comma():
 def test_lambda():
     "lambda : a"
     parse_simple([
-           ('LAMBDA', 'lambda', '', ' '),
-           ('COLON', ':', '', ' '),
+           ('LAMBDA', 'lambda', [], [('SPACE', ' ')]),
+           ('COLON', ':', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ],
           [{
@@ -1036,9 +1036,9 @@ def test_lambda():
 def test_lambda_arguments():
     "lambda argument : a"
     parse_simple([
-           ('LAMBDA', 'lambda', '', ' '),
+           ('LAMBDA', 'lambda', [], [('SPACE', ' ')]),
            ('NAME', 'argument'),
-           ('COLON', ':', ' ', ' '),
+           ('COLON', ':', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ],
           [{

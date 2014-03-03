@@ -24,13 +24,13 @@ def test_first_space_power():
     "a  **b"
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', '  ', ''),
+           ('DOUBLE_STAR', '**', [('SPACE', '  ')]),
            ('NAME', 'b')
           ],
           [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "  ", "second_space": "" }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', '  ', ''),
+           ('DOUBLE_STAR', '**', [('SPACE', '  ')]),
            ('NAME', 'b')
           ],
           [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "  ", "second_space": "" }])
@@ -39,12 +39,12 @@ def test_second_space_power():
     "a** b"
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', '', ' '),
+           ('DOUBLE_STAR', '**', [], [('SPACE', ' ')]),
            ('NAME', 'b')],
           [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', '', ' '),
+           ('DOUBLE_STAR', '**', [], [('SPACE', ' ')]),
            ('NAME', 'b')],
           [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
 
@@ -52,13 +52,13 @@ def test_spaces_power():
     "a **  b"
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'b')
           ],
           [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "  " }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'b')
           ],
           [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "  " }])
@@ -67,9 +67,9 @@ def test_power_power():
     "a **  b   **    c"
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'b'),
-           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
           [{
@@ -98,9 +98,9 @@ def test_power_power():
            }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'b'),
-           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
           [{
@@ -129,9 +129,9 @@ def test_power_power():
            }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'b'),
-           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
           [{
@@ -160,9 +160,9 @@ def test_power_power():
            }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'b'),
-           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
           [{
@@ -188,9 +188,9 @@ def test_power_power():
            }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'b'),
-           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
           [{
@@ -213,9 +213,9 @@ def test_power_power():
            }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'b'),
-           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
           [{
@@ -231,9 +231,9 @@ def test_power_power_spaces():
     "a**  b   **    c"
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', '', '  '),
+           ('DOUBLE_STAR', '**', [], [('SPACE', '  ')]),
            ('NAME', 'b'),
-           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
           [{ "type": "binary_operator",
@@ -255,9 +255,9 @@ def test_power_power_spaces():
            }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', '', '  '),
+           ('DOUBLE_STAR', '**', [], [('SPACE', '  ')]),
            ('NAME', 'b'),
-           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
           [{"type": "binary_operator", "value": '**',
@@ -268,9 +268,9 @@ def test_power_power_spaces():
                           }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', '', '  '),
+           ('DOUBLE_STAR', '**', [], [('SPACE', '  ')]),
            ('NAME', 'b'),
-           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
           [{
@@ -290,9 +290,9 @@ def test_power_power_spaces():
            }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', '', '  '),
+           ('DOUBLE_STAR', '**', [], [('SPACE', '  ')]),
            ('NAME', 'b'),
-           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
           [{"type": "binary_operator", "value": '**',
@@ -303,17 +303,17 @@ def test_power_power_spaces():
                           }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', '', '  '),
+           ('DOUBLE_STAR', '**', [], [('SPACE', '  ')]),
            ('NAME', 'b'),
-           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
           [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": {"type": "binary_operator", "value":                                                    '**',                                                   "first": {"type": "name", "value": 'b'},                                                   "second": { "type": "name", "value": 'c', },                                                   "first_space": "   ",                                                   "second_space": "    "                                                  }, "first_space": "", "second_space": "  " }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', '', '  '),
+           ('DOUBLE_STAR', '**', [], [('SPACE', '  ')]),
            ('NAME', 'b'),
-           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
           [{"type": "binary_operator", "value": '**',
@@ -325,17 +325,17 @@ def test_power_power_spaces():
     "a **b   **    c"
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', ''),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
           [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": {"type": "binary_operator", "value":                                                    '**',                                                   "first": {"type": "name", "value": 'b'},                                                   "second": {"type": "name", "value": 'c'},                                                   "first_space": "   ",                                                   "second_space": "    "                                                  }, "first_space": " ", "second_space": "" }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', ''),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
           [{"type": "binary_operator", "value": '**',
@@ -346,17 +346,17 @@ def test_power_power_spaces():
                           }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', ''),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
           [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": {"type": "binary_operator", "value":                                                    '**',                                                   "first": { "type": "name", "value": 'b', },                                                   "second": {"type": "name", "value": 'c'},                                                   "first_space": "   ",                                                   "second_space": "    "                                                  }, "first_space": " ", "second_space": "" }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', ''),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
           [{"type": "binary_operator", "value": '**',
@@ -367,17 +367,17 @@ def test_power_power_spaces():
                           }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', ''),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
           [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": {"type": "binary_operator", "value":                                                    '**',                                                   "first": {"type": "name", "value": 'b'},                                                   "second": { "type": "name", "value": 'c', },                                                   "first_space": "   ",                                                   "second_space": "    "                                                  }, "first_space": " ", "second_space": "" }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', ''),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
           [{"type": "binary_operator", "value": '**',
@@ -455,14 +455,14 @@ def test_power_factor():
     "a **  +b"
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('PLUS', '+'),
            ('NAME', 'b')
           ],
           [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": { "type": "unitary_operator", "value": '+', "target": {"type": "name", "value": 'b'}, "space": "", }, "first_space": " ", "second_space": "  " }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('PLUS', '+'),
            ('NAME', 'b')
           ],
@@ -472,14 +472,14 @@ def test_power_factor_minus():
     "a **  -b"
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('MINUS', '-'),
            ('NAME', 'b')
           ],
           [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": { "type": "unitary_operator", "value": '-', "target": {"type": "name", "value": 'b'}, "space": "", }, "first_space": " ", "second_space": "  " }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('MINUS', '-'),
            ('NAME', 'b')
           ],
@@ -489,14 +489,14 @@ def test_power_factor_tild():
     "a **  ~b"
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('TILDE', '~'),
            ('NAME', 'b')
           ],
           [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": { "type": "unitary_operator", "value": '~', "target": {"type": "name", "value": 'b'}, "space": "", }, "first_space": " ", "second_space": "  " }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('TILDE', '~'),
            ('NAME', 'b')
           ],
@@ -506,7 +506,7 @@ def test_power_operator_madness():
     "a **  ~+-b"
     parse_simple([
          ('NAME', 'a'),
-         ('DOUBLE_STAR', '**', ' ', '  '),
+         ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
          ('TILDE', '~'),
          ('PLUS', '+'),
          ('MINUS', '-'),
@@ -515,7 +515,7 @@ def test_power_operator_madness():
         [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": {                 "type": "unitary_operator",                 "value": '~',                 "target": {                     "type": "unitary_operator",                     "value": '+',                     "target": {                         "type": "unitary_operator",                         "value": "-",                         "target": {"type": "name", "value": 'b'},                         "space": "",                     },                     "space": "",                 },                 "space": ""             }, "first_space": " ", "second_space": "  " }])
     parse_simple([
          ('NAME', 'a'),
-         ('DOUBLE_STAR', '**', ' ', '  '),
+         ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
          ('TILDE', '~'),
          ('PLUS', '+'),
          ('MINUS', '-'),
@@ -524,7 +524,7 @@ def test_power_operator_madness():
         [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": {                 "type": "unitary_operator",                 "value": '~',                 "target": {                     "type": "unitary_operator",                     "value": '+',                     "target": {                         "type": "unitary_operator",                         "value": "-",                         "target": { "type": "name", "value": 'b', },                         "space": "",                     },                     "space": "",                 },                 "space": ""             }, "first_space": " ", "second_space": "  " }])
     parse_simple([
          ('NAME', 'a'),
-         ('DOUBLE_STAR', '**', ' ', '  '),
+         ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
          ('TILDE', '~'),
          ('PLUS', '+'),
          ('MINUS', '-'),
@@ -533,7 +533,7 @@ def test_power_operator_madness():
         [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": {                     "type": "unitary_operator",                     "value": '~',                     "target": {                         "type": "unitary_operator",                         "value": '+',                         "target": {                             "type": "unitary_operator",                             "value": "-",                             "target": {"type": "name", "value": 'b'},                             "space": "",                         },                         "space": ""                     },                     "space": "",                 }, "first_space": " ", "second_space": "  " }])
     parse_simple([
          ('NAME', 'a'),
-         ('DOUBLE_STAR', '**', ' ', '  '),
+         ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
          ('TILDE', '~'),
          ('PLUS', '+'),
          ('MINUS', '-'),
@@ -542,7 +542,7 @@ def test_power_operator_madness():
         [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": {                     "type": "unitary_operator",                     "value": '~',                     "target": {                         "type": "unitary_operator",                         "value": '+',                         "target": {                             "type": "unitary_operator",                             "value": "-",                             "target": { "type": "name", "value": 'b', },                             "space": "",                         },                         "space": ""                     },                     "space": "",                 }, "first_space": " ", "second_space": "  " }])
     parse_simple([
          ('NAME', 'a'),
-         ('DOUBLE_STAR', '**', ' ', '  '),
+         ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
          ('TILDE', '~'),
          ('PLUS', '+'),
          ('MINUS', '-'),
@@ -551,7 +551,7 @@ def test_power_operator_madness():
         [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": {                 "type": "unitary_operator",                 "value": "~",                 "target": {                     "type": "unitary_operator",                     "value": '+',                     "target": {                         "type": "unitary_operator",                         "value": "-",                         "target": {"type": "name", "value": 'b'},                         "space": ""                     },                     "space": "",                 },                 "space": "",             }, "first_space": " ", "second_space": "  " }])
     parse_simple([
          ('NAME', 'a'),
-         ('DOUBLE_STAR', '**', ' ', '  '),
+         ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
          ('TILDE', '~'),
          ('PLUS', '+'),
          ('MINUS', '-'),
@@ -563,15 +563,15 @@ def test_power_factor_tild_space():
     "a **  ~ b"
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
-           ('TILDE', '~', '', ' '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
+           ('TILDE', '~', [], [('SPACE', ' ')]),
            ('NAME', 'b')
           ],
           [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": { "type": "unitary_operator", "value": '~', "target": {"type": "name", "value": 'b'}, "space": " ", }, "first_space": " ", "second_space": "  " }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
-           ('TILDE', '~', '', ' '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
+           ('TILDE', '~', [], [('SPACE', ' ')]),
            ('NAME', 'b')
           ],
           [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": { "type": "unitary_operator", "value": '~', "target": { "type": "name", "value": 'b', }, "space": " ", }, "first_space": " ", "second_space": "  " }])
@@ -608,7 +608,7 @@ def test_power_trailer_spaces():
     "a  .   b"
     parse_simple([
            ('NAME', 'a'),
-           ('DOT', '.', ' ', ''),
+           ('DOT', '.', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{
@@ -632,7 +632,7 @@ def test_power_trailer_spaces():
 
     parse_simple([
            ('NAME', 'a'),
-           ('DOT', '.', '', '  '),
+           ('DOT', '.', [], [('SPACE', '  ')]),
            ('NAME', 'b'),
           ],
           [{
@@ -656,7 +656,7 @@ def test_power_trailer_spaces():
 
     parse_simple([
            ('NAME', 'a'),
-           ('DOT', '.', '   ', '    '),
+           ('DOT', '.', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'b'),
           ],
           [{
@@ -776,9 +776,9 @@ def test_power_trailers_space():
     "a . b . c"
     parse_simple([
            ('NAME', 'a'),
-           ('DOT', '.', ' ', ' '),
+           ('DOT', '.', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('DOT', '.', ' ', ' '),
+           ('DOT', '.', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -862,13 +862,13 @@ def test_term_mult_first_space():
     "a *b"
     parse_simple([
            ('NAME', 'a'),
-           ('STAR', '*', ' ', ''),
+           ('STAR', '*', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '*', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "" }])
     parse_simple([
            ('NAME', 'a'),
-           ('STAR', '*', ' ', ''),
+           ('STAR', '*', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '*', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "" }])
@@ -877,13 +877,13 @@ def test_term_mult_second_space():
     "a* b"
     parse_simple([
            ('NAME', 'a'),
-           ('STAR', '*', '', ' '),
+           ('STAR', '*', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '*', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
     parse_simple([
            ('NAME', 'a'),
-           ('STAR', '*', '', ' '),
+           ('STAR', '*', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '*', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
@@ -892,13 +892,13 @@ def test_term_mult_spaces():
     "a * b"
     parse_simple([
            ('NAME', 'a'),
-           ('STAR', '*', ' ', ' '),
+           ('STAR', '*', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '*', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " " }])
     parse_simple([
            ('NAME', 'a'),
-           ('STAR', '*', ' ', ' '),
+           ('STAR', '*', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '*', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " " }])
@@ -909,7 +909,7 @@ def test_term_mult_spaces_atomtrailers():
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
-           ('STAR', '*', ' ', ' '),
+           ('STAR', '*', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [{ "type": "binary_operator", "value": '*', "first": {                             "type": "atomtrailers",                             "value": [{                                 "type": "name",                                 "value": "a",                             },{                                 "type": "dot",                                 "first_space": "",                                 "second_space": "",                             },{                                "type": "name",                                "value": "b",                             }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " " }])
@@ -933,13 +933,13 @@ def test_term_div_first_space():
     "a /b"
     parse_simple([
            ('NAME', 'a'),
-           ('SLASH', '/', ' ', ''),
+           ('SLASH', '/', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '/', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "" }])
     parse_simple([
            ('NAME', 'a'),
-           ('SLASH', '/', ' ', ''),
+           ('SLASH', '/', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '/', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "" }])
@@ -948,13 +948,13 @@ def test_term_div_second_space():
     "a/ b"
     parse_simple([
            ('NAME', 'a'),
-           ('SLASH', '/', '', ' '),
+           ('SLASH', '/', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '/', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
     parse_simple([
            ('NAME', 'a'),
-           ('SLASH', '/', '', ' '),
+           ('SLASH', '/', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '/', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
@@ -963,13 +963,13 @@ def test_term_div_spaces():
     "a / b"
     parse_simple([
            ('NAME', 'a'),
-           ('SLASH', '/', ' ', ' '),
+           ('SLASH', '/', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '/', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " " }])
     parse_simple([
            ('NAME', 'a'),
-           ('SLASH', '/', ' ', ' '),
+           ('SLASH', '/', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '/', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " " }])
@@ -980,7 +980,7 @@ def test_term_div_spaces_atomtrailers():
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
-           ('SLASH', '/', ' ', ' '),
+           ('SLASH', '/', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [{ "type": "binary_operator", "value": '/', "first": {                                 "type": "atomtrailers",                                 "value": [{                                     "type": "name",                                     "value": "a",                                 },{                                     "type": "dot",                                     "first_space": "",                                     "second_space": "",                                 },{                                    "type": "name",                                    "value": "b",                                 }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " " }])
@@ -1004,13 +1004,13 @@ def test_term_modulo_first_space():
     "a %b"
     parse_simple([
            ('NAME', 'a'),
-           ('PERCENT', '%', ' ', ''),
+           ('PERCENT', '%', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '%', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "" }])
     parse_simple([
            ('NAME', 'a'),
-           ('PERCENT', '%', ' ', ''),
+           ('PERCENT', '%', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '%', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "" }])
@@ -1019,13 +1019,13 @@ def test_term_modulo_second_space():
     "a% b"
     parse_simple([
            ('NAME', 'a'),
-           ('PERCENT', '%', '', ' '),
+           ('PERCENT', '%', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '%', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
     parse_simple([
            ('NAME', 'a'),
-           ('PERCENT', '%', '', ' '),
+           ('PERCENT', '%', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '%', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
@@ -1034,13 +1034,13 @@ def test_term_modulo_spaces():
     "a % b"
     parse_simple([
            ('NAME', 'a'),
-           ('PERCENT', '%', ' ', ' '),
+           ('PERCENT', '%', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '%', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " " }])
     parse_simple([
            ('NAME', 'a'),
-           ('PERCENT', '%', ' ', ' '),
+           ('PERCENT', '%', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '%', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " " }])
@@ -1051,7 +1051,7 @@ def test_term_modulo_spaces_atomtrailers():
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
-           ('PERCENT', '%', ' ', ' '),
+           ('PERCENT', '%', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [{ "type": "binary_operator", "value": '%', "first": {                             "type": "atomtrailers",                             "value": [{                                 "type": "name",                                 "value": "a",                             },{                                 "type": "dot",                                 "first_space": "",                                 "second_space": "",                             },{                                "type": "name",                                "value": "b",                             }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " " }])
@@ -1075,13 +1075,13 @@ def test_term_floor_division_first_space():
     "a //b"
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_SLASH', '//', ' ', ''),
+           ('DOUBLE_SLASH', '//', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '//', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "" }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_SLASH', '//', ' ', ''),
+           ('DOUBLE_SLASH', '//', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '//', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "" }])
@@ -1090,13 +1090,13 @@ def test_term_floor_division_second_space():
     "a// b"
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_SLASH', '//', '', ' '),
+           ('DOUBLE_SLASH', '//', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '//', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_SLASH', '//', '', ' '),
+           ('DOUBLE_SLASH', '//', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '//', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
@@ -1105,13 +1105,13 @@ def test_term_floor_division_spaces():
     "a // b"
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_SLASH', '//', ' ', ' '),
+           ('DOUBLE_SLASH', '//', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '//', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " " }])
     parse_simple([
            ('NAME', 'a'),
-           ('DOUBLE_SLASH', '//', ' ', ' '),
+           ('DOUBLE_SLASH', '//', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '//', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " " }])
@@ -1122,7 +1122,7 @@ def test_term_floor_division_spaces_atomtrailers():
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
-           ('DOUBLE_SLASH', '//', ' ', ' '),
+           ('DOUBLE_SLASH', '//', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [{ "type": "binary_operator", "value": '//', "first": {                             "type": "atomtrailers",                             "value": [{                                 "type": "name",                                 "value": "a",                             },{                                 "type": "dot",                                 "first_space": "",                                 "second_space": "",                             },{                                "type": "name",                                "value": "b",                             }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " " }])
@@ -1329,13 +1329,13 @@ def test_arith_expr_add_first_space():
     "a +b"
     parse_simple([
            ('NAME', 'a'),
-           ('PLUS', '+', ' ', ''),
+           ('PLUS', '+', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '+', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "" }])
     parse_simple([
            ('NAME', 'a'),
-           ('PLUS', '+', ' ', ''),
+           ('PLUS', '+', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '+', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "" }])
@@ -1344,13 +1344,13 @@ def test_arith_expr_add_second_space():
     "a+ b"
     parse_simple([
            ('NAME', 'a'),
-           ('PLUS', '+', '', ' '),
+           ('PLUS', '+', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '+', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
     parse_simple([
            ('NAME', 'a'),
-           ('PLUS', '+', '', ' '),
+           ('PLUS', '+', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '+', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
@@ -1359,13 +1359,13 @@ def test_arith_expr_add_spaces():
     "a + b"
     parse_simple([
            ('NAME', 'a'),
-           ('PLUS', '+', ' ', ' '),
+           ('PLUS', '+', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '+', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " " }])
     parse_simple([
            ('NAME', 'a'),
-           ('PLUS', '+', ' ', ' '),
+           ('PLUS', '+', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '+', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " " }])
@@ -1376,7 +1376,7 @@ def test_arith_expr_add_spaces_atomtrailers():
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
-           ('PLUS', '+', ' ', ' '),
+           ('PLUS', '+', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [{ "type": "binary_operator", "value": '+', "first": {                             "type": "atomtrailers",                             "value": [{                                 "type": "name",                                 "value": "a",                             },{                                 "type": "dot",                                 "first_space": "",                                 "second_space": "",                             },{                                "type": "name",                                "value": "b",                             }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " " }])
@@ -1400,13 +1400,13 @@ def test_arith_expr_substract_first_space():
     "a -b"
     parse_simple([
            ('NAME', 'a'),
-           ('MINUS', '-', ' ', ''),
+           ('MINUS', '-', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '-', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "" }])
     parse_simple([
            ('NAME', 'a'),
-           ('MINUS', '-', ' ', ''),
+           ('MINUS', '-', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '-', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "" }])
@@ -1415,13 +1415,13 @@ def test_arith_expr_substract_second_space():
     "a- b"
     parse_simple([
            ('NAME', 'a'),
-           ('MINUS', '-', '', ' '),
+           ('MINUS', '-', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '-', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
     parse_simple([
            ('NAME', 'a'),
-           ('MINUS', '-', '', ' '),
+           ('MINUS', '-', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '-', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
@@ -1430,13 +1430,13 @@ def test_arith_expr_substract_spaces():
     "a - b"
     parse_simple([
            ('NAME', 'a'),
-           ('MINUS', '-', ' ', ' '),
+           ('MINUS', '-', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '-', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " " }])
     parse_simple([
            ('NAME', 'a'),
-           ('MINUS', '-', ' ', ' '),
+           ('MINUS', '-', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '-', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " " }])
@@ -1447,7 +1447,7 @@ def test_arith_expr_substract_spaces_atomtrailers():
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
-           ('MINUS', '-', ' ', ' '),
+           ('MINUS', '-', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [{ "type": "binary_operator", "value": '-', "first": {                             "type": "atomtrailers",                             "value": [{                                 "type": "name",                                 "value": "a",                             },{                                 "type": "dot",                                 "first_space": "",                                 "second_space": "",                             },{                                "type": "name",                                "value": "b",                             }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " " }])
@@ -1538,13 +1538,13 @@ def test_arith_expr_left_shift_first_space():
     "a <<b"
     parse_simple([
            ('NAME', 'a'),
-           ('LEFT_SHIFT', '<<', ' ', ''),
+           ('LEFT_SHIFT', '<<', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '<<', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "" }])
     parse_simple([
            ('NAME', 'a'),
-           ('LEFT_SHIFT', '<<', ' ', ''),
+           ('LEFT_SHIFT', '<<', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '<<', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "" }])
@@ -1553,13 +1553,13 @@ def test_arith_expr_left_shift_second_space():
     "a<< b"
     parse_simple([
            ('NAME', 'a'),
-           ('LEFT_SHIFT', '<<', '', ' '),
+           ('LEFT_SHIFT', '<<', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '<<', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
     parse_simple([
            ('NAME', 'a'),
-           ('LEFT_SHIFT', '<<', '', ' '),
+           ('LEFT_SHIFT', '<<', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '<<', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
@@ -1568,13 +1568,13 @@ def test_arith_expr_left_shift_spaces():
     "a << b"
     parse_simple([
            ('NAME', 'a'),
-           ('LEFT_SHIFT', '<<', ' ', ' '),
+           ('LEFT_SHIFT', '<<', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '<<', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " " }])
     parse_simple([
            ('NAME', 'a'),
-           ('LEFT_SHIFT', '<<', ' ', ' '),
+           ('LEFT_SHIFT', '<<', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '<<', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " " }])
@@ -1585,7 +1585,7 @@ def test_arith_expr_left_shift_spaces_atomtrailers():
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
-           ('LEFT_SHIFT', '<<', ' ', ' '),
+           ('LEFT_SHIFT', '<<', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [{ "type": "binary_operator", "value": '<<', "first": {                             "type": "atomtrailers",                             "value": [{                                 "type": "name",                                 "value": "a",                             },{                                 "type": "dot",                                 "first_space": "",                                 "second_space": "",                             },{                                "type": "name",                                "value": "b",                             }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " " }])
@@ -1609,13 +1609,13 @@ def test_arith_expr_right_shift_first_space():
     "a >>b"
     parse_simple([
            ('NAME', 'a'),
-           ('RIGHT_SHIFT', '>>', ' ', ''),
+           ('RIGHT_SHIFT', '>>', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '>>', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "" }])
     parse_simple([
            ('NAME', 'a'),
-           ('RIGHT_SHIFT', '>>', ' ', ''),
+           ('RIGHT_SHIFT', '>>', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '>>', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "" }])
@@ -1624,13 +1624,13 @@ def test_arith_expr_right_shift_second_space():
     "a>> b"
     parse_simple([
            ('NAME', 'a'),
-           ('RIGHT_SHIFT', '>>', '', ' '),
+           ('RIGHT_SHIFT', '>>', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '>>', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
     parse_simple([
            ('NAME', 'a'),
-           ('RIGHT_SHIFT', '>>', '', ' '),
+           ('RIGHT_SHIFT', '>>', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '>>', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
@@ -1639,13 +1639,13 @@ def test_arith_expr_right_shift_spaces():
     "a >> b"
     parse_simple([
            ('NAME', 'a'),
-           ('RIGHT_SHIFT', '>>', ' ', ' '),
+           ('RIGHT_SHIFT', '>>', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '>>', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " " }])
     parse_simple([
            ('NAME', 'a'),
-           ('RIGHT_SHIFT', '>>', ' ', ' '),
+           ('RIGHT_SHIFT', '>>', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '>>', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " " }])
@@ -1656,7 +1656,7 @@ def test_arith_expr_right_shift_spaces_atomtrailers():
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
-           ('RIGHT_SHIFT', '>>', ' ', ' '),
+           ('RIGHT_SHIFT', '>>', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [{ "type": "binary_operator", "value": '>>', "first": {                             "type": "atomtrailers",                             "value": [{                                 "type": "name",                                 "value": "a",                             },{                                 "type": "dot",                                 "first_space": "",                                 "second_space": "",                             },{                                "type": "name",                                "value": "b",                             }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " " }])
@@ -1746,13 +1746,13 @@ def test_and_expr_first_space():
     "a &b"
     parse_simple([
            ('NAME', 'a'),
-           ('AMPER', '&', ' ', ''),
+           ('AMPER', '&', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '&', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "" }])
     parse_simple([
            ('NAME', 'a'),
-           ('AMPER', '&', ' ', ''),
+           ('AMPER', '&', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '&', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "" }])
@@ -1761,13 +1761,13 @@ def test_and_expr_second_space():
     "a& b"
     parse_simple([
            ('NAME', 'a'),
-           ('AMPER', '&', '', ' '),
+           ('AMPER', '&', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '&', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
     parse_simple([
            ('NAME', 'a'),
-           ('AMPER', '&', '', ' '),
+           ('AMPER', '&', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '&', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
@@ -1776,13 +1776,13 @@ def test_and_expr_spaces():
     "a & b"
     parse_simple([
            ('NAME', 'a'),
-           ('AMPER', '&', ' ', ' '),
+           ('AMPER', '&', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '&', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " " }])
     parse_simple([
            ('NAME', 'a'),
-           ('AMPER', '&', ' ', ' '),
+           ('AMPER', '&', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '&', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " " }])
@@ -1793,7 +1793,7 @@ def test_and_expr_spaces_atomtrailers():
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
-           ('AMPER', '&', ' ', ' '),
+           ('AMPER', '&', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [{ "type": "binary_operator", "value": '&', "first": {                             "type": "atomtrailers",                             "value": [{                                 "type": "name",                                 "value": "a",                             },{                                 "type": "dot",                                 "first_space": "",                                 "second_space": "",                             },{                                "type": "name",                                "value": "b",                             }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " " }])
@@ -1883,13 +1883,13 @@ def test_xor_expr_first_space():
     "a ^b"
     parse_simple([
            ('NAME', 'a'),
-           ('CIRCUMFLEX', '^', ' ', ''),
+           ('CIRCUMFLEX', '^', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '^', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "" }])
     parse_simple([
            ('NAME', 'a'),
-           ('CIRCUMFLEX', '^', ' ', ''),
+           ('CIRCUMFLEX', '^', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '^', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "" }])
@@ -1898,13 +1898,13 @@ def test_xor_expr_second_space():
     "a^ b"
     parse_simple([
            ('NAME', 'a'),
-           ('CIRCUMFLEX', '^', '', ' '),
+           ('CIRCUMFLEX', '^', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '^', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
     parse_simple([
            ('NAME', 'a'),
-           ('CIRCUMFLEX', '^', '', ' '),
+           ('CIRCUMFLEX', '^', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '^', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
@@ -1913,13 +1913,13 @@ def test_xor_expr_spaces():
     "a ^ b"
     parse_simple([
            ('NAME', 'a'),
-           ('CIRCUMFLEX', '^', ' ', ' '),
+           ('CIRCUMFLEX', '^', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '^', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " " }])
     parse_simple([
            ('NAME', 'a'),
-           ('CIRCUMFLEX', '^', ' ', ' '),
+           ('CIRCUMFLEX', '^', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '^', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " " }])
@@ -1930,7 +1930,7 @@ def test_xor_expr_spaces_atomtrailers():
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
-           ('CIRCUMFLEX', '^', ' ', ' '),
+           ('CIRCUMFLEX', '^', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [{ "type": "binary_operator", "value": '^', "first": {                             "type": "atomtrailers",                             "value": [{                                 "type": "name",                                 "value": "a",                             },{                                 "type": "dot",                                 "first_space": "",                                 "second_space": "",                             },{                                "type": "name",                                "value": "b",                             }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " " }])
@@ -2020,13 +2020,13 @@ def test_expr_first_space():
     "a |b"
     parse_simple([
            ('NAME', 'a'),
-           ('VBAR', '|', ' ', ''),
+           ('VBAR', '|', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '|', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "" }])
     parse_simple([
            ('NAME', 'a'),
-           ('VBAR', '|', ' ', ''),
+           ('VBAR', '|', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '|', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "" }])
@@ -2035,13 +2035,13 @@ def test_expr_second_space():
     "a| b"
     parse_simple([
            ('NAME', 'a'),
-           ('VBAR', '|', '', ' '),
+           ('VBAR', '|', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '|', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
     parse_simple([
            ('NAME', 'a'),
-           ('VBAR', '|', '', ' '),
+           ('VBAR', '|', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '|', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
@@ -2050,13 +2050,13 @@ def test_expr_spaces():
     "a | b"
     parse_simple([
            ('NAME', 'a'),
-           ('VBAR', '|', ' ', ' '),
+           ('VBAR', '|', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '|', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " " }])
     parse_simple([
            ('NAME', 'a'),
-           ('VBAR', '|', ' ', ' '),
+           ('VBAR', '|', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [{ "type": "binary_operator", "value": '|', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " " }])
@@ -2067,7 +2067,7 @@ def test_expr_spaces_atomtrailers():
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
-           ('VBAR', '|', ' ', ' '),
+           ('VBAR', '|', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [{ "type": "binary_operator", "value": '|', "first": {                             "type": "atomtrailers",                             "value": [{                                 "type": "name",                                 "value": "a",                             },{                                 "type": "dot",                                 "first_space": "",                                 "second_space": "",                             },{                                "type": "name",                                "value": "b",                             }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " " }])
@@ -2343,8 +2343,8 @@ def test_chained_comparison():
                          )])
 
 advanced_comparison_tokens = (
-    (('NOT', 'not', '', ' '), ('IN', 'in')),
-    (('IS', 'is', '', ' '), ('NOT', 'not')),
+    (('NOT', 'not', [], [('SPACE', ' ')]), ('IN', 'in')),
+    (('IS', 'is', [], [('SPACE', ' ')]), ('NOT', 'not')),
 )
 
 def test_advanced_comparison():
@@ -2572,7 +2572,7 @@ def test_chained_advanced_comparison():
 def test_not():
     "not a"
     parse_simple([
-           ('NOT', 'not', '', ' '),
+           ('NOT', 'not', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ],
           [{ "type": "unitary_operator", "value": 'not', "target": { "type": "name", "value": 'a', }, "space": " ", }])
@@ -2580,8 +2580,8 @@ def test_not():
 def test_not_not():
     "not not a"
     parse_simple([
-         ('NOT', 'not', '', ' '),
-         ('NOT', 'not', '', ' '),
+         ('NOT', 'not', [], [('SPACE', ' ')]),
+         ('NOT', 'not', [], [('SPACE', ' ')]),
          ('NAME', 'a'),
         ],
         [{
@@ -2596,8 +2596,8 @@ def test_not_not():
             "space": " "
         }])
     parse_simple([
-         ('NOT', 'not', '', ' '),
-         ('NOT', 'not', '', ' '),
+         ('NOT', 'not', [], [('SPACE', ' ')]),
+         ('NOT', 'not', [], [('SPACE', ' ')]),
          ('NAME', 'a'),
         ],
         [{
@@ -2616,7 +2616,7 @@ def test_and():
     "a and b"
     parse_simple([
            ('NAME', 'a'),
-           ('AND', 'and', ' ', ' '),
+           ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [boolean_operator(
@@ -2628,7 +2628,7 @@ def test_and():
                            )])
     parse_simple([
            ('NAME', 'a'),
-           ('AND', 'and', ' ', ' '),
+           ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [boolean_operator(
@@ -2643,9 +2643,9 @@ def test_and_and():
     "a and b and c"
     parse_simple([
            ('NAME', 'a'),
-           ('AND', 'and', ' ', ' '),
+           ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('AND', 'and', ' ', ' '),
+           ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [boolean_operator(
@@ -2663,9 +2663,9 @@ def test_and_and():
                            )])
     parse_simple([
            ('NAME', 'a'),
-           ('AND', 'and', ' ', ' '),
+           ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('AND', 'and', ' ', ' '),
+           ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [boolean_operator(
@@ -2683,9 +2683,9 @@ def test_and_and():
                            )])
     parse_simple([
            ('NAME', 'a'),
-           ('AND', 'and', ' ', ' '),
+           ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('AND', 'and', ' ', ' '),
+           ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [boolean_operator(
@@ -2706,7 +2706,7 @@ def test_or():
     "a or b"
     parse_simple([
            ('NAME', 'a'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [boolean_operator(
@@ -2718,7 +2718,7 @@ def test_or():
                            )])
     parse_simple([
            ('NAME', 'a'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [boolean_operator(
@@ -2733,9 +2733,9 @@ def test_or_or():
     "a or b or c"
     parse_simple([
            ('NAME', 'a'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [boolean_operator(
@@ -2753,9 +2753,9 @@ def test_or_or():
                            )])
     parse_simple([
            ('NAME', 'a'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [boolean_operator(
@@ -2773,9 +2773,9 @@ def test_or_or():
                            )])
     parse_simple([
            ('NAME', 'a'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [boolean_operator(
@@ -2796,9 +2796,9 @@ def test_or_and():
     "a or b and c"
     parse_simple([
            ('NAME', 'a'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('AND', 'and', ' ', ' '),
+           ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [boolean_operator(
@@ -2816,9 +2816,9 @@ def test_or_and():
                            )])
     parse_simple([
            ('NAME', 'a'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('AND', 'and', ' ', ' '),
+           ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [boolean_operator(
@@ -2836,9 +2836,9 @@ def test_or_and():
                            )])
     parse_simple([
            ('NAME', 'a'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('AND', 'and', ' ', ' '),
+           ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [boolean_operator(
@@ -2860,9 +2860,9 @@ def test_ternary_operator():
     "a if b else c"
     parse_simple([
            ('NAME', 'a'),
-           ('IF', 'if', ' ', ' '),
+           ('IF', 'if', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('ELSE', 'else', ' ', ' '),
+           ('ELSE', 'else', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [ternary_operator(
@@ -2876,9 +2876,9 @@ def test_ternary_operator():
                            )])
     parse_simple([
            ('NAME', 'a'),
-           ('IF', 'if', ' ', ' '),
+           ('IF', 'if', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('ELSE', 'else', ' ', ' '),
+           ('ELSE', 'else', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [ternary_operator(
@@ -2892,9 +2892,9 @@ def test_ternary_operator():
                            )])
     parse_simple([
            ('NAME', 'a'),
-           ('IF', 'if', ' ', ' '),
+           ('IF', 'if', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('ELSE', 'else', ' ', ' '),
+           ('ELSE', 'else', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [ternary_operator(
@@ -2911,7 +2911,7 @@ def test_assignment():
     "a = b"
     parse_simple([
            ('NAME', 'a'),
-           ('EQUAL', '=', ' ', ' '),
+           ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [assignment(
@@ -2922,7 +2922,7 @@ def test_assignment():
                      )])
     parse_simple([
            ('NAME', 'a'),
-           ('EQUAL', '=', ' ', ' '),
+           ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
           [assignment(
@@ -2936,9 +2936,9 @@ def test_assignment_assignment():
     "a = b = c"
     parse_simple([
            ('NAME', 'a'),
-           ('EQUAL', '=', ' ', ' '),
+           ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('EQUAL', '=', ' ', ' '),
+           ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [assignment(
@@ -2954,9 +2954,9 @@ def test_assignment_assignment():
                      )])
     parse_simple([
            ('NAME', 'a'),
-           ('EQUAL', '=', ' ', ' '),
+           ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('EQUAL', '=', ' ', ' '),
+           ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [assignment(
@@ -2972,9 +2972,9 @@ def test_assignment_assignment():
                      )])
     parse_simple([
            ('NAME', 'a'),
-           ('EQUAL', '=', ' ', ' '),
+           ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('EQUAL', '=', ' ', ' '),
+           ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [assignment(
@@ -3103,7 +3103,7 @@ def test_augmented_assignment_yield_b():
         parse_simple([
                ('NAME', 'a'),
                (token_name, value, ' ', ' '),
-               ('YIELD', 'yield', '', ' '),
+               ('YIELD', 'yield', [], [('SPACE', ' ')]),
                ('NAME', 'b'),
               ],
               [augmented_assignment(
@@ -3127,7 +3127,7 @@ def test_a_equal_yield_b():
     """
     parse_simple([
              ('NAME', 'a'),
-             ('EQUAL', '=', ' ', ' '),
+             ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
              ('YIELD', '', '', ' '),
              ('NAME', 'b'),
           ],
@@ -3154,7 +3154,7 @@ def test_expr_comma_list():
     "a or b,c+d"
     parse_simple([
            ('NAME', 'a'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
            ('COMMA', ','),
            ('NAME', 'c'),
@@ -3181,7 +3181,7 @@ def test_expr_comma_list():
                  ])
     parse_simple([
            ('NAME', 'a'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
            ('COMMA', ','),
            ('NAME', 'c'),
@@ -3208,7 +3208,7 @@ def test_expr_comma_list():
                  ])
     parse_simple([
            ('NAME', 'a'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
            ('COMMA', ','),
            ('NAME', 'c'),
@@ -3235,7 +3235,7 @@ def test_expr_comma_list():
                  ])
     parse_simple([
            ('NAME', 'a'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
            ('COMMA', ','),
            ('NAME', 'c'),
@@ -3265,7 +3265,7 @@ def test_expr_comma_list_3_items():
     "a or b,c+d,e"
     parse_simple([
            ('NAME', 'a'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
            ('COMMA', ','),
            ('NAME', 'c'),
@@ -3294,7 +3294,7 @@ def test_expr_comma_list_3_items():
             }])
     parse_simple([
            ('NAME', 'a'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
            ('COMMA', ','),
            ('NAME', 'c'),
@@ -3323,7 +3323,7 @@ def test_expr_comma_list_3_items():
             }])
     parse_simple([
            ('NAME', 'a'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
            ('COMMA', ','),
            ('NAME', 'c'),
@@ -3352,7 +3352,7 @@ def test_expr_comma_list_3_items():
             }])
     parse_simple([
            ('NAME', 'a'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
            ('COMMA', ','),
            ('NAME', 'c'),
@@ -3381,7 +3381,7 @@ def test_expr_comma_list_3_items():
             }])
     parse_simple([
            ('NAME', 'a'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
            ('COMMA', ','),
            ('NAME', 'c'),
@@ -3413,9 +3413,9 @@ def test_implicit_tuple_space():
     "a, b , c"
     parse_simple([
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' ', ' '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
           [{
@@ -3447,7 +3447,7 @@ def test_implicit_tuple_one_item():
     "a ,"
     parse_simple([
            ('NAME', 'a'),
-           ('COMMA', ',', ' ', ''),
+           ('COMMA', ',', [('SPACE', ' ')]),
           ],
           [{
             "type": "tuple",
@@ -3468,9 +3468,9 @@ def test_implicit_tuple_trailing_comma():
     "a, b ,"
     parse_simple([
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' ', ''),
+           ('COMMA', ',', [('SPACE', ' ')]),
           ],
           [{
             "type": "tuple",
@@ -3526,10 +3526,10 @@ def test_subscript_ellipsis_space():
     parse_simple([
            ('NAME', 'a'),
            ('LEFT_SQUARE_BRACKET', '['),
-           ('DOT', '.', '', ' '),
-           ('DOT', '.', '', '  '),
+           ('DOT', '.', [], [('SPACE', ' ')]),
+           ('DOT', '.', [], [('SPACE', '  ')]),
            ('DOT', '.'),
-           ('RIGHT_SQUARE_BRACKET', ']', '   ', ''),
+           ('RIGHT_SQUARE_BRACKET', ']', [('SPACE', '   ')]),
           ],
           [{
             "type": "atomtrailers",
@@ -3608,7 +3608,7 @@ def test_subscript_slice_empty_both():
     parse_simple([
            ('NAME', 'a'),
            ('LEFT_SQUARE_BRACKET', '['),
-           ('COLON', ':', '', ' '),
+           ('COLON', ':', [], [('SPACE', ' ')]),
            ('COLON', ':'),
            ('RIGHT_SQUARE_BRACKET', ']'),
           ],
@@ -3641,7 +3641,7 @@ def test_subscript_slice_one():
            ('NAME', 'a'),
            ('LEFT_SQUARE_BRACKET', '['),
            ('NAME', 'b'),
-           ('COLON', ':', ' ', ''),
+           ('COLON', ':', [('SPACE', ' ')]),
            ('RIGHT_SQUARE_BRACKET', ']'),
           ],
           [{
@@ -3676,9 +3676,9 @@ def test_subscript_slice_both_one():
            ('NAME', 'a'),
            ('LEFT_SQUARE_BRACKET', '['),
            ('NAME', 'b'),
-           ('COLON', ':', ' ', ' '),
-           ('COLON', ':', '', ''),
-           ('RIGHT_SQUARE_BRACKET', ']', ' ', ''),
+           ('COLON', ':', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('COLON', ':', [], []),
+           ('RIGHT_SQUARE_BRACKET', ']', [('SPACE', ' ')]),
           ],
           [{
             "type": "atomtrailers",
@@ -3748,7 +3748,7 @@ def test_subscript_slice_upper_both():
            ('LEFT_SQUARE_BRACKET', '['),
            ('COLON', ':'),
            ('NAME', 'b'),
-           ('COLON', ':', ' ', ''),
+           ('COLON', ':', [('SPACE', ' ')]),
            ('RIGHT_SQUARE_BRACKET', ']'),
           ],
           [{
@@ -3782,8 +3782,8 @@ def test_subscript_slice_step():
     parse_simple([
            ('NAME', 'a'),
            ('LEFT_SQUARE_BRACKET', '['),
-           ('COLON', ':', '', ' '),
-           ('COLON', ':', '', ' '),
+           ('COLON', ':', [], [('SPACE', ' ')]),
+           ('COLON', ':', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
            ('RIGHT_SQUARE_BRACKET', ']'),
           ],
@@ -3819,7 +3819,7 @@ def test_subscript_slice_lower_upper():
            ('NAME', 'a'),
            ('LEFT_SQUARE_BRACKET', '['),
            ('NAME', 'b'),
-           ('COLON', ':', ' ', ' '),
+           ('COLON', ':', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
            ('RIGHT_SQUARE_BRACKET', ']'),
           ],
@@ -3858,9 +3858,9 @@ def test_subscript_slice_lower_upper_both():
            ('NAME', 'a'),
            ('LEFT_SQUARE_BRACKET', '['),
            ('NAME', 'b'),
-           ('COLON', ':', ' ', ' '),
+           ('COLON', ':', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('COLON', ':', ' ', ''),
+           ('COLON', ':', [('SPACE', ' ')]),
            ('RIGHT_SQUARE_BRACKET', ']'),
           ],
           [{
@@ -3899,7 +3899,7 @@ def test_subscript_slice_lower_step():
            ('LEFT_SQUARE_BRACKET', '['),
            ('NAME', 'b'),
            ('COLON', ':'),
-           ('COLON', ':', '', ' '),
+           ('COLON', ':', [], [('SPACE', ' ')]),
            ('NAME', 'c'),
            ('RIGHT_SQUARE_BRACKET', ']'),
           ],
@@ -3939,7 +3939,7 @@ def test_subscript_slice_upper_step():
            ('LEFT_SQUARE_BRACKET', '['),
            ('COLON', ':'),
            ('NAME', 'b'),
-           ('COLON', ':', '', ' '),
+           ('COLON', ':', [], [('SPACE', ' ')]),
            ('NAME', 'c'),
            ('RIGHT_SQUARE_BRACKET', ']'),
           ],
@@ -3978,9 +3978,9 @@ def test_subscript_slice_lower_upper_step():
            ('NAME', 'a'),
            ('LEFT_SQUARE_BRACKET', '['),
            ('NAME', 'b'),
-           ('COLON', ':', ' ', ' '),
+           ('COLON', ':', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('COLON', ':', ' ', ' '),
+           ('COLON', ':', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'd'),
            ('RIGHT_SQUARE_BRACKET', ']'),
           ],
@@ -4022,7 +4022,7 @@ def test_subscript_test_implicit_tuple():
            ('NAME', 'a'),
            ('LEFT_SQUARE_BRACKET', '['),
            ('NAME', 'b'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'c'),
            ('RIGHT_SQUARE_BRACKET', ']'),
           ],
@@ -4081,7 +4081,7 @@ def test_call_empty_with_space():
     "a ( )"
     parse_simple([
            ('NAME', 'a'),
-           ('LEFT_PARENTHESIS', '(', ' ', ' '),
+           ('LEFT_PARENTHESIS', '(', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('RIGHT_PARENTHESIS', ')'),
           ],
           [{
@@ -4137,7 +4137,7 @@ def test_call_two():
            ('NAME', 'a'),
            ('LEFT_PARENTHESIS', '('),
            ('NAME', 'b'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'c'),
            ('RIGHT_PARENTHESIS', ')'),
           ],
@@ -4184,9 +4184,9 @@ def test_call_two_star_arg():
            ('NAME', 'a'),
            ('LEFT_PARENTHESIS', '('),
            ('NAME', 'b'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('STAR', '*'),
            ('NAME', 'd'),
            ('RIGHT_PARENTHESIS', ')'),
@@ -4245,12 +4245,12 @@ def test_call_two_star_arg_kwarg():
            ('NAME', 'a'),
            ('LEFT_PARENTHESIS', '('),
            ('NAME', 'b'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('STAR', '*'),
            ('NAME', 'd'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('DOUBLE_STAR', '**'),
            ('NAME', 'e'),
            ('RIGHT_PARENTHESIS', ')'),
@@ -4321,7 +4321,7 @@ def test_call_named():
            ('NAME', 'a'),
            ('LEFT_PARENTHESIS', '('),
            ('NAME', 'b'),
-           ('EQUAL', '=', ' ', ' '),
+           ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
            ('RIGHT_PARENTHESIS', ')'),
           ],
@@ -4358,9 +4358,9 @@ def test_call_generator():
            ('NAME', 'a'),
            ('LEFT_PARENTHESIS', '('),
            ('NAME', 'x'),
-           ('FOR', 'for', ' ', ' '),
+           ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'y'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'z'),
            ('RIGHT_PARENTHESIS', ')'),
           ],

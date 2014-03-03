@@ -19,7 +19,7 @@ def test_empty_tuple():
 def test_empty_tuple_space():
     "(  )"
     parse_simple([
-           ('LEFT_PARENTHESIS', '(', '', '  '),
+           ('LEFT_PARENTHESIS', '(', [], [('SPACE', '  ')]),
            ('RIGHT_PARENTHESIS', ')'),
           ],
           [{
@@ -32,9 +32,9 @@ def test_empty_tuple_space():
 def test_associative_parenthesis():
     "( a )"
     parse_simple([
-           ('LEFT_PARENTHESIS', '(', '', ' '),
+           ('LEFT_PARENTHESIS', '(', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('RIGHT_PARENTHESIS', ')', ' ', ''),
+           ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
           ],
           [{
             "type": "associative_parenthesis",
@@ -49,10 +49,10 @@ def test_associative_parenthesis():
 def test_tuple_one():
     "( a, )"
     parse_simple([
-           ('LEFT_PARENTHESIS', '(', '', ' '),
+           ('LEFT_PARENTHESIS', '(', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
-           ('RIGHT_PARENTHESIS', ')', '', ''),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
+           ('RIGHT_PARENTHESIS', ')', [], []),
           ],
           [{
             "type": "tuple",
@@ -71,13 +71,13 @@ def test_tuple_one():
 def test_tuple_many():
     "(a, b, c)"
     parse_simple([
-           ('LEFT_PARENTHESIS', '(', '', ''),
+           ('LEFT_PARENTHESIS', '(', [], []),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('RIGHT_PARENTHESIS', ')', '', ''),
+           ('RIGHT_PARENTHESIS', ')', [], []),
           ],
           [{
             "type": "tuple",
@@ -106,8 +106,8 @@ def test_tuple_many():
 def test_empty_list():
     "[ ]"
     parse_simple([
-           ('LEFT_SQUARE_BRACKET', '[', '', ' '),
-           ('RIGHT_SQUARE_BRACKET', ']', '', ''),
+           ('LEFT_SQUARE_BRACKET', '[', [], [('SPACE', ' ')]),
+           ('RIGHT_SQUARE_BRACKET', ']', [], []),
           ],
           [{
             "type": "list",
@@ -119,9 +119,9 @@ def test_empty_list():
 def test_list_one():
     "[ a ]"
     parse_simple([
-           ('LEFT_SQUARE_BRACKET', '[', '', ' '),
+           ('LEFT_SQUARE_BRACKET', '[', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('RIGHT_SQUARE_BRACKET', ']', ' ', ''),
+           ('RIGHT_SQUARE_BRACKET', ']', [('SPACE', ' ')]),
           ],
           [{
             "type": "list",
@@ -136,13 +136,13 @@ def test_list_one():
 def test_list_more():
     "[a, b, c]"
     parse_simple([
-           ('LEFT_SQUARE_BRACKET', '[', '', ''),
+           ('LEFT_SQUARE_BRACKET', '[', [], []),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('RIGHT_SQUARE_BRACKET', ']', '', ''),
+           ('RIGHT_SQUARE_BRACKET', ']', [], []),
           ],
           [{
             "type": "list",
@@ -171,8 +171,8 @@ def test_list_more():
 def test_dict_empty():
     "{ }"
     parse_simple([
-           ('LEFT_BRACKET', '{', '', ' '),
-           ('RIGHT_BRACKET', '}', '', ''),
+           ('LEFT_BRACKET', '{', [], [('SPACE', ' ')]),
+           ('RIGHT_BRACKET', '}', [], []),
           ],
           [{
             "type": "dict",
@@ -184,11 +184,11 @@ def test_dict_empty():
 def test_dict_one():
     "{a: b}"
     parse_simple([
-           ('LEFT_BRACKET', '{', '', ''),
+           ('LEFT_BRACKET', '{', [], []),
            ('NAME', 'a'),
-           ('COLON', ':', '', ' '),
+           ('COLON', ':', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('RIGHT_BRACKET', '}', '', ''),
+           ('RIGHT_BRACKET', '}', [], []),
           ],
           [{
             "type": "dict",
@@ -212,19 +212,19 @@ def test_dict_one():
 def test_dict_more():
     "{a: b, b: c, c: d}"
     parse_simple([
-           ('LEFT_BRACKET', '{', '', ''),
+           ('LEFT_BRACKET', '{', [], []),
            ('NAME', 'a'),
-           ('COLON', ':', '', ' '),
+           ('COLON', ':', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COLON', ':', '', ' '),
+           ('COLON', ':', [], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('COLON', ':', '', ' '),
+           ('COLON', ':', [], [('SPACE', ' ')]),
            ('NAME', 'd'),
-           ('RIGHT_BRACKET', '}', '', ''),
+           ('RIGHT_BRACKET', '}', [], []),
           ],
           [{
             "type": "dict",
@@ -280,9 +280,9 @@ def test_dict_more():
 def test_set_one():
     "{a}"
     parse_simple([
-           ('LEFT_BRACKET', '{', '', ''),
+           ('LEFT_BRACKET', '{', [], []),
            ('NAME', 'a'),
-           ('RIGHT_BRACKET', '}', '', ''),
+           ('RIGHT_BRACKET', '}', [], []),
           ],
           [{
             "type": "set",
@@ -297,13 +297,13 @@ def test_set_one():
 def test_set_more():
     "{a, b, c}"
     parse_simple([
-           ('LEFT_BRACKET', '{', '', ''),
+           ('LEFT_BRACKET', '{', [], []),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('RIGHT_BRACKET', '}', '', ''),
+           ('RIGHT_BRACKET', '}', [], []),
           ],
           [{
             "type": "set",
@@ -332,13 +332,13 @@ def test_set_more():
 def test_generator_comprehension():
     "( a for b in c )"
     parse_simple([
-           ('LEFT_PARENTHESIS', '(', '', ' '),
+           ('LEFT_PARENTHESIS', '(', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('FOR', 'for', ' ', ' '),
+           ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('RIGHT_PARENTHESIS', ')', ' ', ''),
+           ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
           ],
           [{
             "type": "generator_comprehension",
@@ -369,15 +369,15 @@ def test_generator_comprehension():
 def test_generator_comprehension_if():
     "( a for b in c if d )"
     parse_simple([
-           ('LEFT_PARENTHESIS', '(', '', ' '),
+           ('LEFT_PARENTHESIS', '(', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('FOR', 'for', ' ', ' '),
+           ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('IF', 'if', ' ', ' '),
+           ('IF', 'if', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'd'),
-           ('RIGHT_PARENTHESIS', ')', ' ', ''),
+           ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
           ],
           [{
             "type": "generator_comprehension",
@@ -416,17 +416,17 @@ def test_generator_comprehension_if():
 def test_generator_comprehension_if_if():
     "( a for b in c if d if e )"
     parse_simple([
-           ('LEFT_PARENTHESIS', '(', '', ' '),
+           ('LEFT_PARENTHESIS', '(', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('FOR', 'for', ' ', ' '),
+           ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('IF', 'if', ' ', ' '),
+           ('IF', 'if', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'd'),
-           ('IF', 'if', ' ', ' '),
+           ('IF', 'if', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'e'),
-           ('RIGHT_PARENTHESIS', ')', ' ', ''),
+           ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
           ],
           [{
             "type": "generator_comprehension",
@@ -473,17 +473,17 @@ def test_generator_comprehension_if_if():
 def test_generator_comprehension_double():
     "( a for b in c for d in e )"
     parse_simple([
-           ('LEFT_PARENTHESIS', '(', '', ' '),
+           ('LEFT_PARENTHESIS', '(', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('FOR', 'for', ' ', ' '),
+           ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('FOR', 'for', ' ', ' '),
+           ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'd'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'e'),
-           ('RIGHT_PARENTHESIS', ')', ' ', ''),
+           ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
           ],
           [{
             "type": "generator_comprehension",
@@ -529,21 +529,21 @@ def test_generator_comprehension_double():
 def test_generator_comprehension_double_if_if():
     "( a for b in c if x for d in e if y )"
     parse_simple([
-           ('LEFT_PARENTHESIS', '(', '', ' '),
+           ('LEFT_PARENTHESIS', '(', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('FOR', 'for', ' ', ' '),
+           ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('IF', 'if', ' ', ' '),
+           ('IF', 'if', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'x'),
-           ('FOR', 'for', ' ', ' '),
+           ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'd'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'e'),
-           ('IF', 'if', ' ', ' '),
+           ('IF', 'if', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'y'),
-           ('RIGHT_PARENTHESIS', ')', ' ', ''),
+           ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
           ],
           [{
             "type": "generator_comprehension",
@@ -605,13 +605,13 @@ def test_generator_comprehension_double_if_if():
 def test_list_comprehension():
     "[ a for b in c ]"
     parse_simple([
-           ('LEFT_SQUARE_BRACKET', '[', '', ' '),
+           ('LEFT_SQUARE_BRACKET', '[', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('FOR', 'for', ' ', ' '),
+           ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('RIGHT_SQUARE_BRACKET', ']', ' ', ''),
+           ('RIGHT_SQUARE_BRACKET', ']', [('SPACE', ' ')]),
           ],
           [{
             "type": "list_comprehension",
@@ -642,15 +642,15 @@ def test_list_comprehension():
 def test_list_comprehension_if():
     "[ a for b in c if d ]"
     parse_simple([
-           ('LEFT_SQUARE_BRACKET', '[', '', ' '),
+           ('LEFT_SQUARE_BRACKET', '[', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('FOR', 'for', ' ', ' '),
+           ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('IF', 'if', ' ', ' '),
+           ('IF', 'if', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'd'),
-           ('RIGHT_SQUARE_BRACKET', ']', ' ', ''),
+           ('RIGHT_SQUARE_BRACKET', ']', [('SPACE', ' ')]),
           ],
           [{
             "type": "list_comprehension",
@@ -689,15 +689,15 @@ def test_list_comprehension_if():
 def test_list_comprehension_tuple():
     "[ a for b in c, d ]"
     parse_simple([
-           ('LEFT_SQUARE_BRACKET', '[', '', ' '),
+           ('LEFT_SQUARE_BRACKET', '[', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('FOR', 'for', ' ', ' '),
+           ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'd'),
-           ('RIGHT_SQUARE_BRACKET', ']', ' ', ''),
+           ('RIGHT_SQUARE_BRACKET', ']', [('SPACE', ' ')]),
           ],
           [{
             "type": "list_comprehension",
@@ -741,17 +741,17 @@ def test_list_comprehension_tuple():
 def test_list_comprehension_tuple_more():
     "[ a for b in c, d, e ]"
     parse_simple([
-           ('LEFT_SQUARE_BRACKET', '[', '', ' '),
+           ('LEFT_SQUARE_BRACKET', '[', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('FOR', 'for', ' ', ' '),
+           ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'd'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'e'),
-           ('RIGHT_SQUARE_BRACKET', ']', ' ', ''),
+           ('RIGHT_SQUARE_BRACKET', ']', [('SPACE', ' ')]),
           ],
           [{
             "type": "list_comprehension",
@@ -802,15 +802,15 @@ def test_list_comprehension_tuple_more():
 def test_list_comprehension_lambda():
     "[ a for b in lambda: c ]"
     parse_simple([
-           ('LEFT_SQUARE_BRACKET', '[', '', ' '),
+           ('LEFT_SQUARE_BRACKET', '[', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('FOR', 'for', ' ', ' '),
+           ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('IN', 'in', ' ', ' '),
-           ('LAMBDA', 'lambda', '', ''),
-           ('COLON', ':', '', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('LAMBDA', 'lambda', [], []),
+           ('COLON', ':', [], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('RIGHT_SQUARE_BRACKET', ']', ' ', ''),
+           ('RIGHT_SQUARE_BRACKET', ']', [('SPACE', ' ')]),
           ],
           [{
             "type": "list_comprehension",
@@ -848,16 +848,16 @@ def test_list_comprehension_lambda():
 def test_list_comprehension_lambda_with_arguments():
     "[ a for b in lambda argument: c ]"
     parse_simple([
-           ('LEFT_SQUARE_BRACKET', '[', '', ' '),
+           ('LEFT_SQUARE_BRACKET', '[', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('FOR', 'for', ' ', ' '),
+           ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('IN', 'in', ' ', ' '),
-           ('LAMBDA', 'lambda', '', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('LAMBDA', 'lambda', [], [('SPACE', ' ')]),
            ('NAME', 'argument'),
-           ('COLON', ':', '', ' '),
+           ('COLON', ':', [], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('RIGHT_SQUARE_BRACKET', ']', ' ', ''),
+           ('RIGHT_SQUARE_BRACKET', ']', [('SPACE', ' ')]),
           ],
           [{
             "type": "list_comprehension",
@@ -904,13 +904,13 @@ def test_list_comprehension_lambda_with_arguments():
 def test_set_comprehension():
     "{ a for b in c }"
     parse_simple([
-           ('LEFT_BRACKET', '{', '', ' '),
+           ('LEFT_BRACKET', '{', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('FOR', 'for', ' ', ' '),
+           ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('RIGHT_BRACKET', '}', ' ', ''),
+           ('RIGHT_BRACKET', '}', [('SPACE', ' ')]),
           ],
           [{
             "type": "set_comprehension",
@@ -941,15 +941,15 @@ def test_set_comprehension():
 def test_set_comprehension_if():
     "{ a for b in c if d }"
     parse_simple([
-           ('LEFT_BRACKET', '{', '', ' '),
+           ('LEFT_BRACKET', '{', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('FOR', 'for', ' ', ' '),
+           ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('IF', 'if', ' ', ' '),
+           ('IF', 'if', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'd'),
-           ('RIGHT_BRACKET', '}', ' ', ''),
+           ('RIGHT_BRACKET', '}', [('SPACE', ' ')]),
           ],
           [{
             "type": "set_comprehension",
@@ -988,21 +988,21 @@ def test_set_comprehension_if():
 def test_set_comprehension_double_if_if():
     "{ a for b in c if x for d in e if y }"
     parse_simple([
-           ('LEFT_BRACKET', '{', '', ' '),
+           ('LEFT_BRACKET', '{', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('FOR', 'for', ' ', ' '),
+           ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('IF', 'if', ' ', ' '),
+           ('IF', 'if', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'x'),
-           ('FOR', 'for', ' ', ' '),
+           ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'd'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'e'),
-           ('IF', 'if', ' ', ' '),
+           ('IF', 'if', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'y'),
-           ('RIGHT_BRACKET', '}', ' ', ''),
+           ('RIGHT_BRACKET', '}', [('SPACE', ' ')]),
           ],
           [{
             "type": "set_comprehension",
@@ -1064,15 +1064,15 @@ def test_set_comprehension_double_if_if():
 def test_dict_comprehension():
     "{ a: x for b in c }"
     parse_simple([
-           ('LEFT_BRACKET', '{', '', ' '),
+           ('LEFT_BRACKET', '{', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COLON', ':', '', ' '),
+           ('COLON', ':', [], [('SPACE', ' ')]),
            ('NAME', 'x'),
-           ('FOR', 'for', ' ', ' '),
+           ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('RIGHT_BRACKET', '}', ' ', ''),
+           ('RIGHT_BRACKET', '}', [('SPACE', ' ')]),
           ],
           [{
             "type": "dict_comprehension",
@@ -1111,10 +1111,10 @@ def test_dict_comprehension():
 def test_prioritizing_parenthesis():
     "( yield a )"
     parse_simple([
-           ('LEFT_PARENTHESIS', '(', '', ' '),
-           ('YIELD', 'yield', '', ' '),
+           ('LEFT_PARENTHESIS', '(', [], [('SPACE', ' ')]),
+           ('YIELD', 'yield', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('RIGHT_PARENTHESIS', ')', ' ', ''),
+           ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
           ],
           [{
             "type": "yield_atom",
@@ -1130,9 +1130,9 @@ def test_prioritizing_parenthesis():
 def test_repr_quote():
     "` a `"
     parse_simple([
-           ('BACKQUOTE', '`', '', ' '),
+           ('BACKQUOTE', '`', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('BACKQUOTE', '`', ' ', ''),
+           ('BACKQUOTE', '`', [('SPACE', ' ')]),
           ],
           [{
             "type": "repr",
@@ -1147,11 +1147,11 @@ def test_repr_quote():
 def test_repr_quote_double():
     "` a, b `"
     parse_simple([
-           ('BACKQUOTE', '`', '', ' '),
+           ('BACKQUOTE', '`', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('BACKQUOTE', '`', ' ', ''),
+           ('BACKQUOTE', '`', [('SPACE', ' ')]),
           ],
           [{
             "type": "repr",
