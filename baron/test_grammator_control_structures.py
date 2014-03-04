@@ -192,7 +192,7 @@ def test_if_else_stmt_indent():
            ('ENDL', '\n'),
            ('DEDENT', ''),
            ('ELSE', 'else'),
-           ('COLON', ':', " "),
+           ('COLON', ':', [('SPACE', ' ')]),
            ('ENDL', '\n', [], [('SPACE', '    ')]),
            ('INDENT', ''),
            ('PASS', 'pass'),
