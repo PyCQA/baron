@@ -392,8 +392,8 @@ def named_argument((name, equal, test)):
 def parameter_with_default((name, equal, test)):
     return [{
         "type": "argument",
-        "first_space": equal.before_space,
-        "second_space": equal.after_space,
+        "first_formatting": equal.hidden_tokens_before,
+        "second_formatting": equal.hidden_tokens_after,
         "default": test,
         "value": name
     }]
