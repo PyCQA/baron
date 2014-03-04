@@ -3,9 +3,7 @@ def include_data_structures(pg):
     def tuple((left_parenthesis, testlist_comp, right_parenthesis,)):
         return {
                 "type": "tuple",
-                "first_formatting": left_parenthesis.hidden_tokens_after,
-                "second_formatting": right_parenthesis.hidden_tokens_before,
-                "value": left_parenthesis.hidden_tokens_after + testlist_comp
+                "value": left_parenthesis.hidden_tokens_after + testlist_comp + right_parenthesis.hidden_tokens_before
                }
 
 

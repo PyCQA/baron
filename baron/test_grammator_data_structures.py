@@ -11,8 +11,6 @@ def test_empty_tuple():
           ],
           [{
             "type": "tuple",
-            "first_formatting": [],
-            "second_formatting": [],
             "value": [],
           }])
 
@@ -24,9 +22,7 @@ def test_empty_tuple_space():
           ],
           [{
             "type": "tuple",
-            "first_formatting": [{"type": "space", "value": "  "}],
-            "second_formatting": [],
-            "value": [],
+            "value": [{"type": "space", "value": "  "}],
           }])
 
 def test_associative_parenthesis():
@@ -56,9 +52,7 @@ def test_tuple_one():
           ],
           [{
             "type": "tuple",
-            "first_formatting": [{"type": "space", "value": " "}],
-            "second_formatting": [],
-            "value": [{
+            "value": [{"type": "space", "value": " "}, {
                "type": "name",
                "value": "a",
             },{
@@ -81,8 +75,6 @@ def test_tuple_many():
           ],
           [{
             "type": "tuple",
-            "first_formatting": [],
-            "second_formatting": [],
             "value": [{
                "type": "name",
                "value": "a",
