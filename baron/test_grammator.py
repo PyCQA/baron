@@ -457,13 +457,13 @@ def test_class_empty():
             "inherit_from": [],
             "value": [{
                "type": "endl",
-               "space": "",
+               "before_formatting": [],
                "value": "\n",
                "indent": "    "
             },{
                 "type": "pass",
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n"
@@ -499,13 +499,13 @@ def test_class_empty_parenthesis():
             "inherit_from": [],
             "value": [{
                "type": "endl",
-               "space": "",
+               "before_formatting": [],
                "value": "\n",
                "indent": "    "
             },{
                 "type": "pass",
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n"
@@ -546,12 +546,12 @@ def test_class_inherit():
             "value": [{
                "type": "endl",
                "value": "\n",
-               "space": "",
+               "before_formatting": [],
                "indent": "    "
             },{
                 "type": "pass",
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n"
@@ -594,12 +594,12 @@ def test_funcdef_stmt_one_start_parameter_indent():
             "value": [{
                "type": "endl",
                "value": "\n",
-               "space": "",
+               "before_formatting": [],
                "indent": "    "
             },{
                 "type": "pass",
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n"
@@ -642,13 +642,13 @@ def test_funcdef_stmt_one_star_star_parameter_indent():
             }],
             "value": [{
                "type": "endl",
-               "space": "",
+               "before_formatting": [],
                "value": "\n",
                "indent": "    "
             },{
                 "type": "pass",
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n"
@@ -668,7 +668,7 @@ def test_comment():
             "type": "comment",
             "value": "# comment",
           },{
-            "space": "",
+            "before_formatting": [],
             "indent": "",
             "type": "endl",
             "value": "\n",
@@ -703,7 +703,7 @@ def test_with_a():
             "value": [{
                "type": "pass",
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -744,7 +744,7 @@ def test_with_a_as_b():
             "value": [{
                "type": "pass",
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -800,7 +800,7 @@ def test_with_a_as_b_c():
             "value": [{
                "type": "pass",
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -835,7 +835,7 @@ def test_decorator():
             "name": "b",
             "decorators": [{
                 "type": "decorator",
-                "space": "",
+                "before_formatting": [],
                 "call": {},
                 "value": {
                     "type": "dotted_name",
@@ -845,7 +845,7 @@ def test_decorator():
                     }],
                 }
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -853,7 +853,7 @@ def test_decorator():
             "value": [{
                "type": "pass",
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -890,7 +890,7 @@ def test_decorator_parenthesis():
             "name": "b",
             "decorators": [{
                 "type": "decorator",
-                "space": "",
+                "before_formatting": [],
                 "call": {
                     "third_space": "",
                     "type": "call",
@@ -906,7 +906,7 @@ def test_decorator_parenthesis():
                     }],
                 }
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -914,7 +914,7 @@ def test_decorator_parenthesis():
             "value": [{
                "type": "pass",
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -952,7 +952,7 @@ def test_decorator_parenthesis_arg():
             "name": "b",
             "decorators": [{
                 "type": "decorator",
-                "space": "",
+                "before_formatting": [],
                 "call": {
                     "third_space": "",
                     "type": "call",
@@ -977,7 +977,7 @@ def test_decorator_parenthesis_arg():
                     }],
                 }
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -985,7 +985,7 @@ def test_decorator_parenthesis_arg():
             "value": [{
                "type": "pass",
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -1024,7 +1024,7 @@ def test_decorator_two():
             "name": "b",
             "decorators": [{
                 "type": "decorator",
-                "space": "",
+                "before_formatting": [],
                 "call": {},
                 "value": {
                     "type": "dotted_name",
@@ -1034,7 +1034,7 @@ def test_decorator_two():
                     }],
                 }
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -1050,7 +1050,7 @@ def test_decorator_two():
                     }],
                 }
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -1058,7 +1058,7 @@ def test_decorator_two():
             "value": [{
                "type": "pass",
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -1095,7 +1095,7 @@ def test_class_decorator():
             "decorators": [{
                 "type": "decorator",
                 "call": {},
-                "space": "",
+                "before_formatting": [],
                 "value": {
                     "type": "dotted_name",
                     "value": [{
@@ -1104,7 +1104,7 @@ def test_class_decorator():
                     }],
                 }
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -1112,7 +1112,7 @@ def test_class_decorator():
             "value": [{
                "type": "pass",
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -1153,7 +1153,7 @@ def test_class_decorator_two():
             "decorators": [{
                 "type": "decorator",
                 "call": {},
-                "space": "",
+                "before_formatting": [],
                 "value": {
                     "type": "dotted_name",
                     "value": [{
@@ -1162,7 +1162,7 @@ def test_class_decorator_two():
                     }],
                 }
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -1178,7 +1178,7 @@ def test_class_decorator_two():
                     }],
                 }
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -1186,7 +1186,7 @@ def test_class_decorator_two():
             "value": [{
                "type": "pass",
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -1247,7 +1247,7 @@ def test_fplist():
             "value": [{
                "type": "pass",
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -1318,7 +1318,7 @@ def test_fplist_two():
             "value": [{
                "type": "pass",
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -1368,7 +1368,7 @@ def test_fplist_alone():
             "value": [{
                "type": "pass",
             },{
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
