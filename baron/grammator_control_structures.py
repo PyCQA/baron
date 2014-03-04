@@ -4,7 +4,7 @@ def include_control_structures(pg):
         return [{
             "type": "try",
             "value": suite,
-            "space": colon.before_space,
+            "formatting": colon.hidden_tokens_before,
             "else": {},
             "finally": {},
             "excepts": excepts,
@@ -15,7 +15,7 @@ def include_control_structures(pg):
         return [{
             "type": "try",
             "value": suite,
-            "space": colon.before_space,
+            "formatting": colon.hidden_tokens_before,
             "else": else_stmt,
             "finally": {},
             "excepts": excepts,
@@ -26,7 +26,7 @@ def include_control_structures(pg):
         return [{
             "type": "try",
             "value": suite,
-            "space": colon.before_space,
+            "formatting": colon.hidden_tokens_before,
             "else": {},
             "finally": finally_stmt,
             "excepts": excepts,
@@ -37,7 +37,7 @@ def include_control_structures(pg):
         return [{
             "type": "try",
             "value": suite,
-            "space": colon.before_space,
+            "formatting": colon.hidden_tokens_before,
             "else": else_stmt,
             "finally": finally_stmt,
             "excepts": excepts,
@@ -48,7 +48,7 @@ def include_control_structures(pg):
         return [{
             "type": "try",
             "value": suite,
-            "space": colon.before_space,
+            "formatting": colon.hidden_tokens_before,
             "else": {},
             "finally": finally_stmt,
             "excepts": [],
@@ -109,7 +109,7 @@ def include_control_structures(pg):
         return {
             "type": "finally",
             "value": suite,
-            "space": colon.before_space,
+            "formatting": colon.hidden_tokens_before,
         }
 
     @pg.production("else_stmt : ELSE COLON suite")
@@ -117,7 +117,7 @@ def include_control_structures(pg):
         return {
             "type": "else",
             "value": suite,
-            "space": colon.before_space,
+            "formatting": colon.hidden_tokens_before,
         }
 
     @pg.production("for_stmt : FOR exprlist IN testlist COLON suite")
