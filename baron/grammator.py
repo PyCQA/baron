@@ -57,10 +57,10 @@ def comment((comment_, endl)):
     return [{
         "type": "comment",
         "value": comment_.value,
-        "space": comment_.before_space,
+        "formatting": comment_.hidden_tokens_before,
     }, {
         "type": "endl",
-        "space": endl.before_space,
+        "formatting": endl.hidden_tokens_before,
         "indent": endl.after_space,
         "value": endl.value
     }]
@@ -134,9 +134,9 @@ def with_stmt((with_, with_items, colon, suite)):
     return [{
         "type": "with",
         "value": suite,
-        "first_space": with_.after_space,
-        "second_space": colon.before_space,
-        "third_space": colon.after_space,
+        "first_formatting": with_.hidden_tokens_after,
+        "second_formatting": colon.hidden_tokens_before,
+        "third_formatting": colon.hidden_tokens_after,
         "contexts": with_items
     }]
 
@@ -156,8 +156,8 @@ def with_item((test,)):
     return {
         "type": "with_context_item",
         "as": {},
-        "first_space": "",
-        "second_space": "",
+        "first_formatting": [],
+        "second_formatting": [],
         "value": test
     }
 
@@ -167,8 +167,8 @@ def with_item_as((test, as_, expr)):
     return {
         "type": "with_context_item",
         "as": expr,
-        "first_space": as_.before_space,
-        "second_space": as_.after_space,
+        "first_formatting": as_.hidden_tokens_before,
+        "second_formatting": as_.hidden_tokens_after,
         "value": test
     }
 
@@ -247,7 +247,7 @@ def decorator((at, dotted_name, endl)):
             "type": "dotted_name",
         },
         "call": {},
-        "space": at.after_space,
+        "formatting": at.hidden_tokens_after,
     }] + endl
 
 
@@ -260,13 +260,13 @@ def decorator_empty_call((at, dotted_name, left_parenthesis, right_parenthesis, 
             "type": "dotted_name",
         },
         "call": {
-            "third_space": right_parenthesis.before_space,
+            "third_formatting": right_parenthesis.hidden_tokens_before,
             "type": "call",
-            "first_space": left_parenthesis.before_space,
+            "first_formatting": left_parenthesis.hidden_tokens_before,
             "value": [],
-            "second_space": left_parenthesis.after_space
+            "second_formatting": left_parenthesis.hidden_tokens_after
         },
-        "space": at.after_space,
+        "formatting": at.hidden_tokens_after,
     }] + endl
 
 
@@ -279,13 +279,13 @@ def decorator_call((at, dotted_name, left_parenthesis, argslist, right_parenthes
             "type": "dotted_name",
         },
         "call": {
-            "third_space": right_parenthesis.before_space,
+            "third_formatting": right_parenthesis.hidden_tokens_before,
             "type": "call",
-            "first_space": left_parenthesis.before_space,
+            "first_formatting": left_parenthesis.hidden_tokens_before,
             "value": argslist,
-            "second_space": left_parenthesis.after_space
+            "second_formatting": left_parenthesis.hidden_tokens_after
         },
-        "space": at.after_space,
+        "formatting": at.hidden_tokens_after,
     }] + endl
 
 
@@ -331,8 +331,8 @@ def name((name_,)):
 def parameter_one((name,)):
     return [{
         "type": "argument",
-        "first_space": "",
-        "second_space": "",
+        "first_formatting": [],
+        "second_formatting": [],
         "default": {},
         "value": name
     }]
@@ -342,8 +342,8 @@ def parameter_one((name,)):
 def parameter_fpdef((left_parenthesis, parameter, right_parenthesis)):
     return [{
         "type": "associative_parenthesis",
-        "first_space": left_parenthesis.after_space,
-        "second_space": right_parenthesis.before_space,
+        "first_formatting": left_parenthesis.hidden_tokens_after,
+        "second_formatting": right_parenthesis.hidden_tokens_before,
         "value": parameter[0]
     }]
 
@@ -352,13 +352,13 @@ def parameter_fpdef((left_parenthesis, parameter, right_parenthesis)):
 def parameter_fplist((left_parenthesis, fplist, right_parenthesis)):
     return [{
         "type": "argument",
-        "first_space": "",
-        "second_space": "",
+        "first_formatting": [],
+        "second_formatting": [],
         "default": {},
         "value": {
             "type": "tuple",
-            "first_space": left_parenthesis.after_space,
-            "second_space": right_parenthesis.before_space,
+            "first_formatting": left_parenthesis.hidden_tokens_after,
+            "second_formatting": right_parenthesis.hidden_tokens_before,
             "value": fplist
         }
     }]
@@ -382,8 +382,8 @@ def fplist((parameter, comma)):
 def named_argument((name, equal, test)):
     return [{
         "type": "argument",
-        "first_space": equal.before_space,
-        "second_space": equal.after_space,
+        "first_formatting": equal.hidden_tokens_before,
+        "second_formatting": equal.hidden_tokens_after,
         "value": test,
         "name": name
     }]
@@ -410,7 +410,7 @@ def generator_comprehension((test, comp_for,)):
 def argument_star((star, test,)):
     return [{
         "type": "list_argument",
-        "space": star.after_space,
+        "formatting": star.hidden_tokens_after,
         "value": test,
     }]
 
@@ -418,8 +418,8 @@ def argument_star((star, test,)):
 def argument_star_star((double_star, test,)):
     return [{
         "type": "dict_argument",
-        "first_space": double_star.after_space,
-        "second_space": double_star.after_space,
+        "first_formatting": double_star.hidden_tokens_after,
+        "second_formatting": double_star.hidden_tokens_after,
         "value": test,
     }]
 
@@ -428,7 +428,7 @@ def argument_star_star((double_star, test,)):
 def parameter_star((star, name,)):
     return [{
         "type": "list_argument",
-        "first_space": star.after_space,
+        "first_formatting": star.hidden_tokens_after,
         "name": name.value,
     }]
 
@@ -436,8 +436,8 @@ def parameter_star((star, name,)):
 def parameter_star_star((double_star, name,)):
     return [{
         "type": "dict_argument",
-        "first_space": double_star.after_space,
-        "second_space": double_star.after_space,
+        "first_formatting": double_star.hidden_tokens_after,
+        "second_formatting": double_star.hidden_tokens_after,
         "name": name.value,
     }]
 
@@ -475,8 +475,8 @@ def yield_atom((left_parenthesis, yield_expr, right_parenthesis)):
     return {
         "type": "yield_atom",
         "value": yield_expr["value"],
-        "first_space": left_parenthesis.after_space,
-        "second_space": right_parenthesis.before_space,
+        "first_formatting": left_parenthesis.hidden_tokens_after,
+        "second_formatting": right_parenthesis.hidden_tokens_before,
         "third_space": yield_expr["space"]
     }
 
@@ -485,8 +485,8 @@ def repr_atom((backquote, testlist1, backquote2)):
     return {
         "type": "repr",
         "value": testlist1,
-        "first_space": backquote.after_space,
-        "second_space": backquote2.before_space,
+        "first_formatting": backquote.hidden_tokens_after,
+        "second_formatting": backquote2.hidden_tokens_before,
     }
 
 @pg.production("testlist1 : test comma testlist1")
