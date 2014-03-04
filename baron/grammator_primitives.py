@@ -8,7 +8,7 @@ def include_primivites(pg):
             "type": "print",
             "value": None,
             "destination": None,
-            "destination_space": "",
+            "destination_formatting": [],
             "space": "",
         }
 
@@ -19,8 +19,8 @@ def include_primivites(pg):
             "type": "print",
             "value": testlist["value"] if testlist["type"] == "tuple" else [testlist],
             "destination": None,
-            "destination_space": "",
-            "space": print_.after_space,
+            "destination_formatting": [],
+            "formatting": print_.hidden_tokens_after,
         }
 
 
@@ -30,8 +30,8 @@ def include_primivites(pg):
             "type": "print",
             "value": None,
             "destination": test,
-            "destination_space": right_shift.after_space,
-            "space": print_.after_space,
+            "destination_formatting": right_shift.hidden_tokens_after,
+            "formatting": print_.hidden_tokens_after,
         }
 
 
@@ -39,8 +39,8 @@ def include_primivites(pg):
     def print_stmt_redirect_testlist((print_, right_shift, test, comma, testlist)):
         value = [{
             "type": "comma",
-            "first_space": comma.before_space,
-            "second_space": comma.after_space,
+            "first_formatting": comma.hidden_tokens_before,
+            "second_formatting": comma.hidden_tokens_after,
         }]
         #print testlist
         value += testlist["value"] if testlist["type"] == "tuple" else [testlist]
@@ -48,8 +48,8 @@ def include_primivites(pg):
             "type": "print",
             "value": value,
             "destination": test,
-            "destination_space": right_shift.after_space,
-            "space": print_.after_space,
+            "destination_formatting": right_shift.hidden_tokens_after,
+            "formatting": print_.hidden_tokens_after,
         }
 
 
@@ -86,11 +86,11 @@ def include_primivites(pg):
             "value": None,
             "instance": None,
             "traceback": None,
-            "first_space": raise_.after_space,
-            "second_space": "",
-            "third_space": "",
-            "forth_space": "",
-            "fith_space": ""
+            "first_formatting": raise_.hidden_tokens_after,
+            "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
+            "fith_formatting": []
         }
 
 
@@ -101,11 +101,11 @@ def include_primivites(pg):
             "value": test,
             "instance": None,
             "traceback": None,
-            "first_space": raise_.after_space,
-            "second_space": "",
-            "third_space": "",
-            "forth_space": "",
-            "fith_space": ""
+            "first_formatting": raise_.hidden_tokens_after,
+            "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
+            "fith_formatting": []
         }
 
 
@@ -116,11 +116,11 @@ def include_primivites(pg):
             "value": test,
             "instance": test2,
             "traceback": None,
-            "first_space": raise_.after_space,
-            "second_space": comma.before_space,
-            "third_space": comma.after_space,
-            "forth_space": "",
-            "fith_space": ""
+            "first_formatting": raise_.hidden_tokens_after,
+            "second_formatting": comma.hidden_tokens_before,
+            "third_formatting": comma.hidden_tokens_after,
+            "forth_formatting": [],
+            "fith_formatting": []
         }
 
 
@@ -131,11 +131,11 @@ def include_primivites(pg):
             "value": test,
             "instance": test2,
             "traceback": test3,
-            "first_space": raise_.after_space,
-            "second_space": comma.before_space,
-            "third_space": comma.after_space,
-            "forth_space": comma2.before_space,
-            "fith_space": comma2.after_space
+            "first_formatting": raise_.hidden_tokens_after,
+            "second_formatting": comma.hidden_tokens_before,
+            "third_formatting": comma.hidden_tokens_after,
+            "forth_formatting": comma2.hidden_tokens_before,
+            "fith_formatting": comma2.hidden_tokens_after
         }
 
 
@@ -146,11 +146,11 @@ def include_primivites(pg):
             "value": expr,
             "globals": None,
             "locals": None,
-            "first_space": exec_.after_space,
-            "second_space": "",
-            "third_space": "",
-            "forth_space": "",
-            "fith_space": ""
+            "first_formatting": exec_.hidden_tokens_after,
+            "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
+            "fith_formatting": []
         }
 
 
@@ -161,11 +161,11 @@ def include_primivites(pg):
             "value": expr,
             "globals": test,
             "locals": None,
-            "first_space": exec_.after_space,
-            "second_space": in_.before_space,
-            "third_space": in_.after_space,
-            "forth_space": "",
-            "fith_space": ""
+            "first_formatting": exec_.hidden_tokens_after,
+            "second_formatting": in_.hidden_tokens_before,
+            "third_formatting": in_.hidden_tokens_after,
+            "forth_formatting": [],
+            "fith_formatting": []
         }
 
 
@@ -176,11 +176,11 @@ def include_primivites(pg):
             "value": expr,
             "globals": test,
             "locals": test2,
-            "first_space": exec_.after_space,
-            "second_space": in_.before_space,
-            "third_space": in_.after_space,
-            "forth_space": comma.before_space,
-            "fith_space": comma.after_space
+            "first_formatting": exec_.hidden_tokens_after,
+            "second_formatting": in_.hidden_tokens_before,
+            "third_formatting": in_.hidden_tokens_after,
+            "forth_formatting": comma.hidden_tokens_before,
+            "fith_formatting": comma.hidden_tokens_after
         }
 
 
@@ -190,9 +190,9 @@ def include_primivites(pg):
             "type": "assert",
             "value": test,
             "message": None,
-            "first_space": assert_.after_space,
-            "second_space": "",
-            "third_space": ""
+            "first_formatting": assert_.hidden_tokens_after,
+            "second_formatting": [],
+            "third_formatting": []
         }
 
 
@@ -202,9 +202,9 @@ def include_primivites(pg):
             "type": "assert",
             "value": test,
             "message": test2,
-            "first_space": assert_.after_space,
-            "second_space": comma.before_space,
-            "third_space": comma.after_space
+            "first_formatting": assert_.hidden_tokens_after,
+            "second_formatting": comma.hidden_tokens_before,
+            "third_formatting": comma.hidden_tokens_after
         }
 
 
@@ -212,7 +212,7 @@ def include_primivites(pg):
     def global_stmt((global_, names)):
         return {
             "type": "global",
-            "space": global_.after_space,
+            "formatting": global_.hidden_tokens_after,
             "value": names,
         }
 
@@ -241,7 +241,7 @@ def include_primivites(pg):
         return {
             "type": token.name.lower(),
             "value": testlist,
-            "space": token.after_space,
+            "formatting": token.hidden_tokens_after,
         }
 
     @pg.production("lambdef : LAMBDA COLON test")
@@ -250,9 +250,9 @@ def include_primivites(pg):
         return {
             "type": "lambda",
             "arguments": [],
-            "first_space": lambda_.after_space,
-            "second_space": colon.before_space,
-            "third_space": colon.after_space,
+            "first_formatting": lambda_.hidden_tokens_after,
+            "second_formatting": colon.hidden_tokens_before,
+            "third_formatting": colon.hidden_tokens_after,
             "value": test
         }
 
@@ -262,8 +262,8 @@ def include_primivites(pg):
         return {
             "type": "lambda",
             "arguments": parameters,
-            "first_space": lambda_.after_space,
-            "second_space": colon.before_space,
-            "third_space": colon.after_space,
+            "first_formatting": lambda_.hidden_tokens_after,
+            "second_formatting": colon.hidden_tokens_before,
+            "third_formatting": colon.hidden_tokens_after,
             "value": test
         }

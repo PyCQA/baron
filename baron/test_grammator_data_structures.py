@@ -1170,11 +1170,9 @@ def test_empty_tuple_endl():
           ],
           [{
             "type": "tuple",
-            "first_formatting": [],
-            "second_formatting": [],
             "value": [{
                 "indent": "",
-                "space": "",
+                "formatting": [],
                 "type": "endl",
                 "value": "\n",
             }],

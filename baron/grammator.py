@@ -476,7 +476,7 @@ def yield_atom((left_parenthesis, yield_expr, right_parenthesis)):
         "value": yield_expr["value"],
         "first_formatting": left_parenthesis.hidden_tokens_after,
         "second_formatting": right_parenthesis.hidden_tokens_before,
-        "third_space": yield_expr["space"]
+        "third_formatting": yield_expr["formatting"]
     }
 
 @pg.production("atom : BACKQUOTE testlist1 BACKQUOTE")
