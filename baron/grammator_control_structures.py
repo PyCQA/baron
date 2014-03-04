@@ -66,10 +66,10 @@ def include_control_structures(pg):
     def except_as_stmt((except_, test, as_, test2, colon, suite)):
         return [{
             "type": "except",
-            "first_space": except_.after_space,
-            "second_space": as_.before_space,
-            "third_space": as_.after_space,
-            "forth_space": colon.before_space,
+            "first_formatting": except_.hidden_tokens_after,
+            "second_formatting": as_.hidden_tokens_before,
+            "third_formatting": as_.hidden_tokens_after,
+            "forth_formatting": colon.hidden_tokens_before,
             "delimiteur": "as",
             "target": test2,
             "exceptions": test,
@@ -80,10 +80,10 @@ def include_control_structures(pg):
     def except_comma_stmt((except_, test, comma, test2, colon, suite)):
         return [{
             "type": "except",
-            "first_space": except_.after_space,
-            "second_space": comma.before_space,
-            "third_space": comma.after_space,
-            "forth_space": colon.before_space,
+            "first_formatting": except_.hidden_tokens_after,
+            "second_formatting": comma.hidden_tokens_before,
+            "third_formatting": comma.hidden_tokens_after,
+            "forth_formatting": colon.hidden_tokens_before,
             "delimiteur": ",",
             "target": test2,
             "exceptions": test,
@@ -94,10 +94,10 @@ def include_control_structures(pg):
     def except_stmt((except_, test, colon, suite)):
         return [{
             "type": "except",
-            "first_space": except_.after_space,
-            "second_space": "",
-            "third_space": "",
-            "forth_space": "",
+            "first_formatting": except_.hidden_tokens_after,
+            "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
             "delimiteur": "",
             "target": {},
             "exceptions": test,
@@ -128,10 +128,10 @@ def include_control_structures(pg):
                  "iterator": exprlist,
                  "target": testlist,
                  "else": {},
-                 "first_space": for_.after_space,
-                 "second_space": in_.before_space,
-                 "third_space": in_.after_space,
-                 "forth_space": colon.before_space,
+                 "first_formatting": for_.hidden_tokens_after,
+                 "second_formatting": in_.hidden_tokens_before,
+                 "third_formatting": in_.hidden_tokens_after,
+                 "forth_formatting": colon.hidden_tokens_before,
                }]
 
     @pg.production("for_stmt : FOR exprlist IN testlist COLON suite else_stmt")
@@ -142,10 +142,10 @@ def include_control_structures(pg):
                  "iterator": exprlist,
                  "target": testlist,
                  "else": else_stmt,
-                 "first_space": for_.after_space,
-                 "second_space": in_.before_space,
-                 "third_space": in_.after_space,
-                 "forth_space": colon.before_space,
+                 "first_formatting": for_.hidden_tokens_after,
+                 "second_formatting": in_.hidden_tokens_before,
+                 "third_formatting": in_.hidden_tokens_after,
+                 "forth_formatting": colon.hidden_tokens_before,
                }]
 
     @pg.production("while_stmt : WHILE test COLON suite")
@@ -155,8 +155,8 @@ def include_control_structures(pg):
                  "value": suite,
                  "test": test,
                  "else": {},
-                 "first_space": while_.after_space,
-                 "second_space": colon.before_space,
+                 "first_formatting": while_.hidden_tokens_after,
+                 "second_formatting": colon.hidden_tokens_before,
                }]
 
     @pg.production("while_stmt : WHILE test COLON suite else_stmt")
@@ -166,8 +166,8 @@ def include_control_structures(pg):
                  "value": suite,
                  "test": test,
                  "else": else_stmt,
-                 "first_space": while_.after_space,
-                 "second_space": colon.before_space,
+                 "first_formatting": while_.hidden_tokens_after,
+                 "second_formatting": colon.hidden_tokens_before,
                }]
 
     @pg.production("if_stmt : IF test COLON suite")
@@ -178,8 +178,8 @@ def include_control_structures(pg):
                            "type": "if",
                            "value": suite,
                            "test": test,
-                           "first_space": if_.after_space,
-                           "second_space": colon.before_space,
+                           "first_formatting": if_.hidden_tokens_after,
+                           "second_formatting": colon.hidden_tokens_before,
                           }]
                }]
 
@@ -191,8 +191,8 @@ def include_control_structures(pg):
                            "type": "if",
                            "value": suite,
                            "test": test,
-                           "first_space": if_.after_space,
-                           "second_space": colon.before_space,
+                           "first_formatting": if_.hidden_tokens_after,
+                           "second_formatting": colon.hidden_tokens_before,
                           }] + elifs
                }]
 
@@ -200,8 +200,8 @@ def include_control_structures(pg):
     def elifs_elif((elifs, elif_, test, colon, suite),):
         return elifs + [{
             "type": "elif",
-            "first_space": elif_.after_space,
-            "second_space": colon.before_space,
+            "first_formatting": elif_.hidden_tokens_after,
+            "second_formatting": colon.hidden_tokens_before,
             "value": suite,
             "test": test,
         }]
@@ -210,8 +210,8 @@ def include_control_structures(pg):
     def elif_((elif_, test, colon, suite),):
         return [{
             "type": "elif",
-            "first_space": elif_.after_space,
-            "second_space": colon.before_space,
+            "first_formatting": elif_.hidden_tokens_after,
+            "second_formatting": colon.hidden_tokens_before,
             "value": suite,
             "test": test,
         }]
@@ -224,8 +224,8 @@ def include_control_structures(pg):
                            "type": "if",
                            "value": suite,
                            "test": test,
-                           "first_space": if_.after_space,
-                           "second_space": colon.before_space,
+                           "first_formatting": if_.hidden_tokens_after,
+                           "second_formatting": colon.hidden_tokens_before,
                           }, else_stmt]
                }]
 
@@ -237,8 +237,8 @@ def include_control_structures(pg):
                            "type": "if",
                            "value": suite,
                            "test": test,
-                           "first_space": if_.after_space,
-                           "second_space": colon.before_space,
+                           "first_formatting": if_.hidden_tokens_after,
+                           "second_formatting": colon.hidden_tokens_before,
                           }] + elifs + [else_stmt]
                }]
 
