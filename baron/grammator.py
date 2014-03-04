@@ -61,7 +61,7 @@ def comment((comment_, endl)):
     }, {
         "type": "endl",
         "formatting": endl.hidden_tokens_before,
-        "indent": endl.after_space,
+        "indent": endl.hidden_tokens_after[0]["value"] if endl.hidden_tokens_after else "",
         "value": endl.value
     }]
 
