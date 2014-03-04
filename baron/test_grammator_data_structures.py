@@ -1165,7 +1165,7 @@ def test_repr_quote_double():
 def test_empty_tuple_endl():
     "(\n)"
     parse_simple([
-           ('LEFT_PARENTHESIS', '(', '', '', [], [('ENDL', '\n')]),
+           ('LEFT_PARENTHESIS', '(', [], [('ENDL', '\n')]),
            ('RIGHT_PARENTHESIS', ')'),
           ],
           [{
