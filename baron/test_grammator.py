@@ -48,7 +48,7 @@ def test_file_input_one_item():
            ('NAME', 'a'), ('ENDL', '\n'),
         ],[
            { "type": "name", "value": 'a', },
-           { "type": "endl", "value": "\n", "before_formatting": [], "indent": "", },
+           { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
 
 def test_file_input_two_items():
@@ -60,29 +60,29 @@ def test_file_input_two_items():
            ('NAME', 'a'), ('ENDL', '\n'),
            ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           { "type": "name", "value": 'a', }, { "type": "endl", "value": "\n", "before_formatting": [], "indent": "", },
-           {"type": "name", "value": 'a'}, {"type": "endl", "value": "\n", "indent": "", "before_formatting": []},
+           { "type": "name", "value": 'a', }, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
+           {"type": "name", "value": 'a'}, {"type": "endl", "value": "\n", "indent": "", "formatting": []},
           ])
     parse_multi([
            ('NAME', 'a'), ('ENDL', '\n'),
            ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           { "type": "name", "value": 'a', }, {"type": "endl", "value": "\n", "indent": "", "before_formatting": []},
-           {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "before_formatting": [], "indent": "", },
+           { "type": "name", "value": 'a', }, {"type": "endl", "value": "\n", "indent": "", "formatting": []},
+           {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
     parse_multi([
            ('NAME', 'a'), ('ENDL', '\n'),
            ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "before_formatting": [], "indent": "", },
-           { "type": "name", "value": 'a', }, {"type": "endl", "value": "\n", "indent": "", "before_formatting": []},
+           {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
+           { "type": "name", "value": 'a', }, {"type": "endl", "value": "\n", "indent": "", "formatting": []},
           ])
     parse_multi([
            ('NAME', 'a'), ('ENDL', '\n'),
            ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           {"type": "name", "value": 'a'}, {"type": "endl", "value": "\n", "indent": "", "before_formatting": []},
-           { "type": "name", "value": 'a', }, { "type": "endl", "value": "\n", "before_formatting": [], "indent": "", },
+           {"type": "name", "value": 'a'}, {"type": "endl", "value": "\n", "indent": "", "formatting": []},
+           { "type": "name", "value": 'a', }, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
 
 def test_file_input_two_items_endl():
@@ -96,54 +96,54 @@ def test_file_input_two_items_endl():
            ('ENDL', '\n'),
            ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           { "type": "name", "value": 'a', }, { "type": "endl", "value": "\n", "before_formatting": [], "indent": "", },
-           {"type": "endl", "value": "\n", "indent": "", "before_formatting": []},
-           {"type": "name", "value": 'a'}, {"type": "endl", "value": "\n", "indent": "", "before_formatting": []},
+           { "type": "name", "value": 'a', }, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
+           {"type": "endl", "value": "\n", "indent": "", "formatting": []},
+           {"type": "name", "value": 'a'}, {"type": "endl", "value": "\n", "indent": "", "formatting": []},
           ])
     parse_multi([
            ('NAME', 'a'), ('ENDL', '\n'),
            ('ENDL', '\n'),
            ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           { "type": "name", "value": 'a', }, {"type": "endl", "value": "\n", "indent": "", "before_formatting": []},
-           { "type": "endl", "value": "\n", "before_formatting": [], "indent": "", },
-           {"type": "name", "value": 'a'}, {"type": "endl", "value": "\n", "indent": "", "before_formatting": []},
+           { "type": "name", "value": 'a', }, {"type": "endl", "value": "\n", "indent": "", "formatting": []},
+           { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
+           {"type": "name", "value": 'a'}, {"type": "endl", "value": "\n", "indent": "", "formatting": []},
           ])
     parse_multi([
            ('NAME', 'a'), ('ENDL', '\n'),
            ('ENDL', '\n'),
            ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           { "type": "name", "value": 'a', }, {"type": "endl", "value": "\n", "indent": "", "before_formatting": []},
-           {"type": "endl", "value": "\n", "indent": "", "before_formatting": []},
-           {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "before_formatting": [], "indent": "", },
+           { "type": "name", "value": 'a', }, {"type": "endl", "value": "\n", "indent": "", "formatting": []},
+           {"type": "endl", "value": "\n", "indent": "", "formatting": []},
+           {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
     parse_multi([
            ('NAME', 'a'), ('ENDL', '\n'),
            ('ENDL', '\n'),
            ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "before_formatting": [], "indent": "", },
-           {"type": "endl", "value": "\n", "indent": "", "before_formatting": []},
-           { "type": "name", "value": 'a', }, {"type": "endl", "value": "\n", "indent": "", "before_formatting": []},
+           {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
+           {"type": "endl", "value": "\n", "indent": "", "formatting": []},
+           { "type": "name", "value": 'a', }, {"type": "endl", "value": "\n", "indent": "", "formatting": []},
           ])
     parse_multi([
            ('NAME', 'a'), ('ENDL', '\n'),
            ('ENDL', '\n'),
            ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           {"type": "name", "value": 'a'}, {"type": "endl", "value": "\n", "indent": "", "before_formatting": []},
-           { "type": "endl", "value": "\n", "before_formatting": [], "indent": "", },
-           { "type": "name", "value": 'a', }, {"type": "endl", "value": "\n", "indent": "", "before_formatting": []},
+           {"type": "name", "value": 'a'}, {"type": "endl", "value": "\n", "indent": "", "formatting": []},
+           { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
+           { "type": "name", "value": 'a', }, {"type": "endl", "value": "\n", "indent": "", "formatting": []},
           ])
     parse_multi([
            ('NAME', 'a'), ('ENDL', '\n'),
            ('ENDL', '\n'),
            ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           {"type": "name", "value": 'a'}, {"type": "endl", "value": "\n", "indent": "", "before_formatting": []},
-           {"type": "endl", "value": "\n", "indent": "", "before_formatting": []},
-           { "type": "name", "value": 'a', }, { "type": "endl", "value": "\n", "before_formatting": [], "indent": "", },
+           {"type": "name", "value": 'a'}, {"type": "endl", "value": "\n", "indent": "", "formatting": []},
+           {"type": "endl", "value": "\n", "indent": "", "formatting": []},
+           { "type": "name", "value": 'a', }, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
 
 def test_file_input_simple_stmt_one_item_semicolon():
@@ -153,7 +153,7 @@ def test_file_input_simple_stmt_one_item_semicolon():
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';'), ('ENDL', '\n'),
         ],[
-           { "type": "name", "value": 'a', }, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, { "type": "endl", "value": "\n", "before_formatting": [], "indent": "", },
+           { "type": "name", "value": 'a', }, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
 
 def test_file_input_simple_stmt_two_items_semicolon():
@@ -163,12 +163,12 @@ def test_file_input_simple_stmt_two_items_semicolon():
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';'), ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           { "type": "name", "value": 'a', }, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "before_formatting": [], "indent": "", },
+           { "type": "name", "value": 'a', }, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';'), ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           {"type": "name", "value": 'a'}, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, { "type": "name", "value": 'a', }, { "type": "endl", "value": "\n", "before_formatting": [], "indent": "", },
+           {"type": "name", "value": 'a'}, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, { "type": "name", "value": 'a', }, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
 
 def test_file_input_simple_stmt_three_items_semicolon():
@@ -178,32 +178,32 @@ def test_file_input_simple_stmt_three_items_semicolon():
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';'), ('NAME', 'b'), ('SEMICOLON', ';'), ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           { "type": "name", "value": 'a', }, {"type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": []}, {"type": "name", "value": 'b'}, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "before_formatting": [], "indent": "", },
+           { "type": "name", "value": 'a', }, {"type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": []}, {"type": "name", "value": 'b'}, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';'), ('NAME', 'b'), ('SEMICOLON', ';'), ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           {"type": "name", "value": 'a'}, {"type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": []}, { "type": "name", "value": 'b', }, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "before_formatting": [], "indent": "", },
+           {"type": "name", "value": 'a'}, {"type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": []}, { "type": "name", "value": 'b', }, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';'), ('NAME', 'b'), ('SEMICOLON', ';'), ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           {"type": "name", "value": 'a'}, {"type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": []}, {"type": "name", "value": 'b'}, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, { "type": "name", "value": 'a', }, { "type": "endl", "value": "\n", "before_formatting": [], "indent": "", },
+           {"type": "name", "value": 'a'}, {"type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": []}, {"type": "name", "value": 'b'}, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, { "type": "name", "value": 'a', }, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';'), ('NAME', 'b'), ('SEMICOLON', ';'), ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           { "type": "name", "value": 'a', }, {"type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": []}, {"type": "name", "value": 'b'}, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "before_formatting": [], "indent": "", },
+           { "type": "name", "value": 'a', }, {"type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": []}, {"type": "name", "value": 'b'}, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';'), ('NAME', 'b'), ('SEMICOLON', ';'), ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           {"type": "name", "value": 'a'}, {"type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": []}, { "type": "name", "value": 'b', }, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "before_formatting": [], "indent": "", },
+           {"type": "name", "value": 'a'}, {"type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": []}, { "type": "name", "value": 'b', }, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';'), ('NAME', 'b'), ('SEMICOLON', ';'), ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           {"type": "name", "value": 'a'}, {"type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": []}, {"type": "name", "value": 'b'}, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, { "type": "name", "value": 'a', }, { "type": "endl", "value": "\n", "before_formatting": [], "indent": "", },
+           {"type": "name", "value": 'a'}, {"type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": []}, {"type": "name", "value": 'b'}, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, { "type": "name", "value": 'a', }, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
 
 def test_file_input_simple_stmt_one_item_semicolon_space():
@@ -213,7 +213,7 @@ def test_file_input_simple_stmt_one_item_semicolon_space():
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';', [('SPACE', ' ')], [('SPACE', ' ')]), ('ENDL', '\n'),
         ],[
-           { "type": "name", "value": 'a', }, { "type": "semicolon", "value": ";", "before_formatting": [{"type": "space", "value": ' '}], "after_formatting": [{"type": "space", "value": ' '}], }, { "type": "endl", "value": "\n", "before_formatting": [], "indent": "", },
+           { "type": "name", "value": 'a', }, { "type": "semicolon", "value": ";", "before_formatting": [{"type": "space", "value": ' '}], "after_formatting": [{"type": "space", "value": ' '}], }, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
 
 def test_funcdef_stmt_indent():
@@ -246,13 +246,13 @@ def test_funcdef_stmt_indent():
             "value": [{
                "type": "endl",
                "value": "\n",
-               "before_formatting": [],
+               "formatting": [],
                "indent": "    "
             },{
                 "type": "pass",
             },{
                "type": "endl",
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "value": "\n"
             }],
@@ -298,13 +298,13 @@ def test_funcdef_stmt_one_parameter_indent():
             "value": [{
                "type": "endl",
                "value": "\n",
-               "before_formatting": [],
+               "formatting": [],
                "indent": "    "
             },{
                 "type": "pass",
             },{
                "type": "endl",
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "value": "\n"
             }],
@@ -355,13 +355,13 @@ def test_funcdef_stmt_one_parameter_comma_indent():
             "value": [{
                "type": "endl",
                "value": "\n",
-               "before_formatting": [],
+               "formatting": [],
                "indent": "    "
             },{
                 "type": "pass",
             },{
                "type": "endl",
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "value": "\n"
             }],
@@ -418,12 +418,12 @@ def test_funcdef_stmt_one_parameter_comma_default_indent():
             "value": [{
                "type": "endl",
                "value": "\n",
-               "before_formatting": [],
+               "formatting": [],
                "indent": "    "
             },{
                 "type": "pass",
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n"
@@ -457,13 +457,13 @@ def test_class_empty():
             "inherit_from": [],
             "value": [{
                "type": "endl",
-               "before_formatting": [],
+               "formatting": [],
                "value": "\n",
                "indent": "    "
             },{
                 "type": "pass",
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n"
@@ -499,13 +499,13 @@ def test_class_empty_parenthesis():
             "inherit_from": [],
             "value": [{
                "type": "endl",
-               "before_formatting": [],
+               "formatting": [],
                "value": "\n",
                "indent": "    "
             },{
                 "type": "pass",
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n"
@@ -546,12 +546,12 @@ def test_class_inherit():
             "value": [{
                "type": "endl",
                "value": "\n",
-               "before_formatting": [],
+               "formatting": [],
                "indent": "    "
             },{
                 "type": "pass",
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n"
@@ -594,12 +594,12 @@ def test_funcdef_stmt_one_start_parameter_indent():
             "value": [{
                "type": "endl",
                "value": "\n",
-               "before_formatting": [],
+               "formatting": [],
                "indent": "    "
             },{
                 "type": "pass",
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n"
@@ -642,13 +642,13 @@ def test_funcdef_stmt_one_star_star_parameter_indent():
             }],
             "value": [{
                "type": "endl",
-               "before_formatting": [],
+               "formatting": [],
                "value": "\n",
                "indent": "    "
             },{
                 "type": "pass",
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n"
@@ -664,11 +664,11 @@ def test_comment():
              ('ENDL', '\n'),
           ],
           [{
-            "space": "  ",
+            "formatting": [{"type": "space", "value": "  "}],
             "type": "comment",
             "value": "# comment",
           },{
-            "before_formatting": [],
+            "formatting": [],
             "indent": "",
             "type": "endl",
             "value": "\n",
@@ -703,7 +703,7 @@ def test_with_a():
             "value": [{
                "type": "pass",
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -744,7 +744,7 @@ def test_with_a_as_b():
             "value": [{
                "type": "pass",
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -800,7 +800,7 @@ def test_with_a_as_b_c():
             "value": [{
                "type": "pass",
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -845,7 +845,7 @@ def test_decorator():
                     }],
                 }
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -853,7 +853,7 @@ def test_decorator():
             "value": [{
                "type": "pass",
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -906,7 +906,7 @@ def test_decorator_parenthesis():
                     }],
                 }
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -914,7 +914,7 @@ def test_decorator_parenthesis():
             "value": [{
                "type": "pass",
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -977,7 +977,7 @@ def test_decorator_parenthesis_arg():
                     }],
                 }
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -985,7 +985,7 @@ def test_decorator_parenthesis_arg():
             "value": [{
                "type": "pass",
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -1034,13 +1034,13 @@ def test_decorator_two():
                     }],
                 }
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
             },{
                 "type": "decorator",
-                "space": " ",
+                "formatting": [{"type": "space", "value": " "}],
                 "call": {},
                 "value": {
                     "type": "dotted_name",
@@ -1050,7 +1050,7 @@ def test_decorator_two():
                     }],
                 }
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -1058,7 +1058,7 @@ def test_decorator_two():
             "value": [{
                "type": "pass",
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -1104,7 +1104,7 @@ def test_class_decorator():
                     }],
                 }
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -1112,7 +1112,7 @@ def test_class_decorator():
             "value": [{
                "type": "pass",
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -1162,14 +1162,14 @@ def test_class_decorator_two():
                     }],
                 }
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
             },{
                 "type": "decorator",
                 "call": {},
-                "space": " ",
+                "formatting": [{"type": "space", "value": " "}],
                 "value": {
                     "type": "dotted_name",
                     "value": [{
@@ -1178,7 +1178,7 @@ def test_class_decorator_two():
                     }],
                 }
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -1186,7 +1186,7 @@ def test_class_decorator_two():
             "value": [{
                "type": "pass",
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -1247,7 +1247,7 @@ def test_fplist():
             "value": [{
                "type": "pass",
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -1318,7 +1318,7 @@ def test_fplist_two():
             "value": [{
                "type": "pass",
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",
@@ -1368,7 +1368,7 @@ def test_fplist_alone():
             "value": [{
                "type": "pass",
             },{
-               "before_formatting": [],
+               "formatting": [],
                "indent": "",
                "type": "endl",
                "value": "\n",

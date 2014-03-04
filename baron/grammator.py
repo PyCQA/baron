@@ -41,7 +41,7 @@ def endl((endl,)):
     return [{
         "type": "endl",
         "value": endl.value,
-        "before_formatting": endl.hidden_tokens_before,
+        "formatting": endl.hidden_tokens_before,
         "indent": endl.hidden_tokens_after[0]["value"] if endl.hidden_tokens_after else "",
     }]
 
