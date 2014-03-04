@@ -516,8 +516,8 @@ def string((string_,)):
 def comma((comma,)):
     return {
         "type": "comma",
-        "first_space": comma.before_space,
-        "second_space": comma.after_space,
+        "first_formatting": comma.hidden_tokens_before,
+        "second_formatting": comma.hidden_tokens_after,
     }
 
 parser = pg.build()

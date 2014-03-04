@@ -333,11 +333,11 @@ def test_funcdef_stmt_one_parameter_comma_indent():
             "type": "funcdef",
             "decorators": [],
             "name": "a",
-            "first_space": " ",
-            "second_space": " ",
-            "third_space": " ",
-            "forth_space": " ",
-            "fith_space": " ",
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [{"type": "space", "value": " "}],
+            "fith_formatting": [{"type": "space", "value": " "}],
             "arguments": [{
                 "type": "argument",
                 "first_space": "",
@@ -349,19 +349,19 @@ def test_funcdef_stmt_one_parameter_comma_indent():
                 "default": {},
             },{
                 "type": "comma",
-                "first_space": " ",
-                "second_space": " ",
+                "first_formatting": [{"type": "space", "value": " "}],
+                "second_formatting": [{"type": "space", "value": " "}],
             }],
             "value": [{
                "type": "endl",
                "value": "\n",
-               "space": "",
+               "before_formatting": [],
                "indent": "    "
             },{
                 "type": "pass",
             },{
                "type": "endl",
-               "space": "",
+               "before_formatting": [],
                "indent": "",
                "value": "\n"
             }],
