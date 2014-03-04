@@ -3,8 +3,8 @@ def include_data_structures(pg):
     def tuple((left_parenthesis, testlist_comp, right_parenthesis,)):
         return {
                 "type": "tuple",
-                "first_space": left_parenthesis.after_space,
-                "second_space": right_parenthesis.before_space,
+                "first_formatting": left_parenthesis.hidden_tokens_after,
+                "second_formatting": right_parenthesis.hidden_tokens_before,
                 "value": left_parenthesis.hidden_tokens_after + testlist_comp
                }
 
@@ -13,8 +13,8 @@ def include_data_structures(pg):
     def associative_parenthesis((left_parenthesis, test, right_parenthesis,)):
         return {
                 "type": "associative_parenthesis",
-                "first_space": left_parenthesis.after_space,
-                "second_space": right_parenthesis.before_space,
+                "first_formatting": left_parenthesis.hidden_tokens_after,
+                "second_formatting": right_parenthesis.hidden_tokens_before,
                 "value": test
                }
 
@@ -26,8 +26,8 @@ def include_data_structures(pg):
         return {
             "type": "tuple",
             "value": [test, comma],
-            "first_space": "",
-            "second_space": "",
+            "first_formatting": [],
+            "second_formatting": [],
             "with_parenthesis": False,
         }
 
@@ -39,8 +39,8 @@ def include_data_structures(pg):
         return {
             "type": "tuple",
             "value": [test] + testlist_part,
-            "first_space": "",
-            "second_space": "",
+            "first_formatting": [],
+            "second_formatting": [],
             "with_parenthesis": False,
         }
 
@@ -51,8 +51,8 @@ def include_data_structures(pg):
     def testlist_part((comma, test)):
         return [{
             "type": "comma",
-            "first_space": comma.before_space,
-            "second_space": comma.after_space,
+            "first_formatting": comma.hidden_tokens_before,
+            "second_formatting": comma.hidden_tokens_after,
         }, test]
 
 
@@ -61,12 +61,12 @@ def include_data_structures(pg):
     def testlist_part_comma((comma, test, comma2)):
         return [{
             "type": "comma",
-            "first_space": comma.before_space,
-            "second_space": comma.after_space,
+            "first_formatting": comma.hidden_tokens_before,
+            "second_formatting": comma.hidden_tokens_after,
         }, test, {
             "type": "comma",
-            "first_space": comma2.before_space,
-            "second_space": comma2.after_space,
+            "first_formatting": comma2.hidden_tokens_before,
+            "second_formatting": comma2.hidden_tokens_after,
         }]
 
 
@@ -75,8 +75,8 @@ def include_data_structures(pg):
     def testlist_part_next((comma, test, testlist_part)):
         return [{
             "type": "comma",
-            "first_space": comma.before_space,
-            "second_space": comma.after_space,
+            "first_formatting": comma.hidden_tokens_before,
+            "second_formatting": comma.hidden_tokens_after,
         }, test] + testlist_part
 
 
@@ -99,8 +99,8 @@ def include_data_structures(pg):
     def list((left_bracket, listmaker, right_bracket,)):
         return {
                 "type": "list",
-                "first_space": left_bracket.after_space,
-                "second_space": right_bracket.before_space,
+                "first_formatting": left_bracket.hidden_tokens_after,
+                "second_formatting": right_bracket.hidden_tokens_before,
                 "value": listmaker
                }
 
@@ -124,8 +124,8 @@ def include_data_structures(pg):
     def dict((left_bracket, dictmaker, right_bracket,)):
         return {
                 "type": "dict",
-                "first_space": left_bracket.after_space,
-                "second_space": right_bracket.before_space,
+                "first_formatting": left_bracket.hidden_tokens_after,
+                "second_formatting": right_bracket.hidden_tokens_before,
                 "value": dictmaker
                }
 
@@ -138,8 +138,8 @@ def include_data_structures(pg):
     @pg.production("dictmaker : test COLON test")
     def dict_one((test, colon, test2)):
         return [{
-            "first_space": colon.before_space,
-            "second_space": colon.after_space,
+            "first_formatting": colon.hidden_tokens_before,
+            "second_formatting": colon.hidden_tokens_after,
             "key": test,
             "value": test2,
             "type": "dictitem"
@@ -149,8 +149,8 @@ def include_data_structures(pg):
     @pg.production("dictmaker : test COLON test comma dictmaker")
     def dict_more((test, colon, test2, comma, dictmaker)):
         return [{
-            "first_space": colon.before_space,
-            "second_space": colon.after_space,
+            "first_formatting": colon.hidden_tokens_before,
+            "second_formatting": colon.hidden_tokens_after,
             "key": test,
             "value": test2,
             "type": "dictitem"
@@ -161,8 +161,8 @@ def include_data_structures(pg):
     def set((left_bracket, setmaker, right_bracket,)):
         return {
                 "type": "set",
-                "first_space": left_bracket.after_space,
-                "second_space": right_bracket.before_space,
+                "first_formatting": left_bracket.hidden_tokens_after,
+                "second_formatting": right_bracket.hidden_tokens_before,
                 "value": setmaker
                }
 
@@ -181,8 +181,8 @@ def include_data_structures(pg):
     def generator_comprehension((left_parenthesis, test, comp_for, right_parenthesis,)):
         return {
             "type": "generator_comprehension",
-            "first_space": left_parenthesis.after_space,
-            "second_space": right_parenthesis.before_space,
+            "first_formatting": left_parenthesis.hidden_tokens_after,
+            "second_formatting": right_parenthesis.hidden_tokens_before,
             "result": test,
             "generators": comp_for,
           }
@@ -191,8 +191,8 @@ def include_data_structures(pg):
     def list_comprehension((left_square_bracket, test, list_for, right_square_bracket)):
         return {
             "type": "list_comprehension",
-            "first_space": left_square_bracket.after_space,
-            "second_space": right_square_bracket.before_space,
+            "first_formatting": left_square_bracket.hidden_tokens_after,
+            "second_formatting": right_square_bracket.hidden_tokens_before,
             "result": test,
             "generators": list_for,
           }
@@ -201,13 +201,13 @@ def include_data_structures(pg):
     def dict_comprehension((left_bracket, test, colon, test2, list_for, right_bracket)):
         return {
             "type": "dict_comprehension",
-            "first_space": left_bracket.after_space,
-            "second_space": right_bracket.before_space,
+            "first_formatting": left_bracket.hidden_tokens_after,
+            "second_formatting": right_bracket.hidden_tokens_before,
             "result": {
                 "key": test,
                 "value": test2,
-                "first_space": colon.before_space,
-                "second_space": colon.after_space,
+                "first_formatting": colon.hidden_tokens_before,
+                "second_formatting": colon.hidden_tokens_after,
             },
             "generators": list_for,
           }
@@ -216,8 +216,8 @@ def include_data_structures(pg):
     def set_comprehension((left_bracket, test, list_for, right_bracket)):
         return {
             "type": "set_comprehension",
-            "first_space": left_bracket.after_space,
-            "second_space": right_bracket.before_space,
+            "first_formatting": left_bracket.hidden_tokens_after,
+            "second_formatting": right_bracket.hidden_tokens_before,
             "result": test,
             "generators": list_for,
           }
@@ -227,10 +227,10 @@ def include_data_structures(pg):
     def comp_for((for_, exprlist, in_, or_test)):
         return [{
             "type": "comprehension_loop",
-            "first_space": for_.before_space,
-            "second_space": for_.after_space,
-            "third_space": in_.before_space,
-            "forth_space": in_.after_space,
+            "first_formatting": for_.hidden_tokens_before,
+            "second_formatting": for_.hidden_tokens_after,
+            "third_formatting": in_.hidden_tokens_before,
+            "forth_formatting": in_.hidden_tokens_after,
             "target": or_test,
             "iterator": exprlist,
             "ifs": [],
@@ -240,16 +240,16 @@ def include_data_structures(pg):
     def comp_for_implicite_tuple((for_, exprlist, in_, testlist_safe)):
         return [{
             "type": "comprehension_loop",
-            "first_space": for_.before_space,
-            "second_space": for_.after_space,
-            "third_space": in_.before_space,
-            "forth_space": in_.after_space,
+            "first_formatting": for_.hidden_tokens_before,
+            "second_formatting": for_.hidden_tokens_after,
+            "third_formatting": in_.hidden_tokens_before,
+            "forth_formatting": in_.hidden_tokens_after,
             "target": {
                 "type": "tuple",
                 "value": testlist_safe,
                 "with_parenthesis": False,
-                "first_space": "",
-                "second_space": "",
+                "first_formatting": [],
+                "second_formatting": [],
             },
             "iterator": exprlist,
             "ifs": [],
@@ -268,10 +268,10 @@ def include_data_structures(pg):
 
         return [{
             "type": "comprehension_loop",
-            "first_space": for_.before_space,
-            "second_space": for_.after_space,
-            "third_space": in_.before_space,
-            "forth_space": in_.after_space,
+            "first_formatting": for_.hidden_tokens_before,
+            "second_formatting": for_.hidden_tokens_after,
+            "third_formatting": in_.hidden_tokens_before,
+            "forth_formatting": in_.hidden_tokens_after,
             "target": or_test,
             "iterator": exprlist,
             "ifs": my_ifs,
@@ -287,8 +287,8 @@ def include_data_structures(pg):
     def comp_iter_if((if_, old_test)):
         return [{
             "type": "comprehension_if",
-            "first_space": if_.before_space,
-            "second_space": if_.after_space,
+            "first_formatting": if_.hidden_tokens_before,
+            "second_formatting": if_.hidden_tokens_after,
             "value": old_test
         }]
 
@@ -296,7 +296,7 @@ def include_data_structures(pg):
     def comp_iter_if_comp_iter((if_, old_test, comp_iter)):
         return [{
             "type": "comprehension_if",
-            "first_space": if_.before_space,
-            "second_space": if_.after_space,
+            "first_formatting": if_.hidden_tokens_before,
+            "second_formatting": if_.hidden_tokens_after,
             "value": old_test
         }] + comp_iter
