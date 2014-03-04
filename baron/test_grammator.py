@@ -835,7 +835,7 @@ def test_decorator():
             "name": "b",
             "decorators": [{
                 "type": "decorator",
-                "before_formatting": [],
+                "formatting": [],
                 "call": {},
                 "value": {
                     "type": "dotted_name",
@@ -890,7 +890,7 @@ def test_decorator_parenthesis():
             "name": "b",
             "decorators": [{
                 "type": "decorator",
-                "before_formatting": [],
+                "formatting": [],
                 "call": {
                     "third_formatting": [],
                     "type": "call",
@@ -952,7 +952,7 @@ def test_decorator_parenthesis_arg():
             "name": "b",
             "decorators": [{
                 "type": "decorator",
-                "before_formatting": [],
+                "formatting": [],
                 "call": {
                     "third_formatting": [],
                     "type": "call",
@@ -1024,7 +1024,7 @@ def test_decorator_two():
             "name": "b",
             "decorators": [{
                 "type": "decorator",
-                "before_formatting": [],
+                "formatting": [],
                 "call": {},
                 "value": {
                     "type": "dotted_name",
@@ -1095,7 +1095,7 @@ def test_class_decorator():
             "decorators": [{
                 "type": "decorator",
                 "call": {},
-                "before_formatting": [],
+                "formatting": [],
                 "value": {
                     "type": "dotted_name",
                     "value": [{
@@ -1153,7 +1153,7 @@ def test_class_decorator_two():
             "decorators": [{
                 "type": "decorator",
                 "call": {},
-                "before_formatting": [],
+                "formatting": [],
                 "value": {
                     "type": "dotted_name",
                     "value": [{
