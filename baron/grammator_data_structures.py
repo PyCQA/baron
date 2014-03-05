@@ -1,4 +1,5 @@
 def include_data_structures(pg):
+    # TODO remove left_parenthesis and use LEFT_PARENTHESIS instead
     @pg.production("atom : left_parenthesis testlist_comp RIGHT_PARENTHESIS")
     def tuple((left_parenthesis, testlist_comp, right_parenthesis,)):
         return {

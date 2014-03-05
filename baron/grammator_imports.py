@@ -11,7 +11,7 @@ def include_imports(pg):
         return {
                 "type": "import",
                 "value": dotted_as_names,
-                "space": import_.after_space
+                "formatting": import_.hidden_tokens_after
                }
 
     @pg.production("from_import : FROM dotted_name IMPORT from_import_target")
@@ -19,9 +19,9 @@ def include_imports(pg):
         return {
                 "type": "from_import",
                 "targets": from_import_target,
-                "after_space": import_.after_space,
-                "before_space": from_.after_space,
-                "middle_space": import_.before_space,
+                "after_formatting": import_.hidden_tokens_after,
+                "before_formatting": from_.hidden_tokens_after,
+                "middle_formatting": import_.hidden_tokens_before,
                 "value": {
                           "type": "dotted_name",
                           "value": dotted_name
@@ -34,15 +34,10 @@ def include_imports(pg):
 
     @pg.production("from_import_target : LEFT_PARENTHESIS name_as_names RIGHT_PARENTHESIS")
     def from_import_parenthesis((left_parenthesis, name_as_names, right_parenthesis)):
-        to_return = [{
-                 "type": "left_parenthesis",
-                 "value": "("
-                }] + name_as_names
-        if right_parenthesis.before_space:
-                to_return += [{"type": "space", "value": right_parenthesis.before_space}]
-
-        to_return += [{"type": "right_parenthesis", "value": ")"}]
-        return to_return
+        return [{"type": "left_parenthesis", "value": "("}] +\
+               name_as_names +\
+               right_parenthesis.hidden_tokens_before +\
+               [{"type": "right_parenthesis", "value": ")"}]
 
     @pg.production("from_import_target : STAR")
     def from_import_star((star,)):
@@ -64,8 +59,8 @@ def include_imports(pg):
         return [{
                  "type": "name_as_name",
                  "value": name.value,
-                 "before_space": as_.before_space,
-                 "after_space": as_.after_space,
+                 "before_formatting": as_.hidden_tokens_before,
+                 "after_formatting": as_.hidden_tokens_after,
                  "as_": True,
                  "target": name2.value
                 }]
@@ -77,8 +72,8 @@ def include_imports(pg):
                  "value": name.value,
                  "as_": False,
                  "target": None,
-                 "before_space": "",
-                 "after_space": ""
+                 "before_formatting": [],
+                 "after_formatting": []
                 }]
 
     @pg.production("name_as_name : NAME SPACE")
@@ -87,32 +82,21 @@ def include_imports(pg):
                  "type": "name_as_name",
                  "target": None,
                  "value": name.value,
-                 "before_space": "",
-                 "after_space": ""
+                 "before_formatting": [],
+                 "after_formatting": []
                 }] + [create_node_from_token(space)]
 
     @pg.production("name_as_name : COMMA")
     def name_as_name_comma_space((comma,)):
-        to_return = []
-        if comma.before_space:
-            to_return += [{"type": "space", "value": comma.before_space}]
-        to_return += [create_node_from_token(comma)]
-        if comma.after_space:
-            to_return += [{"type": "space", "value": comma.after_space}]
-        return to_return
+        return comma.hidden_tokens_before + [create_node_from_token(comma)] + comma.hidden_tokens_after
 
     @pg.production("dotted_as_names : dotted_as_names COMMA dotted_as_name")
     def dotted_as_names_dotted_as_names_dotted_as_name((dotted_as_names, comma, dotted_as_names2)):
-        return dotted_as_names +\
+        return dotted_as_names + comma.hidden_tokens_before +\
                 [{
                   "type": "comma",
                   "value": ","
-                 },
-                 {
-                  "type": "space",
-                  "value": comma.after_space,
-                 }]\
-                 + dotted_as_names2
+                 }] + comma.hidden_tokens_after + dotted_as_names2
 
     @pg.production("dotted_as_names : dotted_as_name")
     def dotted_as_names_dotted_as_name((dotted_as_name,)):
@@ -126,8 +110,8 @@ def include_imports(pg):
                            "type": "dotted_name",
                            "value": dotted_as_name
                           },
-                 "before_space": as_.before_space,
-                 "after_space": as_.after_space,
+                 "before_formatting": as_.hidden_tokens_before,
+                 "after_formatting": as_.hidden_tokens_after,
                  "target": name.value,
                  "as_": True
                 }]
@@ -140,8 +124,8 @@ def include_imports(pg):
                            "type": "dotted_name",
                            "value": dotted_name
                           },
-                 "before_space": "",
-                 "after_space": "",
+                 "before_formatting": [],
+                 "after_formatting": [],
                  "as_": False,
                  "target": None
                 }]
@@ -161,10 +145,4 @@ def include_imports(pg):
 
     @pg.production("dotted_name_element : DOT")
     def dotted_name_dot((dot,)):
-        to_return = []
-        if dot.before_space:
-            to_return += [{"type": "space", "value": dot.before_space}]
-        to_return += [create_node_from_token(dot)]
-        if dot.after_space:
-            to_return += [{"type": "space", "value": dot.after_space}]
-        return to_return
+        return dot.hidden_tokens_before + [create_node_from_token(dot)] + dot.hidden_tokens_after
