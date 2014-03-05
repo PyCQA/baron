@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
 import pytest
-from utils import comparison, boolean_operator, ternary_operator, assignment, augmented_assignment
+from utils import comparison, boolean_operator, assignment, augmented_assignment
 from test_utils import parse_simple
 
 
@@ -5208,15 +5208,7 @@ def test_ternary_operator():
            ('ELSE', 'else', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [ternary_operator(
-                            { "type": "name", "value": 'b', },
-                            first={"type": "name", "value": 'a'},
-                            second={"type": "name", "value": 'c'},
-                            first_space=" ",
-                            second_space=" ",
-                            third_space=" ",
-                            forth_space=" ",
-                           )])
+          [{ "type": "ternary_operator", "value": { "type": "name", "value": 'b', }, "first": {"type": "name", "value": 'a'}, "second": {"type": "name", "value": 'c'}, "first_space": " ", "second_space": " ", "third_space": " ", "forth_space": " ", }])
     parse_simple([
            ('NAME', 'a'),
            ('IF', 'if', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -5224,15 +5216,7 @@ def test_ternary_operator():
            ('ELSE', 'else', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [ternary_operator(
-                            {"type": "name", "value": 'b'},
-                            first={ "type": "name", "value": 'a', },
-                            second={"type": "name", "value": 'c'},
-                            first_space=" ",
-                            second_space=" ",
-                            third_space=" ",
-                            forth_space=" ",
-                           )])
+          [{ "type": "ternary_operator", "value": {"type": "name", "value": 'b'}, "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'c'}, "first_space": " ", "second_space": " ", "third_space": " ", "forth_space": " ", }])
     parse_simple([
            ('NAME', 'a'),
            ('IF', 'if', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -5240,15 +5224,7 @@ def test_ternary_operator():
            ('ELSE', 'else', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [ternary_operator(
-                            {"type": "name", "value": 'b'},
-                            first={"type": "name", "value": 'a'},
-                            second={ "type": "name", "value": 'c', },
-                            first_space=" ",
-                            second_space=" ",
-                            third_space=" ",
-                            forth_space=" ",
-                           )])
+          [{ "type": "ternary_operator", "value": {"type": "name", "value": 'b'}, "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " ", "third_space": " ", "forth_space": " ", }])
 
 def test_assignment():
     "a = b"
