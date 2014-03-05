@@ -9,7 +9,7 @@ def include_primivites(pg):
             "value": None,
             "destination": None,
             "destination_formatting": [],
-            "space": "",
+            "formatting": [],
         }
 
 
@@ -68,7 +68,7 @@ def include_primivites(pg):
         return {
             "type": token.name.lower(),
             "value": None,
-            "space": ""
+            "formatting": []
         }
 
 
@@ -224,14 +224,11 @@ def include_primivites(pg):
 
     @pg.production("names : names COMMA NAME")
     def names_names_name((names, comma, name,)):
-        to_return = names
-        if comma.before_space:
-            to_return += [{"type": "space", "value": comma.before_space}]
-        to_return += [create_node_from_token(comma)]
-        if comma.after_space:
-            to_return += [{"type": "space", "value": comma.after_space}]
-        to_return += [create_node_from_token(name)]
-        return to_return
+        return names +\
+              comma.hidden_tokens_before +\
+              [create_node_from_token(comma)] +\
+              comma.hidden_tokens_after +\
+              [create_node_from_token(name)]
 
 
     @pg.production("return_stmt : RETURN testlist")

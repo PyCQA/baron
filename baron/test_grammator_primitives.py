@@ -8,7 +8,7 @@ def test_return():
     parse_simple([
            ('RETURN', 'return'),
           ],
-         [{ "type": "return", "value": None, "space": "", }])
+         [{ "type": "return", "value": None, "formatting": [], }])
 
 def test_return_a():
     "return a"
@@ -16,14 +16,14 @@ def test_return_a():
            ('RETURN', 'return', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ],
-         [{ "type": "return", "value": { "type": "name", "value": 'a', }, "space": " ", }])
+         [{ "type": "return", "value": { "type": "name", "value": 'a', }, "formatting": [{"type": "space", "value": " "}], }])
 
 def test_yield():
     "yield"
     parse_simple([
            ('YIELD', 'yield'),
           ],
-         [{ "type": "yield", "value": None, "space": "", }])
+         [{ "type": "yield", "value": None, "formatting": [], }])
 
 def test_yield_a():
     "yield a"
@@ -31,7 +31,7 @@ def test_yield_a():
            ('YIELD', 'yield', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ],
-         [{ "type": "yield", "value": { "type": "name", "value": 'a', }, "space": " ", }])
+         [{ "type": "yield", "value": { "type": "name", "value": 'a', }, "formatting": [{"type": "space", "value": " "}], }])
 
 def test_del():
     "del a"
@@ -43,7 +43,7 @@ def test_del():
            {
             "type": "del",
             "value": { "type": "name", "value": 'a', },
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
            }
           ])
 
@@ -84,9 +84,9 @@ def test_assert():
             "type": "assert",
             "value": { "type": "name", "value": 'a', },
             "message": None,
-            "first_space": " ",
-            "second_space": "",
-            "third_space": ""
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
+            "third_formatting": []
           }])
 
 def test_assert_message():
@@ -101,9 +101,9 @@ def test_assert_message():
             "type": "assert",
             "value": { "type": "name", "value": 'a', },
             "message": {"type": "name", "value": 'b'},
-            "first_space": " ",
-            "second_space": " ",
-            "third_space": " "
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}]
           }])
     parse_simple([
            ('ASSERT', 'assert', [], [('SPACE', ' ')]),
@@ -115,9 +115,9 @@ def test_assert_message():
             "type": "assert",
             "value": {"type": "name", "value": 'a'},
             "message": { "type": "name", "value": 'b', },
-            "first_space": " ",
-            "second_space": " ",
-            "third_space": " "
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}]
           }])
 
 def test_raise_empty():
@@ -130,11 +130,11 @@ def test_raise_empty():
             "value": None,
             "instance": None,
             "traceback": None,
-            "first_space": " ",
-            "second_space": "",
-            "third_space": "",
-            "forth_space": "",
-            "fith_space": ""
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
+            "fith_formatting": []
           }])
 
 def test_raise():
@@ -148,11 +148,11 @@ def test_raise():
             "value": { "type": "name", "value": 'a', },
             "instance": None,
             "traceback": None,
-            "first_space": " ",
-            "second_space": "",
-            "third_space": "",
-            "forth_space": "",
-            "fith_space": ""
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
+            "fith_formatting": []
           }])
 
 def test_raise_instance():
@@ -168,11 +168,11 @@ def test_raise_instance():
             "value": { "type": "name", "value": 'a', },
             "instance": {"type": "name", "value": 'b'},
             "traceback": None,
-            "first_space": " ",
-            "second_space": "",
-            "third_space": " ",
-            "forth_space": "",
-            "fith_space": ""
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
+            "fith_formatting": []
           }])
     parse_simple([
            ('RAISE', 'raise', [], [('SPACE', ' ')]),
@@ -185,11 +185,11 @@ def test_raise_instance():
             "value": {"type": "name", "value": 'a'},
             "instance": { "type": "name", "value": 'b', },
             "traceback": None,
-            "first_space": " ",
-            "second_space": "",
-            "third_space": " ",
-            "forth_space": "",
-            "fith_space": ""
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
+            "fith_formatting": []
           }])
 
 def test_raise_instance_traceback():
@@ -207,11 +207,11 @@ def test_raise_instance_traceback():
             "value": { "type": "name", "value": 'a', },
             "instance": {"type": "name", "value": 'b'},
             "traceback": {"type": "name", "value": 'c'},
-            "first_space": " ",
-            "second_space": "",
-            "third_space": " ",
-            "forth_space": "",
-            "fith_space": " "
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
+            "fith_formatting": [{"type": "space", "value": " "}]
           }])
     parse_simple([
            ('RAISE', 'raise', [], [('SPACE', ' ')]),
@@ -226,11 +226,11 @@ def test_raise_instance_traceback():
             "value": {"type": "name", "value": 'a'},
             "instance": { "type": "name", "value": 'b', },
             "traceback": {"type": "name", "value": 'c'},
-            "first_space": " ",
-            "second_space": "",
-            "third_space": " ",
-            "forth_space": "",
-            "fith_space": " "
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
+            "fith_formatting": [{"type": "space", "value": " "}]
           }])
     parse_simple([
            ('RAISE', 'raise', [], [('SPACE', ' ')]),
@@ -245,11 +245,11 @@ def test_raise_instance_traceback():
             "value": {"type": "name", "value": 'a'},
             "instance": {"type": "name", "value": 'b'},
             "traceback": { "type": "name", "value": 'c', },
-            "first_space": " ",
-            "second_space": "",
-            "third_space": " ",
-            "forth_space": "",
-            "fith_space": " "
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
+            "fith_formatting": [{"type": "space", "value": " "}]
           }])
 
 def test_exec():
@@ -263,11 +263,11 @@ def test_exec():
             "value": { "type": "name", "value": 'a', },
             "globals": None,
             "locals": None,
-            "first_space": " ",
-            "second_space": "",
-            "third_space": "",
-            "forth_space": "",
-            "fith_space": ""
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
+            "fith_formatting": []
           }])
 
 def test_exec_in():
@@ -283,11 +283,11 @@ def test_exec_in():
             "value": { "type": "name", "value": 'a', },
             "globals": {"type": "name", "value": 'b'},
             "locals": None,
-            "first_space": " ",
-            "second_space": " ",
-            "third_space": " ",
-            "forth_space": "",
-            "fith_space": ""
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
+            "fith_formatting": []
           }])
     parse_simple([
            ('EXEC', 'exec', [], [('SPACE', ' ')]),
@@ -300,11 +300,11 @@ def test_exec_in():
             "value": {"type": "name", "value": 'a'},
             "globals": { "type": "name", "value": 'b', },
             "locals": None,
-            "first_space": " ",
-            "second_space": " ",
-            "third_space": " ",
-            "forth_space": "",
-            "fith_space": ""
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
+            "fith_formatting": []
           }])
 
 def test_exec_in_c():
@@ -322,11 +322,11 @@ def test_exec_in_c():
             "value": { "type": "name", "value": 'a', },
             "globals": {"type": "name", "value": 'b'},
             "locals": {"type": "name", "value": 'c'},
-            "first_space": " ",
-            "second_space": " ",
-            "third_space": " ",
-            "forth_space": "",
-            "fith_space": " "
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
+            "fith_formatting": [{"type": "space", "value": " "}]
           }])
     parse_simple([
            ('EXEC', 'exec', [], [('SPACE', ' ')]),
@@ -341,11 +341,11 @@ def test_exec_in_c():
             "value": {"type": "name", "value": 'a'},
             "globals": { "type": "name", "value": 'b', },
             "locals": {"type": "name", "value": 'c'},
-            "first_space": " ",
-            "second_space": " ",
-            "third_space": " ",
-            "forth_space": "",
-            "fith_space": " "
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
+            "fith_formatting": [{"type": "space", "value": " "}]
           }])
     parse_simple([
            ('EXEC', 'exec', [], [('SPACE', ' ')]),
@@ -360,11 +360,11 @@ def test_exec_in_c():
             "value": {"type": "name", "value": 'a'},
             "globals": {"type": "name", "value": 'b'},
             "locals": { "type": "name", "value": 'c', },
-            "first_space": " ",
-            "second_space": " ",
-            "third_space": " ",
-            "forth_space": "",
-            "fith_space": " "
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
+            "fith_formatting": [{"type": "space", "value": " "}]
           }])
 
 def test_global():
@@ -375,7 +375,7 @@ def test_global():
           ],
           [{
             "type": "global",
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
             "value": [
                       { "type": "name", "value": 'a', },
                      ]
@@ -391,7 +391,7 @@ def test_global_one():
           ],
           [{
             "type": "global",
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
             "value": [
                       { "type": "name", "value": 'a', },
                       { "type": "comma", "value": ",", },
@@ -407,7 +407,7 @@ def test_global_one():
           ],
           [{
             "type": "global",
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
             "value": [
                       {"type": "name", "value": 'a'},
                       { "type": "comma", "value": ",", },
@@ -428,7 +428,7 @@ def test_global_two():
           ],
           [{
             "type": "global",
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
             "value": [
                       {"type": "name", "value": "a"},
                       {"type": "comma", "value": ","},
@@ -450,7 +450,7 @@ def test_global_two():
           ],
           [{
             "type": "global",
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
             "value": [
                       {"type": "name", "value": "a"},
                       {"type": "comma", "value": ","},
@@ -472,7 +472,7 @@ def test_global_two():
           ],
           [{
             "type": "global",
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
             "value": [
                       {"type": "name", "value": "a"},
                       {"type": "comma", "value": ","},
@@ -494,7 +494,7 @@ def test_global_two():
           ],
           [{
             "type": "global",
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
             "value": [
                       {"type": "name", "value": "a"},
                       {"type": "comma", "value": ","},
@@ -516,29 +516,7 @@ def test_global_two():
           ],
           [{
             "type": "global",
-            "space": " ",
-            "value": [
-                      {"type": "name", "value": "a"},
-                      {"type": "comma", "value": ","},
-                      {"type": "space", "value": " "},
-                      {"type": "name", "value": "b"},
-                      {"type": "space", "value": " "},
-                     {"type": "comma", "value": ","},
-                      {"type": "space", "value": "  "},
-                      {"type": "name", "value": "c"},
-                     ]
-          }])
-    parse_simple([
-           ('GLOBAL', 'global', [], [('SPACE', ' ')]),
-           ('NAME', 'a'),
-           ('COMMA', ',', [], [('SPACE', ' ')]),
-           ('NAME', 'b'),
-           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', '  ')]),
-           ('NAME', 'c'),
-          ],
-          [{
-            "type": "global",
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
             "value": [
                       {"type": "name", "value": "a"},
                       {"type": "comma", "value": ","},
@@ -560,7 +538,7 @@ def test_global_two():
           ],
           [{
             "type": "global",
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
             "value": [
                       {"type": "name", "value": "a"},
                       {"type": "comma", "value": ","},
@@ -582,7 +560,7 @@ def test_global_two():
           ],
           [{
             "type": "global",
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
             "value": [
                       {"type": "name", "value": "a"},
                       {"type": "comma", "value": ","},
@@ -604,7 +582,7 @@ def test_global_two():
           ],
           [{
             "type": "global",
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
             "value": [
                       {"type": "name", "value": "a"},
                       {"type": "comma", "value": ","},
@@ -626,7 +604,29 @@ def test_global_two():
           ],
           [{
             "type": "global",
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
+            "value": [
+                      {"type": "name", "value": "a"},
+                      {"type": "comma", "value": ","},
+                      {"type": "space", "value": " "},
+                      {"type": "name", "value": "b"},
+                      {"type": "space", "value": " "},
+                     {"type": "comma", "value": ","},
+                      {"type": "space", "value": "  "},
+                      {"type": "name", "value": "c"},
+                     ]
+          }])
+    parse_simple([
+           ('GLOBAL', 'global', [], [('SPACE', ' ')]),
+           ('NAME', 'a'),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
+           ('NAME', 'b'),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', '  ')]),
+           ('NAME', 'c'),
+          ],
+          [{
+            "type": "global",
+            "formatting": [{"type": "space", "value": " "}],
             "value": [
                       {"type": "name", "value": "a"},
                      {"type": "comma", "value": ","},
@@ -648,7 +648,7 @@ def test_global_two():
           ],
           [{
             "type": "global",
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
             "value": [
                       {"type": "name", "value": "a"},
                      {"type": "comma", "value": ","},
@@ -670,7 +670,7 @@ def test_global_two():
           ],
           [{
             "type": "global",
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
             "value": [
                       {"type": "name", "value": "a"},
                      {"type": "comma", "value": ","},
@@ -692,7 +692,7 @@ def test_global_two():
           ],
           [{
             "type": "global",
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
             "value": [
                       {"type": "name", "value": "a"},
                      {"type": "comma", "value": ","},
@@ -714,7 +714,7 @@ def test_global_two():
           ],
           [{
             "type": "global",
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
             "value": [
                       {"type": "name", "value": "a"},
                      {"type": "comma", "value": ","},
@@ -736,7 +736,7 @@ def test_global_two():
           ],
           [{
             "type": "global",
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
             "value": [
                       {"type": "name", "value": "a"},
                      {"type": "comma", "value": ","},
@@ -758,7 +758,7 @@ def test_global_two():
           ],
           [{
             "type": "global",
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
             "value": [
                       {"type": "name", "value": "a"},
                      {"type": "comma", "value": ","},
@@ -780,7 +780,7 @@ def test_global_two():
           ],
           [{
             "type": "global",
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
             "value": [
                       {"type": "name", "value": "a"},
                      {"type": "comma", "value": ","},
@@ -802,7 +802,7 @@ def test_global_two():
           ],
           [{
             "type": "global",
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
             "value": [
                       {"type": "name", "value": "a"},
                      {"type": "comma", "value": ","},
@@ -822,9 +822,9 @@ def test_print():
           ],
           [{
             "type": "print",
-            "space": "",
+            "formatting": [],
             "value": None,
-            "destination_space": "",
+            "destination_formatting": [],
             "destination": None,
           }])
 
@@ -836,9 +836,9 @@ def test_print_a():
           ],
           [{
             "type": "print",
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
             "value": [{ "type": "name", "value": 'a', }],
-            "destination_space": "",
+            "destination_formatting": [],
             "destination": None,
           }])
 
@@ -852,13 +852,20 @@ def test_print_a_b():
           ],
           [{
             "type": "print",
-            "space": " ",
+            "formatting": [{"type": "space",
+                            "value": " "}],
             "value": [
-                      { "type": "name", "value": 'a', },
-                      {"type": "comma", "first_space": "", "second_space": " "},
-                      {"type": "name", "value": 'b'},
+                      {
+                       "type": "name",
+                       "value": 'a',
+                      },
+                      {"type": "comma",
+                       "first_formatting": [],
+                       "second_formatting": [{"type": "space", "value": " "}]},
+                      {"type": "name",
+                       "value": 'b'},
                      ],
-            "destination_space": "",
+            "destination_formatting": [],
             "destination": None,
           }])
     parse_simple([
@@ -869,13 +876,19 @@ def test_print_a_b():
           ],
           [{
             "type": "print",
-            "space": " ",
+            "formatting": [{"type": "space",
+                            "value": " "}],
             "value": [
-                      {"type": "name", "value": 'a'},
-                      {"type": "comma", "first_space": "", "second_space": " "},
-                      { "type": "name", "value": 'b', },
+                      {"type": "name",
+                       "value": 'a'},
+                      {"type": "comma",
+                       "first_formatting": [],
+                       "second_formatting": [{"type": "space", "value": " "}]},
+                      {
+                       "type": "name",
+                       "value": 'b', },
                      ],
-            "destination_space": "",
+            "destination_formatting": [],
             "destination": None,
           }])
 
@@ -890,14 +903,23 @@ def test_print_a_b_comma():
           ],
           [{
             "type": "print",
-            "space": " ",
+            "formatting": [{"type": "space",
+                            "value": " "}],
             "value": [
-                      { "type": "name", "value": 'a', },
-                      {"type": "comma", "first_space": "", "second_space": " "},
-                      {"type": "name", "value": 'b'},
-                      {"type": "comma", "first_space": "", "second_space": ""},
+                      {
+                       "type": "name",
+                       "value": 'a',
+                      },
+                      {"type": "comma",
+                       "first_formatting": [],
+                       "second_formatting": [{"type": "space", "value": " "}]},
+                      {"type": "name",
+                       "value": 'b'},
+                      {"type": "comma",
+                       "first_formatting": [],
+                       "second_formatting": []},
                      ],
-            "destination_space": "",
+            "destination_formatting": [],
             "destination": None,
           }])
     parse_simple([
@@ -909,14 +931,23 @@ def test_print_a_b_comma():
           ],
           [{
             "type": "print",
-            "space": " ",
+            "formatting": [{"type": "space",
+                            "value": " "}],
             "value": [
-                      {"type": "name", "value": 'a'},
-                      {"type": "comma", "first_space": "", "second_space": " "},
-                      { "type": "name", "value": 'b', },
-                      {"type": "comma", "first_space": "", "second_space": ""},
+                      {"type": "name",
+                       "value": 'a'},
+                      {"type": "comma",
+                       "first_formatting": [],
+                       "second_formatting": [{"type": "space", "value": " "}]},
+                      {
+                       "type": "name",
+                       "value": 'b',
+                      },
+                      {"type": "comma",
+                       "first_formatting": [],
+                       "second_formatting": []},
                      ],
-            "destination_space": "",
+            "destination_formatting": [],
             "destination": None,
           }])
 
@@ -929,10 +960,14 @@ def test_print_redirect():
           ],
           [{
             "type": "print",
-            "space": " ",
+            "formatting": [{"type": "space",
+                            "value": " "}],
             "value": None,
-            "destination_space": " ",
-            "destination": { "type": "name", "value": 'a', },
+            "destination_formatting": [{"type": "space",
+                                        "value": " "}],
+            "destination": {
+                            "type": "name",
+                            "value": 'a', },
           }])
 
 def test_print_redirect_ab():
@@ -946,13 +981,18 @@ def test_print_redirect_ab():
           ],
           [{
             "type": "print",
-            "space": " ",
+            "formatting": [{"type": "space",
+                            "value": " "}],
             "value": [
-                      {"type": "comma", "first_space": " ", "second_space": " "},
-                      { "type": "name", "value": 'b', },
+                      {"type": "comma",
+                       "first_formatting": [{"type": "space", "value": " "}],
+                       "second_formatting": [{"type": "space", "value": " "}]},
+                      {
+                       "type": "name",
+                       "value": 'b', },
                      ],
             "destination": {"type": "name", "value": 'a'},
-            "destination_space": " ",
+            "destination_formatting": [{"type": "space", "value": " "}],
           }])
     parse_simple([
            ('PRINT', 'print', [], [('SPACE', ' ')]),
@@ -963,13 +1003,20 @@ def test_print_redirect_ab():
           ],
           [{
             "type": "print",
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
             "value": [
-                      {"type": "comma", "first_space": " ", "second_space": " "},
-                      {"type": "name", "value": 'b'},
+                      {"type": "comma",
+                       "first_formatting": [{"type": "space", "value": " "}],
+                       "second_formatting": [{"type": "space", "value": " "}]},
+                      {"type": "name",
+                       "value": 'b'},
                      ],
-            "destination": { "type": "name", "value": 'a', },
-            "destination_space": " ",
+            "destination": {
+                            "type": "name",
+                            "value": 'a',
+                           },
+            "destination_formatting": [{"type": "space",
+                                        "value": " "}],
           }])
 
 def test_print_redirect_ab_comma():
@@ -984,14 +1031,22 @@ def test_print_redirect_ab_comma():
           ],
           [{
             "type": "print",
-            "space": " ",
+            "formatting": [{"type": "space",
+                            "value": " "}],
             "value": [
-                      {"type": "comma", "first_space": " ", "second_space": " "},
-                      { "type": "name", "value": 'b', },
-                      {"type": "comma", "first_space": " ", "second_space": ""},
+                      {"type": "comma",
+                       "first_formatting": [{"type": "space", "value": " "}],
+                       "second_formatting": [{"type": "space", "value": " "}]},
+                      {
+                       "type": "name",
+                       "value": 'b',
+                      },
+                      {"type": "comma",
+                       "first_formatting": [{"type": "space", "value": " "}],
+                       "second_formatting": []},
                      ],
             "destination": {"type": "name", "value": 'a'},
-            "destination_space": " ",
+            "destination_formatting": [{"type": "space", "value": " "}],
           }])
     parse_simple([
            ('PRINT', 'print', [], [('SPACE', ' ')]),
@@ -1003,14 +1058,24 @@ def test_print_redirect_ab_comma():
           ],
           [{
             "type": "print",
-            "space": " ",
+            "formatting": [{"type": "space",
+                            "value": " "}],
             "value": [
-                      {"type": "comma", "first_space": " ", "second_space": " "},
-                      {"type": "name", "value": 'b'},
-                      {"type": "comma", "first_space": " ", "second_space": ""},
+                      {"type": "comma",
+                       "first_formatting": [{"type": "space", "value": " "}],
+                       "second_formatting": [{"type": "space", "value": " "}]},
+                      {"type": "name",
+                       "value": 'b'},
+                      {"type": "comma",
+                       "first_formatting": [{"type": "space", "value": " "}],
+                       "second_formatting": []},
                      ],
-            "destination": { "type": "name", "value": 'a', },
-            "destination_space": " ",
+            "destination": {
+                            "type": "name",
+                            "value": 'a',
+                           },
+            "destination_formatting": [{"type": "space",
+                                        "value": " "}],
           }])
 
 def test_lambda():
@@ -1022,9 +1087,9 @@ def test_lambda():
           ],
           [{
             "type": "lambda",
-            "first_space": " ",
-            "second_space": "",
-            "third_space": " ",
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
+            "third_formatting": [{"type": "space", "value": " "}],
             "value": {
                 "type": "name",
                 "value": "a",
@@ -1042,17 +1107,17 @@ def test_lambda_arguments():
           ],
           [{
             "type": "lambda",
-            "first_space": " ",
-            "second_space": " ",
-            "third_space": " ",
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
             "value": {
                 "type": "name",
                 "value": "a",
             },
             "arguments": [{
                 "default": {},
-                "first_space": "",
-                "second_space": "",
+                "first_formatting": [],
+                "second_formatting": [],
                 "type": "argument",
                 "value": {
                     "type": "name",
