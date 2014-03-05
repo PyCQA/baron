@@ -20,8 +20,8 @@ def include_operators(pg):
     def augmented_assignment_node((target, operator, value)):
         return {
             "type": "assign",
-            "first_space": operator.before_space,
-            "second_space": operator.after_space,
+            "first_formatting": operator.hidden_tokens_before,
+            "second_formatting": operator.hidden_tokens_after,
             "operator": operator.value[:-1],
             "target": target,
             "value": value
@@ -54,10 +54,10 @@ def include_operators(pg):
             "first": first,
             "second": third,
             "value": second,
-            "first_space": if_.before_space,
-            "second_space": if_.after_space,
-            "third_space": else_.before_space,
-            "forth_space": else_.after_space,
+            "first_formatting": if_.hidden_tokens_before,
+            "second_formatting": if_.hidden_tokens_after,
+            "third_formatting": else_.hidden_tokens_before,
+            "forth_formatting": else_.hidden_tokens_after,
         }
 
     @pg.production("or_test : and_test OR or_test")
@@ -68,8 +68,8 @@ def include_operators(pg):
             "value": operator.value,
             "first": first,
             "second": second,
-            "first_space": operator.before_space,
-            "second_space": operator.after_space,
+            "first_formatting": operator.hidden_tokens_before,
+            "second_formatting": operator.hidden_tokens_after,
         }
 
     @pg.production("not_test : NOT not_test")
@@ -78,7 +78,7 @@ def include_operators(pg):
             "type": "unitary_operator",
             "value": "not",
             "target": comparison,
-            "space": not_.after_space
+            "formatting": not_.hidden_tokens_after
         }
 
     @pg.production("comparison : expr LESS comparison")
@@ -94,11 +94,11 @@ def include_operators(pg):
         return {
             "type": "comparison",
             "value": comparison_operator.value,
-            "middle_space": "",
+            "middle_formatting": [],
             "first": expr,
             "second": comparison_,
-            "first_space": comparison_operator.before_space,
-            "second_space": comparison_operator.after_space
+            "first_formatting": comparison_operator.hidden_tokens_before,
+            "second_formatting": comparison_operator.hidden_tokens_after
         }
 
     @pg.production("comparison : expr IS NOT comparison")
@@ -112,9 +112,9 @@ def include_operators(pg):
             ),
             "first": expr,
             "second": comparison_,
-            "first_space": comparison_operator.before_space,
-            "second_space": comparison_operator2.after_space,
-            "middle_space": comparison_operator.after_space,
+            "first_formatting": comparison_operator.hidden_tokens_before,
+            "second_formatting": comparison_operator2.hidden_tokens_after,
+            "middle_formatting": comparison_operator.hidden_tokens_after,
         }
 
     @pg.production("expr : xor_expr VBAR expr")
@@ -136,8 +136,8 @@ def include_operators(pg):
             "value": operator.value,
             "first": first,
             "second": second,
-            "first_space": operator.before_space,
-            "second_space": operator.after_space
+            "first_formatting": operator.hidden_tokens_before,
+            "second_formatting": operator.hidden_tokens_after
         }
 
     @pg.production("factor : PLUS factor")
@@ -147,7 +147,7 @@ def include_operators(pg):
         return {
             "type": "unitary_operator",
             "value": operator.value,
-            "space": operator.after_space,
+            "formatting": operator.hidden_tokens_after,
             "target": factor,
         }
 
@@ -162,8 +162,8 @@ def include_operators(pg):
                 "value": atomtrailers,
             },
             "second": factor,
-            "first_space": double_star.before_space,
-            "second_space": double_star.after_space
+            "first_formatting": double_star.hidden_tokens_before,
+            "second_formatting": double_star.hidden_tokens_after
         }
 
     @pg.production("power : atomtrailers")
@@ -193,8 +193,8 @@ def include_operators(pg):
     def trailer((dot, name,)):
         return [{
             "type": "dot",
-            "first_space": dot.before_space,
-            "second_space": dot.after_space,
+            "first_formatting": dot.hidden_tokens_before,
+            "second_formatting": dot.hidden_tokens_after,
         },{
             "type": "name",
             "value": name.value,
@@ -205,9 +205,9 @@ def include_operators(pg):
         return [{
             "type": "call",
             "value": argslist,
-            "first_space": left.before_space,
-            "second_space": left.after_space,
-            "third_space": right.before_space,
+            "first_formatting": left.hidden_tokens_before,
+            "second_formatting": left.hidden_tokens_after,
+            "third_formatting": right.hidden_tokens_before,
         }]
 
     @pg.production("trailer : LEFT_SQUARE_BRACKET subscript RIGHT_SQUARE_BRACKET")
@@ -216,16 +216,16 @@ def include_operators(pg):
         return [{
             "type": "getitem" if left.value == "[" else "call",
             "value": subscript,
-            "first_space": left.after_space,
-            "second_space": right.before_space,
+            "first_formatting": left.hidden_tokens_after,
+            "second_formatting": right.hidden_tokens_before,
         }]
 
     @pg.production("subscript : DOT DOT DOT")
     def subscript_ellipsis((dot1, dot2, dot3)):
         return {
             "type": "ellipsis",
-            "first_space": dot1.after_space,
-            "second_space": dot2.after_space,
+            "first_formatting": dot1.hidden_tokens_after,
+            "second_formatting": dot2.hidden_tokens_after,
         }
 
     @pg.production("subscript : test")
@@ -241,10 +241,10 @@ def include_operators(pg):
             "upper": None,
             "step": None,
             "has_two_colons": bool(colon2),
-            "first_space": "",
-            "second_space": colon.after_space,
-            "third_space": "",
-            "forth_space": "",
+            "first_formatting": [],
+            "second_formatting": colon.hidden_tokens_after,
+            "third_formatting": [],
+            "forth_formatting": [],
         }
 
     @pg.production("slice : test COLON COLON?")
@@ -255,10 +255,10 @@ def include_operators(pg):
             "upper": None,
             "step": None,
             "has_two_colons": bool(colon2),
-            "first_space": colon.before_space,
-            "second_space": colon.after_space,
-            "third_space": "",
-            "forth_space": "",
+            "first_formatting": colon.hidden_tokens_before,
+            "second_formatting": colon.hidden_tokens_after,
+            "third_formatting": [],
+            "forth_formatting": [],
         }
 
     @pg.production("slice : COLON test COLON?")
@@ -269,10 +269,10 @@ def include_operators(pg):
             "upper": test,
             "step": None,
             "has_two_colons": bool(colon2),
-            "first_space": colon.before_space,
-            "second_space": colon.after_space,
-            "third_space": colon2.before_space if colon2 else "",
-            "forth_space": "",
+            "first_formatting": colon.hidden_tokens_before,
+            "second_formatting": colon.hidden_tokens_after,
+            "third_formatting": colon2.hidden_tokens_before if colon2 else "",
+            "forth_formatting": [],
         }
 
     @pg.production("slice : COLON COLON test")
@@ -283,10 +283,10 @@ def include_operators(pg):
             "upper": None,
             "step": test,
             "has_two_colons": True,
-            "first_space": colon.before_space,
-            "second_space": colon.after_space,
-            "third_space": colon2.before_space,
-            "forth_space": colon2.after_space,
+            "first_formatting": colon.hidden_tokens_before,
+            "second_formatting": colon.hidden_tokens_after,
+            "third_formatting": colon2.hidden_tokens_before,
+            "forth_formatting": colon2.hidden_tokens_after,
         }
 
     @pg.production("slice : test COLON test COLON?")
@@ -297,10 +297,10 @@ def include_operators(pg):
             "upper": test2,
             "step": None,
             "has_two_colons": bool(colon2),
-            "first_space": colon.before_space,
-            "second_space": colon.after_space,
-            "third_space": colon2.before_space if colon2 else "",
-            "forth_space": "",
+            "first_formatting": colon.hidden_tokens_before,
+            "second_formatting": colon.hidden_tokens_after,
+            "third_formatting": colon2.hidden_tokens_before if colon2 else "",
+                "forth_formatting": [],
         }
 
     @pg.production("slice : test COLON COLON test")
@@ -311,10 +311,10 @@ def include_operators(pg):
             "upper": None,
             "step": test2,
             "has_two_colons": True,
-            "first_space": colon.before_space,
-            "second_space": colon.after_space,
-            "third_space": colon2.before_space,
-            "forth_space": colon2.after_space,
+            "first_formatting": colon.hidden_tokens_before,
+            "second_formatting": colon.hidden_tokens_after,
+            "third_formatting": colon2.hidden_tokens_before,
+            "forth_formatting": colon2.hidden_tokens_after,
         }
 
     @pg.production("slice : COLON test COLON test")
@@ -325,10 +325,10 @@ def include_operators(pg):
             "upper": test,
             "step": test2,
             "has_two_colons": True,
-            "first_space": colon.before_space,
-            "second_space": colon.after_space,
-            "third_space": colon2.before_space,
-            "forth_space": colon2.after_space,
+            "first_formatting": colon.hidden_tokens_before,
+            "second_formatting": colon.hidden_tokens_after,
+            "third_formatting": colon2.hidden_tokens_before,
+            "forth_formatting": colon2.hidden_tokens_after,
         }
 
     @pg.production("slice : test COLON test COLON test")
@@ -339,8 +339,8 @@ def include_operators(pg):
             "upper": test2,
             "step": test3,
             "has_two_colons": True,
-            "first_space": colon.before_space,
-            "second_space": colon.after_space,
-            "third_space": colon2.before_space,
-            "forth_space": colon2.after_space,
+            "first_formatting": colon.hidden_tokens_before,
+            "second_formatting": colon.hidden_tokens_after,
+            "third_formatting": colon2.hidden_tokens_before,
+            "forth_formatting": colon2.hidden_tokens_after,
         }

@@ -12,13 +12,33 @@ def test_simple_power():
            ('DOUBLE_STAR', '**'),
            ('NAME', 'b')
           ],
-          [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '**',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**'),
            ('NAME', 'b')
           ],
-          [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '**',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [] }])
 
 def test_first_space_power():
     "a  **b"
@@ -27,13 +47,33 @@ def test_first_space_power():
            ('DOUBLE_STAR', '**', [('SPACE', '  ')]),
            ('NAME', 'b')
           ],
-          [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "  ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '**',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": "  "}],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**', [('SPACE', '  ')]),
            ('NAME', 'b')
           ],
-          [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "  ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '**',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": "  "}],
+            "second_formatting": [] }])
 
 def test_second_space_power():
     "a** b"
@@ -41,12 +81,32 @@ def test_second_space_power():
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**', [], [('SPACE', ' ')]),
            ('NAME', 'b')],
-          [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '**',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**', [], [('SPACE', ' ')]),
            ('NAME', 'b')],
-          [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '**',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_spaces_power():
     "a **  b"
@@ -55,13 +115,33 @@ def test_spaces_power():
            ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'b')
           ],
-          [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "  " }])
+          [{
+            "type": "binary_operator",
+            "value": '**',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": "  "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'b')
           ],
-          [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "  " }])
+          [{
+            "type": "binary_operator",
+            "value": '**',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": "  "}] }])
 
 def test_power_power():
     "a **  b   **    c"
@@ -90,11 +170,11 @@ def test_power_power():
                                   "type": "name",
                                   "value": 'c'
                                  },
-                       "first_space": "   ",
-                       "second_space": "    "
+                       "first_formatting": [{"type": "space", "value": "   "}],
+                       "second_formatting": [{"type": "space", "value": "    "}]
                       },
-            "first_space": " ",
-            "second_space": "  "
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": "  "}]
            }])
     parse_simple([
            ('NAME', 'a'),
@@ -121,11 +201,11 @@ def test_power_power():
                                   "type": "name",
                                   "value": 'c'
                                  },
-                       "first_space": "   ",
-                       "second_space": "    "
+                       "first_formatting": [{"type": "space", "value": "   "}],
+                       "second_formatting": [{"type": "space", "value": "    "}]
                       },
-            "first_space": " ",
-            "second_space": "  "
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": "  "}]
            }])
     parse_simple([
            ('NAME', 'a'),
@@ -152,11 +232,11 @@ def test_power_power():
                                   "type": "name",
                                   "value": 'c'
                                  },
-                       "first_space": "   ",
-                       "second_space": "    "
+                       "first_formatting": [{"type": "space", "value": "   "}],
+                       "second_formatting": [{"type": "space", "value": "    "}]
                       },
-            "first_space": " ",
-            "second_space": "  "
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": "  "}]
            }])
     parse_simple([
            ('NAME', 'a'),
@@ -180,11 +260,11 @@ def test_power_power():
                                   "type": "name",
                                   "value": 'c'
                                  },
-                       "first_space": "   ",
-                       "second_space": "    "
+                       "first_formatting": [{"type": "space", "value": "   "}],
+                       "second_formatting": [{"type": "space", "value": "    "}]
                       },
-            "first_space": " ",
-            "second_space": "  "
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": "  "}]
            }])
     parse_simple([
            ('NAME', 'a'),
@@ -205,11 +285,11 @@ def test_power_power():
                        "value": '**',
                        "first": {"type": "name", "value": 'b'},
                        "second": { "type": "name", "value": 'c', },
-                       "first_space": "   ",
-                       "second_space": "    "
+                       "first_formatting": [{"type": "space", "value": "   "}],
+                       "second_formatting": [{"type": "space", "value": "    "}]
                       },
-            "first_space": " ",
-            "second_space": "  "
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": "  "}]
            }])
     parse_simple([
            ('NAME', 'a'),
@@ -221,10 +301,21 @@ def test_power_power():
           [{
             "type": "binary_operator",
             "value": '**',
-            "first": {"type": "name", "value": 'a'},
-            "second": { "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'b'}, "second": { "type": "name", "value": 'c', }, "first_space": "   ", "second_space": "    " },
-            "first_space": " ",
-            "second_space": "  "
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "binary_operator",
+                       "value": '**',
+                       "first": {"type": "name",
+                                 "value": 'b'},
+                       "second": {
+                                  "type": "name",
+                                  "value": 'c',
+                                 },
+                       "first_formatting": [{"type": "space", "value": "   "}],
+                       "second_formatting": [{"type": "space", "value": "    "}] },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": "  "}]
            }])
 
 def test_power_power_spaces():
@@ -247,11 +338,11 @@ def test_power_power_spaces():
                        "value": '**',
                        "first": {"type": "name", "value": 'b'},
                        "second": {"type": "name", "value": 'c'},
-                       "first_space": "   ",
-                       "second_space": "    "
+                       "first_formatting": [{"type": "space", "value": "   "}],
+                       "second_formatting": [{"type": "space", "value": "    "}]
                       },
-            "first_space": "",
-            "second_space": "  "
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": "  "}]
            }])
     parse_simple([
            ('NAME', 'a'),
@@ -260,11 +351,23 @@ def test_power_power_spaces():
            ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
-          [{"type": "binary_operator", "value": '**',
-                           "first": { "type": "name", "value": 'a', },
-                           "second": { "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'b'}, "second": {"type": "name", "value": 'c'}, "first_space": "   ", "second_space": "    " },
-                           "first_space": "",
-                           "second_space": "  "
+          [{"type": "binary_operator",
+            "value": '**',
+                           "first": {
+                                     "type": "name",
+                                     "value": 'a',
+                                    },
+                           "second": {
+                                      "type": "binary_operator",
+                                      "value": '**',
+                                      "first": {"type": "name",
+                                                "value": 'b'},
+                                      "second": {"type": "name",
+                                                 "value": 'c'},
+                                      "first_formatting": [{"type": "space", "value": "   "}],
+                                      "second_formatting": [{"type": "space", "value": "    "}] },
+                           "first_formatting": [],
+                           "second_formatting": [{"type": "space", "value": "  "}]
                           }])
     parse_simple([
            ('NAME', 'a'),
@@ -279,14 +382,14 @@ def test_power_power_spaces():
             "first": {"type": "name", "value": 'a'},
             "second": {
                        "type": "binary_operator",
-                       "value":                                                    '**',
+                       "value": '**',
                        "first": { "type": "name", "value": 'b', },
                        "second": {"type": "name", "value": 'c'},
-                       "first_space": "   ",
-                       "second_space": "    "
+                       "first_formatting": [{"type": "space", "value": "   "}],
+                       "second_formatting": [{"type": "space", "value": "    "}]
                       },
-            "first_space": "",
-            "second_space": "  "
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": "  "}]
            }])
     parse_simple([
            ('NAME', 'a'),
@@ -297,9 +400,19 @@ def test_power_power_spaces():
           ],
           [{"type": "binary_operator", "value": '**',
                            "first": {"type": "name", "value": 'a'},
-                           "second": { "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'b', }, "second": {"type": "name", "value": 'c'}, "first_space": "   ", "second_space": "    " },
-                           "first_space": "",
-                           "second_space": "  "
+                           "second": {
+                                      "type": "binary_operator",
+                                      "value": '**',
+                                      "first": {
+                                                "type": "name",
+                                                "value": 'b',
+                                               },
+                                      "second": {"type": "name",
+                                                 "value": 'c'},
+                                      "first_formatting": [{"type": "space", "value": "   "}],
+                                      "second_formatting": [{"type": "space", "value": "    "}] },
+                           "first_formatting": [],
+                           "second_formatting": [{"type": "space", "value": "  "}]
                           }])
     parse_simple([
            ('NAME', 'a'),
@@ -308,7 +421,23 @@ def test_power_power_spaces():
            ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
-          [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": {"type": "binary_operator", "value":                                                    '**',                                                   "first": {"type": "name", "value": 'b'},                                                   "second": { "type": "name", "value": 'c', },                                                   "first_space": "   ",                                                   "second_space": "    "                                                  }, "first_space": "", "second_space": "  " }])
+          [{
+            "type": "binary_operator",
+            "value": '**',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "binary_operator",
+                       "value":                                                    '**',
+                       "first": {"type": "name",
+                                 "value": 'b'},
+                       "second": {
+                                  "type": "name",
+                                  "value": 'c',
+                                 },
+                       "first_formatting": [{"type": "space", "value": "   "}],
+                       "second_formatting": [{"type": "space", "value": "    "}]                                                  },
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": "  "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**', [], [('SPACE', '  ')]),
@@ -316,11 +445,23 @@ def test_power_power_spaces():
            ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
-          [{"type": "binary_operator", "value": '**',
-                           "first": {"type": "name", "value": 'a'},
-                           "second": { "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'b'}, "second": { "type": "name", "value": 'c', }, "first_space": "   ", "second_space": "    " },
-                           "first_space": "",
-                           "second_space": "  "
+          [{"type": "binary_operator",
+            "value": '**',
+                           "first": {"type": "name",
+                                     "value": 'a'},
+                           "second": {
+                                      "type": "binary_operator",
+                                      "value": '**',
+                                      "first": {"type": "name",
+                                                "value": 'b'},
+                                      "second": {
+                                                 "type": "name",
+                                                 "value": 'c',
+                                                },
+                                      "first_formatting": [{"type": "space", "value": "   "}],
+                                      "second_formatting": [{"type": "space", "value": "    "}] },
+                           "first_formatting": [],
+                           "second_formatting": [{"type": "space", "value": "  "}]
                           }])
     "a **b   **    c"
     parse_simple([
@@ -330,7 +471,23 @@ def test_power_power_spaces():
            ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
-          [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": {"type": "binary_operator", "value":                                                    '**',                                                   "first": {"type": "name", "value": 'b'},                                                   "second": {"type": "name", "value": 'c'},                                                   "first_space": "   ",                                                   "second_space": "    "                                                  }, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '**',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "binary_operator",
+                       "value":                                                    '**',
+                       "first": {"type": "name",
+                                 "value": 'b'},
+                       "second": {"type": "name",
+                                  "value": 'c'},
+                       "first_formatting": [{"type": "space", "value": "   "}],
+                       "second_formatting": [{"type": "space", "value": "    "}]                                                  },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**', [('SPACE', ' ')]),
@@ -338,11 +495,23 @@ def test_power_power_spaces():
            ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
-          [{"type": "binary_operator", "value": '**',
-                           "first": { "type": "name", "value": 'a', },
-                           "second": { "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'b'}, "second": {"type": "name", "value": 'c'}, "first_space": "   ", "second_space": "    " },
-                           "first_space": " ",
-                           "second_space": ""
+          [{"type": "binary_operator",
+            "value": '**',
+                           "first": {
+                                     "type": "name",
+                                     "value": 'a',
+                                    },
+                           "second": {
+                                      "type": "binary_operator",
+                                      "value": '**',
+                                      "first": {"type": "name",
+                                                "value": 'b'},
+                                      "second": {"type": "name",
+                                                 "value": 'c'},
+                                      "first_formatting": [{"type": "space", "value": "   "}],
+                                      "second_formatting": [{"type": "space", "value": "    "}] },
+                           "first_formatting": [{"type": "space", "value": " "}],
+                           "second_formatting": []
                           }])
     parse_simple([
            ('NAME', 'a'),
@@ -351,7 +520,23 @@ def test_power_power_spaces():
            ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
-          [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": {"type": "binary_operator", "value":                                                    '**',                                                   "first": { "type": "name", "value": 'b', },                                                   "second": {"type": "name", "value": 'c'},                                                   "first_space": "   ",                                                   "second_space": "    "                                                  }, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '**',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "binary_operator",
+                       "value":                                                    '**',
+                       "first": {
+                                 "type": "name",
+                                 "value": 'b',
+                                },
+                       "second": {"type": "name",
+                                  "value": 'c'},
+                       "first_formatting": [{"type": "space", "value": "   "}],
+                       "second_formatting": [{"type": "space", "value": "    "}]                                                  },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**', [('SPACE', ' ')]),
@@ -359,11 +544,23 @@ def test_power_power_spaces():
            ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
-          [{"type": "binary_operator", "value": '**',
-                           "first": {"type": "name", "value": 'a'},
-                           "second": { "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'b', }, "second": {"type": "name", "value": 'c'}, "first_space": "   ", "second_space": "    " },
-                           "first_space": " ",
-                           "second_space": ""
+          [{"type": "binary_operator",
+            "value": '**',
+                           "first": {"type": "name",
+                                     "value": 'a'},
+                           "second": {
+                                      "type": "binary_operator",
+                                      "value": '**',
+                                      "first": {
+                                                "type": "name",
+                                                "value": 'b',
+                                               },
+                                      "second": {"type": "name",
+                                                 "value": 'c'},
+                                      "first_formatting": [{"type": "space", "value": "   "}],
+                                      "second_formatting": [{"type": "space", "value": "    "}] },
+                           "first_formatting": [{"type": "space", "value": " "}],
+                           "second_formatting": []
                           }])
     parse_simple([
            ('NAME', 'a'),
@@ -372,7 +569,23 @@ def test_power_power_spaces():
            ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
-          [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": {"type": "binary_operator", "value":                                                    '**',                                                   "first": {"type": "name", "value": 'b'},                                                   "second": { "type": "name", "value": 'c', },                                                   "first_space": "   ",                                                   "second_space": "    "                                                  }, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '**',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "binary_operator",
+                       "value":                                                    '**',
+                       "first": {"type": "name",
+                                 "value": 'b'},
+                       "second": {
+                                  "type": "name",
+                                  "value": 'c',
+                                 },
+                       "first_formatting": [{"type": "space", "value": "   "}],
+                       "second_formatting": [{"type": "space", "value": "    "}]                                                  },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**', [('SPACE', ' ')]),
@@ -380,11 +593,23 @@ def test_power_power_spaces():
            ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ],
-          [{"type": "binary_operator", "value": '**',
-                           "first": {"type": "name", "value": 'a'},
-                           "second": { "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'b'}, "second": { "type": "name", "value": 'c', }, "first_space": "   ", "second_space": "    " },
-                           "first_space": " ",
-                           "second_space": ""
+          [{"type": "binary_operator",
+            "value": '**',
+                           "first": {"type": "name",
+                                     "value": 'a'},
+                           "second": {
+                                      "type": "binary_operator",
+                                      "value": '**',
+                                      "first": {"type": "name",
+                                                "value": 'b'},
+                                      "second": {
+                                                 "type": "name",
+                                                 "value": 'c',
+                                                },
+                                      "first_formatting": [{"type": "space", "value": "   "}],
+                                      "second_formatting": [{"type": "space", "value": "    "}] },
+                           "first_formatting": [{"type": "space", "value": " "}],
+                           "second_formatting": []
                           }])
     "a**b**c"
     parse_simple([
@@ -394,7 +619,23 @@ def test_power_power_spaces():
            ('DOUBLE_STAR', '**'),
            ('NAME', 'c')
           ],
-          [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": {"type": "binary_operator", "value": '**',                                                   "first": {"type": "name", "value": 'b'},                                                   "second": {"type": "name", "value": 'c'},                                                   "first_space": "",                                                   "second_space": ""                                                  }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '**',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "binary_operator",
+                       "value": '**',
+                       "first": {"type": "name",
+                                 "value": 'b'},
+                       "second": {"type": "name",
+                                  "value": 'c'},
+                       "first_formatting": [],
+                       "second_formatting": []                                                  },
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**'),
@@ -402,11 +643,23 @@ def test_power_power_spaces():
            ('DOUBLE_STAR', '**'),
            ('NAME', 'c')
           ],
-          [{"type": "binary_operator", "value": '**',
-                           "first": { "type": "name", "value": 'a', },
-                           "second": { "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'b'}, "second": {"type": "name", "value": 'c'}, "first_space": "", "second_space": "" },
-                           "first_space": "",
-                           "second_space": ""
+          [{"type": "binary_operator",
+            "value": '**',
+                           "first": {
+                                     "type": "name",
+                                     "value": 'a',
+                                    },
+                           "second": {
+                                      "type": "binary_operator",
+                                      "value": '**',
+                                      "first": {"type": "name",
+                                                "value": 'b'},
+                                      "second": {"type": "name",
+                                                 "value": 'c'},
+                                      "first_formatting": [],
+                                      "second_formatting": [] },
+                           "first_formatting": [],
+                           "second_formatting": []
                           }])
     parse_simple([
            ('NAME', 'a'),
@@ -415,7 +668,72 @@ def test_power_power_spaces():
            ('DOUBLE_STAR', '**'),
            ('NAME', 'c')
           ],
-          [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": {"type": "binary_operator", "value": '**',                                                   "first": { "type": "name", "value": 'b', },                                                   "second": {"type": "name", "value": 'c'},                                                   "first_space": "",                                                   "second_space": ""                                                  }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '**',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "binary_operator",
+                       "value": '**',
+                       "first": {
+                                 "type": "name",
+                                 "value": 'b',
+                                },
+                       "second": {"type": "name",
+                                  "value": 'c'},
+                       "first_formatting": [],
+                       "second_formatting": []                                                  },
+            "first_formatting": [],
+            "second_formatting": [] }])
+    parse_simple([
+           ('NAME', 'a'),
+           ('DOUBLE_STAR', '**'),
+           ('NAME', 'b'),
+           ('DOUBLE_STAR', '**'),
+           ('NAME', 'c')
+          ],
+         [{"type": "binary_operator",
+           "value": '**',
+           "first": {"type": "name",
+                     "value": 'a'},
+           "second": {
+                      "type": "binary_operator",
+                      "value": '**',
+                      "first": {
+                                "type": "name",
+                                "value": 'b',
+                               },
+                      "second": {"type": "name",
+                                 "value": 'c'},
+                      "first_formatting": [],
+                      "second_formatting": [] },
+           "first_formatting": [],
+           "second_formatting": []
+          }])
+    parse_simple([
+           ('NAME', 'a'),
+           ('DOUBLE_STAR', '**'),
+           ('NAME', 'b'),
+           ('DOUBLE_STAR', '**'),
+           ('NAME', 'c')
+          ],
+          [{
+            "type": "binary_operator",
+            "value": '**',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "binary_operator",
+                       "value": '**',
+                       "first": {"type": "name",
+                                 "value": 'b'},
+                       "second": {
+                                  "type": "name",
+                                  "value": 'c',
+                                 },
+                       "first_formatting": [],
+                       "second_formatting": []                                                  },
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**'),
@@ -425,30 +743,19 @@ def test_power_power_spaces():
           ],
           [{"type": "binary_operator", "value": '**',
                            "first": {"type": "name", "value": 'a'},
-                           "second": { "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'b', }, "second": {"type": "name", "value": 'c'}, "first_space": "", "second_space": "" },
-                           "first_space": "",
-                           "second_space": ""
-                          }])
-    parse_simple([
-           ('NAME', 'a'),
-           ('DOUBLE_STAR', '**'),
-           ('NAME', 'b'),
-           ('DOUBLE_STAR', '**'),
-           ('NAME', 'c')
-          ],
-          [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": {"type": "binary_operator", "value": '**',                                                   "first": {"type": "name", "value": 'b'},                                                   "second": { "type": "name", "value": 'c', },                                                   "first_space": "",                                                   "second_space": ""                                                  }, "first_space": "", "second_space": "" }])
-    parse_simple([
-           ('NAME', 'a'),
-           ('DOUBLE_STAR', '**'),
-           ('NAME', 'b'),
-           ('DOUBLE_STAR', '**'),
-           ('NAME', 'c')
-          ],
-          [{"type": "binary_operator", "value": '**',
-                           "first": {"type": "name", "value": 'a'},
-                           "second": { "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'b'}, "second": { "type": "name", "value": 'c', }, "first_space": "", "second_space": "" },
-                           "first_space": "",
-                           "second_space": ""
+                           "second": {
+                                      "type": "binary_operator",
+                                      "value": '**',
+                                      "first": {"type": "name",
+                                                "value": 'b'},
+                                      "second": {
+                                                 "type": "name",
+                                                 "value": 'c',
+                                                },
+                                      "first_formatting": [],
+                                      "second_formatting": [] },
+                           "first_formatting": [],
+                           "second_formatting": []
                           }])
 
 def test_power_factor():
@@ -459,14 +766,44 @@ def test_power_factor():
            ('PLUS', '+'),
            ('NAME', 'b')
           ],
-          [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": { "type": "unitary_operator", "value": '+', "target": {"type": "name", "value": 'b'}, "space": "", }, "first_space": " ", "second_space": "  " }])
+          [{
+            "type": "binary_operator",
+            "value": '**',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {
+                       "type": "unitary_operator",
+                       "value": '+',
+                       "target": {"type": "name",
+                                  "value": 'b'},
+                       "formatting": [],
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": "  "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('PLUS', '+'),
            ('NAME', 'b')
           ],
-          [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": { "type": "unitary_operator", "value": '+', "target": { "type": "name", "value": 'b', }, "space": "", }, "first_space": " ", "second_space": "  " }])
+          [{
+            "type": "binary_operator",
+            "value": '**',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "unitary_operator",
+                       "value": '+',
+                       "target": {
+                                  "type": "name",
+                                  "value": 'b',
+                                 },
+                       "formatting": [],
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": "  "}] }])
 
 def test_power_factor_minus():
     "a **  -b"
@@ -476,14 +813,44 @@ def test_power_factor_minus():
            ('MINUS', '-'),
            ('NAME', 'b')
           ],
-          [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": { "type": "unitary_operator", "value": '-', "target": {"type": "name", "value": 'b'}, "space": "", }, "first_space": " ", "second_space": "  " }])
+          [{
+            "type": "binary_operator",
+            "value": '**',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {
+                       "type": "unitary_operator",
+                       "value": '-',
+                       "target": {"type": "name",
+                                  "value": 'b'},
+                       "formatting": [],
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": "  "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('MINUS', '-'),
            ('NAME', 'b')
           ],
-          [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": { "type": "unitary_operator", "value": '-', "target": { "type": "name", "value": 'b', }, "space": "", }, "first_space": " ", "second_space": "  " }])
+          [{
+            "type": "binary_operator",
+            "value": '**',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "unitary_operator",
+                       "value": '-',
+                       "target": {
+                                  "type": "name",
+                                  "value": 'b',
+                                 },
+                       "formatting": [],
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": "  "}] }])
 
 def test_power_factor_tild():
     "a **  ~b"
@@ -493,14 +860,44 @@ def test_power_factor_tild():
            ('TILDE', '~'),
            ('NAME', 'b')
           ],
-          [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": { "type": "unitary_operator", "value": '~', "target": {"type": "name", "value": 'b'}, "space": "", }, "first_space": " ", "second_space": "  " }])
+          [{
+            "type": "binary_operator",
+            "value": '**',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {
+                       "type": "unitary_operator",
+                       "value": '~',
+                       "target": {"type": "name",
+                                  "value": 'b'},
+                       "formatting": [],
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": "  "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('TILDE', '~'),
            ('NAME', 'b')
           ],
-          [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": { "type": "unitary_operator", "value": '~', "target": { "type": "name", "value": 'b', }, "space": "", }, "first_space": " ", "second_space": "  " }])
+          [{
+            "type": "binary_operator",
+            "value": '**',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "unitary_operator",
+                       "value": '~',
+                       "target": {
+                                  "type": "name",
+                                  "value": 'b',
+                                 },
+                       "formatting": [],
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": "  "}] }])
 
 def test_power_operator_madness():
     "a **  ~+-b"
@@ -512,7 +909,31 @@ def test_power_operator_madness():
          ('MINUS', '-'),
          ('NAME', 'b')
         ],
-        [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": {                 "type": "unitary_operator",                 "value": '~',                 "target": {                     "type": "unitary_operator",                     "value": '+',                     "target": {                         "type": "unitary_operator",                         "value": "-",                         "target": {"type": "name", "value": 'b'},                         "space": "",                     },                     "space": "",                 },                 "space": ""             }, "first_space": " ", "second_space": "  " }])
+        [{
+          "type": "binary_operator",
+          "value": '**',
+          "first": {
+                    "type": "name",
+                    "value": 'a',
+                   },
+          "second": {
+                     "type": "unitary_operator",
+                     "value": '~',
+                     "target": {
+                                "type": "unitary_operator",
+                                "value": '+',
+                                "target": {
+                                           "type": "unitary_operator",
+                                           "value": "-",
+                                           "target": {"type": "name",
+                                                      "value": 'b'},
+                                           "formatting": [],
+                                          },
+                                "formatting": [],
+                               },
+                     "formatting": []             },
+          "first_formatting": [{"type": "space", "value": " "}],
+          "second_formatting": [{"type": "space", "value": "  "}] }])
     parse_simple([
          ('NAME', 'a'),
          ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
@@ -521,7 +942,31 @@ def test_power_operator_madness():
          ('MINUS', '-'),
          ('NAME', 'b')
         ],
-        [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": {                 "type": "unitary_operator",                 "value": '~',                 "target": {                     "type": "unitary_operator",                     "value": '+',                     "target": {                         "type": "unitary_operator",                         "value": "-",                         "target": { "type": "name", "value": 'b', },                         "space": "",                     },                     "space": "",                 },                 "space": ""             }, "first_space": " ", "second_space": "  " }])
+        [{
+          "type": "binary_operator",
+          "value": '**',
+          "first": {"type": "name",
+                    "value": 'a'},
+          "second": {
+                     "type": "unitary_operator",
+                     "value": '~',
+                     "target": {
+                                "type": "unitary_operator",
+                                "value": '+',
+                                "target": {
+                                           "type": "unitary_operator",
+                                           "value": "-",
+                                           "target": {
+                                                      "type": "name",
+                                                      "value": 'b',
+                                                     },
+                                           "formatting": [],
+                                          },
+                                "formatting": [],
+                               },
+                     "formatting": []             },
+          "first_formatting": [{"type": "space", "value": " "}],
+          "second_formatting": [{"type": "space", "value": "  "}] }])
     parse_simple([
          ('NAME', 'a'),
          ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
@@ -530,7 +975,98 @@ def test_power_operator_madness():
          ('MINUS', '-'),
          ('NAME', 'b')
         ],
-        [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": {                     "type": "unitary_operator",                     "value": '~',                     "target": {                         "type": "unitary_operator",                         "value": '+',                         "target": {                             "type": "unitary_operator",                             "value": "-",                             "target": {"type": "name", "value": 'b'},                             "space": "",                         },                         "space": ""                     },                     "space": "",                 }, "first_space": " ", "second_space": "  " }])
+        [{
+          "type": "binary_operator",
+          "value": '**',
+          "first": {
+                    "type": "name",
+                    "value": 'a',
+                   },
+          "second": {
+                     "type": "unitary_operator",
+                     "value": '~',
+                     "target": {
+                                "type": "unitary_operator",
+                                "value": '+',
+                                "target": {
+                                           "type": "unitary_operator",
+                                           "value": "-",
+                                           "target": {"type": "name",
+                                                      "value": 'b'},
+                                           "formatting": [],
+                                          },
+                                "formatting": []                     },
+                     "formatting": [],
+                    },
+          "first_formatting": [{"type": "space", "value": " "}],
+          "second_formatting": [{"type": "space", "value": "  "}] }])
+    parse_simple([
+         ('NAME',
+          'a'),
+         ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
+         ('TILDE', '~'),
+         ('PLUS', '+'),
+         ('MINUS', '-'),
+         ('NAME', 'b')
+        ],
+        [{ "type": "binary_operator",
+          "value": '**',
+          "first": {"type": "name",
+                    "value": 'a'},
+          "second": {
+                     "type": "unitary_operator",
+                     "value": '~',
+                     "target": {
+                                "type": "unitary_operator",
+                                "value": '+',
+                                "target": {
+                                           "type": "unitary_operator",
+                                           "value": "-",
+                                           "target": {
+                                                      "type": "name",
+                                                      "value": 'b',
+                                                     },
+                                           "formatting": [],
+                                          },
+                                "formatting": []                     },
+                     "formatting": [],
+                    },
+          "first_formatting": [{"type": "space", "value": " "}],
+          "second_formatting": [{"type": "space", "value": "  "}] }])
+    parse_simple([
+         ('NAME',
+          'a'),
+         ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
+         ('TILDE', '~'),
+         ('PLUS', '+'),
+         ('MINUS', '-'),
+         ('NAME', 'b')
+        ],
+        [{
+          "type": "binary_operator",
+          "value": '**',
+          "first": {
+                    "type": "name",
+                    "value": 'a',
+                   },
+          "second": {
+                     "type": "unitary_operator",
+                     "value": "~",
+                     "target": {
+                                "type": "unitary_operator",
+                                "value": '+',
+                                "target": {
+                                           "type": "unitary_operator",
+                                           "value": "-",
+                                           "target": {"type": "name",
+                                                      "value": 'b'},
+                                           "formatting": []                     },
+                                "formatting": [],
+                               },
+                     "formatting": [],
+                    },
+          "first_formatting": [{"type": "space", "value": " "}],
+          "second_formatting": [{"type": "space", "value": "  "}] }])
     parse_simple([
          ('NAME', 'a'),
          ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
@@ -539,25 +1075,31 @@ def test_power_operator_madness():
          ('MINUS', '-'),
          ('NAME', 'b')
         ],
-        [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": {                     "type": "unitary_operator",                     "value": '~',                     "target": {                         "type": "unitary_operator",                         "value": '+',                         "target": {                             "type": "unitary_operator",                             "value": "-",                             "target": { "type": "name", "value": 'b', },                             "space": "",                         },                         "space": ""                     },                     "space": "",                 }, "first_space": " ", "second_space": "  " }])
-    parse_simple([
-         ('NAME', 'a'),
-         ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
-         ('TILDE', '~'),
-         ('PLUS', '+'),
-         ('MINUS', '-'),
-         ('NAME', 'b')
-        ],
-        [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": {                 "type": "unitary_operator",                 "value": "~",                 "target": {                     "type": "unitary_operator",                     "value": '+',                     "target": {                         "type": "unitary_operator",                         "value": "-",                         "target": {"type": "name", "value": 'b'},                         "space": ""                     },                     "space": "",                 },                 "space": "",             }, "first_space": " ", "second_space": "  " }])
-    parse_simple([
-         ('NAME', 'a'),
-         ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
-         ('TILDE', '~'),
-         ('PLUS', '+'),
-         ('MINUS', '-'),
-         ('NAME', 'b')
-        ],
-        [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": {                 "type": "unitary_operator",                 "value": "~",                 "target": {                     "type": "unitary_operator",                     "value": '+',                     "target": {                         "type": "unitary_operator",                         "value": "-",                         "target": { "type": "name", "value": 'b', },                         "space": ""                     },                     "space": "",                 },                 "space": "",             }, "first_space": " ", "second_space": "  " }])
+        [{
+          "type": "binary_operator",
+          "value": '**',
+          "first": {"type": "name",
+                    "value": 'a'},
+          "second": {
+                     "type": "unitary_operator",
+                     "value": "~",
+                     "target": {
+                                "type": "unitary_operator",
+                                "value": '+',
+                                "target": {
+                                           "type": "unitary_operator",
+                                           "value": "-",
+                                           "target": {
+                                                      "type": "name",
+                                                      "value": 'b',
+                                                     },
+                                           "formatting": []                     },
+                                "formatting": [],
+                               },
+                     "formatting": [],
+                    },
+          "first_formatting": [{"type": "space", "value": " "}],
+          "second_formatting": [{"type": "space", "value": "  "}] }])
 
 def test_power_factor_tild_space():
     "a **  ~ b"
@@ -567,14 +1109,44 @@ def test_power_factor_tild_space():
            ('TILDE', '~', [], [('SPACE', ' ')]),
            ('NAME', 'b')
           ],
-          [{ "type": "binary_operator", "value": '**', "first": { "type": "name", "value": 'a', }, "second": { "type": "unitary_operator", "value": '~', "target": {"type": "name", "value": 'b'}, "space": " ", }, "first_space": " ", "second_space": "  " }])
+          [{
+            "type": "binary_operator",
+            "value": '**',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {
+                       "type": "unitary_operator",
+                       "value": '~',
+                       "target": {"type": "name",
+                                  "value": 'b'},
+                       "formatting": [{"type": "space", "value": " "}],
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": "  "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('TILDE', '~', [], [('SPACE', ' ')]),
            ('NAME', 'b')
           ],
-          [{ "type": "binary_operator", "value": '**', "first": {"type": "name", "value": 'a'}, "second": { "type": "unitary_operator", "value": '~', "target": { "type": "name", "value": 'b', }, "space": " ", }, "first_space": " ", "second_space": "  " }])
+          [{
+            "type": "binary_operator",
+            "value": '**',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "unitary_operator",
+                       "value": '~',
+                       "target": {
+                                  "type": "name",
+                                  "value": 'b',
+                                 },
+                       "formatting": [{"type": "space", "value": " "}],
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": "  "}] }])
 
 def test_power_trailer():
     "a.b"
@@ -592,8 +1164,8 @@ def test_power_trailer():
                 },
                 {
                     "type": "dot",
-                    "first_space": "",
-                    "second_space": "",
+                    "first_formatting": [],
+                    "second_formatting": [],
                 },
                 {
                     "type": "name",
@@ -620,8 +1192,8 @@ def test_power_trailer_spaces():
                 },
                 {
                     "type": "dot",
-                    "first_space": " ",
-                    "second_space": "",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [],
                 },
                 {
                     "type": "name",
@@ -644,8 +1216,8 @@ def test_power_trailer_spaces():
                 },
                 {
                     "type": "dot",
-                    "first_space": "",
-                    "second_space": "  ",
+                    "first_formatting": [],
+                    "second_formatting": [{"type": "space", "value": "  "}],
                 },
                 {
                     "type": "name",
@@ -668,8 +1240,8 @@ def test_power_trailer_spaces():
                 },
                 {
                     "type": "dot",
-                    "first_space": "   ",
-                    "second_space": "    ",
+                    "first_formatting": [{"type": "space", "value": "   "}],
+                    "second_formatting": [{"type": "space", "value": "    "}],
                 },
                 {
                     "type": "name",
@@ -696,8 +1268,8 @@ def test_power_trailers():
                 },
                 {
                     "type": "dot",
-                    "first_space": "",
-                    "second_space": "",
+                    "first_formatting": [],
+                    "second_formatting": [],
                 },
                 {
                     "type": "name",
@@ -705,8 +1277,8 @@ def test_power_trailers():
                 },
                 {
                     "type": "dot",
-                    "first_space": "",
-                    "second_space": "",
+                    "first_formatting": [],
+                    "second_formatting": [],
                 },
                 {
                     "type": "name",
@@ -735,8 +1307,8 @@ def test_power_trailers():
                 },
                 {
                     "type": "dot",
-                    "first_space": "",
-                    "second_space": "",
+                    "first_formatting": [],
+                    "second_formatting": [],
                 },
                 {
                     "type": "name",
@@ -744,8 +1316,8 @@ def test_power_trailers():
                 },
                 {
                     "type": "dot",
-                    "first_space": "",
-                    "second_space": "",
+                    "first_formatting": [],
+                    "second_formatting": [],
                 },
                 {
                     "type": "name",
@@ -753,8 +1325,8 @@ def test_power_trailers():
                 },
                 {
                     "type": "dot",
-                    "first_space": "",
-                    "second_space": "",
+                    "first_formatting": [],
+                    "second_formatting": [],
                 },
                 {
                     "type": "name",
@@ -762,8 +1334,8 @@ def test_power_trailers():
                 },
                 {
                     "type": "dot",
-                    "first_space": "",
-                    "second_space": "",
+                    "first_formatting": [],
+                    "second_formatting": [],
                 },
                 {
                     "type": "name",
@@ -790,8 +1362,8 @@ def test_power_trailers_space():
                 },
                 {
                     "type": "dot",
-                    "first_space": " ",
-                    "second_space": " ",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
                 },
                 {
                     "type": "name",
@@ -799,8 +1371,8 @@ def test_power_trailers_space():
                 },
                 {
                     "type": "dot",
-                    "first_space": " ",
-                    "second_space": " ",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
                 },
                 {
                     "type": "name",
@@ -821,8 +1393,8 @@ def test_power_trailer_power():
           [{
             "type": "binary_operator",
             "value": "**",
-            "first_space": "",
-            "second_space": "",
+            "first_formatting": [],
+            "second_formatting": [],
             "first": {
                 "type": "atomtrailers",
                 "value": [{
@@ -830,8 +1402,8 @@ def test_power_trailer_power():
                    "value": "a",
                 },{
                    "type": "dot",
-                   "first_space": "",
-                   "second_space": "",
+                   "first_formatting": [],
+                   "second_formatting": [],
                 },{
                    "type": "name",
                    "value": "b",
@@ -850,13 +1422,31 @@ def test_term_mult():
            ('STAR', '*'),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '*', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": "" }])
+          [{ "type": "binary_operator", "value": '*',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('STAR', '*'),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '*', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '*',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [] }])
 
 def test_term_mult_first_space():
     "a *b"
@@ -865,13 +1455,33 @@ def test_term_mult_first_space():
            ('STAR', '*', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '*', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '*',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('STAR', '*', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '*', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '*',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
 
 def test_term_mult_second_space():
     "a* b"
@@ -880,13 +1490,33 @@ def test_term_mult_second_space():
            ('STAR', '*', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '*', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '*',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('STAR', '*', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '*', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '*',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_term_mult_spaces():
     "a * b"
@@ -895,13 +1525,33 @@ def test_term_mult_spaces():
            ('STAR', '*', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '*', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '*',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('STAR', '*', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '*', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '*',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_term_mult_spaces_atomtrailers():
     "a.b * c"
@@ -912,7 +1562,29 @@ def test_term_mult_spaces_atomtrailers():
            ('STAR', '*', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '*', "first": {                             "type": "atomtrailers",                             "value": [{                                 "type": "name",                                 "value": "a",                             },{                                 "type": "dot",                                 "first_space": "",                                 "second_space": "",                             },{                                "type": "name",                                "value": "b",                             }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '*',
+            "first": {
+                      "type": "atomtrailers",
+                      "value": [{
+                                 "type": "name",
+                                 "value": "a",
+                                },{
+                                   "type": "dot",
+                                   "first_formatting": [],
+                                   "second_formatting": [],
+                                  },{
+                                     "type": "name",
+                                     "value": "b",
+                                    }],
+                     },
+            "second": {
+                       "type": "name",
+                       "value": 'c',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_term_div():
     "a/b"
@@ -921,13 +1593,33 @@ def test_term_div():
            ('SLASH', '/'),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '/', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '/',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('SLASH', '/'),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '/', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '/',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [] }])
 
 def test_term_div_first_space():
     "a /b"
@@ -936,13 +1628,33 @@ def test_term_div_first_space():
            ('SLASH', '/', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '/', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '/',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('SLASH', '/', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '/', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '/',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
 
 def test_term_div_second_space():
     "a/ b"
@@ -951,13 +1663,33 @@ def test_term_div_second_space():
            ('SLASH', '/', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '/', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '/',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('SLASH', '/', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '/', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '/',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_term_div_spaces():
     "a / b"
@@ -966,13 +1698,33 @@ def test_term_div_spaces():
            ('SLASH', '/', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '/', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '/',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('SLASH', '/', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '/', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '/',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_term_div_spaces_atomtrailers():
     "a.b / c"
@@ -983,7 +1735,29 @@ def test_term_div_spaces_atomtrailers():
            ('SLASH', '/', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '/', "first": {                                 "type": "atomtrailers",                                 "value": [{                                     "type": "name",                                     "value": "a",                                 },{                                     "type": "dot",                                     "first_space": "",                                     "second_space": "",                                 },{                                    "type": "name",                                    "value": "b",                                 }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '/',
+            "first": {
+                      "type": "atomtrailers",
+                      "value": [{
+                                 "type": "name",
+                                 "value": "a",
+                                },{
+                                   "type": "dot",
+                                   "first_formatting": [],
+                                   "second_formatting": [],
+                                  },{
+                                     "type": "name",
+                                     "value": "b",
+                                    }],
+                     },
+            "second": {
+                       "type": "name",
+                       "value": 'c',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_term_modulo():
     "a%b"
@@ -992,13 +1766,33 @@ def test_term_modulo():
            ('PERCENT', '%'),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '%', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '%',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('PERCENT', '%'),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '%', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '%',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [] }])
 
 def test_term_modulo_first_space():
     "a %b"
@@ -1007,13 +1801,33 @@ def test_term_modulo_first_space():
            ('PERCENT', '%', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '%', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '%',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('PERCENT', '%', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '%', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '%',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
 
 def test_term_modulo_second_space():
     "a% b"
@@ -1022,13 +1836,33 @@ def test_term_modulo_second_space():
            ('PERCENT', '%', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '%', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '%',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('PERCENT', '%', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '%', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '%',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_term_modulo_spaces():
     "a % b"
@@ -1037,13 +1871,33 @@ def test_term_modulo_spaces():
            ('PERCENT', '%', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '%', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '%',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('PERCENT', '%', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '%', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '%',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_term_modulo_spaces_atomtrailers():
     "a.b % c"
@@ -1054,7 +1908,29 @@ def test_term_modulo_spaces_atomtrailers():
            ('PERCENT', '%', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '%', "first": {                             "type": "atomtrailers",                             "value": [{                                 "type": "name",                                 "value": "a",                             },{                                 "type": "dot",                                 "first_space": "",                                 "second_space": "",                             },{                                "type": "name",                                "value": "b",                             }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '%',
+            "first": {
+                      "type": "atomtrailers",
+                      "value": [{
+                                 "type": "name",
+                                 "value": "a",
+                                },{
+                                   "type": "dot",
+                                   "first_formatting": [],
+                                   "second_formatting": [],
+                                  },{
+                                     "type": "name",
+                                     "value": "b",
+                                    }],
+                     },
+            "second": {
+                       "type": "name",
+                       "value": 'c',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_term_floor_division():
     "a//b"
@@ -1063,13 +1939,33 @@ def test_term_floor_division():
            ('DOUBLE_SLASH', '//'),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '//', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '//',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_SLASH', '//'),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '//', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '//',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [] }])
 
 def test_term_floor_division_first_space():
     "a //b"
@@ -1078,13 +1974,33 @@ def test_term_floor_division_first_space():
            ('DOUBLE_SLASH', '//', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '//', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '//',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_SLASH', '//', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '//', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '//',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
 
 def test_term_floor_division_second_space():
     "a// b"
@@ -1093,13 +2009,33 @@ def test_term_floor_division_second_space():
            ('DOUBLE_SLASH', '//', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '//', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '//',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_SLASH', '//', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '//', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '//',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_term_floor_division_spaces():
     "a // b"
@@ -1108,13 +2044,33 @@ def test_term_floor_division_spaces():
            ('DOUBLE_SLASH', '//', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '//', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '//',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('DOUBLE_SLASH', '//', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '//', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '//',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_term_floor_division_spaces_atomtrailers():
     "a.b // c"
@@ -1125,7 +2081,29 @@ def test_term_floor_division_spaces_atomtrailers():
            ('DOUBLE_SLASH', '//', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '//', "first": {                             "type": "atomtrailers",                             "value": [{                                 "type": "name",                                 "value": "a",                             },{                                 "type": "dot",                                 "first_space": "",                                 "second_space": "",                             },{                                "type": "name",                                "value": "b",                             }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '//',
+            "first": {
+                      "type": "atomtrailers",
+                      "value": [{
+                                 "type": "name",
+                                 "value": "a",
+                                },{
+                                   "type": "dot",
+                                   "first_formatting": [],
+                                   "second_formatting": [],
+                                  },{
+                                     "type": "name",
+                                     "value": "b",
+                                    }],
+                     },
+            "second": {
+                       "type": "name",
+                       "value": 'c',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_combine_div_modulo_mult():
     "a/b%c*d"
@@ -1138,42 +2116,31 @@ def test_combine_div_modulo_mult():
            ('STAR', '*'),
            ('NAME', 'd'),
           ],
-          [{ "type": "binary_operator", "value": '/', "first": { "type": "name", "value": 'a', }, "second": {"type": "binary_operator", "value": '%',                                   "first": {"type": "name", "value": 'b'},                                   "second": {"type": "binary_operator", "value": '*',                                              "first": {"type": "name", "value": "c"},                                              "second": {"type": "name", "value": 'd'},                                              "first_space": "",                                              "second_space": "",                                             },                                   "first_space": "",                                   "second_space": "",                                  }, "first_space": "", "second_space": "" }])
-    parse_simple([
-           ('NAME', 'a'),
-           ('SLASH', '/'),
-           ('NAME', 'b'),
-           ('PERCENT', '%'),
-           ('NAME', 'c'),
-           ('STAR', '*'),
-           ('NAME', 'd'),
-          ],
-          [{"type": "binary_operator", "value": '/',
-                           "first":  { "type": "name", "value": 'a', },
-                           "second": { "type": "binary_operator", "value": '%', "first": {"type": "name", "value": 'b'}, "second": {"type": "binary_operator", "value": '*',                                              "first": {"type": "name", "value": "c"},                                              "second": {"type": "name", "value": 'd'},                                              "first_space": "",                                              "second_space": "",                                             }, "first_space": "", "second_space": "" },
-                           "first_space": "",
-                           "second_space": "",
-                          }])
-    parse_simple([
-           ('NAME', 'a'),
-           ('SLASH', '/'),
-           ('NAME', 'b'),
-           ('PERCENT', '%'),
-           ('NAME', 'c'),
-           ('STAR', '*'),
-           ('NAME', 'd'),
-          ],
-          [{"type": "binary_operator", "value": '/',
-                           "first":  { "type": "name", "value": 'a', },
-                           "second": {"type": "binary_operator", "value": '%',
-                                  "first": {"type": "name", "value": 'b'},
-                                  "second": { "type": "binary_operator", "value": '*', "first": {"type": "name", "value": "c"}, "second": {"type": "name", "value": 'd'}, "first_space": "", "second_space": "" },
-                                  "first_space": "",
-                                  "second_space": "",
+          [{
+            "type": "binary_operator",
+            "value": '/',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "binary_operator",
+                       "value": '%',
+                       "first": {"type": "name",
+                                 "value": 'b'},
+                       "second": {"type": "binary_operator",
+                                  "value": '*',
+                                  "first": {"type": "name",
+                                            "value": "c"},
+                                  "second": {"type": "name",
+                                             "value": 'd'},
+                                  "first_formatting": [],
+                                  "second_formatting": [],
                                  },
-                           "first_space": "",
-                           "second_space": "",
-                          }])
+                       "first_formatting": [],
+                       "second_formatting": [],
+                      },
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('SLASH', '/'),
@@ -1183,67 +2150,31 @@ def test_combine_div_modulo_mult():
            ('STAR', '*'),
            ('NAME', 'd'),
           ],
-          [{ "type": "binary_operator", "value": '/', "first": {"type": "name", "value": 'a'}, "second": {"type": "binary_operator", "value": '%',                                   "first": { "type": "name", "value": 'b', },                                   "second": {"type": "binary_operator", "value": '*',                                              "first": {"type": "name", "value": "c"},                                              "second": {"type": "name", "value": 'd'},                                              "first_space": "",                                              "second_space": "",                                             },                                   "first_space": "",                                   "second_space": "",                                  }, "first_space": "", "second_space": "" }])
-    parse_simple([
-           ('NAME', 'a'),
-           ('SLASH', '/'),
-           ('NAME', 'b'),
-           ('PERCENT', '%'),
-           ('NAME', 'c'),
-           ('STAR', '*'),
-           ('NAME', 'd'),
-          ],
-          [{"type": "binary_operator", "value": '/',
-                           "first":  {"type": "name", "value": 'a'},
-                           "second": { "type": "binary_operator", "value": '%', "first": { "type": "name", "value": 'b', }, "second": {"type": "binary_operator", "value": '*',                                              "first": {"type": "name", "value": "c"},                                              "second": {"type": "name", "value": 'd'},                                              "first_space": "",                                              "second_space": "",                                             }, "first_space": "", "second_space": "" },
-                           "first_space": "",
-                           "second_space": "",
-                          }])
-    parse_simple([
-           ('NAME', 'a'),
-           ('SLASH', '/'),
-           ('NAME', 'b'),
-           ('PERCENT', '%'),
-           ('NAME', 'c'),
-           ('STAR', '*'),
-           ('NAME', 'd'),
-          ],
-          [{"type": "binary_operator", "value": '/',
-                           "first":  {"type": "name", "value": 'a'},
-                           "second": {"type": "binary_operator", "value": '%',
-                                  "first": { "type": "name", "value": 'b', },
-                                  "second": { "type": "binary_operator", "value": '*', "first": {"type": "name", "value": "c"}, "second": {"type": "name", "value": 'd'}, "first_space": "", "second_space": "" },
-                                  "first_space": "",
-                                  "second_space": "",
+          [{"type": "binary_operator",
+            "value": '/',
+            "first":  {
+                       "type": "name",
+                       "value": 'a',
+                      },
+            "second": {
+                       "type": "binary_operator",
+                       "value": '%',
+                       "first": {"type": "name",
+                                 "value": 'b'},
+                       "second": {"type": "binary_operator",
+                                  "value": '*',
+                                  "first": {"type": "name",
+                                            "value": "c"},
+                                  "second": {"type": "name",
+                                             "value": 'd'},
+                                  "first_formatting": [],
+                                  "second_formatting": [],
                                  },
-                           "first_space": "",
-                           "second_space": "",
-                          }])
-    parse_simple([
-           ('NAME', 'a'),
-           ('SLASH', '/'),
-           ('NAME', 'b'),
-           ('PERCENT', '%'),
-           ('NAME', 'c'),
-           ('STAR', '*'),
-           ('NAME', 'd'),
-          ],
-          [{ "type": "binary_operator", "value": '/', "first": {"type": "name", "value": 'a'}, "second": {"type": "binary_operator", "value": '%',                                   "first": {"type": "name", "value": 'b'},                                   "second": {"type": "binary_operator", "value": '*',                                              "first": { "type": "name", "value": "c", },                                              "second": {"type": "name", "value": 'd'},                                              "first_space": "",                                              "second_space": "",                                             },                                   "first_space": "",                                   "second_space": "",                                  }, "first_space": "", "second_space": "" }])
-    parse_simple([
-           ('NAME', 'a'),
-           ('SLASH', '/'),
-           ('NAME', 'b'),
-           ('PERCENT', '%'),
-           ('NAME', 'c'),
-           ('STAR', '*'),
-           ('NAME', 'd'),
-          ],
-          [{"type": "binary_operator", "value": '/',
-                           "first":  {"type": "name", "value": 'a'},
-                           "second": { "type": "binary_operator", "value": '%', "first": {"type": "name", "value": 'b'}, "second": {"type": "binary_operator", "value": '*',                                              "first": { "type": "name", "value": "c", },                                              "second": {"type": "name", "value": 'd'},                                              "first_space": "",                                              "second_space": "",                                             }, "first_space": "", "second_space": "" },
-                           "first_space": "",
-                           "second_space": "",
-                          }])
+                       "first_formatting": [],
+                       "second_formatting": [] },
+            "first_formatting": [],
+            "second_formatting": [],
+           }])
     parse_simple([
            ('NAME', 'a'),
            ('SLASH', '/'),
@@ -1254,16 +2185,63 @@ def test_combine_div_modulo_mult():
            ('NAME', 'd'),
           ],
           [{"type": "binary_operator", "value": '/',
-                           "first":  {"type": "name", "value": 'a'},
-                           "second": {"type": "binary_operator", "value": '%',
-                                  "first": {"type": "name", "value": 'b'},
-                                  "second": { "type": "binary_operator", "value": '*', "first": { "type": "name", "value": "c", }, "second": {"type": "name", "value": 'd'}, "first_space": "", "second_space": "" },
-                                  "first_space": "",
-                                  "second_space": "",
+            "first":  {
+                       "type": "name",
+                       "value": 'a',
+                      },
+            "second": {"type": "binary_operator",
+                       "value": '%',
+                       "first": {"type": "name",
+                                 "value": 'b'},
+                       "second": {
+                                  "type": "binary_operator",
+                                  "value": '*',
+                                  "first": {"type": "name",
+                                            "value": "c"},
+                                  "second": {"type": "name",
+                                             "value": 'd'},
+                                  "first_formatting": [],
+                                  "second_formatting": [] },
+                       "first_formatting": [],
+                       "second_formatting": [],
+                      },
+            "first_formatting": [],
+            "second_formatting": [],
+           }])
+    parse_simple([
+           ('NAME', 'a'),
+           ('SLASH', '/'),
+           ('NAME', 'b'),
+           ('PERCENT', '%'),
+           ('NAME', 'c'),
+           ('STAR', '*'),
+           ('NAME', 'd'),
+          ],
+          [{
+            "type": "binary_operator",
+            "value": '/',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "binary_operator",
+                       "value": '%',
+                       "first": {
+                                 "type": "name",
+                                 "value": 'b',
+                                },
+                       "second": {"type": "binary_operator",
+                                  "value": '*',
+                                  "first": {"type": "name",
+                                            "value": "c"},
+                                  "second": {"type": "name",
+                                             "value": 'd'},
+                                  "first_formatting": [],
+                                  "second_formatting": [],
                                  },
-                           "first_space": "",
-                           "second_space": "",
-                          }])
+                       "first_formatting": [],
+                       "second_formatting": [],
+                      },
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('SLASH', '/'),
@@ -1273,7 +2251,31 @@ def test_combine_div_modulo_mult():
            ('STAR', '*'),
            ('NAME', 'd'),
           ],
-          [{ "type": "binary_operator", "value": '/', "first": {"type": "name", "value": 'a'}, "second": {"type": "binary_operator", "value": '%',                                   "first": {"type": "name", "value": 'b'},                                   "second": {"type": "binary_operator", "value": '*',                                              "first": {"type": "name", "value": "c"},                                              "second": { "type": "name", "value": 'd', },                                              "first_space": "",                                              "second_space": "",                                             },                                   "first_space": "",                                   "second_space": "",                                  }, "first_space": "", "second_space": "" }])
+         [{"type": "binary_operator",
+           "value": '/',
+           "first":  {"type": "name",
+                      "value": 'a'},
+           "second": {
+                      "type": "binary_operator",
+                      "value": '%',
+                      "first": {
+                                "type": "name",
+                                "value": 'b',
+                               },
+                      "second": {"type": "binary_operator",
+                                 "value": '*',
+                                 "first": {"type": "name",
+                                           "value": "c"},
+                                 "second": {"type": "name",
+                                            "value": 'd'},
+                                 "first_formatting": [],
+                                 "second_formatting": [],
+                                },
+                      "first_formatting": [],
+                      "second_formatting": [] },
+           "first_formatting": [],
+           "second_formatting": [],
+          }])
     parse_simple([
            ('NAME', 'a'),
            ('SLASH', '/'),
@@ -1283,12 +2285,31 @@ def test_combine_div_modulo_mult():
            ('STAR', '*'),
            ('NAME', 'd'),
           ],
-          [{"type": "binary_operator", "value": '/',
-                           "first":  {"type": "name", "value": 'a'},
-                           "second": { "type": "binary_operator", "value": '%', "first": {"type": "name", "value": 'b'}, "second": {"type": "binary_operator", "value": '*',                                              "first": {"type": "name", "value": "c"},                                              "second": { "type": "name", "value": 'd', },                                              "first_space": "",                                              "second_space": "",                                             }, "first_space": "", "second_space": "" },
-                           "first_space": "",
-                           "second_space": "",
-                          }])
+          [{"type": "binary_operator",
+            "value": '/',
+            "first":  {"type": "name",
+                       "value": 'a'},
+            "second": {"type": "binary_operator",
+                       "value": '%',
+                       "first": {
+                                 "type": "name",
+                                 "value": 'b',
+                                },
+                       "second": {
+                                  "type": "binary_operator",
+                                  "value": '*',
+                                  "first": {"type": "name",
+                                            "value": "c"},
+                                  "second": {"type": "name",
+                                             "value": 'd'},
+                                  "first_formatting": [],
+                                  "second_formatting": [] },
+                       "first_formatting": [],
+                       "second_formatting": [],
+                      },
+            "first_formatting": [],
+            "second_formatting": [],
+           }])
     parse_simple([
            ('NAME', 'a'),
            ('SLASH', '/'),
@@ -1298,17 +2319,201 @@ def test_combine_div_modulo_mult():
            ('STAR', '*'),
            ('NAME', 'd'),
           ],
-          [{"type": "binary_operator", "value": '/',
-                           "first":  {"type": "name", "value": 'a'},
-                           "second": {"type": "binary_operator", "value": '%',
-                                  "first": {"type": "name", "value": 'b'},
-                                  "second": { "type": "binary_operator", "value": '*', "first": {"type": "name", "value": "c"}, "second": { "type": "name", "value": 'd', }, "first_space": "", "second_space": "" },
-                                  "first_space": "",
-                                  "second_space": "",
+          [{
+            "type": "binary_operator",
+            "value": '/',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "binary_operator",
+                       "value": '%',
+                       "first": {"type": "name",
+                                 "value": 'b'},
+                       "second": {"type": "binary_operator",
+                                  "value": '*',
+                                  "first": {
+                                            "type": "name",
+                                            "value": "c",
+                                           },
+                                  "second": {"type": "name",
+                                             "value": 'd'},
+                                  "first_formatting": [],
+                                  "second_formatting": [],
                                  },
-                           "first_space": "",
-                           "second_space": "",
-                          }])
+                       "first_formatting": [],
+                       "second_formatting": [],
+                      },
+            "first_formatting": [],
+            "second_formatting": [] }])
+    parse_simple([
+           ('NAME', 'a'),
+           ('SLASH', '/'),
+           ('NAME', 'b'),
+           ('PERCENT', '%'),
+           ('NAME', 'c'),
+           ('STAR', '*'),
+           ('NAME', 'd'),
+          ],
+          [{"type": "binary_operator",
+            "value": '/',
+            "first":  {"type": "name",
+                       "value": 'a'},
+            "second": {
+                       "type": "binary_operator",
+                       "value": '%',
+                       "first": {"type": "name",
+                                 "value": 'b'},
+                       "second": {"type": "binary_operator",
+                                  "value": '*',
+                                  "first": {
+                                            "type": "name",
+                                            "value": "c",
+                                           },
+                                  "second": {"type": "name",
+                                             "value": 'd'},
+                                  "first_formatting": [],
+                                  "second_formatting": [],
+                                 },
+                       "first_formatting": [],
+                       "second_formatting": [] },
+            "first_formatting": [],
+            "second_formatting": [],
+           }])
+    parse_simple([
+           ('NAME', 'a'),
+           ('SLASH', '/'),
+           ('NAME', 'b'),
+           ('PERCENT', '%'),
+           ('NAME', 'c'),
+           ('STAR', '*'),
+           ('NAME', 'd'),
+          ],
+          [{"type": "binary_operator",
+            "value": '/',
+            "first":  {"type": "name",
+                       "value": 'a'},
+            "second": {"type": "binary_operator",
+                       "value": '%',
+                       "first": {"type": "name",
+                                 "value": 'b'},
+                       "second": {
+                                  "type": "binary_operator",
+                                  "value": '*',
+                                  "first": {
+                                            "type": "name",
+                                            "value": "c",
+                                           },
+                                  "second": {"type": "name",
+                                             "value": 'd'},
+                                  "first_formatting": [],
+                                  "second_formatting": [] },
+                       "first_formatting": [],
+                       "second_formatting": [],
+                      },
+            "first_formatting": [],
+            "second_formatting": [],
+           }])
+    parse_simple([
+           ('NAME', 'a'),
+           ('SLASH', '/'),
+           ('NAME', 'b'),
+           ('PERCENT', '%'),
+           ('NAME', 'c'),
+           ('STAR', '*'),
+           ('NAME', 'd'),
+          ],
+          [{
+            "type": "binary_operator",
+            "value": '/',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "binary_operator",
+                       "value": '%',
+                       "first": {"type": "name",
+                                 "value": 'b'},
+                       "second": {"type": "binary_operator",
+                                  "value": '*',
+                                  "first": {"type": "name",
+                                            "value": "c"},
+                                  "second": {
+                                             "type": "name",
+                                             "value": 'd',
+                                            },
+                                  "first_formatting": [],
+                                  "second_formatting": [],
+                                 },
+                       "first_formatting": [],
+                       "second_formatting": [],
+                      },
+            "first_formatting": [],
+            "second_formatting": [] }])
+    parse_simple([
+           ('NAME', 'a'),
+           ('SLASH', '/'),
+           ('NAME', 'b'),
+           ('PERCENT', '%'),
+           ('NAME', 'c'),
+           ('STAR', '*'),
+           ('NAME', 'd'),
+          ],
+          [{"type": "binary_operator",
+            "value": '/',
+            "first":  {"type": "name",
+                       "value": 'a'},
+            "second": {
+                       "type": "binary_operator",
+                       "value": '%',
+                       "first": {"type": "name",
+                                 "value": 'b'},
+                       "second": {"type": "binary_operator",
+                                  "value": '*',
+                                  "first": {"type": "name",
+                                            "value": "c"},
+                                  "second": {
+                                             "type": "name",
+                                             "value": 'd',
+                                            },
+                                  "first_formatting": [],
+                                  "second_formatting": [],
+                                 },
+                       "first_formatting": [],
+                       "second_formatting": [] },
+            "first_formatting": [],
+            "second_formatting": [],
+           }])
+    parse_simple([
+           ('NAME', 'a'),
+           ('SLASH', '/'),
+           ('NAME', 'b'),
+           ('PERCENT', '%'),
+           ('NAME', 'c'),
+           ('STAR', '*'),
+           ('NAME', 'd'),
+          ],
+          [{"type": "binary_operator",
+            "value": '/',
+            "first":  {"type": "name",
+                       "value": 'a'},
+            "second": {"type": "binary_operator",
+                       "value": '%',
+                       "first": {"type": "name",
+                                 "value": 'b'},
+                       "second": {
+                                  "type": "binary_operator",
+                                  "value": '*',
+                                  "first": {"type": "name",
+                                            "value": "c"},
+                                  "second": {
+                                             "type": "name",
+                                             "value": 'd',
+                                            },
+                                  "first_formatting": [],
+                                  "second_formatting": [] },
+                       "first_formatting": [],
+                       "second_formatting": [],
+                      },
+            "first_formatting": [],
+            "second_formatting": [],
+           }])
 
 def test_arith_expr_plus():
     "a+b"
@@ -1317,13 +2522,33 @@ def test_arith_expr_plus():
            ('PLUS', '+'),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '+', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '+',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('PLUS', '+'),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '+', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '+',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [] }])
 
 def test_arith_expr_add_first_space():
     "a +b"
@@ -1332,13 +2557,33 @@ def test_arith_expr_add_first_space():
            ('PLUS', '+', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '+', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '+',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('PLUS', '+', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '+', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '+',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
 
 def test_arith_expr_add_second_space():
     "a+ b"
@@ -1347,13 +2592,33 @@ def test_arith_expr_add_second_space():
            ('PLUS', '+', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '+', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '+',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('PLUS', '+', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '+', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '+',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_arith_expr_add_spaces():
     "a + b"
@@ -1362,13 +2627,33 @@ def test_arith_expr_add_spaces():
            ('PLUS', '+', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '+', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '+',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('PLUS', '+', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '+', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '+',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_arith_expr_add_spaces_atomtrailers():
     "a.b + c"
@@ -1379,7 +2664,29 @@ def test_arith_expr_add_spaces_atomtrailers():
            ('PLUS', '+', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '+', "first": {                             "type": "atomtrailers",                             "value": [{                                 "type": "name",                                 "value": "a",                             },{                                 "type": "dot",                                 "first_space": "",                                 "second_space": "",                             },{                                "type": "name",                                "value": "b",                             }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '+',
+            "first": {
+                      "type": "atomtrailers",
+                      "value": [{
+                                 "type": "name",
+                                 "value": "a",
+                                },{
+                                   "type": "dot",
+                                   "first_formatting": [],
+                                   "second_formatting": [],
+                                  },{
+                                     "type": "name",
+                                     "value": "b",
+                                    }],
+                     },
+            "second": {
+                       "type": "name",
+                       "value": 'c',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_arith_expr_substract():
     "a-b"
@@ -1388,13 +2695,33 @@ def test_arith_expr_substract():
            ('MINUS', '-'),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '-', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '-',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('MINUS', '-'),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '-', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '-',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [] }])
 
 def test_arith_expr_substract_first_space():
     "a -b"
@@ -1403,13 +2730,33 @@ def test_arith_expr_substract_first_space():
            ('MINUS', '-', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '-', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '-',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('MINUS', '-', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '-', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '-',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
 
 def test_arith_expr_substract_second_space():
     "a- b"
@@ -1418,13 +2765,33 @@ def test_arith_expr_substract_second_space():
            ('MINUS', '-', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '-', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '-',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('MINUS', '-', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '-', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '-',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_arith_expr_substract_spaces():
     "a - b"
@@ -1433,13 +2800,33 @@ def test_arith_expr_substract_spaces():
            ('MINUS', '-', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '-', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '-',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('MINUS', '-', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '-', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '-',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_arith_expr_substract_spaces_atomtrailers():
     "a.b - c"
@@ -1450,7 +2837,29 @@ def test_arith_expr_substract_spaces_atomtrailers():
            ('MINUS', '-', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '-', "first": {                             "type": "atomtrailers",                             "value": [{                                 "type": "name",                                 "value": "a",                             },{                                 "type": "dot",                                 "first_space": "",                                 "second_space": "",                             },{                                "type": "name",                                "value": "b",                             }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '-',
+            "first": {
+                      "type": "atomtrailers",
+                      "value": [{
+                                 "type": "name",
+                                 "value": "a",
+                                },{
+                                   "type": "dot",
+                                   "first_formatting": [],
+                                   "second_formatting": [],
+                                  },{
+                                     "type": "name",
+                                     "value": "b",
+                                    }],
+                     },
+            "second": {
+                       "type": "name",
+                       "value": 'c',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 
 def test_chained_add_substract():
@@ -1462,7 +2871,22 @@ def test_chained_add_substract():
            ('MINUS', '-'),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '+', "first": { "type": "name", "value": 'a', }, "second": {"type": "binary_operator", "value": '-',                                                   "first": {"type": "name", "value": "b"},                                                   "second": {"type": "name", "value": "c"},                                                   "first_space": "",                                                   "second_space": ""                                                  }, "first_space": "", "second_space": "" }])
+          [{ "type": "binary_operator",
+            "value": '+',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "binary_operator",
+                       "value": '-',
+                       "first": {"type": "name",
+                                 "value": "b"},
+                       "second": {"type": "name",
+                                  "value": "c"},
+                       "first_formatting": [],
+                       "second_formatting": []                                                  },
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('PLUS', '+'),
@@ -1470,11 +2894,23 @@ def test_chained_add_substract():
            ('MINUS', '-'),
            ('NAME', 'c'),
           ],
-          [{"type": "binary_operator", "value": '+',
-                           "first": { "type": "name", "value": 'a', },
-                           "second": { "type": "binary_operator", "value": '-', "first": {"type": "name", "value": "b"}, "second": {"type": "name", "value": "c"}, "first_space": "", "second_space": "" },
-                           "first_space": "",
-                           "second_space": "",
+          [{"type": "binary_operator",
+            "value": '+',
+                           "first": {
+                                     "type": "name",
+                                     "value": 'a',
+                                    },
+                           "second": {
+                                      "type": "binary_operator",
+                                      "value": '-',
+                                      "first": {"type": "name",
+                                                "value": "b"},
+                                      "second": {"type": "name",
+                                                 "value": "c"},
+                                      "first_formatting": [],
+                                      "second_formatting": [] },
+                           "first_formatting": [],
+                           "second_formatting": [],
                           }])
     parse_simple([
            ('NAME', 'a'),
@@ -1483,7 +2919,23 @@ def test_chained_add_substract():
            ('MINUS', '-'),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '+', "first": {"type": "name", "value": 'a'}, "second": {"type": "binary_operator", "value": '-',                                                   "first": { "type": "name", "value": "b", },                                                   "second": {"type": "name", "value": "c"},                                                   "first_space": "",                                                   "second_space": ""                                                  }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '+',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "binary_operator",
+                       "value": '-',
+                       "first": {
+                                 "type": "name",
+                                 "value": "b",
+                                },
+                       "second": {"type": "name",
+                                  "value": "c"},
+                       "first_formatting": [],
+                       "second_formatting": []                                                  },
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('PLUS', '+'),
@@ -1491,12 +2943,24 @@ def test_chained_add_substract():
            ('MINUS', '-'),
            ('NAME', 'c'),
           ],
-          [{"type": "binary_operator", "value": '+',
-                           "first": {"type": "name", "value": 'a'},
-                           "second": { "type": "binary_operator", "value": '-', "first": { "type": "name", "value": "b", }, "second": {"type": "name", "value": "c"}, "first_space": "", "second_space": "" },
-                           "first_space": "",
-                           "second_space": "",
-                          }])
+          [{"type": "binary_operator",
+            "value": '+',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "binary_operator",
+                       "value": '-',
+                       "first": {
+                                 "type": "name",
+                                 "value": "b",
+                                },
+                       "second": {"type": "name",
+                                  "value": "c"},
+                       "first_formatting": [],
+                       "second_formatting": [] },
+            "first_formatting": [],
+            "second_formatting": [],
+           }])
     parse_simple([
            ('NAME', 'a'),
            ('PLUS', '+'),
@@ -1504,7 +2968,23 @@ def test_chained_add_substract():
            ('MINUS', '-'),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '+', "first": {"type": "name", "value": 'a'}, "second": {"type": "binary_operator", "value": '-',                                                   "first": {"type": "name", "value": "b"},                                                   "second": { "type": "name", "value": "c", },                                                   "first_space": "",                                                   "second_space": ""                                                  }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '+',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "binary_operator",
+                       "value": '-',
+                       "first": {"type": "name",
+                                 "value": "b"},
+                       "second": {
+                                  "type": "name",
+                                  "value": "c",
+                                 },
+                       "first_formatting": [],
+                       "second_formatting": []                                                  },
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('PLUS', '+'),
@@ -1512,11 +2992,23 @@ def test_chained_add_substract():
            ('MINUS', '-'),
            ('NAME', 'c'),
           ],
-          [{"type": "binary_operator", "value": '+',
-                           "first": {"type": "name", "value": 'a'},
-                           "second": { "type": "binary_operator", "value": '-', "first": {"type": "name", "value": "b"}, "second": { "type": "name", "value": "c", }, "first_space": "", "second_space": "" },
-                           "first_space": "",
-                           "second_space": "",
+          [{"type": "binary_operator",
+            "value": '+',
+                           "first": {"type": "name",
+                                     "value": 'a'},
+                           "second": {
+                                      "type": "binary_operator",
+                                      "value": '-',
+                                      "first": {"type": "name",
+                                                "value": "b"},
+                                      "second": {
+                                                 "type": "name",
+                                                 "value": "c",
+                                                },
+                                      "first_formatting": [],
+                                      "second_formatting": [] },
+                           "first_formatting": [],
+                           "second_formatting": [],
                           }])
 
 def test_arith_expr_left_shift():
@@ -1526,13 +3018,33 @@ def test_arith_expr_left_shift():
            ('LEFT_SHIFT', '<<'),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '<<', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '<<',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('LEFT_SHIFT', '<<'),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '<<', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '<<',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [] }])
 
 def test_arith_expr_left_shift_first_space():
     "a <<b"
@@ -1541,13 +3053,33 @@ def test_arith_expr_left_shift_first_space():
            ('LEFT_SHIFT', '<<', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '<<', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '<<',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('LEFT_SHIFT', '<<', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '<<', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '<<',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
 
 def test_arith_expr_left_shift_second_space():
     "a<< b"
@@ -1556,13 +3088,33 @@ def test_arith_expr_left_shift_second_space():
            ('LEFT_SHIFT', '<<', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '<<', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '<<',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('LEFT_SHIFT', '<<', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '<<', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '<<',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_arith_expr_left_shift_spaces():
     "a << b"
@@ -1571,13 +3123,33 @@ def test_arith_expr_left_shift_spaces():
            ('LEFT_SHIFT', '<<', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '<<', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '<<',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('LEFT_SHIFT', '<<', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '<<', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '<<',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_arith_expr_left_shift_spaces_atomtrailers():
     "a.b << c"
@@ -1588,7 +3160,29 @@ def test_arith_expr_left_shift_spaces_atomtrailers():
            ('LEFT_SHIFT', '<<', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '<<', "first": {                             "type": "atomtrailers",                             "value": [{                                 "type": "name",                                 "value": "a",                             },{                                 "type": "dot",                                 "first_space": "",                                 "second_space": "",                             },{                                "type": "name",                                "value": "b",                             }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '<<',
+            "first": {
+                      "type": "atomtrailers",
+                      "value": [{
+                                 "type": "name",
+                                 "value": "a",
+                                },{
+                                   "type": "dot",
+                                   "first_formatting": [],
+                                   "second_formatting": [],
+                                  },{
+                                     "type": "name",
+                                     "value": "b",
+                                    }],
+                     },
+            "second": {
+                       "type": "name",
+                       "value": 'c',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_arith_expr_right_shift():
     "a>>b"
@@ -1597,13 +3191,33 @@ def test_arith_expr_right_shift():
            ('RIGHT_SHIFT', '>>'),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '>>', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '>>',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('RIGHT_SHIFT', '>>'),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '>>', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '>>',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [] }])
 
 def test_arith_expr_right_shift_first_space():
     "a >>b"
@@ -1612,13 +3226,33 @@ def test_arith_expr_right_shift_first_space():
            ('RIGHT_SHIFT', '>>', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '>>', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '>>',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('RIGHT_SHIFT', '>>', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '>>', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '>>',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
 
 def test_arith_expr_right_shift_second_space():
     "a>> b"
@@ -1627,13 +3261,33 @@ def test_arith_expr_right_shift_second_space():
            ('RIGHT_SHIFT', '>>', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '>>', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '>>',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('RIGHT_SHIFT', '>>', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '>>', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '>>',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_arith_expr_right_shift_spaces():
     "a >> b"
@@ -1642,13 +3296,33 @@ def test_arith_expr_right_shift_spaces():
            ('RIGHT_SHIFT', '>>', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '>>', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '>>',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('RIGHT_SHIFT', '>>', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '>>', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '>>',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_arith_expr_right_shift_spaces_atomtrailers():
     "a.b >> c"
@@ -1659,7 +3333,29 @@ def test_arith_expr_right_shift_spaces_atomtrailers():
            ('RIGHT_SHIFT', '>>', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '>>', "first": {                             "type": "atomtrailers",                             "value": [{                                 "type": "name",                                 "value": "a",                             },{                                 "type": "dot",                                 "first_space": "",                                 "second_space": "",                             },{                                "type": "name",                                "value": "b",                             }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '>>',
+            "first": {
+                      "type": "atomtrailers",
+                      "value": [{
+                                 "type": "name",
+                                 "value": "a",
+                                },{
+                                   "type": "dot",
+                                   "first_formatting": [],
+                                   "second_formatting": [],
+                                  },{
+                                     "type": "name",
+                                     "value": "b",
+                                    }],
+                     },
+            "second": {
+                       "type": "name",
+                       "value": 'c',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_chained_left_right_shift():
     "a<<b>>c"
@@ -1670,7 +3366,22 @@ def test_chained_left_right_shift():
            ('RIGHT_SHIFT', '>>'),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '<<', "first": { "type": "name", "value": 'a', }, "second": {"type": "binary_operator", "value": '>>',                                                   "first": {"type": "name", "value": "b"},                                                   "second": {"type": "name", "value": "c"},                                                   "first_space": "",                                                   "second_space": ""                                                  }, "first_space": "", "second_space": "" }])
+          [{ "type": "binary_operator",
+            "value": '<<',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "binary_operator",
+                       "value": '>>',
+                       "first": {"type": "name",
+                                 "value": "b"},
+                       "second": {"type": "name",
+                                  "value": "c"},
+                       "first_formatting": [],
+                       "second_formatting": []                                                  },
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('LEFT_SHIFT', '<<'),
@@ -1678,11 +3389,23 @@ def test_chained_left_right_shift():
            ('RIGHT_SHIFT', '>>'),
            ('NAME', 'c'),
           ],
-          [{"type": "binary_operator", "value": '<<',
-                           "first": { "type": "name", "value": 'a', },
-                           "second": { "type": "binary_operator", "value": '>>', "first": {"type": "name", "value": "b"}, "second": {"type": "name", "value": "c"}, "first_space": "", "second_space": "" },
-                           "first_space": "",
-                           "second_space": "",
+          [{"type": "binary_operator",
+            "value": '<<',
+                           "first": {
+                                     "type": "name",
+                                     "value": 'a',
+                                    },
+                           "second": {
+                                      "type": "binary_operator",
+                                      "value": '>>',
+                                      "first": {"type": "name",
+                                                "value": "b"},
+                                      "second": {"type": "name",
+                                                 "value": "c"},
+                                      "first_formatting": [],
+                                      "second_formatting": [] },
+                           "first_formatting": [],
+                           "second_formatting": [],
                           }])
     parse_simple([
            ('NAME', 'a'),
@@ -1691,7 +3414,23 @@ def test_chained_left_right_shift():
            ('RIGHT_SHIFT', '>>'),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '<<', "first": {"type": "name", "value": 'a'}, "second": {"type": "binary_operator", "value": '>>',                                                   "first": { "type": "name", "value": "b", },                                                   "second": {"type": "name", "value": "c"},                                                   "first_space": "",                                                   "second_space": ""                                                  }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '<<',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "binary_operator",
+                       "value": '>>',
+                       "first": {
+                                 "type": "name",
+                                 "value": "b",
+                                },
+                       "second": {"type": "name",
+                                  "value": "c"},
+                       "first_formatting": [],
+                       "second_formatting": []                                                  },
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('LEFT_SHIFT', '<<'),
@@ -1699,11 +3438,23 @@ def test_chained_left_right_shift():
            ('RIGHT_SHIFT', '>>'),
            ('NAME', 'c'),
           ],
-          [{"type": "binary_operator", "value": '<<',
-                           "first": {"type": "name", "value": 'a'},
-                           "second": { "type": "binary_operator", "value": '>>', "first": { "type": "name", "value": "b", }, "second": {"type": "name", "value": "c"}, "first_space": "", "second_space": "" },
-                           "first_space": "",
-                           "second_space": "",
+          [{"type": "binary_operator",
+            "value": '<<',
+                           "first": {"type": "name",
+                                     "value": 'a'},
+                           "second": {
+                                      "type": "binary_operator",
+                                      "value": '>>',
+                                      "first": {
+                                                "type": "name",
+                                                "value": "b",
+                                               },
+                                      "second": {"type": "name",
+                                                 "value": "c"},
+                                      "first_formatting": [],
+                                      "second_formatting": [] },
+                           "first_formatting": [],
+                           "second_formatting": [],
                           }])
     parse_simple([
            ('NAME', 'a'),
@@ -1712,7 +3463,23 @@ def test_chained_left_right_shift():
            ('RIGHT_SHIFT', '>>'),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '<<', "first": {"type": "name", "value": 'a'}, "second": {"type": "binary_operator", "value": '>>',                                                   "first": {"type": "name", "value": "b"},                                                   "second": { "type": "name", "value": "c", },                                                   "first_space": "",                                                   "second_space": ""                                                  }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '<<',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "binary_operator",
+                       "value": '>>',
+                       "first": {"type": "name",
+                                 "value": "b"},
+                       "second": {
+                                  "type": "name",
+                                  "value": "c",
+                                 },
+                       "first_formatting": [],
+                       "second_formatting": []                                                  },
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('LEFT_SHIFT', '<<'),
@@ -1720,11 +3487,23 @@ def test_chained_left_right_shift():
            ('RIGHT_SHIFT', '>>'),
            ('NAME', 'c'),
           ],
-          [{"type": "binary_operator", "value": '<<',
-                           "first": {"type": "name", "value": 'a'},
-                           "second": { "type": "binary_operator", "value": '>>', "first": {"type": "name", "value": "b"}, "second": { "type": "name", "value": "c", }, "first_space": "", "second_space": "" },
-                           "first_space": "",
-                           "second_space": "",
+          [{"type": "binary_operator",
+            "value": '<<',
+                           "first": {"type": "name",
+                                     "value": 'a'},
+                           "second": {
+                                      "type": "binary_operator",
+                                      "value": '>>',
+                                      "first": {"type": "name",
+                                                "value": "b"},
+                                      "second": {
+                                                 "type": "name",
+                                                 "value": "c",
+                                                },
+                                      "first_formatting": [],
+                                      "second_formatting": [] },
+                           "first_formatting": [],
+                           "second_formatting": [],
                           }])
 
 def test_and_expr():
@@ -1734,13 +3513,33 @@ def test_and_expr():
            ('AMPER', '&'),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '&', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '&',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('AMPER', '&'),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '&', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '&',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [] }])
 
 def test_and_expr_first_space():
     "a &b"
@@ -1749,13 +3548,33 @@ def test_and_expr_first_space():
            ('AMPER', '&', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '&', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '&',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('AMPER', '&', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '&', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '&',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
 
 def test_and_expr_second_space():
     "a& b"
@@ -1764,13 +3583,33 @@ def test_and_expr_second_space():
            ('AMPER', '&', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '&', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '&',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('AMPER', '&', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '&', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '&',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_and_expr_spaces():
     "a & b"
@@ -1779,13 +3618,33 @@ def test_and_expr_spaces():
            ('AMPER', '&', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '&', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '&',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('AMPER', '&', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '&', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '&',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_and_expr_spaces_atomtrailers():
     "a.b & c"
@@ -1796,7 +3655,29 @@ def test_and_expr_spaces_atomtrailers():
            ('AMPER', '&', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '&', "first": {                             "type": "atomtrailers",                             "value": [{                                 "type": "name",                                 "value": "a",                             },{                                 "type": "dot",                                 "first_space": "",                                 "second_space": "",                             },{                                "type": "name",                                "value": "b",                             }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '&',
+            "first": {
+                      "type": "atomtrailers",
+                      "value": [{
+                                 "type": "name",
+                                 "value": "a",
+                                },{
+                                   "type": "dot",
+                                   "first_formatting": [],
+                                   "second_formatting": [],
+                                  },{
+                                     "type": "name",
+                                     "value": "b",
+                                    }],
+                     },
+            "second": {
+                       "type": "name",
+                       "value": 'c',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_chained_left_and_expr():
     "a&b&c"
@@ -1807,7 +3688,22 @@ def test_chained_left_and_expr():
            ('AMPER', '&'),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '&', "first": { "type": "name", "value": 'a', }, "second": {"type": "binary_operator", "value": '&',                                                   "first": {"type": "name", "value": "b"},                                                   "second": {"type": "name", "value": "c"},                                                   "first_space": "",                                                   "second_space": ""                                                  }, "first_space": "", "second_space": "" }])
+          [{ "type": "binary_operator",
+            "value": '&',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "binary_operator",
+                       "value": '&',
+                       "first": {"type": "name",
+                                 "value": "b"},
+                       "second": {"type": "name",
+                                  "value": "c"},
+                       "first_formatting": [],
+                       "second_formatting": []                                                  },
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('AMPER', '&'),
@@ -1815,11 +3711,23 @@ def test_chained_left_and_expr():
            ('AMPER', '&'),
            ('NAME', 'c'),
           ],
-          [{"type": "binary_operator", "value": '&',
-                           "first": { "type": "name", "value": 'a', },
-                           "second": { "type": "binary_operator", "value": '&', "first": {"type": "name", "value": "b"}, "second": {"type": "name", "value": "c"}, "first_space": "", "second_space": "" },
-                           "first_space": "",
-                           "second_space": "",
+          [{"type": "binary_operator",
+            "value": '&',
+                           "first": {
+                                     "type": "name",
+                                     "value": 'a',
+                                    },
+                           "second": {
+                                      "type": "binary_operator",
+                                      "value": '&',
+                                      "first": {"type": "name",
+                                                "value": "b"},
+                                      "second": {"type": "name",
+                                                 "value": "c"},
+                                      "first_formatting": [],
+                                      "second_formatting": [] },
+                           "first_formatting": [],
+                           "second_formatting": [],
                           }])
     parse_simple([
            ('NAME', 'a'),
@@ -1828,7 +3736,23 @@ def test_chained_left_and_expr():
            ('AMPER', '&'),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '&', "first": {"type": "name", "value": 'a'}, "second": {"type": "binary_operator", "value": '&',                                                   "first": { "type": "name", "value": "b", },                                                   "second": {"type": "name", "value": "c"},                                                   "first_space": "",                                                   "second_space": ""                                                  }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '&',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "binary_operator",
+                       "value": '&',
+                       "first": {
+                                 "type": "name",
+                                 "value": "b",
+                                },
+                       "second": {"type": "name",
+                                  "value": "c"},
+                       "first_formatting": [],
+                       "second_formatting": []                                                  },
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('AMPER', '&'),
@@ -1836,11 +3760,23 @@ def test_chained_left_and_expr():
            ('AMPER', '&'),
            ('NAME', 'c'),
           ],
-          [{"type": "binary_operator", "value": '&',
-                           "first": {"type": "name", "value": 'a'},
-                           "second": { "type": "binary_operator", "value": '&', "first": { "type": "name", "value": "b", }, "second": {"type": "name", "value": "c"}, "first_space": "", "second_space": "" },
-                           "first_space": "",
-                           "second_space": "",
+          [{"type": "binary_operator",
+            "value": '&',
+                           "first": {"type": "name",
+                                     "value": 'a'},
+                           "second": {
+                                      "type": "binary_operator",
+                                      "value": '&',
+                                      "first": {
+                                                "type": "name",
+                                                "value": "b",
+                                               },
+                                      "second": {"type": "name",
+                                                 "value": "c"},
+                                      "first_formatting": [],
+                                      "second_formatting": [] },
+                           "first_formatting": [],
+                           "second_formatting": [],
                           }])
     parse_simple([
            ('NAME', 'a'),
@@ -1849,7 +3785,23 @@ def test_chained_left_and_expr():
            ('AMPER', '&'),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '&', "first": {"type": "name", "value": 'a'}, "second": {"type": "binary_operator", "value": '&',                                                   "first": {"type": "name", "value": "b"},                                                   "second": { "type": "name", "value": "c", },                                                   "first_space": "",                                                   "second_space": ""                                                  }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '&',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "binary_operator",
+                       "value": '&',
+                       "first": {"type": "name",
+                                 "value": "b"},
+                       "second": {
+                                  "type": "name",
+                                  "value": "c",
+                                 },
+                       "first_formatting": [],
+                       "second_formatting": []                                                  },
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('AMPER', '&'),
@@ -1857,11 +3809,23 @@ def test_chained_left_and_expr():
            ('AMPER', '&'),
            ('NAME', 'c'),
           ],
-          [{"type": "binary_operator", "value": '&',
-                           "first": {"type": "name", "value": 'a'},
-                           "second": { "type": "binary_operator", "value": '&', "first": {"type": "name", "value": "b"}, "second": { "type": "name", "value": "c", }, "first_space": "", "second_space": "" },
-                           "first_space": "",
-                           "second_space": "",
+          [{"type": "binary_operator",
+            "value": '&',
+                           "first": {"type": "name",
+                                     "value": 'a'},
+                           "second": {
+                                      "type": "binary_operator",
+                                      "value": '&',
+                                      "first": {"type": "name",
+                                                "value": "b"},
+                                      "second": {
+                                                 "type": "name",
+                                                 "value": "c",
+                                                },
+                                      "first_formatting": [],
+                                      "second_formatting": [] },
+                           "first_formatting": [],
+                           "second_formatting": [],
                           }])
 
 def test_xor_expr():
@@ -1871,13 +3835,33 @@ def test_xor_expr():
            ('CIRCUMFLEX', '^'),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '^', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '^',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('CIRCUMFLEX', '^'),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '^', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '^',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [] }])
 
 def test_xor_expr_first_space():
     "a ^b"
@@ -1886,13 +3870,33 @@ def test_xor_expr_first_space():
            ('CIRCUMFLEX', '^', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '^', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '^',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('CIRCUMFLEX', '^', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '^', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '^',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
 
 def test_xor_expr_second_space():
     "a^ b"
@@ -1901,13 +3905,33 @@ def test_xor_expr_second_space():
            ('CIRCUMFLEX', '^', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '^', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '^',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('CIRCUMFLEX', '^', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '^', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '^',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_xor_expr_spaces():
     "a ^ b"
@@ -1916,13 +3940,33 @@ def test_xor_expr_spaces():
            ('CIRCUMFLEX', '^', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '^', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '^',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('CIRCUMFLEX', '^', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '^', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '^',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_xor_expr_spaces_atomtrailers():
     "a.b ^ c"
@@ -1933,7 +3977,29 @@ def test_xor_expr_spaces_atomtrailers():
            ('CIRCUMFLEX', '^', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '^', "first": {                             "type": "atomtrailers",                             "value": [{                                 "type": "name",                                 "value": "a",                             },{                                 "type": "dot",                                 "first_space": "",                                 "second_space": "",                             },{                                "type": "name",                                "value": "b",                             }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '^',
+            "first": {
+                      "type": "atomtrailers",
+                      "value": [{
+                                 "type": "name",
+                                 "value": "a",
+                                },{
+                                   "type": "dot",
+                                   "first_formatting": [],
+                                   "second_formatting": [],
+                                  },{
+                                     "type": "name",
+                                     "value": "b",
+                                    }],
+                     },
+            "second": {
+                       "type": "name",
+                       "value": 'c',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_chained_left_xor_expr():
     "a^b^c"
@@ -1944,7 +4010,23 @@ def test_chained_left_xor_expr():
            ('CIRCUMFLEX', '^'),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '^', "first": { "type": "name", "value": 'a', }, "second": {"type": "binary_operator", "value": '^',                                                   "first": {"type": "name", "value": "b"},                                                   "second": {"type": "name", "value": "c"},                                                   "first_space": "",                                                   "second_space": ""                                                  }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '^',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "binary_operator",
+                       "value": '^',
+                       "first": {"type": "name",
+                                 "value": "b"},
+                       "second": {"type": "name",
+                                  "value": "c"},
+                       "first_formatting": [],
+                       "second_formatting": []                                                  },
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('CIRCUMFLEX', '^'),
@@ -1952,11 +4034,23 @@ def test_chained_left_xor_expr():
            ('CIRCUMFLEX', '^'),
            ('NAME', 'c'),
           ],
-          [{"type": "binary_operator", "value": '^',
-                           "first": { "type": "name", "value": 'a', },
-                           "second": { "type": "binary_operator", "value": '^', "first": {"type": "name", "value": "b"}, "second": {"type": "name", "value": "c"}, "first_space": "", "second_space": "" },
-                           "first_space": "",
-                           "second_space": "",
+          [{"type": "binary_operator",
+            "value": '^',
+                           "first": {
+                                     "type": "name",
+                                     "value": 'a',
+                                    },
+                           "second": {
+                                      "type": "binary_operator",
+                                      "value": '^',
+                                      "first": {"type": "name",
+                                                "value": "b"},
+                                      "second": {"type": "name",
+                                                 "value": "c"},
+                                      "first_formatting": [],
+                                      "second_formatting": [] },
+                           "first_formatting": [],
+                           "second_formatting": [],
                           }])
     parse_simple([
            ('NAME', 'a'),
@@ -1965,7 +4059,23 @@ def test_chained_left_xor_expr():
            ('CIRCUMFLEX', '^'),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '^', "first": {"type": "name", "value": 'a'}, "second": {"type": "binary_operator", "value": '^',                                                   "first": { "type": "name", "value": "b", },                                                   "second": {"type": "name", "value": "c"},                                                   "first_space": "",                                                   "second_space": ""                                                  }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '^',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "binary_operator",
+                       "value": '^',
+                       "first": {
+                                 "type": "name",
+                                 "value": "b",
+                                },
+                       "second": {"type": "name",
+                                  "value": "c"},
+                       "first_formatting": [],
+                       "second_formatting": []                                                  },
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('CIRCUMFLEX', '^'),
@@ -1973,11 +4083,23 @@ def test_chained_left_xor_expr():
            ('CIRCUMFLEX', '^'),
            ('NAME', 'c'),
           ],
-          [{"type": "binary_operator", "value": '^',
-                           "first": {"type": "name", "value": 'a'},
-                           "second": { "type": "binary_operator", "value": '^', "first": { "type": "name", "value": "b", }, "second": {"type": "name", "value": "c"}, "first_space": "", "second_space": "" },
-                           "first_space": "",
-                           "second_space": "",
+          [{"type": "binary_operator",
+            "value": '^',
+                           "first": {"type": "name",
+                                     "value": 'a'},
+                           "second": {
+                                      "type": "binary_operator",
+                                      "value": '^',
+                                      "first": {
+                                                "type": "name",
+                                                "value": "b",
+                                               },
+                                      "second": {"type": "name",
+                                                 "value": "c"},
+                                      "first_formatting": [],
+                                      "second_formatting": [] },
+                           "first_formatting": [],
+                           "second_formatting": [],
                           }])
     parse_simple([
            ('NAME', 'a'),
@@ -1986,7 +4108,23 @@ def test_chained_left_xor_expr():
            ('CIRCUMFLEX', '^'),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '^', "first": {"type": "name", "value": 'a'}, "second": {"type": "binary_operator", "value": '^',                                                   "first": {"type": "name", "value": "b"},                                                   "second": { "type": "name", "value": "c", },                                                   "first_space": "",                                                   "second_space": ""                                                  }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '^',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "binary_operator",
+                       "value": '^',
+                       "first": {"type": "name",
+                                 "value": "b"},
+                       "second": {
+                                  "type": "name",
+                                  "value": "c",
+                                 },
+                       "first_formatting": [],
+                       "second_formatting": []                                                  },
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('CIRCUMFLEX', '^'),
@@ -1994,11 +4132,23 @@ def test_chained_left_xor_expr():
            ('CIRCUMFLEX', '^'),
            ('NAME', 'c'),
           ],
-          [{"type": "binary_operator", "value": '^',
-                           "first": {"type": "name", "value": 'a'},
-                           "second": { "type": "binary_operator", "value": '^', "first": {"type": "name", "value": "b"}, "second": { "type": "name", "value": "c", }, "first_space": "", "second_space": "" },
-                           "first_space": "",
-                           "second_space": "",
+          [{"type": "binary_operator",
+            "value": '^',
+                           "first": {"type": "name",
+                                     "value": 'a'},
+                           "second": {
+                                      "type": "binary_operator",
+                                      "value": '^',
+                                      "first": {"type": "name",
+                                                "value": "b"},
+                                      "second": {
+                                                 "type": "name",
+                                                 "value": "c",
+                                                },
+                                      "first_formatting": [],
+                                      "second_formatting": [] },
+                           "first_formatting": [],
+                           "second_formatting": [],
                           }])
 
 def test_expr():
@@ -2008,13 +4158,33 @@ def test_expr():
            ('VBAR', '|'),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '|', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '|',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('VBAR', '|'),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '|', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '|',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [] }])
 
 def test_expr_first_space():
     "a |b"
@@ -2023,13 +4193,33 @@ def test_expr_first_space():
            ('VBAR', '|', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '|', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '|',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('VBAR', '|', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '|', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '|',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [] }])
 
 def test_expr_second_space():
     "a| b"
@@ -2038,13 +4228,33 @@ def test_expr_second_space():
            ('VBAR', '|', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '|', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '|',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('VBAR', '|', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '|', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '|',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_expr_spaces():
     "a | b"
@@ -2053,13 +4263,33 @@ def test_expr_spaces():
            ('VBAR', '|', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '|', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '|',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('NAME', 'a'),
            ('VBAR', '|', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "binary_operator", "value": '|', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '|',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_expr_spaces_atomtrailers():
     "a.b | c"
@@ -2070,7 +4300,29 @@ def test_expr_spaces_atomtrailers():
            ('VBAR', '|', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '|', "first": {                             "type": "atomtrailers",                             "value": [{                                 "type": "name",                                 "value": "a",                             },{                                 "type": "dot",                                 "first_space": "",                                 "second_space": "",                             },{                                "type": "name",                                "value": "b",                             }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " " }])
+          [{
+            "type": "binary_operator",
+            "value": '|',
+            "first": {
+                      "type": "atomtrailers",
+                      "value": [{
+                                 "type": "name",
+                                 "value": "a",
+                                },{
+                                   "type": "dot",
+                                   "first_formatting": [],
+                                   "second_formatting": [],
+                                  },{
+                                     "type": "name",
+                                     "value": "b",
+                                    }],
+                     },
+            "second": {
+                       "type": "name",
+                       "value": 'c',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}] }])
 
 def test_chained_left_expr():
     "a|b|c"
@@ -2081,7 +4333,23 @@ def test_chained_left_expr():
            ('VBAR', '|'),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '|', "first": { "type": "name", "value": 'a', }, "second": {"type": "binary_operator", "value": '|',                                                   "first": {"type": "name", "value": "b"},                                                   "second": {"type": "name", "value": "c"},                                                   "first_space": "",                                                   "second_space": ""                                                  }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '|',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "binary_operator",
+                       "value": '|',
+                       "first": {"type": "name",
+                                 "value": "b"},
+                       "second": {"type": "name",
+                                  "value": "c"},
+                       "first_formatting": [],
+                       "second_formatting": []                                                  },
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('VBAR', '|'),
@@ -2089,11 +4357,23 @@ def test_chained_left_expr():
            ('VBAR', '|'),
            ('NAME', 'c'),
           ],
-          [{"type": "binary_operator", "value": '|',
-                           "first": { "type": "name", "value": 'a', },
-                           "second": { "type": "binary_operator", "value": '|', "first": {"type": "name", "value": "b"}, "second": {"type": "name", "value": "c"}, "first_space": "", "second_space": "" },
-                           "first_space": "",
-                           "second_space": "",
+          [{"type": "binary_operator",
+            "value": '|',
+                           "first": {
+                                     "type": "name",
+                                     "value": 'a',
+                                    },
+                           "second": {
+                                      "type": "binary_operator",
+                                      "value": '|',
+                                      "first": {"type": "name",
+                                                "value": "b"},
+                                      "second": {"type": "name",
+                                                 "value": "c"},
+                                      "first_formatting": [],
+                                      "second_formatting": [] },
+                           "first_formatting": [],
+                           "second_formatting": [],
                           }])
     parse_simple([
            ('NAME', 'a'),
@@ -2102,7 +4382,23 @@ def test_chained_left_expr():
            ('VBAR', '|'),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '|', "first": {"type": "name", "value": 'a'}, "second": {"type": "binary_operator", "value": '|',                                                   "first": { "type": "name", "value": "b", },                                                   "second": {"type": "name", "value": "c"},                                                   "first_space": "",                                                   "second_space": ""                                                  }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '|',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "binary_operator",
+                       "value": '|',
+                       "first": {
+                                 "type": "name",
+                                 "value": "b",
+                                },
+                       "second": {"type": "name",
+                                  "value": "c"},
+                       "first_formatting": [],
+                       "second_formatting": []                                                  },
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('VBAR', '|'),
@@ -2110,11 +4406,23 @@ def test_chained_left_expr():
            ('VBAR', '|'),
            ('NAME', 'c'),
           ],
-          [{"type": "binary_operator", "value": '|',
-                           "first": {"type": "name", "value": 'a'},
-                           "second": { "type": "binary_operator", "value": '|', "first": { "type": "name", "value": "b", }, "second": {"type": "name", "value": "c"}, "first_space": "", "second_space": "" },
-                           "first_space": "",
-                           "second_space": "",
+          [{"type": "binary_operator",
+            "value": '|',
+                           "first": {"type": "name",
+                                     "value": 'a'},
+                           "second": {
+                                      "type": "binary_operator",
+                                      "value": '|',
+                                      "first": {
+                                                "type": "name",
+                                                "value": "b",
+                                               },
+                                      "second": {"type": "name",
+                                                 "value": "c"},
+                                      "first_formatting": [],
+                                      "second_formatting": [] },
+                           "first_formatting": [],
+                           "second_formatting": [],
                           }])
     parse_simple([
            ('NAME', 'a'),
@@ -2123,7 +4431,23 @@ def test_chained_left_expr():
            ('VBAR', '|'),
            ('NAME', 'c'),
           ],
-          [{ "type": "binary_operator", "value": '|', "first": {"type": "name", "value": 'a'}, "second": {"type": "binary_operator", "value": '|',                                                   "first": {"type": "name", "value": "b"},                                                   "second": { "type": "name", "value": "c", },                                                   "first_space": "",                                                   "second_space": ""                                                  }, "first_space": "", "second_space": "" }])
+          [{
+            "type": "binary_operator",
+            "value": '|',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "binary_operator",
+                       "value": '|',
+                       "first": {"type": "name",
+                                 "value": "b"},
+                       "second": {
+                                  "type": "name",
+                                  "value": "c",
+                                 },
+                       "first_formatting": [],
+                       "second_formatting": []                                                  },
+            "first_formatting": [],
+            "second_formatting": [] }])
     parse_simple([
            ('NAME', 'a'),
            ('VBAR', '|'),
@@ -2131,11 +4455,23 @@ def test_chained_left_expr():
            ('VBAR', '|'),
            ('NAME', 'c'),
           ],
-          [{"type": "binary_operator", "value": '|',
-                           "first": {"type": "name", "value": 'a'},
-                           "second": { "type": "binary_operator", "value": '|', "first": {"type": "name", "value": "b"}, "second": { "type": "name", "value": "c", }, "first_space": "", "second_space": "" },
-                           "first_space": "",
-                           "second_space": "",
+          [{"type": "binary_operator",
+            "value": '|',
+                           "first": {"type": "name",
+                                     "value": 'a'},
+                           "second": {
+                                      "type": "binary_operator",
+                                      "value": '|',
+                                      "first": {"type": "name",
+                                                "value": "b"},
+                                      "second": {
+                                                 "type": "name",
+                                                 "value": "c",
+                                                },
+                                      "first_formatting": [],
+                                      "second_formatting": [] },
+                           "first_formatting": [],
+                           "second_formatting": [],
                           }])
 
 comparison_tokens = (
@@ -2272,8 +4608,8 @@ def test_comparison_spaces_atomtrailers():
                                 "value": "a",
                             },{
                                 "type": "dot",
-                                "first_space": "",
-                                "second_space": "",
+                                "first_formatting": [],
+                                "second_formatting": [],
                             },{
                                "type": "name",
                                "value": "b",
@@ -2486,8 +4822,8 @@ def test_advanced_comparison_spaces_atomtrailers():
                                 "value": "a",
                             },{
                                 "type": "dot",
-                                "first_space": "",
-                                "second_space": "",
+                                "first_formatting": [],
+                                "second_formatting": [],
                             },{
                                "type": "name",
                                "value": "b",
@@ -2575,7 +4911,14 @@ def test_not():
            ('NOT', 'not', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ],
-          [{ "type": "unitary_operator", "value": 'not', "target": { "type": "name", "value": 'a', }, "space": " ", }])
+          [{
+            "type": "unitary_operator",
+            "value": 'not',
+            "target": {
+                       "type": "name",
+                       "value": 'a',
+                      },
+            "formatting": [{"type": "space", "value": " "}], }])
 
 def test_not_not():
     "not not a"
@@ -2591,9 +4934,9 @@ def test_not_not():
                 "type": "unitary_operator",
                 "value": 'not',
                 "target": { "type": "name", "value": 'a', },
-                "space": " "
+                "formatting": [{"type": "space", "value": " "}]
             },
-            "space": " "
+            "formatting": [{"type": "space", "value": " "}]
         }])
     parse_simple([
          ('NOT', 'not', [], [('SPACE', ' ')]),
@@ -2607,9 +4950,9 @@ def test_not_not():
                 "type": "unitary_operator",
                 "value": 'not',
                 "target": { "type": "name", "value": 'a', },
-                "space": " "
+                "formatting": [{"type": "space", "value": " "}]
             },
-            "space": " ",
+            "formatting": [{"type": "space", "value": " "}],
         }])
 
 def test_and():
@@ -3109,7 +5452,7 @@ def test_augmented_assignment_yield_b():
               [augmented_assignment(
                             operator=value[:-1],
                             value={
-                                "space": " ",
+                                "formatting": [{"type": "space", "value": " "}],
                                 "type": "yield",
                                 "value": {
                                     "type": "name",
@@ -3132,7 +5475,7 @@ def test_a_equal_yield_b():
              ('NAME', 'b'),
           ],
           [{
-            "first_space": " ",
+            "first_formatting": [{"type": "space", "value": " "}],
             "type": "assign",
             "target": {
                 "type": "name",
@@ -3140,44 +5483,54 @@ def test_a_equal_yield_b():
             },
             "value": {
                 "type": "yield",
-                "space": " ",
-                "value": {
-                    "type": "name",
-                    "value": "b"
-                },
-            },
-            "second_space": " "
-          }])
+                      "formatting": [{"type": "space", "value": " "}],
+                      "value": {
+                                "type": "name",
+                                "value": "b"
+                               },
+                     },
+            "second_formatting": [{"type": "space", "value": " "}]
+           }])
 
 
 def test_expr_comma_list():
     "a or b,c+d"
     parse_simple([
-           ('NAME', 'a'),
-           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
-           ('NAME', 'b'),
-           ('COMMA', ','),
-           ('NAME', 'c'),
-           ('PLUS', '+'),
-           ('NAME', 'd'),
-          ],
-          [{
-            "type": "tuple",
-            "with_parenthesis": False,
-            "first_space": "",
-            "second_space": "",
-            "value": [
-                   boolean_operator(
-                                    'or',
-                                    first={ "type": "name", "value": 'a', },
-                                    second={"type": "name", "value": 'b'},
-                                    first_space=" ",
-                                    second_space=" ",
-                                   ),
-                   {"type": "comma", "first_space": "", "second_space": ""},
-                   { "type": "binary_operator", "value": '+', "first": {"type": "name", "value": 'c'}, "second": {"type": "name", "value": 'd'}, "first_space": "", "second_space": "" }
-                  ],
-           }
+                  ('NAME', 'a'),
+                  ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
+                  ('NAME', 'b'),
+                  ('COMMA', ','),
+                  ('NAME', 'c'),
+                  ('PLUS', '+'),
+                  ('NAME', 'd'),
+                 ],
+                 [{
+                   "type": "tuple",
+                   "with_parenthesis": False,
+                   "first_formatting": [],
+                   "second_formatting": [],
+                   "value": [
+                             boolean_operator(
+                                              'or',
+                                              first={ "type": "name", "value": 'a', },
+                                              second={"type": "name", "value": 'b'},
+                                              first_space=" ",
+                                              second_space=" ",
+                                             ),
+                             {"type": "comma",
+                              "first_formatting": [],
+                              "second_formatting": []},
+                             {
+                              "type": "binary_operator",
+                              "value": '+',
+                              "first": {"type": "name",
+                                        "value": 'c'},
+                              "second": {"type": "name",
+                                         "value": 'd'},
+                              "first_formatting": [],
+                              "second_formatting": [] }
+                            ],
+                  }
                  ])
     parse_simple([
            ('NAME', 'a'),
@@ -3191,8 +5544,8 @@ def test_expr_comma_list():
           [{
             "type": "tuple",
             "with_parenthesis": False,
-            "first_space": "",
-            "second_space": "",
+            "first_formatting": [],
+            "second_formatting": [],
             "value": [
                    boolean_operator(
                                     'or',
@@ -3201,8 +5554,18 @@ def test_expr_comma_list():
                                     first_space=" ",
                                     second_space=" ",
                                    ),
-                   {"type": "comma", "first_space": "", "second_space": ""},
-                   { "type": "binary_operator", "value": '+', "first": {"type": "name", "value": 'c'}, "second": {"type": "name", "value": 'd'}, "first_space": "", "second_space": "" }
+                   {"type": "comma",
+                    "first_formatting": [],
+                    "second_formatting": []},
+                   {
+                    "type": "binary_operator",
+                    "value": '+',
+                    "first": {"type": "name",
+                              "value": 'c'},
+                    "second": {"type": "name",
+                               "value": 'd'},
+                    "first_formatting": [],
+                    "second_formatting": [] }
                   ],
            }
                  ])
@@ -3218,8 +5581,8 @@ def test_expr_comma_list():
           [{
             "type": "tuple",
             "with_parenthesis": False,
-            "first_space": "",
-            "second_space": "",
+            "first_formatting": [],
+            "second_formatting": [],
             "value": [
                    boolean_operator(
                                     'or',
@@ -3228,8 +5591,20 @@ def test_expr_comma_list():
                                     first_space=" ",
                                     second_space=" ",
                                    ),
-                   {"type": "comma", "first_space": "", "second_space": ""},
-                   { "type": "binary_operator", "value": '+', "first": { "type": "name", "value": 'c', }, "second": {"type": "name", "value": 'd'}, "first_space": "", "second_space": "" }
+                   {"type": "comma",
+                    "first_formatting": [],
+                    "second_formatting": []},
+                   {
+                    "type": "binary_operator",
+                    "value": '+',
+                    "first": {
+                              "type": "name",
+                              "value": 'c',
+                             },
+                    "second": {"type": "name",
+                               "value": 'd'},
+                    "first_formatting": [],
+                    "second_formatting": [] }
                   ],
            }
                  ])
@@ -3245,8 +5620,8 @@ def test_expr_comma_list():
           [{
             "type": "tuple",
             "with_parenthesis": False,
-            "first_space": "",
-            "second_space": "",
+            "first_formatting": [],
+            "second_formatting": [],
             "value": [
                    boolean_operator(
                                     'or',
@@ -3255,8 +5630,20 @@ def test_expr_comma_list():
                                     first_space=" ",
                                     second_space=" ",
                                    ),
-                   {"type": "comma", "first_space": "", "second_space": ""},
-                   { "type": "binary_operator", "value": '+', "first": {"type": "name", "value": 'c'}, "second": { "type": "name", "value": 'd', }, "first_space": "", "second_space": "" }
+                   {"type": "comma",
+                    "first_formatting": [],
+                    "second_formatting": []},
+                   {
+                    "type": "binary_operator",
+                    "value": '+',
+                    "first": {"type": "name",
+                              "value": 'c'},
+                    "second": {
+                               "type": "name",
+                               "value": 'd',
+                              },
+                    "first_formatting": [],
+                    "second_formatting": [] }
                   ],
            }
                  ])
@@ -3277,8 +5664,8 @@ def test_expr_comma_list_3_items():
           [{
             "type": "tuple",
             "with_parenthesis": False,
-            "first_space": "",
-            "second_space": "",
+            "first_formatting": [],
+            "second_formatting": [],
             "value": [boolean_operator(
                                     'or',
                                     first={ "type": "name", "value": 'a', },
@@ -3286,10 +5673,23 @@ def test_expr_comma_list_3_items():
                                     first_space=" ",
                                     second_space=" ",
                                    ),
-                   {"type": "comma", "first_space": "", "second_space": ""},
-                   { "type": "binary_operator", "value": '+', "first": {"type": "name", "value": 'c'}, "second": {"type": "name", "value": 'd'}, "first_space": "", "second_space": "" },
-                   {"type": "comma", "first_space": "", "second_space": ""},
-                   {"type": "name", "value": 'e'},
+                   {"type": "comma",
+                    "first_formatting": [],
+                    "second_formatting": []},
+                   {
+                    "type": "binary_operator",
+                    "value": '+',
+                    "first": {"type": "name",
+                              "value": 'c'},
+                    "second": {"type": "name",
+                               "value": 'd'},
+                    "first_formatting": [],
+                    "second_formatting": [] },
+                   {"type": "comma",
+                    "first_formatting": [],
+                    "second_formatting": []},
+                   {"type": "name",
+                    "value": 'e'},
                   ],
             }])
     parse_simple([
@@ -3306,8 +5706,8 @@ def test_expr_comma_list_3_items():
           [{
             "type": "tuple",
             "with_parenthesis": False,
-            "first_space": "",
-            "second_space": "",
+            "first_formatting": [],
+            "second_formatting": [],
             "value": [boolean_operator(
                                     'or',
                                     first={"type": "name", "value": 'a'},
@@ -3315,10 +5715,23 @@ def test_expr_comma_list_3_items():
                                     first_space=" ",
                                     second_space=" ",
                                    ),
-                   {"type": "comma", "first_space": "", "second_space": ""},
-                   { "type": "binary_operator", "value": '+', "first": {"type": "name", "value": 'c'}, "second": {"type": "name", "value": 'd'}, "first_space": "", "second_space": "" },
-                   {"type": "comma", "first_space": "", "second_space": ""},
-                   {"type": "name", "value": 'e'},
+                   {"type": "comma",
+                    "first_formatting": [],
+                    "second_formatting": []},
+                   {
+                    "type": "binary_operator",
+                    "value": '+',
+                    "first": {"type": "name",
+                              "value": 'c'},
+                    "second": {"type": "name",
+                               "value": 'd'},
+                    "first_formatting": [],
+                    "second_formatting": [] },
+                   {"type": "comma",
+                    "first_formatting": [],
+                    "second_formatting": []},
+                   {"type": "name",
+                    "value": 'e'},
                   ],
             }])
     parse_simple([
@@ -3335,8 +5748,8 @@ def test_expr_comma_list_3_items():
           [{
             "type": "tuple",
             "with_parenthesis": False,
-            "first_space": "",
-            "second_space": "",
+            "first_formatting": [],
+            "second_formatting": [],
             "value": [boolean_operator(
                                     'or',
                                     first={"type": "name", "value": 'a'},
@@ -3344,10 +5757,25 @@ def test_expr_comma_list_3_items():
                                     first_space=" ",
                                     second_space=" ",
                                    ),
-                   {"type": "comma", "first_space": "", "second_space": ""},
-                   { "type": "binary_operator", "value": '+', "first": { "type": "name", "value": 'c', }, "second": {"type": "name", "value": 'd'}, "first_space": "", "second_space": "" },
-                   {"type": "comma", "first_space": "", "second_space": ""},
-                   {"type": "name", "value": 'e'},
+                   {"type": "comma",
+                    "first_formatting": [],
+                    "second_formatting": []},
+                   {
+                    "type": "binary_operator",
+                    "value": '+',
+                    "first": {
+                              "type": "name",
+                              "value": 'c',
+                             },
+                    "second": {"type": "name",
+                               "value": 'd'},
+                    "first_formatting": [],
+                    "second_formatting": [] },
+                   {"type": "comma",
+                    "first_formatting": [],
+                    "second_formatting": []},
+                   {"type": "name",
+                    "value": 'e'},
                   ],
             }])
     parse_simple([
@@ -3364,8 +5792,8 @@ def test_expr_comma_list_3_items():
           [{
             "type": "tuple",
             "with_parenthesis": False,
-            "first_space": "",
-            "second_space": "",
+            "first_formatting": [],
+            "second_formatting": [],
             "value": [boolean_operator(
                                     'or',
                                     first={"type": "name", "value": 'a'},
@@ -3373,10 +5801,25 @@ def test_expr_comma_list_3_items():
                                     first_space=" ",
                                     second_space=" ",
                                    ),
-                   {"type": "comma", "first_space": "", "second_space": ""},
-                   { "type": "binary_operator", "value": '+', "first": {"type": "name", "value": 'c'}, "second": { "type": "name", "value": 'd', }, "first_space": "", "second_space": "" },
-                   {"type": "comma", "first_space": "", "second_space": ""},
-                   {"type": "name", "value": 'e'},
+                   {"type": "comma",
+                    "first_formatting": [],
+                    "second_formatting": []},
+                   {
+                    "type": "binary_operator",
+                    "value": '+',
+                    "first": {"type": "name",
+                              "value": 'c'},
+                    "second": {
+                               "type": "name",
+                               "value": 'd',
+                              },
+                    "first_formatting": [],
+                    "second_formatting": [] },
+                   {"type": "comma",
+                    "first_formatting": [],
+                    "second_formatting": []},
+                   {"type": "name",
+                    "value": 'e'},
                   ],
             }])
     parse_simple([
@@ -3393,8 +5836,8 @@ def test_expr_comma_list_3_items():
           [{
             "type": "tuple",
             "with_parenthesis": False,
-            "first_space": "",
-            "second_space": "",
+            "first_formatting": [],
+            "second_formatting": [],
             "value": [boolean_operator(
                                     'or',
                                     first={"type": "name", "value": 'a'},
@@ -3402,10 +5845,25 @@ def test_expr_comma_list_3_items():
                                     first_space=" ",
                                     second_space=" ",
                                    ),
-                   {"type": "comma", "first_space": "", "second_space": ""},
-                   { "type": "binary_operator", "value": '+', "first": {"type": "name", "value": 'c'}, "second": {"type": "name", "value": 'd'}, "first_space": "", "second_space": "" },
-                   {"type": "comma", "first_space": "", "second_space": ""},
-                   { "type": "name", "value": 'e', },
+                   {"type": "comma",
+                    "first_formatting": [],
+                    "second_formatting": []},
+                   {
+                    "type": "binary_operator",
+                    "value": '+',
+                    "first": {"type": "name",
+                              "value": 'c'},
+                    "second": {"type": "name",
+                               "value": 'd'},
+                    "first_formatting": [],
+                    "second_formatting": [] },
+                   {"type": "comma",
+                    "first_formatting": [],
+                    "second_formatting": []},
+                   {
+                    "type": "name",
+                    "value": 'e',
+                   },
                   ],
             }])
 
@@ -3421,22 +5879,22 @@ def test_implicit_tuple_space():
           [{
             "type": "tuple",
             "with_parenthesis": False,
-            "first_space": "",
-            "second_space": "",
+            "first_formatting": [],
+            "second_formatting": [],
             "value": [{
                 "type": "name",
                 "value": "a",
             },{
                "type": "comma",
-               "first_space": "",
-               "second_space": " ",
+               "first_formatting": [],
+               "second_formatting": [{"type": "space", "value": " "}],
             },{
                 "type": "name",
                 "value": "b",
             },{
                "type": "comma",
-               "first_space": " ",
-               "second_space": " ",
+               "first_formatting": [{"type": "space", "value": " "}],
+               "second_formatting": [{"type": "space", "value": " "}],
             },{
                 "type": "name",
                 "value": "c",
@@ -3452,15 +5910,15 @@ def test_implicit_tuple_one_item():
           [{
             "type": "tuple",
             "with_parenthesis": False,
-            "first_space": "",
-            "second_space": "",
+            "first_formatting": [],
+            "second_formatting": [],
             "value": [{
                      "type": "name",
                      "value": "a",
                    },{
                       "type": "comma",
-                      "first_space": " ",
-                      "second_space": "",
+                      "first_formatting": [{"type": "space", "value": " "}],
+                      "second_formatting": [],
                    }]
            }])
 
@@ -3475,22 +5933,22 @@ def test_implicit_tuple_trailing_comma():
           [{
             "type": "tuple",
             "with_parenthesis": False,
-            "first_space": "",
-            "second_space": "",
+            "first_formatting": [],
+            "second_formatting": [],
             "value": [{
                      "type": "name",
                      "value": "a",
                    },{
                       "type": "comma",
-                      "first_space": "",
-                      "second_space": " ",
+                      "first_formatting": [],
+                      "second_formatting": [{"type": "space", "value": " "}],
                    },{
                      "type": "name",
                      "value": "b",
                    },{
                       "type": "comma",
-                      "first_space": " ",
-                      "second_space": "",
+                      "first_formatting": [{"type": "space", "value": " "}],
+                      "second_formatting": [],
                    }]
            }])
 
@@ -3511,12 +5969,12 @@ def test_subscript_ellipsis():
                "value": "a",
             },{
                "type": "getitem",
-               "first_space": "",
-               "second_space": "",
+               "first_formatting": [],
+               "second_formatting": [],
                "value": {
                    "type": "ellipsis",
-                   "first_space": "",
-                   "second_space": "",
+                   "first_formatting": [],
+                   "second_formatting": [],
                }
             }]
            }])
@@ -3538,12 +5996,12 @@ def test_subscript_ellipsis_space():
                "value": "a",
             },{
                "type": "getitem",
-               "first_space": "",
-               "second_space": "   ",
+               "first_formatting": [],
+               "second_formatting": [{"type": "space", "value": "   "}],
                "value": {
                    "type": "ellipsis",
-                   "first_space": " ",
-                   "second_space": "  ",
+                   "first_formatting": [{"type": "space", "value": " "}],
+                   "second_formatting": [{"type": "space", "value": "  "}],
                }
             }]
            }])
@@ -3563,8 +6021,8 @@ def test_subscript_test():
                "value": "a",
             },{
                "type": "getitem",
-               "first_space": "",
-               "second_space": "",
+               "first_formatting": [],
+               "second_formatting": [],
                "value": {
                    "type": "name",
                    "value": "b",
@@ -3587,18 +6045,18 @@ def test_subscript_slice_empty():
                "value": "a",
             },{
                "type": "getitem",
-               "first_space": "",
-               "second_space": "",
+               "first_formatting": [],
+               "second_formatting": [],
                "value": {
                    "type": "slice",
                    "lower": None,
                    "upper": None,
                    "step": None,
                    "has_two_colons": False,
-                   "first_space": "",
-                   "second_space": "",
-                   "third_space": "",
-                   "forth_space": "",
+                   "first_formatting": [],
+                   "second_formatting": [],
+                   "third_formatting": [],
+                   "forth_formatting": [],
                }
             }]
            }])
@@ -3619,18 +6077,18 @@ def test_subscript_slice_empty_both():
                "value": "a",
             },{
                "type": "getitem",
-               "first_space": "",
-               "second_space": "",
+               "first_formatting": [],
+               "second_formatting": [],
                "value": {
                    "type": "slice",
                    "lower": None,
                    "upper": None,
                    "step": None,
                    "has_two_colons": True,
-                   "first_space": "",
-                   "second_space": " ",
-                   "third_space": "",
-                   "forth_space": "",
+                   "first_formatting": [],
+                   "second_formatting": [{"type": "space", "value": " "}],
+                   "third_formatting": [],
+                   "forth_formatting": [],
                }
             }]
            }])
@@ -3651,8 +6109,8 @@ def test_subscript_slice_one():
                "value": "a",
             },{
                "type": "getitem",
-               "first_space": "",
-               "second_space": "",
+               "first_formatting": [],
+               "second_formatting": [],
                "value": {
                    "type": "slice",
                    "lower": {
@@ -3662,10 +6120,10 @@ def test_subscript_slice_one():
                    "upper": None,
                    "step": None,
                    "has_two_colons": False,
-                   "first_space": " ",
-                   "second_space": "",
-                   "third_space": "",
-                   "forth_space": "",
+                   "first_formatting": [{"type": "space", "value": " "}],
+                   "second_formatting": [],
+                   "third_formatting": [],
+                   "forth_formatting": [],
                }
             }]
            }])
@@ -3687,8 +6145,8 @@ def test_subscript_slice_both_one():
                "value": "a",
             },{
                "type": "getitem",
-               "first_space": "",
-               "second_space": " ",
+               "first_formatting": [],
+               "second_formatting": [{"type": "space", "value": " "}],
                "value": {
                    "type": "slice",
                    "lower": {
@@ -3698,10 +6156,10 @@ def test_subscript_slice_both_one():
                    "upper": None,
                    "step": None,
                    "has_two_colons": True,
-                   "first_space": " ",
-                   "second_space": " ",
-                   "third_space": "",
-                   "forth_space": "",
+                   "first_formatting": [{"type": "space", "value": " "}],
+                   "second_formatting": [{"type": "space", "value": " "}],
+                   "third_formatting": [],
+                   "forth_formatting": [],
                }
             }]
            }])
@@ -3722,8 +6180,8 @@ def test_subscript_slice_upper():
                "value": "a",
             },{
                "type": "getitem",
-               "first_space": "",
-               "second_space": "",
+               "first_formatting": [],
+               "second_formatting": [],
                "value": {
                    "type": "slice",
                    "upper": {
@@ -3733,10 +6191,10 @@ def test_subscript_slice_upper():
                    "lower": None,
                    "step": None,
                    "has_two_colons": False,
-                   "first_space": "",
-                   "second_space": "",
-                   "third_space": "",
-                   "forth_space": "",
+                   "first_formatting": [],
+                   "second_formatting": [],
+                   "third_formatting": [],
+                   "forth_formatting": [],
                }
             }]
            }])
@@ -3758,8 +6216,8 @@ def test_subscript_slice_upper_both():
                "value": "a",
             },{
                "type": "getitem",
-               "first_space": "",
-               "second_space": "",
+               "first_formatting": [],
+               "second_formatting": [],
                "value": {
                    "type": "slice",
                    "upper": {
@@ -3769,10 +6227,10 @@ def test_subscript_slice_upper_both():
                    "lower": None,
                    "step": None,
                    "has_two_colons": True,
-                   "first_space": "",
-                   "second_space": "",
-                   "third_space": " ",
-                   "forth_space": "",
+                   "first_formatting": [],
+                   "second_formatting": [],
+                   "third_formatting": [{"type": "space", "value": " "}],
+                   "forth_formatting": [],
                }
             }]
            }])
@@ -3794,8 +6252,8 @@ def test_subscript_slice_step():
                "value": "a",
             },{
                "type": "getitem",
-               "first_space": "",
-               "second_space": "",
+               "first_formatting": [],
+               "second_formatting": [],
                "value": {
                    "type": "slice",
                    "upper": None,
@@ -3805,10 +6263,10 @@ def test_subscript_slice_step():
                         "value": "b",
                    },
                    "has_two_colons": True,
-                   "first_space": "",
-                   "second_space": " ",
-                   "third_space": "",
-                   "forth_space": " ",
+                   "first_formatting": [],
+                   "second_formatting": [{"type": "space", "value": " "}],
+                   "third_formatting": [],
+                   "forth_formatting": [{"type": "space", "value": " "}],
                }
             }]
            }])
@@ -3830,8 +6288,8 @@ def test_subscript_slice_lower_upper():
                "value": "a",
             },{
                "type": "getitem",
-               "first_space": "",
-               "second_space": "",
+               "first_formatting": [],
+               "second_formatting": [],
                "value": {
                    "type": "slice",
                    "lower": {
@@ -3844,10 +6302,10 @@ def test_subscript_slice_lower_upper():
                    },
                    "step": None,
                    "has_two_colons": False,
-                   "first_space": " ",
-                   "second_space": " ",
-                   "third_space": "",
-                   "forth_space": "",
+                   "first_formatting": [{"type": "space", "value": " "}],
+                   "second_formatting": [{"type": "space", "value": " "}],
+                   "third_formatting": [],
+                   "forth_formatting": [],
                }
             }]
            }])
@@ -3870,8 +6328,8 @@ def test_subscript_slice_lower_upper_both():
                "value": "a",
             },{
                "type": "getitem",
-               "first_space": "",
-               "second_space": "",
+               "first_formatting": [],
+               "second_formatting": [],
                "value": {
                    "type": "slice",
                    "lower": {
@@ -3884,10 +6342,10 @@ def test_subscript_slice_lower_upper_both():
                    },
                    "step": None,
                    "has_two_colons": True,
-                   "first_space": " ",
-                   "second_space": " ",
-                   "third_space": " ",
-                   "forth_space": "",
+                   "first_formatting": [{"type": "space", "value": " "}],
+                   "second_formatting": [{"type": "space", "value": " "}],
+                   "third_formatting": [{"type": "space", "value": " "}],
+                   "forth_formatting": [],
                }
             }]
            }])
@@ -3910,8 +6368,8 @@ def test_subscript_slice_lower_step():
                "value": "a",
             },{
                "type": "getitem",
-               "first_space": "",
-               "second_space": "",
+               "first_formatting": [],
+               "second_formatting": [],
                "value": {
                    "type": "slice",
                    "lower": {
@@ -3924,10 +6382,10 @@ def test_subscript_slice_lower_step():
                    },
                    "upper": None,
                    "has_two_colons": True,
-                   "first_space": "",
-                   "second_space": "",
-                   "third_space": "",
-                   "forth_space": " ",
+                   "first_formatting": [],
+                   "second_formatting": [],
+                   "third_formatting": [],
+                   "forth_formatting": [{"type": "space", "value": " "}],
                }
             }]
            }])
@@ -3950,8 +6408,8 @@ def test_subscript_slice_upper_step():
                "value": "a",
             },{
                "type": "getitem",
-               "first_space": "",
-               "second_space": "",
+               "first_formatting": [],
+               "second_formatting": [],
                "value": {
                    "type": "slice",
                    "upper": {
@@ -3964,10 +6422,10 @@ def test_subscript_slice_upper_step():
                    },
                    "lower": None,
                    "has_two_colons": True,
-                   "first_space": "",
-                   "second_space": "",
-                   "third_space": "",
-                   "forth_space": " ",
+                   "first_formatting": [],
+                   "second_formatting": [],
+                   "third_formatting": [],
+                   "forth_formatting": [{"type": "space", "value": " "}],
                }
             }]
            }])
@@ -3991,8 +6449,8 @@ def test_subscript_slice_lower_upper_step():
                "value": "a",
             },{
                "type": "getitem",
-               "first_space": "",
-               "second_space": "",
+               "first_formatting": [],
+               "second_formatting": [],
                "value": {
                    "type": "slice",
                    "lower": {
@@ -4008,10 +6466,10 @@ def test_subscript_slice_lower_upper_step():
                         "value": "d",
                    },
                    "has_two_colons": True,
-                   "first_space": " ",
-                   "second_space": " ",
-                   "third_space": " ",
-                   "forth_space": " ",
+                   "first_formatting": [{"type": "space", "value": " "}],
+                   "second_formatting": [{"type": "space", "value": " "}],
+                   "third_formatting": [{"type": "space", "value": " "}],
+                   "forth_formatting": [{"type": "space", "value": " "}],
                }
             }]
            }])
@@ -4033,20 +6491,20 @@ def test_subscript_test_implicit_tuple():
                "value": "a",
             },{
                "type": "getitem",
-               "first_space": "",
-               "second_space": "",
+               "first_formatting": [],
+               "second_formatting": [],
                "value": {
                     "type": "tuple",
-                    "first_space": "",
-                    "second_space": "",
+                    "first_formatting": [],
+                    "second_formatting": [],
                     "with_parenthesis": False,
                     "value": [{
                         "type": "name",
                         "value": "b",
                     },{
                         "type": "comma",
-                        "first_space": "",
-                        "second_space": " ",
+                        "first_formatting": [],
+                        "second_formatting": [{"type": "space", "value": " "}],
                     },{
                         "type": "name",
                         "value": "c",
@@ -4070,9 +6528,9 @@ def test_call_empty():
                 },
                 {
                     "type": "call",
-                    "first_space": "",
-                    "second_space": "",
-                    "third_space": "",
+                    "first_formatting": [],
+                    "second_formatting": [],
+                    "third_formatting": [],
                     "value": [],
                 }]
            }])
@@ -4092,9 +6550,9 @@ def test_call_empty_with_space():
                 },
                 {
                     "type": "call",
-                    "first_space": " ",
-                    "second_space": " ",
-                    "third_space": "",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [],
                     "value": [],
                 }]
            }])
@@ -4115,13 +6573,13 @@ def test_call_one():
                 },
                 {
                     "type": "call",
-                    "first_space": "",
-                    "second_space": "",
-                    "third_space": "",
+                    "first_formatting": [],
+                    "second_formatting": [],
+                    "third_formatting": [],
                     "value": [{
                         "default": {},
-                        "first_space": "",
-                        "second_space": "",
+                        "first_formatting": [],
+                        "second_formatting": [],
                         "type": "argument",
                         "value": {
                             "type": "name",
@@ -4149,13 +6607,13 @@ def test_call_two():
                 },
                 {
                     "type": "call",
-                    "first_space": "",
-                    "second_space": "",
-                    "third_space": "",
+                    "first_formatting": [],
+                    "second_formatting": [],
+                    "third_formatting": [],
                     "value": [{
                         "default": {},
-                        "first_space": "",
-                        "second_space": "",
+                        "first_formatting": [],
+                        "second_formatting": [],
                         "type": "argument",
                         "value": {
                             "type": "name",
@@ -4163,12 +6621,12 @@ def test_call_two():
                         }
                     },{
                         "type": "comma",
-                        "first_space": "",
-                        "second_space": " ",
+                        "first_formatting": [],
+                        "second_formatting": [{"type": "space", "value": " "}],
                     },{
                         "default": {},
-                        "first_space": "",
-                        "second_space": "",
+                        "first_formatting": [],
+                        "second_formatting": [],
                         "type": "argument",
                         "value": {
                             "type": "name",
@@ -4199,13 +6657,13 @@ def test_call_two_star_arg():
                 },
                 {
                     "type": "call",
-                    "first_space": "",
-                    "second_space": "",
-                    "third_space": "",
+                    "first_formatting": [],
+                    "second_formatting": [],
+                    "third_formatting": [],
                     "value": [{
                         "default": {},
-                        "first_space": "",
-                        "second_space": "",
+                        "first_formatting": [],
+                        "second_formatting": [],
                         "type": "argument",
                         "value": {
                             "type": "name",
@@ -4213,12 +6671,12 @@ def test_call_two_star_arg():
                         }
                     },{
                         "type": "comma",
-                        "first_space": "",
-                        "second_space": " ",
+                        "first_formatting": [],
+                        "second_formatting": [{"type": "space", "value": " "}],
                     },{
                         "default": {},
-                        "first_space": "",
-                        "second_space": "",
+                        "first_formatting": [],
+                        "second_formatting": [],
                         "type": "argument",
                         "value": {
                             "type": "name",
@@ -4226,11 +6684,11 @@ def test_call_two_star_arg():
                         }
                     },{
                         "type": "comma",
-                        "first_space": "",
-                        "second_space": " ",
+                        "first_formatting": [],
+                        "second_formatting": [{"type": "space", "value": " "}],
                     },{
                         "type": "list_argument",
-                        "space": "",
+                        "formatting": [],
                         "value": {
                             "type": "name",
                             "value": "d",
@@ -4263,13 +6721,13 @@ def test_call_two_star_arg_kwarg():
                 },
                 {
                     "type": "call",
-                    "first_space": "",
-                    "second_space": "",
-                    "third_space": "",
+                    "first_formatting": [],
+                    "second_formatting": [],
+                    "third_formatting": [],
                     "value": [{
                         "default": {},
-                        "first_space": "",
-                        "second_space": "",
+                        "first_formatting": [],
+                        "second_formatting": [],
                         "type": "argument",
                         "value": {
                             "type": "name",
@@ -4277,12 +6735,12 @@ def test_call_two_star_arg_kwarg():
                         }
                     },{
                         "type": "comma",
-                        "first_space": "",
-                        "second_space": " ",
+                        "first_formatting": [],
+                        "second_formatting": [{"type": "space", "value": " "}],
                     },{
                         "default": {},
-                        "first_space": "",
-                        "second_space": "",
+                        "first_formatting": [],
+                        "second_formatting": [],
                         "type": "argument",
                         "value": {
                             "type": "name",
@@ -4290,23 +6748,23 @@ def test_call_two_star_arg_kwarg():
                         }
                     },{
                         "type": "comma",
-                        "first_space": "",
-                        "second_space": " ",
+                        "first_formatting": [],
+                        "second_formatting": [{"type": "space", "value": " "}],
                     },{
                         "type": "list_argument",
-                        "space": "",
+                        "formatting": [],
                         "value": {
                             "type": "name",
                             "value": "d",
                         },
                     },{
                         "type": "comma",
-                        "first_space": "",
-                        "second_space": " ",
+                        "first_formatting": [],
+                        "second_formatting": [{"type": "space", "value": " "}],
                     },{
                         "type": "dict_argument",
-                        "first_space": "",
-                        "second_space": "",
+                        "first_formatting": [],
+                        "second_formatting": [],
                         "value": {
                             "type": "name",
                             "value": "e",
@@ -4333,16 +6791,16 @@ def test_call_named():
                 },
                 {
                     "type": "call",
-                    "first_space": "",
-                    "second_space": "",
-                    "third_space": "",
+                    "first_formatting": [],
+                    "second_formatting": [],
+                    "third_formatting": [],
                     "value": [{
                         "value": {
                             "type": "name",
                             "value": "c",
                         },
-                        "first_space": " ",
-                        "second_space": " ",
+                        "first_formatting": [{"type": "space", "value": " "}],
+                        "second_formatting": [{"type": "space", "value": " "}],
                         "type": "argument",
                         "name": {
                             "type": "name",
@@ -4372,15 +6830,15 @@ def test_call_generator():
                 },
                 {
                     "type": "call",
-                    "first_space": "",
-                    "second_space": "",
-                    "third_space": "",
+                    "first_formatting": [],
+                    "second_formatting": [],
+                    "third_formatting": [],
                     "value": [{
                         "generators": [{
-                            "first_space": " ",
-                            "second_space": " ",
-                            "third_space": " ",
-                            "forth_space": " ",
+                            "first_formatting": [{"type": "space", "value": " "}],
+                            "second_formatting": [{"type": "space", "value": " "}],
+                            "third_formatting": [{"type": "space", "value": " "}],
+                            "forth_formatting": [{"type": "space", "value": " "}],
                             "type": "comprehension_loop",
                             "ifs": [],
                             "target": {
