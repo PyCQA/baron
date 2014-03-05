@@ -89,13 +89,3 @@ def boolean_operator(operator, first, second, first_space="", second_space=""):
         "second_space": second_space,
     }
 
-def binary_operator(operator, first, second, first_space="", second_space=""):
-    return {
-        "type": "binary_operator",
-        "value": operator,
-        "first": first,
-        "second": second,
-        "first_space": first_space,
-        "second_space": second_space,
-    }
-
