@@ -16,7 +16,7 @@ def include_operators(pg):
     @pg.production("expr_stmt : testlist augassign_operator yield_expr")
     def augmented_assignment_node((target, operator, value)):
         return {
-            "type": "assign",
+            "type": "assignment",
             "first_formatting": operator.hidden_tokens_before,
             "second_formatting": operator.hidden_tokens_after,
             "operator": operator.value[:-1],
@@ -43,7 +43,7 @@ def include_operators(pg):
     @pg.production("expr_stmt : testlist EQUAL expr_stmt")
     def assignment_node((target, equal, value)):
         return {
-            "type": "assign",
+            "type": "assignment",
             "value": value,
             "target": target,
             "first_formatting": equal.hidden_tokens_before,
@@ -274,7 +274,7 @@ def include_operators(pg):
             "has_two_colons": bool(colon2),
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
-            "third_formatting": colon2.hidden_tokens_before if colon2 else "",
+            "third_formatting": colon2.hidden_tokens_before if colon2 else [],
             "forth_formatting": [],
         }
 
@@ -302,7 +302,7 @@ def include_operators(pg):
             "has_two_colons": bool(colon2),
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
-            "third_formatting": colon2.hidden_tokens_before if colon2 else "",
+            "third_formatting": colon2.hidden_tokens_before if colon2 else [],
                 "forth_formatting": [],
         }
 

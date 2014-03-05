@@ -67,4 +67,3 @@ def create_node(name, value, **kwargs):
     if kwargs:
         result.update(kwargs)
     return result
-

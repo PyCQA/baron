@@ -4493,61 +4493,155 @@ def test_comparison():
                (token_name, value),
                ('NAME', 'b'),
               ],
-              [{ "type": "comparison", "value": value, "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": "", "middle_space": "", }])
+              [{
+                "type": "comparison",
+                "value": value,
+                "first": {
+                          "type": "name",
+                          "value": 'a',
+                         },
+                "second": {"type": "name",
+                           "value": 'b'},
+                "first_formatting": [],
+                "second_formatting": [],
+                "middle_formatting": [], }])
         parse_simple([
                ('NAME', 'a'),
                (token_name, value),
                ('NAME', 'b'),
               ],
-              [{ "type": "comparison", "value": value, "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": "", "middle_space": "", }])
+              [{
+                "type": "comparison",
+                "value": value,
+                "first": {"type": "name",
+                          "value": 'a'},
+                "second": {
+                           "type": "name",
+                           "value": 'b',
+                          },
+                "first_formatting": [],
+                "second_formatting": [],
+                "middle_formatting": [], }])
 
 def test_comparison_first_space():
     "a <b"
     for token_name, value in comparison_tokens:
         parse_simple([
                ('NAME', 'a'),
-               (token_name, value, ' ', ''),
+               (token_name, value, [('SPACE', ' ')]),
                ('NAME', 'b'),
               ],
-              [{ "type": "comparison", "value": value, "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "", "middle_space": "", }])
+              [{
+                "type": "comparison",
+                "value": value,
+                "first": {
+                          "type": "name",
+                          "value": 'a',
+                         },
+                "second": {"type": "name",
+                           "value": 'b'},
+                "first_formatting": [{"type": "space", "value": " "}],
+                "second_formatting": [],
+                "middle_formatting": [],
+               }])
         parse_simple([
                ('NAME', 'a'),
-               (token_name, value, ' ', ''),
+               (token_name, value, [('SPACE', ' ')]),
                ('NAME', 'b'),
               ],
-              [{ "type": "comparison", "value": value, "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "", "middle_space": "", }])
+              [{
+                "type": "comparison",
+                "value": value,
+                "first": {"type": "name",
+                          "value": 'a'},
+                "second": {
+                           "type": "name",
+                           "value": 'b',
+                          },
+                "first_formatting": [{"type": "space", "value": " "}],
+                "second_formatting": [],
+                "middle_formatting": [],
+               }])
 
 def test_comparison_second_space():
     "a< b"
     for token_name, value in comparison_tokens:
         parse_simple([
                ('NAME', 'a'),
-               (token_name, value, '', ' '),
+               (token_name, value, [], [('SPACE', ' ')]),
                ('NAME', 'b'),
               ],
-              [{ "type": "comparison", "value": value, "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " ", "middle_space": "", }])
+              [{
+                "type": "comparison",
+                "value": value,
+                "first": {
+                          "type": "name",
+                          "value": 'a',
+                         },
+                "second": {"type": "name",
+                           "value": 'b'},
+                "first_formatting": [],
+                "second_formatting": [{"type": "space", "value": " "}],
+                "middle_formatting": [],
+               }])
         parse_simple([
                ('NAME', 'a'),
-               (token_name, value, '', ' '),
+               (token_name, value, [], [('SPACE', ' ')]),
                ('NAME', 'b'),
               ],
-              [{ "type": "comparison", "value": value, "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " ", "middle_space": "", }])
+              [{
+                "type": "comparison",
+                "value": value,
+                "first": {"type": "name",
+                          "value": 'a'},
+                "second": {
+                           "type": "name",
+                           "value": 'b',
+                          },
+                "first_formatting": [],
+                "second_formatting": [{"type": "space", "value": " "}],
+                "middle_formatting": [],
+               }])
 
 def test_comparison_spaces():
     "a < b"
     for token_name, value in comparison_tokens:
         parse_simple([
                ('NAME', 'a'),
-               (token_name, value, ' ', ' '),
+               (token_name, value, [('SPACE', ' ')], [('SPACE', ' ')]),
                ('NAME', 'b'),
               ],
-              [{ "type": "comparison", "value": value, "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", "middle_space": "", }])
+              [{
+                "type": "comparison",
+                "value": value,
+                "first": {
+                          "type": "name",
+                          "value": 'a',
+                         },
+                "second": {"type": "name",
+                           "value": 'b'},
+                "first_formatting": [{"type": "space", "value": " "}],
+                "second_formatting": [{"type": "space", "value": " "}],
+                "middle_formatting": [],
+               }])
         parse_simple([
                ('NAME', 'a'),
-               (token_name, value, ' ', ' '),
+               (token_name, value, [('SPACE', ' ')], [('SPACE', ' ')]),
                ('NAME', 'b'),
               ],
-              [{ "type": "comparison", "value": value, "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " ", "middle_space": "", }])
+              [{
+                "type": "comparison",
+                "value": value,
+                "first": {"type": "name",
+                          "value": 'a'},
+                "second": {
+                           "type": "name",
+                           "value": 'b',
+                          },
+                "first_formatting": [{"type": "space", "value": " "}],
+                "second_formatting": [{"type": "space", "value": " "}],
+                "middle_formatting": [],
+               }])
 
 def test_comparison_spaces_atomtrailers():
     "a.b < c"
@@ -4556,10 +4650,34 @@ def test_comparison_spaces_atomtrailers():
                ('NAME', 'a'),
                ('DOT', '.'),
                ('NAME', 'b'),
-               (token_name, value, ' ', ' '),
+               (token_name, value, [('SPACE', ' ')], [('SPACE', ' ')]),
                ('NAME', 'c'),
               ],
-              [{ "type": "comparison", "value": value, "first": {                             "type": "atomtrailers",                             "value": [{                                 "type": "name",                                 "value": "a",                             },{                                 "type": "dot",                                 "first_formatting": [],                                 "second_formatting": [],                             },{                                "type": "name",                                "value": "b",                             }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " ", "middle_space": "", }])
+              [{
+                "type": "comparison",
+                "value": value,
+                "first": {
+                          "type": "atomtrailers",
+                          "value": [{
+                                     "type": "name",
+                                     "value": "a",
+                                    },{
+                                       "type": "dot",
+                                       "first_formatting": [],
+                                       "second_formatting": [],
+                                      },{
+                                         "type": "name",
+                                         "value": "b",
+                                        }],
+                         },
+                "second": {
+                           "type": "name",
+                           "value": 'c',
+                          },
+                "first_formatting": [{"type": "space", "value": " "}],
+                "second_formatting": [{"type": "space", "value": " "}],
+                "middle_formatting": [],
+               }])
 
 def test_chained_comparison():
     "a<b<c"
@@ -4571,7 +4689,28 @@ def test_chained_comparison():
                (token_name, value),
                ('NAME', 'c'),
               ],
-              [{ "type": "comparison", "value": value, "first": { "type": "name", "value": 'a', }, "second": comparison(value,                                             first={"type": "name", "value": "b"},                                             second={"type": "name", "value": "c"},                                             first_space="",                                             second_space=""                                            ), "first_space": "", "second_space": "", "middle_space": "", }])
+              [{
+                "type": "comparison",
+                "value": value,
+                "first": {
+                          "type": "name",
+                          "value": 'a',
+                         },
+                "second": {
+                           "type": "comparison",
+                           "value": value,
+                           "first": {"type": "name",
+                                     "value": "b"},
+                           "second": {"type": "name",
+                                      "value": "c"},
+                           "first_formatting": [],
+                           "second_formatting": [],
+                           "middle_formatting": [],
+                          },
+                "first_formatting": [],
+                "second_formatting": [],
+                "middle_formatting": [],
+               }])
         parse_simple([
                ('NAME', 'a'),
                (token_name, value),
@@ -4579,12 +4718,27 @@ def test_chained_comparison():
                (token_name, value),
                ('NAME', 'c'),
               ],
-              [comparison(value,
-                          first={ "type": "name", "value": 'a', },
-                          second={ "type": "comparison", "value": value, "first": {"type": "name", "value": "b"}, "second": {"type": "name", "value": "c"}, "first_space": "", "second_space": "", "middle_space": "", },
-                          first_space="",
-                          second_space="",
-                         )])
+              [{"type": "comparison",
+                "value": value,
+                "first": {
+                       "type": "name",
+                       "value": 'a',
+                      },
+                "second": {
+                        "type": "comparison",
+                        "value": value,
+                        "first": {"type": "name",
+                                  "value": "b"},
+                        "second": {"type": "name",
+                                   "value": "c"},
+                        "first_formatting": [],
+                        "second_formatting": [],
+                        "middle_formatting": [],
+                       },
+                "first_formatting": [],
+                "second_formatting": [],
+                "middle_formatting": [],
+               }])
         parse_simple([
                ('NAME', 'a'),
                (token_name, value),
@@ -4592,7 +4746,27 @@ def test_chained_comparison():
                (token_name, value),
                ('NAME', 'c'),
               ],
-              [{ "type": "comparison", "value": value, "first": {"type": "name", "value": 'a'}, "second": comparison(value,                                             first={ "type": "name", "value": "b", },                                             second={"type": "name", "value": "c"},                                             first_space="",                                             second_space=""                                            ), "first_space": "", "second_space": "", "middle_space": "", }])
+              [{
+                "type": "comparison",
+                "value": value,
+                "first": {"type": "name",
+                          "value": 'a'},
+                "second": {"type": "comparison",
+                           "value": value,
+                           "first": {
+                                     "type": "name",
+                                     "value": "b",
+                                    },
+                           "second": {"type": "name",
+                                      "value": "c"},
+                           "first_formatting": [],
+                           "second_formatting": [],
+                           "middle_formatting": []
+                          },
+                "first_formatting": [],
+                "second_formatting": [],
+                "middle_formatting": [],
+               }])
         parse_simple([
                ('NAME', 'a'),
                (token_name, value),
@@ -4600,12 +4774,26 @@ def test_chained_comparison():
                (token_name, value),
                ('NAME', 'c'),
               ],
-              [comparison(value,
-                          first={"type": "name", "value": 'a'},
-                          second={ "type": "comparison", "value": value, "first": { "type": "name", "value": "b", }, "second": {"type": "name", "value": "c"}, "first_space": "", "second_space": "", "middle_space": "", },
-                          first_space="",
-                          second_space="",
-                         )])
+              [{"type": "comparison", "value": value,
+                          "first": {"type": "name",
+                                 "value": 'a'},
+                          "second": {
+                                  "type": "comparison",
+                                  "value": value,
+                                  "first": {
+                                            "type": "name",
+                                            "value": "b",
+                                           },
+                                  "second": {"type": "name",
+                                             "value": "c"},
+                                  "first_formatting": [],
+                                  "second_formatting": [],
+                                  "middle_formatting": [],
+                                 },
+                          "first_formatting": [],
+                          "second_formatting": [],
+                          "middle_formatting": [],
+                         }])
         parse_simple([
                ('NAME', 'a'),
                (token_name, value),
@@ -4613,7 +4801,26 @@ def test_chained_comparison():
                (token_name, value),
                ('NAME', 'c'),
               ],
-              [{ "type": "comparison", "value": value, "first": {"type": "name", "value": 'a'}, "second": comparison(value,                                             first={"type": "name", "value": "b"},                                             second={ "type": "name", "value": "c", },                                             first_space="",                                             second_space=""                                            ), "first_space": "", "second_space": "", "middle_space": "", }])
+              [{
+                "type": "comparison",
+                "value": value,
+                "first": {"type": "name",
+                          "value": 'a'},
+                "second": {"type": "comparison", "value": value,
+                                     "first": {"type": "name",
+                                            "value": "b"},
+                                     "second": {
+                                             "type": "name",
+                                             "value": "c",
+                                            },
+                                     "first_formatting": [],
+                                     "second_formatting": [],
+                                     "middle_formatting": [],
+                          },
+                "first_formatting": [],
+                "second_formatting": [],
+                "middle_formatting": [],
+               }])
         parse_simple([
                ('NAME', 'a'),
                (token_name, value),
@@ -4621,12 +4828,26 @@ def test_chained_comparison():
                (token_name, value),
                ('NAME', 'c'),
               ],
-              [comparison(value,
-                          first={"type": "name", "value": 'a'},
-                          second={ "type": "comparison", "value": value, "first": {"type": "name", "value": "b"}, "second": { "type": "name", "value": "c", }, "first_space": "", "second_space": "", "middle_space": "", },
-                          first_space="",
-                          second_space="",
-                         )])
+              [{"type": "comparison", "value": value,
+                          "first": {"type": "name",
+                                 "value": 'a'},
+                          "second": {
+                                  "type": "comparison",
+                                  "value": value,
+                                  "first": {"type": "name",
+                                            "value": "b"},
+                                  "second": {
+                                             "type": "name",
+                                             "value": "c",
+                                            },
+                                  "first_formatting": [],
+                                  "second_formatting": [],
+                                  "middle_formatting": [],
+                                 },
+                          "first_formatting": [],
+                          "second_formatting": [],
+                          "middle_formatting": [],
+                         }])
 
 advanced_comparison_tokens = (
     (('NOT', 'not', [], [('SPACE', ' ')]), ('IN', 'in')),
@@ -4638,72 +4859,168 @@ def test_advanced_comparison():
     for (token_name, value, _, after_space), (token_name2, value2) in advanced_comparison_tokens:
         parse_simple([
                ('NAME', 'a'),
-               (token_name, value, "", after_space),
+               (token_name, value, [], after_space),
                (token_name2, value2),
                ('NAME', 'b'),
               ],
-              [{ "type": "comparison", "value": value + " " + value2, "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": "", "middle_space": after_space, }])
+              [{
+                "type": "comparison",
+                "value": value + " " + value2,
+                "first": {
+                          "type": "name",
+                          "value": 'a',
+                         },
+                "second": {"type": "name",
+                           "value": 'b'},
+                "first_formatting": [],
+                "second_formatting": [],
+                "middle_formatting": [{"type": "space", "value": after_space[0][1]}],
+               }])
         parse_simple([
                ('NAME', 'a'),
-               (token_name, value, "", after_space),
+               (token_name, value, [], after_space),
                (token_name2, value2),
                ('NAME', 'b'),
               ],
-              [{ "type": "comparison", "value": value + " " + value2, "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": "", "middle_space": after_space, }])
+              [{
+                "type": "comparison",
+                "value": value + " " + value2,
+                "first": {"type": "name",
+                          "value": 'a'},
+                "second": {
+                           "type": "name",
+                           "value": 'b',
+                          },
+                "first_formatting": [],
+                "second_formatting": [],
+                "middle_formatting": [{"type": "space", "value": after_space[0][1]}],
+               }])
 
 def test_advanced_comparison_first_space():
     "a <b"
     for (token_name, value, _, after_space), (token_name2, value2) in advanced_comparison_tokens:
         parse_simple([
                ('NAME', 'a'),
-               (token_name, value, " ", after_space),
+               (token_name, value, [('SPACE', " ")], after_space),
                (token_name2, value2),
                ('NAME', 'b'),
               ],
-              [{ "type": "comparison", "value": value + " " + value2, "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": "", "middle_space": after_space, }])
+              [{
+                "type": "comparison",
+                "value": value + " " + value2,
+                "first": {
+                          "type": "name",
+                          "value": 'a',
+                         },
+                "second": {"type": "name",
+                           "value": 'b'},
+                "first_formatting": [{"type": "space", "value": " "}],
+                "second_formatting": [],
+                "middle_formatting": [{"type": "space", "value": after_space[0][1]}],
+               }])
         parse_simple([
                ('NAME', 'a'),
-               (token_name, value, " ", after_space),
+               (token_name, value, [('SPACE', " ")], after_space),
                (token_name2, value2),
                ('NAME', 'b'),
               ],
-              [{ "type": "comparison", "value": value + " " + value2, "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": "", "middle_space": after_space, }])
+              [{
+                "type": "comparison",
+                "value": value + " " + value2,
+                "first": {"type": "name",
+                          "value": 'a'},
+                "second": {
+                           "type": "name",
+                           "value": 'b',
+                          },
+                "first_formatting": [{"type": "space", "value": " "}],
+                "second_formatting": [],
+                "middle_formatting": [{"type": "space", "value": after_space[0][1]}],
+               }])
 
 def test_advanced_comparison_second_space():
     "a< b"
     for (token_name, value, _, after_space), (token_name2, value2) in advanced_comparison_tokens:
         parse_simple([
                ('NAME', 'a'),
-               (token_name, value, "", after_space),
-               (token_name2, value2, "", " "),
+               (token_name, value, [], after_space),
+               (token_name2, value2, [], [('SPACE', " ")]),
                ('NAME', 'b'),
               ],
-              [{ "type": "comparison", "value": value + " " + value2, "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": "", "second_space": " ", "middle_space": after_space, }])
+              [{
+                "type": "comparison",
+                "value": value + " " + value2,
+                "first": {
+                          "type": "name",
+                          "value": 'a',
+                         },
+                "second": {"type": "name",
+                           "value": 'b'},
+                "first_formatting": [],
+                "second_formatting": [{"type": "space", "value": " "}],
+                "middle_formatting": [{"type": "space", "value": after_space[0][1]}],
+               }])
         parse_simple([
                ('NAME', 'a'),
-               (token_name, value, "", after_space),
-               (token_name2, value2, "", " "),
+               (token_name, value, [], after_space),
+               (token_name2, value2, [], [('SPACE', " ")]),
                ('NAME', 'b'),
               ],
-              [{ "type": "comparison", "value": value + " " + value2, "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": "", "second_space": " ", "middle_space": after_space, }])
+              [{
+                "type": "comparison",
+                "value": value + " " + value2,
+                "first": {"type": "name",
+                          "value": 'a'},
+                "second": {
+                           "type": "name",
+                           "value": 'b',
+                          },
+                "first_formatting": [],
+                "second_formatting": [{"type": "space", "value": " "}],
+                "middle_formatting": [{"type": "space", "value": after_space[0][1]}],
+               }])
 
 def test_advanced_comparison_spaces():
     "a < b"
     for (token_name, value, _, after_space), (token_name2, value2) in advanced_comparison_tokens:
         parse_simple([
                ('NAME', 'a'),
-               (token_name, value, " ", after_space),
-               (token_name2, value2, "", " "),
+               (token_name, value, [('SPACE', " ")], after_space),
+               (token_name2, value2, [], [('SPACE', " ")]),
                ('NAME', 'b'),
               ],
-              [{ "type": "comparison", "value": value + " " + value2, "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", "middle_space": after_space, }])
+              [{
+                "type": "comparison",
+                "value": value + " " + value2,
+                "first": {
+                          "type": "name",
+                          "value": 'a',
+                         },
+                "second": {"type": "name",
+                           "value": 'b'},
+                "first_formatting": [{"type": "space", "value": " "}],
+                "second_formatting": [{"type": "space", "value": " "}],
+                "middle_formatting": [{"type": "space", "value": after_space[0][1]}],
+               }])
         parse_simple([
                ('NAME', 'a'),
-               (token_name, value, " ", after_space),
-               (token_name2, value2, "", " "),
+               (token_name, value, [('SPACE', " ")], after_space),
+               (token_name2, value2, [], [('SPACE', " ")]),
                ('NAME', 'b'),
               ],
-              [{ "type": "comparison", "value": value + " " + value2, "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " ", "middle_space": after_space, }])
+              [{
+                "type": "comparison",
+                "value": value + " " + value2,
+                "first": {"type": "name",
+                          "value": 'a'},
+                "second": {
+                           "type": "name",
+                           "value": 'b',
+                          },
+                "first_formatting": [{"type": "space", "value": " "}],
+                "second_formatting": [{"type": "space", "value": " "}],
+                "middle_formatting": [{"type": "space", "value": after_space[0][1]}],
+               }])
 
 def test_advanced_comparison_spaces_atomtrailers():
     "a.b < c"
@@ -4712,93 +5029,214 @@ def test_advanced_comparison_spaces_atomtrailers():
                ('NAME', 'a'),
                ('DOT', '.'),
                ('NAME', 'b'),
-               (token_name, value, " ", after_space),
-               (token_name2, value2, "", " "),
+               (token_name, value, [("SPACE", " ")], after_space),
+               (token_name2, value2, [], [("SPACE", " ")]),
                ('NAME', 'c'),
               ],
-              [{ "type": "comparison", "value": value + " " + value2, "first": {                             "type": "atomtrailers",                             "value": [{                                 "type": "name",                                 "value": "a",                             },{                                 "type": "dot",                                 "first_formatting": [],                                 "second_formatting": [],                             },{                                "type": "name",                                "value": "b",                             }],                            }, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " ", "middle_space": after_space, }])
+              [{
+                "type": "comparison",
+                "value": value + " " + value2,
+                "first": {
+                          "type": "atomtrailers",
+                          "value": [{
+                                     "type": "name",
+                                     "value": "a",
+                                    },{
+                                       "type": "dot",
+                                       "first_formatting": [],
+                                       "second_formatting": [],
+                                      },{
+                                         "type": "name",
+                                         "value": "b",
+                                        }],
+                         },
+                "second": {
+                           "type": "name",
+                           "value": 'c',
+                          },
+                "first_formatting": [{"type": "space", "value": " "}],
+                "second_formatting": [{"type": "space", "value": " "}],
+                "middle_formatting": [{"type": "space", "value": after_space[0][1]}],
+               }])
 
 def test_chained_advanced_comparison():
     "a<b<c"
     for (token_name, value, _, after_space), (token_name2, value2) in advanced_comparison_tokens:
         parse_simple([
                ('NAME', 'a'),
-               (token_name, value, "", after_space),
+               (token_name, value, [], after_space),
                (token_name2, value2),
                ('NAME', 'b'),
-               (token_name, value, "", after_space),
+               (token_name, value, [], after_space),
                (token_name2, value2),
                ('NAME', 'c'),
               ],
-              [{ "type": "comparison", "value": value + " " + value2, "first": { "type": "name", "value": 'a', }, "second": comparison(value + " " + value2,                                             first={"type": "name", "value": "b"},                                             second={"type": "name", "value": "c"},                                             first_space="",                                             second_space="",                                             middle_space=after_space,                                            ), "first_space": "", "second_space": "", "middle_space": after_space, }])
+              [{
+                "type": "comparison",
+                "value": value + " " + value2,
+                "first": {
+                          "type": "name",
+                          "value": 'a',
+                         },
+                "second": {"type": "comparison", "value": value + " " + value2,
+                                     "first": {"type": "name",
+                                            "value": "b"},
+                                     "second": {"type": "name",
+                                             "value": "c"},
+                                     "first_formatting": [],
+                                     "second_formatting": [],
+                                     "middle_formatting": [{"type": "space", "value": after_space[0][1]}],
+
+                          },
+                "first_formatting": [],
+                "second_formatting": [],
+                "middle_formatting": [{"type": "space", "value": after_space[0][1]}],
+               }])
         parse_simple([
                ('NAME', 'a'),
-               (token_name, value, "", after_space),
+               (token_name, value, [], after_space),
                (token_name2, value2),
                ('NAME', 'b'),
-               (token_name, value, "", after_space),
+               (token_name, value, [], after_space),
                (token_name2, value2),
                ('NAME', 'c'),
               ],
-              [comparison(value + " " + value2,
-                          first={ "type": "name", "value": 'a', },
-                          second={ "type": "comparison", "value": value + " " + value2, "first": {"type": "name", "value": "b"}, "second": {"type": "name", "value": "c"}, "first_space": "", "second_space": "", "middle_space": after_space, },
-                          first_space="",
-                          second_space="",
-                          middle_space=after_space,
-                         )])
+              [{"type": "comparison", "value": value + " " + value2,
+                          "first": {
+                                 "type": "name",
+                                 "value": 'a',
+                                },
+                          "second": {
+                                  "type": "comparison",
+                                  "value": value + " " + value2,
+                                  "first": {"type": "name",
+                                            "value": "b"},
+                                  "second": {"type": "name",
+                                             "value": "c"},
+                                  "first_formatting": [],
+                                  "second_formatting": [],
+                                  "middle_formatting": [{"type": "space", "value": after_space[0][1]}],
+                                 },
+                          "first_formatting": [],
+                          "second_formatting": [],
+                          "middle_formatting": [{"type": "space", "value": after_space[0][1]}],
+                         }])
         parse_simple([
                ('NAME', 'a'),
-               (token_name, value, "", after_space),
+               (token_name, value, [], after_space),
                (token_name2, value2),
                ('NAME', 'b'),
-               (token_name, value, "", after_space),
+               (token_name, value, [], after_space),
                (token_name2, value2),
                ('NAME', 'c'),
               ],
-              [{ "type": "comparison", "value": value + " " + value2, "first": {"type": "name", "value": 'a'}, "second": comparison(value + " " + value2,                                             first={ "type": "name", "value": "b", },                                             second={"type": "name", "value": "c"},                                             first_space="",                                             second_space="",                                             middle_space=after_space,                                            ), "first_space": "", "second_space": "", "middle_space": after_space, }])
+              [{
+                "type": "comparison",
+                "value": value + " " + value2,
+                "first": {"type": "name",
+                          "value": 'a'},
+                "second": {"type": "comparison", "value": value + " " + value2,
+                                     "first": {
+                                            "type": "name",
+                                            "value": "b",
+                                           },
+                                     "second": {"type": "name",
+                                             "value": "c"},
+                                     "first_formatting": [],
+                                     "second_formatting": [],
+                                     "middle_formatting": [{"type": "space", "value": after_space[0][1]}],
+                                    },
+                "first_formatting": [],
+                "second_formatting": [],
+                "middle_formatting": [{"type": "space", "value": after_space[0][1]}],
+               }])
         parse_simple([
                ('NAME', 'a'),
-               (token_name, value, "", after_space),
+               (token_name, value, [], after_space),
                (token_name2, value2),
                ('NAME', 'b'),
-               (token_name, value, "", after_space),
+               (token_name, value, [], after_space),
                (token_name2, value2),
                ('NAME', 'c'),
               ],
-              [comparison(value + " " + value2,
-                          first={"type": "name", "value": 'a'},
-                          second={ "type": "comparison", "value": value + " " + value2, "first": { "type": "name", "value": "b", }, "second": {"type": "name", "value": "c"}, "first_space": "", "second_space": "", "middle_space": after_space, },
-                          first_space="",
-                          second_space="",
-                          middle_space=after_space,
-                         )])
+              [{"type": "comparison", "value": value + " " + value2,
+                          "first": {"type": "name",
+                                 "value": 'a'},
+                          "second": {
+                                  "type": "comparison",
+                                  "value": value + " " + value2,
+                                  "first": {
+                                            "type": "name",
+                                            "value": "b",
+                                           },
+                                  "second": {"type": "name",
+                                             "value": "c"},
+                                  "first_formatting": [],
+                                  "second_formatting": [],
+                                  "middle_formatting": [{"type": "space", "value": after_space[0][1]}],
+                                 },
+                          "first_formatting": [],
+                          "second_formatting": [],
+                          "middle_formatting": [{"type": "space", "value": after_space[0][1]}],
+                         }])
         parse_simple([
                ('NAME', 'a'),
-               (token_name, value, "", after_space),
+               (token_name, value, [], after_space),
                (token_name2, value2),
                ('NAME', 'b'),
-               (token_name, value, "", after_space),
+               (token_name, value, [], after_space),
                (token_name2, value2),
                ('NAME', 'c'),
               ],
-              [{ "type": "comparison", "value": value + " " + value2, "first": {"type": "name", "value": 'a'}, "second": comparison(value + " " + value2,                                             first={"type": "name", "value": "b"},                                             second={ "type": "name", "value": "c", },                                             first_space="",                                             second_space="",                                             middle_space=after_space,                                            ), "first_space": "", "second_space": "", "middle_space": after_space, }])
+              [{
+                "type": "comparison",
+                "value": value + " " + value2,
+                "first": {"type": "name",
+                          "value": 'a'},
+                "second": {"type": "comparison", "value": value + " " + value2,
+                                     "first": {"type": "name",
+                                            "value": "b"},
+                                     "second": {
+                                             "type": "name",
+                                             "value": "c",
+                                            },
+                                     "first_formatting": [],
+                                     "second_formatting": [],
+                                     "middle_formatting": [{"type": "space", "value": after_space[0][1]}],
+                                    },
+                "first_formatting": [],
+                "second_formatting": [],
+                "middle_formatting": [{"type": "space", "value": after_space[0][1]}],
+               }])
         parse_simple([
                ('NAME', 'a'),
-               (token_name, value, "", after_space),
+               (token_name, value, [], after_space),
                (token_name2, value2),
                ('NAME', 'b'),
-               (token_name, value, "", after_space),
+               (token_name, value, [], after_space),
                (token_name2, value2),
                ('NAME', 'c'),
               ],
-              [comparison(value + " " + value2,
-                          first={"type": "name", "value": 'a'},
-                          second={ "type": "comparison", "value": value + " " + value2, "first": {"type": "name", "value": "b"}, "second": { "type": "name", "value": "c", }, "first_space": "", "second_space": "", "middle_space": after_space, },
-                          first_space="",
-                          second_space="",
-                          middle_space=after_space,
-                         )])
+              [{"type": "comparison", "value": value + " " + value2,
+                          "first": {"type": "name",
+                                 "value": 'a'},
+                          "second": {
+                                  "type": "comparison",
+                                  "value": value + " " + value2,
+                                  "first": {"type": "name",
+                                            "value": "b"},
+                                  "second": {
+                                             "type": "name",
+                                             "value": "c",
+                                            },
+                                  "first_formatting": [],
+                                  "second_formatting": [],
+                                  "middle_formatting": [{"type": "space", "value": after_space[0][1]}],
+                                 },
+                          "first_formatting": [],
+                          "second_formatting": [],
+                          "middle_formatting": [{"type": "space", "value": after_space[0][1]}],
+                         }])
 
 def test_not():
     "not a"
@@ -4857,13 +5295,35 @@ def test_and():
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "boolean_operator", "value": 'and', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", }])
+          [{
+            "type": "boolean_operator",
+            "value": 'and',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+           }])
     parse_simple([
            ('NAME', 'a'),
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "boolean_operator", "value": 'and', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " ", }])
+          [{
+            "type": "boolean_operator",
+            "value": 'and',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+           }])
 
 def test_and_and():
     "a and b and c"
@@ -4874,7 +5334,24 @@ def test_and_and():
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "boolean_operator", "value": 'and', "first": { "type": "name", "value": 'a', }, "second": boolean_operator(                                                     'and',                                                     first={"type": "name", "value": 'b'},                                                     second={"type": "name", "value": 'c'},                                                     first_space=" ",                                                     second_space=" ",                             ), "first_space": " ", "second_space": " ", }])
+          [{
+            "type": "boolean_operator",
+            "value": 'and',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "boolean_operator", "value": 'and',
+                                       "first": {"type": "name",
+                                              "value": 'b'},
+                                       "second": {"type": "name",
+                                               "value": 'c'},
+                                       "first_formatting": [{"type": "space", "value": " "}],
+                                       "second_formatting": [{"type": "space", "value": " "}],
+                                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+           }])
     parse_simple([
            ('NAME', 'a'),
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -4882,13 +5359,25 @@ def test_and_and():
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [boolean_operator(
+          [{"type": "boolean_operator", "value":
                             'and',
-                            first={ "type": "name", "value": 'a', },
-                            second={ "type": "boolean_operator", "value": 'and', "first": {"type": "name", "value": 'b'}, "second": {"type": "name", "value": 'c'}, "first_space": " ", "second_space": " ", },
-                            first_space=" ",
-                            second_space=" ",
-                           )])
+                            "first": {
+                                   "type": "name",
+                                   "value": 'a',
+                                  },
+                            "second": {
+                                    "type": "boolean_operator",
+                                    "value": 'and',
+                                    "first": {"type": "name",
+                                              "value": 'b'},
+                                    "second": {"type": "name",
+                                               "value": 'c'},
+                                    "first_formatting": [{"type": "space", "value": " "}],
+                                    "second_formatting": [{"type": "space", "value": " "}],
+                                   },
+                            "first_formatting": [{"type": "space", "value": " "}],
+                            "second_formatting": [{"type": "space", "value": " "}],
+                           }])
     parse_simple([
            ('NAME', 'a'),
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -4896,7 +5385,24 @@ def test_and_and():
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "boolean_operator", "value": 'and', "first": {"type": "name", "value": 'a'}, "second": boolean_operator(                                                     'and',                                                     first={ "type": "name", "value": 'b', },                                                     second={"type": "name", "value": 'c'},                                                     first_space=" ",                                                     second_space=" ",                             ), "first_space": " ", "second_space": " ", }])
+          [{
+            "type": "boolean_operator",
+            "value": 'and',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "boolean_operator", "value": 'and',
+                                       "first": {
+                                              "type": "name",
+                                              "value": 'b',
+                                             },
+                                       "second": {"type": "name",
+                                               "value": 'c'},
+                                       "first_formatting": [{"type": "space", "value": " "}],
+                                       "second_formatting": [{"type": "space", "value": " "}],
+                                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+           }])
     parse_simple([
            ('NAME', 'a'),
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -4904,13 +5410,25 @@ def test_and_and():
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [boolean_operator(
+          [{"type": "boolean_operator", "value":
                             'and',
-                            first={"type": "name", "value": 'a'},
-                            second={ "type": "boolean_operator", "value": 'and', "first": { "type": "name", "value": 'b', }, "second": {"type": "name", "value": 'c'}, "first_space": " ", "second_space": " ", },
-                            first_space=" ",
-                            second_space=" ",
-                           )])
+                            "first": {"type": "name",
+                                   "value": 'a'},
+                            "second": {
+                                    "type": "boolean_operator",
+                                    "value": 'and',
+                                    "first": {
+                                              "type": "name",
+                                              "value": 'b',
+                                             },
+                                    "second": {"type": "name",
+                                               "value": 'c'},
+                                    "first_formatting": [{"type": "space", "value": " "}],
+                                    "second_formatting": [{"type": "space", "value": " "}],
+                                   },
+                            "first_formatting": [{"type": "space", "value": " "}],
+                            "second_formatting": [{"type": "space", "value": " "}],
+                           }])
     parse_simple([
            ('NAME', 'a'),
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -4918,7 +5436,24 @@ def test_and_and():
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "boolean_operator", "value": 'and', "first": {"type": "name", "value": 'a'}, "second": boolean_operator(                                                     'and',                                                     first={"type": "name", "value": 'b'},                                                     second={ "type": "name", "value": 'c', },                                                     first_space=" ",                                                     second_space=" ",                             ), "first_space": " ", "second_space": " ", }])
+          [{
+            "type": "boolean_operator",
+            "value": 'and',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "boolean_operator", "value": 'and',
+                                       "first": {"type": "name",
+                                              "value": 'b'},
+                                       "second": {
+                                               "type": "name",
+                                               "value": 'c',
+                                              },
+                                       "first_formatting": [{"type": "space", "value": " "}],
+                                       "second_formatting": [{"type": "space", "value": " "}],
+                                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+           }])
     parse_simple([
            ('NAME', 'a'),
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -4926,13 +5461,25 @@ def test_and_and():
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [boolean_operator(
-                            'and',
-                            first={"type": "name", "value": 'a'},
-                            second={ "type": "boolean_operator", "value": 'and', "first": {"type": "name", "value": 'b'}, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " ", },
-                            first_space=" ",
-                            second_space=" ",
-                           )])
+          [{"type": "boolean_operator",
+            "value": 'and',
+                            "first": {"type": "name",
+                                   "value": 'a'},
+                            "second": {
+                                    "type": "boolean_operator",
+                                    "value": 'and',
+                                    "first": {"type": "name",
+                                              "value": 'b'},
+                                    "second": {
+                                               "type": "name",
+                                               "value": 'c',
+                                              },
+                                    "first_formatting": [{"type": "space", "value": " "}],
+                                    "second_formatting": [{"type": "space", "value": " "}],
+                                   },
+                            "first_formatting": [{"type": "space", "value": " "}],
+                            "second_formatting": [{"type": "space", "value": " "}],
+                           }])
 
 def test_or():
     "a or b"
@@ -4941,13 +5488,35 @@ def test_or():
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "boolean_operator", "value": 'or', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", }])
+          [{
+            "type": "boolean_operator",
+            "value": 'or',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'b'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+           }])
     parse_simple([
            ('NAME', 'a'),
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " ", }])
+          [{
+            "type": "boolean_operator",
+            "value": 'or',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'b',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+           }])
 
 def test_or_or():
     "a or b or c"
@@ -4958,7 +5527,24 @@ def test_or_or():
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "boolean_operator", "value": 'or', "first": { "type": "name", "value": 'a', }, "second": boolean_operator(                                                     'or',                                                     first={"type": "name", "value": 'b'},                                                     second={"type": "name", "value": 'c'},                                                     first_space=" ",                                                     second_space=" ",                             ), "first_space": " ", "second_space": " ", }])
+          [{
+            "type": "boolean_operator",
+            "value": 'or',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "boolean_operator", "value": 'or',
+                                       "first": {"type": "name",
+                                              "value": 'b'},
+                                       "second": {"type": "name",
+                                               "value": 'c'},
+                                       "first_formatting": [{"type": "space", "value": " "}],
+                                       "second_formatting": [{"type": "space", "value": " "}],
+                                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+           }])
     parse_simple([
            ('NAME', 'a'),
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -4966,13 +5552,25 @@ def test_or_or():
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [boolean_operator(
+          [{"type": "boolean_operator", "value":
                             'or',
-                            first={ "type": "name", "value": 'a', },
-                            second={ "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'b'}, "second": {"type": "name", "value": 'c'}, "first_space": " ", "second_space": " ", },
-                            first_space=" ",
-                            second_space=" ",
-                           )])
+                            "first": {
+                                   "type": "name",
+                                   "value": 'a',
+                                  },
+                            "second": {
+                                    "type": "boolean_operator",
+                                    "value": 'or',
+                                    "first": {"type": "name",
+                                              "value": 'b'},
+                                    "second": {"type": "name",
+                                               "value": 'c'},
+                                    "first_formatting": [{"type": "space", "value": " "}],
+                                    "second_formatting": [{"type": "space", "value": " "}],
+                                   },
+                            "first_formatting": [{"type": "space", "value": " "}],
+                            "second_formatting": [{"type": "space", "value": " "}],
+                           }])
     parse_simple([
            ('NAME', 'a'),
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -4980,7 +5578,24 @@ def test_or_or():
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": boolean_operator(                                                     'or',                                                     first={ "type": "name", "value": 'b', },                                                     second={"type": "name", "value": 'c'},                                                     first_space=" ",                                                     second_space=" ",                             ), "first_space": " ", "second_space": " ", }])
+          [{
+            "type": "boolean_operator",
+            "value": 'or',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "boolean_operator", "value": 'or',
+                                       "first": {
+                                              "type": "name",
+                                              "value": 'b',
+                                             },
+                                       "second": {"type": "name",
+                                               "value": 'c'},
+                                       "first_formatting": [{"type": "space", "value": " "}],
+                                       "second_formatting": [{"type": "space", "value": " "}],
+                                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+           }])
     parse_simple([
            ('NAME', 'a'),
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -4988,13 +5603,25 @@ def test_or_or():
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [boolean_operator(
+          [{"type": "boolean_operator", "value":
                             'or',
-                            first={"type": "name", "value": 'a'},
-                            second={ "type": "boolean_operator", "value": 'or', "first": { "type": "name", "value": 'b', }, "second": {"type": "name", "value": 'c'}, "first_space": " ", "second_space": " ", },
-                            first_space=" ",
-                            second_space=" ",
-                           )])
+                            "first": {"type": "name",
+                                   "value": 'a'},
+                            "second": {
+                                    "type": "boolean_operator",
+                                    "value": 'or',
+                                    "first": {
+                                              "type": "name",
+                                              "value": 'b',
+                                             },
+                                    "second": {"type": "name",
+                                               "value": 'c'},
+                                    "first_formatting": [{"type": "space", "value": " "}],
+                                    "second_formatting": [{"type": "space", "value": " "}],
+                                   },
+                            "first_formatting": [{"type": "space", "value": " "}],
+                            "second_formatting": [{"type": "space", "value": " "}],
+                           }])
     parse_simple([
            ('NAME', 'a'),
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -5002,7 +5629,24 @@ def test_or_or():
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": boolean_operator(                                                     'or',                                                     first={"type": "name", "value": 'b'},                                                     second={ "type": "name", "value": 'c', },                                                     first_space=" ",                                                     second_space=" ",                             ), "first_space": " ", "second_space": " ", }])
+          [{
+            "type": "boolean_operator",
+            "value": 'or',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "boolean_operator", "value": 'or',
+                                       "first": {"type": "name",
+                                              "value": 'b'},
+                                       "second": {
+                                               "type": "name",
+                                               "value": 'c',
+                                              },
+                                       "first_formatting": [{"type": "space", "value": " "}],
+                                       "second_formatting": [{"type": "space", "value": " "}],
+                                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+           }])
     parse_simple([
            ('NAME', 'a'),
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -5010,13 +5654,25 @@ def test_or_or():
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [boolean_operator(
+          [{"type": "boolean_operator", "value":
                             'or',
-                            first={"type": "name", "value": 'a'},
-                            second={ "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'b'}, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " ", },
-                            first_space=" ",
-                            second_space=" ",
-                           )])
+                            "first": {"type": "name",
+                                   "value": 'a'},
+                            "second": {
+                                    "type": "boolean_operator",
+                                    "value": 'or',
+                                    "first": {"type": "name",
+                                              "value": 'b'},
+                                    "second": {
+                                               "type": "name",
+                                               "value": 'c',
+                                              },
+                                    "first_formatting": [{"type": "space", "value": " "}],
+                                    "second_formatting": [{"type": "space", "value": " "}],
+                                   },
+                            "first_formatting": [{"type": "space", "value": " "}],
+                            "second_formatting": [{"type": "space", "value": " "}],
+                           }])
 
 def test_or_and():
     "a or b and c"
@@ -5027,7 +5683,24 @@ def test_or_and():
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "boolean_operator", "value": 'or', "first": { "type": "name", "value": 'a', }, "second": boolean_operator(                                                     'and',                                                     first={"type": "name", "value": 'b'},                                                     second={"type": "name", "value": 'c'},                                                     first_space=" ",                                                     second_space=" ",                             ), "first_space": " ", "second_space": " ", }])
+          [{
+            "type": "boolean_operator",
+            "value": 'or',
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "boolean_operator", "value": 'and',
+                                       "first": {"type": "name",
+                                              "value": 'b'},
+                                       "second": {"type": "name",
+                                               "value": 'c'},
+                                       "first_formatting": [{"type": "space", "value": " "}],
+                                       "second_formatting": [{"type": "space", "value": " "}],
+                                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+           }])
     parse_simple([
            ('NAME', 'a'),
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -5035,13 +5708,25 @@ def test_or_and():
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [boolean_operator(
+          [{"type": "boolean_operator", "value":
                             'or',
-                            first={ "type": "name", "value": 'a', },
-                            second={ "type": "boolean_operator", "value": 'and', "first": {"type": "name", "value": 'b'}, "second": {"type": "name", "value": 'c'}, "first_space": " ", "second_space": " ", },
-                            first_space=" ",
-                            second_space=" ",
-                           )])
+                            "first": {
+                                   "type": "name",
+                                   "value": 'a',
+                                  },
+                            "second": {
+                                    "type": "boolean_operator",
+                                    "value": 'and',
+                                    "first": {"type": "name",
+                                              "value": 'b'},
+                                    "second": {"type": "name",
+                                               "value": 'c'},
+                                    "first_formatting": [{"type": "space", "value": " "}],
+                                    "second_formatting": [{"type": "space", "value": " "}],
+                                   },
+                            "first_formatting": [{"type": "space", "value": " "}],
+                            "second_formatting": [{"type": "space", "value": " "}],
+                           }])
     parse_simple([
            ('NAME', 'a'),
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -5049,7 +5734,24 @@ def test_or_and():
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": boolean_operator(                                                     'and',                                                     first={ "type": "name", "value": 'b', },                                                     second={"type": "name", "value": 'c'},                                                     first_space=" ",                                                     second_space=" ",                             ), "first_space": " ", "second_space": " ", }])
+          [{
+            "type": "boolean_operator",
+            "value": 'or',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "boolean_operator", "value": 'and',
+                                       "first": {
+                                              "type": "name",
+                                              "value": 'b',
+                                             },
+                                       "second": {"type": "name",
+                                               "value": 'c'},
+                                       "first_formatting": [{"type": "space", "value": " "}],
+                                       "second_formatting": [{"type": "space", "value": " "}],
+                                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+           }])
     parse_simple([
            ('NAME', 'a'),
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -5057,13 +5759,25 @@ def test_or_and():
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [boolean_operator(
+          [{"type": "boolean_operator", "value":
                             'or',
-                            first={"type": "name", "value": 'a'},
-                            second={ "type": "boolean_operator", "value": 'and', "first": { "type": "name", "value": 'b', }, "second": {"type": "name", "value": 'c'}, "first_space": " ", "second_space": " ", },
-                            first_space=" ",
-                            second_space=" ",
-                           )])
+                            "first": {"type": "name",
+                                   "value": 'a'},
+                            "second": {
+                                    "type": "boolean_operator",
+                                    "value": 'and',
+                                    "first": {
+                                              "type": "name",
+                                              "value": 'b',
+                                             },
+                                    "second": {"type": "name",
+                                               "value": 'c'},
+                                    "first_formatting": [{"type": "space", "value": " "}],
+                                    "second_formatting": [{"type": "space", "value": " "}],
+                                   },
+                            "first_formatting": [{"type": "space", "value": " "}],
+                            "second_formatting": [{"type": "space", "value": " "}],
+                           }])
     parse_simple([
            ('NAME', 'a'),
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -5071,7 +5785,24 @@ def test_or_and():
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": boolean_operator(                                                     'and',                                                     first={"type": "name", "value": 'b'},                                                     second={ "type": "name", "value": 'c', },                                                     first_space=" ",                                                     second_space=" ",                             ), "first_space": " ", "second_space": " ", }])
+          [{
+            "type": "boolean_operator",
+            "value": 'or',
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "boolean_operator", "value": 'and',
+                                       "first": {"type": "name",
+                                              "value": 'b'},
+                                       "second": {
+                                               "type": "name",
+                                               "value": 'c',
+                                              },
+                                       "first_formatting": [{"type": "space", "value": " "}],
+                                       "second_formatting": [{"type": "space", "value": " "}],
+                                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+           }])
     parse_simple([
            ('NAME', 'a'),
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -5079,14 +5810,25 @@ def test_or_and():
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [boolean_operator(
+          [{"type": "boolean_operator", "value":
                             'or',
-                            first={"type": "name", "value": 'a'},
-                            second={ "type": "boolean_operator", "value": 'and', "first": {"type": "name", "value": 'b'}, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " ", },
-                            first_space=" ",
-                            second_space=" ",
-                           )])
-
+                            "first": {"type": "name",
+                                   "value": 'a'},
+                            "second": {
+                                    "type": "boolean_operator",
+                                    "value": 'and',
+                                    "first": {"type": "name",
+                                              "value": 'b'},
+                                    "second": {
+                                               "type": "name",
+                                               "value": 'c',
+                                              },
+                                    "first_formatting": [{"type": "space", "value": " "}],
+                                    "second_formatting": [{"type": "space", "value": " "}],
+                                   },
+                            "first_formatting": [{"type": "space", "value": " "}],
+                            "second_formatting": [{"type": "space", "value": " "}],
+                           }])
 
 def test_ternary_operator():
     "a if b else c"
@@ -5097,7 +5839,21 @@ def test_ternary_operator():
            ('ELSE', 'else', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "ternary_operator", "value": { "type": "name", "value": 'b', }, "first": {"type": "name", "value": 'a'}, "second": {"type": "name", "value": 'c'}, "first_space": " ", "second_space": " ", "third_space": " ", "forth_space": " ", }])
+          [{
+            "type": "ternary_operator",
+            "value": {
+                      "type": "name",
+                      "value": 'b',
+                     },
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {"type": "name",
+                       "value": 'c'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [{"type": "space", "value": " "}],
+           }])
     parse_simple([
            ('NAME', 'a'),
            ('IF', 'if', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -5105,7 +5861,21 @@ def test_ternary_operator():
            ('ELSE', 'else', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "ternary_operator", "value": {"type": "name", "value": 'b'}, "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'c'}, "first_space": " ", "second_space": " ", "third_space": " ", "forth_space": " ", }])
+          [{
+            "type": "ternary_operator",
+            "value": {"type": "name",
+                      "value": 'b'},
+            "first": {
+                      "type": "name",
+                      "value": 'a',
+                     },
+            "second": {"type": "name",
+                       "value": 'c'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [{"type": "space", "value": " "}],
+           }])
     parse_simple([
            ('NAME', 'a'),
            ('IF', 'if', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -5113,7 +5883,21 @@ def test_ternary_operator():
            ('ELSE', 'else', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "ternary_operator", "value": {"type": "name", "value": 'b'}, "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " ", "third_space": " ", "forth_space": " ", }])
+          [{
+            "type": "ternary_operator",
+            "value": {"type": "name",
+                      "value": 'b'},
+            "first": {"type": "name",
+                      "value": 'a'},
+            "second": {
+                       "type": "name",
+                       "value": 'c',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [{"type": "space", "value": " "}],
+           }])
 
 def test_assignment():
     "a = b"
@@ -5122,13 +5906,33 @@ def test_assignment():
            ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "assign", "value": { "type": "name", "value": 'b', }, "target": {"type": "name", "value": 'a'}, "first_space": " ", "second_space": " ", }])
+          [{
+            "type": "assignment",
+            "value": {
+                      "type": "name",
+                      "value": 'b',
+                     },
+            "target": {"type": "name",
+                       "value": 'a'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+           }])
     parse_simple([
            ('NAME', 'a'),
            ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [{ "type": "assign", "value": {"type": "name", "value": 'b'}, "target": { "type": "name", "value": 'a', }, "first_space": " ", "second_space": " ", }])
+          [{
+            "type": "assignment",
+            "value": {"type": "name",
+                      "value": 'b'},
+            "target": {
+                       "type": "name",
+                       "value": 'a',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+           }])
 
 def test_assignment_assignment():
     "a = b = c"
@@ -5139,7 +5943,22 @@ def test_assignment_assignment():
            ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "assign", "value": assignment(                                        value={ "type": "name", "value": 'c', },                                        target={"type": "name", "value": 'b'},                                        first_space=" ",                                        second_space=" ",                                       ), "target": {"type": "name", "value": 'a'}, "first_space": " ", "second_space": " ", }])
+          [{
+            "type": "assignment",
+            "value": {"type": "assignment", "value": {
+                                       "type": "name",
+                                       "value": 'c',
+                                      },
+                                "target": {"type": "name",
+                                        "value": 'b'},
+                                "first_formatting": [{"type": "space", "value": " "}],
+                                "second_formatting": [{"type": "space", "value": " "}],
+                               },
+            "target": {"type": "name",
+                       "value": 'a'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+           }])
     parse_simple([
            ('NAME', 'a'),
            ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -5147,12 +5966,23 @@ def test_assignment_assignment():
            ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [assignment(
-                      value={ "type": "assign", "value": { "type": "name", "value": 'c', }, "target": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", },
-                      target={"type": "name", "value": 'a'},
-                      first_space=" ",
-                      second_space=" ",
-                     )])
+          [{"type": "assignment",
+                      "value": {
+                             "type": "assignment",
+                             "value": {
+                                       "type": "name",
+                                       "value": 'c',
+                                      },
+                             "target": {"type": "name",
+                                        "value": 'b'},
+                             "first_formatting": [{"type": "space", "value": " "}],
+                             "second_formatting": [{"type": "space", "value": " "}],
+                            },
+                      "target": {"type": "name",
+                              "value": 'a'},
+                      "first_formatting": [{"type": "space", "value": " "}],
+                      "second_formatting": [{"type": "space", "value": " "}],
+                     }])
     parse_simple([
            ('NAME', 'a'),
            ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -5160,7 +5990,23 @@ def test_assignment_assignment():
            ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "assign", "value": assignment(                                        value={"type": "name", "value": 'c'},                                        target={ "type": "name", "value": 'b', },                                        first_space=" ",                                        second_space=" ",                                       ), "target": {"type": "name", "value": 'a'}, "first_space": " ", "second_space": " ", }])
+          [{
+            "type": "assignment",
+            "value": {"type": "assignment",
+                                "value": {"type": "name",
+                                       "value": 'c'},
+                                "target": {
+                                        "type": "name",
+                                        "value": 'b',
+                                       },
+                                "first_formatting": [{"type": "space", "value": " "}],
+                                "second_formatting": [{"type": "space", "value": " "}],
+                               },
+            "target": {"type": "name",
+                       "value": 'a'},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+           }])
     parse_simple([
            ('NAME', 'a'),
            ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -5168,12 +6014,22 @@ def test_assignment_assignment():
            ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [assignment(
-                      value={ "type": "assign", "value": {"type": "name", "value": 'c'}, "target": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " ", },
-                      target={"type": "name", "value": 'a'},
-                      first_space=" ",
-                      second_space=" ",
-                     )])
+          [{"type": "assignment",
+                      "value": {
+                             "type": "assignment",
+                             "value": {"type": "name",
+                                       "value": 'c'},
+                             "target": {
+                                        "type": "name",
+                                        "value": 'b',
+                                       },
+                             "first_formatting": [{"type": "space", "value": " "}],
+                             "second_formatting": [{"type": "space", "value": " "}],
+                            },
+                      "target": {"type": "name", "value": 'a'},
+                      "first_formatting": [{"type": "space", "value": " "}],
+                      "second_formatting": [{"type": "space", "value": " "}],
+                     }])
     parse_simple([
            ('NAME', 'a'),
            ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -5181,7 +6037,23 @@ def test_assignment_assignment():
            ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [{ "type": "assign", "value": assignment(                                        value={"type": "name", "value": 'c'},                                        target={"type": "name", "value": 'b'},                                        first_space=" ",                                        second_space=" ",                                       ), "target": { "type": "name", "value": 'a', }, "first_space": " ", "second_space": " ", }])
+          [{
+            "type": "assignment",
+            "value": {"type": "assignment",
+                                "value": {"type": "name",
+                                       "value": 'c'},
+                                "target": {"type": "name",
+                                        "value": 'b'},
+                                "first_formatting": [{"type": "space", "value": " "}],
+                                "second_formatting": [{"type": "space", "value": " "}],
+                               },
+            "target": {
+                       "type": "name",
+                       "value": 'a',
+                      },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+           }])
     parse_simple([
            ('NAME', 'a'),
            ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -5189,12 +6061,23 @@ def test_assignment_assignment():
            ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [assignment(
-                      value={ "type": "assign", "value": {"type": "name", "value": 'c'}, "target": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", },
-                      target={ "type": "name", "value": 'a', },
-                      first_space=" ",
-                      second_space=" ",
-                     )])
+          [{"type": "assignment",
+                      "value": {
+                             "type": "assignment",
+                             "value": {"type": "name",
+                                       "value": 'c'},
+                             "target": {"type": "name",
+                                        "value": 'b'},
+                             "first_formatting": [{"type": "space", "value": " "}],
+                             "second_formatting": [{"type": "space", "value": " "}],
+                            },
+                      "target": {
+                              "type": "name",
+                              "value": 'a',
+                             },
+                      "first_formatting": [{"type": "space", "value": " "}],
+                      "second_formatting": [{"type": "space", "value": " "}],
+                     }])
 
 augmented_assignment_tokens = (
     ('PLUS_EQUAL', '+='),
@@ -5216,84 +6099,217 @@ def test_augmented_assignment():
     for token_name, value in augmented_assignment_tokens:
         parse_simple([
                ('NAME', 'a'),
-               (token_name, value, ' ', ' '),
+               (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
                ('NAME', 'b'),
               ],
-              [{ "type": "assign", "operator": { "type": "name", "value": 'b', }[:-1], "value": { "type": "name", "value": 'b', }, "target": {"type": "name", "value": 'a'}, "first_space": " ", "second_space": " ", }])
+              [{ "type": "assignment",
+                "operator": value[:-1],
+                "value": {
+                          "type": "name",
+                          "value": 'b',
+                         },
+                "target": {"type": "name",
+                           "value": 'a'},
+                "first_formatting": [{"type": "space", "value": " "}],
+                "second_formatting": [{"type": "space", "value": " "}],
+               }])
         parse_simple([
                ('NAME', 'a'),
-               (token_name, value, ' ', ' '),
+               (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
                ('NAME', 'b'),
               ],
-              [{ "type": "assign", "operator": {"type": "name", "value": 'b'}[:-1], "value": {"type": "name", "value": 'b'}, "target": { "type": "name", "value": 'a', }, "first_space": " ", "second_space": " ", }])
+              [{
+                "type": "assignment",
+                "operator": value[:-1],
+                "value": {"type": "name",
+                          "value": 'b'},
+                "target": {
+                           "type": "name",
+                           "value": 'a',
+                          },
+                "first_formatting": [{"type": "space", "value": " "}],
+                "second_formatting": [{"type": "space", "value": " "}],
+               }])
 
+# TODO fix this miss
 def test_augmented_assignment_augmented_assignment():
     "a += b"
     for token_name, value in augmented_assignment_tokens:
         with pytest.raises(Exception):
             parse_simple([
                    ('NAME', 'a'),
-                   (token_name, value, ' ', ' '),
+                   (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
                    ('NAME', 'b'),
-                   (token_name, value, ' ', ' '),
+                   (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
                    ('NAME', 'c'),
                   ],
-                  [{ "type": "assign", "operator": augmented_assignment(                                                        __2__operator=__2__value[:-1],                                                        __2__value={ "type": "name", "value": 'c', },                                                        __2__target={"type": "name", "value": 'b'},                                                        __2__first_space=" ",                                                        __2__second_space=" ",                                                       )[:-1], "value": augmented_assignment(                                                        __2__operator=__2__value[:-1],                                                        __2__value={ "type": "name", "value": 'c', },                                                        __2__target={"type": "name", "value": 'b'},                                                        __2__first_space=" ",                                                        __2__second_space=" ",                                                       ), "target": {"type": "name", "value": 'a'}, "first_space": " ", "second_space": " ", }])
+                  [{
+                    "type": "assignment",
+                    "operator": augmented_assignment(                                                        __2__operator=__2__value[:-1],
+                             __2__value={
+                                         "type": "name",
+                                         "value": 'c',
+                                        },
+                                                     __2__target={"type": "name",
+                                                                  "value": 'b'},
+                                                     __2__first_space=" ",
+                                                     __2__second_space=" ",
+                                                    )[:-1],
+                    "value": augmented_assignment(                                                        __2__operator=__2__value[:-1],
+                                                  __2__value={
+                                                              "type": "name",
+                                                              "value": 'c',
+                                                             },
+                                                  __2__target={"type": "name",
+                                                               "value": 'b'},
+                                                  __2__first_space=" ",
+                                                  __2__second_space=" ",
+                                                 ),
+                    "target": {"type": "name",
+                               "value": 'a'},
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                   }])
             parse_simple([
                    ('NAME', 'a'),
-                   (token_name, value, ' ', ' '),
+                   (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
                    ('NAME', 'b'),
-                   (token_name, value, ' ', ' '),
+                   (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
                    ('NAME', 'c'),
                   ],
                   [augmented_assignment(
                                 operator=value[:-1],
-                                value={ "type": "assign", "operator": { "type": "name", "value": 'c', }[:-1], "value": { "type": "name", "value": 'c', }, "target": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", },
+                                value={
+                                       "type": "assignment",
+                                       "operator": value[:-1],
+                                       "value": {
+                                                 "type": "name",
+                                                 "value": 'c',
+                                                },
+                                       "target": {"type": "name",
+                                                  "value": 'b'},
+                                       "first_formatting": [{"type": "space", "value": " "}],
+                                       "second_formatting": [{"type": "space", "value": " "}],
+                                      },
+                                target={"type": "name",
+                                        "value": 'a'},
+                                first_space=" ",
+                                second_space=" ",
+                               )])
+            parse_simple([
+                   ('NAME', 'a'),
+                   (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
+                   ('NAME', 'b'),
+                   (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
+                   ('NAME', 'c'),
+                  ],
+                  [{
+                    "type": "assignment",
+                    "operator": augmented_assignment(                                                        __4__operator=__4__value[:-1],
+                                                     __4__value={"type": "name",
+                                                                 "value": 'c'},
+                                                     __4__target={
+                                                                  "type": "name",
+                                                                  "value": 'b',
+                                                                 },
+                                                     __4__first_space=" ",
+                                                     __4__second_space=" ",
+                                                    )[:-1],
+                    "value": augmented_assignment(                                                        __4__operator=__4__value[:-1],
+                                                  __4__value={"type": "name",
+                                                              "value": 'c'},
+                                                  __4__target={
+                                                               "type": "name",
+                                                               "value": 'b',
+                                                              },
+                                                  __4__first_space=" ",
+                                                  __4__second_space=" ",
+                                                 ),
+                    "target": {"type": "name",
+                               "value": 'a'},
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                   }])
+            parse_simple([
+                   ('NAME', 'a'),
+                   (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
+                   ('NAME', 'b'),
+                   (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
+                   ('NAME', 'c'),
+                  ],
+                  [augmented_assignment(
+                                operator=value[:-1],
+                                value={
+                                       "type": "assignment",
+                                       "operator": value[:-1],
+                                       "value": {"type": "name",
+                                                 "value": 'c'},
+                                       "target": {
+                                                  "type": "name",
+                                                  "value": 'b',
+                                                 },
+                                       "first_formatting": [{"type": "space", "value": " "}],
+                                       "second_formatting": [{"type": "space", "value": " "}],
+                                      },
                                 target={"type": "name", "value": 'a'},
                                 first_space=" ",
                                 second_space=" ",
                                )])
             parse_simple([
                    ('NAME', 'a'),
-                   (token_name, value, ' ', ' '),
+                   (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
                    ('NAME', 'b'),
-                   (token_name, value, ' ', ' '),
+                   (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
                    ('NAME', 'c'),
                   ],
-                  [{ "type": "assign", "operator": augmented_assignment(                                                        __4__operator=__4__value[:-1],                                                        __4__value={"type": "name", "value": 'c'},                                                        __4__target={ "type": "name", "value": 'b', },                                                        __4__first_space=" ",                                                        __4__second_space=" ",                                                       )[:-1], "value": augmented_assignment(                                                        __4__operator=__4__value[:-1],                                                        __4__value={"type": "name", "value": 'c'},                                                        __4__target={ "type": "name", "value": 'b', },                                                        __4__first_space=" ",                                                        __4__second_space=" ",                                                       ), "target": {"type": "name", "value": 'a'}, "first_space": " ", "second_space": " ", }])
+                  [{
+                    "type": "assignment",
+                    "operator": augmented_assignment(                                                        __6__operator=__6__value[:-1],
+                                                     __6__value={"type": "name",
+                                                                 "value": 'c'},
+                                                     __6__target={"type": "name",
+                                                                  "value": 'b'},
+                                                     __6__first_space=" ",
+                                                     __6__second_space=" ",
+                                                    )[:-1],
+                    "value": augmented_assignment(                                                        __6__operator=__6__value[:-1],
+                                                  __6__value={"type": "name",
+                                                              "value": 'c'},
+                                                  __6__target={"type": "name",
+                                                               "value": 'b'},
+                                                  __6__first_space=" ",
+                                                  __6__second_space=" ",
+                                                 ),
+                    "target": {
+                               "type": "name",
+                               "value": 'a',
+                              },
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                   }])
             parse_simple([
                    ('NAME', 'a'),
-                   (token_name, value, ' ', ' '),
+                   (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
                    ('NAME', 'b'),
-                   (token_name, value, ' ', ' '),
+                   (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
                    ('NAME', 'c'),
                   ],
                   [augmented_assignment(
                                 operator=value[:-1],
-                                value={ "type": "assign", "operator": {"type": "name", "value": 'c'}[:-1], "value": {"type": "name", "value": 'c'}, "target": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " ", },
-                                target={"type": "name", "value": 'a'},
-                                first_space=" ",
-                                second_space=" ",
-                               )])
-            parse_simple([
-                   ('NAME', 'a'),
-                   (token_name, value, ' ', ' '),
-                   ('NAME', 'b'),
-                   (token_name, value, ' ', ' '),
-                   ('NAME', 'c'),
-                  ],
-                  [{ "type": "assign", "operator": augmented_assignment(                                                        __6__operator=__6__value[:-1],                                                        __6__value={"type": "name", "value": 'c'},                                                        __6__target={"type": "name", "value": 'b'},                                                        __6__first_space=" ",                                                        __6__second_space=" ",                                                       )[:-1], "value": augmented_assignment(                                                        __6__operator=__6__value[:-1],                                                        __6__value={"type": "name", "value": 'c'},                                                        __6__target={"type": "name", "value": 'b'},                                                        __6__first_space=" ",                                                        __6__second_space=" ",                                                       ), "target": { "type": "name", "value": 'a', }, "first_space": " ", "second_space": " ", }])
-            parse_simple([
-                   ('NAME', 'a'),
-                   (token_name, value, ' ', ' '),
-                   ('NAME', 'b'),
-                   (token_name, value, ' ', ' '),
-                   ('NAME', 'c'),
-                  ],
-                  [augmented_assignment(
-                                operator=value[:-1],
-                                value={ "type": "assign", "operator": {"type": "name", "value": 'c'}[:-1], "value": {"type": "name", "value": 'c'}, "target": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", },
-                                target={ "type": "name", "value": 'a', },
+                                value={
+                                       "type": "assignment",
+                                       "operator": value[:-1],
+                                       "value": {"type": "name",
+                                                 "value": 'c'},
+                                       "target": {"type": "name",
+                                                  "value": 'b'},
+                                       "first_formatting": [{"type": "space", "value": " "}],
+                                       "second_formatting": [{"type": "space", "value": " "}],
+                                      },
+                                target={
+                                        "type": "name",
+                                        "value": 'a',
+                                       },
                                 first_space=" ",
                                 second_space=" ",
                                )])
@@ -5303,11 +6319,29 @@ def test_augmented_assignment_yield_b():
     for token_name, value in augmented_assignment_tokens:
         parse_simple([
                ('NAME', 'a'),
-               (token_name, value, ' ', ' '),
+               (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
                ('YIELD', 'yield', [], [('SPACE', ' ')]),
                ('NAME', 'b'),
               ],
-              [{ "type": "assign", "operator": {                                 "formatting": [{"type": "space", "value": " "}],                                 "type": "yield",                                 "value": {                                     "type": "name",                                     "value": "b",                                 },                             }[:-1], "value": {                                 "formatting": [{"type": "space", "value": " "}],                                 "type": "yield",                                 "value": {                                     "type": "name",                                     "value": "b",                                 },                             }, "target": { "type": "name", "value": 'a', }, "first_space": " ", "second_space": " ", }])
+              [{
+                "type": "assignment",
+                "operator": value[:-1],
+                "value": {
+                          "formatting": [{"type": "space",
+                                          "value": " "}],
+                          "type": "yield",
+                          "value": {
+                                    "type": "name",
+                                    "value": "b",
+                                   },
+                         },
+                "target": {
+                           "type": "name",
+                           "value": 'a',
+                          },
+                "first_formatting": [{"type": "space", "value": " "}],
+                "second_formatting": [{"type": "space", "value": " "}],
+               }])
 
 def test_a_equal_yield_b():
     """
@@ -5316,12 +6350,12 @@ def test_a_equal_yield_b():
     parse_simple([
              ('NAME', 'a'),
              ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
-             ('YIELD', '', '', ' '),
+             ('YIELD', 'yield', [("SPACE", "")], [("SPACE", " ")]),
              ('NAME', 'b'),
           ],
           [{
             "first_formatting": [{"type": "space", "value": " "}],
-            "type": "assign",
+            "type": "assignment",
             "target": {
                 "type": "name",
                 "value": "a"
@@ -5355,7 +6389,18 @@ def test_expr_comma_list():
                    "first_formatting": [],
                    "second_formatting": [],
                    "value": [
-                             { "type": "boolean_operator", "value": 'or', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", },
+                             {
+                              "type": "boolean_operator",
+                              "value": 'or',
+                              "first": {
+                                        "type": "name",
+                                        "value": 'a',
+                                       },
+                              "second": {"type": "name",
+                                         "value": 'b'},
+                              "first_formatting": [{"type": "space", "value": " "}],
+                              "second_formatting": [{"type": "space", "value": " "}],
+                             },
                              {"type": "comma",
                               "first_formatting": [],
                               "second_formatting": []},
@@ -5386,7 +6431,18 @@ def test_expr_comma_list():
             "first_formatting": [],
             "second_formatting": [],
             "value": [
-                   { "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " ", },
+                   {
+                    "type": "boolean_operator",
+                    "value": 'or',
+                    "first": {"type": "name",
+                              "value": 'a'},
+                    "second": {
+                               "type": "name",
+                               "value": 'b',
+                              },
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                   },
                    {"type": "comma",
                     "first_formatting": [],
                     "second_formatting": []},
@@ -5417,7 +6473,16 @@ def test_expr_comma_list():
             "first_formatting": [],
             "second_formatting": [],
             "value": [
-                   { "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", },
+                   {
+                    "type": "boolean_operator",
+                    "value": 'or',
+                    "first": {"type": "name",
+                              "value": 'a'},
+                    "second": {"type": "name",
+                               "value": 'b'},
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                   },
                    {"type": "comma",
                     "first_formatting": [],
                     "second_formatting": []},
@@ -5450,7 +6515,16 @@ def test_expr_comma_list():
             "first_formatting": [],
             "second_formatting": [],
             "value": [
-                   { "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", },
+                   {
+                    "type": "boolean_operator",
+                    "value": 'or',
+                    "first": {"type": "name",
+                              "value": 'a'},
+                    "second": {"type": "name",
+                               "value": 'b'},
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                   },
                    {"type": "comma",
                     "first_formatting": [],
                     "second_formatting": []},
@@ -5487,7 +6561,18 @@ def test_expr_comma_list_3_items():
             "with_parenthesis": False,
             "first_formatting": [],
             "second_formatting": [],
-            "value": [{ "type": "boolean_operator", "value": 'or', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", },
+            "value": [{
+                       "type": "boolean_operator",
+                       "value": 'or',
+                       "first": {
+                                 "type": "name",
+                                 "value": 'a',
+                                },
+                       "second": {"type": "name",
+                                  "value": 'b'},
+                       "first_formatting": [{"type": "space", "value": " "}],
+                       "second_formatting": [{"type": "space", "value": " "}],
+                      },
                    {"type": "comma",
                     "first_formatting": [],
                     "second_formatting": []},
@@ -5523,7 +6608,18 @@ def test_expr_comma_list_3_items():
             "with_parenthesis": False,
             "first_formatting": [],
             "second_formatting": [],
-            "value": [{ "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " ", },
+            "value": [{
+                       "type": "boolean_operator",
+                       "value": 'or',
+                       "first": {"type": "name",
+                                 "value": 'a'},
+                       "second": {
+                                  "type": "name",
+                                  "value": 'b',
+                                 },
+                       "first_formatting": [{"type": "space", "value": " "}],
+                       "second_formatting": [{"type": "space", "value": " "}],
+                      },
                    {"type": "comma",
                     "first_formatting": [],
                     "second_formatting": []},
@@ -5559,7 +6655,16 @@ def test_expr_comma_list_3_items():
             "with_parenthesis": False,
             "first_formatting": [],
             "second_formatting": [],
-            "value": [{ "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", },
+            "value": [{
+                       "type": "boolean_operator",
+                       "value": 'or',
+                       "first": {"type": "name",
+                                 "value": 'a'},
+                       "second": {"type": "name",
+                                  "value": 'b'},
+                       "first_formatting": [{"type": "space", "value": " "}],
+                       "second_formatting": [{"type": "space", "value": " "}],
+                      },
                    {"type": "comma",
                     "first_formatting": [],
                     "second_formatting": []},
@@ -5597,7 +6702,16 @@ def test_expr_comma_list_3_items():
             "with_parenthesis": False,
             "first_formatting": [],
             "second_formatting": [],
-            "value": [{ "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", },
+            "value": [{
+                       "type": "boolean_operator",
+                       "value": 'or',
+                       "first": {"type": "name",
+                                 "value": 'a'},
+                       "second": {"type": "name",
+                                  "value": 'b'},
+                       "first_formatting": [{"type": "space", "value": " "}],
+                       "second_formatting": [{"type": "space", "value": " "}],
+                      },
                    {"type": "comma",
                     "first_formatting": [],
                     "second_formatting": []},
@@ -5635,7 +6749,16 @@ def test_expr_comma_list_3_items():
             "with_parenthesis": False,
             "first_formatting": [],
             "second_formatting": [],
-            "value": [{ "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", },
+            "value": [{
+                       "type": "boolean_operator",
+                       "value": 'or',
+                       "first": {"type": "name",
+                                 "value": 'a'},
+                       "second": {"type": "name",
+                                  "value": 'b'},
+                       "first_formatting": [{"type": "space", "value": " "}],
+                       "second_formatting": [{"type": "space", "value": " "}],
+                      },
                    {"type": "comma",
                     "first_formatting": [],
                     "second_formatting": []},
