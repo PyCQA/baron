@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
-from utils import return_, yield_
+from utils import yield_
 from test_utils import parse_simple
 
 
@@ -9,7 +9,7 @@ def test_return():
     parse_simple([
            ('RETURN', 'return'),
           ],
-         [return_()])
+         [{ "type": "return", "value": None, "space": "", }])
 
 def test_return_a():
     "return a"
@@ -17,7 +17,7 @@ def test_return_a():
            ('RETURN', 'return', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ],
-         [return_({ "type": "name", "value": 'a', }, space=" ")])
+         [{ "type": "return", "value": { "type": "name", "value": 'a', }, "space": " ", }])
 
 def test_yield():
     "yield"

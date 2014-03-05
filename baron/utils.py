@@ -152,9 +152,3 @@ def yield_(value=None, space=""):
         "space": space,
     }
 
-def return_(value=None, space=""):
-    return {
-        "type": "return",
-        "value": value,
-        "space": space,
-    }
