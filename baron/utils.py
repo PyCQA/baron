@@ -118,11 +118,3 @@ def augmented_assignment(operator, value, target, first_space="", second_space="
         "second_space": second_space,
     }
 
-def unitary_operator(operator, target, space=""):
-    return {
-        "type": "unitary_operator",
-        "value": operator,
-        "target": target,
-        "space": space,
-    }
-
