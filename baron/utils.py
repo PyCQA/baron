@@ -138,10 +138,3 @@ def ternary_operator(test, first, second, first_space, second_space, third_space
         "forth_space": forth_space,
     }
 
-def tuple_(value, with_parenthesis):
-    return {
-        "type": "tuple",
-        "value": value,
-        "with_parenthesis": with_parenthesis,
-    }
-
