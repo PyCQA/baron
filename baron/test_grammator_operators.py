@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
 import pytest
-from utils import comparison, boolean_operator, assignment, augmented_assignment
+from utils import comparison, boolean_operator, assignment
 from test_utils import parse_simple
 
 
@@ -5331,25 +5331,13 @@ def test_augmented_assignment():
                (token_name, value, ' ', ' '),
                ('NAME', 'b'),
               ],
-              [augmented_assignment(
-                                    operator=value[:-1],
-                                    value={ "type": "name", "value": 'b', },
-                                    target={"type": "name", "value": 'a'},
-                                    first_space=" ",
-                                    second_space=" ",
-                                   )])
+              [{ "type": "assign", "operator": { "type": "name", "value": 'b', }[:-1], "value": { "type": "name", "value": 'b', }, "target": {"type": "name", "value": 'a'}, "first_space": " ", "second_space": " ", }])
         parse_simple([
                ('NAME', 'a'),
                (token_name, value, ' ', ' '),
                ('NAME', 'b'),
               ],
-              [augmented_assignment(
-                                    operator=value[:-1],
-                                    value={"type": "name", "value": 'b'},
-                                    target={ "type": "name", "value": 'a', },
-                                    first_space=" ",
-                                    second_space=" ",
-                                   )])
+              [{ "type": "assign", "operator": {"type": "name", "value": 'b'}[:-1], "value": {"type": "name", "value": 'b'}, "target": { "type": "name", "value": 'a', }, "first_space": " ", "second_space": " ", }])
 
 def test_augmented_assignment_augmented_assignment():
     "a += b"
@@ -5362,15 +5350,17 @@ def test_augmented_assignment_augmented_assignment():
                    (token_name, value, ' ', ' '),
                    ('NAME', 'c'),
                   ],
+                  [{ "type": "assign", "operator": augmented_assignment(                                                        __2__operator=__2__value[:-1],                                                        __2__value={ "type": "name", "value": 'c', },                                                        __2__target={"type": "name", "value": 'b'},                                                        __2__first_space=" ",                                                        __2__second_space=" ",                                                       )[:-1], "value": augmented_assignment(                                                        __2__operator=__2__value[:-1],                                                        __2__value={ "type": "name", "value": 'c', },                                                        __2__target={"type": "name", "value": 'b'},                                                        __2__first_space=" ",                                                        __2__second_space=" ",                                                       ), "target": {"type": "name", "value": 'a'}, "first_space": " ", "second_space": " ", }])
+            parse_simple([
+                   ('NAME', 'a'),
+                   (token_name, value, ' ', ' '),
+                   ('NAME', 'b'),
+                   (token_name, value, ' ', ' '),
+                   ('NAME', 'c'),
+                  ],
                   [augmented_assignment(
                                 operator=value[:-1],
-                                value=augmented_assignment(
-                                                       operator=value[:-1],
-                                                       value={ "type": "name", "value": 'c', },
-                                                       target={"type": "name", "value": 'b'},
-                                                       first_space=" ",
-                                                       second_space=" ",
-                                                      ),
+                                value={ "type": "assign", "operator": { "type": "name", "value": 'c', }[:-1], "value": { "type": "name", "value": 'c', }, "target": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", },
                                 target={"type": "name", "value": 'a'},
                                 first_space=" ",
                                 second_space=" ",
@@ -5382,15 +5372,17 @@ def test_augmented_assignment_augmented_assignment():
                    (token_name, value, ' ', ' '),
                    ('NAME', 'c'),
                   ],
+                  [{ "type": "assign", "operator": augmented_assignment(                                                        __4__operator=__4__value[:-1],                                                        __4__value={"type": "name", "value": 'c'},                                                        __4__target={ "type": "name", "value": 'b', },                                                        __4__first_space=" ",                                                        __4__second_space=" ",                                                       )[:-1], "value": augmented_assignment(                                                        __4__operator=__4__value[:-1],                                                        __4__value={"type": "name", "value": 'c'},                                                        __4__target={ "type": "name", "value": 'b', },                                                        __4__first_space=" ",                                                        __4__second_space=" ",                                                       ), "target": {"type": "name", "value": 'a'}, "first_space": " ", "second_space": " ", }])
+            parse_simple([
+                   ('NAME', 'a'),
+                   (token_name, value, ' ', ' '),
+                   ('NAME', 'b'),
+                   (token_name, value, ' ', ' '),
+                   ('NAME', 'c'),
+                  ],
                   [augmented_assignment(
                                 operator=value[:-1],
-                                value=augmented_assignment(
-                                                       operator=value[:-1],
-                                                       value={"type": "name", "value": 'c'},
-                                                       target={ "type": "name", "value": 'b', },
-                                                       first_space=" ",
-                                                       second_space=" ",
-                                                      ),
+                                value={ "type": "assign", "operator": {"type": "name", "value": 'c'}[:-1], "value": {"type": "name", "value": 'c'}, "target": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " ", },
                                 target={"type": "name", "value": 'a'},
                                 first_space=" ",
                                 second_space=" ",
@@ -5402,15 +5394,17 @@ def test_augmented_assignment_augmented_assignment():
                    (token_name, value, ' ', ' '),
                    ('NAME', 'c'),
                   ],
+                  [{ "type": "assign", "operator": augmented_assignment(                                                        __6__operator=__6__value[:-1],                                                        __6__value={"type": "name", "value": 'c'},                                                        __6__target={"type": "name", "value": 'b'},                                                        __6__first_space=" ",                                                        __6__second_space=" ",                                                       )[:-1], "value": augmented_assignment(                                                        __6__operator=__6__value[:-1],                                                        __6__value={"type": "name", "value": 'c'},                                                        __6__target={"type": "name", "value": 'b'},                                                        __6__first_space=" ",                                                        __6__second_space=" ",                                                       ), "target": { "type": "name", "value": 'a', }, "first_space": " ", "second_space": " ", }])
+            parse_simple([
+                   ('NAME', 'a'),
+                   (token_name, value, ' ', ' '),
+                   ('NAME', 'b'),
+                   (token_name, value, ' ', ' '),
+                   ('NAME', 'c'),
+                  ],
                   [augmented_assignment(
                                 operator=value[:-1],
-                                value=augmented_assignment(
-                                                       operator=value[:-1],
-                                                       value={"type": "name", "value": 'c'},
-                                                       target={"type": "name", "value": 'b'},
-                                                       first_space=" ",
-                                                       second_space=" ",
-                                                      ),
+                                value={ "type": "assign", "operator": {"type": "name", "value": 'c'}[:-1], "value": {"type": "name", "value": 'c'}, "target": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", },
                                 target={ "type": "name", "value": 'a', },
                                 first_space=" ",
                                 second_space=" ",
@@ -5425,20 +5419,7 @@ def test_augmented_assignment_yield_b():
                ('YIELD', 'yield', [], [('SPACE', ' ')]),
                ('NAME', 'b'),
               ],
-              [augmented_assignment(
-                            operator=value[:-1],
-                            value={
-                                "formatting": [{"type": "space", "value": " "}],
-                                "type": "yield",
-                                "value": {
-                                    "type": "name",
-                                    "value": "b",
-                                },
-                            },
-                            target={ "type": "name", "value": 'a', },
-                            first_space=" ",
-                            second_space=" ",
-                           )])
+              [{ "type": "assign", "operator": {                                 "formatting": [{"type": "space", "value": " "}],                                 "type": "yield",                                 "value": {                                     "type": "name",                                     "value": "b",                                 },                             }[:-1], "value": {                                 "formatting": [{"type": "space", "value": " "}],                                 "type": "yield",                                 "value": {                                     "type": "name",                                     "value": "b",                                 },                             }, "target": { "type": "name", "value": 'a', }, "first_space": " ", "second_space": " ", }])
 
 def test_a_equal_yield_b():
     """
