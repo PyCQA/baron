@@ -79,13 +79,3 @@ def comparison(operator, first, second, first_space="", second_space="", middle_
         "middle_space": middle_space,
     }
 
-def boolean_operator(operator, first, second, first_space="", second_space=""):
-    return {
-        "type": "boolean_operator",
-        "value": operator,
-        "first": first,
-        "second": second,
-        "first_space": first_space,
-        "second_space": second_space,
-    }
-

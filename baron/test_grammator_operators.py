@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
 import pytest
-from utils import comparison, boolean_operator
+from utils import comparison
 from test_utils import parse_simple
 
 
@@ -4962,25 +4962,13 @@ def test_and():
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [boolean_operator(
-                            'and',
-                            first={ "type": "name", "value": 'a', },
-                            second={"type": "name", "value": 'b'},
-                            first_space=" ",
-                            second_space=" ",
-                           )])
+          [{ "type": "boolean_operator", "value": 'and', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", }])
     parse_simple([
            ('NAME', 'a'),
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [boolean_operator(
-                            'and',
-                            first={"type": "name", "value": 'a'},
-                            second={ "type": "name", "value": 'b', },
-                            first_space=" ",
-                            second_space=" ",
-                           )])
+          [{ "type": "boolean_operator", "value": 'and', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " ", }])
 
 def test_and_and():
     "a and b and c"
@@ -4991,16 +4979,18 @@ def test_and_and():
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
+          [{ "type": "boolean_operator", "value": 'and', "first": { "type": "name", "value": 'a', }, "second": boolean_operator(                                                     'and',                                                     first={"type": "name", "value": 'b'},                                                     second={"type": "name", "value": 'c'},                                                     first_space=" ",                                                     second_space=" ",                             ), "first_space": " ", "second_space": " ", }])
+    parse_simple([
+           ('NAME', 'a'),
+           ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'b'),
+           ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'c'),
+          ],
           [boolean_operator(
                             'and',
                             first={ "type": "name", "value": 'a', },
-                            second=boolean_operator(
-                                                    'and',
-                                                    first={"type": "name", "value": 'b'},
-                                                    second={"type": "name", "value": 'c'},
-                                                    first_space=" ",
-                                                    second_space=" ",
-                            ),
+                            second={ "type": "boolean_operator", "value": 'and', "first": {"type": "name", "value": 'b'}, "second": {"type": "name", "value": 'c'}, "first_space": " ", "second_space": " ", },
                             first_space=" ",
                             second_space=" ",
                            )])
@@ -5011,19 +5001,7 @@ def test_and_and():
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [boolean_operator(
-                            'and',
-                            first={"type": "name", "value": 'a'},
-                            second=boolean_operator(
-                                                    'and',
-                                                    first={ "type": "name", "value": 'b', },
-                                                    second={"type": "name", "value": 'c'},
-                                                    first_space=" ",
-                                                    second_space=" ",
-                            ),
-                            first_space=" ",
-                            second_space=" ",
-                           )])
+          [{ "type": "boolean_operator", "value": 'and', "first": {"type": "name", "value": 'a'}, "second": boolean_operator(                                                     'and',                                                     first={ "type": "name", "value": 'b', },                                                     second={"type": "name", "value": 'c'},                                                     first_space=" ",                                                     second_space=" ",                             ), "first_space": " ", "second_space": " ", }])
     parse_simple([
            ('NAME', 'a'),
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -5034,13 +5012,29 @@ def test_and_and():
           [boolean_operator(
                             'and',
                             first={"type": "name", "value": 'a'},
-                            second=boolean_operator(
-                                                    'and',
-                                                    first={"type": "name", "value": 'b'},
-                                                    second={ "type": "name", "value": 'c', },
-                                                    first_space=" ",
-                                                    second_space=" ",
-                            ),
+                            second={ "type": "boolean_operator", "value": 'and', "first": { "type": "name", "value": 'b', }, "second": {"type": "name", "value": 'c'}, "first_space": " ", "second_space": " ", },
+                            first_space=" ",
+                            second_space=" ",
+                           )])
+    parse_simple([
+           ('NAME', 'a'),
+           ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'b'),
+           ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'c'),
+          ],
+          [{ "type": "boolean_operator", "value": 'and', "first": {"type": "name", "value": 'a'}, "second": boolean_operator(                                                     'and',                                                     first={"type": "name", "value": 'b'},                                                     second={ "type": "name", "value": 'c', },                                                     first_space=" ",                                                     second_space=" ",                             ), "first_space": " ", "second_space": " ", }])
+    parse_simple([
+           ('NAME', 'a'),
+           ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'b'),
+           ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'c'),
+          ],
+          [boolean_operator(
+                            'and',
+                            first={"type": "name", "value": 'a'},
+                            second={ "type": "boolean_operator", "value": 'and', "first": {"type": "name", "value": 'b'}, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " ", },
                             first_space=" ",
                             second_space=" ",
                            )])
@@ -5052,25 +5046,13 @@ def test_or():
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [boolean_operator(
-                            'or',
-                            first={ "type": "name", "value": 'a', },
-                            second={"type": "name", "value": 'b'},
-                            first_space=" ",
-                            second_space=" ",
-                           )])
+          [{ "type": "boolean_operator", "value": 'or', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", }])
     parse_simple([
            ('NAME', 'a'),
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [boolean_operator(
-                            'or',
-                            first={"type": "name", "value": 'a'},
-                            second={ "type": "name", "value": 'b', },
-                            first_space=" ",
-                            second_space=" ",
-                           )])
+          [{ "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " ", }])
 
 def test_or_or():
     "a or b or c"
@@ -5081,16 +5063,18 @@ def test_or_or():
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
+          [{ "type": "boolean_operator", "value": 'or', "first": { "type": "name", "value": 'a', }, "second": boolean_operator(                                                     'or',                                                     first={"type": "name", "value": 'b'},                                                     second={"type": "name", "value": 'c'},                                                     first_space=" ",                                                     second_space=" ",                             ), "first_space": " ", "second_space": " ", }])
+    parse_simple([
+           ('NAME', 'a'),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'b'),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'c'),
+          ],
           [boolean_operator(
                             'or',
                             first={ "type": "name", "value": 'a', },
-                            second=boolean_operator(
-                                                    'or',
-                                                    first={"type": "name", "value": 'b'},
-                                                    second={"type": "name", "value": 'c'},
-                                                    first_space=" ",
-                                                    second_space=" ",
-                            ),
+                            second={ "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'b'}, "second": {"type": "name", "value": 'c'}, "first_space": " ", "second_space": " ", },
                             first_space=" ",
                             second_space=" ",
                            )])
@@ -5101,19 +5085,7 @@ def test_or_or():
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [boolean_operator(
-                            'or',
-                            first={"type": "name", "value": 'a'},
-                            second=boolean_operator(
-                                                    'or',
-                                                    first={ "type": "name", "value": 'b', },
-                                                    second={"type": "name", "value": 'c'},
-                                                    first_space=" ",
-                                                    second_space=" ",
-                            ),
-                            first_space=" ",
-                            second_space=" ",
-                           )])
+          [{ "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": boolean_operator(                                                     'or',                                                     first={ "type": "name", "value": 'b', },                                                     second={"type": "name", "value": 'c'},                                                     first_space=" ",                                                     second_space=" ",                             ), "first_space": " ", "second_space": " ", }])
     parse_simple([
            ('NAME', 'a'),
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -5124,13 +5096,29 @@ def test_or_or():
           [boolean_operator(
                             'or',
                             first={"type": "name", "value": 'a'},
-                            second=boolean_operator(
-                                                    'or',
-                                                    first={"type": "name", "value": 'b'},
-                                                    second={ "type": "name", "value": 'c', },
-                                                    first_space=" ",
-                                                    second_space=" ",
-                            ),
+                            second={ "type": "boolean_operator", "value": 'or', "first": { "type": "name", "value": 'b', }, "second": {"type": "name", "value": 'c'}, "first_space": " ", "second_space": " ", },
+                            first_space=" ",
+                            second_space=" ",
+                           )])
+    parse_simple([
+           ('NAME', 'a'),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'b'),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'c'),
+          ],
+          [{ "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": boolean_operator(                                                     'or',                                                     first={"type": "name", "value": 'b'},                                                     second={ "type": "name", "value": 'c', },                                                     first_space=" ",                                                     second_space=" ",                             ), "first_space": " ", "second_space": " ", }])
+    parse_simple([
+           ('NAME', 'a'),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'b'),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'c'),
+          ],
+          [boolean_operator(
+                            'or',
+                            first={"type": "name", "value": 'a'},
+                            second={ "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'b'}, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " ", },
                             first_space=" ",
                             second_space=" ",
                            )])
@@ -5144,16 +5132,18 @@ def test_or_and():
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
+          [{ "type": "boolean_operator", "value": 'or', "first": { "type": "name", "value": 'a', }, "second": boolean_operator(                                                     'and',                                                     first={"type": "name", "value": 'b'},                                                     second={"type": "name", "value": 'c'},                                                     first_space=" ",                                                     second_space=" ",                             ), "first_space": " ", "second_space": " ", }])
+    parse_simple([
+           ('NAME', 'a'),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'b'),
+           ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'c'),
+          ],
           [boolean_operator(
                             'or',
                             first={ "type": "name", "value": 'a', },
-                            second=boolean_operator(
-                                                    'and',
-                                                    first={"type": "name", "value": 'b'},
-                                                    second={"type": "name", "value": 'c'},
-                                                    first_space=" ",
-                                                    second_space=" ",
-                            ),
+                            second={ "type": "boolean_operator", "value": 'and', "first": {"type": "name", "value": 'b'}, "second": {"type": "name", "value": 'c'}, "first_space": " ", "second_space": " ", },
                             first_space=" ",
                             second_space=" ",
                            )])
@@ -5164,19 +5154,7 @@ def test_or_and():
            ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
-          [boolean_operator(
-                            'or',
-                            first={"type": "name", "value": 'a'},
-                            second=boolean_operator(
-                                                    'and',
-                                                    first={ "type": "name", "value": 'b', },
-                                                    second={"type": "name", "value": 'c'},
-                                                    first_space=" ",
-                                                    second_space=" ",
-                            ),
-                            first_space=" ",
-                            second_space=" ",
-                           )])
+          [{ "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": boolean_operator(                                                     'and',                                                     first={ "type": "name", "value": 'b', },                                                     second={"type": "name", "value": 'c'},                                                     first_space=" ",                                                     second_space=" ",                             ), "first_space": " ", "second_space": " ", }])
     parse_simple([
            ('NAME', 'a'),
            ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
@@ -5187,13 +5165,29 @@ def test_or_and():
           [boolean_operator(
                             'or',
                             first={"type": "name", "value": 'a'},
-                            second=boolean_operator(
-                                                    'and',
-                                                    first={"type": "name", "value": 'b'},
-                                                    second={ "type": "name", "value": 'c', },
-                                                    first_space=" ",
-                                                    second_space=" ",
-                            ),
+                            second={ "type": "boolean_operator", "value": 'and', "first": { "type": "name", "value": 'b', }, "second": {"type": "name", "value": 'c'}, "first_space": " ", "second_space": " ", },
+                            first_space=" ",
+                            second_space=" ",
+                           )])
+    parse_simple([
+           ('NAME', 'a'),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'b'),
+           ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'c'),
+          ],
+          [{ "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": boolean_operator(                                                     'and',                                                     first={"type": "name", "value": 'b'},                                                     second={ "type": "name", "value": 'c', },                                                     first_space=" ",                                                     second_space=" ",                             ), "first_space": " ", "second_space": " ", }])
+    parse_simple([
+           ('NAME', 'a'),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'b'),
+           ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'c'),
+          ],
+          [boolean_operator(
+                            'or',
+                            first={"type": "name", "value": 'a'},
+                            second={ "type": "boolean_operator", "value": 'and', "first": {"type": "name", "value": 'b'}, "second": { "type": "name", "value": 'c', }, "first_space": " ", "second_space": " ", },
                             first_space=" ",
                             second_space=" ",
                            )])
@@ -5466,13 +5460,7 @@ def test_expr_comma_list():
                    "first_formatting": [],
                    "second_formatting": [],
                    "value": [
-                             boolean_operator(
-                                              'or',
-                                              first={ "type": "name", "value": 'a', },
-                                              second={"type": "name", "value": 'b'},
-                                              first_space=" ",
-                                              second_space=" ",
-                                             ),
+                             { "type": "boolean_operator", "value": 'or', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", },
                              {"type": "comma",
                               "first_formatting": [],
                               "second_formatting": []},
@@ -5503,13 +5491,7 @@ def test_expr_comma_list():
             "first_formatting": [],
             "second_formatting": [],
             "value": [
-                   boolean_operator(
-                                    'or',
-                                    first={"type": "name", "value": 'a'},
-                                    second={ "type": "name", "value": 'b', },
-                                    first_space=" ",
-                                    second_space=" ",
-                                   ),
+                   { "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " ", },
                    {"type": "comma",
                     "first_formatting": [],
                     "second_formatting": []},
@@ -5540,13 +5522,7 @@ def test_expr_comma_list():
             "first_formatting": [],
             "second_formatting": [],
             "value": [
-                   boolean_operator(
-                                    'or',
-                                    first={"type": "name", "value": 'a'},
-                                    second={"type": "name", "value": 'b'},
-                                    first_space=" ",
-                                    second_space=" ",
-                                   ),
+                   { "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", },
                    {"type": "comma",
                     "first_formatting": [],
                     "second_formatting": []},
@@ -5579,13 +5555,7 @@ def test_expr_comma_list():
             "first_formatting": [],
             "second_formatting": [],
             "value": [
-                   boolean_operator(
-                                    'or',
-                                    first={"type": "name", "value": 'a'},
-                                    second={"type": "name", "value": 'b'},
-                                    first_space=" ",
-                                    second_space=" ",
-                                   ),
+                   { "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", },
                    {"type": "comma",
                     "first_formatting": [],
                     "second_formatting": []},
@@ -5622,13 +5592,7 @@ def test_expr_comma_list_3_items():
             "with_parenthesis": False,
             "first_formatting": [],
             "second_formatting": [],
-            "value": [boolean_operator(
-                                    'or',
-                                    first={ "type": "name", "value": 'a', },
-                                    second={"type": "name", "value": 'b'},
-                                    first_space=" ",
-                                    second_space=" ",
-                                   ),
+            "value": [{ "type": "boolean_operator", "value": 'or', "first": { "type": "name", "value": 'a', }, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", },
                    {"type": "comma",
                     "first_formatting": [],
                     "second_formatting": []},
@@ -5664,13 +5628,7 @@ def test_expr_comma_list_3_items():
             "with_parenthesis": False,
             "first_formatting": [],
             "second_formatting": [],
-            "value": [boolean_operator(
-                                    'or',
-                                    first={"type": "name", "value": 'a'},
-                                    second={ "type": "name", "value": 'b', },
-                                    first_space=" ",
-                                    second_space=" ",
-                                   ),
+            "value": [{ "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " ", },
                    {"type": "comma",
                     "first_formatting": [],
                     "second_formatting": []},
@@ -5706,13 +5664,7 @@ def test_expr_comma_list_3_items():
             "with_parenthesis": False,
             "first_formatting": [],
             "second_formatting": [],
-            "value": [boolean_operator(
-                                    'or',
-                                    first={"type": "name", "value": 'a'},
-                                    second={"type": "name", "value": 'b'},
-                                    first_space=" ",
-                                    second_space=" ",
-                                   ),
+            "value": [{ "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", },
                    {"type": "comma",
                     "first_formatting": [],
                     "second_formatting": []},
@@ -5750,13 +5702,7 @@ def test_expr_comma_list_3_items():
             "with_parenthesis": False,
             "first_formatting": [],
             "second_formatting": [],
-            "value": [boolean_operator(
-                                    'or',
-                                    first={"type": "name", "value": 'a'},
-                                    second={"type": "name", "value": 'b'},
-                                    first_space=" ",
-                                    second_space=" ",
-                                   ),
+            "value": [{ "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", },
                    {"type": "comma",
                     "first_formatting": [],
                     "second_formatting": []},
@@ -5794,13 +5740,7 @@ def test_expr_comma_list_3_items():
             "with_parenthesis": False,
             "first_formatting": [],
             "second_formatting": [],
-            "value": [boolean_operator(
-                                    'or',
-                                    first={"type": "name", "value": 'a'},
-                                    second={"type": "name", "value": 'b'},
-                                    first_space=" ",
-                                    second_space=" ",
-                                   ),
+            "value": [{ "type": "boolean_operator", "value": 'or', "first": {"type": "name", "value": 'a'}, "second": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", },
                    {"type": "comma",
                     "first_formatting": [],
                     "second_formatting": []},
