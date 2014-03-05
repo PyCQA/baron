@@ -145,10 +145,3 @@ def tuple_(value, with_parenthesis):
         "with_parenthesis": with_parenthesis,
     }
 
-def yield_(value=None, space=""):
-    return {
-        "type": "yield",
-        "value": value,
-        "space": space,
-    }
-

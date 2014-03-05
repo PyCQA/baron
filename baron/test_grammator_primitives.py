@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
-from utils import yield_
 from test_utils import parse_simple
 
 
@@ -24,7 +23,7 @@ def test_yield():
     parse_simple([
            ('YIELD', 'yield'),
           ],
-         [yield_()])
+         [{ "type": "yield", "value": None, "space": "", }])
 
 def test_yield_a():
     "yield a"
@@ -32,7 +31,7 @@ def test_yield_a():
            ('YIELD', 'yield', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ],
-         [yield_({ "type": "name", "value": 'a', }, space=" ")])
+         [{ "type": "yield", "value": { "type": "name", "value": 'a', }, "space": " ", }])
 
 def test_del():
     "del a"
