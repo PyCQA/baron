@@ -1,6 +1,3 @@
-from utils import assignment
-
-
 def include_operators(pg):
     @pg.production("old_test : or_test")
     @pg.production("old_test : old_lambdef")
@@ -45,7 +42,13 @@ def include_operators(pg):
     @pg.production("expr_stmt : testlist EQUAL yield_expr")
     @pg.production("expr_stmt : testlist EQUAL expr_stmt")
     def assignment_node((target, equal, value)):
-        return assignment(value, target, equal.before_space, equal.after_space)
+        return {
+            "type": "assign",
+            "value": value,
+            "target": target,
+            "first_formatting": equal.hidden_tokens_before,
+            "second_formatting": equal.hidden_tokens_after
+        }
 
     @pg.production("test : or_test IF or_test ELSE test")
     def ternary_operator_node((first, if_, second, else_, third)):

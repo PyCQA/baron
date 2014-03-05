@@ -99,12 +99,3 @@ def binary_operator(operator, first, second, first_space="", second_space=""):
         "second_space": second_space,
     }
 
-def assignment(value, target, first_space="", second_space=""):
-    return {
-        "type": "assign",
-        "value": value,
-        "target": target,
-        "first_space": first_space,
-        "second_space": second_space,
-    }
-

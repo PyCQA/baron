@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
 import pytest
-from utils import comparison, boolean_operator, assignment
+from utils import comparison, boolean_operator
 from test_utils import parse_simple
 
 
@@ -5233,23 +5233,13 @@ def test_assignment():
            ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [assignment(
-                      value={ "type": "name", "value": 'b', },
-                      target={"type": "name", "value": 'a'},
-                      first_space=" ",
-                      second_space=" ",
-                     )])
+          [{ "type": "assign", "value": { "type": "name", "value": 'b', }, "target": {"type": "name", "value": 'a'}, "first_space": " ", "second_space": " ", }])
     parse_simple([
            ('NAME', 'a'),
            ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ],
-          [assignment(
-                      value={"type": "name", "value": 'b'},
-                      target={ "type": "name", "value": 'a', },
-                      first_space=" ",
-                      second_space=" ",
-                     )])
+          [{ "type": "assign", "value": {"type": "name", "value": 'b'}, "target": { "type": "name", "value": 'a', }, "first_space": " ", "second_space": " ", }])
 
 def test_assignment_assignment():
     "a = b = c"
@@ -5260,13 +5250,16 @@ def test_assignment_assignment():
            ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
+          [{ "type": "assign", "value": assignment(                                        value={ "type": "name", "value": 'c', },                                        target={"type": "name", "value": 'b'},                                        first_space=" ",                                        second_space=" ",                                       ), "target": {"type": "name", "value": 'a'}, "first_space": " ", "second_space": " ", }])
+    parse_simple([
+           ('NAME', 'a'),
+           ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'b'),
+           ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'c'),
+          ],
           [assignment(
-                      value=assignment(
-                                       value={ "type": "name", "value": 'c', },
-                                       target={"type": "name", "value": 'b'},
-                                       first_space=" ",
-                                       second_space=" ",
-                                      ),
+                      value={ "type": "assign", "value": { "type": "name", "value": 'c', }, "target": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", },
                       target={"type": "name", "value": 'a'},
                       first_space=" ",
                       second_space=" ",
@@ -5278,13 +5271,16 @@ def test_assignment_assignment():
            ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
+          [{ "type": "assign", "value": assignment(                                        value={"type": "name", "value": 'c'},                                        target={ "type": "name", "value": 'b', },                                        first_space=" ",                                        second_space=" ",                                       ), "target": {"type": "name", "value": 'a'}, "first_space": " ", "second_space": " ", }])
+    parse_simple([
+           ('NAME', 'a'),
+           ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'b'),
+           ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'c'),
+          ],
           [assignment(
-                      value=assignment(
-                                       value={"type": "name", "value": 'c'},
-                                       target={ "type": "name", "value": 'b', },
-                                       first_space=" ",
-                                       second_space=" ",
-                                      ),
+                      value={ "type": "assign", "value": {"type": "name", "value": 'c'}, "target": { "type": "name", "value": 'b', }, "first_space": " ", "second_space": " ", },
                       target={"type": "name", "value": 'a'},
                       first_space=" ",
                       second_space=" ",
@@ -5296,13 +5292,16 @@ def test_assignment_assignment():
            ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ],
+          [{ "type": "assign", "value": assignment(                                        value={"type": "name", "value": 'c'},                                        target={"type": "name", "value": 'b'},                                        first_space=" ",                                        second_space=" ",                                       ), "target": { "type": "name", "value": 'a', }, "first_space": " ", "second_space": " ", }])
+    parse_simple([
+           ('NAME', 'a'),
+           ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'b'),
+           ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'c'),
+          ],
           [assignment(
-                      value=assignment(
-                                       value={"type": "name", "value": 'c'},
-                                       target={"type": "name", "value": 'b'},
-                                       first_space=" ",
-                                       second_space=" ",
-                                      ),
+                      value={ "type": "assign", "value": {"type": "name", "value": 'c'}, "target": {"type": "name", "value": 'b'}, "first_space": " ", "second_space": " ", },
                       target={ "type": "name", "value": 'a', },
                       first_space=" ",
                       second_space=" ",
