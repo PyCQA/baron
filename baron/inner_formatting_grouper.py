@@ -148,7 +148,7 @@ def group_generator(sequence):
 
             if current[0] in GROUP_ON:
                 while iterator.show_next() and iterator.show_next()[0] in GROUP_THOSE:
-                    _append_to_debug_file_content(iterator.show_next())
+                    _append_to_debug_file_content(iterator.show_next(), debug_file_content)
                     current = append_to_token_after(current, [iterator.next()])
 
 
