@@ -43,7 +43,7 @@ def test_simple_import():
     group([('IMPORT', 'import'),
            ('SPACE', '  '),
            ('NAME', 'pouet')],
-          [('IMPORT', 'import', '', '  '),
+          [('IMPORT', 'import', [], [('SPACE', '  ')]),
            ('NAME', 'pouet')])
 
 
@@ -54,7 +54,7 @@ def test_import_basic_dot():
            ('NAME', 'pouet'),
            ('DOT', '.'),
            ('NAME', 'blob')],
-          [('IMPORT', 'import', '', '  '),
+          [('IMPORT', 'import', [], [('SPACE', '  ')]),
            ('NAME', 'pouet'),
            ('DOT', '.'),
            ('NAME', 'blob')])
@@ -70,26 +70,26 @@ def test_import_more_dot():
            ('SPACE', ' '),
            ('DOT', '.'),
            ('NAME', 'plop')],
-          [('IMPORT', 'import', '', '  '),
+          [('IMPORT', 'import', [], [('SPACE', '  ')]),
            ('NAME', 'pouet'),
            ('DOT', '.'),
            ('NAME', 'blob'),
-           ('DOT', '.', ' '),
+           ('DOT', '.', [('SPACE', ' ')]),
            ('NAME', 'plop')])
 
 
 def test_import_as():
     "import   pouet as  b"
-    group([('IMPORT', 'import', '', '  '),
+    group([('IMPORT', 'import', [], [('SPACE', '  ')]),
            ('SPACE', '  '),
            ('NAME', 'pouet'),
            ('SPACE', ' '),
            ('AS', 'as'),
            ('SPACE', '  '),
            ('NAME', 'b')],
-          [('IMPORT', 'import', '', '  '),
+          [('IMPORT', 'import', [], [('SPACE', '  ')]),
            ('NAME', 'pouet'),
-           ('AS', 'as', ' ', '  '),
+           ('AS', 'as', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'b')])
 
 
@@ -101,15 +101,15 @@ def test_import_a_b():
            ('COMMA', ','),
            ('SPACE', ' '),
            ('NAME', 'b')],
-          [('IMPORT', 'import', '', ' '),
+          [('IMPORT', 'import', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b')])
 
 
 def test_import_a_b_as_c():
     "import a, b.d as  c"
-    group([('IMPORT', 'import', '', ' '),
+    group([('IMPORT', 'import', [], [('SPACE', ' ')]),
            ('SPACE', ' '),
            ('NAME', 'a'),
            ('COMMA', ','),
@@ -121,19 +121,19 @@ def test_import_a_b_as_c():
            ('AS', 'as'),
            ('SPACE', '  '),
            ('NAME', 'c')],
-          [('IMPORT', 'import', '', ' '),
+          [('IMPORT', 'import', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
            ('DOT', '.'),
            ('NAME', 'd'),
-           ('AS', 'as', ' ', '  '),
+           ('AS', 'as', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'c')])
 
 
 def test_import_a_b_c_d():
     "import a, b, c, d"
-    group([('IMPORT', 'import', '', ' '),
+    group([('IMPORT', 'import', [], [('SPACE', ' ')]),
            ('SPACE', ' '),
            ('NAME', 'a'),
            ('COMMA', ','),
@@ -145,13 +145,13 @@ def test_import_a_b_c_d():
            ('COMMA', ','),
            ('SPACE', ' '),
            ('NAME', 'd')],
-          [('IMPORT', 'import', '', ' '),
+          [('IMPORT', 'import', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'c'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'd')])
 
 
@@ -164,15 +164,15 @@ def test_from_a_import_b():
            ('IMPORT', 'import'),
            ('SPACE', ' '),
            ('NAME', 'b')],
-          [('FROM', 'from', '', ' '),
+          [('FROM', 'from', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('IMPORT', 'import', ' ', ' '),
+           ('IMPORT', 'import', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b')])
 
 
 def test_from_a_dot_c_import_b():
     "from a.C import b"
-    group([('FROM', 'from', '', ' '),
+    group([('FROM', 'from', [], [('SPACE', ' ')]),
            ('SPACE', ' '),
            ('NAME', 'a'),
            ('DOT', '.'),
@@ -181,11 +181,11 @@ def test_from_a_dot_c_import_b():
            ('IMPORT', 'import'),
            ('SPACE', ' '),
            ('NAME', 'b')],
-          [('FROM', 'from', '', ' '),
+          [('FROM', 'from', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'c'),
-           ('IMPORT', 'import', ' ', ' '),
+           ('IMPORT', 'import', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b')])
 
 
@@ -203,13 +203,13 @@ def test_from_a_dot_c_import_b_d():
            ('COMMA', ','),
            ('SPACE', ' '),
            ('NAME', 'd')],
-          [('FROM', 'from', '', ' '),
+          [('FROM', 'from', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'c'),
-           ('IMPORT', 'import', ' ', ' '),
+           ('IMPORT', 'import', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'd')])
 
 
@@ -227,11 +227,11 @@ def test_from_a_import_b_as_d():
            ('SPACE', ' '),
            ('NAME', 'd')
           ],
-          [('FROM', 'from', '', ' '),
+          [('FROM', 'from', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('IMPORT', 'import', ' ', ' '),
+           ('IMPORT', 'import', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('AS', 'as', ' ', ' '),
+           ('AS', 'as', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'd')
           ])
 
@@ -247,9 +247,9 @@ def test_from_a_import_parenthesis_b():
            ('NAME', 'b'),
            ('RIGHT_PARENTHESIS', ')')
           ],
-          [('FROM', 'from', '', ' '),
+          [('FROM', 'from', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('IMPORT', 'import', ' ', ' '),
+           ('IMPORT', 'import', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('LEFT_PARENTHESIS', '('),
            ('NAME', 'b'),
            ('RIGHT_PARENTHESIS', ')')
@@ -267,9 +267,9 @@ def test_from_a_import_parenthesis_b_without_space():
            ('NAME', 'b'),
            ('RIGHT_PARENTHESIS', ')')
           ],
-          [('FROM', 'from', '', ' '),
+          [('FROM', 'from', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('IMPORT', 'import', ' '),
+           ('IMPORT', 'import', [('SPACE', ' ')]),
            ('LEFT_PARENTHESIS', '('),
            ('NAME', 'b'),
            ('RIGHT_PARENTHESIS', ')')
@@ -291,9 +291,9 @@ def test_from_a_import_parenthesis_b_comma():
            ('COMMA', ','),
            ('RIGHT_PARENTHESIS', ')')
           ],
-          [('FROM', 'from', '', ' '),
+          [('FROM', 'from', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('IMPORT', 'import', ' ', ' '),
+           ('IMPORT', 'import', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('LEFT_PARENTHESIS', '('),
            ('NAME', 'b'),
            ('COMMA', ','),
@@ -315,12 +315,12 @@ def test_from_a_import_parenthesis_b_space():
            ('SPACE', ' '),
            ('RIGHT_PARENTHESIS', ')'),
           ],
-          [('FROM', 'from', '', ' '),
+          [('FROM', 'from', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('IMPORT', 'import', ' ', ' '),
+           ('IMPORT', 'import', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('LEFT_PARENTHESIS', '('),
            ('NAME', 'b'),
-           ('RIGHT_PARENTHESIS', ')', ' '),
+           ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
           ])
 
 
@@ -335,9 +335,9 @@ def test_from_a_import_star():
            ('SPACE', ' '),
            ('STAR', '*')
           ],
-          [('FROM', 'from', '', ' '),
+          [('FROM', 'from', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('IMPORT', 'import', ' ', ' '),
+           ('IMPORT', 'import', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('STAR', '*')
           ])
 
@@ -351,9 +351,9 @@ def test_from_a_import_star_without_space():
            ('SPACE', ' '),
            ('IMPORT', 'import'),
            ('STAR', '*')],
-          [('FROM', 'from', '', ' '),
+          [('FROM', 'from', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('IMPORT', 'import', ' '),
+           ('IMPORT', 'import', [('SPACE', ' ')]),
            ('STAR', '*')])
 
 
@@ -369,10 +369,10 @@ def test_from_dot_a_import_b():
            ('SPACE', ' '),
            ('NAME', 'b')
           ],
-          [('FROM', 'from', '', ' '),
+          [('FROM', 'from', [], [('SPACE', ' ')]),
            ('DOT', '.'),
            ('NAME', 'a'),
-           ('IMPORT', 'import', ' ', ' '),
+           ('IMPORT', 'import', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b')
           ])
 
@@ -391,12 +391,12 @@ def test_from_dot_dot_dot_a_import_b():
            ('SPACE', ' '),
            ('NAME', 'b')
           ],
-          [('FROM', 'from', '', ' '),
+          [('FROM', 'from', [], [('SPACE', ' ')]),
            ('DOT', '.'),
            ('DOT', '.'),
            ('DOT', '.'),
            ('NAME', 'a'),
-           ('IMPORT', 'import', ' ', ' '),
+           ('IMPORT', 'import', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b')
           ])
 
@@ -415,7 +415,7 @@ def test_from_no_space_dot_a_import_b():
           [('FROM', 'from'),
            ('DOT', '.'),
            ('NAME', 'a'),
-           ('IMPORT', 'import', ' ', ' '),
+           ('IMPORT', 'import', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b')
           ])
 
@@ -431,9 +431,9 @@ def test_from_dot_import_b():
            ('SPACE', ' '),
            ('NAME', 'b')
           ],
-          [('FROM', 'from', '', ' '),
+          [('FROM', 'from', [], [('SPACE', ' ')]),
            ('DOT', '.'),
-           ('IMPORT', 'import', ' ', ' '),
+           ('IMPORT', 'import', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b')
           ])
 
@@ -448,9 +448,9 @@ def test_from_dot_no_space_import_b():
            ('SPACE', ' '),
            ('NAME', 'b')
           ],
-          [('FROM', 'from', '', ' '),
+          [('FROM', 'from', [], [('SPACE', ' ')]),
            ('DOT', '.'),
-           ('IMPORT', 'import', '', ' '),
+           ('IMPORT', 'import', [], [('SPACE', ' ')]),
            ('NAME', 'b')
           ])
 
@@ -467,7 +467,7 @@ def test_from_no_space_dot_import_b():
           ],
           [('FROM', 'from'),
            ('DOT', '.'),
-           ('IMPORT', 'import', ' ', ' '),
+           ('IMPORT', 'import', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b')
           ])
 
@@ -482,7 +482,7 @@ def test_from_no_space_dot_no_sapceimport_b():
            ('NAME', 'b')],
           [('FROM', 'from'),
            ('DOT', '.'),
-           ('IMPORT', 'import', '', ' '),
+           ('IMPORT', 'import', [], [('SPACE', ' ')]),
            ('NAME', 'b')])
 
 
@@ -508,7 +508,7 @@ def test_first_space_power():
            ('NAME', 'b')
           ],
           [('NAME', 'a'),
-           ('DOUBLE_STAR', '**', '  '),
+           ('DOUBLE_STAR', '**', [('SPACE', '  ')]),
            ('NAME', 'b')
           ])
 
@@ -521,7 +521,7 @@ def test_second_space_power():
            ('SPACE', ' '),
            ('NAME', 'b')],
           [('NAME', 'a'),
-           ('DOUBLE_STAR', '**', '', ' '),
+           ('DOUBLE_STAR', '**', [], [('SPACE', ' ')]),
            ('NAME', 'b')])
 
 
@@ -535,7 +535,7 @@ def test_spaces_power():
            ('NAME', 'b')
           ],
           [('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'b')
           ])
 
@@ -554,9 +554,9 @@ def test_power_power():
            ('NAME', 'c')
           ],
           [('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'b'),
-           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ])
 
@@ -574,9 +574,9 @@ def test_power_power_spaces():
            ('NAME', 'c')
           ],
           [('NAME', 'a'),
-           ('DOUBLE_STAR', '**', '', '  '),
+           ('DOUBLE_STAR', '**', [], [('SPACE', '  ')]),
            ('NAME', 'b'),
-           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ])
     "a **b   **    c"
@@ -591,9 +591,9 @@ def test_power_power_spaces():
            ('NAME', 'c')
           ],
           [('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('DOUBLE_STAR', '**', '   ', '    '),
+           ('DOUBLE_STAR', '**', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'c')
           ])
     "a**b**c"
@@ -623,7 +623,7 @@ def test_power_factor():
            ('NAME', 'b')
           ],
           [('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('PLUS', '+'),
            ('NAME', 'b')
           ])
@@ -640,7 +640,7 @@ def test_power_factor_minus():
            ('NAME', 'b')
           ],
           [('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('MINUS', '-'),
            ('NAME', 'b')
           ])
@@ -657,7 +657,7 @@ def test_power_factor_tild():
            ('NAME', 'b')
           ],
           [('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('TILDE', '~'),
            ('NAME', 'b')
           ])
@@ -676,7 +676,7 @@ def test_power_operator_madness():
            ('NAME', 'b')
           ],
           [('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('TILDE', '~'),
            ('PLUS', '+'),
            ('MINUS', '-'),
@@ -696,8 +696,8 @@ def test_power_factor_tild_space():
            ('NAME', 'b')
           ],
           [('NAME', 'a'),
-           ('DOUBLE_STAR', '**', ' ', '  '),
-           ('TILDE', '~', '', ' '),
+           ('DOUBLE_STAR', '**', [('SPACE', ' ')], [('SPACE', '  ')]),
+           ('TILDE', '~', [], [('SPACE', ' ')]),
            ('NAME', 'b')
           ])
 
@@ -726,7 +726,7 @@ def test_power_trailer_spaces():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('DOT', '.', ' '),
+           ('DOT', '.', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -737,7 +737,7 @@ def test_power_trailer_spaces():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('DOT', '.', '', '  '),
+           ('DOT', '.', [], [('SPACE', '  ')]),
            ('NAME', 'b'),
           ])
 
@@ -749,7 +749,7 @@ def test_power_trailer_spaces():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('DOT', '.', '   ', '    '),
+           ('DOT', '.', [('SPACE', '   ')], [('SPACE', '    ')]),
            ('NAME', 'b'),
           ])
 
@@ -807,9 +807,9 @@ def test_power_trailers_space():
            ('NAME', 'c'),
           ],
           [('NAME', 'a'),
-           ('DOT', '.', ' ', ' '),
+           ('DOT', '.', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('DOT', '.', ' ', ' '),
+           ('DOT', '.', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ])
 
@@ -855,7 +855,7 @@ def test_power_trailer_getitem_empty_with_space():
           ],
           [
            ('NAME', 'a'),
-           ('LEFT_SQUARE_BRACKET', '[', ' ', ' '),
+           ('LEFT_SQUARE_BRACKET', '[', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('RIGHT_SQUARE_BRACKET', ']'),
           ])
 
@@ -883,7 +883,7 @@ def test_power_trailer_call_empty_with_space():
            ('RIGHT_PARENTHESIS', ')'),
           ],
           [('NAME', 'a'),
-           ('LEFT_PARENTHESIS', '(', ' ', ' '),
+           ('LEFT_PARENTHESIS', '(', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('RIGHT_PARENTHESIS', ')'),
           ])
 
@@ -910,7 +910,7 @@ def test_term_mult_first_space():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('STAR', '*', ' '),
+           ('STAR', '*', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -924,7 +924,7 @@ def test_term_mult_second_space():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('STAR', '*', '', ' '),
+           ('STAR', '*', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -939,7 +939,7 @@ def test_term_mult_spaces():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('STAR', '*', ' ', ' '),
+           ('STAR', '*', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -958,7 +958,7 @@ def test_term_mult_spaces_atomtrailers():
           [('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
-           ('STAR', '*', ' ', ' '),
+           ('STAR', '*', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ])
 
@@ -985,7 +985,7 @@ def test_term_div_first_space():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('SLASH', '/', ' '),
+           ('SLASH', '/', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -999,7 +999,7 @@ def test_term_div_second_space():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('SLASH', '/', '', ' '),
+           ('SLASH', '/', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1014,7 +1014,7 @@ def test_term_div_spaces():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('SLASH', '/', ' ', ' '),
+           ('SLASH', '/', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1033,7 +1033,7 @@ def test_term_div_spaces_atomtrailers():
           [('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
-           ('SLASH', '/', ' ', ' '),
+           ('SLASH', '/', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ])
 
@@ -1060,7 +1060,7 @@ def test_term_modulo_first_space():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('PERCENT', '%', ' '),
+           ('PERCENT', '%', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1074,7 +1074,7 @@ def test_term_modulo_second_space():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('PERCENT', '%', '', ' '),
+           ('PERCENT', '%', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1089,7 +1089,7 @@ def test_term_modulo_spaces():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('PERCENT', '%', ' ', ' '),
+           ('PERCENT', '%', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1108,7 +1108,7 @@ def test_term_modulo_spaces_atomtrailers():
           [('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
-           ('PERCENT', '%', ' ', ' '),
+           ('PERCENT', '%', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ])
 
@@ -1135,7 +1135,7 @@ def test_term_floor_division_first_space():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('DOUBLE_SLASH', '//', ' '),
+           ('DOUBLE_SLASH', '//', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1149,7 +1149,7 @@ def test_term_floor_division_second_space():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('DOUBLE_SLASH', '//', '', ' '),
+           ('DOUBLE_SLASH', '//', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1164,7 +1164,7 @@ def test_term_floor_division_spaces():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('DOUBLE_SLASH', '//', ' ', ' '),
+           ('DOUBLE_SLASH', '//', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1183,7 +1183,7 @@ def test_term_floor_division_spaces_atomtrailers():
           [('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
-           ('DOUBLE_SLASH', '//', ' ', ' '),
+           ('DOUBLE_SLASH', '//', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ])
 
@@ -1233,7 +1233,7 @@ def test_arith_expr_add_first_space():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('PLUS', '+', ' '),
+           ('PLUS', '+', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1248,7 +1248,7 @@ def test_arith_expr_add_second_space():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('PLUS', '+', '', ' '),
+           ('PLUS', '+', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1264,7 +1264,7 @@ def test_arith_expr_add_spaces():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('PLUS', '+', ' ', ' '),
+           ('PLUS', '+', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1284,7 +1284,7 @@ def test_arith_expr_add_spaces_atomtrailers():
           [('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
-           ('PLUS', '+', ' ', ' '),
+           ('PLUS', '+', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ])
 
@@ -1312,7 +1312,7 @@ def test_arith_expr_substract_first_space():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('MINUS', '-', ' '),
+           ('MINUS', '-', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1327,7 +1327,7 @@ def test_arith_expr_substract_second_space():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('MINUS', '-', '', ' '),
+           ('MINUS', '-', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1343,7 +1343,7 @@ def test_arith_expr_substract_spaces():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('MINUS', '-', ' ', ' '),
+           ('MINUS', '-', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1363,7 +1363,7 @@ def test_arith_expr_substract_spaces_atomtrailers():
           [('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
-           ('MINUS', '-', ' ', ' '),
+           ('MINUS', '-', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ])
 
@@ -1408,7 +1408,7 @@ def test_arith_expr_left_shift_first_space():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('LEFT_SHIFT', '<<', ' '),
+           ('LEFT_SHIFT', '<<', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1423,7 +1423,7 @@ def test_arith_expr_left_shift_second_space():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('LEFT_SHIFT', '<<', '', ' '),
+           ('LEFT_SHIFT', '<<', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1439,7 +1439,7 @@ def test_arith_expr_left_shift_spaces():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('LEFT_SHIFT', '<<', ' ', ' '),
+           ('LEFT_SHIFT', '<<', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1466,7 +1466,7 @@ def test_arith_expr_right_shift_first_space():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('RIGHT_SHIFT', '>>', ' '),
+           ('RIGHT_SHIFT', '>>', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1480,7 +1480,7 @@ def test_arith_expr_right_shift_second_space():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('RIGHT_SHIFT', '>>', '', ' '),
+           ('RIGHT_SHIFT', '>>', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1495,7 +1495,7 @@ def test_arith_expr_right_shift_spaces():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('RIGHT_SHIFT', '>>', ' ', ' '),
+           ('RIGHT_SHIFT', '>>', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1514,7 +1514,7 @@ def test_arith_expr_right_shift_spaces_atomtrailers():
           [('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
-           ('RIGHT_SHIFT', '>>', ' ', ' '),
+           ('RIGHT_SHIFT', '>>', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ])
 
@@ -1558,7 +1558,7 @@ def test_and_expr_first_space():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('AMPER', '&', ' '),
+           ('AMPER', '&', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1572,7 +1572,7 @@ def test_and_expr_second_space():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('AMPER', '&', '', ' '),
+           ('AMPER', '&', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1587,7 +1587,7 @@ def test_and_expr_spaces():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('AMPER', '&', ' ', ' '),
+           ('AMPER', '&', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1606,7 +1606,7 @@ def test_and_expr_spaces_atomtrailers():
           [('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
-           ('AMPER', '&', ' ', ' '),
+           ('AMPER', '&', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ])
 
@@ -1650,7 +1650,7 @@ def test_xor_expr_first_space():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('CIRCUMFLEX', '^', ' '),
+           ('CIRCUMFLEX', '^', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1664,7 +1664,7 @@ def test_xor_expr_second_space():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('CIRCUMFLEX', '^', '', ' '),
+           ('CIRCUMFLEX', '^', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1679,7 +1679,7 @@ def test_xor_expr_spaces():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('CIRCUMFLEX', '^', ' ', ' '),
+           ('CIRCUMFLEX', '^', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1698,7 +1698,7 @@ def test_xor_expr_spaces_atomtrailers():
           [('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
-           ('CIRCUMFLEX', '^', ' ', ' '),
+           ('CIRCUMFLEX', '^', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ])
 
@@ -1742,7 +1742,7 @@ def test_expr_first_space():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('VBAR', '|', ' '),
+           ('VBAR', '|', [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1756,7 +1756,7 @@ def test_expr_second_space():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('VBAR', '|', '', ' '),
+           ('VBAR', '|', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1771,7 +1771,7 @@ def test_expr_spaces():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('VBAR', '|', ' ', ' '),
+           ('VBAR', '|', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -1790,7 +1790,7 @@ def test_expr_spaces_atomtrailers():
           [('NAME', 'a'),
            ('DOT', '.'),
            ('NAME', 'b'),
-           ('VBAR', '|', ' ', ' '),
+           ('VBAR', '|', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ])
 
@@ -1922,8 +1922,8 @@ def test_chained_comparison():
 
 
 advanced_comparison_tokens = (
-    (('NOT', 'not', '', ' '), ('IN', 'in')),
-    (('IS', 'is', '', ' '), ('NOT', 'not')),
+    (('NOT', 'not', [], [('SPACE', ' ')]), ('IN', 'in')),
+    (('IS', 'is', [], [('SPACE', ' ')]), ('NOT', 'not')),
 )
 
 
@@ -1954,7 +1954,7 @@ def test_not():
            ('SPACE', ' '),
            ('NAME', 'a'),
           ],
-          [('NOT', 'not', '', ' '),
+          [('NOT', 'not', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ])
 
@@ -1968,8 +1968,8 @@ def test_not_not():
            ('SPACE', ' '),
            ('NAME', 'a'),
           ],
-          [('NOT', 'not', '', ' '),
-           ('NOT', 'not', '', ' '),
+          [('NOT', 'not', [], [('SPACE', ' ')]),
+           ('NOT', 'not', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ])
 
@@ -1984,7 +1984,7 @@ def test_and():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('AND', 'and', ' ', ' '),
+           ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -2002,9 +2002,9 @@ def test_and_and():
            ('NAME', 'c'),
           ],
           [('NAME', 'a'),
-           ('AND', 'and', ' ', ' '),
+           ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('AND', 'and', ' ', ' '),
+           ('AND', 'and', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ])
 
@@ -2019,7 +2019,7 @@ def test_or():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -2038,9 +2038,9 @@ def test_or_or():
            ('NAME', 'c'),
           ],
           [('NAME', 'a'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ])
 
@@ -2059,9 +2059,9 @@ def test_ternary_operator():
            ('NAME', 'c'),
           ],
           [('NAME', 'a'),
-           ('IF', 'if', ' ', ' '),
+           ('IF', 'if', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('ELSE', 'else', ' ', ' '),
+           ('ELSE', 'else', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ])
 
@@ -2076,7 +2076,7 @@ def test_assignment():
            ('NAME', 'b'),
           ],
           [('NAME', 'a'),
-           ('EQUAL', '=', ' ', ' '),
+           ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -2095,9 +2095,9 @@ def test_assignment_assignment():
            ('NAME', 'c'),
           ],
           [('NAME', 'a'),
-           ('EQUAL', '=', ' ', ' '),
+           ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('EQUAL', '=', ' ', ' '),
+           ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ])
 
@@ -2148,7 +2148,7 @@ def test_expr_comma_list():
            ('NAME', 'd'),
           ],
           [('NAME', 'a'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
            ('COMMA', ','),
            ('NAME', 'c'),
@@ -2172,7 +2172,7 @@ def test_expr_comma_list_3_items():
            ('NAME', 'e'),
           ],
           [('NAME', 'a'),
-           ('OR', 'or', ' ', ' '),
+           ('OR', 'or', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
            ('COMMA', ','),
            ('NAME', 'c'),
@@ -2196,9 +2196,9 @@ def test_implicit_tuple_space():
            ('NAME', 'c'),
           ],
           [('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' ', ' '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ])
 
@@ -2211,7 +2211,7 @@ def test_implicit_tuple_one_item():
            ('COMMA', ','),
           ],
           [('NAME', 'a'),
-           ('COMMA', ',', ' '),
+           ('COMMA', ',', [('SPACE', ' ')]),
           ])
 
 
@@ -2226,9 +2226,9 @@ def test_implicit_tuple_trailing_comma():
            ('COMMA', ','),
           ],
           [('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' '),
+           ('COMMA', ',', [('SPACE', ' ')]),
           ])
 
 
@@ -2248,7 +2248,7 @@ def test_return_a():
            ('SPACE', ' '),
            ('NAME', 'a'),
           ],
-         [('RETURN', 'return', '', ' '),
+         [('RETURN', 'return', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ])
 
@@ -2269,7 +2269,7 @@ def test_yield_a():
            ('SPACE', ' '),
            ('NAME', 'a'),
           ],
-         [('YIELD', 'yield', '', ' '),
+         [('YIELD', 'yield', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ])
 
@@ -2281,7 +2281,7 @@ def test_del():
            ('SPACE', ' '),
            ('NAME', 'a'),
           ],
-          [('DEL', 'del', '', ' '),
+          [('DEL', 'del', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ])
 
@@ -2320,7 +2320,7 @@ def test_assert():
            ('SPACE', ' '),
            ('NAME', 'a'),
           ],
-          [('ASSERT', 'assert', '', ' '),
+          [('ASSERT', 'assert', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ])
 
@@ -2328,16 +2328,16 @@ def test_assert():
 def test_assert_message():
     "assert a , b"
     group([
-           ('ASSERT', 'assert', '', ' '),
+           ('ASSERT', 'assert', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
            ('SPACE', ' '),
            ('COMMA', ','),
            ('SPACE', ' '),
            ('NAME', 'b'),
           ],
-          [('ASSERT', 'assert', '', ' '),
+          [('ASSERT', 'assert', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', ' ', ' '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -2358,7 +2358,7 @@ def test_raise():
            ('SPACE', ' '),
            ('NAME', 'a'),
           ],
-          [('RAISE', 'raise', '', ' '),
+          [('RAISE', 'raise', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ])
 
@@ -2373,9 +2373,9 @@ def test_raise_instance():
            ('SPACE', ' '),
            ('NAME', 'b'),
           ],
-          [('RAISE', 'raise', '', ' '),
+          [('RAISE', 'raise', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', 'comma', '', ' '),
+           ('COMMA', 'comma', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -2393,11 +2393,11 @@ def test_raise_instance_traceback():
            ('SPACE', ' '),
            ('NAME', 'c'),
           ],
-          [('RAISE', 'raise', '', ' '),
+          [('RAISE', 'raise', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', 'comma', '', ' '),
+           ('COMMA', 'comma', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', 'comma', '', ' '),
+           ('COMMA', 'comma', [], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ])
 
@@ -2409,7 +2409,7 @@ def test_exec():
            ('SPACE', ' '),
            ('NAME', 'a'),
           ],
-          [('EXEC', 'exec', '', ' '),
+          [('EXEC', 'exec', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ])
 
@@ -2425,9 +2425,9 @@ def test_exec_in():
            ('SPACE', ' '),
            ('NAME', 'b'),
           ],
-          [('EXEC', 'exec', '', ' '),
+          [('EXEC', 'exec', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -2446,11 +2446,11 @@ def test_exec_in_c():
            ('SPACE', ' '),
            ('NAME', 'c'),
           ],
-          [('EXEC', 'exec', '', ' '),
+          [('EXEC', 'exec', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('IN', 'in', ' ', ' '),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'c'),
           ])
 
@@ -2462,7 +2462,7 @@ def test_global():
            ('SPACE', ' '),
            ('NAME', 'a'),
           ],
-          [('GLOBAL', 'global', '', ' '),
+          [('GLOBAL', 'global', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ])
 
@@ -2477,9 +2477,9 @@ def test_global_one():
            ('SPACE', ' '),
            ('NAME', 'b'),
           ],
-          [('GLOBAL', 'global', '', ' '),
+          [('GLOBAL', 'global', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -2498,11 +2498,11 @@ def test_global_two():
            ('SPACE', '  '),
            ('NAME', 'c'),
           ],
-          [('GLOBAL', 'global', '', ' '),
+          [('GLOBAL', 'global', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' ', '  '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', '  ')]),
            ('NAME', 'c'),
           ])
 
@@ -2523,7 +2523,7 @@ def test_print_a():
            ('SPACE', ' '),
            ('NAME', 'a'),
           ],
-          [('PRINT', 'print', '', ' '),
+          [('PRINT', 'print', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ])
 
@@ -2538,9 +2538,9 @@ def test_print_a_b():
            ('SPACE', ' '),
            ('NAME', 'b'),
           ],
-          [('PRINT', 'print', '', ' '),
+          [('PRINT', 'print', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -2556,9 +2556,9 @@ def test_print_a_b_comma():
            ('NAME', 'b'),
            ('COMMA', ',', '', ''),
           ],
-          [('PRINT', 'print', '', ' '),
+          [('PRINT', 'print', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', '', ' '),
+           ('COMMA', ',', [], [('SPACE', ' ')]),
            ('NAME', 'b'),
            ('COMMA', ',', '', ''),
           ])
@@ -2573,8 +2573,8 @@ def test_print_redirect():
            ('SPACE', ' '),
            ('NAME', 'a'),
           ],
-          [('PRINT', 'print', '', ' '),
-           ('RIGHT_SHIFT', '>>', '', ' '),
+          [('PRINT', 'print', [], [('SPACE', ' ')]),
+           ('RIGHT_SHIFT', '>>', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
           ])
 
@@ -2592,10 +2592,10 @@ def test_print_redirect_ab():
            ('SPACE', ' '),
            ('NAME', 'b'),
           ],
-          [('PRINT', 'print', '', ' '),
-           ('RIGHT_SHIFT', '>>', '', ' '),
+          [('PRINT', 'print', [], [('SPACE', ' ')]),
+           ('RIGHT_SHIFT', '>>', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', ' ', ' '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
           ])
 
@@ -2615,12 +2615,12 @@ def test_print_redirect_ab_comma():
            ('SPACE', ' '),
            ('COMMA', ','),
           ],
-          [('PRINT', 'print', '', ' '),
-           ('RIGHT_SHIFT', '>>', '', ' '),
+          [('PRINT', 'print', [], [('SPACE', ' ')]),
+           ('RIGHT_SHIFT', '>>', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COMMA', ',', ' ', ' '),
+           ('COMMA', ',', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('NAME', 'b'),
-           ('COMMA', ',', ' '),
+           ('COMMA', ',', [('SPACE', ' ')]),
           ])
 
 
@@ -2636,9 +2636,9 @@ def test_if_a_pass():
            ('PASS', 'pass'),
           ],
           [
-           ('IF', 'if', '', ' '),
+           ('IF', 'if', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COLON', ':', ' ', ' '),
+           ('COLON', ':', [('SPACE', ' ')], [('SPACE', ' ')]),
            ('PASS', 'pass'),
           ])
 
@@ -2660,11 +2660,11 @@ def test_if_a_pass_indent():
            ('PASS', 'pass'),
           ],
           [
-           ('IF', 'if', '', ' '),
+           ('IF', 'if', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
-           ('COLON', ':', ' '),
+           ('COLON', ':', [('SPACE', ' ')]),
            ('ENDL', '\n'),
-           ('INDENT', '', '', '    '),
+           ('INDENT', '', [], [('SPACE', '    ')]),
            ('PASS', 'pass'),
           ])
 
@@ -2677,7 +2677,7 @@ def test_endl_backward():
            ('ENDL', '\n'),
          ],
          [
-           ('ENDL', '\n', '    '),
+           ('ENDL', '\n', [('SPACE', '    ')]),
          ])
 
 
@@ -2690,7 +2690,7 @@ def test_endl():
            ('ENDL', '\n'),
          ],
          [
-           ('ENDL', '\n', '', '    '),
+           ('ENDL', '\n', [], [('SPACE', '    ')]),
            ('ENDL', '\n'),
          ])
 
@@ -2703,7 +2703,7 @@ def test_endl_import():
            ('IMPORT', 'import'),
          ],
          [
-           ('ENDL', '\n', '', '    '),
+           ('ENDL', '\n', [], [('SPACE', '    ')]),
            ('IMPORT', 'import'),
          ])
 
@@ -2716,7 +2716,7 @@ def test_while():
            ('NAME', 'a'),
          ],
          [
-           ('WHILE', 'while', '', '    '),
+           ('WHILE', 'while', [], [('SPACE', '    ')]),
            ('NAME', 'a'),
          ])
 
@@ -2729,7 +2729,7 @@ def test_elif():
            ('NAME', 'a'),
          ],
          [
-           ('ELIF', 'elif', '', '    '),
+           ('ELIF', 'elif', [], [('SPACE', '    ')]),
            ('NAME', 'a'),
          ])
 
@@ -2743,7 +2743,7 @@ def test_for():
            ('NAME', 'a'),
          ],
          [
-           ('FOR', 'for', '    ', '    '),
+           ('FOR', 'for', [('SPACE', '    ')], [('SPACE', '    ')]),
            ('NAME', 'a'),
          ])
 
@@ -2756,7 +2756,7 @@ def test_except():
            ('NAME', 'a'),
          ],
          [
-          ('EXCEPT', 'except', '', '    '),
+          ('EXCEPT', 'except', [], [('SPACE', '    ')]),
            ('NAME', 'a'),
          ])
 
@@ -2769,7 +2769,7 @@ def test_def():
            ('NAME', 'a'),
          ],
          [
-          ('DEF', 'def', '', '    '),
+          ('DEF', 'def', [], [('SPACE', '    ')]),
            ('NAME', 'a'),
          ])
 
@@ -2782,7 +2782,7 @@ def test_class():
            ('NAME', 'a'),
          ],
          [
-           ('CLASS', 'class', '', '    '),
+           ('CLASS', 'class', [], [('SPACE', '    ')]),
            ('NAME', 'a'),
          ])
 
@@ -2795,7 +2795,7 @@ def test_with():
            ('NAME', 'a'),
          ],
          [
-           ('WITH', 'with', '', '    '),
+           ('WITH', 'with', [], [('SPACE', '    ')]),
            ('NAME', 'a'),
          ])
 
@@ -2808,7 +2808,7 @@ def test_lambda():
            ('NAME', 'a'),
          ],
          [
-           ('LAMBDA', 'lambda', '', '    '),
+           ('LAMBDA', 'lambda', [], [('SPACE', '    ')]),
            ('NAME', 'a'),
          ])
 
@@ -2820,5 +2820,5 @@ def test_comment():
            ('COMMENT', '#'),
          ],
          [
-           ('COMMENT', '#', ' '),
+           ('COMMENT', '#', [('SPACE', ' ')]),
          ])
