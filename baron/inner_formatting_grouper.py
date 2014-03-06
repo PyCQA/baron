@@ -95,8 +95,10 @@ def group(sequence):
 
 
 def fail_on_bad_token(token, debug_file_content):
-    if token in GROUP_ON:
+    if token[0] in GROUP_ON:
         return
+
+    debug_file_content += _append_to_debug_file_content(token)
 
     debug_file_content = debug_file_content.split("\n")
     debug_file_content = zip(range(1, len(debug_file_content) + 1), debug_file_content)
@@ -137,7 +139,7 @@ def group_generator(sequence):
                     _append_to_debug_file_content(to_group[-1], debug_file_content)
 
 
-                fail_on_bad_token(iterator.show_next()[0], debug_file_content)
+                fail_on_bad_token(iterator.show_next(), debug_file_content)
                 current = append_to_token_before(iterator.next(), to_group)
 
             if current[0] in GROUP_ON:
