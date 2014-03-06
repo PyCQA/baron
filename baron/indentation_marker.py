@@ -23,6 +23,16 @@ def mark_indentation(sequence):
     return list(mark_indentation_generator(sequence))
 
 
+def get_space(node):
+    if len(node) < 3:
+        print "WARNING"
+        return None
+    if len(node[3]) == 0:
+        print "WARNING"
+        return None
+    return node[3][0][1]
+
+
 def mark_indentation_generator(sequence):
     iterator = FlexibleIterator(sequence)
     current = None, None
@@ -44,7 +54,7 @@ def mark_indentation_generator(sequence):
         #print current, iterator.show_next()
         if current[0] == "COLON" and iterator.show_next()[0] == "ENDL":
             if iterator.show_next(2)[0] not in ("ENDL",):
-                indentations.append(iterator.show_next()[3])
+                indentations.append(get_space(iterator.show_next()))
                 yield current
                 yield iterator.next()
                 yield ('INDENT', '')
@@ -53,15 +63,15 @@ def mark_indentation_generator(sequence):
                 yield current
                 for i in iterator:
                     if i[0] == 'ENDL' and iterator.show_next()[0] not in ('ENDL',):
-                        indentations.append(i[3])
+                        indentations.append(get_space(i))
                         yield ('INDENT', '')
                         yield i
                         break
                     yield i
                 continue
 
-        if indentations and current[0] == "ENDL" and (len(current) != 4 or current[3] != indentations[-1]) and iterator.show_next()[0] != "ENDL":
-            new_indent = current[3] if len(current) == 4 else ""
+        if indentations and current[0] == "ENDL" and (len(current) != 4 or get_space(current) != indentations[-1]) and iterator.show_next()[0] != "ENDL":
+            new_indent = get_space(current) if len(current) == 4 else ""
             yield current
             while indentations and indentations[-1] > new_indent:
                 indentations.pop()
