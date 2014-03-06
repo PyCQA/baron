@@ -74,26 +74,20 @@ GROUP_ON = (
 
 def append_to_token_after(token, to_append_list):
     if len(token) == 2:
-        return (token[0], token[1], '', '', [], to_append_list)
+        return (token[0], token[1], [], to_append_list)
     elif len(token) == 3:
-        return (token[0], token[1], token[2], '', [], to_append_list)
+        return (token[0], token[1], token[2], to_append_list)
     elif len(token) == 4:
-        return (token[0], token[1], token[2], token[3], [], to_append_list)
-    elif len(token) == 6:
-        return (token[0], token[1], token[2], token[3], token[4], token[5] + to_append_list)
+        return (token[0], token[1], token[2], token[3] + to_append_list)
 
 
 def append_to_token_before(token, to_append_list):
     if len(token) == 2:
-        return (token[0], token[1], '', '', to_append_list, [])
+        return (token[0], token[1], to_append_list, [])
     elif len(token) == 3:
-        return (token[0], token[1], token[2], '', to_append_list, [])
+        return (token[0], token[1], to_append_list + token[2], [])
     elif len(token) == 4:
-        return (token[0], token[1], token[2], token[3], to_append_list, [])
-    #elif len(token) == 5:
-        #return (token[0], token[1], token[2], token[3], token[4], to_append_list)
-    elif len(token) == 6:
-        return (token[0], token[1], token[2], token[3], token[4] + to_append_list, token[5])
+        return (token[0], token[1],  to_append_list + token[2], token[3])
 
 
 def group(sequence):
