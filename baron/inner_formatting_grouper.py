@@ -107,10 +107,10 @@ def fail_on_bad_token(token, debug_file_content):
     raise Exception("Here:\n%s <----\n\n'%s' should have been in: %s" % (debug_file_content, token, ', '.join(sorted(GROUP_ON))))
 
 
-def _append_to_debug_file_content(token, debug_file_content):
+def _append_to_debug_file_content(token):
     before_debug = "".join(map(lambda x: x[1], token[2] if len(token) >= 3 else []))
     after_debug = "".join(map(lambda x: x[1], token[3] if len(token) >= 4 else []))
-    debug_file_content += before_debug + token[1] + after_debug
+    return  before_debug + token[1] + after_debug
 
 
 def group_generator(sequence):
@@ -124,7 +124,7 @@ def group_generator(sequence):
 
         debug_previous_token = current
         current = iterator.next()
-        _append_to_debug_file_content(current, debug_file_content)
+        debug_file_content += _append_to_debug_file_content(current)
 
         if current[0] in ENTER_GROUPING_MODE:
             in_grouping_mode += 1
@@ -136,7 +136,7 @@ def group_generator(sequence):
                 to_group = [current]
                 while iterator.show_next() and iterator.show_next()[0] in GROUP_THOSE:
                     to_group.append(iterator.next())
-                    _append_to_debug_file_content(to_group[-1], debug_file_content)
+                    debug_file_content += _append_to_debug_file_content(to_group[-1])
 
 
                 fail_on_bad_token(iterator.show_next(), debug_file_content)
@@ -144,7 +144,7 @@ def group_generator(sequence):
 
             if current[0] in GROUP_ON:
                 while iterator.show_next() and iterator.show_next()[0] in GROUP_THOSE:
-                    _append_to_debug_file_content(iterator.show_next(), debug_file_content)
+                    debug_file_content += _append_to_debug_file_content(iterator.show_next())
                     current = append_to_token_after(current, [iterator.next()])
 
 
