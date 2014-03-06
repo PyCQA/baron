@@ -122,7 +122,9 @@ def group_generator(sequence):
 
         debug_previous_token = current
         current = iterator.next()
-        debug_file_content += current[1]
+        before_debug = "".join(map(lambda x: x[1], current[2] if len(current) >= 3 else []))
+        after_debug = "".join(map(lambda x: x[1], current[3] if len(current) >= 4 else []))
+        debug_file_content += before_debug + current[1] + after_debug
 
         if current[0] in ENTER_GROUPING_MODE:
             in_grouping_mode += 1
@@ -134,14 +136,20 @@ def group_generator(sequence):
                 to_group = [current]
                 while iterator.show_next() and iterator.show_next()[0] in GROUP_THOSE:
                     to_group.append(iterator.next())
-                    debug_file_content += to_group[-1][1]
+                    before_debug = "".join(map(lambda x: x[1], to_group[-1][2] if len(to_group[-1]) >= 3 else []))
+                    after_debug = "".join(map(lambda x: x[1], to_group[-1][3] if len(to_group[-1]) >= 4 else []))
+                    print [before_debug], [after_debug]
+                    debug_file_content += before_debug + to_group[-1][1] + after_debug
+
 
                 fail_on_bad_token(iterator.show_next()[0], debug_file_content)
                 current = append_to_token_before(iterator.next(), to_group)
 
             if current[0] in GROUP_ON:
                 while iterator.show_next() and iterator.show_next()[0] in GROUP_THOSE:
-                    debug_file_content += iterator.show_next()[1]
+                    before_debug = "".join(map(lambda x: x[1], iterator.show_next()[2] if len(iterator.show_next()) >= 3 else []))
+                    after_debug = "".join(map(lambda x: x[1], iterator.show_next()[3] if len(iterator.show_next()) >= 4 else []))
+                    debug_file_content += before_debug + iterator.show_next()[1] + after_debug
                     current = append_to_token_after(current, [iterator.next()])
 
 
