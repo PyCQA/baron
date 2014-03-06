@@ -1,5 +1,5 @@
 from itertools import izip_longest
-from space_grouper import group as _group
+from formatting_grouper import group as _group
 
 
 def group(inp, out):

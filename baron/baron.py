@@ -1,7 +1,7 @@
 from spliter import split
 from grouper import group
 from tokenizer import tokenize as _tokenize
-from space_grouper import group as space_group
+from formatting_grouper import group as space_group
 from grammator import parser, Token
 from indentation_marker  import mark_indentation
 from inner_formatting_grouper import group as inner_group
