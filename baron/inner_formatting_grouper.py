@@ -100,6 +100,17 @@ def group(sequence):
     return list(group_generator(sequence))
 
 
+def fail_on_bad_token(token, debug_file_content):
+    if token in GROUP_ON:
+        return
+
+    debug_file_content = debug_file_content.split("\n")
+    debug_file_content = zip(range(1, len(debug_file_content) + 1), debug_file_content)
+    debug_file_content = debug_file_content[-3:]
+    debug_file_content = "\n".join(map(lambda x: "%4s %s" % (x[0], x[1]), debug_file_content))
+    raise Exception("Here:\n%s <----\n\n'%s' should have been in: %s" % (debug_file_content, token, ', '.join(sorted(GROUP_ON))))
+
+
 def group_generator(sequence):
     iterator = FlexibleIterator(sequence)
     current = None, None
@@ -124,7 +135,8 @@ def group_generator(sequence):
                 while iterator.show_next() and iterator.show_next()[0] in GROUP_THOSE:
                     to_group.append(iterator.next())
                     debug_file_content += to_group[-1][1]
-                assert iterator.show_next()[0] in GROUP_ON
+
+                fail_on_bad_token(iterator.show_next()[0], debug_file_content)
                 current = append_to_token_before(iterator.next(), to_group)
 
             if current[0] in GROUP_ON:
