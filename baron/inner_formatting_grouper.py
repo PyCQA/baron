@@ -106,7 +106,7 @@ def fail_on_bad_token(token, debug_file_content):
 
     debug_file_content = debug_file_content.split("\n")
     debug_file_content = zip(range(1, len(debug_file_content) + 1), debug_file_content)
-    debug_file_content = debug_file_content[-3:]
+    debug_file_content = debug_file_content[-8:]
     debug_file_content = "\n".join(map(lambda x: "%4s %s" % (x[0], x[1]), debug_file_content))
     raise Exception("Here:\n%s <----\n\n'%s' should have been in: %s" % (debug_file_content, token, ', '.join(sorted(GROUP_ON))))
 
