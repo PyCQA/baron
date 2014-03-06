@@ -1845,11 +1845,11 @@ def test_comparison_first_space():
         group([
                ('NAME', 'a'),
                ('SPACE', ' '),
-               (token_name, value, ' '),
+               (token_name, value),
                ('NAME', 'b'),
               ],
               [('NAME', 'a'),
-               (token_name, value, ' '),
+               (token_name, value, [('SPACE', ' ')]),
                ('NAME', 'b'),
               ])
 
@@ -1863,7 +1863,7 @@ def test_comparison_second_space():
                ('NAME', 'b'),
               ],
               [('NAME', 'a'),
-               (token_name, value, '', ' '),
+               (token_name, value, [], [('SPACE', ' ')]),
                ('NAME', 'b'),
               ])
 
@@ -1878,7 +1878,7 @@ def test_comparison_spaces():
                ('NAME', 'b'),
               ],
               [('NAME', 'a'),
-               (token_name, value, ' ', ' '),
+               (token_name, value, [('SPACE', ' ')], [('SPACE', ' ')]),
                ('NAME', 'b'),
               ])
 
@@ -1898,7 +1898,7 @@ def test_comparison_spaces_atomtrailers():
               [('NAME', 'a'),
                ('DOT', '.'),
                ('NAME', 'b'),
-               (token_name, value, ' ', ' '),
+               (token_name, value, [('SPACE', ' ')], [('SPACE', ' ')]),
                ('NAME', 'c'),
               ])
 
@@ -1935,14 +1935,14 @@ def test_advanced_comparison():
                ('NAME', 'a'),
                ('SPACE', ' '),
                (token_name, value),
-               ('SPACE', after_space),
+               after_space[0],
                (token_name2, value2),
                ('SPACE', ' '),
                ('NAME', 'b'),
               ],
               [('NAME', 'a'),
-               (token_name, value, " ", after_space),
-               (token_name2, value2, "", " "),
+               (token_name, value, [('SPACE', ' ')], after_space),
+               (token_name2, value2, [], [('SPACE', ' ')]),
                ('NAME', 'b'),
               ])
 
@@ -2129,7 +2129,7 @@ def test_augmented_assignment():
                ('NAME', 'b'),
               ],
               [('NAME', 'a'),
-               (token_name, value, ' ', ' '),
+               (token_name, value, [('SPACE', ' ')], [('SPACE', ' ')]),
                ('NAME', 'b'),
               ])
 

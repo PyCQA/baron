@@ -112,12 +112,12 @@ def group_generator(sequence):
 
         if current[0] == "SPACE" and iterator.show_next()[0] in GROUP_SPACE_BEFORE:
             new_current = iterator.next()
-            current = (new_current[0], new_current[1], current[1])
+            current = (new_current[0], new_current[1], [current])
 
         if current[0] in GROUP_SPACE_AFTER and\
             (iterator.show_next() and iterator.show_next()[0] == "SPACE") and\
             (iterator.show_next(2) and not less_prioritary_than(current[0], iterator.show_next(2)[0])):
-            _, space_value = iterator.next()
-            current = (current[0], current[1], current[2] if len(current) > 2 else '', space_value)
+            after_space = iterator.next()
+            current = (current[0], current[1], current[2] if len(current) > 2 else [], [after_space])
 
         yield current
