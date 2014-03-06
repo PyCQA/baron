@@ -1,5 +1,9 @@
 from utils import FlexibleIterator
 
+class UnExpectedFormattingToken(Exception):
+        pass
+
+
 GROUP_THOSE = (
     "ENDL",
 )
@@ -100,11 +104,14 @@ def group_generator(sequence):
     iterator = FlexibleIterator(sequence)
     current = None, None
     in_grouping_mode = 0
+    debug_file_content = ""
     while True:
         if iterator.end():
             return
 
+        debug_previous_token = current
         current = iterator.next()
+        debug_file_content += current[1]
 
         if current[0] in ENTER_GROUPING_MODE:
             in_grouping_mode += 1
@@ -116,13 +123,25 @@ def group_generator(sequence):
                 to_group = [current]
                 while iterator.show_next() and iterator.show_next()[0] in GROUP_THOSE:
                     to_group.append(iterator.next())
+                    debug_file_content += to_group[-1][1]
                 assert iterator.show_next()[0] in GROUP_ON
                 current = append_to_token_before(iterator.next(), to_group)
 
             if current[0] in GROUP_ON:
                 while iterator.show_next() and iterator.show_next()[0] in GROUP_THOSE:
+                    debug_file_content += iterator.show_next()[1]
                     current = append_to_token_after(current, [iterator.next()])
 
+
+        if current[0] == "SPACE":
+            debug_file_content = debug_file_content.split("\n")
+            debug_file_content = zip(range(1, len(debug_file_content) + 1), debug_file_content)
+            debug_file_content = debug_file_content[-3:]
+            debug_file_content = "\n".join(map(lambda x: "%4s %s" % (x[0], x[1]), debug_file_content))
+            debug_file_content += "<--- here"
+            debug_text = "Unexpected '%s' token:\n\n" % current[0].lower() + debug_file_content + "\n\n"
+            debug_text += "Should have been grouped on either %s (before) or %s (after) token." % (debug_previous_token, iterator.show_next())
+            raise UnExpectedFormattingToken(debug_text)
 
         print current
         yield current
