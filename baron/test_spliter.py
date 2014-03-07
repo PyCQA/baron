@@ -260,7 +260,7 @@ def test_multi_string_with_same_quotes_in():
     assert split('"""pouet " "" pouet"""') == ['"""pouet " "" pouet"""']
 
 def test_comment_backslash():
-    assert split('# pouet \\\npouet') == ["# pouet ", "\\", "\n", "pouet"]
+    assert split('# pouet \\\npouet') == ["# pouet \\", "\n", "pouet"]
 
 def test_backslash_in_comment():
     assert split("# pouet \\t pouet\npouet") == ["# pouet \\t pouet", "\n", "pouet"]
