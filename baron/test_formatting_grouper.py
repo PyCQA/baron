@@ -2510,9 +2510,10 @@ def test_global_two():
 def test_print():
     "print"
     group([
-           ('PRINT', 'print', '', ''),
+           ('PRINT', 'print'),
           ],
-          [('PRINT', 'print', '', ''),
+          [
+           ('PRINT', 'print'),
           ])
 
 
