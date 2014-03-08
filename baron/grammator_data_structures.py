@@ -259,7 +259,6 @@ def include_data_structures(pg):
     def comp_for_iter((for_, exprlist, in_, or_test, comp_iter)):
         my_ifs = []
         for i in comp_iter:
-            print i
             if i["type"] != "comprehension_if":
                 break
             my_ifs.append(i)
