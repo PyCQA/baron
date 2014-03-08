@@ -9,6 +9,7 @@ PRIORITY_ORDER = (
 )
 
 BOTH = (
+    "SEMICOLON",
     "AS",
     "IMPORT",
     "DOUBLE_STAR",
@@ -110,13 +111,13 @@ def group_generator(sequence):
         if current is None:
             return
 
-        if current[0] == "SPACE" and iterator.show_next()[0] in GROUP_SPACE_BEFORE:
+        if current[0] in ("SPACE", "COMMENT") and iterator.show_next() and iterator.show_next()[0] in GROUP_SPACE_BEFORE:
             new_current = iterator.next()
             current = (new_current[0], new_current[1], [current])
 
         if current[0] in GROUP_SPACE_AFTER and\
-            (iterator.show_next() and iterator.show_next()[0] == "SPACE") and\
-            (iterator.show_next(2) and not less_prioritary_than(current[0], iterator.show_next(2)[0])):
+            (iterator.show_next() and iterator.show_next()[0] in ("SPACE", "COMMENT")) and\
+            (not iterator.show_next(2) or (iterator.show_next(2) and not less_prioritary_than(current[0], iterator.show_next(2)[0]))):
             after_space = iterator.next()
             current = (current[0], current[1], current[2] if len(current) > 2 else [], [after_space])
 

@@ -2823,3 +2823,16 @@ def test_comment():
          [
            ('COMMENT', '#', [('SPACE', ' ')]),
          ])
+
+def test_semicolon():
+    """
+     ; 
+    """
+    group([
+           ('SPACE', ' '),
+           ('SEMICOLON', ';'),
+           ('SPACE', ' '),
+         ],
+         [
+           ('SEMICOLON', ';', [('SPACE', ' ')], [('SPACE', ' ')]),
+         ])
