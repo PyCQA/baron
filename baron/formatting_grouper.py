@@ -57,7 +57,13 @@ BOTH = (
     "ENDL",
     "COMMA",
     "FOR",
-    "COLON"
+    "COLON",
+    "STRING",
+    "RAW_STRING",
+    "UNICODE_STRING",
+    "UNICODE_RAW_STRING",
+    "BINARY_STRING",
+    "BINARY_RAW_STRING",
 )
 
 GROUP_SPACE_BEFORE = BOTH + (
