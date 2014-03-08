@@ -90,6 +90,20 @@ def include_control_structures(pg):
             "value": suite
         }]
 
+    @pg.production("except_stmt : EXCEPT COLON suite")
+    def except_stmt_empty((except_, colon, suite)):
+        return [{
+            "type": "except",
+            "first_formatting": except_.hidden_tokens_after,
+            "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
+            "delimiteur": "",
+            "target": {},
+            "exceptions": [],
+            "value": suite
+        }]
+
     @pg.production("except_stmt : EXCEPT test COLON suite")
     def except_stmt((except_, test, colon, suite)):
         return [{

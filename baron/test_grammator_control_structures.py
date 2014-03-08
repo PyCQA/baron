@@ -756,6 +756,72 @@ def test_try_finally_stmt_indent():
              }],
           }])
 
+def test_try_excepts_stmt_empty():
+    """
+    try :
+        pass
+    except:
+        pass
+    """
+    parse_multi([
+             ('TRY', 'try'),
+             ('COLON', ':', [('SPACE', ' ')]),
+             ('ENDL', '\n', [], [('SPACE', '    ')]),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+             ('EXCEPT', 'except', [], []),
+             ('COLON', ':'),
+             ('ENDL', '\n', [], [('SPACE', '    ')]),
+             ('INDENT', ''),
+             ('PASS', 'pass'),
+             ('ENDL', '\n'),
+             ('DEDENT', ''),
+          ],
+          [{
+            "type": "try",
+            "formatting": [{"type": "space", "value": " "}],
+            "else": {},
+            "finally": {},
+            "excepts": [{
+               "type": "except",
+               "first_formatting": [],
+               "second_formatting": [],
+               "third_formatting": [],
+               "forth_formatting": [],
+               "delimiteur": "",
+               "target": {},
+               "exceptions": [],
+                "value": [{
+                    "type": "endl",
+                    "formatting": [],
+                    "value": "\n",
+                    "indent": "    "
+                 },{
+                     "type": "pass",
+                 },{
+                    "indent": "",
+                    "formatting": [],
+                    "type": "endl",
+                    "value": "\n"
+                 }]
+            }],
+            "value": [{
+                "type": "endl",
+                "formatting": [],
+                "value": "\n",
+                "indent": "    "
+             },{
+                 "type": "pass",
+             },{
+                "indent": "",
+                "formatting": [],
+                "type": "endl",
+                "value": "\n"
+             }],
+          }])
+
 def test_try_excepts_stmt_indent():
     """
     try :
