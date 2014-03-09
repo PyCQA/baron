@@ -237,6 +237,14 @@ def decorators((decorator,)):
     return decorator
 
 
+# TODO tests
+@pg.production("decorator : endl")
+def decorator_endl((endl,)):
+    # thanks ipythons dev, you appears to be the only one in the world that
+    # split decorators with empty lines... like seriously.
+    return endl
+
+
 @pg.production("decorator : AT dotted_name endl")
 def decorator((at, dotted_name, endl)):
     return [{
