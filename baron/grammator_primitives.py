@@ -1,56 +1,57 @@
 from utils import create_node_from_token
 
 
-def include_primivites(pg):
-    @pg.production("print_stmt : PRINT")
-    def print_stmt_empty((print_,)):
-        return {
-            "type": "print",
-            "value": None,
-            "destination": None,
-            "destination_formatting": [],
-            "formatting": [],
-        }
+def include_primivites(pg, print_function):
+    if not print_function:
+        @pg.production("print_stmt : PRINT")
+        def print_stmt_empty((print_,)):
+            return {
+                "type": "print",
+                "value": None,
+                "destination": None,
+                "destination_formatting": [],
+                "formatting": [],
+            }
 
 
-    @pg.production("print_stmt : PRINT testlist")
-    def print_stmt((print_, testlist)):
-        return {
-            "type": "print",
-            "value": testlist["value"] if testlist["type"] == "tuple" else [testlist],
-            "destination": None,
-            "destination_formatting": [],
-            "formatting": print_.hidden_tokens_after,
-        }
+        @pg.production("print_stmt : PRINT testlist")
+        def print_stmt((print_, testlist)):
+            return {
+                "type": "print",
+                "value": testlist["value"] if testlist["type"] == "tuple" else [testlist],
+                "destination": None,
+                "destination_formatting": [],
+                "formatting": print_.hidden_tokens_after,
+            }
 
 
-    @pg.production("print_stmt : PRINT RIGHT_SHIFT test")
-    def print_stmt_redirect((print_, right_shift, test)):
-        return {
-            "type": "print",
-            "value": None,
-            "destination": test,
-            "destination_formatting": right_shift.hidden_tokens_after,
-            "formatting": print_.hidden_tokens_after,
-        }
+        @pg.production("print_stmt : PRINT RIGHT_SHIFT test")
+        def print_stmt_redirect((print_, right_shift, test)):
+            return {
+                "type": "print",
+                "value": None,
+                "destination": test,
+                "destination_formatting": right_shift.hidden_tokens_after,
+                "formatting": print_.hidden_tokens_after,
+            }
 
 
-    @pg.production("print_stmt : PRINT RIGHT_SHIFT test COMMA testlist")
-    def print_stmt_redirect_testlist((print_, right_shift, test, comma, testlist)):
-        value = [{
-            "type": "comma",
-            "first_formatting": comma.hidden_tokens_before,
-            "second_formatting": comma.hidden_tokens_after,
-        }]
-        #print testlist
-        value += testlist["value"] if testlist["type"] == "tuple" else [testlist]
-        return {
-            "type": "print",
-            "value": value,
-            "destination": test,
-            "destination_formatting": right_shift.hidden_tokens_after,
-            "formatting": print_.hidden_tokens_after,
-        }
+        @pg.production("print_stmt : PRINT RIGHT_SHIFT test COMMA testlist")
+        def print_stmt_redirect_testlist((print_, right_shift, test, comma, testlist)):
+            value = [{
+                "type": "comma",
+                "first_formatting": comma.hidden_tokens_before,
+                "second_formatting": comma.hidden_tokens_after,
+            }]
+            #print testlist
+            value += testlist["value"] if testlist["type"] == "tuple" else [testlist]
+            return {
+                "type": "print",
+                "value": value,
+                "destination": test,
+                "destination_formatting": right_shift.hidden_tokens_after,
+                "formatting": print_.hidden_tokens_after,
+            }
 
 
     @pg.production("flow_stmt : return_stmt")

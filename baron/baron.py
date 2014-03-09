@@ -1,14 +1,24 @@
+from rply.errors import ParsingError
+
 from spliter import split
 from grouper import group
 from tokenizer import tokenize as _tokenize
 from formatting_grouper import group as space_group
-from grammator import parser, Token
+from grammator import generate_parse
 from indentation_marker  import mark_indentation
 from inner_formatting_grouper import group as inner_group
 
 
+parse_tokens = generate_parse(print_function=False)
+
 def _parse(tokens):
-    return parser.parse(iter(map(lambda x: Token(*x) if x else x, tokens) + [None]))
+    try:
+        return parse_tokens(tokens)
+    except ParsingError:
+        # sooo horrible hack to handle grammar modification to please hipsters
+        # TODO launch ast.py at some point to find "from __future__ import
+        # print_function" or something like that
+        return generate_parse(print_function=True)(tokens)
 
 
 def parse(pouet):
@@ -18,4 +28,4 @@ def parse(pouet):
 
 
 def tokenize(pouet):
-    return inner_group(mark_indentation(space_group(_tokenize(group(split(pouet))))))
+    return mark_indentation(inner_group(space_group(_tokenize(group(split(pouet))))))
