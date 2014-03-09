@@ -267,3 +267,6 @@ def test_backslash_in_comment():
 
 def test_regression():
     assert split("(r'[\"\\'](.|\n|\r)*[\"\\']', 'STRING'),") == ["(", "r", "'[\"\\'](.|\n|\r)*[\"\\']'", ",", " ", "'STRING'", ")", ","]
+
+def test_remove_crap():
+    assert split("\x0c\xef\xbb\xbf") == []
