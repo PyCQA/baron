@@ -30,7 +30,7 @@ def get_space(node):
     if len(node[3]) == 0:
         print "WARNING"
         return None
-    return node[3][0][1]
+    return node[3][0][1].replace("	", " "*8)
 
 
 def mark_indentation_generator(sequence):
