@@ -1177,3 +1177,76 @@ def test_empty_tuple_endl():
                 "value": "\n",
             }],
           }])
+
+def test_subscript_special_case():
+    "z[a, b, c,]"
+    parse_simple([
+             ('NAME', 'z'),
+             ('LEFT_SQUARE_BRACKET', '['),
+             ('NAME', 'a'),
+             ('COMMA', ',', [], [('SPACE', ' ')]),
+             ('NAME', 'b'),
+             ('COMMA', ',', [], [('SPACE', ' ')]),
+             ('NAME', 'c'),
+             ('COMMA', ','),
+             ('RIGHT_SQUARE_BRACKET', ']')
+          ],
+          [{
+            "type": "atomtrailers",
+            "value": [
+                      {
+                       "type": "name",
+                       "value": "z"
+                      },
+                      {
+                       "first_formatting": [],
+                       "type": "getitem",
+                       "value": {
+                                 "first_formatting": [],
+                                 "with_parenthesis": False,
+                                 "type": "tuple",
+                                 "value": [
+                                           {
+                                            "type": "name",
+                                            "value": "a"
+                                           },
+                                           {
+                                            "first_formatting": [],
+                                            "type": "comma",
+                                            "second_formatting": [
+                                                                  {
+                                                                   "type": "space",
+                                                                   "value": " "
+                                                                  }
+                                                                 ]
+                                           },
+                                           {
+                                            "type": "name",
+                                            "value": "b"
+                                           },
+                                           {
+                                            "first_formatting": [],
+                                            "type": "comma",
+                                            "second_formatting": [
+                                                                  {
+                                                                   "type": "space",
+                                                                   "value": " "
+                                                                  }
+                                                                 ]
+                                           },
+                                           {
+                                            "type": "name",
+                                            "value": "c"
+                                           },
+                                           {
+                                            "first_formatting": [],
+                                            "type": "comma",
+                                            "second_formatting": []
+                                           }
+                                          ],
+                                 "second_formatting": []
+                                },
+                       "second_formatting": []
+                      }
+    ]
+          }])

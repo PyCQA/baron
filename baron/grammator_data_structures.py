@@ -54,9 +54,9 @@ def include_data_structures(pg):
             "second_formatting": comma.hidden_tokens_after,
         }, test]
 
-
     @pg.production("testlist_part : COMMA test COMMA")
     @pg.production("exprlist_part : COMMA expr COMMA")
+    @pg.production("subscriptlist_part : COMMA subscript COMMA")
     def testlist_part_comma((comma, test, comma2)):
         return [{
             "type": "comma",
@@ -71,6 +71,7 @@ def include_data_structures(pg):
 
     @pg.production("testlist_part : COMMA test testlist_part")
     @pg.production("exprlist_part : COMMA expr exprlist_part")
+    @pg.production("subscriptlist_part : COMMA subscript subscriptlist_part")
     def testlist_part_next((comma, test, testlist_part)):
         return [{
             "type": "comma",
