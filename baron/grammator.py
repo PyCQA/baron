@@ -521,9 +521,32 @@ def atom_name((name,)):
     return name
 
 
-@pg.production("atom : STRING")
+@pg.production("atom : strings")
+def strings((string_chain,)):
+    if len(string_chain) == 1:
+        return string_chain[0]
+    return {
+        "type": "string_chain",
+        "value": string_chain
+    }
+
+@pg.production("strings : string strings")
+def strings_string_strings((string_, strings_)):
+    return string_ + strings_
+
+@pg.production("strings : string")
+def strings_string((string_,)):
+    return string_
+
+# TODO tests those other kind of strings
+@pg.production("string : STRING")
+@pg.production("string : RAW_STRING")
+@pg.production("string : UNICODE_STRING")
+@pg.production("string : BINARY_STRING")
+@pg.production("string : UNICODE_RAW_STRING")
+@pg.production("string : BINARY_RAW_STRING")
 def string((string_,)):
-    return create_node_from_token(string_)
+    return [create_node_from_token(string_)]
 
 
 @pg.production("comma : COMMA")
