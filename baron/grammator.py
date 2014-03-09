@@ -504,7 +504,14 @@ def testlist1_double((test, comma, test2,)):
 def testlist1((test,)):
     return [test]
 
+# TODO test all the things (except INT)
 @pg.production("atom : INT")
+@pg.production("atom : OCTA")
+@pg.production("atom : HEXA")
+@pg.production("atom : BINARY")
+@pg.production("atom : FLOAT")
+@pg.production("atom : FLOAT_EXPONANT")
+@pg.production("atom : COMPLEX")
 def int((int_,)):
     return create_node_from_token(int_, section="number")
 
