@@ -19,6 +19,7 @@ def test_if_stmt():
               "type": "if",
               "first_formatting": [{"type": "space", "value": " "}],
               "second_formatting": [],
+              "third_formatting": [],
               "test": {
                   "type": "name",
                   "value": "a",
@@ -55,6 +56,7 @@ def test_if_stmt_indent():
               "type": "if",
               "first_formatting": [{"type": "space", "value": " "}],
               "second_formatting": [],
+              "third_formatting": [],
               "test": {
                   "type": "name",
                   "value": "a",
@@ -97,6 +99,7 @@ def test_if_stmt_indent_two_endls():
               "type": "if",
               "first_formatting": [{"type": "space", "value": " "}],
               "second_formatting": [],
+              "third_formatting": [],
               "test": {
                   "type": "name",
                   "value": "a",
@@ -146,6 +149,7 @@ def test_if_stmt_indent_multiple_endls():
               "type": "if",
               "first_formatting": [{"type": "space", "value": " "}],
               "second_formatting": [],
+              "third_formatting": [],
               "test": {
                   "type": "name",
                   "value": "a",
@@ -205,6 +209,7 @@ def test_if_else_stmt_indent():
               "type": "if",
               "first_formatting": [{"type": "space", "value": " "}],
               "second_formatting": [],
+              "third_formatting": [],
               "test": {
                   "type": "name",
                   "value": "a",
@@ -284,6 +289,7 @@ def test_if_elif_elif_stmt_indent():
               "type": "if",
               "first_formatting": [{"type": "space", "value": " "}],
               "second_formatting": [],
+              "third_formatting": [],
               "test": {
                   "type": "name",
                   "value": "a",
@@ -396,6 +402,7 @@ def test_if_elif_elif_else_stmt_indent():
               "type": "if",
               "first_formatting": [{"type": "space", "value": " "}],
               "second_formatting": [],
+              "third_formatting": [],
               "test": {
                   "type": "name",
                   "value": "a",

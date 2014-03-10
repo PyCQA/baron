@@ -197,6 +197,7 @@ def include_control_structures(pg):
                            "test": test,
                            "first_formatting": if_.hidden_tokens_after,
                            "second_formatting": colon.hidden_tokens_before,
+                           "third_formatting": colon.hidden_tokens_after,
                           }]
                }]
 
@@ -210,6 +211,7 @@ def include_control_structures(pg):
                            "test": test,
                            "first_formatting": if_.hidden_tokens_after,
                            "second_formatting": colon.hidden_tokens_before,
+                           "third_formatting": colon.hidden_tokens_after,
                           }] + elifs
                }]
 
@@ -243,6 +245,7 @@ def include_control_structures(pg):
                            "test": test,
                            "first_formatting": if_.hidden_tokens_after,
                            "second_formatting": colon.hidden_tokens_before,
+                           "third_formatting": colon.hidden_tokens_after,
                           }, else_stmt]
                }]
 
@@ -256,6 +259,7 @@ def include_control_structures(pg):
                            "test": test,
                            "first_formatting": if_.hidden_tokens_after,
                            "second_formatting": colon.hidden_tokens_before,
+                           "third_formatting": colon.hidden_tokens_after,
                           }] + elifs + [else_stmt]
                }]
 
