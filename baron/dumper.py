@@ -12,6 +12,7 @@ def dump_node_list(node_list):
 
 
 def endl(node):
+    yield dump_node_list(node["formatting"])
     yield node["value"]
     yield node["indent"]
 
@@ -56,8 +57,19 @@ def if_(node):
     yield "if"
     yield dump_node_list(node["first_formatting"])
     yield dump_node(node["test"])
-    yield ":"
     yield dump_node_list(node["second_formatting"])
+    yield ":"
+    yield dump_node_list(node["third_formatting"])
+    yield dump_node_list(node["value"])
+
+
+def elif_(node):
+    yield "elif"
+    yield dump_node_list(node["first_formatting"])
+    yield dump_node(node["test"])
+    yield dump_node_list(node["second_formatting"])
+    yield ":"
+    yield dump_node_list(node["third_formatting"])
     yield dump_node_list(node["value"])
 
 
@@ -78,9 +90,10 @@ dumpers = {
     "assignment": assignment,
     "binary_operator": binary_operator,
     "while": while_,
-    "else": else_,
     "ifelseblock": dump_node_list_value,
     "if": if_,
+    "elif": elif_,
+    "else": else_,
 }
 
 

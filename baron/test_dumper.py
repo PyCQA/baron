@@ -39,3 +39,11 @@ def test_while_indent():
 
 def test_if():
     check_dumps("if a:\n    pass")
+
+
+def test_if_elif():
+    check_dumps("if a: \n    pass\nelif b: pass")
+
+
+def test_if_elif_else():
+    check_dumps("if a: \n    pass\nelif b: pass\nelse :   \n	pouet")
