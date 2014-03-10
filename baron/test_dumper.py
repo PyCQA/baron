@@ -27,3 +27,7 @@ def test_binary_operator():
 
 def test_while():
     check_dumps("while a  : pass")
+
+
+def test_while_else():
+    check_dumps("while a  : pass\nelse : pass")

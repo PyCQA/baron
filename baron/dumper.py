@@ -39,6 +39,16 @@ def while_(node):
     yield ":"
     yield dump_node_list(node["third_formatting"])
     yield dump_node_list(node["value"])
+    if node["else"]:
+        yield dump_node(node["else"])
+
+
+def else_(node):
+    yield "else"
+    yield dump_node_list(node["first_formatting"])
+    yield ":"
+    yield dump_node_list(node["second_formatting"])
+    yield dump_node_list(node["value"])
 
 
 dumpers = {
@@ -50,6 +60,7 @@ dumpers = {
     "assignment": assignment,
     "binary_operator": binary_operator,
     "while": while_,
+    "else": else_,
 }
 
 
