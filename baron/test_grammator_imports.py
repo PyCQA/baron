@@ -991,9 +991,9 @@ def test_from_a_import_b():
                          "target": None,
                         }
                        ],
-            "before_formatting": [{"type": "space", "value": " "}],
-            "middle_formatting": [{"type": "space", "value": " "}],
-            "after_formatting": [{"type": "space", "value": " "}]
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}]
            }])
 
 def test_from_a_dot_c_import_b():
@@ -1032,9 +1032,9 @@ def test_from_a_dot_c_import_b():
                          "target": None,
                         }
                        ],
-            "before_formatting": [{"type": "space", "value": " "}],
-            "middle_formatting": [{"type": "space", "value": " "}],
-            "after_formatting": [{"type": "space", "value": " "}] }])
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('FROM', 'from', [], [('SPACE', ' ')]),
            ('NAME', 'a'),
@@ -1069,9 +1069,9 @@ def test_from_a_dot_c_import_b():
                          "target": None,
                         }
                        ],
-            "before_formatting": [{"type": "space", "value": " "}],
-            "middle_formatting": [{"type": "space", "value": " "}],
-            "after_formatting": [{"type": "space", "value": " "}] }])
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}] }])
 
 def test_from_a_dot_c_import_b_d():
     "from a.c import b, d"
@@ -1125,9 +1125,9 @@ def test_from_a_dot_c_import_b_d():
                          "as": False,
                          "target": None}
                        ],
-            "before_formatting": [{"type": "space", "value": " "}],
-            "middle_formatting": [{"type": "space", "value": " "}],
-            "after_formatting": [{"type": "space", "value": " "}] }])
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('FROM',
             'from', [], [('SPACE', ' ')]),
@@ -1179,9 +1179,9 @@ def test_from_a_dot_c_import_b_d():
                          "target": None,
                         }
                        ],
-            "before_formatting": [{"type": "space", "value": " "}],
-            "middle_formatting": [{"type": "space", "value": " "}],
-            "after_formatting": [{"type": "space", "value": " "}] }])
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('FROM',
             'from', [], [('SPACE', ' ')]),
@@ -1232,9 +1232,9 @@ def test_from_a_dot_c_import_b_d():
                          "as": False,
                          "target": None}
                        ],
-            "before_formatting": [{"type": "space", "value": " "}],
-            "middle_formatting": [{"type": "space", "value": " "}],
-            "after_formatting": [{"type": "space", "value": " "}]
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}]
            }])
     parse_simple([
            ('FROM', 'from', [], [('SPACE', ' ')]),
@@ -1286,9 +1286,9 @@ def test_from_a_dot_c_import_b_d():
                          "target": None,
                         }
                        ],
-            "before_formatting": [{"type": "space", "value": " "}],
-            "middle_formatting": [{"type": "space", "value": " "}],
-            "after_formatting": [{"type": "space", "value": " "}]
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}]
            }])
 
 def test_from_a_import_b_as_d():
@@ -1321,9 +1321,9 @@ def test_from_a_import_b_as_d():
                          "target": "d",
                         }
                        ],
-            "before_formatting": [{"type": "space", "value": " "}],
-            "middle_formatting": [{"type": "space", "value": " "}],
-            "after_formatting": [{"type": "space", "value": " "}] }])
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}] }])
 
 def test_from_a_import_parenthesis_b():
     "from a import (b)"
@@ -1362,9 +1362,9 @@ def test_from_a_import_parenthesis_b():
                          "value": ")",
                         }
                        ],
-            "before_formatting": [{"type": "space", "value": " "}],
-            "middle_formatting": [{"type": "space", "value": " "}],
-            "after_formatting": [{"type": "space", "value": " "}] }])
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}] }])
 
 def test_from_a_import_parenthesis_b_without_space():
     "from a import(b)"
@@ -1405,9 +1405,9 @@ def test_from_a_import_parenthesis_b_without_space():
                          "value": ")",
                         }
                        ],
-            "before_formatting": [{"type": "space", "value": " "}],
-            "middle_formatting": [{"type": "space", "value": " "}],
-            "after_formatting": [] }])
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [] }])
 
 def test_from_a_import_parenthesis_b_comma():
     "from a import (b,)"
@@ -1453,9 +1453,9 @@ def test_from_a_import_parenthesis_b_comma():
                          "value": ")",
                         }
                        ],
-            "before_formatting": [{"type": "space", "value": " "}],
-            "middle_formatting": [{"type": "space", "value": " "}],
-            "after_formatting": [{"type": "space", "value": " "}]
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}]
            }])
 
 def test_from_a_import_parenthesis_b_space():
@@ -1501,9 +1501,9 @@ def test_from_a_import_parenthesis_b_space():
                          "value": ")",
                         }
                        ],
-            "before_formatting": [{"type": "space", "value": " "}],
-            "middle_formatting": [{"type": "space", "value": " "}],
-            "after_formatting": [{"type": "space", "value": " "}] }])
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}] }])
 
 def test_from_a_import_star():
     "from a import *"
@@ -1529,9 +1529,9 @@ def test_from_a_import_star():
                          "value": "*",
                         }
                        ],
-            "before_formatting": [{"type": "space", "value": " "}],
-            "middle_formatting": [{"type": "space", "value": " "}],
-            "after_formatting": [{"type": "space", "value": " "}] }])
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}] }])
 
 def test_from_a_import_star_without_space():
     "from a import*"
@@ -1557,9 +1557,9 @@ def test_from_a_import_star_without_space():
                          "value": "*",
                         }
                        ],
-            "before_formatting": [{"type": "space", "value": " "}],
-            "middle_formatting": [{"type": "space", "value": " "}],
-            "after_formatting": []
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": []
            }])
 
 def test_from_dot_a_import_b():
@@ -1596,9 +1596,9 @@ def test_from_dot_a_import_b():
                          "target": None,
                         }
                        ],
-            "before_formatting": [{"type": "space", "value": " "}],
-            "middle_formatting": [{"type": "space", "value": " "}],
-            "after_formatting": [{"type": "space", "value": " "}] }])
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}] }])
 
 def test_from_dot_dot_dot_a_import_b():
     "from ...a import b"
@@ -1644,9 +1644,9 @@ def test_from_dot_dot_dot_a_import_b():
                          "target": None,
                         }
                        ],
-            "before_formatting": [{"type": "space", "value": " "}],
-            "middle_formatting": [{"type": "space", "value": " "}],
-            "after_formatting": [{"type": "space", "value": " "}] }])
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('FROM', 'from', [], [('SPACE', ' ')]),
            ('DOT', '.'),
@@ -1689,9 +1689,9 @@ def test_from_dot_dot_dot_a_import_b():
                          "target": None,
                         }
                        ],
-            "before_formatting": [{"type": "space", "value": " "}],
-            "middle_formatting": [{"type": "space", "value": " "}],
-            "after_formatting": [{"type": "space", "value": " "}] }])
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}] }])
     parse_simple([
            ('FROM', 'from', [], [('SPACE', ' ')]),
            ('DOT', '.'),
@@ -1734,9 +1734,9 @@ def test_from_dot_dot_dot_a_import_b():
                          "target": None,
                         }
                        ],
-            "before_formatting": [{"type": "space", "value": " "}],
-            "middle_formatting": [{"type": "space", "value": " "}],
-            "after_formatting": [{"type": "space", "value": " "}] }])
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}] }])
 
 def test_from_no_space_dot_a_import_b():
     "from.a import b"
@@ -1772,9 +1772,9 @@ def test_from_no_space_dot_a_import_b():
                          "target": None,
                         }
                        ],
-            "before_formatting": [],
-            "middle_formatting": [{"type": "space", "value": " "}],
-            "after_formatting": [{"type": "space", "value": " "}] }])
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}] }])
 
 def test_from_dot_import_b():
     "from . import b"
@@ -1802,9 +1802,9 @@ def test_from_dot_import_b():
                          "as": False,
                          "target": None,
                         }                                ],
-            "before_formatting": [{"type": "space", "value": " "}],
-            "middle_formatting": [{"type": "space", "value": " "}],
-            "after_formatting": [{"type": "space", "value": " "}] }])
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}] }])
 
 def test_from_dot_no_space_import_b():
     "from .import b"
@@ -1835,9 +1835,9 @@ def test_from_dot_no_space_import_b():
                          "target": None,
                         }
                        ],
-            "before_formatting": [{"type": "space", "value": " "}],
-            "middle_formatting": [],
-            "after_formatting": [{"type": "space", "value": " "}] }])
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
+            "third_formatting": [{"type": "space", "value": " "}] }])
 
 def test_from_no_space_dot_import_b():
     "from. import b"
@@ -1868,9 +1868,9 @@ def test_from_no_space_dot_import_b():
                          "target": None,
                         }
                        ],
-            "before_formatting": [],
-            "middle_formatting": [{"type": "space", "value": " "}],
-            "after_formatting": [{"type": "space", "value": " "}] }])
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}] }])
 
 def test_from_no_space_dot_no_sapceimport_b():
     "from.import b"
@@ -1900,8 +1900,8 @@ def test_from_no_space_dot_no_sapceimport_b():
                          "target": None,
                          }
                        ],
-            "before_formatting": [],
-            "middle_formatting": [],
-            "after_formatting": [{"type": "space", "value": " "}] }])
+            "first_formatting": [],
+            "second_formatting": [],
+            "third_formatting": [{"type": "space", "value": " "}] }])
 
 # TODO: 'from. .import*

@@ -19,9 +19,9 @@ def include_imports(pg):
         return {
                 "type": "from_import",
                 "targets": from_import_target,
-                "after_formatting": import_.hidden_tokens_after,
-                "before_formatting": from_.hidden_tokens_after,
-                "middle_formatting": import_.hidden_tokens_before,
+                "first_formatting": from_.hidden_tokens_after,
+                "second_formatting": import_.hidden_tokens_before,
+                "third_formatting": import_.hidden_tokens_after,
                 "value": {
                           "type": "dotted_name",
                           "value": dotted_name
