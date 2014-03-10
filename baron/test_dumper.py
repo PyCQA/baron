@@ -14,3 +14,7 @@ def test_var():
 
 def test_int():
     check_dumps("1")
+
+
+def test_assign():
+    check_dumps("a = 2")
