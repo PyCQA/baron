@@ -35,3 +35,7 @@ def test_while_else():
 
 def test_while_indent():
     check_dumps("while a:\n    pass")
+
+
+def test_if():
+    check_dumps("if a:\n    pass")

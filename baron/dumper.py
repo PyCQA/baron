@@ -20,6 +20,10 @@ def get_value(node):
     yield node["value"]
 
 
+def dump_node_list_value(node):
+    yield dump_node_list(node["value"])
+
+
 def assignment(node):
     yield dump_node(node["target"])
     yield dump_node_list(node["first_formatting"])
@@ -48,6 +52,15 @@ def while_(node):
         yield dump_node(node["else"])
 
 
+def if_(node):
+    yield "if"
+    yield dump_node_list(node["first_formatting"])
+    yield dump_node(node["test"])
+    yield ":"
+    yield dump_node_list(node["second_formatting"])
+    yield dump_node_list(node["value"])
+
+
 def else_(node):
     yield "else"
     yield dump_node_list(node["first_formatting"])
@@ -66,6 +79,8 @@ dumpers = {
     "binary_operator": binary_operator,
     "while": while_,
     "else": else_,
+    "ifelseblock": dump_node_list_value,
+    "if": if_,
 }
 
 
