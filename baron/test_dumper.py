@@ -6,3 +6,7 @@ from test_utils import check_dumps
 
 def test_empty():
     check_dumps("")
+
+
+def test_var():
+    check_dumps("hello")
