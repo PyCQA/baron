@@ -23,12 +23,21 @@ def assignment(node):
     yield dump_node(node["value"])
 
 
+def binary_operator(node):
+    yield dump_node(node["first"])
+    yield dump_node_list(node["first_formatting"])
+    yield node["value"]
+    yield dump_node_list(node["second_formatting"])
+    yield dump_node(node["second"])
+
+
 dumpers = {
     "name": get_value,
     "endl": get_value,
     "int": get_value,
     "space": get_value,
     "assignment": assignment,
+    "binary_operator": binary_operator,
 }
 
 

@@ -18,3 +18,8 @@ def test_int():
 
 def test_assign():
     check_dumps("a = 2")
+
+
+def test_binary_operator():
+    check_dumps("z +  42")
+    check_dumps("z   -  42")
