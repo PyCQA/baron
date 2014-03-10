@@ -7,7 +7,6 @@ from itertools import izip_longest
 
 def check(input, output):
     for i, j in izip_longest(mark_indentation(input + [('ENDMARKER', ''), None]), output + [('ENDMARKER', ''), None]):
-        print "DEBUG", i, j
         assert i == j
 
 
