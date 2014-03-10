@@ -38,6 +38,11 @@ def endl(node):
 def get_value(node):
     yield node["value"]
 
+@node()
+def comma(node):
+    yield dump_node_list(node["first_formatting"])
+    yield ","
+    yield dump_node_list(node["second_formatting"])
 
 @node()
 def pass_(node):
@@ -154,6 +159,10 @@ def name_as_name(node):
 def print_(node):
     yield "print"
     yield dump_node_list(node["formatting"])
+    if node["destination"]:
+        yield ">>"
+        yield dump_node_list(node["destination_formatting"])
+        yield dump_node(node["destination"])
     yield dump_node_list(node["value"])
 
 

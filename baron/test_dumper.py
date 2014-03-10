@@ -63,3 +63,7 @@ def test_from_import():
 
 def test_print():
     check_dumps("print pouet")
+
+
+def test_print_madness():
+    check_dumps("print >>  qsd, pouet, zdzd,")
