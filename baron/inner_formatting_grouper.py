@@ -110,7 +110,7 @@ def group(sequence):
     return list(group_generator(sequence))
 
 
-def fail_on_bad_token(token, debug_file_content):
+def fail_on_bad_token(token, debug_file_content, in_grouping_mode):
     if token[0] in GROUP_ON:
         return
 
@@ -120,7 +120,7 @@ def fail_on_bad_token(token, debug_file_content):
     debug_file_content = zip(range(1, len(debug_file_content) + 1), debug_file_content)
     debug_file_content = debug_file_content[-8:]
     debug_file_content = "\n".join(map(lambda x: "%4s %s" % (x[0], x[1]), debug_file_content))
-    raise Exception("Here:\n%s <----\n\n'%s' should have been in: %s" % (debug_file_content, token, ', '.join(sorted(GROUP_ON))))
+    raise Exception("Fail to group formatting tokens, here:\n%s <----\n\n'%s' should have been in: %s\n\nCurrent value of 'in_grouping_mode': %s" % (debug_file_content, token, ', '.join(sorted(GROUP_ON)), in_grouping_mode))
 
 
 def _append_to_debug_file_content(token):
@@ -155,7 +155,7 @@ def group_generator(sequence):
                     debug_file_content += _append_to_debug_file_content(to_group[-1])
 
 
-                fail_on_bad_token(iterator.show_next(), debug_file_content)
+                fail_on_bad_token(iterator.show_next(), debug_file_content, in_grouping_mode)
                 current = append_to_token_before(iterator.next(), to_group)
 
             if current[0] in GROUP_ON:
