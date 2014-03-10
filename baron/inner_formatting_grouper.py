@@ -163,6 +163,13 @@ def group_generator(sequence):
                 fail_on_bad_token(iterator.show_next(), debug_file_content, in_grouping_mode)
                 current = append_to_token_before(iterator.next(), to_group)
 
+                # TODO test
+                if current[0] in QUIT_GROUPING_MODE:
+                    in_grouping_mode -= 1
+                    yield current
+                    continue
+
+
             if current[0] in GROUP_ON:
                 while iterator.show_next() and iterator.show_next()[0] in GROUP_THOSE:
                     debug_file_content += _append_to_debug_file_content(iterator.show_next())
