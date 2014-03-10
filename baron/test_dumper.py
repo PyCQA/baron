@@ -59,3 +59,7 @@ def test_import_madness():
 
 def test_from_import():
     check_dumps("from b   import  a  as   rev")
+
+
+def test_print():
+    check_dumps("print pouet")

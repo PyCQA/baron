@@ -150,5 +150,12 @@ def name_as_name(node):
         yield node["target"]
 
 
+@node()
+def print_(node):
+    yield "print"
+    yield dump_node_list(node["formatting"])
+    yield dump_node_list(node["value"])
+
+
 def dumps(tree):
     return "".join(map(dump_node, tree))
