@@ -1,3 +1,8 @@
+def debug(j):
+    import json
+    print json.dumps(j, indent=4)
+
+
 def dump_node(node):
     return "".join(list(dumpers[node["type"]](node)))
 
