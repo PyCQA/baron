@@ -23,3 +23,7 @@ def test_assign():
 def test_binary_operator():
     check_dumps("z +  42")
     check_dumps("z   -  42")
+
+
+def test_while():
+    check_dumps("while a  : pass")
