@@ -41,7 +41,7 @@ def get_value(node):
 
 @node()
 def pass_(node):
-    return "pass"
+    yield "pass"
 
 
 @node("dotted_name")
