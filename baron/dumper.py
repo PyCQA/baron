@@ -89,10 +89,16 @@ def import_(node):
 
 def dotted_as_name(node):
     yield dump_node_list(node["value"]["value"])
+    if node["as"]:
+        yield dump_node_list(node["first_formatting"])
+        yield "as"
+        yield dump_node_list(node["second_formatting"])
+        yield node["target"]
 
 
 dumpers = {
     "name": get_value,
+    "dot": get_value,
     "endl": endl,
     "int": get_value,
     "pass": lambda x: "pass",

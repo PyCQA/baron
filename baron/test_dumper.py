@@ -51,3 +51,7 @@ def test_if_elif_else():
 
 def test_import():
     check_dumps("import  a")
+
+
+def test_import_madness():
+    check_dumps("import  a.B .   c as  saucisse")
