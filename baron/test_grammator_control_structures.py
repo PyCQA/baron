@@ -191,8 +191,8 @@ def test_if_else_stmt_indent():
            ('PASS', 'pass'),
            ('ENDL', '\n'),
            ('DEDENT', ''),
-           ('ELSE', 'else'),
-           ('COLON', ':', [('SPACE', ' ')]),
+           ('ELSE', 'else', [], [('SPACE', ' ')]),
+           ('COLON', ':'),
            ('ENDL', '\n', [], [('SPACE', '    ')]),
            ('INDENT', ''),
            ('PASS', 'pass'),
@@ -224,7 +224,8 @@ def test_if_else_stmt_indent():
                 }],
             },{
                "type": "else",
-               "formatting": [{"type": "space", "value": " "}],
+               "first_formatting": [{"type": "space", "value": " "}],
+               "second_formatting": [],
                "value": [{
                  "type": "endl",
                  "value": "\n",
@@ -381,8 +382,8 @@ def test_if_elif_elif_else_stmt_indent():
            ('PASS', 'pass'),
            ('ENDL', '\n'),
            ('DEDENT', ''),
-           ('ELSE', 'else'),
-           ('COLON', ':', [('SPACE', ' ')]),
+           ('ELSE', 'else', [], [('SPACE', ' ')]),
+           ('COLON', ':'),
            ('ENDL', '\n', [], [('SPACE', '    ')]),
            ('INDENT', ''),
            ('PASS', 'pass'),
@@ -456,7 +457,8 @@ def test_if_elif_elif_else_stmt_indent():
                 }],
             },{
                "type": "else",
-               "formatting": [{"type": "space", "value": " "}],
+               "first_formatting": [{"type": "space", "value": " "}],
+               "second_formatting": [],
                "value": [{
                  "formatting": [],
                  "type": "endl",
@@ -570,8 +572,8 @@ def test_while_else_stmt_indent():
            ('PASS', 'pass'),
            ('ENDL', '\n'),
            ('DEDENT', ''),
-           ('ELSE', 'else'),
-           ('COLON', ':', [('SPACE', " ")]),
+           ('ELSE', 'else', [], [('SPACE', " ")]),
+           ('COLON', ':'),
            ('ENDL', '\n', [], [('SPACE', '    ')]),
            ('INDENT', ''),
            ('PASS', 'pass'),
@@ -602,7 +604,8 @@ def test_while_else_stmt_indent():
               }],
             "else": {
              "type": "else",
-             "formatting": [{"type": "space", "value": " "}],
+             "first_formatting": [{"type": "space", "value": " "}],
+             "second_formatting": [],
              "value": [{
                "type": "endl",
                "value": "\n",
@@ -700,7 +703,8 @@ def test_for_else_stmt_indent():
             "forth_formatting": [],
             "else": {
               "type": "else",
-              "formatting": [],
+              "first_formatting": [],
+              "second_formatting": [],
               "value": [{
                  "type": "endl",
                  "value": "\n",
@@ -1084,7 +1088,8 @@ def test_try_except_comma_stmt_else_indent():
             "formatting": [{"type": "space", "value": " "}],
             "else": {
               "type": "else",
-              "formatting": [],
+              "first_formatting": [],
+              "second_formatting": [],
               "value": [{
                  "type": "endl",
                  "value": "\n",
@@ -1193,7 +1198,8 @@ def test_try_except_comma_stmt_else_finally_indent():
             "formatting": [{"type": "space", "value": " "}],
             "else": {
               "type": "else",
-              "formatting": [],
+              "first_formatting": [],
+              "second_formatting": [],
               "value": [{
                  "type": "endl",
                  "value": "\n",

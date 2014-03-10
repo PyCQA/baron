@@ -131,7 +131,8 @@ def include_control_structures(pg):
         return {
             "type": "else",
             "value": suite,
-            "formatting": colon.hidden_tokens_before,
+            "first_formatting": else_.hidden_tokens_after,
+            "second_formatting": colon.hidden_tokens_after,
         }
 
     @pg.production("for_stmt : FOR exprlist IN testlist COLON suite")
