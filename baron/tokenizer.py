@@ -110,4 +110,6 @@ if __name__ == '__main__':
     from spliter import split
     from grouper import group
     import sys
-    print tokenize(group(split(open(sys.argv[1]).read())))
+    #print tokenize(group(split(open(sys.argv[1]).read())))
+    print group(split("self.e1"))
+    print tokenize(group(split("self.e1")))
