@@ -154,6 +154,11 @@ def group_generator(sequence):
                     to_group.append(iterator.next())
                     debug_file_content += _append_to_debug_file_content(to_group[-1])
 
+                    # XXX don't remember how (:() but I can end up finding a
+                    # DEDENT/INDENT token in this situation and I don't want to
+                    # group on it. Need to do test for that.
+                    if iterator.show_next()[0] in ("INDENT", "DEDENT"):
+                        yield iterator.next()
 
                 fail_on_bad_token(iterator.show_next(), debug_file_content, in_grouping_mode)
                 current = append_to_token_before(iterator.next(), to_group)
