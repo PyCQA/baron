@@ -22,7 +22,7 @@ def test_simple_import():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None,
                       }
                       ],
@@ -59,7 +59,7 @@ def test_import_basic_dot():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None,
                       }
                      ],
@@ -84,7 +84,7 @@ def test_import_basic_dot():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None,
                       }
                      ],
@@ -136,7 +136,7 @@ def test_import_more_dot():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None
                       }
                      ],
@@ -181,7 +181,7 @@ def test_import_more_dot():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None}
                      ],
             "formatting": [{"type": "space", "value": "  "}],
@@ -225,7 +225,7 @@ def test_import_more_dot():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None}
                      ],
             "formatting": [{"type": "space", "value": "  "}],
@@ -269,7 +269,7 @@ def test_import_more_dot():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None}
                      ],
             "formatting": [{"type": "space", "value": "  "}],
@@ -313,7 +313,7 @@ def test_import_more_dot():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None}
                      ],
             "formatting": [{"type": "space", "value": "  "}],
@@ -357,7 +357,7 @@ def test_import_more_dot():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None}
                      ],
             "formatting": [{"type": "space", "value": "  "}],
@@ -381,7 +381,7 @@ def test_import_as():
                                            }],
                                 },
                        "before_formatting": [{"type": "space", "value": " "}],
-                       "as_": True,
+                       "as": True,
                        "after_formatting": [{"type": "space", "value": "  "}],
                        "target": 'b',
                        "type": "dotted_as_name",
@@ -410,7 +410,7 @@ def test_import_a_b():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None},
                       {
                        "type": "comma",
@@ -427,7 +427,7 @@ def test_import_a_b():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None}
                      ],
             "formatting": [{"type": "space", "value": " "}], }])
@@ -447,7 +447,7 @@ def test_import_a_b():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None},
                       {
                        "type": "comma",
@@ -466,7 +466,7 @@ def test_import_a_b():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None}
                      ],
             "formatting": [{"type": "space", "value": " "}],
@@ -488,7 +488,7 @@ def test_import_a_b():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None},
                       {
                        "type": "comma",
@@ -506,7 +506,7 @@ def test_import_a_b():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None}
                      ],
             "formatting": [{"type": "space", "value": " "}],
@@ -526,7 +526,7 @@ def test_import_a_b():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None},
                       {
                        "type": "comma",
@@ -546,7 +546,7 @@ def test_import_a_b():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None}
                      ],
             "formatting": [{"type": "space", "value": " "}],
@@ -576,7 +576,7 @@ def test_import_a_b_as_c():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None},
                       {
                        "type": "comma",
@@ -605,7 +605,7 @@ def test_import_a_b_as_c():
                        "after_formatting": [{"type": "space", "value": "  "}],
                        "target": "c",
                        "type": "dotted_as_name",
-                       "as_": True,
+                       "as": True,
                       }
                      ],
             "formatting": [{"type": "space", "value": " "}],
@@ -630,7 +630,7 @@ def test_import_a_b_as_c():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None},
                       {
                        "type": "comma",
@@ -653,7 +653,7 @@ def test_import_a_b_as_c():
                                            {"type": "name",
                                             "value": 'd'}                         ],
                                 },
-                       "as_": True,
+                       "as": True,
                        "before_formatting": [{"type": "space", "value": " "}],
                        "after_formatting": [{"type": "space", "value": "  "}],
                        "target": "c"                                    ,
@@ -682,7 +682,7 @@ def test_import_a_b_as_c():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None},
                       {
                        "type": "comma",
@@ -705,7 +705,7 @@ def test_import_a_b_as_c():
                                             "value": 'd',
                                            }                         ],
                                 },
-                       "as_": True,
+                       "as": True,
                        "before_formatting": [{"type": "space", "value": " "}],
                        "after_formatting": [{"type": "space", "value": "  "}],
                        "target": "c",
@@ -729,7 +729,7 @@ def test_import_a_b_as_c():
                              {
                               "before_formatting": [],
                               "after_formatting": [],
-                              "as_": False,
+                              "as": False,
                               "target": None,
                               "value":
                               {
@@ -763,7 +763,7 @@ def test_import_a_b_as_c():
                                         ],
 
                               },
-                              "as_": True,
+                              "as": True,
                               "before_formatting": [{"type": "space", "value": " "}],
                               "after_formatting": [{"type": "space", "value": "  "}],
                               "target": "c",
@@ -792,7 +792,7 @@ def test_import_a_b_as_c():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None
                       },
                       {
@@ -820,7 +820,7 @@ def test_import_a_b_as_c():
                                    "value": 'd'}
                                  ],
                        },
-                       "as_": True,
+                       "as": True,
                        "before_formatting": [{"type": "space", "value": " "}],
                        "after_formatting": [{"type": "space", "value": "  "}],
                        "target": "c"                                    ,
@@ -849,7 +849,7 @@ def test_import_a_b_as_c():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None
                       },
                       {
@@ -876,7 +876,7 @@ def test_import_a_b_as_c():
                                   }
                                  ],
                        },
-                       "as_": True,
+                       "as": True,
                        "before_formatting": [{"type": "space", "value": " "}],
                        "after_formatting": [{"type": "space", "value": "  "}],
                        "target": "c",
@@ -909,7 +909,7 @@ def test_import_a_b_c_d():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None},
                       {
                        "type": "comma",
@@ -927,7 +927,7 @@ def test_import_a_b_c_d():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None},
                       {
                        "type": "comma",
@@ -943,7 +943,7 @@ def test_import_a_b_c_d():
                        "type": "dotted_as_name",
                        "before_formatting": [],
                        "after_formatting": [],
-                       "as_": False,
+                       "as": False,
                        "target": None},
                       {
                        "type": "comma",
@@ -959,7 +959,7 @@ def test_import_a_b_c_d():
      "type": "dotted_as_name",
      "before_formatting": [],
      "after_formatting": [],
-     "as_": False,
+     "as": False,
      "target": None}                     ],
     "formatting": [{"type": "space", "value": " "}], }])
 
@@ -987,7 +987,7 @@ def test_from_a_import_b():
                          "value": 'b',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None,
                         }
                        ],
@@ -1028,7 +1028,7 @@ def test_from_a_dot_c_import_b():
                          "value": 'b',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None,
                         }
                        ],
@@ -1065,7 +1065,7 @@ def test_from_a_dot_c_import_b():
                          "value": 'b',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None,
                         }
                        ],
@@ -1107,7 +1107,7 @@ def test_from_a_dot_c_import_b_d():
                          "value": 'b',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None,
                         },
                         {
@@ -1122,7 +1122,7 @@ def test_from_a_dot_c_import_b_d():
                          "value": 'd',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None}
                        ],
             "before_formatting": [{"type": "space", "value": " "}],
@@ -1160,7 +1160,7 @@ def test_from_a_dot_c_import_b_d():
                          "value": 'b',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None},
                         {
                          "type": "comma",
@@ -1175,7 +1175,7 @@ def test_from_a_dot_c_import_b_d():
                          "value": 'd',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None,
                         }
                        ],
@@ -1214,7 +1214,7 @@ def test_from_a_dot_c_import_b_d():
                          "value": 'b',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None,
                         },
                         {
@@ -1229,7 +1229,7 @@ def test_from_a_dot_c_import_b_d():
                          "value": 'd',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None}
                        ],
             "before_formatting": [{"type": "space", "value": " "}],
@@ -1267,7 +1267,7 @@ def test_from_a_dot_c_import_b_d():
                          "value": 'b',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None},
                         {
                          "type": "comma",
@@ -1282,7 +1282,7 @@ def test_from_a_dot_c_import_b_d():
                          "value": 'd',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None,
                         }
                        ],
@@ -1317,7 +1317,7 @@ def test_from_a_import_b_as_d():
                          "value": 'b',
                          "before_formatting": [{"type": "space", "value": " "}],
                          "after_formatting": [{"type": "space", "value": " "}],
-                         "as_": True,
+                         "as": True,
                          "target": "d",
                         }
                        ],
@@ -1354,7 +1354,7 @@ def test_from_a_import_parenthesis_b():
                          "value": 'b',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None,
                         },
                         {
@@ -1397,7 +1397,7 @@ def test_from_a_import_parenthesis_b_without_space():
                          "value": 'b',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None,
                         },
                         {
@@ -1441,7 +1441,7 @@ def test_from_a_import_parenthesis_b_comma():
                          "value": 'b',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None,
                         },
                         {
@@ -1489,7 +1489,7 @@ def test_from_a_import_parenthesis_b_space():
                          "value": 'b',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None,
                         },
                         {
@@ -1592,7 +1592,7 @@ def test_from_dot_a_import_b():
                          "value": 'b',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None,
                         }
                        ],
@@ -1640,7 +1640,7 @@ def test_from_dot_dot_dot_a_import_b():
                          "value": 'b',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None,
                         }
                        ],
@@ -1685,7 +1685,7 @@ def test_from_dot_dot_dot_a_import_b():
                          "value": 'b',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None,
                         }
                        ],
@@ -1730,7 +1730,7 @@ def test_from_dot_dot_dot_a_import_b():
                          "value": 'b',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None,
                         }
                        ],
@@ -1768,7 +1768,7 @@ def test_from_no_space_dot_a_import_b():
                          "value": 'b',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None,
                         }
                        ],
@@ -1799,7 +1799,7 @@ def test_from_dot_import_b():
                          "value": 'b',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None,
                         }                                ],
             "before_formatting": [{"type": "space", "value": " "}],
@@ -1831,7 +1831,7 @@ def test_from_dot_no_space_import_b():
                          "value": 'b',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None,
                         }
                        ],
@@ -1864,7 +1864,7 @@ def test_from_no_space_dot_import_b():
                          "value": 'b',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None,
                         }
                        ],
@@ -1896,7 +1896,7 @@ def test_from_no_space_dot_no_sapceimport_b():
                          "value": 'b',
                          "before_formatting": [],
                          "after_formatting": [],
-                         "as_": False,
+                         "as": False,
                          "target": None,
                          }
                        ],

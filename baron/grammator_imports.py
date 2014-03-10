@@ -61,7 +61,7 @@ def include_imports(pg):
                  "value": name.value,
                  "before_formatting": as_.hidden_tokens_before,
                  "after_formatting": as_.hidden_tokens_after,
-                 "as_": True,
+                 "as": True,
                  "target": name2.value
                 }]
 
@@ -70,7 +70,7 @@ def include_imports(pg):
         return [{
                  "type": "name_as_name",
                  "value": name.value,
-                 "as_": False,
+                 "as": False,
                  "target": None,
                  "before_formatting": [],
                  "after_formatting": []
@@ -113,7 +113,7 @@ def include_imports(pg):
                  "before_formatting": as_.hidden_tokens_before,
                  "after_formatting": as_.hidden_tokens_after,
                  "target": name.value,
-                 "as_": True
+                 "as": True
                 }]
 
     @pg.production("dotted_as_name : dotted_name")
@@ -126,7 +126,7 @@ def include_imports(pg):
                           },
                  "before_formatting": [],
                  "after_formatting": [],
-                 "as_": False,
+                 "as": False,
                  "target": None
                 }]
 
