@@ -17,4 +17,6 @@ def parse_multi(tokens, result):
 
 
 def check_dumps(source_code):
+    open("/tmp/c", "w").write(source_code)
+    open("/tmp/d", "w").write(dumps(baron_parse(source_code)))
     assert dumps(baron_parse(source_code)) == source_code
