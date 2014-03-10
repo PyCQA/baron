@@ -81,6 +81,16 @@ def else_(node):
     yield dump_node_list(node["value"])
 
 
+def import_(node):
+    yield "import"
+    yield dump_node_list(node["formatting"])
+    yield dump_node_list(node["value"])
+
+
+def dotted_as_name(node):
+    yield dump_node_list(node["value"]["value"])
+
+
 dumpers = {
     "name": get_value,
     "endl": endl,
@@ -94,6 +104,8 @@ dumpers = {
     "if": if_,
     "elif": elif_,
     "else": else_,
+    "import": import_,
+    "dotted_as_name": dotted_as_name,
 }
 
 

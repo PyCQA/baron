@@ -47,3 +47,7 @@ def test_if_elif():
 
 def test_if_elif_else():
     check_dumps("if a: \n    pass\nelif b: pass\nelse :   \n	pouet")
+
+
+def test_import():
+    check_dumps("import  a")
