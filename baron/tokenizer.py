@@ -7,14 +7,27 @@ class UnknowItem(Exception):
 KEYWORDS = ("and", "as", "assert", "break", "class", "continue", "def", "del", "elif", "else", "except", "exec", "finally", "for", "from", "global", "if", "import", "in", "is", "lambda", "not", "or", "pass", "print", "raise", "return", "try", "while", "with", "yield")
 
 TOKENS = (
-    (r'\.', 'DOT'),
     (r'[a-zA-Z_]\w*', 'NAME'),
+
+    # TODO tests
+    (r'0', 'INT'),
+    (r'\d+[eE][-+]?\d*', 'FLOAT_EXPONANT'),
+    (r'\d+\.\d*[eE][-+]?\d*', 'FLOAT_EXPONANT'),
+    (r'\.\d+[eE][-+]?\d*', 'FLOAT_EXPONANT'),
+    (r'\d*\.\d+[jJ]', 'COMPLEX'),
+    (r'\d+\.[jJ]', 'COMPLEX'),
+    (r'\d+[jJ]', 'COMPLEX'),
+    (r'\d+\.', 'FLOAT'),
+    (r'\d*\.\d+[lL]?', 'FLOAT'),
+    (r'\d+\.\d*[lL]?', 'FLOAT'),
+    (r'\.', 'DOT'),
+    # ENDTODO
+
     (r'[1-9]+\d*[lL]?', 'INT'),
-    (r'\d*\.\d*[lL]?', 'FLOAT'),
     (r'0[xX][\da-fA-F]+[lL]?', 'HEXA'),
     (r'(0[oO][0-7]+)|(0[0-7]*)[lL]?', 'OCTA'),
-    (r'\d+[eE][-+]?\d+', 'FLOAT_EXPONANT'),
-    (r'\d*.\d*[eE][-+]?\d+', 'FLOAT_EXPONANT'),
+    # TODO test
+    (r'0[bB][01]+[lL]?', 'BINARY'),
     (r'\(', 'LEFT_PARENTHESIS'),
     (r'\)', 'RIGHT_PARENTHESIS'),
     (r':', 'COLON'),
