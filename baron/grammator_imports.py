@@ -59,8 +59,8 @@ def include_imports(pg):
         return [{
                  "type": "name_as_name",
                  "value": name.value,
-                 "before_formatting": as_.hidden_tokens_before,
-                 "after_formatting": as_.hidden_tokens_after,
+                 "first_formatting": as_.hidden_tokens_before,
+                 "second_formatting": as_.hidden_tokens_after,
                  "as": True,
                  "target": name2.value
                 }]
@@ -72,8 +72,8 @@ def include_imports(pg):
                  "value": name.value,
                  "as": False,
                  "target": None,
-                 "before_formatting": [],
-                 "after_formatting": []
+                 "first_formatting": [],
+                 "second_formatting": []
                 }]
 
     @pg.production("name_as_name : NAME SPACE")
@@ -82,8 +82,8 @@ def include_imports(pg):
                  "type": "name_as_name",
                  "target": None,
                  "value": name.value,
-                 "before_formatting": [],
-                 "after_formatting": []
+                 "first_formatting": [],
+                 "second_formatting": []
                 }] + [create_node_from_token(space)]
 
     @pg.production("name_as_name : COMMA")
@@ -110,8 +110,8 @@ def include_imports(pg):
                            "type": "dotted_name",
                            "value": dotted_as_name
                           },
-                 "before_formatting": as_.hidden_tokens_before,
-                 "after_formatting": as_.hidden_tokens_after,
+                 "first_formatting": as_.hidden_tokens_before,
+                 "second_formatting": as_.hidden_tokens_after,
                  "target": name.value,
                  "as": True
                 }]
@@ -124,8 +124,8 @@ def include_imports(pg):
                            "type": "dotted_name",
                            "value": dotted_name
                           },
-                 "before_formatting": [],
-                 "after_formatting": [],
+                 "first_formatting": [],
+                 "second_formatting": [],
                  "as": False,
                  "target": None
                 }]
