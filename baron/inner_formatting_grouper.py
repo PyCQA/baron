@@ -174,5 +174,4 @@ def group_generator(sequence):
             debug_text += "Should have been grouped on either %s (before) or %s (after) token." % (debug_previous_token, iterator.show_next())
             raise UnExpectedFormattingToken(debug_text)
 
-        print current
         yield current
