@@ -87,6 +87,16 @@ def import_(node):
     yield dump_node_list(node["value"])
 
 
+def from_import(node):
+    yield "from"
+    yield dump_node_list(node["first_formatting"])
+    yield dump_node(node["value"])
+    yield dump_node_list(node["second_formatting"])
+    yield "import"
+    yield dump_node_list(node["third_formatting"])
+    yield dump_node_list(node["targets"])
+
+
 def dotted_as_name(node):
     yield dump_node_list(node["value"]["value"])
     if node["as"]:
@@ -94,6 +104,16 @@ def dotted_as_name(node):
         yield "as"
         yield dump_node_list(node["second_formatting"])
         yield node["target"]
+
+
+def name_as_name(node):
+    yield node["value"]
+    if node["as"]:
+        yield dump_node_list(node["first_formatting"])
+        yield "as"
+        yield dump_node_list(node["second_formatting"])
+        yield node["target"]
+    debug(node)
 
 
 dumpers = {
@@ -111,7 +131,10 @@ dumpers = {
     "elif": elif_,
     "else": else_,
     "import": import_,
+    "from_import": from_import,
     "dotted_as_name": dotted_as_name,
+    "dotted_name": dump_node_list_value,
+    "name_as_name": name_as_name,
 }
 
 

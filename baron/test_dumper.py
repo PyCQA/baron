@@ -55,3 +55,7 @@ def test_import():
 
 def test_import_madness():
     check_dumps("import  a.B .   c as  saucisse")
+
+
+def test_from_import():
+    check_dumps("from b   import  a  as   rev")
