@@ -151,9 +151,4 @@ def name_as_name(node):
 
 
 def dumps(tree):
-    result = ""
-
-    for node in tree:
-        result += dump_node(node)
-
-    return result
+    return "".join(map(dump_node, tree))
