@@ -125,3 +125,6 @@ def test_space_endl_with_backslash():
 
 def test_regression():
     assert group(['0x045e', ':', ' ']) == ['0x045e', ':', ' ']
+
+def test_backslash_window_endl():
+    assert group(['\\', '\r', '\n']) == ['\\\r\n']

@@ -64,6 +64,12 @@ def group_generator(sequence):
             if re.match(r'^\s+$', str(iterator.show_next())):
                 current += iterator.next()
 
+        if current == "\\" and iterator.show_next() == "\r" and iterator.show_next(2) == "\n":
+            current += iterator.next()
+            current += iterator.next()
+            if re.match(r'^\s+$', str(iterator.show_next())):
+                current += iterator.next()
+
         if re.match(r'^\s+$', current) and iterator.show_next() == "\\":
             current += iterator.next()
             current += iterator.next()
