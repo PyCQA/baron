@@ -1,5 +1,5 @@
 def dump_node(node):
-    return dumpers[node["type"]](node)
+    return "".join(list(dumpers[node["type"]](node)))
 
 
 def dump_node_list(node_list):
@@ -7,17 +7,15 @@ def dump_node_list(node_list):
 
 
 def get_value(node):
-    return node["value"]
+    yield node["value"]
 
 
 def assignment(node):
-    to_return = ""
-    to_return += dump_node(node["target"])
-    to_return += dump_node_list(node["first_formatting"])
-    to_return += "="
-    to_return += dump_node_list(node["second_formatting"])
-    to_return += dump_node(node["value"])
-    return to_return
+    yield dump_node(node["target"])
+    yield dump_node_list(node["first_formatting"])
+    yield "="
+    yield dump_node_list(node["second_formatting"])
+    yield dump_node(node["value"])
 
 
 dumpers = {
