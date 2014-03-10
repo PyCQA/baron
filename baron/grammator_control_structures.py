@@ -221,6 +221,7 @@ def include_control_structures(pg):
             "type": "elif",
             "first_formatting": elif_.hidden_tokens_after,
             "second_formatting": colon.hidden_tokens_before,
+            "third_formatting": colon.hidden_tokens_after,
             "value": suite,
             "test": test,
         }]
@@ -231,6 +232,7 @@ def include_control_structures(pg):
             "type": "elif",
             "first_formatting": elif_.hidden_tokens_after,
             "second_formatting": colon.hidden_tokens_before,
+            "third_formatting": colon.hidden_tokens_after,
             "value": suite,
             "test": test,
         }]
@@ -262,4 +264,3 @@ def include_control_structures(pg):
                            "third_formatting": colon.hidden_tokens_after,
                           }] + elifs + [else_stmt]
                }]
-

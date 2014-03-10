@@ -311,6 +311,7 @@ def test_if_elif_elif_stmt_indent():
               "type": "elif",
               "first_formatting": [{"type": "space", "value": " "}],
               "second_formatting": [],
+              "third_formatting": [],
               "test": {
                   "type": "name",
                   "value": "b",
@@ -332,6 +333,7 @@ def test_if_elif_elif_stmt_indent():
               "type": "elif",
               "first_formatting": [{"type": "space", "value": " "}],
               "second_formatting": [{"type": "space", "value": " "}],
+              "third_formatting": [],
               "test": {
                   "type": "name",
                   "value": "c",
@@ -424,6 +426,7 @@ def test_if_elif_elif_else_stmt_indent():
               "type": "elif",
               "first_formatting": [{"type": "space", "value": " "}],
               "second_formatting": [],
+              "third_formatting": [],
               "test": {
                   "type": "name",
                   "value": "b",
@@ -445,6 +448,7 @@ def test_if_elif_elif_else_stmt_indent():
               "type": "elif",
               "first_formatting": [{"type": "space", "value": " "}],
               "second_formatting": [{"type": "space", "value": " "}],
+              "third_formatting": [],
               "test": {
                   "type": "name",
                   "value": "c",
