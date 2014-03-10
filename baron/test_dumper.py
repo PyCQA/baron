@@ -10,3 +10,7 @@ def test_empty():
 
 def test_var():
     check_dumps("hello")
+
+
+def test_int():
+    check_dumps("1")
