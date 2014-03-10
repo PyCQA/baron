@@ -11,6 +11,11 @@ def dump_node_list(node_list):
     return "".join(map(dump_node, node_list))
 
 
+def endl(node):
+    yield node["value"]
+    yield node["indent"]
+
+
 def get_value(node):
     yield node["value"]
 
@@ -53,7 +58,7 @@ def else_(node):
 
 dumpers = {
     "name": get_value,
-    "endl": get_value,
+    "endl": endl,
     "int": get_value,
     "pass": lambda x: "pass",
     "space": get_value,
