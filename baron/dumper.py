@@ -1,4 +1,18 @@
+def get_value(node):
+    return node["value"]
+
+
+dumpers = {
+    "name": get_value,
+    "endl": get_value,
+    "int": get_value,
+}
+
+
 def dumps(tree):
-    if tree:
-        return tree[0]["value"]
-    return ""
+    result = ""
+
+    for node in tree:
+        result += dumpers[node["type"]](node)
+
+    return result
