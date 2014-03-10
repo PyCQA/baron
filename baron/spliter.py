@@ -20,8 +20,8 @@ def split_generator(sequence):
             yield result
 
         for section in ("'", '"'):
-            not_found = False
             if iterator.next_starts_with(section * 3):
+                not_found = False
                 result = iterator.next()
                 result += iterator.next()
                 result += iterator.next()
@@ -31,6 +31,7 @@ def split_generator(sequence):
                 result += iterator.next()
                 yield result
             elif iterator.next_in(section):
+                not_found = False
                 result = iterator.next()
                 result += iterator.grab_string(lambda iterator: iterator.show_next() not in section)
                 result += iterator.next()
