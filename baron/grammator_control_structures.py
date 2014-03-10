@@ -171,6 +171,7 @@ def include_control_structures(pg):
                  "else": {},
                  "first_formatting": while_.hidden_tokens_after,
                  "second_formatting": colon.hidden_tokens_before,
+                 "third_formatting": colon.hidden_tokens_after,
                }]
 
     @pg.production("while_stmt : WHILE test COLON suite else_stmt")
@@ -182,6 +183,7 @@ def include_control_structures(pg):
                  "else": else_stmt,
                  "first_formatting": while_.hidden_tokens_after,
                  "second_formatting": colon.hidden_tokens_before,
+                 "third_formatting": colon.hidden_tokens_after,
                }]
 
     @pg.production("if_stmt : IF test COLON suite")

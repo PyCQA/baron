@@ -493,6 +493,47 @@ def test_while_stmt_indent():
             "type": "while",
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [],
+            "third_formatting": [],
+            "else": {},
+            "test": {
+                "type": "name",
+                "value": "a",
+            },
+             "value": [{
+                "type": "endl",
+                "formatting": [],
+                "value": "\n",
+                "indent": "    "
+             },{
+                 "type": "pass",
+             },{
+                "formatting": [],
+                "indent": "",
+                "type": "endl",
+                "value": "\n"
+             }],
+          }])
+
+def test_while_stmt_indent_third_formatting():
+    """
+    while a : 
+        pass
+    """
+    parse_multi([
+           ('WHILE', 'while', [], [('SPACE', ' ')]),
+           ('NAME', 'a'),
+           ('COLON', ':', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('ENDL', '\n', [], [('SPACE', '    ')]),
+           ('INDENT', ''),
+           ('PASS', 'pass'),
+           ('ENDL', '\n'),
+           ('DEDENT', ''),
+          ],
+          [{
+            "type": "while",
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
             "else": {},
             "test": {
                 "type": "name",
@@ -541,6 +582,7 @@ def test_while_else_stmt_indent():
             "type": "while",
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [],
+            "third_formatting": [],
             "test": {
                 "type": "name",
                 "value": "a",
