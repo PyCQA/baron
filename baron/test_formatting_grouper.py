@@ -2842,7 +2842,6 @@ def test_strings():
     I don't this because python allow to write stuff like 'qsd' rb"qsd" u'pouet'
     """
     for i in ('STRING', 'RAW_STRING', 'UNICODE_STRING', 'UNICODE_RAW_STRING', 'BINARY_STRING', 'BINARY_RAW_STRING'):
-        print "For", i
         group([
                ('SPACE', ' '),
                (i, 'dummy'),
