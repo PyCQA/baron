@@ -1,2 +1,2 @@
-def dumps():
-    pass
+def dumps(tree):
+    return ""

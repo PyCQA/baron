@@ -5,4 +5,4 @@ from test_utils import check_dumps
 
 
 def test_empty():
-    pass
+    check_dumps("")
