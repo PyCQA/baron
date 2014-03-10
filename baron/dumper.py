@@ -1,3 +1,7 @@
+def dump_node(node):
+    return dumpers[node["type"]](node)
+
+
 def get_value(node):
     return node["value"]
 
@@ -13,6 +17,6 @@ def dumps(tree):
     result = ""
 
     for node in tree:
-        result += dumpers[node["type"]](node)
+        result += dump_node(node)
 
     return result
