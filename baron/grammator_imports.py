@@ -145,4 +145,8 @@ def include_imports(pg):
 
     @pg.production("dotted_name_element : DOT")
     def dotted_name_dot((dot,)):
-        return dot.hidden_tokens_before + [create_node_from_token(dot)] + dot.hidden_tokens_after
+        return [{
+            "type": "dot",
+            "first_formatting": dot.hidden_tokens_before,
+            "second_formatting": dot.hidden_tokens_after,
+        }]

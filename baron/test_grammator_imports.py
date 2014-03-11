@@ -48,7 +48,8 @@ def test_import_basic_dot():
                                            },
                                            {
                                             "type": "dot",
-                                            "value": ".",
+                                            "first_formatting": [],
+                                            "second_formatting": [],
                                            },
                                            {
                                             "type": "name",
@@ -77,7 +78,11 @@ def test_import_basic_dot():
                                  "type": "dotted_name",
                                  "value": [
                                            {"type": "name", "value": "pouet"},
-                                           { "type": "dot", "value": ".", },
+                                           {
+                                            "type": "dot",
+                                            "first_formatting": [],
+                                            "second_formatting": [],
+                                           },
                                            { "type": "name", "value": "blob", }
                                           ],
                                 },
@@ -113,19 +118,20 @@ def test_import_more_dot():
                                            },
                                            {
                                             "type": "dot",
-                                            "value": ".",
+                                            "first_formatting": [],
+                                            "second_formatting": [],
                                            },
                                            {
                                             "type": "name",
                                             "value": "blob"
                                            },
                                            {
+                                            "type": "dot",
+                                            "first_formatting": [{
                                             "type": "space",
                                             "value": " ",
-                                           },
-                                           {
-                                            "type": "dot",
-                                            "value": ".",
+                                           }],
+                                            "second_formatting": [],
                                            },
                                            {
                                             "type": "name",
@@ -159,19 +165,20 @@ def test_import_more_dot():
                                             "value": "pouet"},
                                            {
                                             "type": "dot",
-                                            "value": ".",
+                                            "first_formatting": [],
+                                            "second_formatting": [],
                                            },
                                            {
                                             "type": "name",
                                             "value": "blob",
                                            },
                                            {
+                                            "type": "dot",
+                                            "first_formatting": [{
                                             "type": "space",
                                             "value": " ",
-                                           },
-                                           {
-                                            "type": "dot",
-                                            "value": ".",
+                                           }],
+                                            "second_formatting": [],
                                            },
                                            {"type": "name",
                                             "value": "plop"}
@@ -203,17 +210,18 @@ def test_import_more_dot():
                                             "value": "pouet"},
                                            {
                                             "type": "dot",
-                                            "value": ".",
+                                            "first_formatting": [],
+                                            "second_formatting": [],
                                            },
                                            {"type": "name",
                                             "value": "blob"},
                                            {
+                                            "type": "dot",
+                                            "first_formatting": [{
                                             "type": "space",
                                             "value": " ",
-                                           },
-                                           {
-                                            "type": "dot",
-                                            "value": ".",
+                                           }],
+                                            "second_formatting": [],
                                            },
                                            {
                                             "type": "name",
@@ -249,17 +257,18 @@ def test_import_more_dot():
                                            },
                                            {
                                             "type": "dot",
-                                            "value": ".",
+                                            "first_formatting": [],
+                                            "second_formatting": [],
                                            },
                                            {"type": "name",
                                             "value": "blob"},
                                            {
+                                            "type": "dot",
+                                            "first_formatting": [{
                                             "type": "space",
                                             "value": " ",
-                                           },
-                                           {
-                                            "type": "dot",
-                                            "value": ".",
+                                           }],
+                                            "second_formatting": [],
                                            },
                                            {"type": "name",
                                             "value": "plop"}
@@ -291,19 +300,20 @@ def test_import_more_dot():
                                             "value": "pouet"},
                                            {
                                             "type": "dot",
-                                            "value": ".",
+                                            "first_formatting": [],
+                                            "second_formatting": [],
                                            },
                                            {
                                             "type": "name",
                                             "value": "blob",
                                            },
                                            {
+                                            "type": "dot",
+                                            "first_formatting": [{
                                             "type": "space",
                                             "value": " ",
-                                           },
-                                           {
-                                            "type": "dot",
-                                            "value": ".",
+                                           }],
+                                            "second_formatting": [],
                                            },
                                            {"type": "name",
                                             "value": "plop"}
@@ -335,17 +345,18 @@ def test_import_more_dot():
                                             "value": "pouet"},
                                            {
                                             "type": "dot",
-                                            "value": ".",
+                                            "first_formatting": [],
+                                            "second_formatting": [],
                                            },
                                            {"type": "name",
                                             "value": "blob"},
                                            {
+                                            "type": "dot",
+                                            "first_formatting": [{
                                             "type": "space",
                                             "value": " ",
-                                           },
-                                           {
-                                            "type": "dot",
-                                            "value": ".",
+                                           }],
+                                            "second_formatting": [],
                                            },
                                            {
                                             "type": "name",
@@ -594,7 +605,8 @@ def test_import_a_b_as_c():
                                             "value": 'b'},
                                            {
                                             "type": "dot",
-                                            "value": "."
+                                            "first_formatting": [],
+                                            "second_formatting": [],
                                            },
                                            {
                                             "type": "name",
@@ -649,7 +661,9 @@ def test_import_a_b_as_c():
                                            },
                                            {
                                             "type": "dot",
-                                            "value": "."                             },
+                                            "first_formatting": [],
+                                            "second_formatting": [],
+                                           },
                                            {"type": "name",
                                             "value": 'd'}                         ],
                                 },
@@ -699,7 +713,9 @@ def test_import_a_b_as_c():
                                             "value": 'b'},
                                            {
                                             "type": "dot",
-                                            "value": "."                             },
+                                            "first_formatting": [],
+                                            "second_formatting": [],
+                                           },
                                            {
                                             "type": "name",
                                             "value": 'd',
@@ -742,7 +758,8 @@ def test_import_a_b_as_c():
                               "type": "dotted_as_name",
                              },
                              {
-                              "type": "comma", "value": ",",
+                              "type": "comma",
+                              "value": ",",
                              },
                              {
                               "type": "space",
@@ -756,7 +773,8 @@ def test_import_a_b_as_c():
                                           "value": 'b'},
                                          {
                                           "type": "dot",
-                                          "value": ".",
+                                          "first_formatting": [],
+                                          "second_formatting": [],
                                          },
                                          {"type": "name",
                                           "value": 'd'}
@@ -814,7 +832,8 @@ def test_import_a_b_as_c():
                                   },
                                   {
                                    "type": "dot",
-                                   "value": ".",
+                                   "first_formatting": [],
+                                   "second_formatting": [],
                                   },
                                   {"type": "name",
                                    "value": 'd'}
@@ -868,7 +887,8 @@ def test_import_a_b_as_c():
                                    "value": 'b'},
                                   {
                                    "type": "dot",
-                                   "value": ".",
+                                   "first_formatting": [],
+                                   "second_formatting": [],
                                   },
                                   {
                                    "type": "name",
@@ -1016,7 +1036,8 @@ def test_from_a_dot_c_import_b():
                                 },
                                 {
                                  "type": "dot",
-                                 "value": ".",
+                                 "first_formatting": [],
+                                 "second_formatting": [],
                                 },
                                 {"type": "name",
                                  "value": 'c'}
@@ -1051,7 +1072,8 @@ def test_from_a_dot_c_import_b():
                                  "value": 'a'},
                                 {
                                  "type": "dot",
-                                 "value": ".",
+                                 "first_formatting": [],
+                                 "second_formatting": [],
                                 },
                                 {
                                  "type": "name",
@@ -1095,7 +1117,8 @@ def test_from_a_dot_c_import_b_d():
                                 },
                                 {
                                  "type": "dot",
-                                 "value": ".",
+                                 "first_formatting": [],
+                                 "second_formatting": [],
                                 },
                                 {"type": "name",
                                  "value": 'c'}
@@ -1149,7 +1172,8 @@ def test_from_a_dot_c_import_b_d():
                                 },
                                 {
                                  "type": "dot",
-                                 "value": ".",
+                                 "first_formatting": [],
+                                 "second_formatting": [],
                                 },
                                 {"type": "name",
                                  "value": 'c'}
@@ -1200,7 +1224,8 @@ def test_from_a_dot_c_import_b_d():
                                  "value": 'a'},
                                 {
                                  "type": "dot",
-                                 "value": ".",
+                                 "first_formatting": [],
+                                 "second_formatting": [],
                                 },
                                 {
                                  "type": "name",
@@ -1254,7 +1279,8 @@ def test_from_a_dot_c_import_b_d():
                                  "value": 'a'},
                                 {
                                  "type": "dot",
-                                 "value": ".",
+                                 "first_formatting": [],
+                                 "second_formatting": [],
                                 },
                                 {
                                  "type": "name",
@@ -1578,7 +1604,8 @@ def test_from_dot_a_import_b():
                       "value": [
                                 {
                                  "type": "dot",
-                                 "value": ".",
+                                 "first_formatting": [],
+                                 "second_formatting": [],
                                 },
                                 {
                                  "type": "name",
@@ -1618,60 +1645,18 @@ def test_from_dot_dot_dot_a_import_b():
                       "value": [
                                 {
                                  "type": "dot",
-                                 "value": ".",
+                                 "first_formatting": [],
+                                 "second_formatting": [],
                                 },
                                 {
                                  "type": "dot",
-                                 "value": ".",
+                                 "first_formatting": [],
+                                 "second_formatting": [],
                                 },
                                 {
                                  "type": "dot",
-                                 "value": ".",
-                                },
-                                {
-                                 "type": "name",
-                                 "value": 'a',
-                                }
-                               ],
-                     },
-            "targets": [
-                        {
-                         "type": "name_as_name",
-                         "value": 'b',
-                         "first_formatting": [],
-                         "second_formatting": [],
-                         "as": False,
-                         "target": None,
-                        }
-                       ],
-            "first_formatting": [{"type": "space", "value": " "}],
-            "second_formatting": [{"type": "space", "value": " "}],
-            "third_formatting": [{"type": "space", "value": " "}] }])
-    parse_simple([
-           ('FROM', 'from', [], [('SPACE', ' ')]),
-           ('DOT', '.'),
-           ('DOT', '.'),
-           ('DOT', '.'),
-           ('NAME', 'a'),
-           ('IMPORT', 'import', [('SPACE', ' ')], [('SPACE', ' ')]),
-           ('NAME', 'b')
-          ],
-          [{
-            "type": "from_import",
-            "value": {
-                      "type": "dotted_name",
-                      "value": [
-                                {
-                                 "type": "dot",
-                                 "value": ".",
-                                },
-                                {
-                                 "type": "dot",
-                                 "value": ".",
-                                },
-                                {
-                                 "type": "dot",
-                                 "value": ".",
+                                 "first_formatting": [],
+                                 "second_formatting": [],
                                 },
                                 {
                                  "type": "name",
@@ -1708,15 +1693,66 @@ def test_from_dot_dot_dot_a_import_b():
                       "value": [
                                 {
                                  "type": "dot",
-                                 "value": ".",
+                                 "first_formatting": [],
+                                 "second_formatting": [],
                                 },
                                 {
                                  "type": "dot",
-                                 "value": ".",
+                                 "first_formatting": [],
+                                 "second_formatting": [],
                                 },
                                 {
                                  "type": "dot",
-                                 "value": ".",
+                                 "first_formatting": [],
+                                 "second_formatting": [],
+                                },
+                                {
+                                 "type": "name",
+                                 "value": 'a',
+                                }
+                               ],
+                     },
+            "targets": [
+                        {
+                         "type": "name_as_name",
+                         "value": 'b',
+                         "first_formatting": [],
+                         "second_formatting": [],
+                         "as": False,
+                         "target": None,
+                        }
+                       ],
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}] }])
+    parse_simple([
+           ('FROM', 'from', [], [('SPACE', ' ')]),
+           ('DOT', '.'),
+           ('DOT', '.'),
+           ('DOT', '.'),
+           ('NAME', 'a'),
+           ('IMPORT', 'import', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'b')
+          ],
+          [{
+            "type": "from_import",
+            "value": {
+                      "type": "dotted_name",
+                      "value": [
+                                {
+                                 "type": "dot",
+                                 "first_formatting": [],
+                                 "second_formatting": [],
+                                },
+                                {
+                                 "type": "dot",
+                                 "first_formatting": [],
+                                 "second_formatting": [],
+                                },
+                                {
+                                 "type": "dot",
+                                 "first_formatting": [],
+                                 "second_formatting": [],
                                 },
                                 {
                                  "type": "name",
@@ -1754,7 +1790,8 @@ def test_from_no_space_dot_a_import_b():
                       "value": [
                                 {
                                  "type": "dot",
-                                 "value": ".",
+                                 "first_formatting": [],
+                                 "second_formatting": [],
                                 },
                                 {
                                  "type": "name",
@@ -1790,8 +1827,10 @@ def test_from_dot_import_b():
                       "value": [
                                 {
                                  "type": "dot",
-                                 "value": ".",
-                                }                                    ],
+                                 "first_formatting": [],
+                                 "second_formatting": [],
+                                }
+                               ],
                      },
             "targets": [
                         {
@@ -1821,7 +1860,8 @@ def test_from_dot_no_space_import_b():
                       "value": [
                                 {
                                  "type": "dot",
-                                 "value": ".",
+                                 "first_formatting": [],
+                                 "second_formatting": [],
                                 }
                                ],
                      },
@@ -1854,7 +1894,8 @@ def test_from_no_space_dot_import_b():
                       "value": [
                                 {
                                  "type": "dot",
-                                 "value": ".",
+                                 "first_formatting": [],
+                                 "second_formatting": [],
                                 }
                                ],
                      },
@@ -1886,7 +1927,8 @@ def test_from_no_space_dot_no_sapceimport_b():
                       "value": [
                                 {
                                  "type": "dot",
-                                 "value": ".",
+                                 "first_formatting": [],
+                                 "second_formatting": [],
                                 }
                                ],
                      },
