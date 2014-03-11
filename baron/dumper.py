@@ -33,16 +33,39 @@ def endl(node):
 
 @node("name")
 @node("int")
-@node("dot")
 @node("space")
 def get_value(node):
     yield node["value"]
+
+
+@node()
+def dot(node):
+    yield dump_node_list(node["first_formatting"])
+    yield "."
+    yield dump_node_list(node["second_formatting"])
+
 
 @node()
 def comma(node):
     yield dump_node_list(node["first_formatting"])
     yield ","
     yield dump_node_list(node["second_formatting"])
+
+
+@node()
+def call(node):
+    yield dump_node_list(node["first_formatting"])
+    yield "("
+    yield dump_node_list(node["second_formatting"])
+    yield dump_node_list(node["value"])
+    yield ")"
+    yield dump_node_list(node["third_formatting"])
+
+
+@node()
+def argument(node):
+    yield dump_node(node["value"])
+
 
 @node()
 def pass_(node):
@@ -51,6 +74,7 @@ def pass_(node):
 
 @node("dotted_name")
 @node("ifelseblock")
+@node("atomtrailers")
 def dump_node_list_value(node):
     yield dump_node_list(node["value"])
 

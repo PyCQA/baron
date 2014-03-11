@@ -67,3 +67,7 @@ def test_print():
 
 def test_print_madness():
     check_dumps("print >>  qsd, pouet, zdzd,")
+
+
+def test_atom_trailers_call():
+    check_dumps("a.c(b)")
