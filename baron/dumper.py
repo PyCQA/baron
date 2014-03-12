@@ -67,17 +67,6 @@ def call(node):
     yield dump_node_list(node["third_formatting"])
 
 
-def call_argument(node):
-    if node["name"]:
-        yield dump_node(node["name"])
-        yield dump_node_list(node["first_formatting"])
-        yield "="
-        yield dump_node_list(node["second_formatting"])
-        yield dump_node(node["value"])
-    else:
-        yield dump_node(node["value"])
-
-
 @node()
 def funcdef(node):
     yield "def"
@@ -86,12 +75,39 @@ def funcdef(node):
     yield dump_node_list(node["second_formatting"])
     yield "("
     yield dump_node_list(node["third_formatting"])
+    for n in node["arguments"]:
+        if n["type"] == "argument":
+            yield "".join(list(funcdef_argument(n)))
+        else:
+            yield dump_node(n)
     yield dump_node_list(node["forth_formatting"])
     yield ")"
     yield dump_node_list(node["fith_formatting"])
     yield ":"
     yield dump_node_list(node["sixth_formatting"])
     yield dump_node_list(node["value"])
+
+
+def call_argument(node):
+    if node["name"]:
+        yield node["name"]
+        yield dump_node_list(node["first_formatting"])
+        yield "="
+        yield dump_node_list(node["second_formatting"])
+        yield dump_node(node["value"])
+    else:
+        yield dump_node(node["value"])
+
+
+def funcdef_argument(node):
+    if node["value"]:
+        yield node["name"]
+        yield dump_node_list(node["first_formatting"])
+        yield "="
+        yield dump_node_list(node["second_formatting"])
+        yield dump_node(node["value"])
+    else:
+        yield node["name"]
 
 
 @node()

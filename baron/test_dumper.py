@@ -87,3 +87,11 @@ def test_funcdef():
 
 def test_funcdef_indent():
     check_dumps("def a  ( ) : \n    pass")
+
+
+def test_funcdef_parameter():
+    check_dumps("def a  ( b ) : pass")
+
+
+def test_funcdef_parameter_named():
+    check_dumps("def a  ( b  , c = qsd ) : pass")
