@@ -79,6 +79,22 @@ def call_argument(node):
 
 
 @node()
+def funcdef(node):
+    yield "def"
+    yield dump_node_list(node["first_formatting"])
+    yield node["name"]
+    yield dump_node_list(node["second_formatting"])
+    yield "("
+    yield dump_node_list(node["third_formatting"])
+    yield dump_node_list(node["forth_formatting"])
+    yield ")"
+    yield dump_node_list(node["fith_formatting"])
+    yield ":"
+    yield dump_node_list(node["sixth_formatting"])
+    yield dump_node_list(node["value"])
+
+
+@node()
 def pass_(node):
     yield "pass"
 

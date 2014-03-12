@@ -79,3 +79,11 @@ def test_atom_trailers_call_default():
 
 def test_string():
     check_dumps("'ama string!'")
+
+
+def test_funcdef():
+    check_dumps("def a  ( ) : pass")
+
+
+def test_funcdef_indent():
+    check_dumps("def a  ( ) : \n    pass")
