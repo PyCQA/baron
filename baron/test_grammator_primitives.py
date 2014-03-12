@@ -1115,11 +1115,11 @@ def test_lambda_arguments():
                 "value": "a",
             },
             "arguments": [{
-                "default": {},
+                "value": {},
                 "first_formatting": [],
                 "second_formatting": [],
                 "type": "argument",
-                "value": {
+                "name": {
                     "type": "name",
                     "value": "argument",
                 },

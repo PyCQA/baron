@@ -339,14 +339,24 @@ def generate_parse(print_function):
         }
 
     @pg.production("argument : test")
+    def argument_one((name,)):
+        return [{
+            "type": "argument",
+            "first_formatting": [],
+            "second_formatting": [],
+            "name": {},
+            "value": name
+        }]
+
+
     @pg.production("parameter : name")
     def parameter_one((name,)):
         return [{
             "type": "argument",
             "first_formatting": [],
             "second_formatting": [],
-            "default": {},
-            "value": name
+            "value": {},
+            "name": name
         }]
 
 
@@ -366,8 +376,8 @@ def generate_parse(print_function):
             "type": "argument",
             "first_formatting": [],
             "second_formatting": [],
-            "default": {},
-            "value": {
+            "value": {},
+            "name": {
                 "type": "tuple",
                 "first_formatting": left_parenthesis.hidden_tokens_after,
                 "second_formatting": right_parenthesis.hidden_tokens_before,
@@ -406,8 +416,8 @@ def generate_parse(print_function):
             "type": "argument",
             "first_formatting": equal.hidden_tokens_before,
             "second_formatting": equal.hidden_tokens_after,
-            "default": test,
-            "value": name
+            "value": test,
+            "name": name
         }]
 
     @pg.production("argument : test comp_for")
@@ -441,7 +451,7 @@ def generate_parse(print_function):
         return [{
             "type": "list_argument",
             "first_formatting": star.hidden_tokens_after,
-            "name": name.value,
+            "value": name.value,
         }]
 
     @pg.production("parameter : DOUBLE_STAR NAME")
@@ -450,7 +460,7 @@ def generate_parse(print_function):
             "type": "dict_argument",
             "first_formatting": double_star.hidden_tokens_after,
             "second_formatting": double_star.hidden_tokens_after,
-            "name": name.value,
+            "value": name.value,
         }]
 
     @pg.production("argument : comma")

@@ -71,3 +71,7 @@ def test_print_madness():
 
 def test_atom_trailers_call():
     check_dumps("a.c(b)")
+
+
+def test_atom_trailers_call_default():
+    check_dumps("caramba(s, b=2)")

@@ -875,11 +875,11 @@ def test_list_comprehension_lambda_with_arguments():
                    "second_formatting": [],
                    "third_formatting": [{"type": "space", "value": " "}],
                    "arguments": [{
-                        "default": {},
+                        "value": {},
                         "first_formatting": [],
                         "second_formatting": [],
                         "type": "argument",
-                        "value": {
+                        "name": {
                             "type": "name",
                             "value": "argument"
                         },
