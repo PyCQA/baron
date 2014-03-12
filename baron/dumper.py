@@ -166,6 +166,13 @@ def assignment(node):
 
 
 @node()
+def unitary_operator(node):
+    yield node["value"]
+    yield dump_node_list(node["formatting"])
+    yield dump_node(node["target"])
+
+
+@node()
 def binary_operator(node):
     yield dump_node(node["first"])
     yield dump_node_list(node["first_formatting"])
