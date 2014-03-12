@@ -57,14 +57,24 @@ def call(node):
     yield dump_node_list(node["first_formatting"])
     yield "("
     yield dump_node_list(node["second_formatting"])
-    yield dump_node_list(node["value"])
+    for n in node["value"]:
+        if n["type"] == "argument":
+            yield "".join(list(call_argument(n)))
+        else:
+            yield dump_node(n)
     yield ")"
     yield dump_node_list(node["third_formatting"])
 
 
-@node()
-def argument(node):
-    yield dump_node(node["value"])
+def call_argument(node):
+    if node["name"]:
+        yield dump_node(node["name"])
+        yield dump_node_list(node["first_formatting"])
+        yield "="
+        yield dump_node_list(node["second_formatting"])
+        yield dump_node(node["value"])
+    else:
+        yield dump_node(node["value"])
 
 
 @node()
