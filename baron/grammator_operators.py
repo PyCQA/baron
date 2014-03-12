@@ -335,7 +335,7 @@ def include_operators(pg):
         }
 
     @pg.production("slice : test COLON test COLON test")
-    def slice_lower_upper_step((test, colon2, test2, colon, test3)):
+    def slice_lower_upper_step((test, colon, test2, colon2, test3)):
         return {
             "type": "slice",
             "lower": test,
