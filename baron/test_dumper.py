@@ -111,3 +111,8 @@ def test_slice_empty():
 
 def test_slice_classical():
     check_dumps("a[1: 42]")
+
+
+def test_slice_step():
+    check_dumps("a[1: 42:]")
+    #check_dumps("a[1: 42    :         3]")

@@ -148,6 +148,12 @@ def slice(node):
     if node["upper"]:
         yield dump_node(node["upper"])
 
+    if node["has_two_colons"]:
+        yield dump_node_list(node["third_formatting"])
+        yield ":"
+        if node["step"]:
+            yield dump_node(node["step"])
+
 
 @node()
 def assignment(node):
