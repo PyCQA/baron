@@ -240,9 +240,9 @@ def include_operators(pg):
     def slice((colon, colon2)):
         return {
             "type": "slice",
-            "lower": None,
-            "upper": None,
-            "step": None,
+            "lower": {},
+            "upper": {},
+            "step": {},
             "has_two_colons": bool(colon2),
             "first_formatting": [],
             "second_formatting": colon.hidden_tokens_after,
@@ -255,8 +255,8 @@ def include_operators(pg):
         return {
             "type": "slice",
             "lower": test,
-            "upper": None,
-            "step": None,
+            "upper": {},
+            "step": {},
             "has_two_colons": bool(colon2),
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
@@ -268,9 +268,9 @@ def include_operators(pg):
     def slice_upper((colon, test, colon2)):
         return {
             "type": "slice",
-            "lower": None,
+            "lower": {},
             "upper": test,
-            "step": None,
+            "step": {},
             "has_two_colons": bool(colon2),
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
@@ -282,8 +282,8 @@ def include_operators(pg):
     def slice_step((colon, colon2, test)):
         return {
             "type": "slice",
-            "lower": None,
-            "upper": None,
+            "lower": {},
+            "upper": {},
             "step": test,
             "has_two_colons": True,
             "first_formatting": colon.hidden_tokens_before,
@@ -298,7 +298,7 @@ def include_operators(pg):
             "type": "slice",
             "lower": test,
             "upper": test2,
-            "step": None,
+            "step": {},
             "has_two_colons": bool(colon2),
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
@@ -311,7 +311,7 @@ def include_operators(pg):
         return {
             "type": "slice",
             "lower": test,
-            "upper": None,
+            "upper": {},
             "step": test2,
             "has_two_colons": True,
             "first_formatting": colon.hidden_tokens_before,
@@ -324,7 +324,7 @@ def include_operators(pg):
     def slice_upper_step((colon, test, colon2, test2)):
         return {
             "type": "slice",
-            "lower": None,
+            "lower": {},
             "upper": test,
             "step": test2,
             "has_two_colons": True,

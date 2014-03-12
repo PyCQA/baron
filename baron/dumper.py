@@ -139,6 +139,17 @@ def getitem(node):
 
 
 @node()
+def slice(node):
+    if node["lower"]:
+        yield dump_node(node["lower"])
+    yield dump_node_list(node["first_formatting"])
+    yield ":"
+    yield dump_node_list(node["second_formatting"])
+    if node["upper"]:
+        yield dump_node(node["upper"])
+
+
+@node()
 def assignment(node):
     yield dump_node(node["target"])
     yield dump_node_list(node["first_formatting"])

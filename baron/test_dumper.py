@@ -103,3 +103,11 @@ def test_return():
 
 def test_getitem():
     check_dumps("a[ b  ]")
+
+
+def test_slice_empty():
+    check_dumps("a[ :  ]")
+
+
+def test_slice_classical():
+    check_dumps("a[1: 42]")
