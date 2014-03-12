@@ -1119,9 +1119,6 @@ def test_lambda_arguments():
                 "first_formatting": [],
                 "second_formatting": [],
                 "type": "argument",
-                "name": {
-                    "type": "name",
-                    "value": "argument",
-                },
+                "name": "argument",
             }]
           }])

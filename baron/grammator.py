@@ -357,7 +357,7 @@ def generate_parse(print_function):
             "first_formatting": [],
             "second_formatting": [],
             "value": {},
-            "name": name
+            "name": name["value"]
         }]
 
 

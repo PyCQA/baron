@@ -291,10 +291,7 @@ def test_funcdef_stmt_one_parameter_indent():
                 "type": "argument",
                 "first_formatting": [],
                 "second_formatting": [],
-                "name": {
-                    "type": "name",
-                    "value": "x",
-                },
+                "name": "x",
                 "value": {},
             }],
             "value": [{
@@ -345,10 +342,7 @@ def test_funcdef_stmt_one_parameter_comma_indent():
                 "type": "argument",
                 "first_formatting": [],
                 "second_formatting": [],
-                "name": {
-                    "type": "name",
-                    "value": "x",
-                },
+                "name": "x",
                 "value": {},
             },{
                 "type": "comma",
@@ -1239,10 +1233,7 @@ def test_fplist():
                         "value": {},
                         "first_formatting": [],
                         "second_formatting": [],
-                        "name": {
-                            "type": "name",
-                            "value": "b",
-                        },
+                        "name": "b",
                     },{
                         "type": "comma",
                         "first_formatting": [],
@@ -1302,10 +1293,7 @@ def test_fplist_two():
                         "value": {},
                         "first_formatting": [],
                         "second_formatting": [],
-                        "name": {
-                            "type": "name",
-                            "value": "b",
-                        },
+                        "name": "b",
                     },{
                         "type": "comma",
                         "first_formatting": [],
@@ -1315,10 +1303,7 @@ def test_fplist_two():
                         "value": {},
                         "first_formatting": [],
                         "second_formatting": [],
-                        "name": {
-                            "type": "name",
-                            "value": "c",
-                        },
+                        "name": "c",
                     }],
                 }
             }],
@@ -1367,10 +1352,7 @@ def test_fplist_alone():
                     "type": "argument",
                     "first_formatting": [],
                     "second_formatting": [],
-                    "name": {
-                        "type": "name",
-                        "value": "b",
-                    },
+                    "name": "b",
                 }
             }],
             "name": "a",
