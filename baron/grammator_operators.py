@@ -244,10 +244,10 @@ def include_operators(pg):
             "upper": {},
             "step": {},
             "has_two_colons": bool(colon2),
-            "first_formatting": [],
+            "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
-            "third_formatting": [],
-            "forth_formatting": [],
+            "third_formatting": colon2.hidden_tokens_before if colon2 else [],
+            "forth_formatting": colon2.hidden_tokens_after if colon2 else [],
         }
 
     @pg.production("slice : test COLON COLON?")
@@ -260,8 +260,8 @@ def include_operators(pg):
             "has_two_colons": bool(colon2),
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
-            "third_formatting": [],
-            "forth_formatting": [],
+            "third_formatting": colon2.hidden_tokens_before if colon2 else [],
+            "forth_formatting": colon2.hidden_tokens_after if colon2 else [],
         }
 
     @pg.production("slice : COLON test COLON?")
@@ -275,7 +275,7 @@ def include_operators(pg):
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
             "third_formatting": colon2.hidden_tokens_before if colon2 else [],
-            "forth_formatting": [],
+            "forth_formatting": colon2.hidden_tokens_after if colon2 else [],
         }
 
     @pg.production("slice : COLON COLON test")
@@ -303,7 +303,7 @@ def include_operators(pg):
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
             "third_formatting": colon2.hidden_tokens_before if colon2 else [],
-                "forth_formatting": [],
+            "forth_formatting": colon2.hidden_tokens_after if colon2 else [],
         }
 
     @pg.production("slice : test COLON COLON test")
