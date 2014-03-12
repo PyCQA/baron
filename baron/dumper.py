@@ -130,6 +130,15 @@ def dump_node_list_value(node):
 
 
 @node()
+def getitem(node):
+    yield "["
+    yield dump_node_list(node["first_formatting"])
+    yield dump_node(node["value"])
+    yield dump_node_list(node["second_formatting"])
+    yield "]"
+
+
+@node()
 def assignment(node):
     yield dump_node(node["target"])
     yield dump_node_list(node["first_formatting"])

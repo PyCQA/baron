@@ -99,3 +99,7 @@ def test_funcdef_parameter_named():
 
 def test_return():
     check_dumps("return a")
+
+
+def test_getitem():
+    check_dumps("a[ b  ]")
