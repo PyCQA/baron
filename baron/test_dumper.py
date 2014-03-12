@@ -75,3 +75,7 @@ def test_atom_trailers_call():
 
 def test_atom_trailers_call_default():
     check_dumps("caramba(s, b=2)")
+
+
+def test_string():
+    check_dumps("'ama string!'")

@@ -34,6 +34,7 @@ def endl(node):
 @node("name")
 @node("int")
 @node("space")
+@node("string")
 def get_value(node):
     yield node["value"]
 
