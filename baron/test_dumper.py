@@ -95,3 +95,7 @@ def test_funcdef_parameter():
 
 def test_funcdef_parameter_named():
     check_dumps("def a  ( b  , c = qsd ) : pass")
+
+
+def test_return():
+    check_dumps("return a")
