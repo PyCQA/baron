@@ -312,6 +312,7 @@ def generate_parse(print_function):
             "third_formatting": left_parenthesis.hidden_tokens_after,
             "forth_formatting": right_parenthesis.hidden_tokens_before,
             "fith_formatting": colon.hidden_tokens_before,
+            "sixth_formatting": colon.hidden_tokens_after,
             "arguments": parameters,
             "value": suite,
         }]
