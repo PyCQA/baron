@@ -31,10 +31,15 @@ def endl(node):
     yield node["indent"]
 
 
-@node("name")
 @node("int")
+@node("name")
 @node("space")
 @node("string")
+@node("raw_string")
+@node("binary_string")
+@node("unicode_string")
+@node("binary_raw_string")
+@node("unicode_raw_string")
 def get_value(node):
     yield node["value"]
 

@@ -120,3 +120,23 @@ def test_slice_step():
 
 def test_unitary_operator():
     check_dumps("- 1")
+
+
+def test_unicode_string():
+    check_dumps("u'pouet'")
+
+
+def test_raw_string():
+    check_dumps("r'pouet'")
+
+
+def test_unicode_raw_string():
+    check_dumps("ur'pouet'")
+
+
+def test_binary_string():
+    check_dumps("b'pouet'")
+
+
+def test_binary_raw_string():
+    check_dumps("br'pouet'")
