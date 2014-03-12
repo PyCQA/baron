@@ -7716,10 +7716,7 @@ def test_call_named():
                         "first_formatting": [{"type": "space", "value": " "}],
                         "second_formatting": [{"type": "space", "value": " "}],
                         "type": "argument",
-                        "name": {
-                            "type": "name",
-                            "value": "b",
-                        }
+                        "name": "b",
                     }],
                 }]
            }])

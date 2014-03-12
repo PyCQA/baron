@@ -405,10 +405,7 @@ def test_funcdef_stmt_one_parameter_comma_default_indent():
                 "type": "argument",
                 "first_formatting": [],
                 "second_formatting": [],
-                "name": {
-                    "type": "name",
-                    "value": "x",
-                },
+                "name": "x",
                 "value": {
                     "type": "int",
                     "value": "1",

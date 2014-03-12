@@ -408,7 +408,7 @@ def generate_parse(print_function):
             "first_formatting": equal.hidden_tokens_before,
             "second_formatting": equal.hidden_tokens_after,
             "value": test,
-            "name": name
+            "name": name["value"]
         }]
 
     @pg.production("parameter : name EQUAL test")
@@ -418,7 +418,7 @@ def generate_parse(print_function):
             "first_formatting": equal.hidden_tokens_before,
             "second_formatting": equal.hidden_tokens_after,
             "value": test,
-            "name": name
+            "name": name["value"]
         }]
 
     @pg.production("argument : test comp_for")
