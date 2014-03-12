@@ -151,6 +151,7 @@ def slice(node):
     if node["has_two_colons"]:
         yield dump_node_list(node["third_formatting"])
         yield ":"
+        yield dump_node_list(node["forth_formatting"])
         if node["step"]:
             yield dump_node(node["step"])
 

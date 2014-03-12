@@ -115,4 +115,4 @@ def test_slice_classical():
 
 def test_slice_step():
     check_dumps("a[1: 42:]")
-    #check_dumps("a[1: 42    :         3]")
+    check_dumps("a[1: 42    :         3]")
