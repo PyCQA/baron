@@ -248,6 +248,20 @@ def else_(node):
 
 
 @node()
+def lambda_(node):
+    yield "lambda"
+    yield dump_node_list(node["first_formatting"])
+    for n in node["arguments"]:
+        if n["type"] == "argument":
+            yield "".join(list(funcdef_argument(n)))
+        else:
+            yield dump_node(n)
+    yield dump_node_list(node["second_formatting"])
+    yield ":"
+    yield dump_node_list(node["third_formatting"])
+    yield dump_node(node["value"])
+
+@node()
 def import_(node):
     yield "import"
     yield dump_node_list(node["formatting"])

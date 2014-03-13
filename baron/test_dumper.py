@@ -152,3 +152,9 @@ def test_for_indent():
 
 def test_for_else():
     check_dumps("for i in pouet : pass\nelse: pass")
+
+def test_lambda():
+    check_dumps("lambda : x")
+
+def test_lambda_args():
+    check_dumps("lambda poeut, hompi_dompi: x")
