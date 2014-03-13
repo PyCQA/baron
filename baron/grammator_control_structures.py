@@ -147,6 +147,7 @@ def include_control_structures(pg):
                  "second_formatting": in_.hidden_tokens_before,
                  "third_formatting": in_.hidden_tokens_after,
                  "forth_formatting": colon.hidden_tokens_before,
+                 "fith_formatting": colon.hidden_tokens_after,
                }]
 
     @pg.production("for_stmt : FOR exprlist IN testlist COLON suite else_stmt")
@@ -161,6 +162,7 @@ def include_control_structures(pg):
                  "second_formatting": in_.hidden_tokens_before,
                  "third_formatting": in_.hidden_tokens_after,
                  "forth_formatting": colon.hidden_tokens_before,
+                 "fith_formatting": colon.hidden_tokens_after,
                }]
 
     @pg.production("while_stmt : WHILE test COLON suite")

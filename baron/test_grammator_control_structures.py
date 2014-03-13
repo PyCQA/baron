@@ -656,6 +656,7 @@ def test_for_stmt_indent():
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [{"type": "space", "value": " "}],
             "forth_formatting": [],
+            "fith_formatting": [{"type": "space", "value": " "}],
             "else": {},
             "iterator": {
                 "type": "name",
@@ -712,6 +713,7 @@ def test_for_else_stmt_indent():
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [{"type": "space", "value": " "}],
             "forth_formatting": [],
+            "fith_formatting": [],
             "else": {
               "type": "else",
               "first_formatting": [],
