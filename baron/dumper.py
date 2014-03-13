@@ -1,4 +1,4 @@
-def debug(j):
+def d(j):
     import json
     print json.dumps(j, indent=4)
 
