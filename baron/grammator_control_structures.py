@@ -4,7 +4,8 @@ def include_control_structures(pg):
         return [{
             "type": "try",
             "value": suite,
-            "formatting": colon.hidden_tokens_before,
+            "first_formatting": colon.hidden_tokens_before,
+            "second_formatting": colon.hidden_tokens_after,
             "else": {},
             "finally": {},
             "excepts": excepts,
@@ -15,7 +16,8 @@ def include_control_structures(pg):
         return [{
             "type": "try",
             "value": suite,
-            "formatting": colon.hidden_tokens_before,
+            "first_formatting": colon.hidden_tokens_before,
+            "second_formatting": colon.hidden_tokens_after,
             "else": else_stmt,
             "finally": {},
             "excepts": excepts,
@@ -26,7 +28,8 @@ def include_control_structures(pg):
         return [{
             "type": "try",
             "value": suite,
-            "formatting": colon.hidden_tokens_before,
+            "first_formatting": colon.hidden_tokens_before,
+            "second_formatting": colon.hidden_tokens_after,
             "else": {},
             "finally": finally_stmt,
             "excepts": excepts,
@@ -37,7 +40,8 @@ def include_control_structures(pg):
         return [{
             "type": "try",
             "value": suite,
-            "formatting": colon.hidden_tokens_before,
+            "first_formatting": colon.hidden_tokens_before,
+            "second_formatting": colon.hidden_tokens_after,
             "else": else_stmt,
             "finally": finally_stmt,
             "excepts": excepts,
@@ -48,7 +52,8 @@ def include_control_structures(pg):
         return [{
             "type": "try",
             "value": suite,
-            "formatting": colon.hidden_tokens_before,
+            "first_formatting": colon.hidden_tokens_before,
+            "second_formatting": colon.hidden_tokens_after,
             "else": {},
             "finally": finally_stmt,
             "excepts": [],

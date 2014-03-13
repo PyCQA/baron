@@ -780,7 +780,8 @@ def test_try_finally_stmt_indent():
           ],
           [{
             "type": "try",
-            "formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
             "else": {},
             "finally": {
                 "type": "finally",
@@ -840,7 +841,8 @@ def test_try_excepts_stmt_empty():
           ],
           [{
             "type": "try",
-            "formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
             "else": {},
             "finally": {},
             "excepts": [{
@@ -917,7 +919,8 @@ def test_try_excepts_stmt_indent():
           ],
           [{
             "type": "try",
-            "formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
             "else": {},
             "finally": {},
             "excepts": [{
@@ -1014,7 +1017,8 @@ def test_try_except_comma_stmt_indent():
           ],
           [{
             "type": "try",
-            "formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
             "else": {},
             "finally": {},
             "excepts": [{
@@ -1098,7 +1102,8 @@ def test_try_except_comma_stmt_else_indent():
           ],
           [{
             "type": "try",
-            "formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
             "else": {
               "type": "else",
               "first_formatting": [],
@@ -1208,7 +1213,8 @@ def test_try_except_comma_stmt_else_finally_indent():
           ],
           [{
             "type": "try",
-            "formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
             "else": {
               "type": "else",
               "first_formatting": [],
@@ -1325,7 +1331,8 @@ def test_try_except_comma_stmt_finally_indent():
           ],
           [{
             "type": "try",
-            "formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
             "else": {},
             "finally": {
                 "type": "finally",
@@ -1416,7 +1423,8 @@ def test_try_except_as_stmt_indent():
           ],
           [{
             "type": "try",
-            "formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
             "else": {},
             "finally": {},
             "excepts": [{
@@ -1462,4 +1470,3 @@ def test_try_except_as_stmt_indent():
                 "value": "\n"
              }],
           }])
-
