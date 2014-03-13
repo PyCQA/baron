@@ -788,7 +788,8 @@ def test_try_finally_stmt_indent():
                 "value": [{
                 "type": "endl",
                 "value": "\n",
-                "formatting": [],
+                "first_formatting": [{"type": "space", "value": " "}],
+                "second_formatting": [],
                 "indent": "    "
                 },{
                   "type": "pass",
@@ -798,7 +799,6 @@ def test_try_finally_stmt_indent():
                   "type": "endl",
                   "value": "\n"
                 }],
-                "formatting": [{"type": "space", "value": " "}],
             },
             "excepts": [],
             "value": [{
@@ -1237,7 +1237,8 @@ def test_try_except_comma_stmt_else_finally_indent():
                 "type": "finally",
                 "value": [{
                 "type": "endl",
-                "formatting": [],
+                "first_formatting": [{"type": "space", "value": " "}],
+                "second_formatting": [],
                 "value": "\n",
                 "indent": "    "
                 },{
@@ -1338,7 +1339,8 @@ def test_try_except_comma_stmt_finally_indent():
                 "type": "finally",
                 "value": [{
                 "type": "endl",
-                "formatting": [],
+                "first_formatting": [{"type": "space", "value": " "}],
+                "second_formatting": [],
                 "value": "\n",
                 "indent": "    "
                 },{
@@ -1349,7 +1351,6 @@ def test_try_except_comma_stmt_finally_indent():
                   "type": "endl",
                   "value": "\n"
                 }],
-                "formatting": [],
             },
             "excepts": [{
                "type": "except",

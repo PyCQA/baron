@@ -128,7 +128,8 @@ def include_control_structures(pg):
         return {
             "type": "finally",
             "value": suite,
-            "formatting": colon.hidden_tokens_before,
+            "first_formatting": colon.hidden_tokens_before,
+            "second_formatting": colon.hidden_tokens_after,
         }
 
     @pg.production("else_stmt : ELSE COLON suite")
