@@ -140,3 +140,15 @@ def test_binary_string():
 
 def test_binary_raw_string():
     check_dumps("br'pouet'")
+
+
+def test_for():
+    check_dumps("for i in pouet : pass")
+
+
+def test_for_indent():
+    check_dumps("for i in pouet : \n    pass")
+
+
+def test_for_else():
+    check_dumps("for i in pouet : pass\nelse: pass")
