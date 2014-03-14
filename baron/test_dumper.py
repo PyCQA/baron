@@ -158,3 +158,15 @@ def test_lambda():
 
 def test_lambda_args():
     check_dumps("lambda poeut, hompi_dompi: x")
+
+def test_try_finally():
+    check_dumps("try : pass\nfinally : pass")
+
+def test_try_except():
+    check_dumps("try : pass\nexcept Exception : pass")
+
+def test_try_except_finally():
+    check_dumps("try : pass\nexcept Exception : pass\nfinally : pass")
+
+def test_try_except_finally_else():
+    check_dumps("try : pass\nexcept Exception : pass\nelse: pouet\nfinally : pass")
