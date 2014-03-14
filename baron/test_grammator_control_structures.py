@@ -852,6 +852,7 @@ def test_try_excepts_stmt_empty():
                "second_formatting": [],
                "third_formatting": [],
                "forth_formatting": [],
+               "fith_formatting": [],
                "delimiteur": "",
                "target": {},
                "exception": {},
@@ -930,6 +931,7 @@ def test_try_excepts_stmt_indent():
                "second_formatting": [],
                "third_formatting": [],
                "forth_formatting": [],
+               "fith_formatting": [],
                "delimiteur": "",
                "target": {},
                "exception": {
@@ -955,6 +957,7 @@ def test_try_excepts_stmt_indent():
                "second_formatting": [],
                "third_formatting": [],
                "forth_formatting": [],
+               "fith_formatting": [],
                "delimiteur": "",
                "target": {},
                "exception": {
@@ -1028,6 +1031,7 @@ def test_try_except_comma_stmt_indent():
                "second_formatting": [],
                "third_formatting": [{"type": "space", "value": " "}],
                "forth_formatting": [],
+               "fith_formatting": [],
                "delimiteur": ",",
                "target": {
                     "type": "name",
@@ -1130,6 +1134,7 @@ def test_try_except_comma_stmt_else_indent():
                "second_formatting": [],
                "third_formatting": [{"type": "space", "value": " "}],
                "forth_formatting": [],
+               "fith_formatting": [],
                "delimiteur": ",",
                "target": {
                     "type": "name",
@@ -1258,6 +1263,7 @@ def test_try_except_comma_stmt_else_finally_indent():
                "second_formatting": [],
                "third_formatting": [{"type": "space", "value": " "}],
                "forth_formatting": [],
+               "fith_formatting": [],
                "delimiteur": ",",
                "target": {
                     "type": "name",
@@ -1360,6 +1366,7 @@ def test_try_except_comma_stmt_finally_indent():
                "second_formatting": [],
                "third_formatting": [{"type": "space", "value": " "}],
                "forth_formatting": [],
+               "fith_formatting": [],
                "delimiteur": ",",
                "target": {
                     "type": "name",
@@ -1436,6 +1443,7 @@ def test_try_except_as_stmt_indent():
                "second_formatting": [{"type": "space", "value": " "}],
                "third_formatting": [{"type": "space", "value": " "}],
                "forth_formatting": [],
+               "fith_formatting": [],
                "delimiteur": "as",
                "target": {
                     "type": "name",
