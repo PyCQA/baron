@@ -173,3 +173,9 @@ def test_try_except_finally_else():
 
 def test_comment():
     check_dumps("# pouet")
+
+def test_boolean_operator():
+    check_dumps("a and b")
+
+def test_boolean_operator_advanced():
+    check_dumps("a and b or c and d")

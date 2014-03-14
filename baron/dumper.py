@@ -178,7 +178,8 @@ def unitary_operator(node):
     yield dump_node(node["target"])
 
 
-@node()
+@node("binary_operator")
+@node("boolean_operator")
 def binary_operator(node):
     yield dump_node(node["first"])
     yield dump_node_list(node["first_formatting"])
