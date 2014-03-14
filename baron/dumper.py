@@ -312,6 +312,7 @@ def lambda_(node):
     yield dump_node_list(node["third_formatting"])
     yield dump_node(node["value"])
 
+
 @node()
 def try_(node):
     yield "try"

@@ -153,59 +153,78 @@ def test_for_indent():
 def test_for_else():
     check_dumps("for i in pouet : pass\nelse: pass")
 
+
 def test_lambda():
     check_dumps("lambda : x")
+
 
 def test_lambda_args():
     check_dumps("lambda poeut, hompi_dompi: x")
 
+
 def test_try_finally():
     check_dumps("try : pass\nfinally : pass")
+
 
 def test_try_except():
     check_dumps("try : pass\nexcept Exception : pass")
 
+
 def test_try_except_comma():
     check_dumps("try : pass\nexcept Exception ,   d : pass")
+
 
 def test_try_except_as():
     check_dumps("try : pass\nexcept Exception     as   d : pass")
 
+
 def test_try_except_finally():
     check_dumps("try : pass\nexcept Exception : pass\nfinally : pass")
+
 
 def test_try_except_finally_else():
     check_dumps("try : pass\nexcept Exception : pass\nelse: pouet\nfinally : pass")
 
+
 def test_comment():
     check_dumps("# pouet")
+
 
 def test_boolean_operator():
     check_dumps("a and b")
 
+
 def test_boolean_operator_advanced():
     check_dumps("a and b or c and d")
+
 
 def test_comparison():
     check_dumps("a < b")
 
+
 def test_with():
     check_dumps("with a : \n    pass")
+
 
 def test_with_as():
     check_dumps("with a as b : \n    pass")
 
+
 def test_dict_empty():
     check_dumps("{   }")
+
 
 def test_dict_one():
     check_dumps("{ a : b  }")
 
+
 def test_dict_more():
     check_dumps("{ a : b   ,\n123  :     'pouet'  }")
 
+
 def test_ternary_operator():
     check_dumps("a   if        b  else      c")
+
 
 def test_yield():
     check_dumps("yield a")
