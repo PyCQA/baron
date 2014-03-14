@@ -179,3 +179,6 @@ def test_boolean_operator():
 
 def test_boolean_operator_advanced():
     check_dumps("a and b or c and d")
+
+def test_comparison():
+    check_dumps("a < b")

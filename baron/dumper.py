@@ -180,6 +180,7 @@ def unitary_operator(node):
 
 @node("binary_operator")
 @node("boolean_operator")
+@node("comparison")
 def binary_operator(node):
     yield dump_node(node["first"])
     yield dump_node_list(node["first_formatting"])
