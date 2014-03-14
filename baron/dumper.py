@@ -60,11 +60,9 @@ def get_value(node):
 @node("binary_raw_string")
 @node("unicode_raw_string")
 def string(node):
-    if node.get("first_formatting"):
-        yield dump_node_list(node["first_formatting"])
+    yield dump_node_list(node["first_formatting"])
     yield node["value"]
-    if node.get("second_formatting"):
-        yield dump_node_list(node["second_formatting"])
+    yield dump_node_list(node["second_formatting"])
 
 
 @node()
