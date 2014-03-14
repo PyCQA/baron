@@ -231,6 +231,13 @@ def with_context_item(node):
 
 
 @node()
+def yield_(node):
+    yield "yield"
+    yield dump_node_list(node["formatting"])
+    yield dump_node(node["value"])
+
+
+@node()
 def while_(node):
     yield "while"
     yield dump_node_list(node["first_formatting"])

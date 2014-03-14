@@ -206,3 +206,6 @@ def test_dict_more():
 
 def test_ternary_operator():
     check_dumps("a   if        b  else      c")
+
+def test_yield():
+    check_dumps("yield a")
