@@ -228,3 +228,11 @@ def test_ternary_operator():
 
 def test_yield():
     check_dumps("yield a")
+
+
+def test_decorator():
+    check_dumps("@pouet\ndef a(): pass")
+
+
+def test_decorator_call():
+    check_dumps("@pouet('pouet')\ndef a(): pass")

@@ -94,7 +94,16 @@ def call(node):
 
 
 @node()
+def decorator(node):
+    yield "@"
+    yield dump_node(node["value"])
+    if node["call"]:
+        yield dump_node(node["call"])
+
+
+@node()
 def funcdef(node):
+    yield dump_node_list(node["decorators"])
     yield "def"
     yield dump_node_list(node["first_formatting"])
     yield node["name"]
