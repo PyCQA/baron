@@ -194,3 +194,6 @@ def test_with():
 
 def test_with_as():
     check_dumps("with a as b : \n    pass")
+
+def test_dict_empty():
+    check_dumps("{   }")
