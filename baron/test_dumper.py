@@ -182,3 +182,9 @@ def test_boolean_operator_advanced():
 
 def test_comparison():
     check_dumps("a < b")
+
+def test_with():
+    check_dumps("with a : \n    pass")
+
+def test_with_as():
+    check_dumps("with a as b : \n    pass")

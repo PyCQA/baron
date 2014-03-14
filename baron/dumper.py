@@ -190,6 +190,27 @@ def binary_operator(node):
 
 
 @node()
+def with_(node):
+    yield "with"
+    yield dump_node_list(node["first_formatting"])
+    yield dump_node_list(node["contexts"])
+    yield dump_node_list(node["second_formatting"])
+    yield ":"
+    yield dump_node_list(node["third_formatting"])
+    yield dump_node_list(node["value"])
+
+
+@node()
+def with_context_item(node):
+    yield dump_node(node["value"])
+    if node["as"]:
+        yield dump_node_list(node["first_formatting"])
+        yield "as"
+        yield dump_node_list(node["second_formatting"])
+        yield dump_node(node["as"])
+
+
+@node()
 def while_(node):
     yield "while"
     yield dump_node_list(node["first_formatting"])
