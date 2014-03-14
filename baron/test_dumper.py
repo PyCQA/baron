@@ -197,3 +197,9 @@ def test_with_as():
 
 def test_dict_empty():
     check_dumps("{   }")
+
+def test_dict_one():
+    check_dumps("{ a : b  }")
+
+def test_dict_more():
+    check_dumps("{ a : b   ,\n123  :     'pouet'  }")

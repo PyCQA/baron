@@ -34,15 +34,23 @@ def endl(node):
 @node("int")
 @node("name")
 @node("space")
-@node("string")
 @node("comment")
+def get_value(node):
+    yield node["value"]
+
+
+@node("string")
 @node("raw_string")
 @node("binary_string")
 @node("unicode_string")
 @node("binary_raw_string")
 @node("unicode_raw_string")
-def get_value(node):
+def string(node):
+    if node.get("first_formatting"):
+        yield dump_node_list(node["first_formatting"])
     yield node["value"]
+    if node.get("second_formatting"):
+        yield dump_node_list(node["second_formatting"])
 
 
 @node()
@@ -327,10 +335,21 @@ def finally_(node):
 
 @node()
 def dict_(node):
+    #d(node)
     yield "{"
     yield dump_node_list(node["first_formatting"])
+    yield dump_node_list(node["value"])
     yield dump_node_list(node["second_formatting"])
     yield "}"
+
+
+@node()
+def dictitem(node):
+    yield dump_node(node["key"])
+    yield dump_node_list(node["first_formatting"])
+    yield ":"
+    yield dump_node_list(node["second_formatting"])
+    yield dump_node(node["value"])
 
 
 @node()
