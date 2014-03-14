@@ -562,7 +562,12 @@ def generate_parse(print_function):
     @pg.production("string : UNICODE_RAW_STRING")
     @pg.production("string : BINARY_RAW_STRING")
     def string((string_,)):
-        return [create_node_from_token(string_)]
+        return [{
+            "type": string_.name.lower(),
+            "value": string_.value,
+            "first_formatting": string_.hidden_tokens_before,
+            "second_formatting": string_.hidden_tokens_after,
+        }]
 
 
     @pg.production("comma : COMMA")

@@ -31,10 +31,20 @@ def test_string():
     '''
     parse_simple([
            ('STRING', '"pouet pouet"')],
-          [{ "type": "string", "value": '"pouet pouet"', }])
+          [{
+            "type": "string",
+            "value": '"pouet pouet"',
+            "first_formatting": [],
+            "second_formatting": [],
+           }])
     parse_simple([
            ('STRING', '"""pouet pouet"""')],
-          [{ "type": "string", "value": '"""pouet pouet"""', }])
+          [{
+            "type": "string",
+            "value": '"""pouet pouet"""',
+            "first_formatting": [],
+            "second_formatting": [],
+           }])
 
 def test_file_input_empty():
     ""
