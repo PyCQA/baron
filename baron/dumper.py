@@ -305,13 +305,15 @@ def except_(node):
     yield dump_node_list(node["first_formatting"])
     if node["exception"]:
         yield dump_node(node["exception"])
-    yield dump_node_list(node["second_formatting"])
-    yield dump_node_list(node["third_formatting"])
+    if node["delimiteur"]:
+        yield dump_node_list(node["second_formatting"])
+        yield node["delimiteur"]
+        yield dump_node_list(node["third_formatting"])
+        yield dump_node(node["target"])
     yield dump_node_list(node["forth_formatting"])
     yield ":"
     yield dump_node_list(node["fith_formatting"])
     yield dump_node_list(node["value"])
-    #d(node)
 
 
 @node()

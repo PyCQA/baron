@@ -165,6 +165,12 @@ def test_try_finally():
 def test_try_except():
     check_dumps("try : pass\nexcept Exception : pass")
 
+def test_try_except_comma():
+    check_dumps("try : pass\nexcept Exception ,   d : pass")
+
+def test_try_except_as():
+    check_dumps("try : pass\nexcept Exception     as   d : pass")
+
 def test_try_except_finally():
     check_dumps("try : pass\nexcept Exception : pass\nfinally : pass")
 
