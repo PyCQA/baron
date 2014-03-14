@@ -31,6 +31,20 @@ def endl(node):
     yield node["indent"]
 
 
+@node()
+def ternary_operator(node):
+    yield dump_node(node["first"])
+    yield dump_node_list(node["first_formatting"])
+    yield "if"
+    yield dump_node_list(node["second_formatting"])
+    yield dump_node(node["value"])
+    yield dump_node_list(node["third_formatting"])
+    yield "else"
+    yield dump_node_list(node["forth_formatting"])
+    yield dump_node(node["second"])
+    d(node)
+
+
 @node("int")
 @node("name")
 @node("space")
