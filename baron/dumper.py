@@ -35,6 +35,7 @@ def endl(node):
 @node("name")
 @node("space")
 @node("string")
+@node("comment")
 @node("raw_string")
 @node("binary_string")
 @node("unicode_string")

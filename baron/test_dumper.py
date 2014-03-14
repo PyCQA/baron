@@ -170,3 +170,6 @@ def test_try_except_finally():
 
 def test_try_except_finally_else():
     check_dumps("try : pass\nexcept Exception : pass\nelse: pouet\nfinally : pass")
+
+def test_comment():
+    check_dumps("# pouet")
