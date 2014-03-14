@@ -854,7 +854,7 @@ def test_try_excepts_stmt_empty():
                "forth_formatting": [],
                "delimiteur": "",
                "target": {},
-               "exceptions": [],
+               "exception": {},
                 "value": [{
                     "type": "endl",
                     "formatting": [],
@@ -932,7 +932,7 @@ def test_try_excepts_stmt_indent():
                "forth_formatting": [],
                "delimiteur": "",
                "target": {},
-               "exceptions": {
+               "exception": {
                   "type": "name",
                   "value": "IOError",
                },
@@ -957,7 +957,7 @@ def test_try_excepts_stmt_indent():
                "forth_formatting": [],
                "delimiteur": "",
                "target": {},
-               "exceptions": {
+               "exception": {
                   "type": "name",
                   "value": "Exception",
                },
@@ -1033,7 +1033,7 @@ def test_try_except_comma_stmt_indent():
                     "type": "name",
                     "value": "a"
                },
-               "exceptions": {
+               "exception": {
                   "type": "name",
                   "value": "IOError",
                },
@@ -1135,7 +1135,7 @@ def test_try_except_comma_stmt_else_indent():
                     "type": "name",
                     "value": "a"
                },
-               "exceptions": {
+               "exception": {
                   "type": "name",
                   "value": "IOError",
                },
@@ -1263,7 +1263,7 @@ def test_try_except_comma_stmt_else_finally_indent():
                     "type": "name",
                     "value": "a"
                },
-               "exceptions": {
+               "exception": {
                   "type": "name",
                   "value": "IOError",
                },
@@ -1365,7 +1365,7 @@ def test_try_except_comma_stmt_finally_indent():
                     "type": "name",
                     "value": "a"
                },
-               "exceptions": {
+               "exception": {
                   "type": "name",
                   "value": "IOError",
                },
@@ -1441,7 +1441,7 @@ def test_try_except_as_stmt_indent():
                     "type": "name",
                     "value": "a"
                },
-               "exceptions": {
+               "exception": {
                   "type": "name",
                   "value": "IOError",
                },

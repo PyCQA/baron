@@ -77,7 +77,7 @@ def include_control_structures(pg):
             "forth_formatting": colon.hidden_tokens_before,
             "delimiteur": "as",
             "target": test2,
-            "exceptions": test,
+            "exception": test,
             "value": suite
         }]
 
@@ -91,7 +91,7 @@ def include_control_structures(pg):
             "forth_formatting": colon.hidden_tokens_before,
             "delimiteur": ",",
             "target": test2,
-            "exceptions": test,
+            "exception": test,
             "value": suite
         }]
 
@@ -105,7 +105,7 @@ def include_control_structures(pg):
             "forth_formatting": [],
             "delimiteur": "",
             "target": {},
-            "exceptions": [],
+            "exception": {},
             "value": suite
         }]
 
@@ -119,7 +119,7 @@ def include_control_structures(pg):
             "forth_formatting": [],
             "delimiteur": "",
             "target": {},
-            "exceptions": test,
+            "exception": test,
             "value": suite
         }]
 
