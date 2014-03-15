@@ -4,7 +4,10 @@ def include_data_structures(pg):
     def tuple((left_parenthesis, testlist_comp, right_parenthesis,)):
         return {
                 "type": "tuple",
-                "value": left_parenthesis.hidden_tokens_after + testlist_comp + right_parenthesis.hidden_tokens_before
+                "value": testlist_comp,
+                "first_formatting": left_parenthesis.hidden_tokens_after,
+                "second_formatting": right_parenthesis.hidden_tokens_before,
+                "with_parenthesis": True,
                }
 
 

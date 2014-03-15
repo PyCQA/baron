@@ -10,6 +10,9 @@ def test_empty_tuple():
            ('RIGHT_PARENTHESIS', ')'),
           ],
           [{
+            "with_parenthesis": True,
+            "first_formatting": [],
+            "second_formatting": [],
             "type": "tuple",
             "value": [],
           }])
@@ -21,8 +24,11 @@ def test_empty_tuple_space():
            ('RIGHT_PARENTHESIS', ')'),
           ],
           [{
+            "with_parenthesis": True,
+            "first_formatting": [{"type": "space", "value": "  "}],
+            "second_formatting": [],
             "type": "tuple",
-            "value": [{"type": "space", "value": "  "}],
+            "value": [],
           }])
 
 def test_associative_parenthesis():
@@ -51,8 +57,11 @@ def test_tuple_one():
            ('RIGHT_PARENTHESIS', ')', [], []),
           ],
           [{
+            "with_parenthesis": True,
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
             "type": "tuple",
-            "value": [{"type": "space", "value": " "}, {
+            "value": [{
                "type": "name",
                "value": "a",
             },{
@@ -74,6 +83,9 @@ def test_tuple_many():
            ('RIGHT_PARENTHESIS', ')', [], []),
           ],
           [{
+            "with_parenthesis": True,
+            "first_formatting": [],
+            "second_formatting": [],
             "type": "tuple",
             "value": [{
                "type": "name",
@@ -1166,13 +1178,16 @@ def test_empty_tuple_endl():
            ('RIGHT_PARENTHESIS', ')'),
           ],
           [{
-            "type": "tuple",
-            "value": [{
+            "with_parenthesis": True,
+            "first_formatting": [{
                 "indent": "",
                 "formatting": [],
                 "type": "endl",
                 "value": "\n",
             }],
+            "second_formatting": [],
+            "type": "tuple",
+            "value": [],
           }])
 
 def test_subscript_special_case():

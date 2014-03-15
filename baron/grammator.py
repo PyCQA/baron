@@ -388,7 +388,8 @@ def generate_parse(print_function):
                 "type": "tuple",
                 "first_formatting": left_parenthesis.hidden_tokens_after,
                 "second_formatting": right_parenthesis.hidden_tokens_before,
-                "value": fplist
+                "value": fplist,
+                "with_parenthesis": True
             }
         }]
 

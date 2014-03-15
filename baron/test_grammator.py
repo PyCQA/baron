@@ -1246,6 +1246,7 @@ def test_fplist():
                     "type": "tuple",
                     "first_formatting": [],
                     "second_formatting": [],
+                    "with_parenthesis": True,
                     "value": [{
                         "type": "argument",
                         "value": {},
@@ -1306,6 +1307,7 @@ def test_fplist_two():
                     "type": "tuple",
                     "first_formatting": [],
                     "second_formatting": [],
+                    "with_parenthesis": True,
                     "value": [{
                         "type": "argument",
                         "value": {},
