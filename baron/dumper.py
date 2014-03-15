@@ -42,7 +42,6 @@ def ternary_operator(node):
     yield "else"
     yield dump_node_list(node["forth_formatting"])
     yield dump_node(node["second"])
-    d(node)
 
 
 @node("int")
@@ -119,7 +118,6 @@ def class_(node):
     yield ":"
     yield dump_node_list(node["sixth_formatting"])
     yield dump_node_list(node["value"])
-    d(node)
 
 
 @node()
@@ -396,7 +394,6 @@ def finally_(node):
 
 @node()
 def dict_(node):
-    #d(node)
     yield "{"
     yield dump_node_list(node["first_formatting"])
     yield dump_node_list(node["value"])
