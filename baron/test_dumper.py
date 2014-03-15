@@ -252,3 +252,11 @@ def test_class_parenthesis_inherit():
 
 def test_class_parenthesis_inherit_decorated():
     check_dumps("@pouet\nclass A(B): pass")
+
+
+def test_tuple():
+    check_dumps("a  ,  b    , c")
+
+
+def test_tuple_parenthesis():
+    check_dumps("( a  ,  b    , c    )")
