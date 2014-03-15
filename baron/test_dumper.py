@@ -276,3 +276,7 @@ def test_list():
 
 def test_list_more():
     check_dumps("[ x, r, f, e   , e ]")
+
+
+def test_associative_parenthesis():
+    check_dumps("(  a )")
