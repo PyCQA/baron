@@ -264,3 +264,15 @@ def test_tuple_parenthesis():
 
 def test_return_empty():
     check_dumps("return")
+
+
+def test_list_empty():
+    check_dumps("[   ]")
+
+
+def test_list():
+    check_dumps("[ x ]")
+
+
+def test_list_more():
+    check_dumps("[ x, r, f, e   , e ]")

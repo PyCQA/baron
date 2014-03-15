@@ -121,6 +121,15 @@ def class_(node):
 
 
 @node()
+def list_(node):
+    yield "["
+    yield dump_node_list(node["first_formatting"])
+    yield dump_node_list(node["value"])
+    yield dump_node_list(node["second_formatting"])
+    yield "]"
+
+
+@node()
 def tuple_(node):
     if node["with_parenthesis"]:
         yield "("
