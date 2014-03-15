@@ -190,6 +190,7 @@ def generate_parse(print_function):
             "fith_formatting": colon.hidden_tokens_before,
             "sixth_formatting": colon.hidden_tokens_after,
             "inherit_from": [],
+            "decorators": [],
             "value": suite,
         }]
 
@@ -207,6 +208,7 @@ def generate_parse(print_function):
             "fith_formatting": right_parenthesis.hidden_tokens_after,
             "sixth_formatting": colon.hidden_tokens_after,
             "inherit_from": [],
+            "decorators": [],
             "value": suite,
         }]
 
@@ -224,6 +226,7 @@ def generate_parse(print_function):
             "fith_formatting": right_parenthesis.hidden_tokens_after,
             "sixth_formatting": colon.hidden_tokens_after,
             "inherit_from": [testlist],
+            "decorators": [],
             "value": suite,
         }]
 

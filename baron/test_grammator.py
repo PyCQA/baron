@@ -453,6 +453,7 @@ def test_class_empty():
           [{
             "type": "class",
             "name": "A",
+            "decorators": [],
             "parenthesis": False,
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [],
@@ -496,6 +497,7 @@ def test_class_empty_parenthesis():
           [{
             "type": "class",
             "name": "A",
+            "decorators": [],
             "parenthesis": True,
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
@@ -540,6 +542,7 @@ def test_class_inherit():
           [{
             "type": "class",
             "name": "A",
+            "decorators": [],
             "parenthesis": True,
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
