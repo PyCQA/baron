@@ -3,8 +3,13 @@
 while true
 do
     clear
-    py.test -x | tee /tmp/.baron_test_ouput
-    if [ ! "$1" ] && [ "$(grep ': AssertionError' /tmp/.baron_test_ouput)" ]
+    if [ "$1" == "grammator" ]
+    then
+        py.test test_grammator* -x | tee /tmp/.baron_test_ouput
+    else
+        py.test -x | tee /tmp/.baron_test_ouput
+    fi
+    if ([ ! "$1" ] || [ "$1" == "grammator" ]) && [ "$(grep ': AssertionError' /tmp/.baron_test_ouput)" ]
     then
         grep "   def" /tmp/.baron_test_ouput | head -n 1 | sed 's/^ *//'
         sed 's/, *$//' /tmp/a > /tmp/aa
