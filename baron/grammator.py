@@ -187,7 +187,8 @@ def generate_parse(print_function):
             "second_formatting": [],
             "third_formatting": [],
             "forth_formatting": [],
-            "fith_formatting": [],
+            "fith_formatting": colon.hidden_tokens_before,
+            "sixth_formatting": colon.hidden_tokens_after,
             "inherit_from": [],
             "value": suite,
         }]
@@ -204,6 +205,7 @@ def generate_parse(print_function):
             "third_formatting": left_parenthesis.hidden_tokens_after,
             "forth_formatting": right_parenthesis.hidden_tokens_before,
             "fith_formatting": right_parenthesis.hidden_tokens_after,
+            "sixth_formatting": colon.hidden_tokens_after,
             "inherit_from": [],
             "value": suite,
         }]
@@ -220,6 +222,7 @@ def generate_parse(print_function):
             "third_formatting": left_parenthesis.hidden_tokens_after,
             "forth_formatting": right_parenthesis.hidden_tokens_before,
             "fith_formatting": right_parenthesis.hidden_tokens_after,
+            "sixth_formatting": colon.hidden_tokens_after,
             "inherit_from": [testlist],
             "value": suite,
         }]

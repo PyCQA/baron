@@ -459,6 +459,7 @@ def test_class_empty():
             "third_formatting": [],
             "forth_formatting": [],
             "fith_formatting": [],
+            "sixth_formatting": [],
             "inherit_from": [],
             "value": [{
                "type": "endl",
@@ -501,6 +502,7 @@ def test_class_empty_parenthesis():
             "third_formatting": [{"type": "space", "value": " "}],
             "forth_formatting": [],
             "fith_formatting": [{"type": "space", "value": " "}],
+            "sixth_formatting": [],
             "inherit_from": [],
             "value": [{
                "type": "endl",
@@ -544,6 +546,7 @@ def test_class_inherit():
             "third_formatting": [{"type": "space", "value": " "}],
             "forth_formatting": [{"type": "space", "value": " "}],
             "fith_formatting": [{"type": "space", "value": " "}],
+            "sixth_formatting": [],
             "inherit_from": [{
                 "type": "name",
                 "value": "B"
@@ -1099,6 +1102,7 @@ def test_class_decorator():
             "third_formatting": [],
             "fith_formatting": [],
             "forth_formatting": [],
+            "sixth_formatting": [{"type": "space", "value": " "}],
             "type": "class",
             "inherit_from": [],
             "parenthesis": True,
@@ -1157,6 +1161,7 @@ def test_class_decorator_two():
             "third_formatting": [],
             "fith_formatting": [],
             "forth_formatting": [],
+            "sixth_formatting": [{"type": "space", "value": " "}],
             "type": "class",
             "inherit_from": [],
             "parenthesis": True,
