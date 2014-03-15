@@ -260,3 +260,7 @@ def test_tuple():
 
 def test_tuple_parenthesis():
     check_dumps("( a  ,  b    , c    )")
+
+
+def test_return_empty():
+    check_dumps("return")

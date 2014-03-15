@@ -184,7 +184,8 @@ def pass_(node):
 def return_(node):
     yield "return"
     yield dump_node_list(node["formatting"])
-    yield dump_node(node["value"])
+    if node["value"]:
+        yield dump_node(node["value"])
 
 
 @node("dotted_name")
