@@ -236,3 +236,19 @@ def test_decorator():
 
 def test_decorator_call():
     check_dumps("@pouet('pouet')\ndef a(): pass")
+
+
+def test_class():
+    check_dumps("class A: pass")
+
+
+def test_class_parenthesis():
+    check_dumps("class A(): pass")
+
+
+def test_class_parenthesis_inherit():
+    check_dumps("class A(B): pass")
+
+
+def test_class_parenthesis_inherit_decorated():
+    check_dumps("@pouet\nclass A(B): pass")

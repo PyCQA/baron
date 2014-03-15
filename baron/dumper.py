@@ -102,6 +102,27 @@ def decorator(node):
 
 
 @node()
+def class_(node):
+    yield dump_node_list(node["decorators"])
+    yield "class"
+    yield dump_node_list(node["first_formatting"])
+    yield node["name"]
+    yield dump_node_list(node["second_formatting"])
+    if node["parenthesis"]:
+        yield "("
+    yield dump_node_list(node["third_formatting"])
+    yield dump_node_list(node["inherit_from"])
+    yield dump_node_list(node["forth_formatting"])
+    if node["parenthesis"]:
+        yield ")"
+    yield dump_node_list(node["fith_formatting"])
+    yield ":"
+    yield dump_node_list(node["sixth_formatting"])
+    yield dump_node_list(node["value"])
+    d(node)
+
+
+@node()
 def funcdef(node):
     yield dump_node_list(node["decorators"])
     yield "def"
