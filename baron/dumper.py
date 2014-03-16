@@ -72,6 +72,10 @@ def dot(node):
 
 
 @node()
+def break_(node):
+    return "break"
+
+@node()
 def comma(node):
     yield dump_node_list(node["first_formatting"])
     yield ","
