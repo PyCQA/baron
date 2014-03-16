@@ -226,6 +226,24 @@ def return_(node):
 
 
 @node()
+def raise_(node):
+    yield "raise"
+    if node["value"]:
+        yield dump_node_list(node["first_formatting"])
+        yield dump_node(node["value"])
+    if node["instance"]:
+        yield dump_node_list(node["second_formatting"])
+        yield ","
+        yield dump_node_list(node["third_formatting"])
+        yield dump_node(node["instance"])
+    if node["traceback"]:
+        yield dump_node_list(node["forth_formatting"])
+        yield ","
+        yield dump_node_list(node["fith_formatting"])
+        yield dump_node(node["traceback"])
+
+
+@node()
 def assert_(node):
     yield "assert"
     yield dump_node_list(node["first_formatting"])

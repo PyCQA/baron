@@ -305,3 +305,10 @@ def test_assert():
 
 def test_continue():
     check_dumps("continue")
+
+
+def test_raise():
+    check_dumps("raise")
+    check_dumps("raise a")
+    check_dumps("raise a ,   b")
+    check_dumps("raise a ,   b   ,     c")
