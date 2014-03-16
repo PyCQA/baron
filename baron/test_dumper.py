@@ -280,3 +280,7 @@ def test_list_more():
 
 def test_associative_parenthesis():
     check_dumps("(  a )")
+
+
+def test_fplist():
+    check_dumps("def a((b, c)): pass")

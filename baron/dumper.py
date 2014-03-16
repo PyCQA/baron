@@ -182,6 +182,7 @@ def call_argument(node):
         yield dump_node(node["value"])
 
 
+@node("argument")
 def funcdef_argument(node):
     if node["value"]:
         yield node["name"]
@@ -189,8 +190,10 @@ def funcdef_argument(node):
         yield "="
         yield dump_node_list(node["second_formatting"])
         yield dump_node(node["value"])
-    else:
+    elif isinstance(node["name"], basestring):
         yield node["name"]
+    else:
+        yield dump_node(node["name"])
 
 
 @node()
