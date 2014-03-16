@@ -341,7 +341,8 @@ def with_context_item(node):
 def yield_(node):
     yield "yield"
     yield dump_node_list(node["formatting"])
-    yield dump_node(node["value"])
+    if node["value"]:
+        yield dump_node(node["value"])
 
 
 @node()

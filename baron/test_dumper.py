@@ -238,6 +238,10 @@ def test_ternary_operator():
     check_dumps("a   if        b  else      c")
 
 
+def test_yield_empty():
+    check_dumps("yield")
+
+
 def test_yield():
     check_dumps("yield a")
 
