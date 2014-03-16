@@ -81,6 +81,10 @@ def test_list_argument():
     check_dumps("caramba(* a)")
 
 
+def test_dict_argument():
+    check_dumps("caramba(** a)")
+
+
 def test_string():
     check_dumps("'ama string!'")
 

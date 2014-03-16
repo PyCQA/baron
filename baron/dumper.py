@@ -208,6 +208,13 @@ def list_argument(node):
 
 
 @node()
+def dict_argument(node):
+    yield "**"
+    yield dump_node_list(node["formatting"])
+    yield dump_node(node["value"])
+
+
+@node()
 def pass_(node):
     yield "pass"
 
