@@ -448,8 +448,7 @@ def generate_parse(print_function):
     def argument_star_star((double_star, test,)):
         return [{
             "type": "dict_argument",
-            "first_formatting": double_star.hidden_tokens_after,
-            "second_formatting": double_star.hidden_tokens_after,
+            "formatting": double_star.hidden_tokens_after,
             "value": test,
         }]
 
@@ -466,8 +465,7 @@ def generate_parse(print_function):
     def parameter_star_star((double_star, name,)):
         return [{
             "type": "dict_argument",
-            "first_formatting": double_star.hidden_tokens_after,
-            "second_formatting": double_star.hidden_tokens_after,
+            "formatting": double_star.hidden_tokens_after,
             "value": name.value,
         }]
 

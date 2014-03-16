@@ -649,8 +649,7 @@ def test_funcdef_stmt_one_star_star_parameter_indent():
             "sixth_formatting": [{"type": "space", "value": " "}],
             "arguments": [{
                 "type": "dict_argument",
-                "first_formatting": [],
-                "second_formatting": [],
+                "formatting": [],
                 "value": "b",
             }],
             "value": [{

@@ -7677,8 +7677,7 @@ def test_call_two_star_arg_kwarg():
                         "second_formatting": [{"type": "space", "value": " "}],
                     },{
                         "type": "dict_argument",
-                        "first_formatting": [],
-                        "second_formatting": [],
+                        "formatting": [],
                         "value": {
                             "type": "name",
                             "value": "e",
