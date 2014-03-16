@@ -220,6 +220,11 @@ def pass_(node):
 
 
 @node()
+def continue_(node):
+    yield "continue"
+
+
+@node()
 def return_(node):
     yield "return"
     yield dump_node_list(node["formatting"])

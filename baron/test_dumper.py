@@ -301,3 +301,7 @@ def test_break():
 def test_assert():
     check_dumps("assert a == b")
     check_dumps("assert a == b  , c")
+
+
+def test_continue():
+    check_dumps("continue")
