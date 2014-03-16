@@ -52,6 +52,13 @@ def get_value(node):
     yield node["value"]
 
 
+@node("break")
+@node("continue")
+@node("pass")
+def get_type(node):
+    yield node["type"]
+
+
 @node("string")
 @node("raw_string")
 @node("binary_string")
@@ -70,10 +77,6 @@ def dot(node):
     yield "."
     yield dump_node_list(node["second_formatting"])
 
-
-@node()
-def break_(node):
-    return "break"
 
 @node()
 def comma(node):
@@ -212,16 +215,6 @@ def dict_argument(node):
     yield "**"
     yield dump_node_list(node["formatting"])
     yield dump_node(node["value"])
-
-
-@node()
-def pass_(node):
-    yield "pass"
-
-
-@node()
-def continue_(node):
-    yield "continue"
 
 
 @node()
