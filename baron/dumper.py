@@ -227,6 +227,18 @@ def return_(node):
         yield dump_node(node["value"])
 
 
+@node()
+def assert_(node):
+    yield "assert"
+    yield dump_node_list(node["first_formatting"])
+    yield dump_node(node["value"])
+    if node["message"]:
+        yield dump_node_list(node["second_formatting"])
+        yield ","
+        yield dump_node_list(node["third_formatting"])
+        yield dump_node(node["message"])
+
+
 @node("dotted_name")
 @node("ifelseblock")
 @node("atomtrailers")

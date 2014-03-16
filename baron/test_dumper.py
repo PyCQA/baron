@@ -296,3 +296,8 @@ def test_fplist():
 
 def test_break():
     check_dumps("break")
+
+
+def test_assert():
+    check_dumps("assert a == b")
+    check_dumps("assert a == b  , c")
