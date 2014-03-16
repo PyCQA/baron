@@ -86,17 +86,13 @@ def include_imports(pg):
                  "second_formatting": []
                 }] + [create_node_from_token(space)]
 
-    @pg.production("name_as_name : COMMA")
+    @pg.production("name_as_name : comma")
     def name_as_name_comma_space((comma,)):
-        return comma.hidden_tokens_before + [create_node_from_token(comma)] + comma.hidden_tokens_after
+        return [comma]
 
-    @pg.production("dotted_as_names : dotted_as_names COMMA dotted_as_name")
+    @pg.production("dotted_as_names : dotted_as_names comma dotted_as_name")
     def dotted_as_names_dotted_as_names_dotted_as_name((dotted_as_names, comma, dotted_as_names2)):
-        return dotted_as_names + comma.hidden_tokens_before +\
-                [{
-                  "type": "comma",
-                  "value": ","
-                 }] + comma.hidden_tokens_after + dotted_as_names2
+        return dotted_as_names + [comma] + dotted_as_names2
 
     @pg.production("dotted_as_names : dotted_as_name")
     def dotted_as_names_dotted_as_name((dotted_as_name,)):
