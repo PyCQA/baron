@@ -524,7 +524,8 @@ def print_(node):
         yield ">>"
         yield dump_node_list(node["destination_formatting"])
         yield dump_node(node["destination"])
-    yield dump_node_list(node["value"])
+    if node["value"]:
+        yield dump_node_list(node["value"])
 
 
 def dumps(tree):
