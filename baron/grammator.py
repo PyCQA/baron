@@ -457,8 +457,11 @@ def generate_parse(print_function):
     def parameter_star((star, name,)):
         return [{
             "type": "list_argument",
-            "first_formatting": star.hidden_tokens_after,
-            "value": name.value,
+            "formatting": star.hidden_tokens_after,
+            "value": {
+                "type": "name",
+                "value": name.value,
+            }
         }]
 
     @pg.production("parameter : DOUBLE_STAR NAME")
@@ -466,7 +469,10 @@ def generate_parse(print_function):
         return [{
             "type": "dict_argument",
             "formatting": double_star.hidden_tokens_after,
-            "value": name.value,
+            "value": {
+                "type": "name",
+                "value": name.value,
+            },
         }]
 
     @pg.production("argument : comma")

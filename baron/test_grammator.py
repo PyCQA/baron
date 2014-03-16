@@ -600,8 +600,11 @@ def test_funcdef_stmt_one_start_parameter_indent():
             "sixth_formatting": [{"type": "space", "value": " "}],
             "arguments": [{
                 "type": "list_argument",
-                "first_formatting": [],
-                "value": "b",
+                "formatting": [],
+                "value": {
+                    "value": "b",
+                    "type": "name",
+                }
             }],
             "value": [{
                "type": "endl",
@@ -650,7 +653,10 @@ def test_funcdef_stmt_one_star_star_parameter_indent():
             "arguments": [{
                 "type": "dict_argument",
                 "formatting": [],
-                "value": "b",
+                "value": {
+                    "value": "b",
+                    "type": "name",
+                }
             }],
             "value": [{
                "type": "endl",
