@@ -460,6 +460,13 @@ def exec_(node):
 
 
 @node()
+def global_(node):
+    yield "global"
+    yield dump_node_list(node["formatting"])
+    yield dump_node_list(node["value"])
+
+
+@node()
 def while_(node):
     yield "while"
     yield dump_node_list(node["first_formatting"])
