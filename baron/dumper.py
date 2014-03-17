@@ -468,7 +468,8 @@ def yield_atom(node):
     yield dump_node_list(node["first_formatting"])
     yield "yield"
     yield dump_node_list(node["second_formatting"])
-    yield dump_node(node["value"])
+    if node["value"]:
+        yield dump_node(node["value"])
     yield dump_node_list(node["third_formatting"])
     yield ")"
 

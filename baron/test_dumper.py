@@ -459,6 +459,10 @@ def test_ellipsis():
     check_dumps("a[ . .  .]")
 
 
+def test_yield_atom_empty():
+    check_dumps("a = ( yield )")
+
+
 def test_yield_atom():
     check_dumps("a = ( yield b )")
 
