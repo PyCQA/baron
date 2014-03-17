@@ -85,6 +85,13 @@ def dot(node):
 
 
 @node()
+def semicolon(node):
+    yield dump_node_list(node["first_formatting"])
+    yield ";"
+    yield dump_node_list(node["second_formatting"])
+
+
+@node()
 def comma(node):
     yield dump_node_list(node["first_formatting"])
     yield ","
