@@ -69,7 +69,7 @@ def include_primivites(pg, print_function):
         return {
             "type": token.name.lower(),
             "value": None,
-            "formatting": []
+            "formatting": token.hidden_tokens_after,
         }
 
 

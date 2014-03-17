@@ -528,8 +528,8 @@ def generate_parse(print_function):
             "type": "yield_atom",
             "value": yield_expr["value"],
             "first_formatting": left_parenthesis.hidden_tokens_after,
-            "second_formatting": right_parenthesis.hidden_tokens_before,
-            "third_formatting": yield_expr["formatting"]
+            "second_formatting": yield_expr["formatting"],
+            "third_formatting": right_parenthesis.hidden_tokens_before
         }
 
     @pg.production("atom : BACKQUOTE testlist1 BACKQUOTE")

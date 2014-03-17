@@ -1166,7 +1166,22 @@ def test_dict_comprehension():
             }]
           }])
 
-def test_prioritizing_parenthesis():
+def test_yield_atom_empty():
+    "( yield )"
+    parse_simple([
+           ('LEFT_PARENTHESIS', '(', [], [('SPACE', ' ')]),
+           ('YIELD', 'yield', [], [('SPACE', ' ')]),
+           ('RIGHT_PARENTHESIS', ')', []),
+          ],
+          [{
+            "type": "yield_atom",
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [],
+            "value": None,
+          }])
+
+def test_yield_atom():
     "( yield a )"
     parse_simple([
            ('LEFT_PARENTHESIS', '(', [], [('SPACE', ' ')]),
