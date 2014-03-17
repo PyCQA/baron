@@ -265,6 +265,16 @@ def dump_node_list_value(node):
 
 
 @node()
+def generator_comprehension(node):
+    yield "("
+    yield dump_node_list(node["first_formatting"])
+    yield dump_node(node["result"])
+    yield dump_node_list(node["generators"])
+    yield dump_node_list(node["second_formatting"])
+    yield ")"
+
+
+@node()
 def list_comprehension(node):
     yield "["
     yield dump_node_list(node["first_formatting"])

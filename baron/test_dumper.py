@@ -351,4 +351,16 @@ def test_list_comprehension_ifs():
 
 
 def test_list_comprehension_ifs_more():
-    check_dumps("[ x for   y       in  z, z   if a   if  qsd  for ss in gfgr    ]")
+    check_dumps("[ x for   y       in  z   if a   if  qsd  for ss in gfgr    ]")
+
+
+def test_generator_comprehension():
+    check_dumps("( x for   y       in  z      )")
+
+
+def test_generator_comprehension_ifs():
+    check_dumps("( x for   y       in  z   if a   if  qsd  )")
+
+
+def test_generator_comprehension_ifs_more():
+    check_dumps("( x for   y       in  z   if a   if  qsd  for ss in gfgr    )")
