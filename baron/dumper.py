@@ -49,6 +49,7 @@ def ternary_operator(node):
 @node("star")
 @node("hexa")
 @node("octa")
+@node("float")
 @node("space")
 @node("binary")
 @node("comment")

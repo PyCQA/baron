@@ -419,5 +419,9 @@ def test_binary():
     check_dumps("0b010110101100")
 
 
+def test_float():
+    check_dumps("1.2")
+
+
 def test_semicolon():
     check_dumps("a;b")
