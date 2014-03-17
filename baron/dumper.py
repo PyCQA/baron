@@ -81,6 +81,15 @@ def string(node):
 
 
 @node()
+def ellipsis(node):
+    yield "."
+    yield dump_node_list(node["first_formatting"])
+    yield "."
+    yield dump_node_list(node["second_formatting"])
+    yield "."
+
+
+@node()
 def dot(node):
     yield dump_node_list(node["first_formatting"])
     yield "."

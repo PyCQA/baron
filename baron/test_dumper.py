@@ -453,3 +453,7 @@ def test_global():
 
 def test_global_more():
     check_dumps("global a ,   b,    d")
+
+
+def test_ellipsis():
+    check_dumps("a[ . .  .]")
