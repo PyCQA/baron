@@ -690,6 +690,63 @@ def test_list_comprehension_if():
             }]
           }])
 
+def test_list_comprehension_if_if():
+    "[ a for b in c if d if d ]"
+    parse_simple([
+           ('LEFT_SQUARE_BRACKET', '[', [], [('SPACE', ' ')]),
+           ('NAME', 'a'),
+           ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'b'),
+           ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'c'),
+           ('IF', 'if', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'd'),
+           ('IF', 'if', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('NAME', 'd'),
+           ('RIGHT_SQUARE_BRACKET', ']', [('SPACE', ' ')]),
+          ],
+          [{
+            "type": "list_comprehension",
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "result": {
+               "type": "name",
+               "value": "a",
+            },
+            "generators": [{
+                "type": "comprehension_loop",
+                "first_formatting": [{"type": "space", "value": " "}],
+                "second_formatting": [{"type": "space", "value": " "}],
+                "third_formatting": [{"type": "space", "value": " "}],
+                "forth_formatting": [{"type": "space", "value": " "}],
+                "iterator": {
+                   "type": "name",
+                   "value": "b",
+                },
+                "target": {
+                   "type": "name",
+                   "value": "c",
+                },
+                "ifs": [{
+                    "type": "comprehension_if",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "value": {
+                        "type": "name",
+                        "value": "d"
+                    },
+                }, {
+                    "type": "comprehension_if",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "value": {
+                        "type": "name",
+                        "value": "d"
+                    },
+                }],
+            }]
+          }])
+
 def test_list_comprehension_tuple():
     "[ a for b in c, d ]"
     parse_simple([

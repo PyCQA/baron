@@ -294,6 +294,7 @@ def include_data_structures(pg):
             "value": old_test
         }]
 
+    @pg.production("list_iter : IF old_test comp_iter")
     @pg.production("comp_iter : IF old_test comp_iter")
     def comp_iter_if_comp_iter((if_, old_test, comp_iter)):
         return [{
