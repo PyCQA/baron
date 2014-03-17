@@ -163,7 +163,14 @@ def test_file_input_simple_stmt_one_item_semicolon():
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';'), ('ENDL', '\n'),
         ],[
-           { "type": "name", "value": 'a', }, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
+           { "type": "name", "value": 'a', },
+           {
+            "type": "semicolon",
+            "value": ";",
+            "first_formatting": [],
+            "second_formatting": [],
+           },
+           { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
 
 def test_file_input_simple_stmt_two_items_semicolon():
@@ -173,12 +180,28 @@ def test_file_input_simple_stmt_two_items_semicolon():
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';'), ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           { "type": "name", "value": 'a', }, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
+           { "type": "name", "value": 'a', },
+           {
+            "type": "semicolon",
+            "value": ";",
+            "first_formatting": [],
+            "second_formatting": [],
+           },
+           {"type": "name", "value": 'a'},
+           { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';'), ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           {"type": "name", "value": 'a'}, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, { "type": "name", "value": 'a', }, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
+           {"type": "name", "value": 'a'},
+           {
+            "type": "semicolon",
+            "value": ";",
+            "first_formatting": [],
+            "second_formatting": [],
+           },
+           { "type": "name", "value": 'a', },
+           { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
 
 def test_file_input_simple_stmt_three_items_semicolon():
@@ -188,32 +211,61 @@ def test_file_input_simple_stmt_three_items_semicolon():
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';'), ('NAME', 'b'), ('SEMICOLON', ';'), ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           { "type": "name", "value": 'a', }, {"type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": []}, {"type": "name", "value": 'b'}, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
+           { "type": "name", "value": 'a', },
+           {"type": "semicolon", "value": ";", "first_formatting": [], "second_formatting": []},
+           {"type": "name", "value": 'b'},
+           { "type": "semicolon", "value": ";", "first_formatting": [], "second_formatting": [], },
+           {"type": "name", "value": 'a'},
+           { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';'), ('NAME', 'b'), ('SEMICOLON', ';'), ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           {"type": "name", "value": 'a'}, {"type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": []}, { "type": "name", "value": 'b', }, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
+           {"type": "name", "value": 'a'},
+           {"type": "semicolon", "value": ";", "first_formatting": [], "second_formatting": []},
+           { "type": "name", "value": 'b', },
+           { "type": "semicolon", "value": ";", "first_formatting": [], "second_formatting": [], },
+           {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';'), ('NAME', 'b'), ('SEMICOLON', ';'), ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           {"type": "name", "value": 'a'}, {"type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": []}, {"type": "name", "value": 'b'}, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, { "type": "name", "value": 'a', }, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
+           {"type": "name", "value": 'a'},
+           {"type": "semicolon", "value": ";", "first_formatting": [], "second_formatting": []},
+           {"type": "name", "value": 'b'},
+           { "type": "semicolon", "value": ";", "first_formatting": [], "second_formatting": [], },
+           { "type": "name", "value": 'a', },
+           { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';'), ('NAME', 'b'), ('SEMICOLON', ';'), ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           { "type": "name", "value": 'a', }, {"type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": []}, {"type": "name", "value": 'b'}, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
+           { "type": "name", "value": 'a', },
+           {"type": "semicolon", "value": ";", "first_formatting": [], "second_formatting": []},
+           {"type": "name", "value": 'b'},
+           { "type": "semicolon", "value": ";", "first_formatting": [], "second_formatting": [], },
+           {"type": "name", "value": 'a'},
+           { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';'), ('NAME', 'b'), ('SEMICOLON', ';'), ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           {"type": "name", "value": 'a'}, {"type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": []}, { "type": "name", "value": 'b', }, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, {"type": "name", "value": 'a'}, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
+           {"type": "name", "value": 'a'},
+           {"type": "semicolon", "value": ";", "first_formatting": [], "second_formatting": []},
+           { "type": "name", "value": 'b', },
+           { "type": "semicolon", "value": ";", "first_formatting": [], "second_formatting": [], },
+           {"type": "name", "value": 'a'},
+           { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';'), ('NAME', 'b'), ('SEMICOLON', ';'), ('NAME', 'a'), ('ENDL', '\n'),
         ],[
-           {"type": "name", "value": 'a'}, {"type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": []}, {"type": "name", "value": 'b'}, { "type": "semicolon", "value": ";", "before_formatting": [], "after_formatting": [], }, { "type": "name", "value": 'a', }, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
+           {"type": "name", "value": 'a'},
+           {"type": "semicolon", "value": ";", "first_formatting": [], "second_formatting": []},
+           {"type": "name", "value": 'b'},
+           { "type": "semicolon", "value": ";", "first_formatting": [], "second_formatting": [], },
+           { "type": "name", "value": 'a', },
+           { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
 
 def test_file_input_simple_stmt_one_item_semicolon_space():
@@ -223,7 +275,9 @@ def test_file_input_simple_stmt_one_item_semicolon_space():
     parse_multi([
            ('NAME', 'a'), ('SEMICOLON', ';', [('SPACE', ' ')], [('SPACE', ' ')]), ('ENDL', '\n'),
         ],[
-           { "type": "name", "value": 'a', }, { "type": "semicolon", "value": ";", "before_formatting": [{"type": "space", "value": ' '}], "after_formatting": [{"type": "space", "value": ' '}], }, { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
+           { "type": "name", "value": 'a', },
+           { "type": "semicolon", "value": ";", "first_formatting": [{"type": "space", "value": ' '}], "second_formatting": [{"type": "space", "value": ' '}], },
+           { "type": "endl", "value": "\n", "formatting": [], "indent": "", },
           ])
 
 def test_funcdef_stmt_indent():
