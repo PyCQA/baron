@@ -259,6 +259,7 @@ def assert_(node):
 @node("dotted_name")
 @node("ifelseblock")
 @node("atomtrailers")
+@node("string_chain")
 def dump_node_list_value(node):
     yield dump_node_list(node["value"])
 

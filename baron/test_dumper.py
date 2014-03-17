@@ -336,3 +336,7 @@ def test_del():
 
 def test_star():
     check_dumps("from a import *")
+
+
+def test_string_chain():
+    check_dumps("'q' 'b'")
