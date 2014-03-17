@@ -47,6 +47,7 @@ def ternary_operator(node):
 @node("int")
 @node("name")
 @node("space")
+@node("star")
 @node("comment")
 def get_value(node):
     yield node["value"]

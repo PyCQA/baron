@@ -332,3 +332,7 @@ def test_raise():
 
 def test_del():
     check_dumps("del a")
+
+
+def test_star():
+    check_dumps("from a import *")
