@@ -454,6 +454,17 @@ def yield_(node):
 
 
 @node()
+def yield_atom(node):
+    yield "("
+    yield dump_node_list(node["first_formatting"])
+    yield "yield"
+    yield dump_node_list(node["second_formatting"])
+    yield dump_node(node["value"])
+    yield dump_node_list(node["third_formatting"])
+    yield ")"
+
+
+@node()
 def exec_(node):
     yield "exec"
     yield dump_node_list(node["first_formatting"])
