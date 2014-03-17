@@ -388,3 +388,15 @@ def test_set_comprehension_ifs():
 
 def test_set_comprehension_ifs_more():
     check_dumps("{ x  for   y       in  z   if a   if  qsd  for ss in gfgr    }")
+
+
+def test_argument_generator_comprehension():
+    check_dumps("a( x for   y       in  z)")
+
+
+def test_argument_generator_comprehension_comprehension_ifs():
+    check_dumps("a( x    for   y       in  z   if a   if  qsd)")
+
+
+def test_argument_generator_comprehension_comprehension_ifs_more():
+    check_dumps("a(x  for   y       in  z   if a   if  qsd  for ss in gfgr)")

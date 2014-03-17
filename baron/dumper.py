@@ -289,6 +289,12 @@ def dict_comprehension(node):
 
 
 @node()
+def argument_generator_comprehension(node):
+    yield dump_node(node["result"])
+    yield dump_node_list(node["generators"])
+
+
+@node()
 def generator_comprehension(node):
     yield "("
     yield dump_node_list(node["first_formatting"])
