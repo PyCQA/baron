@@ -46,8 +46,11 @@ def ternary_operator(node):
 
 @node("int")
 @node("name")
-@node("space")
 @node("star")
+@node("hexa")
+@node("octa")
+@node("space")
+@node("binary")
 @node("comment")
 @node("left_parenthesis")
 @node("right_parenthesis")

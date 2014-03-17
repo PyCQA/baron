@@ -405,3 +405,15 @@ def test_argument_generator_comprehension_comprehension_ifs():
 
 def test_argument_generator_comprehension_comprehension_ifs_more():
     check_dumps("a(x  for   y       in  z   if a   if  qsd  for ss in gfgr)")
+
+
+def test_hexa():
+    check_dumps("0x123")
+
+
+def test_octa():
+    check_dumps("0123")
+
+
+def test_binary():
+    check_dumps("0b010110101100")
