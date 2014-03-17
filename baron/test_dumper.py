@@ -423,6 +423,10 @@ def test_float():
     check_dumps("1.2")
 
 
+def test_complex():
+    check_dumps("10j")
+
+
 def test_float_exponant():
     check_dumps("1e9")
 
