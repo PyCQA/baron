@@ -265,6 +265,20 @@ def dump_node_list_value(node):
 
 
 @node()
+def dict_comprehension(node):
+    yield "{"
+    yield dump_node_list(node["first_formatting"])
+    yield dump_node(node["result"]["key"])
+    yield dump_node_list(node["result"]["first_formatting"])
+    yield ":"
+    yield dump_node_list(node["result"]["second_formatting"])
+    yield dump_node(node["result"]["value"])
+    yield dump_node_list(node["generators"])
+    yield dump_node_list(node["second_formatting"])
+    yield "}"
+
+
+@node()
 def generator_comprehension(node):
     yield "("
     yield dump_node_list(node["first_formatting"])

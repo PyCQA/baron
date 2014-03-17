@@ -364,3 +364,15 @@ def test_generator_comprehension_ifs():
 
 def test_generator_comprehension_ifs_more():
     check_dumps("( x for   y       in  z   if a   if  qsd  for ss in gfgr    )")
+
+
+def test_dict_comprehension():
+    check_dumps("{ x: z for   y       in  z      }")
+
+
+def test_dict_comprehension_ifs():
+    check_dumps("{ x   : z for   y       in  z   if a   if  qsd  }")
+
+
+def test_dict_comprehension_ifs_more():
+    check_dumps("{ x :z for   y       in  z   if a   if  qsd  for ss in gfgr    }")
