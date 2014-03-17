@@ -2824,6 +2824,18 @@ def test_comment():
            ('COMMENT', '#', [('SPACE', ' ')]),
          ])
 
+def test_repr():
+    """
+    ` 
+    """
+    group([
+           ('BACKQUOTE', '`'),
+           ('SPACE', ' '),
+         ],
+         [
+           ('BACKQUOTE', '`', [], [('SPACE', ' ')]),
+         ])
+
 def test_semicolon():
     """
      ; 
