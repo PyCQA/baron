@@ -61,6 +61,11 @@ def test_from_import():
     check_dumps("from b   import  a  as   rev")
 
 
+def test_from_import_special_notation():
+    check_dumps("from a import (b)")
+    check_dumps("from a import (b, c, d)")
+
+
 def test_print_empty():
     check_dumps("print")
 
