@@ -239,6 +239,7 @@ def include_data_structures(pg):
             "ifs": [],
         }]
 
+    @pg.production("list_for : FOR exprlist IN old_test")
     @pg.production("list_for : FOR exprlist IN testlist_safe")
     def comp_for_implicite_tuple((for_, exprlist, in_, testlist_safe)):
         return [{
@@ -259,7 +260,8 @@ def include_data_structures(pg):
         }]
 
     @pg.production("comp_for : FOR exprlist IN or_test comp_iter")
-    @pg.production("list_for : FOR exprlist IN or_test list_iter")
+    @pg.production("list_for : FOR exprlist IN old_test list_iter")
+    @pg.production("list_for : FOR exprlist IN testlist_safe list_iter")
     def comp_for_iter((for_, exprlist, in_, or_test, comp_iter)):
         my_ifs = []
         for i in comp_iter:
@@ -294,7 +296,7 @@ def include_data_structures(pg):
             "value": old_test
         }]
 
-    @pg.production("list_iter : IF old_test comp_iter")
+    @pg.production("list_iter : IF old_test list_iter")
     @pg.production("comp_iter : IF old_test comp_iter")
     def comp_iter_if_comp_iter((if_, old_test, comp_iter)):
         return [{
