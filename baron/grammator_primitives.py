@@ -223,13 +223,9 @@ def include_primivites(pg, print_function):
         return [create_node_from_token(name)]
 
 
-    @pg.production("names : names COMMA NAME")
+    @pg.production("names : names comma name")
     def names_names_name((names, comma, name,)):
-        return names +\
-              comma.hidden_tokens_before +\
-              [create_node_from_token(comma)] +\
-              comma.hidden_tokens_after +\
-              [create_node_from_token(name)]
+        return names + [comma, name]
 
 
     @pg.production("return_stmt : RETURN testlist")
