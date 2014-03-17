@@ -265,6 +265,29 @@ def dump_node_list_value(node):
 
 
 @node()
+def list_comprehension(node):
+    yield "["
+    yield dump_node_list(node["first_formatting"])
+    yield dump_node(node["result"])
+    yield dump_node_list(node["generators"])
+    yield dump_node_list(node["second_formatting"])
+    yield "]"
+
+
+@node()
+def comprehension_loop(node):
+    "for x in x"
+    yield dump_node_list(node["first_formatting"])
+    yield "for"
+    yield dump_node_list(node["second_formatting"])
+    yield dump_node(node["iterator"])
+    yield dump_node_list(node["third_formatting"])
+    yield "in"
+    yield dump_node_list(node["forth_formatting"])
+    yield dump_node(node["target"])
+
+
+@node()
 def getitem(node):
     yield "["
     yield dump_node_list(node["first_formatting"])

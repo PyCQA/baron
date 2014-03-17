@@ -340,3 +340,7 @@ def test_star():
 
 def test_string_chain():
     check_dumps("'q' 'b'")
+
+
+def test_list_comprehension():
+    check_dumps("[ x for   y       in  z      ]")
