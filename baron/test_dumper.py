@@ -461,3 +461,7 @@ def test_ellipsis():
 
 def test_yield_atom():
     check_dumps("a = ( yield b )")
+
+
+def test_repr():
+    check_dumps("` a  `")
