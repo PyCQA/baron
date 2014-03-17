@@ -425,3 +425,15 @@ def test_float():
 
 def test_semicolon():
     check_dumps("a;b")
+
+
+def test_exec():
+    check_dumps("exec a")
+
+
+def test_exec_globals():
+    check_dumps("exec a  in   b")
+
+
+def test_exec_globals_locals():
+    check_dumps("exec a  in   b   ,     c")

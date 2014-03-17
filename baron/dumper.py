@@ -443,6 +443,23 @@ def yield_(node):
 
 
 @node()
+def exec_(node):
+    yield "exec"
+    yield dump_node_list(node["first_formatting"])
+    yield dump_node(node["value"])
+    if node["globals"]:
+        yield dump_node_list(node["second_formatting"])
+        yield "in"
+        yield dump_node_list(node["third_formatting"])
+        yield dump_node(node["globals"])
+    if node["locals"]:
+        yield dump_node_list(node["forth_formatting"])
+        yield ","
+        yield dump_node_list(node["fith_formatting"])
+        yield dump_node(node["locals"])
+
+
+@node()
 def while_(node):
     yield "while"
     yield dump_node_list(node["first_formatting"])
