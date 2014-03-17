@@ -53,6 +53,7 @@ def ternary_operator(node):
 @node("space")
 @node("binary")
 @node("comment")
+@node("float_exponant")
 @node("left_parenthesis")
 @node("right_parenthesis")
 def get_value(node):
