@@ -284,7 +284,19 @@ def comprehension_loop(node):
     yield dump_node_list(node["third_formatting"])
     yield "in"
     yield dump_node_list(node["forth_formatting"])
-    yield dump_node(node["target"])
+    if isinstance(node["target"], list):
+        yield dump_node_list(node["target"])
+    else:
+        yield dump_node(node["target"])
+    yield dump_node_list(node["ifs"])
+
+
+@node()
+def comprehension_if(node):
+    yield dump_node_list(node["first_formatting"])
+    yield "if"
+    yield dump_node_list(node["second_formatting"])
+    yield dump_node(node["value"])
 
 
 @node()
