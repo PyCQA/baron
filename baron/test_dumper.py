@@ -328,3 +328,7 @@ def test_raise():
     check_dumps("raise a")
     check_dumps("raise a ,   b")
     check_dumps("raise a ,   b   ,     c")
+
+
+def test_del():
+    check_dumps("del a")
