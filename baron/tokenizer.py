@@ -93,9 +93,13 @@ def tokenize(sequence, print_function=False):
 
 
 def tokenize_generator(sequence, print_function=False):
+    if print_function is True:
+        current_keywords = filter(lambda x: x != "print", KEYWORDS)
+    else:
+        current_keywords = KEYWORDS
 
     for item in sequence:
-        if item in KEYWORDS:
+        if item in current_keywords:
             yield (item.upper(), item)
             continue
         for candidate, token_name in TOKENS:
