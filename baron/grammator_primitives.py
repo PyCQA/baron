@@ -18,7 +18,7 @@ def include_primivites(pg, print_function):
         def print_stmt((print_, testlist)):
             return {
                 "type": "print",
-                "value": testlist["value"] if testlist["type"] == "tuple" else [testlist],
+                "value": testlist["value"] if testlist["type"] == "tuple" and testlist["with_parenthesis"] == False else [testlist],
                 "destination": None,
                 "destination_formatting": [],
                 "formatting": print_.hidden_tokens_after,

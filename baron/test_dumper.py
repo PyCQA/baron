@@ -493,3 +493,7 @@ def test_from_import_parenthesis_formatting():
 
 def test_getitem_special_case():
     check_dumps("[a[...] ]")
+
+
+def test_print_tuple():
+    check_dumps("print(pouet, pouet)")
