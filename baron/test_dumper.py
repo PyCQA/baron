@@ -481,3 +481,7 @@ def test_yield_atom():
 
 def test_repr():
     check_dumps("` a  `")
+
+
+def test_comment_special_case():
+    check_dumps("d((s)   # Padding\n)")
