@@ -127,8 +127,9 @@ def call(node):
             yield "".join(list(call_argument(n)))
         else:
             yield dump_node(n)
-    yield ")"
     yield dump_node_list(node["third_formatting"])
+    yield ")"
+    yield dump_node_list(node["forth_formatting"])
 
 
 @node()

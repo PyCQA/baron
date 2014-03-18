@@ -223,8 +223,8 @@ def test_augassign():
     check_dumps("a &= b")
 
 
-def check_right_parenthesis():
-    check_dumps("a()\n ")
+def test_call_forth_formatting():
+    check_dumps("set(n for e in s() \n                 if a)")
 
 
 def test_boolean_operator():
