@@ -485,3 +485,7 @@ def test_repr():
 
 def test_comment_special_case():
     check_dumps("d((s)   # Padding\n)")
+
+
+def test_from_import_parenthesis_formatting():
+    check_dumps("from a import (\nb, c\n)\n")

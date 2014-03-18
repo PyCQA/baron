@@ -34,10 +34,13 @@ def include_imports(pg):
 
     @pg.production("from_import_target : LEFT_PARENTHESIS name_as_names RIGHT_PARENTHESIS")
     def from_import_parenthesis((left_parenthesis, name_as_names, right_parenthesis)):
-        return [{"type": "left_parenthesis", "value": "("}] +\
+        return left_parenthesis.hidden_tokens_before +\
+               [{"type": "left_parenthesis", "value": "("}] +\
+               left_parenthesis.hidden_tokens_after +\
                name_as_names +\
                right_parenthesis.hidden_tokens_before +\
-               [{"type": "right_parenthesis", "value": ")"}]
+               [{"type": "right_parenthesis", "value": ")"}] +\
+               right_parenthesis.hidden_tokens_after
 
     @pg.production("from_import_target : STAR")
     def from_import_star((star,)):
