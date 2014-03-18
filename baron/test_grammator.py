@@ -971,6 +971,7 @@ def test_decorator_parenthesis():
                     "first_formatting": [],
                     "value": [],
                     "second_formatting": [],
+                    "forth_formatting": [],
                 },
                 "value": {
                     "type": "dotted_name",
@@ -1031,6 +1032,7 @@ def test_decorator_parenthesis_arg():
                 "call": {
                     "third_formatting": [],
                     "type": "call",
+                    "forth_formatting": [],
                     "first_formatting": [],
                     "value": [{
                         "name": {},

@@ -297,6 +297,7 @@ def generate_parse(print_function):
             },
             "call": {
                 "third_formatting": right_parenthesis.hidden_tokens_before,
+                "forth_formatting": right_parenthesis.hidden_tokens_after,
                 "type": "call",
                 "first_formatting": left_parenthesis.hidden_tokens_before,
                 "value": [],
@@ -316,6 +317,7 @@ def generate_parse(print_function):
             },
             "call": {
                 "third_formatting": right_parenthesis.hidden_tokens_before,
+                "forth_formatting": right_parenthesis.hidden_tokens_after,
                 "type": "call",
                 "first_formatting": left_parenthesis.hidden_tokens_before,
                 "value": argslist,

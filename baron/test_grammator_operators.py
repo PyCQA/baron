@@ -7445,6 +7445,7 @@ def test_call_empty():
                     "first_formatting": [],
                     "second_formatting": [],
                     "third_formatting": [],
+                    "forth_formatting": [],
                     "value": [],
                 }]
            }])
@@ -7467,6 +7468,30 @@ def test_call_empty_with_space():
                     "first_formatting": [{"type": "space", "value": " "}],
                     "second_formatting": [{"type": "space", "value": " "}],
                     "third_formatting": [],
+                    "forth_formatting": [],
+                    "value": [],
+                }]
+           }])
+
+def test_call_empty_with_space_forth_formatting():
+    "a ( )"
+    parse_simple([
+           ('NAME', 'a'),
+           ('LEFT_PARENTHESIS', '(', [('SPACE', ' ')], [('SPACE', ' ')]),
+           ('RIGHT_PARENTHESIS', ')', [], [('SPACE', ' ')]),
+          ],
+          [{
+            "type": "atomtrailers",
+            "value": [{
+                    "type": "name",
+                    "value": "a",
+                },
+                {
+                    "type": "call",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [],
+                    "forth_formatting": [{"type": "space", "value": " "}],
                     "value": [],
                 }]
            }])
@@ -7490,6 +7515,7 @@ def test_call_one():
                     "first_formatting": [],
                     "second_formatting": [],
                     "third_formatting": [],
+                    "forth_formatting": [],
                     "value": [{
                         "name": {},
                         "first_formatting": [],
@@ -7524,6 +7550,7 @@ def test_call_two():
                     "first_formatting": [],
                     "second_formatting": [],
                     "third_formatting": [],
+                    "forth_formatting": [],
                     "value": [{
                         "name": {},
                         "first_formatting": [],
@@ -7574,6 +7601,7 @@ def test_call_two_star_arg():
                     "first_formatting": [],
                     "second_formatting": [],
                     "third_formatting": [],
+                    "forth_formatting": [],
                     "value": [{
                         "name": {},
                         "first_formatting": [],
@@ -7638,6 +7666,7 @@ def test_call_two_star_arg_kwarg():
                     "first_formatting": [],
                     "second_formatting": [],
                     "third_formatting": [],
+                    "forth_formatting": [],
                     "value": [{
                         "name": {},
                         "first_formatting": [],
@@ -7707,6 +7736,7 @@ def test_call_named():
                     "first_formatting": [],
                     "second_formatting": [],
                     "third_formatting": [],
+                    "forth_formatting": [],
                     "value": [{
                         "value": {
                             "type": "name",
@@ -7743,6 +7773,7 @@ def test_call_generator():
                     "first_formatting": [],
                     "second_formatting": [],
                     "third_formatting": [],
+                    "forth_formatting": [],
                     "value": [{
                         "generators": [{
                             "first_formatting": [{"type": "space", "value": " "}],

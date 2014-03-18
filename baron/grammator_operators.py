@@ -211,6 +211,7 @@ def include_operators(pg):
             "first_formatting": left.hidden_tokens_before,
             "second_formatting": left.hidden_tokens_after,
             "third_formatting": right.hidden_tokens_before,
+            "forth_formatting": right.hidden_tokens_after,
         }]
 
     @pg.production("trailer : LEFT_SQUARE_BRACKET subscript RIGHT_SQUARE_BRACKET")
