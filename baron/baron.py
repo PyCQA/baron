@@ -21,10 +21,10 @@ def _parse(tokens):
         return generate_parse(print_function=True)(tokens)
 
 
-def parse(pouet):
-    if pouet and pouet[-1] != "\n":
-        pouet += "\n"
-    return _parse(tokenize(pouet))
+def parse(source_code):
+    if source_code and source_code[-1] != "\n":
+        source_code += "\n"
+    return _parse(tokenize(source_code))
 
 
 def tokenize(pouet):
