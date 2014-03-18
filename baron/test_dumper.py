@@ -505,3 +505,7 @@ def test_raise_special():
 
 def test_from_import_star_comment():
     check_dumps("from a import * # pouet")
+
+
+def test_class_formatting():
+    check_dumps("class A(pouet) :\n    pass")
