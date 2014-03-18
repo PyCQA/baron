@@ -46,7 +46,6 @@ def ternary_operator(node):
 
 @node("int")
 @node("name")
-@node("star")
 @node("hexa")
 @node("octa")
 @node("float")
@@ -67,13 +66,14 @@ def get_type(node):
     yield node["type"]
 
 
+@node("star")
 @node("string")
 @node("raw_string")
 @node("binary_string")
 @node("unicode_string")
 @node("binary_raw_string")
 @node("unicode_raw_string")
-def string(node):
+def generic(node):
     yield dump_node_list(node["first_formatting"])
     yield node["value"]
     yield dump_node_list(node["second_formatting"])

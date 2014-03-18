@@ -46,7 +46,9 @@ def include_imports(pg):
     def from_import_star((star,)):
         return [{
                  "type": "star",
-                 "value": "*"
+                 "value": "*",
+                 "first_formatting": star.hidden_tokens_before,
+                 "second_formatting": star.hidden_tokens_after
                 }]
 
     @pg.production("name_as_names : name_as_names name_as_name")

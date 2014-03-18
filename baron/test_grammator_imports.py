@@ -1558,6 +1558,8 @@ def test_from_a_import_star():
                         {
                          "type": "star",
                          "value": "*",
+                         "first_formatting": [],
+                         "second_formatting": [],
                         }
                        ],
             "first_formatting": [{"type": "space", "value": " "}],
@@ -1586,6 +1588,8 @@ def test_from_a_import_star_without_space():
                         {
                          "type": "star",
                          "value": "*",
+                         "first_formatting": [],
+                         "second_formatting": [],
                         }
                        ],
             "first_formatting": [{"type": "space", "value": " "}],

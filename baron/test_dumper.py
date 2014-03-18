@@ -501,3 +501,7 @@ def test_print_tuple():
 
 def test_raise_special():
     check_dumps("raise   # pouet")
+
+
+def test_from_import_star_comment():
+    check_dumps("from a import * # pouet")
