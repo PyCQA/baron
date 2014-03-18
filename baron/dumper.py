@@ -52,7 +52,6 @@ def ternary_operator(node):
 @node("float")
 @node("space")
 @node("binary")
-@node("comment")
 @node("complex")
 @node("float_exponant")
 @node("left_parenthesis")
@@ -78,6 +77,14 @@ def string(node):
     yield dump_node_list(node["first_formatting"])
     yield node["value"]
     yield dump_node_list(node["second_formatting"])
+
+
+@node()
+def comment(node):
+    # FIXME ugly, comment can end up in formatting of another node or being
+    # standalone, this is bad
+    yield dump_node_list(node.get("formatting", []))
+    yield node["value"]
 
 
 @node()
