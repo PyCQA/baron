@@ -14,7 +14,6 @@ def generate_parse(print_function):
     pg = ParserGenerator(tuple(map(lambda x: x.upper(), KEYWORDS)) + zip(*TOKENS)[1] + ("ENDMARKER", "INDENT", "DEDENT"), cache_id="baron")
             # precedence=[("left", ['PLUS', 'MINUS'])], cache_id="baron")
 
-
     @pg.production("main : statements")
     def main((statements,)):
         return filter(None, statements) if statements else []
