@@ -223,6 +223,10 @@ def test_augassign():
     check_dumps("a &= b")
 
 
+def check_right_parenthesis():
+    check_dumps("a()\n ")
+
+
 def test_boolean_operator():
     check_dumps("a and b")
 
