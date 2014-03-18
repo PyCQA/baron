@@ -372,8 +372,10 @@ def test_generator_comprehension():
           ],
           [{
             "type": "generator_comprehension",
-            "first_formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [],
             "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
             "result": {
                "type": "name",
                "value": "a",
@@ -411,8 +413,10 @@ def test_generator_comprehension_if():
           ],
           [{
             "type": "generator_comprehension",
-            "first_formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [],
             "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
             "result": {
                "type": "name",
                "value": "a",
@@ -460,8 +464,10 @@ def test_generator_comprehension_if_if():
           ],
           [{
             "type": "generator_comprehension",
-            "first_formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [],
             "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
             "result": {
                "type": "name",
                "value": "a",
@@ -517,8 +523,10 @@ def test_generator_comprehension_double():
           ],
           [{
             "type": "generator_comprehension",
-            "first_formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [],
             "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
             "result": {
                "type": "name",
                "value": "a",
@@ -577,8 +585,10 @@ def test_generator_comprehension_double_if_if():
           ],
           [{
             "type": "generator_comprehension",
-            "first_formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [],
             "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
             "result": {
                "type": "name",
                "value": "a",
@@ -645,8 +655,10 @@ def test_list_comprehension():
           ],
           [{
             "type": "list_comprehension",
-            "first_formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [],
             "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
             "result": {
                "type": "name",
                "value": "a",
@@ -684,8 +696,10 @@ def test_list_comprehension_if():
           ],
           [{
             "type": "list_comprehension",
-            "first_formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [],
             "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
             "result": {
                "type": "name",
                "value": "a",
@@ -733,8 +747,10 @@ def test_list_comprehension_if_if():
           ],
           [{
             "type": "list_comprehension",
-            "first_formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [],
             "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
             "result": {
                "type": "name",
                "value": "a",
@@ -788,8 +804,10 @@ def test_list_comprehension_tuple():
           ],
           [{
             "type": "list_comprehension",
-            "first_formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [],
             "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
             "result": {
                "type": "name",
                "value": "a",
@@ -844,8 +862,10 @@ def test_list_comprehension_tuple_more():
           ],
           [{
             "type": "list_comprehension",
-            "first_formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [],
             "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
             "result": {
                "type": "name",
                "value": "a",
@@ -905,8 +925,10 @@ def test_list_comprehension_lambda():
           ],
           [{
             "type": "list_comprehension",
-            "first_formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [],
             "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
             "result": {
                "type": "name",
                "value": "a",
@@ -952,8 +974,10 @@ def test_list_comprehension_lambda_with_arguments():
           ],
           [{
             "type": "list_comprehension",
-            "first_formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [],
             "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
             "result": {
                "type": "name",
                "value": "a",
@@ -1002,8 +1026,10 @@ def test_set_comprehension():
           ],
           [{
             "type": "set_comprehension",
-            "first_formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [],
             "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
             "result": {
                "type": "name",
                "value": "a",
@@ -1041,8 +1067,10 @@ def test_set_comprehension_if():
           ],
           [{
             "type": "set_comprehension",
-            "first_formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [],
             "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
             "result": {
                "type": "name",
                "value": "a",
@@ -1094,8 +1122,10 @@ def test_set_comprehension_double_if_if():
           ],
           [{
             "type": "set_comprehension",
-            "first_formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [],
             "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
             "result": {
                "type": "name",
                "value": "a",
@@ -1164,8 +1194,10 @@ def test_dict_comprehension():
           ],
           [{
             "type": "dict_comprehension",
-            "first_formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [],
             "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
             "result": {
                 "key": {
                     "type": "name",

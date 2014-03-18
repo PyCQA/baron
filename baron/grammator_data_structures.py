@@ -198,8 +198,10 @@ def include_data_structures(pg):
     def generator_comprehension((left_parenthesis, test, comp_for, right_parenthesis,)):
         return {
             "type": "generator_comprehension",
-            "first_formatting": left_parenthesis.hidden_tokens_after,
-            "second_formatting": right_parenthesis.hidden_tokens_before,
+            "first_formatting": left_parenthesis.hidden_tokens_before,
+            "second_formatting": left_parenthesis.hidden_tokens_after,
+            "third_formatting": right_parenthesis.hidden_tokens_before,
+            "forth_formatting": right_parenthesis.hidden_tokens_after,
             "result": test,
             "generators": comp_for,
           }
@@ -208,8 +210,10 @@ def include_data_structures(pg):
     def list_comprehension((left_square_bracket, test, list_for, right_square_bracket)):
         return {
             "type": "list_comprehension",
-            "first_formatting": left_square_bracket.hidden_tokens_after,
-            "second_formatting": right_square_bracket.hidden_tokens_before,
+            "first_formatting": left_square_bracket.hidden_tokens_before,
+            "second_formatting": left_square_bracket.hidden_tokens_after,
+            "third_formatting": right_square_bracket.hidden_tokens_before,
+            "forth_formatting": right_square_bracket.hidden_tokens_after,
             "result": test,
             "generators": list_for,
           }
@@ -218,8 +222,10 @@ def include_data_structures(pg):
     def dict_comprehension((left_bracket, test, colon, test2, list_for, right_bracket)):
         return {
             "type": "dict_comprehension",
-            "first_formatting": left_bracket.hidden_tokens_after,
-            "second_formatting": right_bracket.hidden_tokens_before,
+            "first_formatting": left_bracket.hidden_tokens_before,
+            "second_formatting": left_bracket.hidden_tokens_after,
+            "third_formatting": right_bracket.hidden_tokens_before,
+            "forth_formatting": right_bracket.hidden_tokens_after,
             "result": {
                 "key": test,
                 "value": test2,
@@ -233,8 +239,10 @@ def include_data_structures(pg):
     def set_comprehension((left_bracket, test, list_for, right_bracket)):
         return {
             "type": "set_comprehension",
-            "first_formatting": left_bracket.hidden_tokens_after,
-            "second_formatting": right_bracket.hidden_tokens_before,
+            "first_formatting": left_bracket.hidden_tokens_before,
+            "second_formatting": left_bracket.hidden_tokens_after,
+            "third_formatting": right_bracket.hidden_tokens_before,
+            "forth_formatting": right_bracket.hidden_tokens_after,
             "result": test,
             "generators": list_for,
           }
