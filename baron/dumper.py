@@ -171,11 +171,13 @@ def repr(node):
 
 @node()
 def list_(node):
-    yield "["
     yield dump_node_list(node["first_formatting"])
-    yield dump_node_list(node["value"])
+    yield "["
     yield dump_node_list(node["second_formatting"])
+    yield dump_node_list(node["value"])
+    yield dump_node_list(node["third_formatting"])
     yield "]"
+    yield dump_node_list(node["forth_formatting"])
 
 
 @node()
@@ -192,12 +194,14 @@ def associative_parenthesis(node):
 @node()
 def tuple_(node):
     if node["with_parenthesis"]:
-        yield "("
         yield dump_node_list(node["first_formatting"])
+        yield "("
+        yield dump_node_list(node["second_formatting"])
     yield dump_node_list(node["value"])
     if node["with_parenthesis"]:
-        yield dump_node_list(node["second_formatting"])
+        yield dump_node_list(node["third_formatting"])
         yield ")"
+        yield dump_node_list(node["forth_formatting"])
 
 
 @node()
@@ -309,26 +313,30 @@ def dump_node_list_value(node):
 
 @node()
 def set_comprehension(node):
-    yield "{"
     yield dump_node_list(node["first_formatting"])
+    yield "{"
+    yield dump_node_list(node["second_formatting"])
     yield dump_node(node["result"])
     yield dump_node_list(node["generators"])
-    yield dump_node_list(node["second_formatting"])
+    yield dump_node_list(node["third_formatting"])
     yield "}"
+    yield dump_node_list(node["forth_formatting"])
 
 
 @node()
 def dict_comprehension(node):
-    yield "{"
     yield dump_node_list(node["first_formatting"])
+    yield "{"
+    yield dump_node_list(node["second_formatting"])
     yield dump_node(node["result"]["key"])
     yield dump_node_list(node["result"]["first_formatting"])
     yield ":"
     yield dump_node_list(node["result"]["second_formatting"])
     yield dump_node(node["result"]["value"])
     yield dump_node_list(node["generators"])
-    yield dump_node_list(node["second_formatting"])
+    yield dump_node_list(node["third_formatting"])
     yield "}"
+    yield dump_node_list(node["forth_formatting"])
 
 
 @node()
@@ -339,22 +347,26 @@ def argument_generator_comprehension(node):
 
 @node()
 def generator_comprehension(node):
-    yield "("
     yield dump_node_list(node["first_formatting"])
+    yield "("
+    yield dump_node_list(node["second_formatting"])
     yield dump_node(node["result"])
     yield dump_node_list(node["generators"])
-    yield dump_node_list(node["second_formatting"])
+    yield dump_node_list(node["third_formatting"])
     yield ")"
+    yield dump_node_list(node["forth_formatting"])
 
 
 @node()
 def list_comprehension(node):
-    yield "["
     yield dump_node_list(node["first_formatting"])
+    yield "["
+    yield dump_node_list(node["second_formatting"])
     yield dump_node(node["result"])
     yield dump_node_list(node["generators"])
-    yield dump_node_list(node["second_formatting"])
+    yield dump_node_list(node["third_formatting"])
     yield "]"
+    yield dump_node_list(node["forth_formatting"])
 
 
 @node()
@@ -629,11 +641,13 @@ def finally_(node):
 
 @node()
 def dict_(node):
-    yield "{"
     yield dump_node_list(node["first_formatting"])
-    yield dump_node_list(node["value"])
+    yield "{"
     yield dump_node_list(node["second_formatting"])
+    yield dump_node_list(node["value"])
+    yield dump_node_list(node["third_formatting"])
     yield "}"
+    yield dump_node_list(node["forth_formatting"])
 
 
 @node()
