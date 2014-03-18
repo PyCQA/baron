@@ -217,7 +217,7 @@ def include_operators(pg):
     @pg.production("trailer : LEFT_SQUARE_BRACKET subscriptlist RIGHT_SQUARE_BRACKET")
     def trailer_getitem_ellipsis((left, subscript, right)):
         return [{
-            "type": "getitem" if left.value == "[" else "call",
+            "type": "getitem",
             "value": subscript,
             "first_formatting": left.hidden_tokens_after,
             "second_formatting": right.hidden_tokens_before,
