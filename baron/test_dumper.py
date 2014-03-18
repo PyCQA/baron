@@ -489,3 +489,7 @@ def test_comment_special_case():
 
 def test_from_import_parenthesis_formatting():
     check_dumps("from a import (\nb, c\n)\n")
+
+
+def test_getitem_special_case():
+    check_dumps("[a[...] ]")
