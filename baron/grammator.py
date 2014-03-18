@@ -409,7 +409,9 @@ def generate_parse(print_function):
             "name": {
                 "type": "tuple",
                 "first_formatting": left_parenthesis.hidden_tokens_after,
-                "second_formatting": right_parenthesis.hidden_tokens_before,
+                "second_formatting": left_parenthesis.hidden_tokens_before,
+                "third_formatting": right_parenthesis.hidden_tokens_before,
+                "forth_formatting": right_parenthesis.hidden_tokens_after,
                 "value": fplist,
                 "with_parenthesis": True
             }

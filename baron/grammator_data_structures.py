@@ -5,8 +5,10 @@ def include_data_structures(pg):
         return {
                 "type": "tuple",
                 "value": testlist_comp,
-                "first_formatting": left_parenthesis.hidden_tokens_after,
-                "second_formatting": right_parenthesis.hidden_tokens_before,
+                "first_formatting": left_parenthesis.hidden_tokens_before,
+                "second_formatting": left_parenthesis.hidden_tokens_after,
+                "third_formatting": right_parenthesis.hidden_tokens_before,
+                "forth_formatting": right_parenthesis.hidden_tokens_after,
                 "with_parenthesis": True,
                }
 
@@ -32,6 +34,8 @@ def include_data_structures(pg):
             "value": [test, comma],
             "first_formatting": [],
             "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
             "with_parenthesis": False,
         }
 
@@ -45,6 +49,8 @@ def include_data_structures(pg):
             "value": [test] + testlist_part,
             "first_formatting": [],
             "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
             "with_parenthesis": False,
         }
 
@@ -104,8 +110,10 @@ def include_data_structures(pg):
     def list((left_bracket, listmaker, right_bracket,)):
         return {
                 "type": "list",
-                "first_formatting": left_bracket.hidden_tokens_after,
-                "second_formatting": right_bracket.hidden_tokens_before,
+                "first_formatting": left_bracket.hidden_tokens_before,
+                "second_formatting": left_bracket.hidden_tokens_after,
+                "third_formatting": right_bracket.hidden_tokens_before,
+                "forth_formatting": right_bracket.hidden_tokens_after,
                 "value": listmaker
                }
 
@@ -129,8 +137,10 @@ def include_data_structures(pg):
     def dict((left_bracket, dictmaker, right_bracket,)):
         return {
                 "type": "dict",
-                "first_formatting": left_bracket.hidden_tokens_after,
-                "second_formatting": right_bracket.hidden_tokens_before,
+                "first_formatting": left_bracket.hidden_tokens_before,
+                "second_formatting": left_bracket.hidden_tokens_after,
+                "third_formatting": right_bracket.hidden_tokens_before,
+                "forth_formatting": right_bracket.hidden_tokens_after,
                 "value": dictmaker
                }
 
@@ -166,8 +176,10 @@ def include_data_structures(pg):
     def set((left_bracket, setmaker, right_bracket,)):
         return {
                 "type": "set",
-                "first_formatting": left_bracket.hidden_tokens_after,
-                "second_formatting": right_bracket.hidden_tokens_before,
+                "first_formatting": left_bracket.hidden_tokens_before,
+                "second_formatting": left_bracket.hidden_tokens_after,
+                "third_formatting": right_bracket.hidden_tokens_before,
+                "forth_formatting": right_bracket.hidden_tokens_after,
                 "value": setmaker
                }
 
@@ -256,6 +268,8 @@ def include_data_structures(pg):
                 "with_parenthesis": False,
                 "first_formatting": [],
                 "second_formatting": [],
+                "third_formatting": [],
+                "forth_formatting": [],
             },
             "iterator": exprlist,
             "ifs": [],

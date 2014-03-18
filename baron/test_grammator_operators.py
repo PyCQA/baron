@@ -6388,6 +6388,8 @@ def test_expr_comma_list():
                    "with_parenthesis": False,
                    "first_formatting": [],
                    "second_formatting": [],
+                   "third_formatting": [],
+                   "forth_formatting": [],
                    "value": [
                              {
                               "type": "boolean_operator",
@@ -6430,6 +6432,8 @@ def test_expr_comma_list():
             "with_parenthesis": False,
             "first_formatting": [],
             "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
             "value": [
                    {
                     "type": "boolean_operator",
@@ -6472,6 +6476,8 @@ def test_expr_comma_list():
             "with_parenthesis": False,
             "first_formatting": [],
             "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
             "value": [
                    {
                     "type": "boolean_operator",
@@ -6514,6 +6520,8 @@ def test_expr_comma_list():
             "with_parenthesis": False,
             "first_formatting": [],
             "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
             "value": [
                    {
                     "type": "boolean_operator",
@@ -6561,6 +6569,8 @@ def test_expr_comma_list_3_items():
             "with_parenthesis": False,
             "first_formatting": [],
             "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
             "value": [{
                        "type": "boolean_operator",
                        "value": 'or',
@@ -6608,6 +6618,8 @@ def test_expr_comma_list_3_items():
             "with_parenthesis": False,
             "first_formatting": [],
             "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
             "value": [{
                        "type": "boolean_operator",
                        "value": 'or',
@@ -6655,6 +6667,8 @@ def test_expr_comma_list_3_items():
             "with_parenthesis": False,
             "first_formatting": [],
             "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
             "value": [{
                        "type": "boolean_operator",
                        "value": 'or',
@@ -6702,6 +6716,8 @@ def test_expr_comma_list_3_items():
             "with_parenthesis": False,
             "first_formatting": [],
             "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
             "value": [{
                        "type": "boolean_operator",
                        "value": 'or',
@@ -6749,6 +6765,8 @@ def test_expr_comma_list_3_items():
             "with_parenthesis": False,
             "first_formatting": [],
             "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
             "value": [{
                        "type": "boolean_operator",
                        "value": 'or',
@@ -6795,6 +6813,8 @@ def test_implicit_tuple_space():
             "with_parenthesis": False,
             "first_formatting": [],
             "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
             "value": [{
                 "type": "name",
                 "value": "a",
@@ -6826,6 +6846,8 @@ def test_implicit_tuple_one_item():
             "with_parenthesis": False,
             "first_formatting": [],
             "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
             "value": [{
                      "type": "name",
                      "value": "a",
@@ -6849,6 +6871,8 @@ def test_implicit_tuple_trailing_comma():
             "with_parenthesis": False,
             "first_formatting": [],
             "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
             "value": [{
                      "type": "name",
                      "value": "a",
@@ -7411,6 +7435,8 @@ def test_subscript_test_implicit_tuple():
                     "type": "tuple",
                     "first_formatting": [],
                     "second_formatting": [],
+                    "third_formatting": [],
+                    "forth_formatting": [],
                     "with_parenthesis": False,
                     "value": [{
                         "type": "name",

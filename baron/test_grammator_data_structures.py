@@ -13,6 +13,8 @@ def test_empty_tuple():
             "with_parenthesis": True,
             "first_formatting": [],
             "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
             "type": "tuple",
             "value": [],
           }])
@@ -25,8 +27,10 @@ def test_empty_tuple_space():
           ],
           [{
             "with_parenthesis": True,
-            "first_formatting": [{"type": "space", "value": "  "}],
-            "second_formatting": [],
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": "  "}],
+            "third_formatting": [],
+            "forth_formatting": [],
             "type": "tuple",
             "value": [],
           }])
@@ -60,8 +64,10 @@ def test_tuple_one():
           ],
           [{
             "with_parenthesis": True,
-            "first_formatting": [{"type": "space", "value": " "}],
-            "second_formatting": [],
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [],
+            "forth_formatting": [],
             "type": "tuple",
             "value": [{
                "type": "name",
@@ -88,6 +94,8 @@ def test_tuple_many():
             "with_parenthesis": True,
             "first_formatting": [],
             "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
             "type": "tuple",
             "value": [{
                "type": "name",
@@ -117,8 +125,10 @@ def test_empty_list():
           ],
           [{
             "type": "list",
-            "first_formatting": [{"type": "space", "value": " "}],
-            "second_formatting": [],
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [],
+            "forth_formatting": [],
             "value": [],
           }])
 
@@ -131,8 +141,10 @@ def test_list_one():
           ],
           [{
             "type": "list",
-            "first_formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [],
             "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
             "value": [{
                "type": "name",
                "value": "a",
@@ -154,6 +166,8 @@ def test_list_more():
             "type": "list",
             "first_formatting": [],
             "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
             "value": [{
                "type": "name",
                "value": "a",
@@ -182,8 +196,10 @@ def test_dict_empty():
           ],
           [{
             "type": "dict",
-            "first_formatting": [{"type": "space", "value": " "}],
-            "second_formatting": [],
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [],
+            "forth_formatting": [],
             "value": [],
           }])
 
@@ -200,6 +216,8 @@ def test_dict_one():
             "type": "dict",
             "first_formatting": [],
             "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
             "value": [{
                 "type": "dictitem",
                 "first_formatting": [],
@@ -236,6 +254,8 @@ def test_dict_more():
             "type": "dict",
             "first_formatting": [],
             "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
             "value": [{
                 "type": "dictitem",
                 "first_formatting": [],
@@ -294,6 +314,8 @@ def test_set_one():
             "type": "set",
             "first_formatting": [],
             "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
             "value": [{
                 "type": "name",
                 "value": "a",
@@ -315,6 +337,8 @@ def test_set_more():
             "type": "set",
             "first_formatting": [],
             "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
             "value": [{
                 "type": "name",
                 "value": "a",
@@ -785,6 +809,8 @@ def test_list_comprehension_tuple():
                    "with_parenthesis": False,
                    "first_formatting": [],
                    "second_formatting": [],
+                   "third_formatting": [],
+                   "forth_formatting": [],
                    "value": [{
                         "type": "name",
                         "value": "c",
@@ -839,6 +865,8 @@ def test_list_comprehension_tuple_more():
                    "with_parenthesis": False,
                    "first_formatting": [],
                    "second_formatting": [],
+                   "third_formatting": [],
+                   "forth_formatting": [],
                    "value": [{
                         "type": "name",
                         "value": "c",
@@ -1253,13 +1281,15 @@ def test_empty_tuple_endl():
           ],
           [{
             "with_parenthesis": True,
-            "first_formatting": [{
+            "first_formatting": [],
+            "second_formatting": [{
                 "indent": "",
                 "formatting": [],
                 "type": "endl",
                 "value": "\n",
             }],
-            "second_formatting": [],
+            "third_formatting": [],
+            "forth_formatting": [],
             "type": "tuple",
             "value": [],
           }])
@@ -1290,6 +1320,8 @@ def test_subscript_special_case():
                        "value": {
                                  "first_formatting": [],
                                  "with_parenthesis": False,
+                                 "third_formatting": [],
+                                 "forth_formatting": [],
                                  "type": "tuple",
                                  "value": [
                                            {
