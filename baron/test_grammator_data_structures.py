@@ -1348,6 +1348,8 @@ def test_subscript_special_case():
                       },
                       {
                        "first_formatting": [],
+                       "third_formatting": [],
+                       "forth_formatting": [],
                        "type": "getitem",
                        "value": {
                                  "first_formatting": [],
@@ -1396,7 +1398,9 @@ def test_subscript_special_case():
                                           ],
                                  "second_formatting": []
                                 },
-                       "second_formatting": []
+                       "second_formatting": [],
+                       "third_formatting": [],
+                       "forth_formatting": []
                       }
     ]
           }])

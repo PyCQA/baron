@@ -220,8 +220,10 @@ def include_operators(pg):
         return [{
             "type": "getitem",
             "value": subscript,
-            "first_formatting": left.hidden_tokens_after,
-            "second_formatting": right.hidden_tokens_before,
+            "first_formatting": left.hidden_tokens_before,
+            "second_formatting": left.hidden_tokens_after,
+            "third_formatting": right.hidden_tokens_before,
+            "forth_formatting": right.hidden_tokens_after,
         }]
 
     @pg.production("subscript : DOT DOT DOT")

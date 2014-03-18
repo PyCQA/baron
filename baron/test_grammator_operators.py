@@ -6909,6 +6909,8 @@ def test_subscript_ellipsis():
                "type": "getitem",
                "first_formatting": [],
                "second_formatting": [],
+               "third_formatting": [],
+               "forth_formatting": [],
                "value": {
                    "type": "ellipsis",
                    "first_formatting": [],
@@ -6935,7 +6937,9 @@ def test_subscript_ellipsis_space():
             },{
                "type": "getitem",
                "first_formatting": [],
-               "second_formatting": [{"type": "space", "value": "   "}],
+               "second_formatting": [],
+               "third_formatting": [{"type": "space", "value": "   "}],
+               "forth_formatting": [],
                "value": {
                    "type": "ellipsis",
                    "first_formatting": [{"type": "space", "value": " "}],
@@ -6961,6 +6965,8 @@ def test_subscript_test():
                "type": "getitem",
                "first_formatting": [],
                "second_formatting": [],
+               "third_formatting": [],
+               "forth_formatting": [],
                "value": {
                    "type": "name",
                    "value": "b",
@@ -6985,6 +6991,8 @@ def test_subscript_slice_empty():
                "type": "getitem",
                "first_formatting": [],
                "second_formatting": [],
+               "third_formatting": [],
+               "forth_formatting": [],
                "value": {
                    "type": "slice",
                    "lower": {},
@@ -7017,6 +7025,8 @@ def test_subscript_slice_empty_both():
                "type": "getitem",
                "first_formatting": [],
                "second_formatting": [],
+               "third_formatting": [],
+               "forth_formatting": [],
                "value": {
                    "type": "slice",
                    "lower": {},
@@ -7049,6 +7059,8 @@ def test_subscript_slice_one():
                "type": "getitem",
                "first_formatting": [],
                "second_formatting": [],
+               "third_formatting": [],
+               "forth_formatting": [],
                "value": {
                    "type": "slice",
                    "lower": {
@@ -7084,7 +7096,9 @@ def test_subscript_slice_both_one():
             },{
                "type": "getitem",
                "first_formatting": [],
-               "second_formatting": [{"type": "space", "value": " "}],
+               "second_formatting": [],
+               "third_formatting": [{"type": "space", "value": " "}],
+               "forth_formatting": [],
                "value": {
                    "type": "slice",
                    "lower": {
@@ -7120,6 +7134,8 @@ def test_subscript_slice_upper():
                "type": "getitem",
                "first_formatting": [],
                "second_formatting": [],
+               "third_formatting": [],
+               "forth_formatting": [],
                "value": {
                    "type": "slice",
                    "upper": {
@@ -7156,6 +7172,8 @@ def test_subscript_slice_upper_both():
                "type": "getitem",
                "first_formatting": [],
                "second_formatting": [],
+               "third_formatting": [],
+               "forth_formatting": [],
                "value": {
                    "type": "slice",
                    "upper": {
@@ -7192,6 +7210,8 @@ def test_subscript_slice_step():
                "type": "getitem",
                "first_formatting": [],
                "second_formatting": [],
+               "third_formatting": [],
+               "forth_formatting": [],
                "value": {
                    "type": "slice",
                    "upper": {},
@@ -7228,6 +7248,8 @@ def test_subscript_slice_lower_upper():
                "type": "getitem",
                "first_formatting": [],
                "second_formatting": [],
+               "third_formatting": [],
+               "forth_formatting": [],
                "value": {
                    "type": "slice",
                    "lower": {
@@ -7268,6 +7290,8 @@ def test_subscript_slice_lower_upper_both():
                "type": "getitem",
                "first_formatting": [],
                "second_formatting": [],
+               "third_formatting": [],
+               "forth_formatting": [],
                "value": {
                    "type": "slice",
                    "lower": {
@@ -7308,6 +7332,8 @@ def test_subscript_slice_lower_step():
                "type": "getitem",
                "first_formatting": [],
                "second_formatting": [],
+               "third_formatting": [],
+               "forth_formatting": [],
                "value": {
                    "type": "slice",
                    "lower": {
@@ -7348,6 +7374,8 @@ def test_subscript_slice_upper_step():
                "type": "getitem",
                "first_formatting": [],
                "second_formatting": [],
+               "third_formatting": [],
+               "forth_formatting": [],
                "value": {
                    "type": "slice",
                    "upper": {
@@ -7389,6 +7417,8 @@ def test_subscript_slice_lower_upper_step():
                "type": "getitem",
                "first_formatting": [],
                "second_formatting": [],
+               "third_formatting": [],
+               "forth_formatting": [],
                "value": {
                    "type": "slice",
                    "lower": {
@@ -7431,6 +7461,8 @@ def test_subscript_test_implicit_tuple():
                "type": "getitem",
                "first_formatting": [],
                "second_formatting": [],
+               "third_formatting": [],
+               "forth_formatting": [],
                "value": {
                     "type": "tuple",
                     "first_formatting": [],
