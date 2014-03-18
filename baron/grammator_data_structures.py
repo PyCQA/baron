@@ -15,8 +15,10 @@ def include_data_structures(pg):
     def associative_parenthesis((left_parenthesis, test, right_parenthesis,)):
         return {
                 "type": "associative_parenthesis",
-                "first_formatting": left_parenthesis.hidden_tokens_after,
-                "second_formatting": right_parenthesis.hidden_tokens_before,
+                "first_formatting": left_parenthesis.hidden_tokens_before,
+                "second_formatting": left_parenthesis.hidden_tokens_after,
+                "third_formatting": right_parenthesis.hidden_tokens_before,
+                "forth_formatting": right_parenthesis.hidden_tokens_after,
                 "value": test
                }
 

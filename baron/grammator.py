@@ -391,8 +391,10 @@ def generate_parse(print_function):
     def parameter_fpdef((left_parenthesis, parameter, right_parenthesis)):
         return [{
             "type": "associative_parenthesis",
-            "first_formatting": left_parenthesis.hidden_tokens_after,
-            "second_formatting": right_parenthesis.hidden_tokens_before,
+            "first_formatting": left_parenthesis.hidden_tokens_before,
+            "second_formatting": left_parenthesis.hidden_tokens_after,
+            "third_formatting": right_parenthesis.hidden_tokens_before,
+            "forth_formatting": right_parenthesis.hidden_tokens_after,
             "value": parameter[0]
         }]
 

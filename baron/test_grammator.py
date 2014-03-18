@@ -1428,6 +1428,8 @@ def test_fplist_alone():
                 "type": "associative_parenthesis",
                 "first_formatting": [],
                 "second_formatting": [],
+                "third_formatting": [],
+                "forth_formatting": [],
                 "value": {
                     "value": {},
                     "type": "argument",

@@ -40,8 +40,10 @@ def test_associative_parenthesis():
           ],
           [{
             "type": "associative_parenthesis",
-            "first_formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [],
             "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "forth_formatting": [],
             "value": {
                "type": "name",
                "value": "a",
