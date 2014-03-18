@@ -34,8 +34,8 @@ def parse(source_code, print_function=None):
 
     if source_code and source_code[-1] != "\n":
         source_code += "\n"
-    return _parse(tokenize(source_code), print_function)
+    return _parse(tokenize(source_code, print_function), print_function)
 
 
-def tokenize(pouet):
-    return mark_indentation(inner_group(space_group(_tokenize(group(split(pouet))))))
+def tokenize(pouet, print_function=False):
+    return mark_indentation(inner_group(space_group(_tokenize(group(split(pouet)), print_function))))

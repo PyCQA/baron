@@ -88,11 +88,12 @@ TOKENS = (
 TOKENS = map(lambda x: (re.compile('^' + x[0] + '$'), x[1]), TOKENS)
 
 
-def tokenize(sequence):
-    return list(tokenize_generator(sequence))
+def tokenize(sequence, print_function=False):
+    return list(tokenize_generator(sequence, print_function))
 
 
-def tokenize_generator(sequence):
+def tokenize_generator(sequence, print_function=False):
+
     for item in sequence:
         if item in KEYWORDS:
             yield (item.upper(), item)
