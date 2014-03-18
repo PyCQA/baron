@@ -497,3 +497,7 @@ def test_getitem_special_case():
 
 def test_print_tuple():
     check_dumps("print(pouet, pouet)")
+
+
+def test_raise_special():
+    check_dumps("raise   # pouet")

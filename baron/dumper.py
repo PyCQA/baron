@@ -276,8 +276,8 @@ def return_(node):
 @node()
 def raise_(node):
     yield "raise"
+    yield dump_node_list(node["first_formatting"])
     if node["value"]:
-        yield dump_node_list(node["first_formatting"])
         yield dump_node(node["value"])
     if node["instance"]:
         yield dump_node_list(node["second_formatting"])
