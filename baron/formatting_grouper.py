@@ -6,7 +6,6 @@ class UnExpectedSpaceToken(Exception):
 PRIORITY_ORDER = (
     "IMPORT",
     "ENDL",
-    "IF",
 )
 
 BOTH = (

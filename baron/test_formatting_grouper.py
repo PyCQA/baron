@@ -2836,20 +2836,6 @@ def test_repr():
            ('BACKQUOTE', '`', [], [('SPACE', ' ')]),
          ])
 
-def test_if_over_parenthesis():
-    """
-    if (
-    """
-    group([
-           ('LEFT_PARENTHESIS', ')'),
-           ('SPACE', ' '),
-           ('IF', 'if'),
-         ],
-         [
-           ('LEFT_PARENTHESIS', ')'),
-           ('IF', 'if', [('SPACE', ' ')]),
-         ])
-
 def test_semicolon():
     """
      ; 
