@@ -219,6 +219,10 @@ def test_comment_formatting():
     check_dumps("a # pouet")
 
 
+def test_augassign():
+    check_dumps("a &= b")
+
+
 def test_boolean_operator():
     check_dumps("a and b")
 
