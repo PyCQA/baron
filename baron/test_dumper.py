@@ -320,7 +320,7 @@ def test_list_more():
 
 
 def test_associative_parenthesis():
-    check_dumps("(  a )")
+    check_dumps("( \n   ( a ) +   ( 1 *    4 )\n ) ")
 
 
 def test_fplist():
