@@ -11,7 +11,8 @@ def include_imports(pg):
         return {
                 "type": "import",
                 "value": dotted_as_names,
-                "formatting": import_.hidden_tokens_after
+                "first_formatting": import_.hidden_tokens_before,
+                "second_formatting": import_.hidden_tokens_after
                }
 
     @pg.production("from_import : FROM dotted_name IMPORT from_import_target")

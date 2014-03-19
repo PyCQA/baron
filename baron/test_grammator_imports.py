@@ -26,7 +26,8 @@ def test_simple_import():
                        "target": None,
                       }
                       ],
-                      "formatting": [{"type": "space", "value": "  "}],
+                      "first_formatting": [],
+                      "second_formatting": [{"type": "space", "value": "  "}],
                      }])
 
 def test_import_basic_dot():
@@ -64,7 +65,8 @@ def test_import_basic_dot():
                        "target": None,
                       }
                      ],
-            "formatting": [{"type": "space", "value": "  "}]
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": "  "}]
            }])
     parse_simple([
            ('IMPORT', 'import', [], [('SPACE', '  ')]),
@@ -93,7 +95,8 @@ def test_import_basic_dot():
                        "target": None,
                       }
                      ],
-            "formatting": [{"type": "space", "value": "  "}],
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": "  "}]
            }])
 
 def test_import_more_dot():
@@ -146,233 +149,10 @@ def test_import_more_dot():
                        "target": None
                       }
                      ],
-            "formatting": [{"type": "space", "value": "  "}],
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": "  "}]
            }
           ])
-    parse_simple([
-           ('IMPORT', 'import', [], [('SPACE', '  ')]),
-           ('NAME', 'pouet'),
-           ('DOT', '.'),
-           ('NAME', 'blob'),
-           ('DOT', '.', [('SPACE', ' ')]),
-           ('NAME', 'plop')],
-          [{ "type": "import",
-            "value": [
-                      {"value": {
-                                 "type": "dotted_name",
-                                 "value": [
-                                           {"type": "name",
-                                            "value": "pouet"},
-                                           {
-                                            "type": "dot",
-                                            "first_formatting": [],
-                                            "second_formatting": [],
-                                           },
-                                           {
-                                            "type": "name",
-                                            "value": "blob",
-                                           },
-                                           {
-                                            "type": "dot",
-                                            "first_formatting": [{
-                                            "type": "space",
-                                            "value": " ",
-                                           }],
-                                            "second_formatting": [],
-                                           },
-                                           {"type": "name",
-                                            "value": "plop"}
-                                          ],
-                                }
-                       ,
-                       "type": "dotted_as_name",
-                       "first_formatting": [],
-                       "second_formatting": [],
-                       "as": False,
-                       "target": None}
-                     ],
-            "formatting": [{"type": "space", "value": "  "}],
-           }])
-    parse_simple([
-           ('IMPORT', 'import', [], [('SPACE', '  ')]),
-           ('NAME', 'pouet'),
-           ('DOT', '.'),
-           ('NAME', 'blob'),
-           ('DOT', '.', [('SPACE', ' ')]),
-           ('NAME', 'plop')],
-          [{
-            "type": "import",
-            "value": [
-                      {"value": {
-                                 "type": "dotted_name",
-                                 "value": [
-                                           {"type": "name",
-                                            "value": "pouet"},
-                                           {
-                                            "type": "dot",
-                                            "first_formatting": [],
-                                            "second_formatting": [],
-                                           },
-                                           {"type": "name",
-                                            "value": "blob"},
-                                           {
-                                            "type": "dot",
-                                            "first_formatting": [{
-                                            "type": "space",
-                                            "value": " ",
-                                           }],
-                                            "second_formatting": [],
-                                           },
-                                           {
-                                            "type": "name",
-                                            "value": "plop",
-                                           }
-                                          ],
-                                }
-                       ,
-                       "type": "dotted_as_name",
-                       "first_formatting": [],
-                       "second_formatting": [],
-                       "as": False,
-                       "target": None}
-                     ],
-            "formatting": [{"type": "space", "value": "  "}],
-           }])
-    parse_simple([
-           ('IMPORT', 'import', [], [('SPACE', '  ')]),
-           ('NAME', 'pouet'),
-           ('DOT', '.'),
-           ('NAME', 'blob'),
-           ('DOT', '.', [('SPACE', ' ')]),
-           ('NAME', 'plop')],
-          [{
-            "type": "import",
-            "value": [
-                      {"value": {
-                                 "type": "dotted_name",
-                                 "value": [
-                                           {
-                                            "type": "name",
-                                            "value": "pouet",
-                                           },
-                                           {
-                                            "type": "dot",
-                                            "first_formatting": [],
-                                            "second_formatting": [],
-                                           },
-                                           {"type": "name",
-                                            "value": "blob"},
-                                           {
-                                            "type": "dot",
-                                            "first_formatting": [{
-                                            "type": "space",
-                                            "value": " ",
-                                           }],
-                                            "second_formatting": [],
-                                           },
-                                           {"type": "name",
-                                            "value": "plop"}
-                                          ],
-                                }
-                       ,
-                       "type": "dotted_as_name",
-                       "first_formatting": [],
-                       "second_formatting": [],
-                       "as": False,
-                       "target": None}
-                     ],
-            "formatting": [{"type": "space", "value": "  "}],
-           }])
-    parse_simple([
-           ('IMPORT', 'import', [], [('SPACE', '  ')]),
-           ('NAME', 'pouet'),
-           ('DOT', '.'),
-           ('NAME', 'blob'),
-           ('DOT', '.', [('SPACE', ' ')]),
-           ('NAME', 'plop')],
-          [{
-            "type": "import",
-            "value": [
-                      {"value": {
-                                 "type": "dotted_name",
-                                 "value": [
-                                           {"type": "name",
-                                            "value": "pouet"},
-                                           {
-                                            "type": "dot",
-                                            "first_formatting": [],
-                                            "second_formatting": [],
-                                           },
-                                           {
-                                            "type": "name",
-                                            "value": "blob",
-                                           },
-                                           {
-                                            "type": "dot",
-                                            "first_formatting": [{
-                                            "type": "space",
-                                            "value": " ",
-                                           }],
-                                            "second_formatting": [],
-                                           },
-                                           {"type": "name",
-                                            "value": "plop"}
-                                          ],
-                                }
-                       ,
-                       "type": "dotted_as_name",
-                       "first_formatting": [],
-                       "second_formatting": [],
-                       "as": False,
-                       "target": None}
-                     ],
-            "formatting": [{"type": "space", "value": "  "}],
-           }])
-    parse_simple([
-           ('IMPORT', 'import', [], [('SPACE', '  ')]),
-           ('NAME', 'pouet'),
-           ('DOT', '.'),
-           ('NAME', 'blob'),
-           ('DOT', '.', [('SPACE', ' ')]),
-           ('NAME', 'plop')],
-          [{
-            "type": "import",
-            "value": [
-                      {"value": {
-                                 "type": "dotted_name",
-                                 "value": [
-                                           {"type": "name",
-                                            "value": "pouet"},
-                                           {
-                                            "type": "dot",
-                                            "first_formatting": [],
-                                            "second_formatting": [],
-                                           },
-                                           {"type": "name",
-                                            "value": "blob"},
-                                           {
-                                            "type": "dot",
-                                            "first_formatting": [{
-                                            "type": "space",
-                                            "value": " ",
-                                           }],
-                                            "second_formatting": [],
-                                           },
-                                           {
-                                            "type": "name",
-                                            "value": "plop",
-                                           }
-                                          ],
-                                }
-                       ,
-                       "type": "dotted_as_name",
-                       "first_formatting": [],
-                       "second_formatting": [],
-                       "as": False,
-                       "target": None}
-                     ],
-            "formatting": [{"type": "space", "value": "  "}],
-           }])
 
 def test_import_as():
     "import   pouet as  b"
@@ -398,7 +178,8 @@ def test_import_as():
                        "type": "dotted_as_name",
                       }
                      ],
-            "formatting": [{"type": "space", "value": "  "}],
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": "  "}]
            }])
 
 def test_import_a_b():
@@ -441,126 +222,8 @@ def test_import_a_b():
                        "as": False,
                        "target": None}
                      ],
-            "formatting": [{"type": "space", "value": " "}], }])
-    parse_simple([
-           ('IMPORT', 'import', [], [('SPACE', ' ')]),
-           ('NAME', 'a'),
-           ('COMMA', ',', [], [('SPACE', ' ')]),
-           ('NAME', 'b')],
-          [{
-            "type": "import",
-            "value": [
-                      {"value": {
-                                 "type": "dotted_name",
-                                 "value": [{"type": "name",
-                                            "value": 'a'}],
-                                },
-                       "type": "dotted_as_name",
-                       "first_formatting": [],
-                       "second_formatting": [],
-                       "as": False,
-                       "target": None},
-                      {
-                       "type": "comma",
-                       "first_formatting": [],
-                       "second_formatting": [{
-                                              "type": "space",
-                                              "value": " ",
-                                             }],
-                      },
-                      {"value": {
-                                 "type": "dotted_name",
-                                 "value": [{
-                                            "type": "name",
-                                            "value": 'b',
-                                           }]                     },
-                       "type": "dotted_as_name",
-                       "first_formatting": [],
-                       "second_formatting": [],
-                       "as": False,
-                       "target": None}
-                     ],
-            "formatting": [{"type": "space", "value": " "}],
-           }])
-    parse_simple([
-           ('IMPORT', 'import', [], [('SPACE', ' ')]),
-           ('NAME', 'a'),
-           ('COMMA', ',', [], [('SPACE', ' ')]),
-           ('NAME', 'b')],
-          [{
-            "type": "import",
-            "value": [
-                      {"value": {
-                                 "type": "dotted_name",
-                                 "value": [{
-                                            "type": "name",
-                                            "value": 'a',
-                                           }]                     },
-                       "type": "dotted_as_name",
-                       "first_formatting": [],
-                       "second_formatting": [],
-                       "as": False,
-                       "target": None},
-                      {
-                       "type": "comma",
-                       "first_formatting": [],
-                       "second_formatting": [{
-                                              "type": "space",
-                                              "value": " ",
-                                             }],
-                      },
-                      {"value": {
-                                 "type": "dotted_name",
-                                 "value": [{"type": "name",
-                                            "value": 'b'}],
-                                },
-                       "type": "dotted_as_name",
-                       "first_formatting": [],
-                       "second_formatting": [],
-                       "as": False,
-                       "target": None}
-                     ],
-            "formatting": [{"type": "space", "value": " "}],
-           }])
-    parse_simple([
-           ('IMPORT', 'import', [], [('SPACE', ' ')]),
-           ('NAME', 'a'),
-           ('COMMA', ',', [], [('SPACE', ' ')]),
-           ('NAME', 'b')],
-          [{
-            "type": "import",
-            "value": [
-                      {"value": {
-                                 "type": "dotted_name",
-                                 "value": [{"type": "name",
-                                            "value": 'a'}]                     },
-                       "type": "dotted_as_name",
-                       "first_formatting": [],
-                       "second_formatting": [],
-                       "as": False,
-                       "target": None},
-                      {
-                       "type": "comma",
-                       "first_formatting": [],
-                       "second_formatting": [{
-                                              "type": "space",
-                                              "value": " ",
-                                             }],
-                      },
-                      {"value": {
-                                 "type": "dotted_name",
-                                 "value": [{
-                                            "type": "name",
-                                            "value": 'b',
-                                           }],
-                                },
-                       "type": "dotted_as_name",
-                       "first_formatting": [],
-                       "second_formatting": [],
-                       "as": False,
-                       "target": None}
-                     ],
-            "formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}]
            }])
 
 def test_import_a_b_as_c():
@@ -620,290 +283,9 @@ def test_import_a_b_as_c():
                        "as": True,
                       }
                      ],
-            "formatting": [{"type": "space", "value": " "}],
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}]
            }])
-    parse_simple([
-           ('IMPORT', 'import', [], [('SPACE', ' ')]),
-           ('NAME', 'a'),
-           ('COMMA', ',', [], [('SPACE', ' ')]),
-           ('NAME', 'b'),
-           ('DOT', '.'),
-           ('NAME', 'd'),
-           ('AS', 'as', [('SPACE', ' ')], [('SPACE', '  ')]),
-           ('NAME', 'c')],
-          [{
-            "type": "import",
-            "value": [
-                      {"value": {
-                                 "type": "dotted_name",
-                                 "value": [{"type": "name",
-                                            "value": 'a'}],
-                                },
-                       "type": "dotted_as_name",
-                       "first_formatting": [],
-                       "second_formatting": [],
-                       "as": False,
-                       "target": None},
-                      {
-                       "type": "comma",
-                       "first_formatting": [],
-                       "second_formatting": [{
-                                              "type": "space",
-                                              "value": " ",
-                                             }],
-                      },
-                      {"value": {
-                                 "type": "dotted_name",
-                                 "value": [
-                                           {
-                                            "type": "name",
-                                            "value": 'b',
-                                           },
-                                           {
-                                            "type": "dot",
-                                            "first_formatting": [],
-                                            "second_formatting": [],
-                                           },
-                                           {"type": "name",
-                                            "value": 'd'}                         ],
-                                },
-                       "as": True,
-                       "first_formatting": [{"type": "space", "value": " "}],
-                       "second_formatting": [{"type": "space", "value": "  "}],
-                       "target": "c"                                    ,
-                       "type": "dotted_as_name",
-                      }
-                     ],
-            "formatting": [{"type": "space", "value": " "}],
-           }])
-    parse_simple([
-           ('IMPORT', 'import', [], [('SPACE', ' ')]),
-           ('NAME', 'a'),
-           ('COMMA', ',', [], [('SPACE', ' ')]),
-           ('NAME', 'b'),
-           ('DOT', '.'),
-           ('NAME', 'd'),
-           ('AS', 'as', [('SPACE', ' ')], [('SPACE', '  ')]),
-           ('NAME', 'c')],
-          [{
-            "type": "import",
-            "value": [
-                      {"value": {
-                                 "type": "dotted_name",
-                                 "value": [{"type": "name",
-                                            "value": 'a'}],
-                                },
-                       "type": "dotted_as_name",
-                       "first_formatting": [],
-                       "second_formatting": [],
-                       "as": False,
-                       "target": None},
-                      {
-                       "type": "comma",
-                       "first_formatting": [],
-                       "second_formatting": [{
-                                              "type": "space",
-                                              "value": " ",
-                                             }],
-                      },
-                      {"value": {
-                                 "type": "dotted_name",
-                                 "value": [
-                                           {"type": "name",
-                                            "value": 'b'},
-                                           {
-                                            "type": "dot",
-                                            "first_formatting": [],
-                                            "second_formatting": [],
-                                           },
-                                           {
-                                            "type": "name",
-                                            "value": 'd',
-                                           }                         ],
-                                },
-                       "as": True,
-                       "first_formatting": [{"type": "space", "value": " "}],
-                       "second_formatting": [{"type": "space", "value": "  "}],
-                       "target": "c",
-                       "type": "dotted_as_name",
-                      }
-                     ],
-            "formatting": [{"type": "space", "value": " "}],
-           }])
-    parse_simple([
-           ('IMPORT', 'import', [], [('SPACE', ' ')]),
-           ('NAME', 'a'),
-           ('COMMA', ',', [], [('SPACE', ' ')]),
-           ('NAME', 'b'),
-           ('DOT', '.'),
-           ('NAME', 'd'),
-           ('AS', 'as', [('SPACE', ' ')], [('SPACE', '  ')]),
-           ('NAME', 'c')],
-                 [{
-                   "type": "import",
-                   "value": [
-                             {
-                              "first_formatting": [],
-                              "second_formatting": [],
-                              "as": False,
-                              "target": None,
-                              "value":
-                              {
-                               "value": [{
-                                          "type": "name",
-                                          "value": 'a',
-                                         }],
-                              "type": "dotted_name",
-                              },
-                              "type": "dotted_as_name",
-                             },
-                             {
-                              "type": "comma",
-                       "first_formatting": [],
-                       "second_formatting": [{
-                                              "type": "space",
-                                              "value": " ",
-                                             }],
-                             },
-                             {"value":
-                              {
-                               "type": "dotted_name",
-                               "value": [
-                                         {"type": "name",
-                                          "value": 'b'},
-                                         {
-                                          "type": "dot",
-                                          "first_formatting": [],
-                                          "second_formatting": [],
-                                         },
-                                         {"type": "name",
-                                          "value": 'd'}
-                                        ],
-
-                              },
-                              "as": True,
-                              "first_formatting": [{"type": "space", "value": " "}],
-                              "second_formatting": [{"type": "space", "value": "  "}],
-                              "target": "c",
-                              "type": "dotted_as_name",
-                             }
-                            ],
-                   "formatting": [{"type": "space", "value": " "}], }])
-    parse_simple([
-           ('IMPORT', 'import', [], [('SPACE', ' ')]),
-           ('NAME', 'a'),
-           ('COMMA', ',', [], [('SPACE', ' ')]),
-           ('NAME', 'b'),
-           ('DOT', '.'),
-           ('NAME', 'd'),
-           ('AS', 'as', [('SPACE', ' ')], [('SPACE', '  ')]),
-           ('NAME', 'c')],
-          [{
-            "type": "import",
-            "value": [
-                      {
-                       "value": {
-                                 "type": "dotted_name",
-                                 "value": [{"type": "name",
-                                            "value": 'a'}],
-                                },
-                       "type": "dotted_as_name",
-                       "first_formatting": [],
-                       "second_formatting": [],
-                       "as": False,
-                       "target": None
-                      },
-                      {
-                       "type": "comma",
-                       "first_formatting": [],
-                       "second_formatting": [{
-                                              "type": "space",
-                                              "value": " ",
-                                             }],
-                      },
-                      {
-                       "value":
-                       {
-                        "type": "dotted_name",
-                        "value": [
-                                  {
-                                   "type": "name",
-                                   "value": 'b',
-                                  },
-                                  {
-                                   "type": "dot",
-                                   "first_formatting": [],
-                                   "second_formatting": [],
-                                  },
-                                  {"type": "name",
-                                   "value": 'd'}
-                                 ],
-                       },
-                       "as": True,
-                       "first_formatting": [{"type": "space", "value": " "}],
-                       "second_formatting": [{"type": "space", "value": "  "}],
-                       "target": "c"                                    ,
-                       "type": "dotted_as_name",
-                      }
-                     ],
-            "formatting": [{"type": "space", "value": " "}],
-           }])
-    parse_simple([
-           ('IMPORT', 'import', [], [('SPACE', ' ')]),
-           ('NAME', 'a'),
-           ('COMMA', ',', [], [('SPACE', ' ')]),
-           ('NAME', 'b'),
-           ('DOT', '.'),
-           ('NAME', 'd'),
-           ('AS', 'as', [('SPACE', ' ')], [('SPACE', '  ')]),
-           ('NAME', 'c')],
-          [{ "type": "import",
-            "value": [
-                      {
-                       "value": {
-                                 "type": "dotted_name",
-                                 "value": [{"type": "name",
-                                            "value": 'a'}],
-                                },
-                       "type": "dotted_as_name",
-                       "first_formatting": [],
-                       "second_formatting": [],
-                       "as": False,
-                       "target": None
-                      },
-                      {
-                       "type": "comma",
-                       "first_formatting": [],
-                       "second_formatting": [{
-                                              "type": "space",
-                                              "value": " ",
-                                             }],
-                      },
-                      {"value":
-                       {
-                        "type": "dotted_name",
-                        "value": [
-                                  {"type": "name",
-                                   "value": 'b'},
-                                  {
-                                   "type": "dot",
-                                   "first_formatting": [],
-                                   "second_formatting": [],
-                                  },
-                                  {
-                                   "type": "name",
-                                   "value": 'd',
-                                  }
-                                 ],
-                       },
-                       "as": True,
-                       "first_formatting": [{"type": "space", "value": " "}],
-                       "second_formatting": [{"type": "space", "value": "  "}],
-                       "target": "c",
-                       "type": "dotted_as_name",
-                      }
-                     ],
-            "formatting": [{"type": "space", "value": " "}], }])
 
 def test_import_a_b_c_d():
     "import a, b, c, d"
@@ -985,7 +367,9 @@ def test_import_a_b_c_d():
      "second_formatting": [],
      "as": False,
      "target": None}                     ],
-    "formatting": [{"type": "space", "value": " "}], }])
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}]
+    }])
 
 def test_from_a_import_b():
     "from a import b"
