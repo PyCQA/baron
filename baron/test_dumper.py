@@ -508,4 +508,8 @@ def test_from_import_star_comment():
 
 
 def test_class_formatting():
-    check_dumps("class A(pouet) :\n    pass")
+    check_dumps("class A(pouet) : \n    pass")
+
+
+def test_backslash_not_in_formatting():
+    check_dumps("if a not \\\n      in b: pass")

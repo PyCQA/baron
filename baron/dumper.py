@@ -448,7 +448,12 @@ def unitary_operator(node):
 def binary_operator(node):
     yield dump_node(node["first"])
     yield dump_node_list(node["first_formatting"])
-    yield node["value"]
+    if node["value"] == "not in":  # FIXME ugly :(
+        yield "not"
+        yield dump_node_list(node["middle_formatting"])
+        yield "in"
+    else:
+        yield node["value"]
     yield dump_node_list(node["second_formatting"])
     yield dump_node(node["second"])
 
