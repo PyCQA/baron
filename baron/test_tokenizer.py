@@ -307,3 +307,13 @@ def test_float_exponant_advanced():
     match("1e+2", "FLOAT_EXPONANT")
     match("1.e1", "FLOAT_EXPONANT")
     match(".1e1", "FLOAT_EXPONANT")
+
+def test_complex():
+    match(".1j", "COMPLEX")
+    match("1.j", "COMPLEX")
+    match("1.1j", "COMPLEX")
+    match("11j", "COMPLEX")
+    match(".1J", "COMPLEX")
+    match("1.J", "COMPLEX")
+    match("1.1J", "COMPLEX")
+    match("11J", "COMPLEX")

@@ -12,11 +12,11 @@ TOKENS = (
     (r'\d+[eE][-+]?\d*', 'FLOAT_EXPONANT'),
     (r'\d+\.\d*[eE][-+]?\d*', 'FLOAT_EXPONANT'),
     (r'\.\d+[eE][-+]?\d*', 'FLOAT_EXPONANT'),
-
-    # TODO tests
     (r'\d*\.\d+[jJ]', 'COMPLEX'),
     (r'\d+\.[jJ]', 'COMPLEX'),
     (r'\d+[jJ]', 'COMPLEX'),
+
+    # TODO tests
     (r'\d+\.', 'FLOAT'),
     (r'\d*\.\d+[lL]?', 'FLOAT'),
     (r'\d+\.\d*[lL]?', 'FLOAT'),
