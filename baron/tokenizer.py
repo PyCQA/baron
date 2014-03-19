@@ -26,7 +26,6 @@ TOKENS = (
     (r'[1-9]+\d*[lL]?', 'INT'),
     (r'0[xX][\da-fA-F]+[lL]?', 'HEXA'),
     (r'(0[oO][0-7]+)|(0[0-7]*)[lL]?', 'OCTA'),
-    # TODO test
     (r'0[bB][01]+[lL]?', 'BINARY'),
     (r'\(', 'LEFT_PARENTHESIS'),
     (r'\)', 'RIGHT_PARENTHESIS'),

@@ -288,3 +288,6 @@ def test_space():
 
 def test_arobase():
     match('@', 'AT')
+
+def test_binary():
+    match("0b01010101", "BINARY")
