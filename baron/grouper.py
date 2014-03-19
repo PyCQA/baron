@@ -78,17 +78,12 @@ def group_generator(sequence):
             if re.match(r'^\s+$', str(iterator.show_next())):
                 current += iterator.next()
 
-        # FIXME no strong enough logic for all those float variations and
-        # complex numbers
-        # eg: .3e55 will not be grouped
-        if re.match(r'^\d+$', current) and iterator.show_next() and iterator.show_next() == ".":
+        if (re.match(r'\d+$', current) and iterator.show_next() and iterator.show_next() == ".") or\
+           (current == "." and iterator.show_next() and re.match(r'\d+[lL]?$', iterator.show_next())):
             current += iterator.next()
 
-        if re.match(r'^\d+\.$', current) and re.match(r'^[\deEjJ]+$', iterator.show_next()):
-            current += iterator.next()
-
-        if re.match(r'^\d*\.$', current) and re.match(r'^\d+$', iterator.show_next()):
-            current += iterator.next()
+            if iterator.show_next() and re.match("^\d+$", iterator.show_next()):
+                current += iterator.next()
 
         yield current
 

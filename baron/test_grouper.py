@@ -128,3 +128,8 @@ def test_regression():
 
 def test_backslash_window_endl():
     assert group(['\\', '\r', '\n']) == ['\\\r\n']
+
+def test_regression_float():
+    assert group(['1', '.']) == ['1.']
+    assert group(['.', '1']) == ['.1']
+    assert group(['1', '.', '1']) == ['1.1']
