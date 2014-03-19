@@ -317,3 +317,12 @@ def test_complex():
     match("1.J", "COMPLEX")
     match("1.1J", "COMPLEX")
     match("11J", "COMPLEX")
+
+def test_float_advanced():
+    match("1.", "FLOAT")
+    match(".1", "FLOAT")
+    match("1.1", "FLOAT")
+    match(".1L", "FLOAT")
+    match("1.1L", "FLOAT")
+    match(".1l", "FLOAT")
+    match("1.1l", "FLOAT")

@@ -15,14 +15,10 @@ TOKENS = (
     (r'\d*\.\d+[jJ]', 'COMPLEX'),
     (r'\d+\.[jJ]', 'COMPLEX'),
     (r'\d+[jJ]', 'COMPLEX'),
-
-    # TODO tests
     (r'\d+\.', 'FLOAT'),
     (r'\d*\.\d+[lL]?', 'FLOAT'),
     (r'\d+\.\d*[lL]?', 'FLOAT'),
     (r'\.', 'DOT'),
-    # ENDTODO
-
     (r'[1-9]+\d*[lL]?', 'INT'),
     (r'0[xX][\da-fA-F]+[lL]?', 'HEXA'),
     (r'(0[oO][0-7]+)|(0[0-7]*)[lL]?', 'OCTA'),
