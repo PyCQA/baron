@@ -79,10 +79,10 @@ def group_generator(sequence):
                 current += iterator.next()
 
         if (re.match(r'\d+$', current) and iterator.show_next() and iterator.show_next() == ".") or\
-           (current == "." and iterator.show_next() and re.match(r'\d+[lL]?$', iterator.show_next())):
+           (current == "." and iterator.show_next() and re.match(r'\d+[jJ]?$', iterator.show_next())):
             current += iterator.next()
 
-            if iterator.show_next() and re.match("^\d+$", iterator.show_next()):
+            if iterator.show_next() and re.match("^\d*[jJ]?$", iterator.show_next()):
                 current += iterator.next()
 
         yield current
