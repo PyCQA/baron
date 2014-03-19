@@ -292,3 +292,6 @@ def test_arobase():
 
 def test_binary():
     match("0b01010101", "BINARY")
+
+def test_zero():
+    match("0", "INT")
