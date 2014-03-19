@@ -322,7 +322,3 @@ def test_float_advanced():
     match("1.", "FLOAT")
     match(".1", "FLOAT")
     match("1.1", "FLOAT")
-    match(".1L", "FLOAT")
-    match("1.1L", "FLOAT")
-    match(".1l", "FLOAT")
-    match("1.1l", "FLOAT")
