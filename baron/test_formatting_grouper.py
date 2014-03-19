@@ -1818,7 +1818,7 @@ comparison_tokens = (
     ('EQUAL_EQUAL', '=='),
     ('LESS_EQUAL', '<='),
     ('GREATER_EQUAL', '>='),
-    ('LESS_GREATER', '<>'),
+    ('NOT_EQUAL', '<>'),
     ('NOT_EQUAL', '!='),
     ('IN', 'in'),
     ('IS', 'is'),

@@ -49,7 +49,7 @@ TOKENS = (
     (r'\}', 'RIGHT_BRACKET'),
     (r'`', 'BACKQUOTE'),
     (r'==', 'EQUAL_EQUAL'),
-    (r'<>', 'LESS_GREATER'), # TODO: tests!!
+    (r'<>', 'NOT_EQUAL'),
     (r'!=', 'NOT_EQUAL'),
     (r'<=', 'LESS_EQUAL'),
     (r'>=', 'GREATER_EQUAL'),

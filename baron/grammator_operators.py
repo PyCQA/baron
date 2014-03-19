@@ -89,7 +89,6 @@ def include_operators(pg):
     @pg.production("comparison : expr EQUAL_EQUAL comparison")
     @pg.production("comparison : expr LESS_EQUAL comparison")
     @pg.production("comparison : expr GREATER_EQUAL comparison")
-    @pg.production("comparison : expr LESS_GREATER comparison")
     @pg.production("comparison : expr NOT_EQUAL comparison")
     @pg.production("comparison : expr IN comparison")
     @pg.production("comparison : expr IS comparison")

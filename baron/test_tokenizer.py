@@ -141,6 +141,7 @@ def test_equal_equal():
 
 def test_not_equal():
     match('!=', 'NOT_EQUAL')
+    match('<>', 'NOT_EQUAL')
 
 def test_less_equal():
     match('<=', 'LESS_EQUAL')
