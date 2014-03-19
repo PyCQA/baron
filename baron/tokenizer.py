@@ -9,11 +9,11 @@ KEYWORDS = ("and", "as", "assert", "break", "class", "continue", "def", "del", "
 TOKENS = (
     (r'[a-zA-Z_]\w*', 'NAME'),
     (r'0', 'INT'),
-
-    # TODO tests
     (r'\d+[eE][-+]?\d*', 'FLOAT_EXPONANT'),
     (r'\d+\.\d*[eE][-+]?\d*', 'FLOAT_EXPONANT'),
     (r'\.\d+[eE][-+]?\d*', 'FLOAT_EXPONANT'),
+
+    # TODO tests
     (r'\d*\.\d+[jJ]', 'COMPLEX'),
     (r'\d+\.[jJ]', 'COMPLEX'),
     (r'\d+[jJ]', 'COMPLEX'),

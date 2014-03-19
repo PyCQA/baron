@@ -295,3 +295,15 @@ def test_binary():
 
 def test_zero():
     match("0", "INT")
+
+def test_float_exponant_advanced():
+    match("1E1", "FLOAT_EXPONANT")
+    match("1E-2", "FLOAT_EXPONANT")
+    match("1E+2", "FLOAT_EXPONANT")
+    match("1.E1", "FLOAT_EXPONANT")
+    match(".1E1", "FLOAT_EXPONANT")
+    match("1e1", "FLOAT_EXPONANT")
+    match("1e-2", "FLOAT_EXPONANT")
+    match("1e+2", "FLOAT_EXPONANT")
+    match("1.e1", "FLOAT_EXPONANT")
+    match(".1e1", "FLOAT_EXPONANT")
