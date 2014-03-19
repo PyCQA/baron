@@ -668,8 +668,9 @@ def dictitem(node):
 
 @node()
 def import_(node):
+    yield dump_node_list(node["first_formatting"])
     yield "import"
-    yield dump_node_list(node["formatting"])
+    yield dump_node_list(node["second_formatting"])
     yield dump_node_list(node["value"])
 
 

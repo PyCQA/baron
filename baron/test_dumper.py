@@ -513,3 +513,7 @@ def test_class_formatting():
 
 def test_backslash_not_in_formatting():
     check_dumps("if a not \\\n      in b: pass")
+
+
+def test_try_import_after_colon():
+    check_dumps("try: import stuff\nexcept: pass")
