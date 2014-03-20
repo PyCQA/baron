@@ -1,3 +1,11 @@
+Introduction
+============
+
+Baron is a FST for python, a Full Syntax Tree. By opposition to an AST which
+drop some syntax informations in the process of its creation (like empty lines,
+comments, formatting), a FST keeps everything and guarantee the operation
+<code>ast\_to\_code(code\_to\_ast(source\_code)) == source\_code</code>.
+
 Installation
 ============
 
