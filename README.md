@@ -2,7 +2,7 @@ Introduction
 ============
 
 Baron is a FST for python, a Full Syntax Tree. By opposition to an AST which
-drops some syntax informations in the process of its creation (like empty lines,
+drops some syntax information in the process of its creation (like empty lines,
 comments, formatting), a FST keeps everything and guarantees the operation
 <code>ast\_to\_code(code\_to\_ast(source\_code)) == source\_code</code>.
 
@@ -29,7 +29,12 @@ you realize that it removes too much information to be suitable for those
 situations. You will probably ditch this task as simple too complicated and
 really not worth the effort. You are missing a good abstraction that will take
 care of all of the code structure and formatting for you so you can concentrate
-on your task. The FST tries to be this abstraction.
+on your task.
+
+The FST tries to be this abstraction. With it you can now work on a tree which
+represents your code with its formatting and since it is the exact
+representation of your code, modifying it and converting it back to a string
+will give you back your code only modified where you have modified the tree.
 
 Said in another way, what I'm trying to achieve with Baron is a paradigm change in
 which writing code that will modify code is now a realist task that is worth
