@@ -49,6 +49,14 @@ to do code generation and code analysis while those two operations are already
 quite feasible (using [ast.py](http://docs.python.org/2/library/ast.html) for
 example and a templating engine).
 
+Some technical details
+======================
+
+Baron produce a FST in the form of json (and by json I mean python lists
+and dicts that can be dump into json) for maximum interoperability.
+
+Since playing directly with json is a bit raw I'm going to build an abstraction
+on top of it that will looks like Beautifulsoup/Jquery.
 
 Installation
 ============
