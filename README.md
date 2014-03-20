@@ -22,7 +22,7 @@ series of problems to illustrate it. Let's say that you want to write a program 
 * implement the class browser of smalltalk for python (the whole one where you can edit the code of the methods, not just showing code)
 
 It is very likely that you will end up with the awkward feeling of writing
-clumpsy weak code that is very likely to break because you haven't though about
+clumpsy weak code that is very likely to break because you didn't though about
 all the annoying special cases and the formatting keeps bothering you. You may
 end up playing with [ast.py](http://docs.python.org/2/library/ast.html) until
 you realize that it removes too much information to be suitable for those
@@ -32,7 +32,7 @@ care of all of the code structure and formatting for you so you can concentrate
 on your task.
 
 The FST tries to be this abstraction. With it you can now work on a tree which
-represents your code with its formatting and since it is the exact
+represents your code with its formatting. Moreover, since it is the exact
 representation of your code, modifying it and converting it back to a string
 will give you back your code only modified where you have modified the tree.
 
