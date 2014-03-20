@@ -55,6 +55,9 @@ Some technical details
 Baron produce a FST in the form of json (and by json I mean python lists
 and dicts that can be dump into json) for maximum interoperability.
 
+Baron FST is quite similar to python AST with some modifications to be more
+intuitive to humans, since python AST has been made to cpython interpreter.
+
 Since playing directly with json is a bit raw I'm going to build an abstraction
 on top of it that will looks like Beautifulsoup/Jquery.
 
@@ -72,8 +75,92 @@ Usage
 from baron import parse, dumps
 
 ast = parse(source_code_string)
-source_code_string = dumps(ast)
+source_code_string == dumps(ast)
 ```
+
+Documentation
+=============
+
+For the moment baron doesn't have any documentation yet. The usage of the only
+2 functions provided by Baron is shown above. Apart from that, baron provide 2
+helper functions to explore the FST (in ipython for example). Example:
+
+```python
+from baron.helpers import show, show_file
+
+show(string)
+show_file(file_path)
+```
+
+Those 2 functions will print a formated version of the FST so you can play with
+it to explore the FST and have an idea of what you are playing with. Example:
+
+```python
+In [5]: from baron.helpers import show
+
+In [6]: show("a +  b")
+[
+    {
+        "first_formatting": [
+            {
+                "type": "space", 
+                "value": " "
+            }
+        ], 
+        "value": "+", 
+        "second_formatting": [
+            {
+                "type": "space", 
+                "value": "  "
+            }
+        ], 
+        "second": {
+            "type": "name", 
+            "value": "b"
+        }, 
+        "type": "binary_operator", 
+        "first": {
+            "type": "name", 
+            "value": "a"
+        }
+    }, 
+    {
+        "indent": "", 
+        "formatting": [], 
+        "type": "endl", 
+        "value": "\n"
+    }
+]
+```
+
+Every node have a <code>type</code> key and all node of the same type share the same
+structure (if you find that this is not the case, please open a bug). And
+nearly all node have a <code>value</code> key (except the obvious one that
+never change like 'pass') that represent the data.
+
+The <code>*\_formatting</code> value represent the formatting of the node. They
+are always around syntax element of python, here, the "+" (the only exception
+to this rules are string since you code write things like that in python:
+<code>"a" ru'b' "cd" """ef"""</code>). The translation
+looks like this:
+
+    a +  b
+    |||| |
+    first
+     ||| |
+    first_formatting
+      || |
+    value|
+       | |
+    second_formatting
+         |
+    second
+
+The exact way to render a node can be find in the [code of the dumps
+function](https://github.com/Psycojoker/baron/blob/master/baron/dumper.py).
+
+If there isn't any "\n" at the end of the parsed string, Baron will add one to
+respect python grammar. This is the <code>endl</code> node here.
 
 Tests
 =====
