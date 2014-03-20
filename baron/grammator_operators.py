@@ -238,46 +238,88 @@ def include_operators(pg):
     def subscript_test((test,)):
         return test
 
-    @pg.production("slice : COLON COLON?")
-    def slice((colon, colon2)):
+    @pg.production("slice : COLON")
+    def slice((colon,)):
         return {
             "type": "slice",
             "lower": {},
             "upper": {},
             "step": {},
-            "has_two_colons": bool(colon2),
+            "has_two_colons": False,
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
-            "third_formatting": colon2.hidden_tokens_before if colon2 else [],
-            "forth_formatting": colon2.hidden_tokens_after if colon2 else [],
+            "third_formatting": [],
+            "forth_formatting": [],
         }
 
-    @pg.production("slice : test COLON COLON?")
-    def slice_lower((test, colon, colon2)):
+    @pg.production("slice : COLON COLON")
+    def slice_colon((colon, colon2)):
+        return {
+            "type": "slice",
+            "lower": {},
+            "upper": {},
+            "step": {},
+            "has_two_colons": True,
+            "first_formatting": colon.hidden_tokens_before,
+            "second_formatting": colon.hidden_tokens_after,
+            "third_formatting": colon2.hidden_tokens_before,
+            "forth_formatting": colon2.hidden_tokens_after,
+        }
+
+    @pg.production("slice : test COLON")
+    def slice_lower((test, colon,)):
         return {
             "type": "slice",
             "lower": test,
             "upper": {},
             "step": {},
-            "has_two_colons": bool(colon2),
+            "has_two_colons": False,
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
-            "third_formatting": colon2.hidden_tokens_before if colon2 else [],
-            "forth_formatting": colon2.hidden_tokens_after if colon2 else [],
+            "third_formatting": [],
+            "forth_formatting": [],
         }
 
-    @pg.production("slice : COLON test COLON?")
-    def slice_upper((colon, test, colon2)):
+    @pg.production("slice : test COLON COLON")
+    def slice_lower_colon_colon((test, colon, colon2)):
+        return {
+            "type": "slice",
+            "lower": test,
+            "upper": {},
+            "step": {},
+            "has_two_colons": True,
+            "first_formatting": colon.hidden_tokens_before,
+            "second_formatting": colon.hidden_tokens_after,
+            "third_formatting": colon2.hidden_tokens_before,
+            "forth_formatting": colon2.hidden_tokens_after,
+        }
+
+    @pg.production("slice : COLON test")
+    def slice_upper((colon, test,)):
         return {
             "type": "slice",
             "lower": {},
             "upper": test,
             "step": {},
-            "has_two_colons": bool(colon2),
+            "has_two_colons": False,
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
-            "third_formatting": colon2.hidden_tokens_before if colon2 else [],
-            "forth_formatting": colon2.hidden_tokens_after if colon2 else [],
+            "third_formatting": [],
+            "forth_formatting": [],
+        }
+
+    @pg.production("slice : COLON test COLON")
+    def slice_upper_colon((colon, test, colon2)):
+        return {
+            "type": "slice",
+            "lower": {},
+            "upper": test,
+            "step": {},
+            "has_two_colons": True,
+            "first_formatting": colon.hidden_tokens_before,
+            "second_formatting": colon.hidden_tokens_after,
+            "third_formatting": colon2.hidden_tokens_before,
+            "forth_formatting": colon2.hidden_tokens_after,
         }
 
     @pg.production("slice : COLON COLON test")
@@ -294,18 +336,32 @@ def include_operators(pg):
             "forth_formatting": colon2.hidden_tokens_after,
         }
 
-    @pg.production("slice : test COLON test COLON?")
-    def slice_lower_upper((test, colon, test2, colon2)):
+    @pg.production("slice : test COLON test")
+    def slice_lower_upper((test, colon, test2,)):
         return {
             "type": "slice",
             "lower": test,
             "upper": test2,
             "step": {},
-            "has_two_colons": bool(colon2),
+            "has_two_colons": False,
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
-            "third_formatting": colon2.hidden_tokens_before if colon2 else [],
-            "forth_formatting": colon2.hidden_tokens_after if colon2 else [],
+            "third_formatting": [],
+            "forth_formatting": [],
+        }
+
+    @pg.production("slice : test COLON test COLON")
+    def slice_lower_upper_colon((test, colon, test2, colon2)):
+        return {
+            "type": "slice",
+            "lower": test,
+            "upper": test2,
+            "step": {},
+            "has_two_colons": True,
+            "first_formatting": colon.hidden_tokens_before,
+            "second_formatting": colon.hidden_tokens_after,
+            "third_formatting": colon2.hidden_tokens_before,
+            "forth_formatting": colon2.hidden_tokens_after,
         }
 
     @pg.production("slice : test COLON COLON test")

@@ -24,16 +24,19 @@ def generate_parse(print_function):
         return statements + statement
 
 
-    @pg.production("statements : statement SEMICOLON?")
-    def statement((statement, semicolon)):
-        if semicolon:
-            return statement +\
-                    [{
-                      "type": "semicolon",
-                      "first_formatting": semicolon.hidden_tokens_before,
-                      "second_formatting": semicolon.hidden_tokens_after,
-                      "value": ";"
-                     }]
+    @pg.production("statements : statement SEMICOLON")
+    def statement_semicolon((statement, semicolon)):
+        return statement +\
+                [{
+                  "type": "semicolon",
+                  "first_formatting": semicolon.hidden_tokens_before,
+                  "second_formatting": semicolon.hidden_tokens_after,
+                  "value": ";"
+                 }]
+
+
+    @pg.production("statements : statement")
+    def statement((statement,)):
         return statement
 
 
@@ -81,16 +84,19 @@ def generate_parse(print_function):
     def statement_simple_statement((stmt,)):
         return stmt
 
-    @pg.production("simple_stmt : small_stmt SEMICOLON? endl")
-    def simple_stmt((small_stmt, semicolon, endl)):
-        if semicolon:
-            return [small_stmt,
-                    {
-                     "type": "semicolon",
-                     "value": ";",
-                     "first_formatting": semicolon.hidden_tokens_before,
-                     "second_formatting": semicolon.hidden_tokens_after
-                    }] + endl
+    @pg.production("simple_stmt : small_stmt SEMICOLON endl")
+    def simple_stmt_semicolon_endl((small_stmt, semicolon, endl)):
+        return [small_stmt,
+                {
+                 "type": "semicolon",
+                 "value": ";",
+                 "first_formatting": semicolon.hidden_tokens_before,
+                 "second_formatting": semicolon.hidden_tokens_after
+                }] + endl
+
+
+    @pg.production("simple_stmt : small_stmt endl")
+    def simple_stmt((small_stmt, endl)):
         return [small_stmt] + endl
 
 
