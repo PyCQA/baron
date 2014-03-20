@@ -1,4 +1,4 @@
-from rply.token import Token
+from token import BaronToken
 from rply import ParserGenerator
 
 from tokenizer import TOKENS, KEYWORDS, tokenize
@@ -628,9 +628,9 @@ def generate_parse(print_function):
                     token = tuple(token)
                 new_tokens.append(token)
 
-            tokens = map(lambda x: Token(*x) if x else x, new_tokens) + [None]
+            tokens = map(lambda x: BaronToken(*x) if x else x, new_tokens) + [None]
         else:
-            tokens = map(lambda x: Token(*x) if x else x, tokens) + [None]
+            tokens = map(lambda x: BaronToken(*x) if x else x, tokens) + [None]
 
         return parser.parse(iter(tokens))
 
