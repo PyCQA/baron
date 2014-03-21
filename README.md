@@ -1,7 +1,7 @@
 Introduction
 ============
 
-Baron is a FST for python, a Full Syntax Tree. By opposition to an AST which
+Baron is a FST for Python, a Full Syntax Tree. By opposition to an AST which
 drops some syntax information in the process of its creation (like empty lines,
 comments, formatting), a FST keeps everything and guarantees the operation
 <code>ast\_to\_code(code\_to\_ast(source\_code)) == source\_code</code>.
@@ -12,7 +12,7 @@ Why is this important?
 The usage of a FST might not be obvious at first sight so let's consider a
 series of problems to illustrate it. Let's say that you want to write a program that will:
 
-* rename a variable in a source file ... without clashing with things that are not a variable (example: stuff inside a string)
+* rename a variable in a source file... without clashing with things that are not a variable (example: stuff inside a string)
 * inline a function/method
 * extract a function/method from a series of line of code
 * split a class into several classes
@@ -52,14 +52,14 @@ example and a templating engine).
 Some technical details
 ======================
 
-Baron produces a FST in the form of JSON (and by JSON I mean python lists
-and dicts that can be dump into JSON) for maximum interoperability.
+Baron produces a FST in the form of JSON (and by JSON I mean Python lists
+and dicts that can be dumped into JSON) for maximum interoperability.
 
-Baron FST is quite similar to python AST with some modifications to be more
-intuitive to humans, since python AST has been made to cpython interpreter.
+Baron FST is quite similar to Python AST with some modifications to be more
+intuitive to humans, since Python AST has been made for CPython interpreter.
 
 Since playing directly with JSON is a bit raw I'm going to build an abstraction
-on top of it that will looks like Beautifulsoup/Jquery.
+on top of it that will looks like BeautifulSoup/jQuery.
 
 Installation
 ============
@@ -81,9 +81,9 @@ source_code_string == dumps(ast)
 Documentation
 =============
 
-For the moment baron doesn't have any documentation yet. The usage of the only
-2 functions provided by Baron is shown above. Apart from that, baron provide 2
-helper functions to explore the FST (in ipython for example). Example:
+At the moment Baron doesn't have any documentation yet. The usage of the only
+2 functions provided by Baron is shown above. Apart from that, Baron provides 2
+helper functions to explore the FST (in iPython for example). Example:
 
 ```python
 from baron.helpers import show, show_file
@@ -133,14 +133,14 @@ In [6]: show("a +  b")
 ]
 ```
 
-Every node have a <code>type</code> key and all node of the same type share the same
-structure (if you find that this is not the case, please open a bug). And
-nearly all node have a <code>value</code> key (except the obvious one that
-never change like 'pass') that represent the data.
+Every node has a <code>type</code> key and all nodes of the same type share the same
+structure (if you find that it is not the case, please open an issue). And
+nearly all nodes have a <code>value</code> key (except the obvious one that
+never change like 'pass') that represents the data.
 
-The <code>*\_formatting</code> value represent the formatting of the node. They
-are always around syntax element of python, here, the "+" (the only exception
-to this rules are string since you code write things like that in python:
+The <code>*\_formatting</code> value represents the formatting of the node. They
+are always around syntax element of Python, here, the "+" (the only exception
+to this rules are string since you code things like that in Python:
 <code>"a" ru'b' "cd" """ef"""</code>). The translation
 looks like this:
 
@@ -160,7 +160,7 @@ The exact way to render a node can be find in the [code of the dumps
 function](https://github.com/Psycojoker/baron/blob/master/baron/dumper.py).
 
 If there isn't any "\n" at the end of the parsed string, Baron will add one to
-respect python grammar. This is the <code>endl</code> node here.
+respect Python grammar. This is the <code>endl</code> node here.
 
 Tests
 =====
