@@ -19,11 +19,20 @@ parse_tokens_print_function = generate_parse(True)
 def _parse(tokens, print_function):
     parser = parse_tokens if not print_function else parse_tokens_print_function
     try:
-        return parser(tokens)
-    except ParsingError:
-        # swap parsers for print_function situation where I failed to find it
-        parser = parse_tokens if print_function else parse_tokens_print_function
-        return parser(tokens)
+        try:
+            return parser(tokens)
+        except ParsingError:
+            # swap parsers for print_function situation where I failed to find it
+            parser = parse_tokens if print_function else parse_tokens_print_function
+            return parser(tokens)
+    except ParsingError as e:
+        raise e
+    except Exception as e:
+        import sys
+        import traceback
+        traceback.print_exc(file=sys.stderr)
+        sys.stderr.write("%s\n" % e)
+        sys.stderr.write("\nIt is not normal that you see this error, it means that Baron has failed to parse valide python code. It would be kind if you can extract the snippet of your code that make Baron fails and open a bug here: https://github.com/Psycojoker/baron/issues\n\nSorry for the inconvinience.")
 
 
 def parse(source_code, print_function=None):
