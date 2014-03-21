@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
 
+import sys
 from test_utils import check_dumps
 
 
@@ -382,29 +383,29 @@ def test_generator_comprehension_ifs():
 def test_generator_comprehension_ifs_more():
     check_dumps("( x for   y       in  z   if a   if  qsd  for ss in gfgr    )")
 
-
-def test_dict_comprehension():
-    check_dumps("{ x: z for   y       in  z      }")
-
-
-def test_dict_comprehension_ifs():
-    check_dumps("{ x   : z for   y       in  z   if a   if  qsd  }")
+if sys.version_info >= (2, 7):
+    def test_dict_comprehension():
+        check_dumps("{ x: z for   y       in  z      }")
 
 
-def test_dict_comprehension_ifs_more():
-    check_dumps("{ x :z for   y       in  z   if a   if  qsd  for ss in gfgr    }")
+    def test_dict_comprehension_ifs():
+        check_dumps("{ x   : z for   y       in  z   if a   if  qsd  }")
 
 
-def test_set_comprehension():
-    check_dumps("{ x for   y       in  z      }")
+    def test_dict_comprehension_ifs_more():
+        check_dumps("{ x :z for   y       in  z   if a   if  qsd  for ss in gfgr    }")
 
 
-def test_set_comprehension_ifs():
-    check_dumps("{ x    for   y       in  z   if a   if  qsd  }")
+    def test_set_comprehension():
+        check_dumps("{ x for   y       in  z      }")
 
 
-def test_set_comprehension_ifs_more():
-    check_dumps("{ x  for   y       in  z   if a   if  qsd  for ss in gfgr    }")
+    def test_set_comprehension_ifs():
+        check_dumps("{ x    for   y       in  z   if a   if  qsd  }")
+
+
+    def test_set_comprehension_ifs_more():
+        check_dumps("{ x  for   y       in  z   if a   if  qsd  for ss in gfgr    }")
 
 
 def test_argument_generator_comprehension():
