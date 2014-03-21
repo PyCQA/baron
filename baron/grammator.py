@@ -1,5 +1,5 @@
 from token import BaronToken
-from rply import ParserGenerator
+from parser import BaronParserGenerator
 
 from tokenizer import TOKENS, KEYWORDS, tokenize
 from utils import create_node_from_token
@@ -11,7 +11,7 @@ from grammator_data_structures import include_data_structures
 
 
 def generate_parse(print_function):
-    pg = ParserGenerator(tuple(map(lambda x: x.upper(), KEYWORDS)) + zip(*TOKENS)[1] + ("ENDMARKER", "INDENT", "DEDENT"), cache_id="baron")
+    pg = BaronParserGenerator(tuple(map(lambda x: x.upper(), KEYWORDS)) + zip(*TOKENS)[1] + ("ENDMARKER", "INDENT", "DEDENT"), cache_id="baron")
             # precedence=[("left", ['PLUS', 'MINUS'])], cache_id="baron")
 
     @pg.production("main : statements")
@@ -642,7 +642,7 @@ def fake_lexer(sequence):
     for i in tokenize(sequence):
         if i is None:
             yield None
-        yield Token(*i)
+        yield BaronToken(*i)
 
 
 def parse(sequence):
