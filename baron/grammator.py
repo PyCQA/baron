@@ -12,7 +12,6 @@ from grammator_data_structures import include_data_structures
 
 def generate_parse(print_function):
     pg = BaronParserGenerator(tuple(map(lambda x: x.upper(), KEYWORDS)) + zip(*TOKENS)[1] + ("ENDMARKER", "INDENT", "DEDENT"), cache_id="baron")
-            # precedence=[("left", ['PLUS', 'MINUS'])], cache_id="baron")
 
     @pg.production("main : statements")
     def main((statements,)):
