@@ -76,18 +76,19 @@ class BaronParserGenerator(ParserGenerator):
             fd = os.open(cache_file, os.O_RDWR | os.O_CREAT | os.O_EXCL, 0o0600)
             with os.fdopen(fd, "w") as f:
                 json.dump(self.serialize_table(table), f)
-        if table.sr_conflicts:
-            warnings.warn(
-                "%d shift/reduce conflict%s" % (len(table.sr_conflicts), "s" if len(table.sr_conflicts) > 1 else ""),
-                ParserGeneratorWarning,
-                stacklevel=2,
-            )
-        if table.rr_conflicts:
-            warnings.warn(
-                "%d reduce/reduce conflict%s" % (len(table.rr_conflicts), "s" if len(table.rr_conflicts) > 1 else ""),
-                ParserGeneratorWarning,
-                stacklevel=2,
-            )
+        # meh :(
+        #if table.sr_conflicts:
+            #warnings.warn(
+                #"%d shift/reduce conflict%s" % (len(table.sr_conflicts), "s" if len(table.sr_conflicts) > 1 else ""),
+                #ParserGeneratorWarning,
+                #stacklevel=2,
+            #)
+        #if table.rr_conflicts:
+            #warnings.warn(
+                #"%d reduce/reduce conflict%s" % (len(table.rr_conflicts), "s" if len(table.rr_conflicts) > 1 else ""),
+                #ParserGeneratorWarning,
+                #stacklevel=2,
+            #)
         return BaronLRParser(table, self.error_handler)
 
 
