@@ -77,7 +77,6 @@ class BaronParserGenerator(ParserGenerator):
             with os.fdopen(fd, "w") as f:
                 json.dump(self.serialize_table(table), f)
         if table.sr_conflicts:
-            print table.sr_conflicts
             warnings.warn(
                 "%d shift/reduce conflict%s" % (len(table.sr_conflicts), "s" if len(table.sr_conflicts) > 1 else ""),
                 ParserGeneratorWarning,
