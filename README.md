@@ -44,7 +44,7 @@ complex task).
 Other
 -----
 
-Having a FST (or at least a good abstraction build on it) also make it easier
+Having a FST (or at least a good abstraction build on it) also makes it easier
 to do code generation and code analysis while those two operations are already
 quite feasible (using [ast.py](http://docs.python.org/2/library/ast.html) for
 example and a templating engine).
@@ -52,13 +52,13 @@ example and a templating engine).
 Some technical details
 ======================
 
-Baron produce a FST in the form of json (and by json I mean python lists
-and dicts that can be dump into json) for maximum interoperability.
+Baron produces a FST in the form of JSON (and by JSON I mean python lists
+and dicts that can be dump into JSON) for maximum interoperability.
 
 Baron FST is quite similar to python AST with some modifications to be more
 intuitive to humans, since python AST has been made to cpython interpreter.
 
-Since playing directly with json is a bit raw I'm going to build an abstraction
+Since playing directly with JSON is a bit raw I'm going to build an abstraction
 on top of it that will looks like Beautifulsoup/Jquery.
 
 Installation
