@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
 
-from grouper import group
+from baron.grouper import group
 
 def test_empty():
     assert group([]) == []

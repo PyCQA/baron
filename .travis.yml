@@ -3,4 +3,4 @@ install: "pip install -r requirements.txt"
 python:
     - "2.6"
     - "2.7"
-script: "py.test baron"
+script: "py.test tests"

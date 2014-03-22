@@ -1,6 +1,6 @@
-from grammator import generate_parse
-from dumper import dumps
-from baron import parse as baron_parse
+from baron.grammator import generate_parse
+from baron.dumper import dumps
+from baron.baron import parse as baron_parse
 
 
 parse = generate_parse(False)

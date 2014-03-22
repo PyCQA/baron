@@ -2,7 +2,7 @@
 # -*- coding:Utf-8 -*-
 
 
-from spliter import split
+from baron.spliter import split
 
 def test_empty():
     assert split("") == []
