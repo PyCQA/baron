@@ -2,7 +2,7 @@
 # -*- coding:Utf-8 -*-
 
 
-from tokenizer import tokenize, KEYWORDS
+from baron.tokenizer import tokenize, KEYWORDS
 
 def match(string, token):
     assert tokenize([string]) == [(token, string), ('ENDMARKER', ''), None]

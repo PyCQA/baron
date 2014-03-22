@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
 
-from indentation_marker import mark_indentation
+from baron.indentation_marker import mark_indentation
 from itertools import izip_longest
 
 
