@@ -322,3 +322,5 @@ def test_float_advanced():
     match("1.", "FLOAT")
     match(".1", "FLOAT")
     match("1.1", "FLOAT")
+
+# TODO 1.1e1j
