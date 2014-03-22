@@ -134,6 +134,7 @@ def test_regression_float():
     assert group(['1', '.']) == ['1.']
     assert group(['.', '1']) == ['.1']
     assert group(['1', '.', '1']) == ['1.1']
+    assert group(['7', '.', '629e', '-', '6']) == ['7.629e-6']
 
 def test_complex():
     assert group(['.', '1j']) == ['.1j']
