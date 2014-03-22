@@ -21,5 +21,5 @@ do
         colordiff -W $(stty size | cut -d " " -f 2) -y /tmp/c /tmp/d
         echo
     fi
-    inotifywait -e modify *.py
+    inotifywait -e modify *.py ../baron/*.py
 done
