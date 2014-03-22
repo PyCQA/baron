@@ -85,7 +85,7 @@ def group_generator(sequence):
             if iterator.show_next() and re.match(r'^\d*[jJ]?$', iterator.show_next()) and re.match(r'^\d*[jJ]?$', iterator.show_next()).group():
                 current += iterator.next()
 
-        if re.match(r'^\d+\.$', current) and iterator.show_next() and iterator.show_next() in "eE":
+        if re.match(r'^\d+\.$', current) and iterator.show_next() and re.match(r'^[eE]\d*$', iterator.show_next()):
             current += iterator.next()
 
         if re.match(r'^\d+\.?[eE]$', current) and iterator.show_next() and re.match(r'^\d+$', iterator.show_next()):
