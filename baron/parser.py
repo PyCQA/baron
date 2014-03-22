@@ -155,7 +155,7 @@ class BaronLRParser(LRParser):
                     debug_output = debug_output[-8:]
                     debug_output = "\n".join(map(lambda x: "%4s %s" % (x[0], x[1]), debug_output))
                     debug_output += "<---- here"
-                    debug_output = "Error, got an unexpected toke %s here:\n\n" % ltype + debug_output
+                    debug_output = "Error, got an unexpected token %s here:\n\n" % ltype + debug_output
                     debug_output += "\n\nThe token %s should be one of those: %s" % (ltype, ", ".join(sorted(self.lr_table.lr_action[current_state].keys())))
-                    debug_output += "\n\nIt is not normal that you see this error, it means that Baron has failed to parse valide python code. It would be kind if you can extract the snippet of your code that make Baron fails and open a bug here: https://github.com/Psycojoker/baron/issues\n\nSorry for the inconvinience."
+                    debug_output += "\n\nIt is not normal that you see this error, it means that Baron has failed to parse valid Python code. It would be kind if you can extract the snippet of your code that makes Baron fail and open a bug here: https://github.com/Psycojoker/baron/issues\n\nSorry for the inconvenience."
                     raise ParsingError(debug_output)
