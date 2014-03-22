@@ -61,6 +61,19 @@ intuitive to humans, since Python AST has been made for CPython interpreter.
 Since playing directly with JSON is a bit raw I'm going to build an abstraction
 on top of it that will looks like BeautifulSoup/jQuery.
 
+State of the project
+====================
+
+Currently, Baron has been tested on the top 100 projects and the FST converts
+back exactly into the original source code. So, it can be considered quite
+stable, but it is far away from having been battle tested.
+
+Since the project is very young and no one is already using it except my
+project, I'm open to modifications of the FST nodes but I will become
+conversative very fast once it gets some adoption and will probably accept to
+modify it only once or two in the future with clear indications on how to
+migrate.
+
 Installation
 ============
 
