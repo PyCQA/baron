@@ -77,8 +77,6 @@ migrate.
 Installation
 ============
 
-NOT WORKING YET.
-
     pip install baron
 
 Usage
