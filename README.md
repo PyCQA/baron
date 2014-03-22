@@ -177,7 +177,7 @@ respect Python grammar. This is the <code>endl</code> node here.
 
 Tests
 =====
-Run either "py.test" or "nosetests" in the baron directory.
+Run either `py.test tests/` or `nosetests` in the baron directory.
 
 Misc
 ====
