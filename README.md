@@ -74,6 +74,10 @@ conversative very fast once it gets some adoption and will probably accept to
 modify it only once or two in the future with clear indications on how to
 migrate.
 
+**Baron is targeting python 2.[67]**. It has not been tested on python3 but
+should be working for most part (except the new grammar like "yield from",
+obviously).
+
 Installation
 ============
 
