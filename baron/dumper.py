@@ -718,4 +718,7 @@ def print_(node):
 
 
 def dumps(tree):
-    return "".join(map(dump_node, tree))
+    if isinstance(tree, list):
+        return "".join(map(dump_node, tree))
+    else:
+        dump_node(tree)

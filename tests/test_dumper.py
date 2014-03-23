@@ -2,6 +2,7 @@
 # -*- coding:Utf-8 -*-
 
 import sys
+import baron
 from test_utils import check_dumps
 
 
@@ -518,3 +519,7 @@ def test_backslash_not_in_formatting():
 
 def test_try_import_after_colon():
     check_dumps("try: import stuff\nexcept: pass")
+
+
+def test_single_object():
+    baron.dumps({"type": "name", "value": "a"}) == "a"
