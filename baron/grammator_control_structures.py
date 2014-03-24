@@ -74,7 +74,7 @@ def include_control_structures(pg):
             "first_formatting": except_.hidden_tokens_after,
             "second_formatting": as_.hidden_tokens_before,
             "third_formatting": as_.hidden_tokens_after,
-            "forth_formatting": colon.hidden_tokens_before,
+            "fourth_formatting": colon.hidden_tokens_before,
             "fifth_formatting": colon.hidden_tokens_after,
             "delimiteur": "as",
             "target": test2,
@@ -89,7 +89,7 @@ def include_control_structures(pg):
             "first_formatting": except_.hidden_tokens_after,
             "second_formatting": comma.hidden_tokens_before,
             "third_formatting": comma.hidden_tokens_after,
-            "forth_formatting": colon.hidden_tokens_before,
+            "fourth_formatting": colon.hidden_tokens_before,
             "fifth_formatting": colon.hidden_tokens_after,
             "delimiteur": ",",
             "target": test2,
@@ -104,7 +104,7 @@ def include_control_structures(pg):
             "first_formatting": except_.hidden_tokens_after,
             "second_formatting": [],
             "third_formatting": [],
-            "forth_formatting": colon.hidden_tokens_before,
+            "fourth_formatting": colon.hidden_tokens_before,
             "fifth_formatting": colon.hidden_tokens_after,
             "delimiteur": "",
             "target": {},
@@ -119,7 +119,7 @@ def include_control_structures(pg):
             "first_formatting": except_.hidden_tokens_after,
             "second_formatting": [],
             "third_formatting": [],
-            "forth_formatting": colon.hidden_tokens_before,
+            "fourth_formatting": colon.hidden_tokens_before,
             "fifth_formatting": colon.hidden_tokens_after,
             "delimiteur": "",
             "target": {},
@@ -156,7 +156,7 @@ def include_control_structures(pg):
                  "first_formatting": for_.hidden_tokens_after,
                  "second_formatting": in_.hidden_tokens_before,
                  "third_formatting": in_.hidden_tokens_after,
-                 "forth_formatting": colon.hidden_tokens_before,
+                 "fourth_formatting": colon.hidden_tokens_before,
                  "fifth_formatting": colon.hidden_tokens_after,
                }]
 
@@ -171,7 +171,7 @@ def include_control_structures(pg):
                  "first_formatting": for_.hidden_tokens_after,
                  "second_formatting": in_.hidden_tokens_before,
                  "third_formatting": in_.hidden_tokens_after,
-                 "forth_formatting": colon.hidden_tokens_before,
+                 "fourth_formatting": colon.hidden_tokens_before,
                  "fifth_formatting": colon.hidden_tokens_after,
                }]
 

@@ -133,7 +133,7 @@ def test_raise_empty():
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [],
             "third_formatting": [],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "fifth_formatting": []
           }])
 
@@ -151,7 +151,7 @@ def test_raise():
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [],
             "third_formatting": [],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "fifth_formatting": []
           }])
 
@@ -171,7 +171,7 @@ def test_raise_instance():
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [],
             "third_formatting": [{"type": "space", "value": " "}],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "fifth_formatting": []
           }])
     parse_simple([
@@ -188,7 +188,7 @@ def test_raise_instance():
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [],
             "third_formatting": [{"type": "space", "value": " "}],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "fifth_formatting": []
           }])
 
@@ -210,7 +210,7 @@ def test_raise_instance_traceback():
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [],
             "third_formatting": [{"type": "space", "value": " "}],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "fifth_formatting": [{"type": "space", "value": " "}]
           }])
     parse_simple([
@@ -229,7 +229,7 @@ def test_raise_instance_traceback():
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [],
             "third_formatting": [{"type": "space", "value": " "}],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "fifth_formatting": [{"type": "space", "value": " "}]
           }])
     parse_simple([
@@ -248,7 +248,7 @@ def test_raise_instance_traceback():
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [],
             "third_formatting": [{"type": "space", "value": " "}],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "fifth_formatting": [{"type": "space", "value": " "}]
           }])
 
@@ -266,7 +266,7 @@ def test_exec():
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [],
             "third_formatting": [],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "fifth_formatting": []
           }])
 
@@ -286,7 +286,7 @@ def test_exec_in():
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [{"type": "space", "value": " "}],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "fifth_formatting": []
           }])
     parse_simple([
@@ -303,7 +303,7 @@ def test_exec_in():
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [{"type": "space", "value": " "}],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "fifth_formatting": []
           }])
 
@@ -325,7 +325,7 @@ def test_exec_in_c():
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [{"type": "space", "value": " "}],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "fifth_formatting": [{"type": "space", "value": " "}]
           }])
     parse_simple([
@@ -344,7 +344,7 @@ def test_exec_in_c():
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [{"type": "space", "value": " "}],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "fifth_formatting": [{"type": "space", "value": " "}]
           }])
     parse_simple([
@@ -363,7 +363,7 @@ def test_exec_in_c():
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [{"type": "space", "value": " "}],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "fifth_formatting": [{"type": "space", "value": " "}]
           }])
 

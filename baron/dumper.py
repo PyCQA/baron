@@ -40,7 +40,7 @@ def ternary_operator(node):
     yield dump_node(node["value"])
     yield dump_node_list(node["third_formatting"])
     yield "else"
-    yield dump_node_list(node["forth_formatting"])
+    yield dump_node_list(node["fourth_formatting"])
     yield dump_node(node["second"])
 
 
@@ -129,7 +129,7 @@ def call(node):
             yield dump_node(n)
     yield dump_node_list(node["third_formatting"])
     yield ")"
-    yield dump_node_list(node["forth_formatting"])
+    yield dump_node_list(node["fourth_formatting"])
 
 
 @node()
@@ -151,7 +151,7 @@ def class_(node):
         yield "("
     yield dump_node_list(node["third_formatting"])
     yield dump_node_list(node["inherit_from"])
-    yield dump_node_list(node["forth_formatting"])
+    yield dump_node_list(node["fourth_formatting"])
     if node["parenthesis"]:
         yield ")"
     yield dump_node_list(node["fifth_formatting"])
@@ -177,7 +177,7 @@ def list_(node):
     yield dump_node_list(node["value"])
     yield dump_node_list(node["third_formatting"])
     yield "]"
-    yield dump_node_list(node["forth_formatting"])
+    yield dump_node_list(node["fourth_formatting"])
 
 
 @node()
@@ -188,7 +188,7 @@ def associative_parenthesis(node):
     yield dump_node(node["value"])
     yield dump_node_list(node["third_formatting"])
     yield ")"
-    yield dump_node_list(node["forth_formatting"])
+    yield dump_node_list(node["fourth_formatting"])
 
 
 @node()
@@ -201,7 +201,7 @@ def tuple_(node):
     if node["with_parenthesis"]:
         yield dump_node_list(node["third_formatting"])
         yield ")"
-        yield dump_node_list(node["forth_formatting"])
+        yield dump_node_list(node["fourth_formatting"])
 
 
 @node()
@@ -218,7 +218,7 @@ def funcdef(node):
             yield "".join(list(funcdef_argument(n)))
         else:
             yield dump_node(n)
-    yield dump_node_list(node["forth_formatting"])
+    yield dump_node_list(node["fourth_formatting"])
     yield ")"
     yield dump_node_list(node["fifth_formatting"])
     yield ":"
@@ -285,7 +285,7 @@ def raise_(node):
         yield dump_node_list(node["third_formatting"])
         yield dump_node(node["instance"])
     if node["traceback"]:
-        yield dump_node_list(node["forth_formatting"])
+        yield dump_node_list(node["fourth_formatting"])
         yield ","
         yield dump_node_list(node["fifth_formatting"])
         yield dump_node(node["traceback"])
@@ -320,7 +320,7 @@ def set_comprehension(node):
     yield dump_node_list(node["generators"])
     yield dump_node_list(node["third_formatting"])
     yield "}"
-    yield dump_node_list(node["forth_formatting"])
+    yield dump_node_list(node["fourth_formatting"])
 
 
 @node()
@@ -336,7 +336,7 @@ def dict_comprehension(node):
     yield dump_node_list(node["generators"])
     yield dump_node_list(node["third_formatting"])
     yield "}"
-    yield dump_node_list(node["forth_formatting"])
+    yield dump_node_list(node["fourth_formatting"])
 
 
 @node()
@@ -354,7 +354,7 @@ def generator_comprehension(node):
     yield dump_node_list(node["generators"])
     yield dump_node_list(node["third_formatting"])
     yield ")"
-    yield dump_node_list(node["forth_formatting"])
+    yield dump_node_list(node["fourth_formatting"])
 
 
 @node()
@@ -366,7 +366,7 @@ def list_comprehension(node):
     yield dump_node_list(node["generators"])
     yield dump_node_list(node["third_formatting"])
     yield "]"
-    yield dump_node_list(node["forth_formatting"])
+    yield dump_node_list(node["fourth_formatting"])
 
 
 @node()
@@ -378,7 +378,7 @@ def comprehension_loop(node):
     yield dump_node(node["iterator"])
     yield dump_node_list(node["third_formatting"])
     yield "in"
-    yield dump_node_list(node["forth_formatting"])
+    yield dump_node_list(node["fourth_formatting"])
     if isinstance(node["target"], list):
         yield dump_node_list(node["target"])
     else:
@@ -402,7 +402,7 @@ def getitem(node):
     yield dump_node(node["value"])
     yield dump_node_list(node["third_formatting"])
     yield "]"
-    yield dump_node_list(node["forth_formatting"])
+    yield dump_node_list(node["fourth_formatting"])
 
 
 @node()
@@ -418,7 +418,7 @@ def slice(node):
     if node["has_two_colons"]:
         yield dump_node_list(node["third_formatting"])
         yield ":"
-        yield dump_node_list(node["forth_formatting"])
+        yield dump_node_list(node["fourth_formatting"])
         if node["step"]:
             yield dump_node(node["step"])
 
@@ -517,7 +517,7 @@ def exec_(node):
         yield dump_node_list(node["third_formatting"])
         yield dump_node(node["globals"])
     if node["locals"]:
-        yield dump_node_list(node["forth_formatting"])
+        yield dump_node_list(node["fourth_formatting"])
         yield ","
         yield dump_node_list(node["fifth_formatting"])
         yield dump_node(node["locals"])
@@ -552,7 +552,7 @@ def for_(node):
     yield "in"
     yield dump_node_list(node["third_formatting"])
     yield dump_node(node["target"])
-    yield dump_node_list(node["forth_formatting"])
+    yield dump_node_list(node["fourth_formatting"])
     yield ":"
     yield dump_node_list(node["fifth_formatting"])
     yield dump_node_list(node["value"])
@@ -631,7 +631,7 @@ def except_(node):
         yield node["delimiteur"]
         yield dump_node_list(node["third_formatting"])
         yield dump_node(node["target"])
-    yield dump_node_list(node["forth_formatting"])
+    yield dump_node_list(node["fourth_formatting"])
     yield ":"
     yield dump_node_list(node["fifth_formatting"])
     yield dump_node_list(node["value"])
@@ -654,7 +654,7 @@ def dict_(node):
     yield dump_node_list(node["value"])
     yield dump_node_list(node["third_formatting"])
     yield "}"
-    yield dump_node_list(node["forth_formatting"])
+    yield dump_node_list(node["fourth_formatting"])
 
 
 @node()

@@ -225,7 +225,7 @@ def test_augassign():
     check_dumps("a &= b")
 
 
-def test_call_forth_formatting():
+def test_call_fourth_formatting():
     check_dumps("set(n for e in s() \n                 if a)")
 
 

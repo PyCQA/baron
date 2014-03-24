@@ -8,7 +8,7 @@ def include_data_structures(pg):
                 "first_formatting": left_parenthesis.hidden_tokens_before,
                 "second_formatting": left_parenthesis.hidden_tokens_after,
                 "third_formatting": right_parenthesis.hidden_tokens_before,
-                "forth_formatting": right_parenthesis.hidden_tokens_after,
+                "fourth_formatting": right_parenthesis.hidden_tokens_after,
                 "with_parenthesis": True,
                }
 
@@ -20,7 +20,7 @@ def include_data_structures(pg):
                 "first_formatting": left_parenthesis.hidden_tokens_before,
                 "second_formatting": left_parenthesis.hidden_tokens_after,
                 "third_formatting": right_parenthesis.hidden_tokens_before,
-                "forth_formatting": right_parenthesis.hidden_tokens_after,
+                "fourth_formatting": right_parenthesis.hidden_tokens_after,
                 "value": test
                }
 
@@ -35,7 +35,7 @@ def include_data_structures(pg):
             "first_formatting": [],
             "second_formatting": [],
             "third_formatting": [],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "with_parenthesis": False,
         }
 
@@ -50,7 +50,7 @@ def include_data_structures(pg):
             "first_formatting": [],
             "second_formatting": [],
             "third_formatting": [],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "with_parenthesis": False,
         }
 
@@ -113,7 +113,7 @@ def include_data_structures(pg):
                 "first_formatting": left_bracket.hidden_tokens_before,
                 "second_formatting": left_bracket.hidden_tokens_after,
                 "third_formatting": right_bracket.hidden_tokens_before,
-                "forth_formatting": right_bracket.hidden_tokens_after,
+                "fourth_formatting": right_bracket.hidden_tokens_after,
                 "value": listmaker
                }
 
@@ -140,7 +140,7 @@ def include_data_structures(pg):
                 "first_formatting": left_bracket.hidden_tokens_before,
                 "second_formatting": left_bracket.hidden_tokens_after,
                 "third_formatting": right_bracket.hidden_tokens_before,
-                "forth_formatting": right_bracket.hidden_tokens_after,
+                "fourth_formatting": right_bracket.hidden_tokens_after,
                 "value": dictmaker
                }
 
@@ -179,7 +179,7 @@ def include_data_structures(pg):
                 "first_formatting": left_bracket.hidden_tokens_before,
                 "second_formatting": left_bracket.hidden_tokens_after,
                 "third_formatting": right_bracket.hidden_tokens_before,
-                "forth_formatting": right_bracket.hidden_tokens_after,
+                "fourth_formatting": right_bracket.hidden_tokens_after,
                 "value": setmaker
                }
 
@@ -201,7 +201,7 @@ def include_data_structures(pg):
             "first_formatting": left_parenthesis.hidden_tokens_before,
             "second_formatting": left_parenthesis.hidden_tokens_after,
             "third_formatting": right_parenthesis.hidden_tokens_before,
-            "forth_formatting": right_parenthesis.hidden_tokens_after,
+            "fourth_formatting": right_parenthesis.hidden_tokens_after,
             "result": test,
             "generators": comp_for,
           }
@@ -213,7 +213,7 @@ def include_data_structures(pg):
             "first_formatting": left_square_bracket.hidden_tokens_before,
             "second_formatting": left_square_bracket.hidden_tokens_after,
             "third_formatting": right_square_bracket.hidden_tokens_before,
-            "forth_formatting": right_square_bracket.hidden_tokens_after,
+            "fourth_formatting": right_square_bracket.hidden_tokens_after,
             "result": test,
             "generators": list_for,
           }
@@ -225,7 +225,7 @@ def include_data_structures(pg):
             "first_formatting": left_bracket.hidden_tokens_before,
             "second_formatting": left_bracket.hidden_tokens_after,
             "third_formatting": right_bracket.hidden_tokens_before,
-            "forth_formatting": right_bracket.hidden_tokens_after,
+            "fourth_formatting": right_bracket.hidden_tokens_after,
             "result": {
                 "key": test,
                 "value": test2,
@@ -242,7 +242,7 @@ def include_data_structures(pg):
             "first_formatting": left_bracket.hidden_tokens_before,
             "second_formatting": left_bracket.hidden_tokens_after,
             "third_formatting": right_bracket.hidden_tokens_before,
-            "forth_formatting": right_bracket.hidden_tokens_after,
+            "fourth_formatting": right_bracket.hidden_tokens_after,
             "result": test,
             "generators": list_for,
           }
@@ -255,7 +255,7 @@ def include_data_structures(pg):
             "first_formatting": for_.hidden_tokens_before,
             "second_formatting": for_.hidden_tokens_after,
             "third_formatting": in_.hidden_tokens_before,
-            "forth_formatting": in_.hidden_tokens_after,
+            "fourth_formatting": in_.hidden_tokens_after,
             "target": or_test,
             "iterator": exprlist,
             "ifs": [],
@@ -269,7 +269,7 @@ def include_data_structures(pg):
             "first_formatting": for_.hidden_tokens_before,
             "second_formatting": for_.hidden_tokens_after,
             "third_formatting": in_.hidden_tokens_before,
-            "forth_formatting": in_.hidden_tokens_after,
+            "fourth_formatting": in_.hidden_tokens_after,
             "target": {
                 "type": "tuple",
                 "value": testlist_safe,
@@ -277,7 +277,7 @@ def include_data_structures(pg):
                 "first_formatting": [],
                 "second_formatting": [],
                 "third_formatting": [],
-                "forth_formatting": [],
+                "fourth_formatting": [],
             },
             "iterator": exprlist,
             "ifs": [],
@@ -299,7 +299,7 @@ def include_data_structures(pg):
             "first_formatting": for_.hidden_tokens_before,
             "second_formatting": for_.hidden_tokens_after,
             "third_formatting": in_.hidden_tokens_before,
-            "forth_formatting": in_.hidden_tokens_after,
+            "fourth_formatting": in_.hidden_tokens_after,
             "target": or_test,
             "iterator": exprlist,
             "ifs": my_ifs,
