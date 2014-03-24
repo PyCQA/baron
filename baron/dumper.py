@@ -721,4 +721,4 @@ def dumps(tree):
     if isinstance(tree, list):
         return "".join(map(dump_node, tree))
     else:
-        dump_node(tree)
+        return dump_node(tree)

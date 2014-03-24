@@ -522,4 +522,4 @@ def test_try_import_after_colon():
 
 
 def test_single_object():
-    baron.dumps({"type": "name", "value": "a"}) == "a"
+    assert baron.dumps({"type": "name", "value": "a"}) == "a"
