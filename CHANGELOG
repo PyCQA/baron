@@ -1,0 +1,25 @@
+Changelog
+=========
+
+0.1.2 (unreleased)
+------------------
+
+- baron.dumps now accept a signle FST node, it was only working with a list of
+  FST nodes
+
+Planned:
+
+- don't add a endl node at the end if not present in the input string
+- de-uniformise call_arguments and function_arguments node, this is just
+  creating more problems that anything else
+
+0.1.1 (2014-03-23)
+------------------
+
+- It appears that I don't know how to write MANIFEST.in correctly
+
+
+0.1 (2014-03-22)
+----------------
+
+- Init
