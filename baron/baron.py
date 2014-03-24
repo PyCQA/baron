@@ -43,7 +43,10 @@ def parse(source_code, print_function=None):
 
     if source_code and source_code[-1] != "\n":
         source_code += "\n"
+        return _parse(tokenize(source_code, print_function), print_function)[:-1]
+
     return _parse(tokenize(source_code, print_function), print_function)
+
 
 
 def tokenize(pouet, print_function=False):
