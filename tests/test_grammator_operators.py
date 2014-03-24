@@ -5852,7 +5852,7 @@ def test_ternary_operator():
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [{"type": "space", "value": " "}],
-            "forth_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [{"type": "space", "value": " "}],
            }])
     parse_simple([
            ('NAME', 'a'),
@@ -5874,7 +5874,7 @@ def test_ternary_operator():
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [{"type": "space", "value": " "}],
-            "forth_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [{"type": "space", "value": " "}],
            }])
     parse_simple([
            ('NAME', 'a'),
@@ -5896,7 +5896,7 @@ def test_ternary_operator():
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [{"type": "space", "value": " "}],
-            "forth_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [{"type": "space", "value": " "}],
            }])
 
 def test_assignment():
@@ -6389,7 +6389,7 @@ def test_expr_comma_list():
                    "first_formatting": [],
                    "second_formatting": [],
                    "third_formatting": [],
-                   "forth_formatting": [],
+                   "fourth_formatting": [],
                    "value": [
                              {
                               "type": "boolean_operator",
@@ -6433,7 +6433,7 @@ def test_expr_comma_list():
             "first_formatting": [],
             "second_formatting": [],
             "third_formatting": [],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "value": [
                    {
                     "type": "boolean_operator",
@@ -6477,7 +6477,7 @@ def test_expr_comma_list():
             "first_formatting": [],
             "second_formatting": [],
             "third_formatting": [],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "value": [
                    {
                     "type": "boolean_operator",
@@ -6521,7 +6521,7 @@ def test_expr_comma_list():
             "first_formatting": [],
             "second_formatting": [],
             "third_formatting": [],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "value": [
                    {
                     "type": "boolean_operator",
@@ -6570,7 +6570,7 @@ def test_expr_comma_list_3_items():
             "first_formatting": [],
             "second_formatting": [],
             "third_formatting": [],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "value": [{
                        "type": "boolean_operator",
                        "value": 'or',
@@ -6619,7 +6619,7 @@ def test_expr_comma_list_3_items():
             "first_formatting": [],
             "second_formatting": [],
             "third_formatting": [],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "value": [{
                        "type": "boolean_operator",
                        "value": 'or',
@@ -6668,7 +6668,7 @@ def test_expr_comma_list_3_items():
             "first_formatting": [],
             "second_formatting": [],
             "third_formatting": [],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "value": [{
                        "type": "boolean_operator",
                        "value": 'or',
@@ -6717,7 +6717,7 @@ def test_expr_comma_list_3_items():
             "first_formatting": [],
             "second_formatting": [],
             "third_formatting": [],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "value": [{
                        "type": "boolean_operator",
                        "value": 'or',
@@ -6766,7 +6766,7 @@ def test_expr_comma_list_3_items():
             "first_formatting": [],
             "second_formatting": [],
             "third_formatting": [],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "value": [{
                        "type": "boolean_operator",
                        "value": 'or',
@@ -6814,7 +6814,7 @@ def test_implicit_tuple_space():
             "first_formatting": [],
             "second_formatting": [],
             "third_formatting": [],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "value": [{
                 "type": "name",
                 "value": "a",
@@ -6847,7 +6847,7 @@ def test_implicit_tuple_one_item():
             "first_formatting": [],
             "second_formatting": [],
             "third_formatting": [],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "value": [{
                      "type": "name",
                      "value": "a",
@@ -6872,7 +6872,7 @@ def test_implicit_tuple_trailing_comma():
             "first_formatting": [],
             "second_formatting": [],
             "third_formatting": [],
-            "forth_formatting": [],
+            "fourth_formatting": [],
             "value": [{
                      "type": "name",
                      "value": "a",
@@ -6910,7 +6910,7 @@ def test_subscript_ellipsis():
                "first_formatting": [],
                "second_formatting": [],
                "third_formatting": [],
-               "forth_formatting": [],
+               "fourth_formatting": [],
                "value": {
                    "type": "ellipsis",
                    "first_formatting": [],
@@ -6939,7 +6939,7 @@ def test_subscript_ellipsis_space():
                "first_formatting": [],
                "second_formatting": [],
                "third_formatting": [{"type": "space", "value": "   "}],
-               "forth_formatting": [],
+               "fourth_formatting": [],
                "value": {
                    "type": "ellipsis",
                    "first_formatting": [{"type": "space", "value": " "}],
@@ -6966,7 +6966,7 @@ def test_subscript_test():
                "first_formatting": [],
                "second_formatting": [],
                "third_formatting": [],
-               "forth_formatting": [],
+               "fourth_formatting": [],
                "value": {
                    "type": "name",
                    "value": "b",
@@ -6992,7 +6992,7 @@ def test_subscript_slice_empty():
                "first_formatting": [],
                "second_formatting": [],
                "third_formatting": [],
-               "forth_formatting": [],
+               "fourth_formatting": [],
                "value": {
                    "type": "slice",
                    "lower": {},
@@ -7002,7 +7002,7 @@ def test_subscript_slice_empty():
                    "first_formatting": [],
                    "second_formatting": [],
                    "third_formatting": [],
-                   "forth_formatting": [],
+                   "fourth_formatting": [],
                }
             }]
            }])
@@ -7026,7 +7026,7 @@ def test_subscript_slice_empty_both():
                "first_formatting": [],
                "second_formatting": [],
                "third_formatting": [],
-               "forth_formatting": [],
+               "fourth_formatting": [],
                "value": {
                    "type": "slice",
                    "lower": {},
@@ -7036,7 +7036,7 @@ def test_subscript_slice_empty_both():
                    "first_formatting": [],
                    "second_formatting": [{"type": "space", "value": " "}],
                    "third_formatting": [],
-                   "forth_formatting": [],
+                   "fourth_formatting": [],
                }
             }]
            }])
@@ -7060,7 +7060,7 @@ def test_subscript_slice_one():
                "first_formatting": [],
                "second_formatting": [],
                "third_formatting": [],
-               "forth_formatting": [],
+               "fourth_formatting": [],
                "value": {
                    "type": "slice",
                    "lower": {
@@ -7073,7 +7073,7 @@ def test_subscript_slice_one():
                    "first_formatting": [{"type": "space", "value": " "}],
                    "second_formatting": [],
                    "third_formatting": [],
-                   "forth_formatting": [],
+                   "fourth_formatting": [],
                }
             }]
            }])
@@ -7098,7 +7098,7 @@ def test_subscript_slice_both_one():
                "first_formatting": [],
                "second_formatting": [],
                "third_formatting": [{"type": "space", "value": " "}],
-               "forth_formatting": [],
+               "fourth_formatting": [],
                "value": {
                    "type": "slice",
                    "lower": {
@@ -7111,7 +7111,7 @@ def test_subscript_slice_both_one():
                    "first_formatting": [{"type": "space", "value": " "}],
                    "second_formatting": [{"type": "space", "value": " "}],
                    "third_formatting": [],
-                   "forth_formatting": [],
+                   "fourth_formatting": [],
                }
             }]
            }])
@@ -7135,7 +7135,7 @@ def test_subscript_slice_upper():
                "first_formatting": [],
                "second_formatting": [],
                "third_formatting": [],
-               "forth_formatting": [],
+               "fourth_formatting": [],
                "value": {
                    "type": "slice",
                    "upper": {
@@ -7148,7 +7148,7 @@ def test_subscript_slice_upper():
                    "first_formatting": [],
                    "second_formatting": [],
                    "third_formatting": [],
-                   "forth_formatting": [],
+                   "fourth_formatting": [],
                }
             }]
            }])
@@ -7173,7 +7173,7 @@ def test_subscript_slice_upper_both():
                "first_formatting": [],
                "second_formatting": [],
                "third_formatting": [],
-               "forth_formatting": [],
+               "fourth_formatting": [],
                "value": {
                    "type": "slice",
                    "upper": {
@@ -7186,7 +7186,7 @@ def test_subscript_slice_upper_both():
                    "first_formatting": [],
                    "second_formatting": [],
                    "third_formatting": [{"type": "space", "value": " "}],
-                   "forth_formatting": [],
+                   "fourth_formatting": [],
                }
             }]
            }])
@@ -7211,7 +7211,7 @@ def test_subscript_slice_step():
                "first_formatting": [],
                "second_formatting": [],
                "third_formatting": [],
-               "forth_formatting": [],
+               "fourth_formatting": [],
                "value": {
                    "type": "slice",
                    "upper": {},
@@ -7224,7 +7224,7 @@ def test_subscript_slice_step():
                    "first_formatting": [],
                    "second_formatting": [{"type": "space", "value": " "}],
                    "third_formatting": [],
-                   "forth_formatting": [{"type": "space", "value": " "}],
+                   "fourth_formatting": [{"type": "space", "value": " "}],
                }
             }]
            }])
@@ -7249,7 +7249,7 @@ def test_subscript_slice_lower_upper():
                "first_formatting": [],
                "second_formatting": [],
                "third_formatting": [],
-               "forth_formatting": [],
+               "fourth_formatting": [],
                "value": {
                    "type": "slice",
                    "lower": {
@@ -7265,7 +7265,7 @@ def test_subscript_slice_lower_upper():
                    "first_formatting": [{"type": "space", "value": " "}],
                    "second_formatting": [{"type": "space", "value": " "}],
                    "third_formatting": [],
-                   "forth_formatting": [],
+                   "fourth_formatting": [],
                }
             }]
            }])
@@ -7291,7 +7291,7 @@ def test_subscript_slice_lower_upper_both():
                "first_formatting": [],
                "second_formatting": [],
                "third_formatting": [],
-               "forth_formatting": [],
+               "fourth_formatting": [],
                "value": {
                    "type": "slice",
                    "lower": {
@@ -7307,7 +7307,7 @@ def test_subscript_slice_lower_upper_both():
                    "first_formatting": [{"type": "space", "value": " "}],
                    "second_formatting": [{"type": "space", "value": " "}],
                    "third_formatting": [{"type": "space", "value": " "}],
-                   "forth_formatting": [],
+                   "fourth_formatting": [],
                }
             }]
            }])
@@ -7333,7 +7333,7 @@ def test_subscript_slice_lower_step():
                "first_formatting": [],
                "second_formatting": [],
                "third_formatting": [],
-               "forth_formatting": [],
+               "fourth_formatting": [],
                "value": {
                    "type": "slice",
                    "lower": {
@@ -7349,7 +7349,7 @@ def test_subscript_slice_lower_step():
                    "first_formatting": [],
                    "second_formatting": [],
                    "third_formatting": [],
-                   "forth_formatting": [{"type": "space", "value": " "}],
+                   "fourth_formatting": [{"type": "space", "value": " "}],
                }
             }]
            }])
@@ -7375,7 +7375,7 @@ def test_subscript_slice_upper_step():
                "first_formatting": [],
                "second_formatting": [],
                "third_formatting": [],
-               "forth_formatting": [],
+               "fourth_formatting": [],
                "value": {
                    "type": "slice",
                    "upper": {
@@ -7391,7 +7391,7 @@ def test_subscript_slice_upper_step():
                    "first_formatting": [],
                    "second_formatting": [],
                    "third_formatting": [],
-                   "forth_formatting": [{"type": "space", "value": " "}],
+                   "fourth_formatting": [{"type": "space", "value": " "}],
                }
             }]
            }])
@@ -7418,7 +7418,7 @@ def test_subscript_slice_lower_upper_step():
                "first_formatting": [],
                "second_formatting": [],
                "third_formatting": [],
-               "forth_formatting": [],
+               "fourth_formatting": [],
                "value": {
                    "type": "slice",
                    "lower": {
@@ -7437,7 +7437,7 @@ def test_subscript_slice_lower_upper_step():
                    "first_formatting": [{"type": "space", "value": " "}],
                    "second_formatting": [{"type": "space", "value": " "}],
                    "third_formatting": [{"type": "space", "value": " "}],
-                   "forth_formatting": [{"type": "space", "value": " "}],
+                   "fourth_formatting": [{"type": "space", "value": " "}],
                }
             }]
            }])
@@ -7462,13 +7462,13 @@ def test_subscript_test_implicit_tuple():
                "first_formatting": [],
                "second_formatting": [],
                "third_formatting": [],
-               "forth_formatting": [],
+               "fourth_formatting": [],
                "value": {
                     "type": "tuple",
                     "first_formatting": [],
                     "second_formatting": [],
                     "third_formatting": [],
-                    "forth_formatting": [],
+                    "fourth_formatting": [],
                     "with_parenthesis": False,
                     "value": [{
                         "type": "name",
@@ -7503,7 +7503,7 @@ def test_call_empty():
                     "first_formatting": [],
                     "second_formatting": [],
                     "third_formatting": [],
-                    "forth_formatting": [],
+                    "fourth_formatting": [],
                     "value": [],
                 }]
            }])
@@ -7526,12 +7526,12 @@ def test_call_empty_with_space():
                     "first_formatting": [{"type": "space", "value": " "}],
                     "second_formatting": [{"type": "space", "value": " "}],
                     "third_formatting": [],
-                    "forth_formatting": [],
+                    "fourth_formatting": [],
                     "value": [],
                 }]
            }])
 
-def test_call_empty_with_space_forth_formatting():
+def test_call_empty_with_space_fourth_formatting():
     "a ( )"
     parse_simple([
            ('NAME', 'a'),
@@ -7549,7 +7549,7 @@ def test_call_empty_with_space_forth_formatting():
                     "first_formatting": [{"type": "space", "value": " "}],
                     "second_formatting": [{"type": "space", "value": " "}],
                     "third_formatting": [],
-                    "forth_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
                     "value": [],
                 }]
            }])
@@ -7573,7 +7573,7 @@ def test_call_one():
                     "first_formatting": [],
                     "second_formatting": [],
                     "third_formatting": [],
-                    "forth_formatting": [],
+                    "fourth_formatting": [],
                     "value": [{
                         "name": {},
                         "first_formatting": [],
@@ -7608,7 +7608,7 @@ def test_call_two():
                     "first_formatting": [],
                     "second_formatting": [],
                     "third_formatting": [],
-                    "forth_formatting": [],
+                    "fourth_formatting": [],
                     "value": [{
                         "name": {},
                         "first_formatting": [],
@@ -7659,7 +7659,7 @@ def test_call_two_star_arg():
                     "first_formatting": [],
                     "second_formatting": [],
                     "third_formatting": [],
-                    "forth_formatting": [],
+                    "fourth_formatting": [],
                     "value": [{
                         "name": {},
                         "first_formatting": [],
@@ -7724,7 +7724,7 @@ def test_call_two_star_arg_kwarg():
                     "first_formatting": [],
                     "second_formatting": [],
                     "third_formatting": [],
-                    "forth_formatting": [],
+                    "fourth_formatting": [],
                     "value": [{
                         "name": {},
                         "first_formatting": [],
@@ -7794,7 +7794,7 @@ def test_call_named():
                     "first_formatting": [],
                     "second_formatting": [],
                     "third_formatting": [],
-                    "forth_formatting": [],
+                    "fourth_formatting": [],
                     "value": [{
                         "value": {
                             "type": "name",
@@ -7831,13 +7831,13 @@ def test_call_generator():
                     "first_formatting": [],
                     "second_formatting": [],
                     "third_formatting": [],
-                    "forth_formatting": [],
+                    "fourth_formatting": [],
                     "value": [{
                         "generators": [{
                             "first_formatting": [{"type": "space", "value": " "}],
                             "second_formatting": [{"type": "space", "value": " "}],
                             "third_formatting": [{"type": "space", "value": " "}],
-                            "forth_formatting": [{"type": "space", "value": " "}],
+                            "fourth_formatting": [{"type": "space", "value": " "}],
                             "type": "comprehension_loop",
                             "ifs": [],
                             "target": {

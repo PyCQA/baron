@@ -60,7 +60,7 @@ def include_operators(pg):
             "first_formatting": if_.hidden_tokens_before,
             "second_formatting": if_.hidden_tokens_after,
             "third_formatting": else_.hidden_tokens_before,
-            "forth_formatting": else_.hidden_tokens_after,
+            "fourth_formatting": else_.hidden_tokens_after,
         }
 
     @pg.production("or_test : and_test OR or_test")
@@ -210,7 +210,7 @@ def include_operators(pg):
             "first_formatting": left.hidden_tokens_before,
             "second_formatting": left.hidden_tokens_after,
             "third_formatting": right.hidden_tokens_before,
-            "forth_formatting": right.hidden_tokens_after,
+            "fourth_formatting": right.hidden_tokens_after,
         }]
 
     @pg.production("trailer : LEFT_SQUARE_BRACKET subscript RIGHT_SQUARE_BRACKET")
@@ -222,7 +222,7 @@ def include_operators(pg):
             "first_formatting": left.hidden_tokens_before,
             "second_formatting": left.hidden_tokens_after,
             "third_formatting": right.hidden_tokens_before,
-            "forth_formatting": right.hidden_tokens_after,
+            "fourth_formatting": right.hidden_tokens_after,
         }]
 
     @pg.production("subscript : DOT DOT DOT")
@@ -249,7 +249,7 @@ def include_operators(pg):
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
             "third_formatting": [],
-            "forth_formatting": [],
+            "fourth_formatting": [],
         }
 
     @pg.production("slice : COLON COLON")
@@ -263,7 +263,7 @@ def include_operators(pg):
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
             "third_formatting": colon2.hidden_tokens_before,
-            "forth_formatting": colon2.hidden_tokens_after,
+            "fourth_formatting": colon2.hidden_tokens_after,
         }
 
     @pg.production("slice : test COLON")
@@ -277,7 +277,7 @@ def include_operators(pg):
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
             "third_formatting": [],
-            "forth_formatting": [],
+            "fourth_formatting": [],
         }
 
     @pg.production("slice : test COLON COLON")
@@ -291,7 +291,7 @@ def include_operators(pg):
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
             "third_formatting": colon2.hidden_tokens_before,
-            "forth_formatting": colon2.hidden_tokens_after,
+            "fourth_formatting": colon2.hidden_tokens_after,
         }
 
     @pg.production("slice : COLON test")
@@ -305,7 +305,7 @@ def include_operators(pg):
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
             "third_formatting": [],
-            "forth_formatting": [],
+            "fourth_formatting": [],
         }
 
     @pg.production("slice : COLON test COLON")
@@ -319,7 +319,7 @@ def include_operators(pg):
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
             "third_formatting": colon2.hidden_tokens_before,
-            "forth_formatting": colon2.hidden_tokens_after,
+            "fourth_formatting": colon2.hidden_tokens_after,
         }
 
     @pg.production("slice : COLON COLON test")
@@ -333,7 +333,7 @@ def include_operators(pg):
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
             "third_formatting": colon2.hidden_tokens_before,
-            "forth_formatting": colon2.hidden_tokens_after,
+            "fourth_formatting": colon2.hidden_tokens_after,
         }
 
     @pg.production("slice : test COLON test")
@@ -347,7 +347,7 @@ def include_operators(pg):
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
             "third_formatting": [],
-            "forth_formatting": [],
+            "fourth_formatting": [],
         }
 
     @pg.production("slice : test COLON test COLON")
@@ -361,7 +361,7 @@ def include_operators(pg):
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
             "third_formatting": colon2.hidden_tokens_before,
-            "forth_formatting": colon2.hidden_tokens_after,
+            "fourth_formatting": colon2.hidden_tokens_after,
         }
 
     @pg.production("slice : test COLON COLON test")
@@ -375,7 +375,7 @@ def include_operators(pg):
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
             "third_formatting": colon2.hidden_tokens_before,
-            "forth_formatting": colon2.hidden_tokens_after,
+            "fourth_formatting": colon2.hidden_tokens_after,
         }
 
     @pg.production("slice : COLON test COLON test")
@@ -389,7 +389,7 @@ def include_operators(pg):
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
             "third_formatting": colon2.hidden_tokens_before,
-            "forth_formatting": colon2.hidden_tokens_after,
+            "fourth_formatting": colon2.hidden_tokens_after,
         }
 
     @pg.production("slice : test COLON test COLON test")
@@ -403,5 +403,5 @@ def include_operators(pg):
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
             "third_formatting": colon2.hidden_tokens_before,
-            "forth_formatting": colon2.hidden_tokens_after,
+            "fourth_formatting": colon2.hidden_tokens_after,
         }

@@ -90,8 +90,8 @@ def include_primivites(pg, print_function):
             "first_formatting": raise_.hidden_tokens_after,
             "second_formatting": [],
             "third_formatting": [],
-            "forth_formatting": [],
-            "fith_formatting": []
+            "fourth_formatting": [],
+            "fifth_formatting": []
         }
 
 
@@ -105,8 +105,8 @@ def include_primivites(pg, print_function):
             "first_formatting": raise_.hidden_tokens_after,
             "second_formatting": [],
             "third_formatting": [],
-            "forth_formatting": [],
-            "fith_formatting": []
+            "fourth_formatting": [],
+            "fifth_formatting": []
         }
 
 
@@ -120,8 +120,8 @@ def include_primivites(pg, print_function):
             "first_formatting": raise_.hidden_tokens_after,
             "second_formatting": comma.hidden_tokens_before,
             "third_formatting": comma.hidden_tokens_after,
-            "forth_formatting": [],
-            "fith_formatting": []
+            "fourth_formatting": [],
+            "fifth_formatting": []
         }
 
 
@@ -135,8 +135,8 @@ def include_primivites(pg, print_function):
             "first_formatting": raise_.hidden_tokens_after,
             "second_formatting": comma.hidden_tokens_before,
             "third_formatting": comma.hidden_tokens_after,
-            "forth_formatting": comma2.hidden_tokens_before,
-            "fith_formatting": comma2.hidden_tokens_after
+            "fourth_formatting": comma2.hidden_tokens_before,
+            "fifth_formatting": comma2.hidden_tokens_after
         }
 
 
@@ -150,8 +150,8 @@ def include_primivites(pg, print_function):
             "first_formatting": exec_.hidden_tokens_after,
             "second_formatting": [],
             "third_formatting": [],
-            "forth_formatting": [],
-            "fith_formatting": []
+            "fourth_formatting": [],
+            "fifth_formatting": []
         }
 
 
@@ -165,8 +165,8 @@ def include_primivites(pg, print_function):
             "first_formatting": exec_.hidden_tokens_after,
             "second_formatting": in_.hidden_tokens_before,
             "third_formatting": in_.hidden_tokens_after,
-            "forth_formatting": [],
-            "fith_formatting": []
+            "fourth_formatting": [],
+            "fifth_formatting": []
         }
 
 
@@ -180,8 +180,8 @@ def include_primivites(pg, print_function):
             "first_formatting": exec_.hidden_tokens_after,
             "second_formatting": in_.hidden_tokens_before,
             "third_formatting": in_.hidden_tokens_after,
-            "forth_formatting": comma.hidden_tokens_before,
-            "fith_formatting": comma.hidden_tokens_after
+            "fourth_formatting": comma.hidden_tokens_before,
+            "fifth_formatting": comma.hidden_tokens_after
         }
 
 
