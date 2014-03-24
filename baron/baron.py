@@ -41,6 +41,7 @@ def parse(source_code, print_function=None):
         print_function_finder.visit(python_ast_parse(source_code))
         print_function = print_function_finder.print_function
 
+    # Python syntax requires source code to end with an ENDL token
     if source_code and source_code[-1] != "\n":
         source_code += "\n"
         return _parse(tokenize(source_code, print_function), print_function)[:-1]
