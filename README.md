@@ -138,12 +138,6 @@ In [6]: show("a +  b")
             "type": "name", 
             "value": "a"
         }
-    }, 
-    {
-        "indent": "", 
-        "formatting": [], 
-        "type": "endl", 
-        "value": "\n"
     }
 ]
 ```
@@ -173,9 +167,6 @@ looks like this:
 
 The exact way to render a node can be find in the [code of the dumps
 function](https://github.com/Psycojoker/baron/blob/master/baron/dumper.py).
-
-If there isn't any "\n" at the end of the parsed string, Baron will add one to
-respect Python grammar. This is the <code>endl</code> node here.
 
 Tests
 =====
