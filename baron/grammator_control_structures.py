@@ -75,7 +75,7 @@ def include_control_structures(pg):
             "second_formatting": as_.hidden_tokens_before,
             "third_formatting": as_.hidden_tokens_after,
             "forth_formatting": colon.hidden_tokens_before,
-            "fith_formatting": colon.hidden_tokens_after,
+            "fifth_formatting": colon.hidden_tokens_after,
             "delimiteur": "as",
             "target": test2,
             "exception": test,
@@ -90,7 +90,7 @@ def include_control_structures(pg):
             "second_formatting": comma.hidden_tokens_before,
             "third_formatting": comma.hidden_tokens_after,
             "forth_formatting": colon.hidden_tokens_before,
-            "fith_formatting": colon.hidden_tokens_after,
+            "fifth_formatting": colon.hidden_tokens_after,
             "delimiteur": ",",
             "target": test2,
             "exception": test,
@@ -105,7 +105,7 @@ def include_control_structures(pg):
             "second_formatting": [],
             "third_formatting": [],
             "forth_formatting": colon.hidden_tokens_before,
-            "fith_formatting": colon.hidden_tokens_after,
+            "fifth_formatting": colon.hidden_tokens_after,
             "delimiteur": "",
             "target": {},
             "exception": {},
@@ -120,7 +120,7 @@ def include_control_structures(pg):
             "second_formatting": [],
             "third_formatting": [],
             "forth_formatting": colon.hidden_tokens_before,
-            "fith_formatting": colon.hidden_tokens_after,
+            "fifth_formatting": colon.hidden_tokens_after,
             "delimiteur": "",
             "target": {},
             "exception": test,
@@ -157,7 +157,7 @@ def include_control_structures(pg):
                  "second_formatting": in_.hidden_tokens_before,
                  "third_formatting": in_.hidden_tokens_after,
                  "forth_formatting": colon.hidden_tokens_before,
-                 "fith_formatting": colon.hidden_tokens_after,
+                 "fifth_formatting": colon.hidden_tokens_after,
                }]
 
     @pg.production("for_stmt : FOR exprlist IN testlist COLON suite else_stmt")
@@ -172,7 +172,7 @@ def include_control_structures(pg):
                  "second_formatting": in_.hidden_tokens_before,
                  "third_formatting": in_.hidden_tokens_after,
                  "forth_formatting": colon.hidden_tokens_before,
-                 "fith_formatting": colon.hidden_tokens_after,
+                 "fifth_formatting": colon.hidden_tokens_after,
                }]
 
     @pg.production("while_stmt : WHILE test COLON suite")

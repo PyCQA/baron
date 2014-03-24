@@ -154,7 +154,7 @@ def class_(node):
     yield dump_node_list(node["forth_formatting"])
     if node["parenthesis"]:
         yield ")"
-    yield dump_node_list(node["fith_formatting"])
+    yield dump_node_list(node["fifth_formatting"])
     yield ":"
     yield dump_node_list(node["sixth_formatting"])
     yield dump_node_list(node["value"])
@@ -220,7 +220,7 @@ def funcdef(node):
             yield dump_node(n)
     yield dump_node_list(node["forth_formatting"])
     yield ")"
-    yield dump_node_list(node["fith_formatting"])
+    yield dump_node_list(node["fifth_formatting"])
     yield ":"
     yield dump_node_list(node["sixth_formatting"])
     yield dump_node_list(node["value"])
@@ -287,7 +287,7 @@ def raise_(node):
     if node["traceback"]:
         yield dump_node_list(node["forth_formatting"])
         yield ","
-        yield dump_node_list(node["fith_formatting"])
+        yield dump_node_list(node["fifth_formatting"])
         yield dump_node(node["traceback"])
 
 
@@ -519,7 +519,7 @@ def exec_(node):
     if node["locals"]:
         yield dump_node_list(node["forth_formatting"])
         yield ","
-        yield dump_node_list(node["fith_formatting"])
+        yield dump_node_list(node["fifth_formatting"])
         yield dump_node(node["locals"])
 
 
@@ -554,7 +554,7 @@ def for_(node):
     yield dump_node(node["target"])
     yield dump_node_list(node["forth_formatting"])
     yield ":"
-    yield dump_node_list(node["fith_formatting"])
+    yield dump_node_list(node["fifth_formatting"])
     yield dump_node_list(node["value"])
     if node["else"]:
         yield dump_node(node["else"])
@@ -633,7 +633,7 @@ def except_(node):
         yield dump_node(node["target"])
     yield dump_node_list(node["forth_formatting"])
     yield ":"
-    yield dump_node_list(node["fith_formatting"])
+    yield dump_node_list(node["fifth_formatting"])
     yield dump_node_list(node["value"])
 
 

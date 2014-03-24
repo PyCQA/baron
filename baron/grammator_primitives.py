@@ -91,7 +91,7 @@ def include_primivites(pg, print_function):
             "second_formatting": [],
             "third_formatting": [],
             "forth_formatting": [],
-            "fith_formatting": []
+            "fifth_formatting": []
         }
 
 
@@ -106,7 +106,7 @@ def include_primivites(pg, print_function):
             "second_formatting": [],
             "third_formatting": [],
             "forth_formatting": [],
-            "fith_formatting": []
+            "fifth_formatting": []
         }
 
 
@@ -121,7 +121,7 @@ def include_primivites(pg, print_function):
             "second_formatting": comma.hidden_tokens_before,
             "third_formatting": comma.hidden_tokens_after,
             "forth_formatting": [],
-            "fith_formatting": []
+            "fifth_formatting": []
         }
 
 
@@ -136,7 +136,7 @@ def include_primivites(pg, print_function):
             "second_formatting": comma.hidden_tokens_before,
             "third_formatting": comma.hidden_tokens_after,
             "forth_formatting": comma2.hidden_tokens_before,
-            "fith_formatting": comma2.hidden_tokens_after
+            "fifth_formatting": comma2.hidden_tokens_after
         }
 
 
@@ -151,7 +151,7 @@ def include_primivites(pg, print_function):
             "second_formatting": [],
             "third_formatting": [],
             "forth_formatting": [],
-            "fith_formatting": []
+            "fifth_formatting": []
         }
 
 
@@ -166,7 +166,7 @@ def include_primivites(pg, print_function):
             "second_formatting": in_.hidden_tokens_before,
             "third_formatting": in_.hidden_tokens_after,
             "forth_formatting": [],
-            "fith_formatting": []
+            "fifth_formatting": []
         }
 
 
@@ -181,7 +181,7 @@ def include_primivites(pg, print_function):
             "second_formatting": in_.hidden_tokens_before,
             "third_formatting": in_.hidden_tokens_after,
             "forth_formatting": comma.hidden_tokens_before,
-            "fith_formatting": comma.hidden_tokens_after
+            "fifth_formatting": comma.hidden_tokens_after
         }
 
 
