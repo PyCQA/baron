@@ -43,7 +43,12 @@ def parse(source_code, print_function=None):
 
     if source_code and source_code[-1] != "\n":
         source_code += "\n"
-        return _parse(tokenize(source_code, print_function), print_function)[:-1]
+        to_return = _parse(tokenize(source_code, print_function), print_function)
+
+        if to_return[-1]["type"] == "endl":
+            return to_return[:-1]
+        else:
+            return to_return
 
     return _parse(tokenize(source_code, print_function), print_function)
 
