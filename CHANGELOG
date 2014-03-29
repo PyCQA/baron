@@ -12,6 +12,7 @@ Planned:
 
 - de-uniformise call_arguments and function_arguments node, this is just
   creating more problems that anything else
+- fix https://github.com/Psycojoker/redbaron/issues/4
 
 0.1.1 (2014-03-23)
 ------------------
