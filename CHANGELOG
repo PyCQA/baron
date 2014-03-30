@@ -1,6 +1,14 @@
 Changelog
 =========
 
+0.2 (unreleased)
+----------------
+
+Planned:
+- dumper class
+- dictionary that contains the order un which the items of a node must be
+  rendered
+
 0.1.2 (unreleased)
 ------------------
 
