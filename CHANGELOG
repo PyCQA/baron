@@ -15,11 +15,11 @@ Planned:
 - baron.dumps now accept a signle FST node, it was only working with a list of
   FST nodes
 - don't add a endl node at the end if not present in the input string
+- de-uniformise call_arguments and function_arguments node, this is just
+  creating more problems that anything else
 
 Planned:
 
-- de-uniformise call_arguments and function_arguments node, this is just
-  creating more problems that anything else
 - fix https://github.com/Psycojoker/redbaron/issues/4
 - fix the fact that baron can't parse "{1,}" (but "{1}" is working)
 
