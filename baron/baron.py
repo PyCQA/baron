@@ -45,8 +45,10 @@ def parse(source_code, print_function=None):
         source_code += "\n"
         to_return = _parse(tokenize(source_code, print_function), print_function)
 
-        if to_return[-1]["type"] == "endl":
+        if to_return[-1]["type"] == "endl" and not to_return[-1]["formatting"]:
             return to_return[:-1]
+        elif to_return[-1]["type"] == "endl" and to_return[-1]["formatting"]:
+            return to_return[:-1] + to_return[-1]["formatting"]
         else:
             return to_return
 

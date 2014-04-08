@@ -28,27 +28,27 @@ def test_binary_operator():
 
 
 def test_while():
-    check_dumps("while a  : pass")
+    check_dumps("while a  : pass\n")
 
 
 def test_while_else():
-    check_dumps("while a  : pass\nelse : pass")
+    check_dumps("while a  : pass\nelse : pass\n")
 
 
 def test_while_indent():
-    check_dumps("while a:\n    pass")
+    check_dumps("while a:\n    pass\n")
 
 
 def test_if():
-    check_dumps("if a:\n    pass")
+    check_dumps("if a:\n    pass\n")
 
 
 def test_if_elif():
-    check_dumps("if a: \n    pass\nelif b: pass")
+    check_dumps("if a: \n    pass\nelif b: pass\n")
 
 
 def test_if_elif_else():
-    check_dumps("if a: \n    pass\nelif b: pass\nelse :   \n	pouet")
+    check_dumps("if a: \n    pass\nelif b: pass\nelse :   \n	pouet\n")
 
 
 def test_import():
@@ -97,11 +97,11 @@ def test_dict_argument():
 
 
 def test_list_argument_funcdef():
-    check_dumps("def caramba(* a): pass")
+    check_dumps("def caramba(* a): pass\n")
 
 
 def test_dict_argument_funcdef():
-    check_dumps("def caramba(** a): pass")
+    check_dumps("def caramba(** a): pass\n")
 
 
 def test_string():
@@ -109,19 +109,19 @@ def test_string():
 
 
 def test_funcdef():
-    check_dumps("def a  ( ) : pass")
+    check_dumps("def a  ( ) : pass\n")
 
 
 def test_funcdef_indent():
-    check_dumps("def a  ( ) : \n    pass")
+    check_dumps("def a  ( ) : \n    pass\n")
 
 
 def test_funcdef_parameter():
-    check_dumps("def a  ( b ) : pass")
+    check_dumps("def a  ( b ) : pass\n")
 
 
 def test_funcdef_parameter_named():
-    check_dumps("def a  ( b  , c = qsd ) : pass")
+    check_dumps("def a  ( b  , c = qsd ) : pass\n")
 
 
 def test_return():
@@ -170,15 +170,15 @@ def test_binary_raw_string():
 
 
 def test_for():
-    check_dumps("for i in pouet : pass")
+    check_dumps("for i in pouet : pass\n")
 
 
 def test_for_indent():
-    check_dumps("for i in pouet : \n    pass")
+    check_dumps("for i in pouet : \n    pass\n")
 
 
 def test_for_else():
-    check_dumps("for i in pouet : pass\nelse: pass")
+    check_dumps("for i in pouet : pass\nelse: pass\n")
 
 
 def test_lambda():
@@ -190,27 +190,27 @@ def test_lambda_args():
 
 
 def test_try_finally():
-    check_dumps("try : pass\nfinally : pass")
+    check_dumps("try : pass\nfinally : pass\n")
 
 
 def test_try_except():
-    check_dumps("try : pass\nexcept Exception : pass")
+    check_dumps("try : pass\nexcept Exception : pass\n")
 
 
 def test_try_except_comma():
-    check_dumps("try : pass\nexcept Exception ,   d : pass")
+    check_dumps("try : pass\nexcept Exception ,   d : pass\n")
 
 
 def test_try_except_as():
-    check_dumps("try : pass\nexcept Exception     as   d : pass")
+    check_dumps("try : pass\nexcept Exception     as   d : pass\n")
 
 
 def test_try_except_finally():
-    check_dumps("try : pass\nexcept Exception : pass\nfinally : pass")
+    check_dumps("try : pass\nexcept Exception : pass\nfinally : pass\n")
 
 
 def test_try_except_finally_else():
-    check_dumps("try : pass\nexcept Exception : pass\nelse: pouet\nfinally : pass")
+    check_dumps("try : pass\nexcept Exception : pass\nelse: pouet\nfinally : pass\n")
 
 
 def test_comment():
@@ -242,11 +242,11 @@ def test_comparison():
 
 
 def test_with():
-    check_dumps("with a : \n    pass")
+    check_dumps("with a : \n    pass\n")
 
 
 def test_with_as():
-    check_dumps("with a as b : \n    pass")
+    check_dumps("with a as b : \n    pass\n")
 
 
 def test_dict_empty():
@@ -274,27 +274,27 @@ def test_yield():
 
 
 def test_decorator():
-    check_dumps("@pouet\ndef a(): pass")
+    check_dumps("@pouet\ndef a(): pass\n")
 
 
 def test_decorator_call():
-    check_dumps("@pouet('pouet')\ndef a(): pass")
+    check_dumps("@pouet('pouet')\ndef a(): pass\n")
 
 
 def test_class():
-    check_dumps("class A: pass")
+    check_dumps("class A: pass\n")
 
 
 def test_class_parenthesis():
-    check_dumps("class A(): pass")
+    check_dumps("class A(): pass\n")
 
 
 def test_class_parenthesis_inherit():
-    check_dumps("class A(B): pass")
+    check_dumps("class A(B): pass\n")
 
 
 def test_class_parenthesis_inherit_decorated():
-    check_dumps("@pouet\nclass A(B): pass")
+    check_dumps("@pouet\nclass A(B): pass\n")
 
 
 def test_tuple():
@@ -326,7 +326,7 @@ def test_associative_parenthesis():
 
 
 def test_fplist():
-    check_dumps("def a((b, c)): pass")
+    check_dumps("def a((b, c)): pass\n")
 
 
 def test_break():
@@ -510,15 +510,15 @@ def test_from_import_star_comment():
 
 
 def test_class_formatting():
-    check_dumps("class A(pouet) : \n    pass")
+    check_dumps("class A(pouet) : \n    pass\n")
 
 
 def test_backslash_not_in_formatting():
-    check_dumps("if a not \\\n      in b: pass")
+    check_dumps("if a not \\\n      in b: pass\n")
 
 
 def test_try_import_after_colon():
-    check_dumps("try: import stuff\nexcept: pass")
+    check_dumps("try: import stuff\nexcept: pass\n")
 
 
 def test_single_object():
