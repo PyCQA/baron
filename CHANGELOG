@@ -9,7 +9,7 @@ Planned:
 - dictionary that contains the order un which the items of a node must be
   rendered
 
-0.1.2 (unreleased)
+0.1.2 (2014-04-08)
 ------------------
 
 - baron.dumps now accept a signle FST node, it was only working with a list of
