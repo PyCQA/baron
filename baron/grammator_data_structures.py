@@ -228,6 +228,7 @@ def include_data_structures(pg):
             "fourth_formatting": right_bracket.hidden_tokens_after,
             "result": {
                 "key": test,
+                "type": "dictitem",
                 "value": test2,
                 "first_formatting": colon.hidden_tokens_before,
                 "second_formatting": colon.hidden_tokens_after,

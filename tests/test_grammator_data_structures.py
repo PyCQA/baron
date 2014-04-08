@@ -1204,6 +1204,7 @@ def test_dict_comprehension():
                     "value": "a",
                 },
                 "first_formatting": [],
+                "type": "dictitem",
                 "second_formatting": [{"type": "space", "value": " "}],
                 "value": {
                     "type": "name",
