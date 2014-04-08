@@ -122,11 +122,7 @@ def call(node):
     yield dump_node_list(node["first_formatting"])
     yield "("
     yield dump_node_list(node["second_formatting"])
-    for n in node["value"]:
-        if n["type"] == "argument":
-            yield "".join(list(call_argument(n)))
-        else:
-            yield dump_node(n)
+    yield dump_node_list(node["value"])
     yield dump_node_list(node["third_formatting"])
     yield ")"
     yield dump_node_list(node["fourth_formatting"])
@@ -213,11 +209,7 @@ def funcdef(node):
     yield dump_node_list(node["second_formatting"])
     yield "("
     yield dump_node_list(node["third_formatting"])
-    for n in node["arguments"]:
-        if n["type"] == "argument":
-            yield "".join(list(funcdef_argument(n)))
-        else:
-            yield dump_node(n)
+    yield dump_node_list(node["arguments"])
     yield dump_node_list(node["fourth_formatting"])
     yield ")"
     yield dump_node_list(node["fifth_formatting"])
@@ -226,6 +218,7 @@ def funcdef(node):
     yield dump_node_list(node["value"])
 
 
+@node()
 def call_argument(node):
     if node["name"]:
         yield node["name"]
@@ -237,8 +230,8 @@ def call_argument(node):
         yield dump_node(node["value"])
 
 
-@node("argument")
-def funcdef_argument(node):
+@node()
+def def_argument(node):
     if node["value"]:
         yield node["name"]
         yield dump_node_list(node["first_formatting"])
