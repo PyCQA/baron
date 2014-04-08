@@ -1001,7 +1001,7 @@ def test_list_comprehension_lambda_with_arguments():
                         "value": {},
                         "first_formatting": [],
                         "second_formatting": [],
-                        "type": "argument",
+                        "type": "def_argument",
                         "name": "argument",
                    }],
                    "value": {

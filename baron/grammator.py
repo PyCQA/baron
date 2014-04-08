@@ -375,7 +375,7 @@ def generate_parse(print_function):
     @pg.production("argument : test")
     def argument_one((name,)):
         return [{
-            "type": "argument",
+            "type": "call_argument",
             "first_formatting": [],
             "second_formatting": [],
             "name": {},
@@ -386,7 +386,7 @@ def generate_parse(print_function):
     @pg.production("parameter : name")
     def parameter_one((name,)):
         return [{
-            "type": "argument",
+            "type": "def_argument",
             "first_formatting": [],
             "second_formatting": [],
             "value": {},
@@ -409,7 +409,7 @@ def generate_parse(print_function):
     @pg.production("parameter : LEFT_PARENTHESIS fplist RIGHT_PARENTHESIS")
     def parameter_fplist((left_parenthesis, fplist, right_parenthesis)):
         return [{
-            "type": "argument",
+            "type": "def_argument",
             "first_formatting": [],
             "second_formatting": [],
             "value": {},
@@ -442,7 +442,7 @@ def generate_parse(print_function):
     @pg.production("argument : test EQUAL test")
     def named_argument((name, equal, test)):
         return [{
-            "type": "argument",
+            "type": "call_argument",
             "first_formatting": equal.hidden_tokens_before,
             "second_formatting": equal.hidden_tokens_after,
             "value": test,
@@ -452,7 +452,7 @@ def generate_parse(print_function):
     @pg.production("parameter : name EQUAL test")
     def parameter_with_default((name, equal, test)):
         return [{
-            "type": "argument",
+            "type": "def_argument",
             "first_formatting": equal.hidden_tokens_before,
             "second_formatting": equal.hidden_tokens_after,
             "value": test,

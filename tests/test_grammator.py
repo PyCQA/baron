@@ -352,7 +352,7 @@ def test_funcdef_stmt_one_parameter_indent():
             "fifth_formatting": [{"type": "space", "value": " "}],
             "sixth_formatting": [],
             "arguments": [{
-                "type": "argument",
+                "type": "def_argument",
                 "first_formatting": [],
                 "second_formatting": [],
                 "name": "x",
@@ -403,7 +403,7 @@ def test_funcdef_stmt_one_parameter_comma_indent():
             "fifth_formatting": [{"type": "space", "value": " "}],
             "sixth_formatting": [],
             "arguments": [{
-                "type": "argument",
+                "type": "def_argument",
                 "first_formatting": [],
                 "second_formatting": [],
                 "name": "x",
@@ -460,7 +460,7 @@ def test_funcdef_stmt_one_parameter_comma_default_indent():
             "fifth_formatting": [{"type": "space", "value": " "}],
             "sixth_formatting": [],
             "arguments": [{
-                "type": "argument",
+                "type": "def_argument",
                 "first_formatting": [],
                 "second_formatting": [],
                 "name": "x",
@@ -1038,7 +1038,7 @@ def test_decorator_parenthesis_arg():
                         "name": {},
                         "first_formatting": [],
                         "second_formatting": [],
-                        "type": "argument",
+                        "type": "call_argument",
                         "value": {
                             "type": "name",
                             "value": "c",
@@ -1299,7 +1299,7 @@ def test_fplist():
             "sixth_formatting": [{"type": "space", "value": " "}],
             "type": "funcdef",
             "arguments": [{
-                "type": "argument",
+                "type": "def_argument",
                 "value": {},
                 "first_formatting": [],
                 "second_formatting": [],
@@ -1311,7 +1311,7 @@ def test_fplist():
                     "fourth_formatting": [],
                     "with_parenthesis": True,
                     "value": [{
-                        "type": "argument",
+                        "type": "def_argument",
                         "value": {},
                         "first_formatting": [],
                         "second_formatting": [],
@@ -1362,7 +1362,7 @@ def test_fplist_two():
             "sixth_formatting": [{"type": "space", "value": " "}],
             "type": "funcdef",
             "arguments": [{
-                "type": "argument",
+                "type": "def_argument",
                 "value": {},
                 "first_formatting": [],
                 "second_formatting": [],
@@ -1374,7 +1374,7 @@ def test_fplist_two():
                     "fourth_formatting": [],
                     "with_parenthesis": True,
                     "value": [{
-                        "type": "argument",
+                        "type": "def_argument",
                         "value": {},
                         "first_formatting": [],
                         "second_formatting": [],
@@ -1384,7 +1384,7 @@ def test_fplist_two():
                         "first_formatting": [],
                         "second_formatting": [],
                     },{
-                        "type": "argument",
+                        "type": "def_argument",
                         "value": {},
                         "first_formatting": [],
                         "second_formatting": [],
@@ -1436,7 +1436,7 @@ def test_fplist_alone():
                 "fourth_formatting": [],
                 "value": {
                     "value": {},
-                    "type": "argument",
+                    "type": "def_argument",
                     "first_formatting": [],
                     "second_formatting": [],
                     "name": "b",

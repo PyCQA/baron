@@ -7578,7 +7578,7 @@ def test_call_one():
                         "name": {},
                         "first_formatting": [],
                         "second_formatting": [],
-                        "type": "argument",
+                        "type": "call_argument",
                         "value": {
                             "type": "name",
                             "value": "b",
@@ -7613,7 +7613,7 @@ def test_call_two():
                         "name": {},
                         "first_formatting": [],
                         "second_formatting": [],
-                        "type": "argument",
+                        "type": "call_argument",
                         "value": {
                             "type": "name",
                             "value": "b",
@@ -7626,7 +7626,7 @@ def test_call_two():
                         "name": {},
                         "first_formatting": [],
                         "second_formatting": [],
-                        "type": "argument",
+                        "type": "call_argument",
                         "value": {
                             "type": "name",
                             "value": "c",
@@ -7664,7 +7664,7 @@ def test_call_two_star_arg():
                         "name": {},
                         "first_formatting": [],
                         "second_formatting": [],
-                        "type": "argument",
+                        "type": "call_argument",
                         "value": {
                             "type": "name",
                             "value": "b",
@@ -7677,7 +7677,7 @@ def test_call_two_star_arg():
                         "name": {},
                         "first_formatting": [],
                         "second_formatting": [],
-                        "type": "argument",
+                        "type": "call_argument",
                         "value": {
                             "type": "name",
                             "value": "c",
@@ -7729,7 +7729,7 @@ def test_call_two_star_arg_kwarg():
                         "name": {},
                         "first_formatting": [],
                         "second_formatting": [],
-                        "type": "argument",
+                        "type": "call_argument",
                         "value": {
                             "type": "name",
                             "value": "b",
@@ -7742,7 +7742,7 @@ def test_call_two_star_arg_kwarg():
                         "name": {},
                         "first_formatting": [],
                         "second_formatting": [],
-                        "type": "argument",
+                        "type": "call_argument",
                         "value": {
                             "type": "name",
                             "value": "c",
@@ -7802,7 +7802,7 @@ def test_call_named():
                         },
                         "first_formatting": [{"type": "space", "value": " "}],
                         "second_formatting": [{"type": "space", "value": " "}],
-                        "type": "argument",
+                        "type": "call_argument",
                         "name": "b",
                     }],
                 }]
