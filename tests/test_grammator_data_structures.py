@@ -322,6 +322,30 @@ def test_set_one():
             }],
           }])
 
+def test_set_one_comma():
+    "{a,}"
+    parse_simple([
+           ('LEFT_BRACKET', '{', [], []),
+           ('NAME', 'a'),
+           ('COMMA', ','),
+           ('RIGHT_BRACKET', '}', [], []),
+          ],
+          [{
+            "type": "set",
+            "first_formatting": [],
+            "second_formatting": [],
+            "third_formatting": [],
+            "fourth_formatting": [],
+            "value": [{
+                "type": "name",
+                "value": "a",
+            },{
+                "type": "comma",
+                "first_formatting": [],
+                "second_formatting": [],
+            }],
+          }])
+
 def test_set_more():
     "{a, b, c}"
     parse_simple([
