@@ -261,18 +261,6 @@ def test_dict_more():
     check_dumps("{ a : b   ,\n123  :     'pouet'  }")
 
 
-def test_set_one():
-    check_dumps("{a}")
-
-
-def test_set_one_comma():
-    check_dumps("{a,}")
-
-
-def test_set_one_more():
-    check_dumps("{ a  ,   b      }")
-
-
 def test_ternary_operator():
     check_dumps("a   if        b  else      c")
 
@@ -419,6 +407,18 @@ if sys.version_info >= (2, 7):
 
     def test_set_comprehension_ifs_more():
         check_dumps("{ x  for   y       in  z   if a   if  qsd  for ss in gfgr    }")
+
+
+    def test_set_one():
+        check_dumps("{a}")
+
+
+    def test_set_one_comma():
+        check_dumps("{a,}")
+
+
+    def test_set_one_more():
+        check_dumps("{ a  ,   b      }")
 
 
 def test_argument_generator_comprehension():
