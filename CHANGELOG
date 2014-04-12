@@ -9,6 +9,12 @@ Planned:
 - dictionary that contains the order un which the items of a node must be
   rendered
 
+0.1.3 (unreleased)
+------------------
+
+- set sugar syntaxic notation wasn't handled by the dumper (apparently no one
+  use this on pypi top 100)
+
 0.1.2 (2014-04-08)
 ------------------
 
