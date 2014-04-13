@@ -9,7 +9,7 @@ Planned:
 - dictionary that contains the order un which the items of a node must be
   rendered
 
-0.1.3 (unreleased)
+0.1.3 (2014-04-13)
 ------------------
 
 - set sugar syntaxic notation wasn't handled by the dumper (apparently no one
