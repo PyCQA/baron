@@ -1,7 +1,7 @@
 from .token import BaronToken
 from .parser import BaronParserGenerator
 
-from .tokenizer import TOKENS, KEYWORDS, tokenize
+from .tokenizer import TOKENS, KEYWORDS, tokenize, tokenize_current_keywords
 from .utils import create_node_from_token
 from .grammator_imports import include_imports
 from .grammator_control_structures import include_control_structures
@@ -11,10 +11,7 @@ from .grammator_data_structures import include_data_structures
 
 
 def generate_parse(print_function):
-    if print_function:
-        pg = BaronParserGenerator(tuple(map(lambda x: x.upper(), filter(lambda x: x != "print", KEYWORDS))) + tuple([x[1] for x in TOKENS]) + ("ENDMARKER", "INDENT", "DEDENT"), cache_id="baron")
-    else:
-        pg = BaronParserGenerator(tuple(map(lambda x: x.upper(), KEYWORDS)) + tuple([x[1] for x in TOKENS]) + ("ENDMARKER", "INDENT", "DEDENT"), cache_id="baron")
+    pg = BaronParserGenerator(tuple([x.upper() for x in tokenize_current_keywords(print_function)] + [x[1] for x in TOKENS] + ["ENDMARKER", "INDENT", "DEDENT"]), cache_id="baron")
 
     @pg.production("main : statements")
     def main(pack):
