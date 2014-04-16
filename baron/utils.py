@@ -1,6 +1,6 @@
 import ast
-
 import sys
+
 
 if sys.version_info[0] == 2:
     python_version = 2
@@ -38,6 +38,7 @@ class FlexibleIterator():
 
     def next(self):
         return self.__next__()
+
     def __next__(self):
         self.position += 1
         if self.position == len(self.sequence):
