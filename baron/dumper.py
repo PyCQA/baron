@@ -1,7 +1,7 @@
 def d(j):
     import json
     import sys
-    sys.stdout.write(json.dumps(j, indent=4))
+    sys.stdout.write(json.dumps(j, indent=4) + "\n")
 
 from .utils import string_instance
 

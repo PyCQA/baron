@@ -33,6 +33,6 @@ def check_dumps(source_code):
         import traceback
         traceback.print_exc(file=sys.stdout)
         sys.stdout.write("Warning: couldn't write dumps output to debug file, exception: %s\n\n" % e)
-        sys.stdout.write("Tree: %s" % json.dumps(baron_parse(source_code), indent=4))
+        sys.stdout.write("Tree: %s" % json.dumps(baron_parse(source_code), indent=4) + "\n")
 
     assert dumps(baron_parse(source_code)) == source_code
