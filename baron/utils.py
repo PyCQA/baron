@@ -7,7 +7,6 @@ if sys.version_info[0] == 2:
 else:
     python_version = 3
 
-print(python_version)
 if python_version == 3:
     string_instance = str
 else:
