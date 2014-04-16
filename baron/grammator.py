@@ -19,7 +19,7 @@ def generate_parse(print_function):
     @pg.production("main : statements")
     def main(pack):
         (statements,) = pack
-        return [_f for _f in statements if _f] if statements else []
+        return [x for x in statements if x] if statements else []
 
 
     @pg.production("statements : statements statement")
