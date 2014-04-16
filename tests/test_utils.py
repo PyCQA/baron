@@ -1,9 +1,10 @@
 from baron.grammator import generate_parse
 from baron.dumper import dumps
 from baron.baron import parse as baron_parse
+from baron.utils import python_version
 
 import sys
-if sys.version_info.major == 3:
+if python_version == 3:
     from itertools import zip_longest
 else:
     from itertools import izip_longest

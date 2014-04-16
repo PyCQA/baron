@@ -1,10 +1,17 @@
 import ast
 
 import sys
-if sys.version_info.major == 2:
-    string_instance = basestring
+
+if sys.version_info[0] == 2:
+    python_version = 2
 else:
+    python_version = 3
+
+print(python_version)
+if python_version == 3:
     string_instance = str
+else:
+    string_instance = basestring
 
 
 class PrintFunctionImportFinder(ast.NodeVisitor):
