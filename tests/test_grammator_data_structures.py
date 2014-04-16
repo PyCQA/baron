@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-from test_utils import parse_simple
+from .test_utils import parse_simple
 
 
 def test_empty_tuple():

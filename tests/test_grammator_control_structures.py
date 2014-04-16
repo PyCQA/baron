@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
 
-from test_utils import parse_multi
+from .test_utils import parse_multi
 
 
 def test_if_stmt():

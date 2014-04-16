@@ -2,14 +2,14 @@ from ast import parse as python_ast_parse
 
 from rply.errors import ParsingError
 
-from utils import PrintFunctionImportFinder
-from spliter import split
-from grouper import group
-from tokenizer import tokenize as _tokenize
-from formatting_grouper import group as space_group
-from grammator import generate_parse
-from indentation_marker import mark_indentation
-from inner_formatting_grouper import group as inner_group
+from .utils import PrintFunctionImportFinder
+from .spliter import split
+from .grouper import group
+from .tokenizer import tokenize as _tokenize
+from .formatting_grouper import group as space_group
+from .grammator import generate_parse
+from .indentation_marker import mark_indentation
+from .inner_formatting_grouper import group as inner_group
 
 
 parse_tokens = generate_parse(False)

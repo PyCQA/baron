@@ -1,33 +1,36 @@
-from token import BaronToken
-from parser import BaronParserGenerator
+from .token import BaronToken
+from .parser import BaronParserGenerator
 
-from tokenizer import TOKENS, KEYWORDS, tokenize
-from utils import create_node_from_token
-from grammator_imports import include_imports
-from grammator_control_structures import include_control_structures
-from grammator_primitives import include_primivites
-from grammator_operators import include_operators
-from grammator_data_structures import include_data_structures
+from .tokenizer import TOKENS, KEYWORDS, tokenize
+from .utils import create_node_from_token
+from .grammator_imports import include_imports
+from .grammator_control_structures import include_control_structures
+from .grammator_primitives import include_primivites
+from .grammator_operators import include_operators
+from .grammator_data_structures import include_data_structures
 
 
 def generate_parse(print_function):
     if print_function:
-        pg = BaronParserGenerator(tuple(map(lambda x: x.upper(), filter(lambda x: x != "print", KEYWORDS))) + zip(*TOKENS)[1] + ("ENDMARKER", "INDENT", "DEDENT"), cache_id="baron")
+        pg = BaronParserGenerator(tuple(map(lambda x: x.upper(), filter(lambda x: x != "print", KEYWORDS))) + tuple([x[1] for x in TOKENS]) + ("ENDMARKER", "INDENT", "DEDENT"), cache_id="baron")
     else:
-        pg = BaronParserGenerator(tuple(map(lambda x: x.upper(), KEYWORDS)) + zip(*TOKENS)[1] + ("ENDMARKER", "INDENT", "DEDENT"), cache_id="baron")
+        pg = BaronParserGenerator(tuple(map(lambda x: x.upper(), KEYWORDS)) + tuple([x[1] for x in TOKENS]) + ("ENDMARKER", "INDENT", "DEDENT"), cache_id="baron")
 
     @pg.production("main : statements")
-    def main((statements,)):
-        return filter(None, statements) if statements else []
+    def main(pack):
+        (statements,) = pack
+        return [_f for _f in statements if _f] if statements else []
 
 
     @pg.production("statements : statements statement")
-    def statements_statement((statements, statement)):
+    def statements_statement(pack):
+        (statements, statement) = pack
         return statements + statement
 
 
     @pg.production("statements : statement SEMICOLON")
-    def statement_semicolon((statement, semicolon)):
+    def statement_semicolon(pack):
+        (statement, semicolon) = pack
         return statement +\
                 [{
                   "type": "semicolon",
@@ -38,17 +41,20 @@ def generate_parse(print_function):
 
 
     @pg.production("statements : statement")
-    def statement((statement,)):
+    def statement(pack):
+        (statement,) = pack
         return statement
 
 
     @pg.production("statement : endl")
-    def statement_endl((endl,)):
+    def statement_endl(pack):
+        (endl,) = pack
         return endl
 
 
     @pg.production("endl : ENDL")
-    def endl((endl,)):
+    def endl(pack):
+        (endl,) = pack
         return [{
             "type": "endl",
             "value": endl.value,
@@ -58,12 +64,14 @@ def generate_parse(print_function):
 
 
     @pg.production("left_parenthesis : LEFT_PARENTHESIS")
-    def left_parenthesis((lp,)):
+    def left_parenthesis(pack):
+        (lp,) = pack
         return lp
 
 
     @pg.production("endl : COMMENT ENDL")
-    def comment((comment_, endl)):
+    def comment(pack):
+        (comment_, endl) = pack
         return [{
             "type": "comment",
             "value": comment_.value,
@@ -77,17 +85,20 @@ def generate_parse(print_function):
 
 
     @pg.production("statement : ENDMARKER")
-    def end((endmarker)):
+    def end(pack):
+        (endmarker) = pack
         return [None]
 
 
     @pg.production("statement : simple_stmt")
     @pg.production("statement : compound_stmt")
-    def statement_simple_statement((stmt,)):
+    def statement_simple_statement(pack):
+        (stmt,) = pack
         return stmt
 
     @pg.production("simple_stmt : small_stmt SEMICOLON endl")
-    def simple_stmt_semicolon_endl((small_stmt, semicolon, endl)):
+    def simple_stmt_semicolon_endl(pack):
+        (small_stmt, semicolon, endl) = pack
         return [small_stmt,
                 {
                  "type": "semicolon",
@@ -98,12 +109,14 @@ def generate_parse(print_function):
 
 
     @pg.production("simple_stmt : small_stmt endl")
-    def simple_stmt((small_stmt, endl)):
+    def simple_stmt(pack):
+        (small_stmt, endl) = pack
         return [small_stmt] + endl
 
 
     @pg.production("simple_stmt : small_stmt SEMICOLON simple_stmt")
-    def simple_stmt_semicolon((small_stmt, semicolon, simple_stmt)):
+    def simple_stmt_semicolon(pack):
+        (small_stmt, semicolon, simple_stmt) = pack
         return [small_stmt,
                 {
                  "type": "semicolon",
@@ -127,12 +140,14 @@ def generate_parse(print_function):
     @pg.production("compound_stmt : classdef")
     @pg.production("compound_stmt : with_stmt")
     @pg.production("compound_stmt : decorated")
-    def small_and_compound_stmt((statement,)):
+    def small_and_compound_stmt(pack):
+        (statement,) = pack
         return statement
 
     if not print_function:
         @pg.production("small_stmt : print_stmt")
-        def print_statement((statement,)):
+        def print_statement(pack):
+            (statement,) = pack
             return statement
 
 
@@ -154,12 +169,14 @@ def generate_parse(print_function):
     @pg.production("factor : power")
     @pg.production("power : atom")
     @pg.production("exprlist : expr")
-    def term_factor((level,)):
+    def term_factor(pack):
+        (level,) = pack
         return level
 
 
     @pg.production("with_stmt : WITH with_items COLON suite")
-    def with_stmt((with_, with_items, colon, suite)):
+    def with_stmt(pack):
+        (with_, with_items, colon, suite) = pack
         return [{
             "type": "with",
             "value": suite,
@@ -171,17 +188,20 @@ def generate_parse(print_function):
 
 
     @pg.production("with_items : with_items comma with_item")
-    def with_items_with_item((with_items, comma, with_item,)):
+    def with_items_with_item(pack):
+        (with_items, comma, with_item,) = pack
         return with_items + [comma, with_item]
 
 
     @pg.production("with_items : with_item")
-    def with_items((with_item,)):
+    def with_items(pack):
+        (with_item,) = pack
         return [with_item]
 
 
     @pg.production("with_item : test")
-    def with_item((test,)):
+    def with_item(pack):
+        (test,) = pack
         return {
             "type": "with_context_item",
             "as": {},
@@ -192,7 +212,8 @@ def generate_parse(print_function):
 
 
     @pg.production("with_item : test AS expr")
-    def with_item_as((test, as_, expr)):
+    def with_item_as(pack):
+        (test, as_, expr) = pack
         return {
             "type": "with_context_item",
             "as": expr,
@@ -203,7 +224,8 @@ def generate_parse(print_function):
 
 
     @pg.production("classdef : CLASS NAME COLON suite")
-    def class_stmt((class_, name, colon, suite),):
+    def class_stmt(pack,):
+        (class_, name, colon, suite) = pack
         return [{
             "type": "class",
             "name": name.value,
@@ -221,7 +243,8 @@ def generate_parse(print_function):
 
 
     @pg.production("classdef : CLASS NAME LEFT_PARENTHESIS RIGHT_PARENTHESIS COLON suite")
-    def class_stmt_parenthesis((class_, name, left_parenthesis, right_parenthesis, colon, suite),):
+    def class_stmt_parenthesis(pack,):
+        (class_, name, left_parenthesis, right_parenthesis, colon, suite) = pack
         return [{
             "type": "class",
             "name": name.value,
@@ -239,7 +262,8 @@ def generate_parse(print_function):
 
 
     @pg.production("classdef : CLASS NAME LEFT_PARENTHESIS testlist RIGHT_PARENTHESIS COLON suite")
-    def class_stmt_inherit((class_, name, left_parenthesis, testlist, right_parenthesis, colon, suite),):
+    def class_stmt_inherit(pack,):
+        (class_, name, left_parenthesis, testlist, right_parenthesis, colon, suite) = pack
         return [{
             "type": "class",
             "name": name.value,
@@ -258,31 +282,36 @@ def generate_parse(print_function):
 
     @pg.production("decorated : decorators funcdef")
     @pg.production("decorated : decorators classdef")
-    def decorated((decorators, funcdef)):
+    def decorated(pack):
+        (decorators, funcdef) = pack
         funcdef[0]["decorators"] = decorators
         return funcdef
 
 
     @pg.production("decorators : decorators decorator")
-    def decorators_decorator((decorators, decorator,)):
+    def decorators_decorator(pack):
+        (decorators, decorator,) = pack
         return decorators + decorator
 
 
     @pg.production("decorators : decorator")
-    def decorators((decorator,)):
+    def decorators(pack):
+        (decorator,) = pack
         return decorator
 
 
     # TODO tests
     @pg.production("decorator : endl")
-    def decorator_endl((endl,)):
+    def decorator_endl(pack):
         # thanks ipythons dev, you appears to be the only one in the world that
         # split decorators with empty lines... like seriously.
+        (endl,) = pack
         return endl
 
 
     @pg.production("decorator : AT dotted_name endl")
-    def decorator((at, dotted_name, endl)):
+    def decorator(pack):
+        (at, dotted_name, endl) = pack
         return [{
             "type": "decorator",
             "value": {
@@ -295,7 +324,8 @@ def generate_parse(print_function):
 
 
     @pg.production("decorator : AT dotted_name LEFT_PARENTHESIS RIGHT_PARENTHESIS endl")
-    def decorator_empty_call((at, dotted_name, left_parenthesis, right_parenthesis, endl)):
+    def decorator_empty_call(pack):
+        (at, dotted_name, left_parenthesis, right_parenthesis, endl) = pack
         return [{
             "type": "decorator",
             "value": {
@@ -315,7 +345,8 @@ def generate_parse(print_function):
 
 
     @pg.production("decorator : AT dotted_name LEFT_PARENTHESIS argslist RIGHT_PARENTHESIS endl")
-    def decorator_call((at, dotted_name, left_parenthesis, argslist, right_parenthesis, endl)):
+    def decorator_call(pack):
+        (at, dotted_name, left_parenthesis, argslist, right_parenthesis, endl) = pack
         return [{
             "type": "decorator",
             "value": {
@@ -335,7 +366,8 @@ def generate_parse(print_function):
 
 
     @pg.production("funcdef : DEF NAME LEFT_PARENTHESIS parameters RIGHT_PARENTHESIS COLON suite")
-    def function_definition((def_, name, left_parenthesis, parameters, right_parenthesis, colon, suite)):
+    def function_definition(pack):
+        (def_, name, left_parenthesis, parameters, right_parenthesis, colon, suite) = pack
         return [{
             "type": "funcdef",
             "decorators": [],
@@ -352,12 +384,14 @@ def generate_parse(print_function):
 
     @pg.production("argslist : argslist argument")
     @pg.production("parameters : parameters parameter")
-    def parameters_parameters_parameter((parameters, parameter,),):
+    def parameters_parameters_parameter(pack,):
+        (parameters, parameter,) = pack
         return parameters + parameter
 
     @pg.production("argslist : argument")
     @pg.production("parameters : parameter")
-    def parameters_parameter((parameter,),):
+    def parameters_parameter(pack,):
+        (parameter,) = pack
         return parameter
 
     @pg.production("argument :")
@@ -366,14 +400,16 @@ def generate_parse(print_function):
         return []
 
     @pg.production("name : NAME")
-    def name((name_,)):
+    def name(pack):
+        (name_,) = pack
         return {
             "type": "name",
             "value": name_.value,
         }
 
     @pg.production("argument : test")
-    def argument_one((name,)):
+    def argument_one(pack):
+        (name,) = pack
         return [{
             "type": "call_argument",
             "first_formatting": [],
@@ -384,7 +420,8 @@ def generate_parse(print_function):
 
 
     @pg.production("parameter : name")
-    def parameter_one((name,)):
+    def parameter_one(pack):
+        (name,) = pack
         return [{
             "type": "def_argument",
             "first_formatting": [],
@@ -395,7 +432,8 @@ def generate_parse(print_function):
 
 
     @pg.production("parameter : LEFT_PARENTHESIS parameter RIGHT_PARENTHESIS")
-    def parameter_fpdef((left_parenthesis, parameter, right_parenthesis)):
+    def parameter_fpdef(pack):
+        (left_parenthesis, parameter, right_parenthesis) = pack
         return [{
             "type": "associative_parenthesis",
             "first_formatting": left_parenthesis.hidden_tokens_before,
@@ -407,7 +445,8 @@ def generate_parse(print_function):
 
 
     @pg.production("parameter : LEFT_PARENTHESIS fplist RIGHT_PARENTHESIS")
-    def parameter_fplist((left_parenthesis, fplist, right_parenthesis)):
+    def parameter_fplist(pack):
+        (left_parenthesis, fplist, right_parenthesis) = pack
         return [{
             "type": "def_argument",
             "first_formatting": [],
@@ -426,12 +465,14 @@ def generate_parse(print_function):
 
 
     @pg.production("fplist : fplist parameter")
-    def fplist_recur((fplist, parameter)):
+    def fplist_recur(pack):
+        (fplist, parameter) = pack
         return fplist + parameter
 
 
     @pg.production("fplist : parameter comma")
-    def fplist((parameter, comma)):
+    def fplist(pack):
+        (parameter, comma) = pack
         return parameter + [comma]
 
 
@@ -440,7 +481,8 @@ def generate_parse(print_function):
     # python give me 'SyntaxError: keyword can't be an expression' when I try to
     # put something else than a name (looks like a custom SyntaxError)
     @pg.production("argument : test EQUAL test")
-    def named_argument((name, equal, test)):
+    def named_argument(pack):
+        (name, equal, test) = pack
         return [{
             "type": "call_argument",
             "first_formatting": equal.hidden_tokens_before,
@@ -450,7 +492,8 @@ def generate_parse(print_function):
         }]
 
     @pg.production("parameter : name EQUAL test")
-    def parameter_with_default((name, equal, test)):
+    def parameter_with_default(pack):
+        (name, equal, test) = pack
         return [{
             "type": "def_argument",
             "first_formatting": equal.hidden_tokens_before,
@@ -460,7 +503,8 @@ def generate_parse(print_function):
         }]
 
     @pg.production("argument : test comp_for")
-    def generator_comprehension((test, comp_for,)):
+    def generator_comprehension(pack):
+        (test, comp_for,) = pack
         return [{
             "type": "argument_generator_comprehension",
             "result": test,
@@ -468,7 +512,8 @@ def generate_parse(print_function):
         }]
 
     @pg.production("argument : STAR test")
-    def argument_star((star, test,)):
+    def argument_star(pack):
+        (star, test,) = pack
         return [{
             "type": "list_argument",
             "formatting": star.hidden_tokens_after,
@@ -476,7 +521,8 @@ def generate_parse(print_function):
         }]
 
     @pg.production("argument : DOUBLE_STAR test")
-    def argument_star_star((double_star, test,)):
+    def argument_star_star(pack):
+        (double_star, test,) = pack
         return [{
             "type": "dict_argument",
             "formatting": double_star.hidden_tokens_after,
@@ -485,7 +531,8 @@ def generate_parse(print_function):
 
     # TODO refactor those 2 to uniformise with argument_star and argument_star_star
     @pg.production("parameter : STAR NAME")
-    def parameter_star((star, name,)):
+    def parameter_star(pack):
+        (star, name,) = pack
         return [{
             "type": "list_argument",
             "formatting": star.hidden_tokens_after,
@@ -496,7 +543,8 @@ def generate_parse(print_function):
         }]
 
     @pg.production("parameter : DOUBLE_STAR NAME")
-    def parameter_star_star((double_star, name,)):
+    def parameter_star_star(pack):
+        (double_star, name,) = pack
         return [{
             "type": "dict_argument",
             "formatting": double_star.hidden_tokens_after,
@@ -508,16 +556,19 @@ def generate_parse(print_function):
 
     @pg.production("argument : comma")
     @pg.production("parameter : comma")
-    def parameter_comma((comma,)):
+    def parameter_comma(pack):
+        (comma,) = pack
         return [comma]
 
     @pg.production("suite : simple_stmt")
-    def suite((simple_stmt,)):
+    def suite(pack):
+        (simple_stmt,) = pack
         return simple_stmt
 
 
     @pg.production("suite : endls INDENT statements DEDENT")
-    def suite_indent((endls, indent, statements, dedent,)):
+    def suite_indent(pack):
+        (endls, indent, statements, dedent,) = pack
         return endls + statements
 
 
@@ -536,7 +587,8 @@ def generate_parse(print_function):
     include_data_structures(pg)
 
     @pg.production("atom : LEFT_PARENTHESIS yield_expr RIGHT_PARENTHESIS")
-    def yield_atom((left_parenthesis, yield_expr, right_parenthesis)):
+    def yield_atom(pack):
+        (left_parenthesis, yield_expr, right_parenthesis) = pack
         return {
             "type": "yield_atom",
             "value": yield_expr["value"],
@@ -546,7 +598,8 @@ def generate_parse(print_function):
         }
 
     @pg.production("atom : BACKQUOTE testlist1 BACKQUOTE")
-    def repr_atom((backquote, testlist1, backquote2)):
+    def repr_atom(pack):
+        (backquote, testlist1, backquote2) = pack
         return {
             "type": "repr",
             "value": testlist1,
@@ -555,11 +608,13 @@ def generate_parse(print_function):
         }
 
     @pg.production("testlist1 : test comma testlist1")
-    def testlist1_double((test, comma, test2,)):
+    def testlist1_double(pack):
+        (test, comma, test2,) = pack
         return [test, comma] + test2
 
     @pg.production("testlist1 : test")
-    def testlist1((test,)):
+    def testlist1(pack):
+        (test,) = pack
         return [test]
 
     # TODO test all the things (except INT)
@@ -570,17 +625,20 @@ def generate_parse(print_function):
     @pg.production("atom : FLOAT")
     @pg.production("atom : FLOAT_EXPONANT")
     @pg.production("atom : COMPLEX")
-    def int((int_,)):
+    def int(pack):
+        (int_,) = pack
         return create_node_from_token(int_, section="number")
 
 
     @pg.production("atom : name")
-    def atom_name((name,)):
+    def atom_name(pack):
+        (name,) = pack
         return name
 
 
     @pg.production("atom : strings")
-    def strings((string_chain,)):
+    def strings(pack):
+        (string_chain,) = pack
         if len(string_chain) == 1:
             return string_chain[0]
         return {
@@ -589,11 +647,13 @@ def generate_parse(print_function):
         }
 
     @pg.production("strings : string strings")
-    def strings_string_strings((string_, strings_)):
+    def strings_string_strings(pack):
+        (string_, strings_) = pack
         return string_ + strings_
 
     @pg.production("strings : string")
-    def strings_string((string_,)):
+    def strings_string(pack):
+        (string_,) = pack
         return string_
 
     # TODO tests those other kind of strings
@@ -603,7 +663,8 @@ def generate_parse(print_function):
     @pg.production("string : BINARY_STRING")
     @pg.production("string : UNICODE_RAW_STRING")
     @pg.production("string : BINARY_RAW_STRING")
-    def string((string_,)):
+    def string(pack):
+        (string_,) = pack
         return [{
             "type": string_.name.lower(),
             "value": string_.value,
@@ -613,7 +674,8 @@ def generate_parse(print_function):
 
 
     @pg.production("comma : COMMA")
-    def comma((comma,)):
+    def comma(pack):
+        (comma,) = pack
         return {
             "type": "comma",
             "first_formatting": comma.hidden_tokens_before,
@@ -630,9 +692,9 @@ def generate_parse(print_function):
                     token = tuple(token)
                 new_tokens.append(token)
 
-            tokens = map(lambda x: BaronToken(*x) if x else x, new_tokens) + [None]
+            tokens = [BaronToken(*x) if x else x for x in new_tokens] + [None]
         else:
-            tokens = map(lambda x: BaronToken(*x) if x else x, tokens) + [None]
+            tokens = [BaronToken(*x) if x else x for x in tokens] + [None]
 
         return parser.parse(iter(tokens))
 

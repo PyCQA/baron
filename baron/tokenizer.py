@@ -80,7 +80,7 @@ TOKENS = (
 )
 
 
-TOKENS = map(lambda x: (re.compile('^' + x[0] + '$'), x[1]), TOKENS)
+TOKENS = [(re.compile('^' + x[0] + '$'), x[1]) for x in TOKENS]
 
 
 def tokenize(sequence, print_function=False):

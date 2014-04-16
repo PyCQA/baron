@@ -4,7 +4,7 @@ import stat
 import tempfile
 import warnings
 
-from token import BaronToken
+from .token import BaronToken
 
 from rply import ParserGenerator
 from rply.parser import LRParser
@@ -151,9 +151,9 @@ class BaronLRParser(LRParser):
                     raise AssertionError("For now, error_handler must raise.")
                 else:
                     debug_output = parsed_file_content.split("\n")
-                    debug_output = zip(range(1, len(debug_output) + 1), debug_output)
+                    debug_output = list(zip(range(1, len(debug_output) + 1), debug_output))
                     debug_output = debug_output[-8:]
-                    debug_output = "\n".join(map(lambda x: "%4s %s" % (x[0], x[1]), debug_output))
+                    debug_output = "\n".join(["%4s %s" % (x[0], x[1]) for x in debug_output])
                     debug_output += "<---- here"
                     debug_output = "Error, got an unexpected token %s here:\n\n" % ltype + debug_output
                     debug_output += "\n\nThe token %s should be one of those: %s" % (ltype, ", ".join(sorted(self.lr_table.lr_action[current_state].keys())))

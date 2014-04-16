@@ -1,4 +1,4 @@
-from utils import FlexibleIterator
+from .utils import FlexibleIterator
 
 class UnExpectedFormattingToken(Exception):
         pass
@@ -116,9 +116,9 @@ def fail_on_bad_token(token, debug_file_content, in_grouping_mode):
     debug_file_content += _append_to_debug_file_content(token)
 
     debug_file_content = debug_file_content.split("\n")
-    debug_file_content = zip(range(1, len(debug_file_content) + 1), debug_file_content)
+    debug_file_content = list(zip(range(1, len(debug_file_content) + 1), debug_file_content))
     debug_file_content = debug_file_content[-8:]
-    debug_file_content = "\n".join(map(lambda x: "%4s %s" % (x[0], x[1]), debug_file_content))
+    debug_file_content = "\n".join(["%4s %s" % (x[0], x[1]) for x in debug_file_content])
     raise Exception("Fail to group formatting tokens, here:\n%s <----\n\n'%s' should have been in: %s\n\nCurrent value of 'in_grouping_mode': %s" % (debug_file_content, token, ', '.join(sorted(GROUP_ON)), in_grouping_mode))
 
 
@@ -138,7 +138,7 @@ def group_generator(sequence):
             return
 
         debug_previous_token = current
-        current = iterator.next()
+        current = next(iterator)
         debug_file_content += _append_to_debug_file_content(current)
 
         if current[0] in ENTER_GROUPING_MODE:
@@ -150,17 +150,17 @@ def group_generator(sequence):
             if current[0] in GROUP_THOSE:
                 to_group = [current]
                 while iterator.show_next() and iterator.show_next()[0] in GROUP_THOSE:
-                    to_group.append(iterator.next())
+                    to_group.append(next(iterator))
                     debug_file_content += _append_to_debug_file_content(to_group[-1])
 
                     # XXX don't remember how (:() but I can end up finding a
                     # DEDENT/INDENT token in this situation and I don't want to
                     # group on it. Need to do test for that.
                     if iterator.show_next()[0] in ("INDENT", "DEDENT"):
-                        yield iterator.next()
+                        yield next(iterator)
 
                 fail_on_bad_token(iterator.show_next(), debug_file_content, in_grouping_mode)
-                current = append_to_token_before(iterator.next(), to_group)
+                current = append_to_token_before(next(iterator), to_group)
 
                 # TODO test
                 if current[0] in QUIT_GROUPING_MODE:
@@ -172,14 +172,14 @@ def group_generator(sequence):
             if current[0] in GROUP_ON:
                 while iterator.show_next() and iterator.show_next()[0] in GROUP_THOSE:
                     debug_file_content += _append_to_debug_file_content(iterator.show_next())
-                    current = append_to_token_after(current, [iterator.next()])
+                    current = append_to_token_after(current, [next(iterator)])
 
 
         if current[0] == "SPACE":
             debug_file_content = debug_file_content.split("\n")
-            debug_file_content = zip(range(1, len(debug_file_content) + 1), debug_file_content)
+            debug_file_content = list(zip(range(1, len(debug_file_content) + 1), debug_file_content))
             debug_file_content = debug_file_content[-3:]
-            debug_file_content = "\n".join(map(lambda x: "%4s %s" % (x[0], x[1]), debug_file_content))
+            debug_file_content = "\n".join(["%4s %s" % (x[0], x[1]) for x in debug_file_content])
             debug_file_content += "<--- here"
             debug_text = "Unexpected '%s' token:\n\n" % current[0].lower() + debug_file_content + "\n\n"
             debug_text += "Should have been grouped on either %s (before) or %s (after) token." % (debug_previous_token, iterator.show_next())

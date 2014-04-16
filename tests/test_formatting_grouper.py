@@ -1,9 +1,9 @@
-from itertools import izip_longest
+from .test_utils import zip_longest
 from baron.formatting_grouper import group as _group
 
 
 def group(inp, out):
-    for i, j in izip_longest(_group(inp), out):
+    for i, j in zip_longest(_group(inp), out):
         assert i == j
 
 

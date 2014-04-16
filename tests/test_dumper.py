@@ -3,7 +3,7 @@
 
 import sys
 import baron
-from test_utils import check_dumps
+from .test_utils import check_dumps
 
 
 def test_empty():

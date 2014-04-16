@@ -1,4 +1,5 @@
-from utils import FlexibleIterator
+from .utils import FlexibleIterator
+import sys
 
 """
 Objectif: add an INDENT token and a DEDENT token arround every block
@@ -25,10 +26,10 @@ def mark_indentation(sequence):
 
 def get_space(node):
     if len(node) < 3:
-        print "WARNING"
+        sys.stdout.write("WARNING")
         return None
     if len(node[3]) == 0:
-        print "WARNING"
+        sys.stdout.write("WARNING")
         return None
     return node[3][0][1].replace("	", " "*8)
 
@@ -41,7 +42,7 @@ def mark_indentation_generator(sequence):
         if iterator.end():
             return
 
-        current = iterator.next()
+        current = next(iterator)
 
         if current is None:
             return
@@ -51,12 +52,12 @@ def mark_indentation_generator(sequence):
                 yield ('DEDENT', '')
                 indentations.pop()
 
-        #print current, iterator.show_next()
+        #sys.stdout.write(current, iterator.show_next())
         if current[0] == "COLON" and iterator.show_next()[0] == "ENDL":
             if iterator.show_next(2)[0] not in ("ENDL",):
                 indentations.append(get_space(iterator.show_next()))
                 yield current
-                yield iterator.next()
+                yield next(iterator)
                 yield ('INDENT', '')
                 continue
             else:
@@ -76,7 +77,7 @@ def mark_indentation_generator(sequence):
             while indentations and indentations[-1] > new_indent:
                 indentations.pop()
                 yield ('DEDENT', '')
-            yield iterator.next()
+            yield next(iterator)
             continue
 
         yield current

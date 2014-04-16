@@ -1,7 +1,9 @@
 def d(j):
     import json
-    print json.dumps(j, indent=4)
+    import sys
+    sys.stdout.write(json.dumps(j, indent=4))
 
+from .utils import string_instance
 
 dumpers = {}
 
@@ -238,7 +240,7 @@ def def_argument(node):
         yield "="
         yield dump_node_list(node["second_formatting"])
         yield dump_node(node["value"])
-    elif isinstance(node["name"], basestring):
+    elif isinstance(node["name"], string_instance):
         yield node["name"]
     else:
         yield dump_node(node["name"])

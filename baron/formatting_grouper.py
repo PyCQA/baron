@@ -1,4 +1,4 @@
-from utils import FlexibleIterator
+from .utils import FlexibleIterator
 
 class UnExpectedSpaceToken(Exception):
     pass
@@ -112,19 +112,19 @@ def group_generator(sequence):
         if iterator.end():
             return
 
-        current = iterator.next()
+        current = next(iterator)
 
         if current is None:
             return
 
         if current[0] in ("SPACE", "COMMENT") and iterator.show_next() and iterator.show_next()[0] in GROUP_SPACE_BEFORE:
-            new_current = iterator.next()
+            new_current = next(iterator)
             current = (new_current[0], new_current[1], [current])
 
         if current[0] in GROUP_SPACE_AFTER and\
             (iterator.show_next() and iterator.show_next()[0] in ("SPACE", "COMMENT")) and\
             (not iterator.show_next(2) or (iterator.show_next(2) and not less_prioritary_than(current[0], iterator.show_next(2)[0]))):
-            after_space = iterator.next()
+            after_space = next(iterator)
             current = (current[0], current[1], current[2] if len(current) > 2 else [], [after_space])
 
         yield current

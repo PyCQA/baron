@@ -1,5 +1,11 @@
 import ast
 
+import sys
+if sys.version_info.major == 2:
+    string_instance = basestring
+else:
+    string_instance = str
+
 
 class PrintFunctionImportFinder(ast.NodeVisitor):
     def __init__(self, *args, **kwars):
@@ -11,7 +17,7 @@ class PrintFunctionImportFinder(ast.NodeVisitor):
             # my job is already done
             return
 
-        if node.module == "__future__" and filter(lambda x: x.name == "print_function", node.names):
+        if node.module == "__future__" and [x for x in node.names if x.name == "print_function"]:
             self.print_function = True
 
 
@@ -24,6 +30,8 @@ class FlexibleIterator():
         return self
 
     def next(self):
+        return self.__next__()
+    def __next__(self):
         self.position += 1
         if self.position == len(self.sequence):
             raise StopIteration
@@ -53,7 +61,7 @@ class FlexibleIterator():
         to_return = ""
         current = None
         while self.show_next() is not None and test(self):
-            current = self.next()
+            current = next(self)
             to_return += current
 
         return to_return
@@ -63,7 +71,7 @@ class FlexibleIterator():
         current = None
         escaped = False
         while self.show_next() is not None and (escaped or test(self)):
-            current = self.next()
+            current = next(self)
             to_return += current
             if escaped:
                 escaped = False

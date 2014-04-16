@@ -2,11 +2,11 @@
 # -*- coding:Utf-8 -*-
 
 from baron.indentation_marker import mark_indentation
-from itertools import izip_longest
+from .test_utils import zip_longest
 
 
 def check(input, output):
-    for i, j in izip_longest(mark_indentation(input + [('ENDMARKER', ''), None]), output + [('ENDMARKER', ''), None]):
+    for i, j in zip_longest(mark_indentation(input + [('ENDMARKER', ''), None]), output + [('ENDMARKER', ''), None]):
         assert i == j
 
 
