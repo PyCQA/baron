@@ -8,11 +8,11 @@ def assert_print_function(code, is_print_function):
 
 
 def assert_print_is_function(code, is_function):
-    count = json.dumps(code).find('{"type": "name", "value": "print"}')
-    if is_function:
-        assert count > 0
-    else:
-        assert count == -1
+    code_json = json.dumps(code)
+    found = '"type": "name", "value": "print"' in code_json \
+         or '"value": "print", "type": "name"' in code_json
+    print(json.dumps(code))
+    assert found if is_function else not found
 
 
 def test_no_future():
