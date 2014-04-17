@@ -1,4 +1,3 @@
-import ast
 import sys
 
 
@@ -11,20 +10,6 @@ if python_version == 3:
     string_instance = str
 else:
     string_instance = basestring
-
-
-class PrintFunctionImportFinder(ast.NodeVisitor):
-    def __init__(self, *args, **kwars):
-        super(ast.NodeVisitor, self).__init__(*args, **kwars)
-        self.print_function = False
-
-    def visit_ImportFrom(self, node):
-        if self.print_function:
-            # my job is already done
-            return
-
-        if node.module == "__future__" and [x for x in node.names if x.name == "print_function"]:
-            self.print_function = True
 
 
 class FlexibleIterator():
