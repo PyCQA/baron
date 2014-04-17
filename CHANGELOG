@@ -13,8 +13,10 @@ Planned:
 -------------------
 
 Planned:
-- in the function "lambda_" in dumper.py, there is a call to a now deleted
-  function "funcdef_argument", this will crash a redering of lambda
+- <del>in the function "lambda_" in dumper.py, there is a call to a now deleted
+  function "funcdef_argument", this will crash a redering of lambda</del> in
+  fact, this case won't happen since "argument" isn't a FST node anymore, this is
+  just dead code that needs to be clean. This will be removed from the CHANGELOG
 
 0.1.3 (2014-04-13)
 ------------------
