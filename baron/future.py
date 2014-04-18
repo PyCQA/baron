@@ -10,11 +10,13 @@ def has_print_function(tokens):
 
 
 def get_sequence_occurences(tokens, sequence):
-    if len(sequence) != 0:
-        for pos in range(len(tokens)):
-            current_tokens = tokens[pos:pos+len(sequence)]
-            if sequences_match(current_tokens, sequence):
-                yield current_tokens
+    if len(sequence) == 0:
+        return
+
+    for pos in range(len(tokens)):
+        current_tokens = tokens[pos:pos+len(sequence)]
+        if sequences_match(current_tokens, sequence):
+            yield current_tokens
 
 
 def sequences_match(tokens, type_sequence):
