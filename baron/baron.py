@@ -6,6 +6,7 @@ from .spliter import split
 from .grouper import group
 from .tokenizer import tokenize as _tokenize
 from .formatting_grouper import group as space_group
+from .future import has_print_function, replace_print_by_name
 from .grammator import generate_parse
 from .indentation_marker import mark_indentation
 from .inner_formatting_grouper import group as inner_group
@@ -42,7 +43,6 @@ def parse(source_code, print_function=None):
 
     if print_function is None:
         tokens = tokenize(source_code, False)
-        from .future import has_print_function, replace_print_by_name
         print_function = has_print_function(tokens)
         if print_function:
             replace_print_by_name(tokens)
