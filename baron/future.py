@@ -2,30 +2,34 @@ import re
 
 
 def has_print_function(tokens):
-    searching_sequence = ['FROM', 'NAME', 'IMPORT', 'NAME']
-    for sequence in get_sequence_occurences(tokens, searching_sequence):
-        if sequence[1][1] == 'future' and sequence[3][1] == 'print_function':
+    for pos in range(len(tokens)):
+        if tokens_defines_print_function(tokens[pos:]):
             return True
     return False
 
 
-def get_sequence_occurences(tokens, sequence):
-    if len(sequence) == 0:
-        return
-
-    for pos in range(len(tokens)):
-        current_tokens = tokens[pos:pos+len(sequence)]
-        if sequences_match(current_tokens, sequence):
-            yield current_tokens
-
-
-def sequences_match(tokens, type_sequence):
-    for pos in range(len(type_sequence)):
-        if tokens[pos][0] != type_sequence[pos]:
+def tokens_defines_print_function(tokens):
+    token = iter(tokens)
+    try:
+        if next(token)[0] != 'FROM' \
+                or next(token)[0:2] != ('NAME', '__future__') \
+                or next(token)[0] != 'IMPORT':
             return False
-        pos += 1
+        
+        current_token = next(token)
+        if current_token[0] == 'LEFT_PARENTHESIS':
+            current_token = next(token)
 
-    return True
+        while (current_token[0] == 'NAME'):
+            if current_token[1] == 'print_function':
+                return True
+            if next(token)[0] == 'AS':
+                next(token)
+                next(token)
+            current_token = next(token)
+    except StopIteration:
+        pass
+    return False
 
 
 def replace_print_by_name(tokens):

@@ -19,17 +19,58 @@ def test_no_future():
 
 
 def test_other_future():
-    code = "from future import other"
+    code = "from __future__ import other"
     assert print_token_is_a_function(code) == False
 
 
 def test_print_future():
-    code = "from future import print_function"
+    code = "from __future__ import print_function"
+    assert print_token_is_a_function(code) == True
+
+
+def test_print_future_as():
+    code = "from __future__ import print_function as p_f"
+    assert print_token_is_a_function(code) == True
+
+
+def test_print_future_comma():
+    code = "from __future__ import a, b, print_function"
+    assert print_token_is_a_function(code) == True
+
+
+def test_print_future_comma_as():
+    code = "from __future__ import a as c, b as d, print_function as e"
+    assert print_token_is_a_function(code) == True
+
+
+def test_print_no_future_comma_as():
+    code = "from __future__ import a as c, b as d"
+    assert print_token_is_a_function(code) == False
+
+
+def test_print_future_in_parenthesis():
+    code = "from __future__ import (a, b, print_function)"
+    assert print_token_is_a_function(code) == True
+
+
+def test_print_future_in_parenthesis_as():
+    code = "from __future__ import (a as c, b as d, print_function as e)"
+    assert print_token_is_a_function(code) == True
+
+
+def test_print_no_future_in_parenthesis_as():
+    code = "from __future__ import (a as c, b as d)"
+    assert print_token_is_a_function(code) == False
+
+
+def test_print_future_second():
+    code = """from __future__ import a, b as e
+from __future__ import c, print_function"""
     assert print_token_is_a_function(code) == True
 
 
 def test_auto_print_as_name():
-    code = "from future import print_function\nprint(a)"
+    code = "from __future__ import print_function\nprint(a)"
     assert print_is_parsed_as_a_function(parse(code)) == True
 
 
