@@ -4,6 +4,11 @@ Changelog
 0.2 (unreleased)
 ----------------
 
+- baron now run in python3 (*but* doesn't implement python3 grammar yet) by
+  Pierre Penninckx https://github.com/ibizaman
+- drop the usage of ast.py to find print_function, this allow any version of
+  python to parse any other version of python also by Pierre Penninckx
+
 Planned:
 - dumper class
 - dictionary that contains the order un which the items of a node must be
