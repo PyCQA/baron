@@ -42,6 +42,11 @@ def parse(source_code, print_function=None):
         print_function = print_function_finder.print_function
 
     # Python syntax requires source code to end with an ENDL token
+    # the endl token is removed afterward, if, and only if, it's the last token of the root level
+    # It is possible that this token end up in a 'suite' grammar rule
+    # which means that it is 'traped' in an indented block of code
+    # I don't want to recursivly travers the tree to hope to find it
+    # This solution behave in the expected way for 90% of the case
     if source_code and source_code[-1] != "\n":
         source_code += "\n"
         to_return = _parse(tokenize(source_code, print_function), print_function)
