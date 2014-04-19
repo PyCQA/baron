@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
-from test_utils import parse_simple
+from .test_utils import parse_simple
 
 
 def test_return():

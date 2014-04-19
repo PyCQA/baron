@@ -1,5 +1,5 @@
 import string
-from utils import FlexibleIterator
+from .utils import FlexibleIterator
 
 
 def split(sequence):
@@ -22,19 +22,19 @@ def split_generator(sequence):
         for section in ("'", '"'):
             if iterator.next_starts_with(section * 3):
                 not_found = False
-                result = iterator.next()
-                result += iterator.next()
-                result += iterator.next()
+                result = next(iterator)
+                result += next(iterator)
+                result += next(iterator)
                 result += iterator.grab_string(lambda iterator: not iterator.next_starts_with(section * 3))
-                result += iterator.next()
-                result += iterator.next()
-                result += iterator.next()
+                result += next(iterator)
+                result += next(iterator)
+                result += next(iterator)
                 yield result
             elif iterator.next_in(section):
                 not_found = False
-                result = iterator.next()
+                result = next(iterator)
                 result += iterator.grab_string(lambda iterator: iterator.show_next() not in section)
-                result += iterator.next()
+                result += next(iterator)
                 yield result
 
         for section in (string.ascii_letters + "_" + "1234567890", " \t"):
@@ -45,7 +45,7 @@ def split_generator(sequence):
         for one in "@,.;()=*:+-/^%&<>|\r\n~[]{}!``\\":
             if iterator.next_in(one):
                 not_found = False
-                yield iterator.next()
+                yield next(iterator)
 
         if iterator.show_next().__repr__().startswith("'\\x"):
             # guys, seriously, how do you manage to put this shit in your code?
@@ -54,7 +54,7 @@ def split_generator(sequence):
             # example of crapy unicode stuff found in some source files: \x0c\xef\xbb\xbf
             not_found = False
             # let's drop that crap
-            iterator.next()
+            next(iterator)
 
         if not_found:
             raise Exception("Untreaded elements: %s" % iterator.rest_of_the_sequence().__repr__()[:50])

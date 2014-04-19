@@ -80,18 +80,22 @@ TOKENS = (
 )
 
 
-TOKENS = map(lambda x: (re.compile('^' + x[0] + '$'), x[1]), TOKENS)
+TOKENS = [(re.compile('^' + x[0] + '$'), x[1]) for x in TOKENS]
 
 
 def tokenize(sequence, print_function=False):
     return list(tokenize_generator(sequence, print_function))
 
 
-def tokenize_generator(sequence, print_function=False):
+def tokenize_current_keywords(print_function=False):
     if print_function is True:
-        current_keywords = filter(lambda x: x != "print", KEYWORDS)
+        return [x for x in KEYWORDS if x != "print"]
     else:
-        current_keywords = KEYWORDS
+        return KEYWORDS
+
+
+def tokenize_generator(sequence, print_function=False):
+    current_keywords = tokenize_current_keywords()
 
     for item in sequence:
         if item in current_keywords:

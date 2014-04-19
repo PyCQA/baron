@@ -1,20 +1,24 @@
 def include_operators(pg):
     @pg.production("old_test : or_test")
     @pg.production("old_test : old_lambdef")
-    def old_test((level,)):
+    def old_test(pack):
+        (level,) = pack
         return level
 
     @pg.production("testlist_safe : old_test comma old_test")
-    def testlist_safe((old_test, comma, old_test2)):
+    def testlist_safe(pack):
+        (old_test, comma, old_test2) = pack
         return [old_test, comma, old_test2]
 
     @pg.production("testlist_safe : old_test comma testlist_safe")
-    def testlist_safe_more((old_test, comma, testlist_safe)):
+    def testlist_safe_more(pack):
+        (old_test, comma, testlist_safe) = pack
         return [old_test, comma] + testlist_safe
 
     @pg.production("expr_stmt : testlist augassign_operator testlist")
     @pg.production("expr_stmt : testlist augassign_operator yield_expr")
-    def augmented_assignment_node((target, operator, value)):
+    def augmented_assignment_node(pack):
+        (target, operator, value) = pack
         return {
             "type": "assignment",
             "first_formatting": operator.hidden_tokens_before,
@@ -36,12 +40,14 @@ def include_operators(pg):
     @pg.production("augassign_operator : RIGHT_SHIFT_EQUAL")
     @pg.production("augassign_operator : DOUBLE_STAR_EQUAL")
     @pg.production("augassign_operator : DOUBLE_SLASH_EQUAL")
-    def augassign_operator((operator,)):
+    def augassign_operator(pack):
+        (operator,) = pack
         return operator
 
     @pg.production("expr_stmt : testlist EQUAL yield_expr")
     @pg.production("expr_stmt : testlist EQUAL expr_stmt")
-    def assignment_node((target, equal, value)):
+    def assignment_node(pack):
+        (target, equal, value) = pack
         return {
             "type": "assignment",
             "value": value,
@@ -51,7 +57,8 @@ def include_operators(pg):
         }
 
     @pg.production("test : or_test IF or_test ELSE test")
-    def ternary_operator_node((first, if_, second, else_, third)):
+    def ternary_operator_node(pack):
+        (first, if_, second, else_, third) = pack
         return {
             "type": "ternary_operator",
             "first": first,
@@ -65,7 +72,8 @@ def include_operators(pg):
 
     @pg.production("or_test : and_test OR or_test")
     @pg.production("and_test : not_test AND and_test")
-    def and_or_node((first, operator, second)):
+    def and_or_node(pack):
+        (first, operator, second) = pack
         return {
             "type": "boolean_operator",
             "value": operator.value,
@@ -76,7 +84,8 @@ def include_operators(pg):
         }
 
     @pg.production("not_test : NOT not_test")
-    def not_node((not_, comparison)):
+    def not_node(pack):
+        (not_, comparison) = pack
         return {
             "type": "unitary_operator",
             "value": "not",
@@ -92,7 +101,8 @@ def include_operators(pg):
     @pg.production("comparison : expr NOT_EQUAL comparison")
     @pg.production("comparison : expr IN comparison")
     @pg.production("comparison : expr IS comparison")
-    def comparison_node((expr, comparison_operator, comparison_)):
+    def comparison_node(pack):
+        (expr, comparison_operator, comparison_) = pack
         return {
             "type": "comparison",
             "value": comparison_operator.value,
@@ -105,7 +115,8 @@ def include_operators(pg):
 
     @pg.production("comparison : expr IS NOT comparison")
     @pg.production("comparison : expr NOT IN comparison")
-    def comparison_advanced_node((expr, comparison_operator, comparison_operator2, comparison_)):
+    def comparison_advanced_node(pack):
+        (expr, comparison_operator, comparison_operator2, comparison_) = pack
         return {
             "type": "comparison",
             "value": "%s %s" % (
@@ -132,7 +143,8 @@ def include_operators(pg):
     @pg.production("term : factor DOUBLE_SLASH term")
     @pg.production("power : atom DOUBLE_STAR factor")
     @pg.production("power : atom DOUBLE_STAR power")
-    def binary_operator_node((first, operator, second)):
+    def binary_operator_node(pack):
+        (first, operator, second) = pack
         return {
             "type": "binary_operator",
             "value": operator.value,
@@ -145,7 +157,8 @@ def include_operators(pg):
     @pg.production("factor : PLUS factor")
     @pg.production("factor : MINUS factor")
     @pg.production("factor : TILDE factor")
-    def factor_unitary_operator_space((operator, factor,)):
+    def factor_unitary_operator_space(pack):
+        (operator, factor,) = pack
         return {
             "type": "unitary_operator",
             "value": operator.value,
@@ -155,7 +168,8 @@ def include_operators(pg):
 
     @pg.production("power : atomtrailers DOUBLE_STAR factor")
     @pg.production("power : atomtrailers DOUBLE_STAR power")
-    def power_atomtrailer_power((atomtrailers, double_star, factor)):
+    def power_atomtrailer_power(pack):
+        (atomtrailers, double_star, factor) = pack
         return {
             "type": "binary_operator",
             "value": double_star.value,
@@ -169,30 +183,36 @@ def include_operators(pg):
         }
 
     @pg.production("power : atomtrailers")
-    def power_atomtrailers((atomtrailers,)):
+    def power_atomtrailers(pack):
+        (atomtrailers,) = pack
         return {
             "type": "atomtrailers",
             "value": atomtrailers
         }
 
     @pg.production("atomtrailers : atom")
-    def atomtrailers_atom((atom,)):
+    def atomtrailers_atom(pack):
+        (atom,) = pack
         return [atom]
 
     @pg.production("atomtrailers : atom trailers")
-    def atomtrailer((atom, trailers)):
+    def atomtrailer(pack):
+        (atom, trailers) = pack
         return [atom] + trailers
 
     @pg.production("trailers : trailer")
-    def trailers((trailer,)):
+    def trailers(pack):
+        (trailer,) = pack
         return trailer
 
     @pg.production("trailers : trailers trailer")
-    def trailers_trailer((trailers, trailer)):
+    def trailers_trailer(pack):
+        (trailers, trailer) = pack
         return trailers + trailer
 
     @pg.production("trailer : DOT NAME")
-    def trailer((dot, name,)):
+    def trailer(pack):
+        (dot, name,) = pack
         return [{
             "type": "dot",
             "first_formatting": dot.hidden_tokens_before,
@@ -203,7 +223,8 @@ def include_operators(pg):
         }]
 
     @pg.production("trailer : LEFT_PARENTHESIS argslist RIGHT_PARENTHESIS")
-    def trailer_call((left, argslist, right)):
+    def trailer_call(pack):
+        (left, argslist, right) = pack
         return [{
             "type": "call",
             "value": argslist,
@@ -215,7 +236,8 @@ def include_operators(pg):
 
     @pg.production("trailer : LEFT_SQUARE_BRACKET subscript RIGHT_SQUARE_BRACKET")
     @pg.production("trailer : LEFT_SQUARE_BRACKET subscriptlist RIGHT_SQUARE_BRACKET")
-    def trailer_getitem_ellipsis((left, subscript, right)):
+    def trailer_getitem_ellipsis(pack):
+        (left, subscript, right) = pack
         return [{
             "type": "getitem",
             "value": subscript,
@@ -226,7 +248,8 @@ def include_operators(pg):
         }]
 
     @pg.production("subscript : DOT DOT DOT")
-    def subscript_ellipsis((dot1, dot2, dot3)):
+    def subscript_ellipsis(pack):
+        (dot1, dot2, dot3) = pack
         return {
             "type": "ellipsis",
             "first_formatting": dot1.hidden_tokens_after,
@@ -235,11 +258,13 @@ def include_operators(pg):
 
     @pg.production("subscript : test")
     @pg.production("subscript : slice")
-    def subscript_test((test,)):
+    def subscript_test(pack):
+        (test,) = pack
         return test
 
     @pg.production("slice : COLON")
-    def slice((colon,)):
+    def slice(pack):
+        (colon,) = pack
         return {
             "type": "slice",
             "lower": {},
@@ -253,7 +278,8 @@ def include_operators(pg):
         }
 
     @pg.production("slice : COLON COLON")
-    def slice_colon((colon, colon2)):
+    def slice_colon(pack):
+        (colon, colon2) = pack
         return {
             "type": "slice",
             "lower": {},
@@ -267,7 +293,8 @@ def include_operators(pg):
         }
 
     @pg.production("slice : test COLON")
-    def slice_lower((test, colon,)):
+    def slice_lower(pack):
+        (test, colon,) = pack
         return {
             "type": "slice",
             "lower": test,
@@ -281,7 +308,8 @@ def include_operators(pg):
         }
 
     @pg.production("slice : test COLON COLON")
-    def slice_lower_colon_colon((test, colon, colon2)):
+    def slice_lower_colon_colon(pack):
+        (test, colon, colon2) = pack
         return {
             "type": "slice",
             "lower": test,
@@ -295,7 +323,8 @@ def include_operators(pg):
         }
 
     @pg.production("slice : COLON test")
-    def slice_upper((colon, test,)):
+    def slice_upper(pack):
+        (colon, test,) = pack
         return {
             "type": "slice",
             "lower": {},
@@ -309,7 +338,8 @@ def include_operators(pg):
         }
 
     @pg.production("slice : COLON test COLON")
-    def slice_upper_colon((colon, test, colon2)):
+    def slice_upper_colon(pack):
+        (colon, test, colon2) = pack
         return {
             "type": "slice",
             "lower": {},
@@ -323,7 +353,8 @@ def include_operators(pg):
         }
 
     @pg.production("slice : COLON COLON test")
-    def slice_step((colon, colon2, test)):
+    def slice_step(pack):
+        (colon, colon2, test) = pack
         return {
             "type": "slice",
             "lower": {},
@@ -337,7 +368,8 @@ def include_operators(pg):
         }
 
     @pg.production("slice : test COLON test")
-    def slice_lower_upper((test, colon, test2,)):
+    def slice_lower_upper(pack):
+        (test, colon, test2,) = pack
         return {
             "type": "slice",
             "lower": test,
@@ -351,7 +383,8 @@ def include_operators(pg):
         }
 
     @pg.production("slice : test COLON test COLON")
-    def slice_lower_upper_colon((test, colon, test2, colon2)):
+    def slice_lower_upper_colon(pack):
+        (test, colon, test2, colon2) = pack
         return {
             "type": "slice",
             "lower": test,
@@ -365,7 +398,8 @@ def include_operators(pg):
         }
 
     @pg.production("slice : test COLON COLON test")
-    def slice_lower_step((test, colon, colon2, test2)):
+    def slice_lower_step(pack):
+        (test, colon, colon2, test2) = pack
         return {
             "type": "slice",
             "lower": test,
@@ -379,7 +413,8 @@ def include_operators(pg):
         }
 
     @pg.production("slice : COLON test COLON test")
-    def slice_upper_step((colon, test, colon2, test2)):
+    def slice_upper_step(pack):
+        (colon, test, colon2, test2) = pack
         return {
             "type": "slice",
             "lower": {},
@@ -393,7 +428,8 @@ def include_operators(pg):
         }
 
     @pg.production("slice : test COLON test COLON test")
-    def slice_lower_upper_step((test, colon, test2, colon2, test3)):
+    def slice_lower_upper_step(pack):
+        (test, colon, test2, colon2, test3) = pack
         return {
             "type": "slice",
             "lower": test,

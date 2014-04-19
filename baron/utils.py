@@ -1,18 +1,15 @@
-import ast
+import sys
 
 
-class PrintFunctionImportFinder(ast.NodeVisitor):
-    def __init__(self, *args, **kwars):
-        super(ast.NodeVisitor, self).__init__(*args, **kwars)
-        self.print_function = False
+if sys.version_info[0] == 2:
+    python_version = 2
+else:
+    python_version = 3
 
-    def visit_ImportFrom(self, node):
-        if self.print_function:
-            # my job is already done
-            return
-
-        if node.module == "__future__" and filter(lambda x: x.name == "print_function", node.names):
-            self.print_function = True
+if python_version == 3:
+    string_instance = str
+else:
+    string_instance = basestring
 
 
 class FlexibleIterator():
@@ -24,6 +21,9 @@ class FlexibleIterator():
         return self
 
     def next(self):
+        return self.__next__()
+
+    def __next__(self):
         self.position += 1
         if self.position == len(self.sequence):
             raise StopIteration
@@ -53,7 +53,7 @@ class FlexibleIterator():
         to_return = ""
         current = None
         while self.show_next() is not None and test(self):
-            current = self.next()
+            current = next(self)
             to_return += current
 
         return to_return
@@ -63,7 +63,7 @@ class FlexibleIterator():
         current = None
         escaped = False
         while self.show_next() is not None and (escaped or test(self)):
-            current = self.next()
+            current = next(self)
             to_return += current
             if escaped:
                 escaped = False

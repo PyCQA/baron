@@ -2,14 +2,14 @@ from ast import parse as python_ast_parse
 
 from rply.errors import ParsingError
 
-from utils import PrintFunctionImportFinder
-from spliter import split
-from grouper import group
-from tokenizer import tokenize as _tokenize
-from formatting_grouper import group as space_group
-from grammator import generate_parse
-from indentation_marker import mark_indentation
-from inner_formatting_grouper import group as inner_group
+from .spliter import split
+from .grouper import group
+from .tokenizer import tokenize as _tokenize
+from .formatting_grouper import group as space_group
+from .future import has_print_function, replace_print_by_name
+from .grammator import generate_parse
+from .indentation_marker import mark_indentation
+from .inner_formatting_grouper import group as inner_group
 
 
 parse_tokens = generate_parse(False)
@@ -36,20 +36,27 @@ def _parse(tokens, print_function):
 
 
 def parse(source_code, print_function=None):
-    if print_function is None:
-        print_function_finder = PrintFunctionImportFinder()
-        print_function_finder.visit(python_ast_parse(source_code))
-        print_function = print_function_finder.print_function
-
     # Python syntax requires source code to end with an ENDL token
     # the endl token is removed afterward, if, and only if, it's the last token of the root level
     # It is possible that this token end up in a 'suite' grammar rule
     # which means that it is 'traped' in an indented block of code
     # I don't want to recursivly travers the tree to hope to find it
     # This solution behave in the expected way for 90% of the case
+    newline_appended = False
     if source_code and source_code[-1] != "\n":
         source_code += "\n"
-        to_return = _parse(tokenize(source_code, print_function), print_function)
+        newline_appended = True
+
+    if print_function is None:
+        tokens = tokenize(source_code, False)
+        print_function = has_print_function(tokens)
+        if print_function:
+            replace_print_by_name(tokens)
+    else:
+        tokens = tokenize(source_code, print_function)
+
+    if newline_appended:
+        to_return = _parse(tokens, print_function)
 
         if to_return[-1]["type"] == "endl" and not to_return[-1]["formatting"]:
             return to_return[:-1]
@@ -58,8 +65,7 @@ def parse(source_code, print_function=None):
         else:
             return to_return
 
-    return _parse(tokenize(source_code, print_function), print_function)
-
+    return _parse(tokens, print_function)
 
 
 def tokenize(pouet, print_function=False):

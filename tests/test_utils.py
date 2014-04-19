@@ -1,7 +1,14 @@
 from baron.grammator import generate_parse
 from baron.dumper import dumps
 from baron.baron import parse as baron_parse
+from baron.utils import python_version
 
+import sys
+if python_version == 3:
+    from itertools import zip_longest
+else:
+    from itertools import izip_longest
+    zip_longest = izip_longest
 
 parse = generate_parse(False)
 
@@ -25,8 +32,7 @@ def check_dumps(source_code):
         import json
         import traceback
         traceback.print_exc(file=sys.stdout)
-        print "Warning: couldn't write dumps output to debug file, exception: %s" % e
-        print
-        print "Tree: %s" % json.dumps(baron_parse(source_code), indent=4)
+        sys.stdout.write("Warning: couldn't write dumps output to debug file, exception: %s\n\n" % e)
+        sys.stdout.write("Tree: %s" % json.dumps(baron_parse(source_code), indent=4) + "\n")
 
     assert dumps(baron_parse(source_code)) == source_code

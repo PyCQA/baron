@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
 import pytest
-from test_utils import parse_simple
+from .test_utils import parse_simple
 
 
 def test_simple_power():

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
-from test_utils import parse_simple, parse_multi
+from .test_utils import parse_simple, parse_multi
 
 def test_empty():
     ""
