@@ -68,14 +68,10 @@ def is_on_targetted_node(target, current, length):
 
 
 def render(node):
-    optional_offset = 0
     for pos, (key_type, render_key, dependent) in enumerate(d[node['type']]):
-        if not dependent:
-            if not node.get(render_key):
-                optional_offset += 1
-                continue
+        if not dependent and not node.get(render_key):
+            continue
         elif isinstance(dependent, list) and not all([node.get(x) for x in dependent]):
-            optional_offset += 1
             continue
 
         if key_type == 'list':
@@ -88,5 +84,5 @@ def render(node):
         elif key_type == 'formatting':
             #TODO do not use dumps from dumper
             value = dumps(node[render_key])
-        yield (pos+1 - optional_offset, key_type, render_key, value)
+        yield (pos+1, key_type, render_key, value)
 

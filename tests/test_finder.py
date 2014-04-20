@@ -46,12 +46,12 @@ def test_sc_assignement_first_formatting():
 
 
 def test_sc_assignement_operator():
-    path = make_path([0], "assignment", 3)
+    path = make_path([0], "assignment", 4)
     check_path(simplecode, 1, 6, path)
 
 
 def test_sc_assignement_second_formatting():
-    path = make_path([0, "second_formatting"], "assignment", 4)
+    path = make_path([0, "second_formatting"], "assignment", 5)
     check_path(simplecode, 1, 7, path)
 
 
