@@ -34,18 +34,21 @@ def path_to_location_walk(node, current, target):
     if isinstance(node, list):
         for pos, child in enumerate(node):
             found = path_to_location_walk(child, current, target)
-            if found is not None:
+            if found is False:
+                return False
+            elif found is not None:
                 found["path"] = [pos] + found["path"]
                 return found
     elif isinstance(node, dict):
-        if node['type'] == "endl":
-            current.advance_line()
         for render_pos, key_type, render_key, value in render(node):
             if key_type == 'list':
                 found = path_to_location_walk(node[render_key], current, target)
             else:
                 found = path_to_location_walk(value, current, target)
-            if found is not None:
+
+            if found is False:
+                return False
+            elif found is not None:
                 if render_key is not None:
                     found["path"] = [render_key] + found["path"]
                 if found["type"] is None:
@@ -53,10 +56,15 @@ def path_to_location_walk(node, current, target):
                     found["position_in_rendering_list"] = render_pos
                 return found
     else:
-        advance_by = len(node)
-        if is_on_targetted_node(target, current, advance_by):
-            return {"path":[], "type":None, "position_in_rendering_list":None}
-        current.advance_columns(advance_by)
+        if node == "\n":
+            current.advance_line()
+            if targetted_line_is_passed(target, current):
+                return False
+        else:
+            advance_by = len(node)
+            if is_on_targetted_node(target, current, advance_by):
+                return {"path":[], "type":None, "position_in_rendering_list":None}
+            current.advance_columns(advance_by)
         
     return None
 
@@ -65,6 +73,10 @@ def is_on_targetted_node(target, current, length):
     return target.line == current.line \
         and target.column >= current.column \
         and target.column < current.column + length
+
+
+def targetted_line_is_passed(target, current):
+    return current.line > target.line
 
 
 def render(node):
