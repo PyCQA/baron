@@ -83,6 +83,8 @@ def render(node):
     for pos, (key_type, render_key, dependent) in enumerate(d[node['type']]):
         if not dependent and not node.get(render_key):
             continue
+        elif isinstance(dependent, str) and not node.get(dependent):
+            continue
         elif isinstance(dependent, list) and not all([node.get(x) for x in dependent]):
             continue
 
