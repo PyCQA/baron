@@ -1,6 +1,5 @@
 from .rendering_dictionnary import rendering_dictionnary as d
 from .dumper import dumps
-import json
 
 
 class Position:
@@ -16,15 +15,40 @@ class Position:
         self.column = 1
 
 
+class PathHandler:
+    def __init__(self):
+        self.path = []
+        self.type = None
+        self.position_in_rendering_list = None
+
+    def add_list_level(self, index):
+        self.path = [index] + self.path
+
+    def add_dict_level(self, render_key, render_type, render_index):
+        if render_key:
+            self.path = [render_key] + self.path
+
+        if self.leaf_node_not_specified():
+            self.type = render_type
+            self.position_in_rendering_list = render_index
+
+    def leaf_node_not_specified(self):
+        return self.type is None
+
+    def get_path(self):
+        return {
+                "path": self.path,
+                "type": self.type,
+                "position_in_rendering_list": self.position_in_rendering_list
+            }
+
+
 def path_to_location(tree, line, column):
     current = Position(1,1)
     target = Position(line, column)
 
     found = path_to_location_walk(tree, current, target)
-    if not found:
-        return None
-    else:
-        return json.dumps(found)
+    return found.get_path() if found else None
 
 
 def walk_on_list(node, current, target):
@@ -33,7 +57,7 @@ def walk_on_list(node, current, target):
         if found is False:
             return False
         elif found is not None:
-            found["path"] = [pos] + found["path"]
+            found.add_list_level(pos)
             return found
 
 
@@ -43,14 +67,14 @@ def walk_on_dict(node, current, target):
         if found is False:
             return False
         elif found is not None:
-            if render_key is not None:
-                found["path"] = [render_key] + found["path"]
-            if found["type"] is None:
-                found["type"] = node["type"]
-                found["position_in_rendering_list"] = render_pos
+            found.add_dict_level(render_key, node["type"], render_pos)
             return found
 
 
+# The constant node is not interesting for the path: every leaf node is
+# a constant. What's more interesting is the parent node, with its type
+# and position_in_rendering_list, so the function returns an empty
+# PathHandler() object that will be filled by the callee later on.
 def walk_on_constant(constant, current, target):
     if constant == "\n":
         current.advance_line()
@@ -59,7 +83,7 @@ def walk_on_constant(constant, current, target):
     else:
         advance_by = len(constant)
         if is_on_targetted_node(target, current, advance_by):
-            return {"path": [], "type": None, "position_in_rendering_list": None}
+            return PathHandler()
         current.advance_columns(advance_by)
         
     return None
