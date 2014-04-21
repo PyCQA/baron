@@ -21,6 +21,16 @@ ast = parse(source_code_string)
 source_code_string == dumps(ast)
 ```
 
+There is great chances that you'll probably want to use
+[RedBaron](https://github.com/Psycojoker/redbaron) instead of using Baron
+directly. Think of Baron as the "bytecode of python source code" and RedBaron
+as some sort of usable layer on top of it.
+
+If you don't know what Baron is or don't understand yet why it might proves
+itself useful for you, read the next section.
+
+'Documentation' is bellow.
+
 Why is this important?
 ======================
 
