@@ -14,7 +14,7 @@ def fun2(arg1 = default, **kwargs):
 
 
 def make_path(path, type, pos):
-    return json.dumps({"path":path, "type":type, "position_in_rendering_list":pos})
+    return json.dumps({"path": path, "type": type, "position_in_rendering_list": pos})
 
 
 def check_path(code, line, column, target_node):

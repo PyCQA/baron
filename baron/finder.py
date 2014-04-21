@@ -63,7 +63,7 @@ def path_to_location_walk(node, current, target):
         else:
             advance_by = len(node)
             if is_on_targetted_node(target, current, advance_by):
-                return {"path":[], "type":None, "position_in_rendering_list":None}
+                return {"path": [], "type": None, "position_in_rendering_list": None}
             current.advance_columns(advance_by)
         
     return None
