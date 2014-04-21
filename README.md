@@ -11,8 +11,8 @@ Installation
 
     pip install baron
 
-Usage
-=====
+Basic Usage
+===========
 
 ```python
 from baron import parse, dumps
