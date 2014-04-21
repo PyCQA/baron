@@ -27,43 +27,58 @@ def path_to_location(tree, line, column):
         return json.dumps(found)
 
 
-def path_to_location_walk(node, current, target):
-    if isinstance(node, list):
-        for pos, child in enumerate(node):
-            found = path_to_location_walk(child, current, target)
-            if found is False:
-                return False
-            elif found is not None:
-                found["path"] = [pos] + found["path"]
-                return found
-    elif isinstance(node, dict):
-        for render_pos, key_type, render_key, value in render(node):
-            if key_type == 'list':
-                found = path_to_location_walk(node[render_key], current, target)
-            else:
-                found = path_to_location_walk(value, current, target)
+def walk_on_list(node, current, target):
+    for pos, child in enumerate(node):
+        found = path_to_location_walk(child, current, target)
+        if found is False:
+            return False
+        elif found is not None:
+            found["path"] = [pos] + found["path"]
+            return found
 
-            if found is False:
-                return False
-            elif found is not None:
-                if render_key is not None:
-                    found["path"] = [render_key] + found["path"]
-                if found["type"] is None:
-                    found["type"] = node["type"]
-                    found["position_in_rendering_list"] = render_pos
-                return found
-    else:
-        if node == "\n":
-            current.advance_line()
-            if targetted_line_is_passed(target, current):
-                return False
+
+def walk_on_dict(node, current, target):
+    for render_pos, key_type, render_key, value in render(node):
+        if key_type == 'list':
+            found = path_to_location_walk(node[render_key], current, target)
         else:
-            advance_by = len(node)
-            if is_on_targetted_node(target, current, advance_by):
-                return {"path": [], "type": None, "position_in_rendering_list": None}
-            current.advance_columns(advance_by)
+            found = path_to_location_walk(value, current, target)
+
+        if found is False:
+            return False
+        elif found is not None:
+            if render_key is not None:
+                found["path"] = [render_key] + found["path"]
+            if found["type"] is None:
+                found["type"] = node["type"]
+                found["position_in_rendering_list"] = render_pos
+            return found
+
+
+def walk_on_constant(constant, current, target):
+    if constant == "\n":
+        current.advance_line()
+        if targetted_line_is_passed(target, current):
+            return False
+    else:
+        advance_by = len(constant)
+        if is_on_targetted_node(target, current, advance_by):
+            return {"path": [], "type": None, "position_in_rendering_list": None}
+        current.advance_columns(advance_by)
         
     return None
+
+
+walk_function_based_on_instance = {
+        "list": walk_on_list,
+        "dict": walk_on_dict,
+        "str": walk_on_constant,
+    }
+
+
+def path_to_location_walk(node, current, target):
+    instance_name = type(node).__name__
+    return walk_function_based_on_instance[instance_name](node, current, target)
 
 
 def is_on_targetted_node(target, current, length):
