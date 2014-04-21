@@ -6,6 +6,21 @@ drops some syntax information in the process of its creation (like empty lines,
 comments, formatting), a FST keeps everything and guarantees the operation
 <code>ast\_to\_code(code\_to\_ast(source\_code)) == source\_code</code>.
 
+Installation
+============
+
+    pip install baron
+
+Usage
+=====
+
+```python
+from baron import parse, dumps
+
+ast = parse(source_code_string)
+source_code_string == dumps(ast)
+```
+
 Why is this important?
 ======================
 
@@ -77,21 +92,6 @@ migrate.
 **Baron is targeting python 2.[67]**. It has not been tested on python3 but
 should be working for most part (except the new grammar like "yield from",
 obviously).
-
-Installation
-============
-
-    pip install baron
-
-Usage
-=====
-
-```python
-from baron import parse, dumps
-
-ast = parse(source_code_string)
-source_code_string == dumps(ast)
-```
 
 Documentation
 =============
