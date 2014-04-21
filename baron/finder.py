@@ -12,9 +12,6 @@ class Position:
         self.column += columns
 
     def advance_line(self):
-        self.advance_lines(1)
-
-    def advance_lines(self, lines):
         self.line += 1
         self.column = 1
 
