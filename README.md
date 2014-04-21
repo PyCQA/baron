@@ -182,6 +182,11 @@ Tests
 =====
 Run either `py.test tests/` or `nosetests` in the baron directory.
 
+Community
+=========
+
+You can reach us on [irc.freenode.net#baron](https://webchat.freenode.net/?channels=%23baron).
+
 Misc
 ====
 [Old blog post announcing the project.](http://worlddomination.be/blog/2013/the-baron-project-part-1-what-and-why.html) Not that much up to date.
