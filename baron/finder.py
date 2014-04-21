@@ -38,12 +38,8 @@ def walk_on_list(node, current, target):
 
 
 def walk_on_dict(node, current, target):
-    for render_pos, key_type, render_key, value in render(node):
-        if key_type == 'list':
-            found = path_to_location_walk(node[render_key], current, target)
-        else:
-            found = path_to_location_walk(value, current, target)
-
+    for render_pos, render_key, value in render(node):
+        found = path_to_location_walk(value, current, target)
         if found is False:
             return False
         elif found is not None:
@@ -101,7 +97,7 @@ def render(node):
             continue
 
         if key_type == 'list':
-            value = ''
+            value = node[render_key]
         elif key_type == 'key':
             value = node[render_key]
         elif key_type == 'constant':
@@ -110,5 +106,5 @@ def render(node):
         elif key_type == 'formatting':
             #TODO do not use dumps from dumper
             value = dumps(node[render_key])
-        yield (pos+1, key_type, render_key, value)
+        yield (pos+1, render_key, value)
 
