@@ -1,4 +1,4 @@
-from .render import render
+from .walker import NodeWalker
 
 
 class Position:
@@ -42,57 +42,45 @@ class PathHandler:
             }
 
 
-def path_to_location(tree, line, column):
-    current = Position(1,1)
-    target = Position(line, column)
+class PositionFinder(NodeWalker):
+    def __init__(self):
+        NodeWalker.__init__(self)
+        self.current = None
+        self.target = None
+        self.path_found = None
 
-    found = path_to_location_walk(tree, current, target)
-    return found.get_path() if found else None
+    def find(self, tree, line, column):
+        self.current = Position(1,1)
+        self.target = Position(line, column)
+        self.path_found = None
 
+        self.walk(tree)
+        return self.path_found.get_path() if self.path_found else None
 
-def walk_on_list(node, current, target):
-    for pos, child in enumerate(node):
-        found = path_to_location_walk(child, current, target)
-        if found is False:
-            return False
-        elif found is not None:
-            found.add_list_level(pos)
-            return found
+    def on_list(self, node, pos):
+        if self.path_found:
+            self.path_found.add_list_level(pos)
 
+    def on_dict(self, item, render_pos, render_key):
+        if self.path_found:
+            self.path_found.add_dict_level(render_key, item["type"], render_pos)
 
-def walk_on_dict(node, current, target):
-    for render_pos, render_key, value in render(node):
-        found = path_to_location_walk(value, current, target)
-        if found is False:
-            return False
-        elif found is not None:
-            found.add_dict_level(render_key, node["type"], render_pos)
-            return found
-
-
-# The constant node is not interesting for the path: every leaf node is
-# a constant. What's more interesting is the parent node, with its type
-# and position_in_rendering_list, so the function returns an empty
-# PathHandler() object that will be filled by the callee later on.
-def walk_on_constant(constant, current, target):
-    if constant == "\n":
-        current.advance_line()
-        if targetted_line_is_passed(target, current):
-            return False
-    else:
-        advance_by = len(constant)
-        if is_on_targetted_node(target, current, advance_by):
-            return PathHandler()
-        current.advance_columns(advance_by)
-        
-    return None
-
-
-walk_function_based_on_instance = {
-        "list": walk_on_list,
-        "dict": walk_on_dict,
-        "str": walk_on_constant,
-    }
+    # The constant node is not interesting for the path: every leaf node is
+    # a constant. What's more interesting is the parent node, with its type
+    # and position_in_rendering_list, so the function returns an empty
+    # PathHandler() object that will be filled by the callee later on.
+    def on_constant(self, constant):
+        if constant == "\n":
+            self.current.advance_line()
+            if targetted_line_is_passed(self.target, self.current):
+                return True
+        else:
+            advance_by = len(constant)
+            if is_on_targetted_node(self.target, self.current, advance_by):
+                self.path_found = PathHandler()
+                return True
+            self.current.advance_columns(advance_by)
+        return False
 
 
 def path_to_location_walk(node, current, target):
