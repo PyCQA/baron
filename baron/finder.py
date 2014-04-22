@@ -1,5 +1,4 @@
-from .rendering_dictionnary import rendering_dictionnary as d
-from .dumper import dumps
+from .render import render
 
 
 class Position:
@@ -109,26 +108,4 @@ def is_on_targetted_node(target, current, length):
 
 def targetted_line_is_passed(target, current):
     return current.line > target.line
-
-
-def render(node):
-    for pos, (key_type, render_key, dependent) in enumerate(d[node['type']]):
-        if not dependent and not node.get(render_key):
-            continue
-        elif isinstance(dependent, str) and not node.get(dependent):
-            continue
-        elif isinstance(dependent, list) and not all([node.get(x) for x in dependent]):
-            continue
-
-        if key_type == 'list':
-            value = node[render_key]
-        elif key_type == 'key':
-            value = node[render_key]
-        elif key_type == 'constant':
-            value = render_key
-            render_key = None
-        elif key_type == 'formatting':
-            #TODO do not use dumps from dumper
-            value = dumps(node[render_key])
-        yield (pos+1, render_key, value)
 
