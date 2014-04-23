@@ -1,7 +1,7 @@
 from .token import BaronToken
 from .parser import BaronParserGenerator
 
-from .tokenizer import TOKENS, KEYWORDS, tokenize, tokenize_current_keywords
+from .tokenizer import TOKENS, tokenize, tokenize_current_keywords
 from .utils import create_node_from_token
 from .grammator_imports import include_imports
 from .grammator_control_structures import include_control_structures
