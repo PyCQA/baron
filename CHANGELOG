@@ -4,20 +4,17 @@ Changelog
 0.2 (unreleased)
 ----------------
 
-- baron now run in python3 (*but* doesn't implement python3 grammar yet) by
-  Pierre Penninckx https://github.com/ibizaman
-- drop the usage of ast.py to find print_function, this allow any version of
-  python to parse any other version of python also by Pierre Penninckx
+- feature: baron now run in python3 (*but* doesn't implement python3 grammar
+  yet) by Pierre Penninckx https://github.com/ibizaman
+- feature: drop the usage of ast.py to find print_function, this allow any
+  version of python to parse any other version of python also by Pierre
+  Penninckx
+- fix: rare bug where a comment end up being confused as an indentation level
 
 Planned:
 - dumper class
 - dictionary that contains the order un which the items of a node must be
   rendered
-
-0.1.4 (unreleased):
--------------------
-
-Planned:
 - <del>in the function "lambda_" in dumper.py, there is a call to a now deleted
   function "funcdef_argument", this will crash a redering of lambda</del> in
   fact, this case won't happen since "argument" isn't a FST node anymore, this is
