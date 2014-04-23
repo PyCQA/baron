@@ -1453,3 +1453,15 @@ def test_fplist_alone():
                "value": "\n",
             }],
           }])
+
+
+def test_endl_dont_grab_comment_as_indent():
+    """
+    \n# pouet
+    """
+    parse_multi([
+           ('ENDL', '\n', [], [('COMMENT', '# pouet')])
+        ],[
+           {"type": "endl", "value": "\n", "indent": "", "formatting": []},
+           {"type": "comment", "value": "# pouet"},
+          ])

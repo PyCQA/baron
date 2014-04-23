@@ -52,12 +52,16 @@ def generate_parse(print_function):
     @pg.production("endl : ENDL")
     def endl(pack):
         (endl,) = pack
+        indent = ""
+        if endl.hidden_tokens_after and endl.hidden_tokens_after[0]["type"] == "space":
+            indent = endl.hidden_tokens_after[0]["value"]
+            endl.hidden_tokens_after = endl.hidden_tokens_after[1:]
         return [{
             "type": "endl",
             "value": endl.value,
             "formatting": endl.hidden_tokens_before,
-            "indent": endl.hidden_tokens_after[0]["value"] if endl.hidden_tokens_after else "",
-        }]
+            "indent": indent,
+        }] + endl.hidden_tokens_after
 
 
     @pg.production("left_parenthesis : LEFT_PARENTHESIS")
