@@ -83,11 +83,6 @@ class PositionFinder(NodeWalker):
         return False
 
 
-def path_to_location_walk(node, current, target):
-    instance_name = type(node).__name__
-    return walk_function_based_on_instance[instance_name](node, current, target)
-
-
 def is_on_targetted_node(target, current, length):
     return target.line == current.line \
         and target.column >= current.column \
