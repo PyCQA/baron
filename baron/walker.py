@@ -1,6 +1,15 @@
 from .render import render
 
 
+def walk(worker, node):
+    if isinstance(node, list):
+        return walk_on_list(worker, node)
+    elif isinstance(node, dict):
+        return walk_on_dict(worker, node)
+    else:
+        return walk_on_constant(worker, node)
+
+
 class NodeWalkerWorker:
     '''Inherit me and overload the methods you want'''
     CONTINUE = False
@@ -16,43 +25,33 @@ class NodeWalkerWorker:
         return self.CONTINUE
 
 
-class NodeWalker:
-    def __init__(self, worker):
-        self.worker = worker
+def walk_on_list(worker, node):
+    stop = False
 
-    def walk_on_list(self, node):
-        stop = False
+    pos = None
+    for pos, child in enumerate(node):
+        stop = walk(worker, child)
+        if stop:
+            break
 
-        pos = None
-        for pos, child in enumerate(node):
-            stop = self.walk(child)
-            if stop:
-                break
+    stop |= worker.on_list(node, pos)
+    return stop
 
-        stop |= self.worker.on_list(node, pos)
-        return stop
 
-    def walk_on_dict(self, node):
-        stop = False
+def walk_on_dict(worker, node):
+    stop = False
 
-        render_pos = None
-        render_key = None
-        for render_pos, render_key, item in render(node):
-            stop = self.walk(item)
-            if stop:
-                break
+    render_pos = None
+    render_key = None
+    for render_pos, render_key, child in render(node):
+        stop = walk(worker, child)
+        if stop:
+            break
 
-        stop |= self.worker.on_dict(node, render_pos, render_key)
-        return stop
+    stop |= worker.on_dict(node, render_pos, render_key)
+    return stop
 
-    def walk_on_constant(self, node):
-        return self.worker.on_constant(node)
 
-    def walk(self, node):
-        if isinstance(node, list):
-            return self.walk_on_list(node)
-        elif isinstance(node, dict):
-            return self.walk_on_dict(node)
-        else:
-            return self.walk_on_constant(node)
+def walk_on_constant(worker, node):
+    return worker.on_constant(node)
 
