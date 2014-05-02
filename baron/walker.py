@@ -24,7 +24,7 @@ class NodeWalkerWorker:
     def before_dict(self, node):
         return self.CONTINUE
 
-    def after_dict(self, node, render_pos, render_key):
+    def after_dict(self, node, render_pos, render_key, key_type):
         return self.CONTINUE
 
     def on_constant(self, constant):
@@ -53,12 +53,12 @@ def walk_on_dict(worker, node):
 
     render_pos = None
     render_key = None
-    for render_pos, render_key, child in render(node):
+    for render_pos, render_key, key_type, child in render(node):
         stop = walk(worker, child)
         if stop:
             break
 
-    stop |= worker.after_dict(node, render_pos, render_key)
+    stop |= worker.after_dict(node, render_pos, render_key, key_type)
     return stop
 
 

@@ -1,6 +1,3 @@
-from .dumper import dumps
-
-
 def render(node):
     for pos, (key_type, render_key, dependent) in enumerate(rendering_dictionnary[node['type']]):
         if not dependent and not node.get(render_key):
@@ -10,17 +7,12 @@ def render(node):
         elif isinstance(dependent, list) and not all([node.get(x) for x in dependent]):
             continue
 
-        if key_type == 'list':
-            value = node[render_key]
-        elif key_type == 'key':
+        if key_type in ['list', 'key', 'formatting']:
             value = node[render_key]
         elif key_type == 'constant':
             value = render_key
             render_key = None
-        elif key_type == 'formatting':
-            #TODO do not use dumps from dumper
-            value = dumps(node[render_key])
-        yield (pos+1, render_key, value)
+        yield (pos+1, render_key, key_type, value)
 
 
 rendering_dictionnary = {
