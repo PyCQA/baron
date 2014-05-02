@@ -54,13 +54,13 @@ class PositionFinder(NodeWalkerWorker):
         self.target = Position(line, column)
         self.path_found = None
 
-    def on_list(self, node, pos):
+    def after_list(self, node, pos):
         if self.path_found:
             self.path_found.add_list_level(pos)
             return self.STOP
         return self.CONTINUE
 
-    def on_dict(self, item, render_pos, render_key):
+    def after_dict(self, item, render_pos, render_key):
         if self.path_found:
             self.path_found.add_dict_level(render_key, item["type"], render_pos)
             return self.STOP
