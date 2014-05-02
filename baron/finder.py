@@ -22,6 +22,9 @@ class Position:
 
 class PathHandler:
     def __init__(self):
+        self.reset()
+
+    def reset(self):
         self.path = []
         self.type = None
         self.position_in_rendering_list = None
@@ -60,8 +63,10 @@ class PositionFinder(NodeWalkerWorker):
             return self.STOP
         return self.CONTINUE
 
-    def after_dict(self, item, render_pos, render_key):
+    def after_dict(self, item, render_pos, render_key, key_type):
         if self.path_found:
+            if key_type == 'formatting':
+                self.path_found.reset()
             self.path_found.add_dict_level(render_key, item["type"], render_pos)
             return self.STOP
         return self.CONTINUE
