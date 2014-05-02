@@ -1,5 +1,5 @@
 from baron.baron import parse
-from baron.finder import PositionFinder
+from baron.finder import find
 
 simplecode = """vara = 1"""
 
@@ -17,8 +17,7 @@ def make_path(path, type, pos):
 
 
 def check_path(code, line, column, target_node):
-    finder = PositionFinder()
-    assert finder.find(parse(code), line, column) == target_node
+    assert find(parse(code), line, column) == target_node
 
 
 def test_sc_line_before_scope():

@@ -1,4 +1,11 @@
-from .walker import NodeWalker
+from .walker import NodeWalker, NodeWalkerWorker
+
+
+def find(tree, line, column):
+    worker = PositionFinder(line, column)
+    walker = NodeWalker(worker)
+    walker.walk(tree)
+    return worker.path_found.get_path() if worker.path_found else None
 
 
 class Position:
@@ -42,26 +49,17 @@ class PathHandler:
             }
 
 
-class PositionFinder(NodeWalker):
-    def __init__(self):
-        NodeWalker.__init__(self)
-        self.current = None
-        self.target = None
-        self.path_found = None
-
-    def find(self, tree, line, column):
+class PositionFinder(NodeWalkerWorker):
+    def __init__(self, line, column):
         self.current = Position(1,1)
         self.target = Position(line, column)
         self.path_found = None
 
-        self.walk(tree)
-        return self.path_found.get_path() if self.path_found else None
-
     def on_list(self, node, pos):
         if self.path_found:
             self.path_found.add_list_level(pos)
-            return True
-        return False
+            return self.STOP
+        return self.CONTINUE
 
     def on_dict(self, item, render_pos, render_key):
         if self.path_found:
@@ -77,14 +75,14 @@ class PositionFinder(NodeWalker):
         if constant == "\n":
             self.current.advance_line()
             if targetted_line_is_passed(self.target, self.current):
-                return True
+                return self.STOP
         else:
             advance_by = len(constant)
             if is_on_targetted_node(self.target, self.current, advance_by):
                 self.path_found = PathHandler()
-                return True
+                return self.STOP
             self.current.advance_columns(advance_by)
-        return False
+        return self.CONTINUE
 
 
 def is_on_targetted_node(target, current, length):
