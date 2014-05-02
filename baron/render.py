@@ -12,7 +12,7 @@ def render(node):
         elif key_type == 'constant':
             value = render_key
             render_key = None
-        yield (pos+1, render_key, key_type, value)
+        yield (pos, render_key, key_type, value)
 
 
 rendering_dictionnary = {
