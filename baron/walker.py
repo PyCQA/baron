@@ -1,43 +1,37 @@
 from .render import render
 
 
-class StopState:
-    def __init__(self):
-        self.stop = False
-
-    def setStop(self, stop):
-        if not self.stop and stop:
-            self.stop = True
 
 
 class NodeWalker:
 
     def walk_on_list(self, node):
-        stop = StopState()
+        stop = False
+
         pos = None
         for pos, child in enumerate(node):
-            stop.setStop(self.walk(child))
-            if stop.stop:
+            stop = self.walk(child)
+            if stop:
                 break
 
-        stop.setStop(self.on_list(node, pos))
-        return stop.stop
+        stop |= self.on_list(node, pos)
+        return stop
 
     def walk_on_dict(self, node):
-        stop = StopState()
+        stop = False
+
         render_pos = None
         render_key = None
         for render_pos, render_key, item in render(node):
-            stop.setStop(self.walk(item))
-            if stop.stop:
+            stop = self.walk(item)
+            if stop:
                 break
 
-        stop.setStop(self.on_dict(node, render_pos, render_key))
-        return stop.stop
+        stop |= self.on_dict(node, render_pos, render_key)
+        return stop
 
     def walk_on_constant(self, node):
-        stop = self.on_constant(node)
-        return stop
+        return self.on_constant(node)
 
     def walk(self, node):
         if isinstance(node, list):

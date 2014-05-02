@@ -60,10 +60,14 @@ class PositionFinder(NodeWalker):
     def on_list(self, node, pos):
         if self.path_found:
             self.path_found.add_list_level(pos)
+            return True
+        return False
 
     def on_dict(self, item, render_pos, render_key):
         if self.path_found:
             self.path_found.add_dict_level(render_key, item["type"], render_pos)
+            return self.STOP
+        return self.CONTINUE
 
     # The constant node is not interesting for the path: every leaf node is
     # a constant. What's more interesting is the parent node, with its type
