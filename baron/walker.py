@@ -15,10 +15,16 @@ class NodeWalkerWorker:
     CONTINUE = False
     STOP = True
 
-    def on_list(self, node, pos):
+    def before_list(self, node):
         return self.CONTINUE
 
-    def on_dict(self, node, render_pos, render_key):
+    def after_list(self, node, pos):
+        return self.CONTINUE
+
+    def before_dict(self, node):
+        return self.CONTINUE
+
+    def after_dict(self, node, render_pos, render_key):
         return self.CONTINUE
 
     def on_constant(self, constant):
@@ -26,7 +32,9 @@ class NodeWalkerWorker:
 
 
 def walk_on_list(worker, node):
-    stop = False
+    stop = worker.before_list(node)
+    if stop:
+        return stop
 
     pos = None
     for pos, child in enumerate(node):
@@ -34,12 +42,14 @@ def walk_on_list(worker, node):
         if stop:
             break
 
-    stop |= worker.on_list(node, pos)
+    stop |= worker.after_list(node, pos)
     return stop
 
 
 def walk_on_dict(worker, node):
-    stop = False
+    stop = worker.before_dict(node)
+    if stop:
+        return stop
 
     render_pos = None
     render_key = None
@@ -48,7 +58,7 @@ def walk_on_dict(worker, node):
         if stop:
             break
 
-    stop |= worker.on_dict(node, render_pos, render_key)
+    stop |= worker.after_dict(node, render_pos, render_key)
     return stop
 
 
