@@ -1,9 +1,24 @@
 from .render import render
 
 
+class NodeWalkerWorker:
+    '''Inherit me and overload the methods you want'''
+    CONTINUE = False
+    STOP = True
+
+    def on_list(self, node, pos):
+        return self.CONTINUE
+
+    def on_dict(self, node, render_pos, render_key):
+        return self.CONTINUE
+
+    def on_constant(self, constant):
+        return self.CONTINUE
 
 
 class NodeWalker:
+    def __init__(self, worker):
+        self.worker = worker
 
     def walk_on_list(self, node):
         stop = False
@@ -14,7 +29,7 @@ class NodeWalker:
             if stop:
                 break
 
-        stop |= self.on_list(node, pos)
+        stop |= self.worker.on_list(node, pos)
         return stop
 
     def walk_on_dict(self, node):
@@ -27,11 +42,11 @@ class NodeWalker:
             if stop:
                 break
 
-        stop |= self.on_dict(node, render_pos, render_key)
+        stop |= self.worker.on_dict(node, render_pos, render_key)
         return stop
 
     def walk_on_constant(self, node):
-        return self.on_constant(node)
+        return self.worker.on_constant(node)
 
     def walk(self, node):
         if isinstance(node, list):
@@ -41,12 +56,3 @@ class NodeWalker:
         else:
             return self.walk_on_constant(node)
 
-
-    def on_list(self, node, pos):
-        pass
-
-    def on_dict(self, node, current, target):
-        pass
-
-    def on_constant(self, constant):
-        pass
