@@ -39,17 +39,13 @@ class NodeWalker:
         stop = self.on_constant(node)
         return stop
 
-    def __init__(self):
-        self.walk_function_based_on_instance = {
-                "list": self.walk_on_list,
-                "dict": self.walk_on_dict,
-                "str": self.walk_on_constant,
-            }
-
     def walk(self, node):
-        instance_name = type(node).__name__
-        stop = self.walk_function_based_on_instance[instance_name](node)
-        return stop
+        if isinstance(node, list):
+            return self.walk_on_list(node)
+        elif isinstance(node, dict):
+            return self.walk_on_dict(node)
+        else:
+            return self.walk_on_constant(node)
 
 
     def on_list(self, node, pos):
