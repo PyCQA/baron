@@ -32,7 +32,7 @@ def _parse(tokens, print_function):
         import traceback
         traceback.print_exc(file=sys.stderr)
         sys.stderr.write("%s\n" % e)
-        sys.stderr.write("\nIt is not normal that you see this error, it means that Baron has failed to parse valide python code. It would be kind if you can extract the snippet of your code that make Baron fails and open a bug here: https://github.com/Psycojoker/baron/issues\n\nSorry for the inconvinience.")
+        sys.stderr.write("\nBaron has failed to parse this input. If this is valid python code (and by that I mean that the python binary successfully parse this code without any syntax error) (also consider that python does not yet parse python 3 code integrally) it would be kind if you can extract a snippet of your code that make Baron fails and open a bug here: https://github.com/Psycojoker/baron/issues\n\nSorry for the inconvenience.")
 
 
 def parse(source_code, print_function=None):
