@@ -12,6 +12,9 @@ def render(node):
         elif key_type == 'constant':
             value = render_key
             render_key = None
+        else:
+            raise NotImplemented("Unknown key type: %s" % key_type)
+
         yield (pos, render_key, key_type, value)
 
 
