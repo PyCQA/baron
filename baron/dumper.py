@@ -1,17 +1,17 @@
-from .walker import walk, NodeWalkerWorker
+from .walker import NodeWalker
 
 
 def dumps(tree):
-    worker = Dumper()
-    walk(worker, tree)
-    return worker.dump
+    return Dumper().dump(tree)
 
 
-class Dumper(NodeWalkerWorker):
-    def __init__(self):
-        self.dump = ''
-
+class Dumper(NodeWalker):
     def on_constant(self, constant):
         self.dump += constant
         return self.CONTINUE
+
+    def dump(self, tree):
+        self.dump = ''
+        self.walk(tree)
+        return self.dump
 

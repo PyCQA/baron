@@ -1,10 +1,9 @@
-from .walker import walk, NodeWalkerWorker
+from .walker import NodeWalker
 
 
 def find(tree, line, column):
-    worker = PositionFinder(line, column)
-    walk(worker, tree)
-    return worker.path_found.get_path() if worker.path_found else None
+    result = PositionFinder().find(tree, line, column)
+    return result.get_path() if result else None
 
 
 class Position:
@@ -51,11 +50,14 @@ class PathHandler:
             }
 
 
-class PositionFinder(NodeWalkerWorker):
-    def __init__(self, line, column):
+class PositionFinder(NodeWalker):
+    def find(self, tree, line, column):
         self.current = Position(1,1)
         self.target = Position(line, column)
         self.path_found = None
+
+        self.walk(tree)
+        return self.path_found
 
     def after_list(self, node, pos):
         if self.path_found:

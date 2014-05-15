@@ -1,16 +1,7 @@
 from .render import render
 
 
-def walk(worker, node):
-    if isinstance(node, list):
-        return walk_on_list(worker, node)
-    elif isinstance(node, dict):
-        return walk_on_dict(worker, node)
-    else:
-        return walk_on_constant(worker, node)
-
-
-class NodeWalkerWorker:
+class NodeWalker:
     '''Inherit me and overload the methods you want'''
     CONTINUE = False
     STOP = True
@@ -30,38 +21,45 @@ class NodeWalkerWorker:
     def on_constant(self, constant):
         return self.CONTINUE
 
+    def walk(self, node):
+        if isinstance(node, list):
+            return self.walk_on_list(node)
+        elif isinstance(node, dict):
+            return self.walk_on_dict(node)
+        else:
+            return self.walk_on_constant(node)
 
-def walk_on_list(worker, node):
-    stop = worker.before_list(node)
-    if stop:
+    def walk_on_list(self, node):
+        stop = self.before_list(node)
+        if stop:
+            return stop
+
+        pos = None
+        for pos, child in enumerate(node):
+            stop = self.walk(child)
+            if stop:
+                break
+
+        stop |= self.after_list(node, pos)
         return stop
 
-    pos = None
-    for pos, child in enumerate(node):
-        stop = walk(worker, child)
+
+    def walk_on_dict(self, node):
+        stop = self.before_dict(node)
         if stop:
-            break
+            return stop
 
-    stop |= worker.after_list(node, pos)
-    return stop
+        render_pos = None
+        render_key = None
+        for render_pos, render_key, key_type, child in render(node):
+            stop = self.walk(child)
+            if stop:
+                break
 
-
-def walk_on_dict(worker, node):
-    stop = worker.before_dict(node)
-    if stop:
+        stop |= self.after_dict(node, render_pos, render_key, key_type)
         return stop
 
-    render_pos = None
-    render_key = None
-    for render_pos, render_key, key_type, child in render(node):
-        stop = walk(worker, child)
-        if stop:
-            break
 
-    stop |= worker.after_dict(node, render_pos, render_key, key_type)
-    return stop
-
-
-def walk_on_constant(worker, node):
-    return worker.on_constant(node)
+    def walk_on_constant(self, node):
+        return self.on_constant(node)
 
