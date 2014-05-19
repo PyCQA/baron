@@ -1,4 +1,16 @@
 def render(node):
+    if isinstance(node, list):
+        return render_list(node)
+    else:
+        return render_node(node)
+
+
+def render_list(node):
+    for pos, child in enumerate(node):
+        yield ('node', child, pos, pos)
+
+
+def render_node(node):
     for pos, (key_type, render_key, dependent) in enumerate(rendering_dictionnary[node['type']]):
         if not dependent and not node.get(render_key):
             continue
@@ -7,15 +19,16 @@ def render(node):
         elif isinstance(dependent, list) and not all([node.get(x) for x in dependent]):
             continue
 
-        if key_type in ['list', 'key', 'formatting']:
-            value = node[render_key]
+        if key_type in ['list', 'formatting']:
+            yield (key_type, node[render_key], pos, render_key)
+        elif key_type == 'key':
+            key_type = 'constant' if isinstance(node[render_key], str) else key_type
+            yield (key_type, node[render_key], pos, render_key)
         elif key_type == 'constant':
-            value = render_key
-            render_key = None
+            yield ('constant', render_key, pos, None)
         else:
-            raise NotImplemented("Unknown key type: %s" % key_type)
+            raise NotImplementedError("Unknown key type: %s" % key_type)
 
-        yield (pos, render_key, key_type, value)
 
 
 rendering_dictionnary = {
@@ -608,60 +621,53 @@ class RenderWalker:
     CONTINUE = False
     STOP = True
 
-    def before_list(self, node):
+    def before_list(self, node, render_pos, render_key):
         return self.CONTINUE
 
-    def after_list(self, node, pos):
+    def after_list(self, node, render_pos, render_key):
         return self.CONTINUE
 
-    def before_dict(self, node):
+    def before_formatting(self, node, render_pos, render_key):
         return self.CONTINUE
 
-    def after_dict(self, node, render_pos, render_key, key_type):
+    def after_formatting(self, node, render_pos, render_key):
         return self.CONTINUE
 
-    def on_constant(self, constant):
+    def before_node(self, node, render_pos, render_key):
         return self.CONTINUE
+
+    def after_node(self, node, render_pos, render_key):
+        return self.CONTINUE
+
+    def before_key(self, node, render_pos, render_key):
+        return self.CONTINUE
+
+    def after_key(self, node, render_pos, render_key):
+        return self.CONTINUE
+
+    def on_constant(self, node, render_pos, render_key):
+        return self.CONTINUE
+
+    def before(self, key_type, item, position, render_key):
+        return getattr(self, 'before_'+key_type)(item, position, render_key)
+
+    def after(self, key_type, item, position, render_key):
+        return getattr(self, 'after_'+key_type)(item, position, render_key)
 
     def walk(self, node):
-        if isinstance(node, list):
-            return self.walk_on_list(node)
-        elif isinstance(node, dict):
-            return self.walk_on_dict(node)
-        else:
-            return self.walk_on_constant(node)
+        stop = self.CONTINUE
+        for key_type, item, render_pos, render_key in render(node):
+            if key_type == 'constant':
+                stop = self.on_constant(item, render_pos, render_key)
+            else:
+                stop = self.before(key_type, item, render_pos, render_key)
+                if stop:
+                    break
+                stop = self.walk(item)
+                stop |= self.after(key_type, item, render_pos, render_key)
 
-    def walk_on_list(self, node):
-        stop = self.before_list(node)
-        if stop:
-            return stop
-
-        pos = None
-        for pos, child in enumerate(node):
-            stop = self.walk(child)
             if stop:
                 break
 
-        stop |= self.after_list(node, pos)
         return stop
-
-
-    def walk_on_dict(self, node):
-        stop = self.before_dict(node)
-        if stop:
-            return stop
-
-        render_pos = None
-        render_key = None
-        for render_pos, render_key, key_type, child in render(node):
-            stop = self.walk(child)
-            if stop:
-                break
-
-        stop |= self.after_dict(node, render_pos, render_key, key_type)
-        return stop
-
-
-    def walk_on_constant(self, node):
-        return self.on_constant(node)
 

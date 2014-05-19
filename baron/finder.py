@@ -47,6 +47,12 @@ class PathHandler:
 
 
 class PositionFinder(RenderWalker):
+    """Find a node by line and column and return the path to it.
+
+    First, walk through all the nodes while maintaining the current line
+    and column. When the targetted node is found, stop there and build
+    the path while going back up the tree.
+    """
     def find(self, tree, line, column):
         self.current = Position(1,1)
         self.target = Position(line, column)
@@ -57,27 +63,43 @@ class PositionFinder(RenderWalker):
         self.walk(tree)
         return self.path.get_path() if self.path_found else None
 
-    def after_list(self, node, pos):
+    def after_list(self, node, pos, key):
+        if self.path_found:
+            self.path.push(key)
+
+        return self.stop
+
+    def after_key(self, node, pos, key):
+        if self.path_found:
+            self.path.push(key)
+            if 'type' in node:
+                self.path.setTypeIfNotSet(node['type'])
+
+        return self.stop
+
+    def after_formatting(self, node, pos, key):
+        if self.path_found:
+            self.path.reset()
+            self.path.push(key)
+            self.path.setPositionIfNotSet(pos)
+
+        return self.stop
+
+    def after_node(self, node, pos, key):
         if self.path_found:
             self.path.push(pos)
+            self.path.setTypeIfNotSet(node['type'])
 
         return self.stop
 
-    def after_dict(self, item, render_pos, render_key, key_type):
-        if self.path_found:
-            if key_type == 'formatting':
-                self.path.reset()
-            if render_key:
-                self.path.push(render_key)
-            self.path.setTypeIfNotSet(item["type"])
-            self.path.setPositionIfNotSet(render_pos)
-
-        return self.stop
-
-    # The constant node is not interesting for the path: every leaf node is
-    # a constant. What's more interesting is the parent node, with its type
-    # and position_in_rendering_list.
-    def on_constant(self, constant):
+    def on_constant(self, constant, pos, key):
+        """Determine if we're on the targetted node.
+        
+        If the targetted column is reached, `stop` and `path_found` are
+        set. If the targetted line is passed, only `stop` is set. This
+        prevents unnecessary tree travelling when the targetted column
+        is out of bounds.
+        """
         if constant == "\n":
             self.current.advance_line()
             if self.targetted_line_is_passed():
@@ -86,6 +108,9 @@ class PositionFinder(RenderWalker):
 
         advance_by = len(constant)
         if self.is_on_targetted_node(advance_by):
+            if key:
+                self.path.push(key)
+            self.path.setPositionIfNotSet(pos)
             self.path_found = True
             self.stop = self.STOP
             return self.stop
