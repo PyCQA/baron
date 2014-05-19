@@ -24,27 +24,24 @@ class PathHandler:
 
     def reset(self):
         self.path = []
-        self.type = None
+        self.node_type = None
         self.position_in_rendering_list = None
 
-    def add_list_level(self, index):
-        self.path = [index] + self.path
+    def push(self, elem):
+        self.path = [elem] + self.path
 
-    def add_dict_level(self, render_key, render_type, render_index):
-        if render_key:
-            self.path = [render_key] + self.path
+    def setTypeIfNotSet(self, type):
+        if self.node_type is None:
+            self.node_type = type
 
-        if self.leaf_node_not_specified():
-            self.type = render_type
-            self.position_in_rendering_list = render_index
-
-    def leaf_node_not_specified(self):
-        return self.type is None
+    def setPositionIfNotSet(self, pos):
+        if self.position_in_rendering_list is None:
+            self.position_in_rendering_list = pos
 
     def get_path(self):
         return {
                 "path": self.path,
-                "type": self.type,
+                "type": self.node_type,
                 "position_in_rendering_list": self.position_in_rendering_list
             }
 
@@ -62,7 +59,7 @@ class PositionFinder(NodeWalker):
 
     def after_list(self, node, pos):
         if self.path_found:
-            self.path.add_list_level(pos)
+            self.path.push(pos)
 
         return self.stop
 
@@ -70,7 +67,10 @@ class PositionFinder(NodeWalker):
         if self.path_found:
             if key_type == 'formatting':
                 self.path.reset()
-            self.path.add_dict_level(render_key, item["type"], render_pos)
+            if render_key:
+                self.path.push(render_key)
+            self.path.setTypeIfNotSet(item["type"])
+            self.path.setPositionIfNotSet(render_pos)
 
         return self.stop
 
