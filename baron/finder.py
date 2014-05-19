@@ -2,8 +2,7 @@ from .walker import NodeWalker
 
 
 def find(tree, line, column):
-    result = PositionFinder().find(tree, line, column)
-    return result.get_path() if result else None
+    return PositionFinder().find(tree, line, column)
 
 
 class Position:
@@ -54,22 +53,23 @@ class PositionFinder(NodeWalker):
     def find(self, tree, line, column):
         self.current = Position(1,1)
         self.target = Position(line, column)
-        self.path_found = None
+        self.path_found = False
+        self.path = Path()
 
         self.walk(tree)
-        return self.path_found
+        return self.path.get_path() if self.path_found else None
 
     def after_list(self, node, pos):
         if self.path_found:
-            self.path_found.add_list_level(pos)
+            self.path.add_list_level(pos)
             return self.STOP
         return self.CONTINUE
 
     def after_dict(self, item, render_pos, render_key, key_type):
         if self.path_found:
             if key_type == 'formatting':
-                self.path_found.reset()
-            self.path_found.add_dict_level(render_key, item["type"], render_pos)
+                self.path.reset()
+            self.path.add_dict_level(render_key, item["type"], render_pos)
             return self.STOP
         return self.CONTINUE
 
@@ -85,7 +85,7 @@ class PositionFinder(NodeWalker):
         else:
             advance_by = len(constant)
             if is_on_targetted_node(self.target, self.current, advance_by):
-                self.path_found = PathHandler()
+                self.path_found = True
                 return self.STOP
             self.current.advance_columns(advance_by)
         return self.CONTINUE
