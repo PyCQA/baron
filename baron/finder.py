@@ -80,12 +80,12 @@ class PositionFinder(NodeWalker):
     def on_constant(self, constant):
         if constant == "\n":
             self.current.advance_line()
-            if targetted_line_is_passed(self.target, self.current):
+            if self.targetted_line_is_passed():
                 self.stop = self.STOP
             return self.stop
 
         advance_by = len(constant)
-        if is_on_targetted_node(self.target, self.current, advance_by):
+        if self.is_on_targetted_node(advance_by):
             self.path_found = True
             self.stop = self.STOP
             return self.stop
@@ -93,13 +93,11 @@ class PositionFinder(NodeWalker):
         self.current.advance_columns(advance_by)
         return self.stop
 
+    def is_on_targetted_node(self, advance_by):
+        return self.target.line == self.current.line \
+            and self.target.column >= self.current.column \
+            and self.target.column <  self.current.column + advance_by
 
-def is_on_targetted_node(target, current, length):
-    return target.line == current.line \
-        and target.column >= current.column \
-        and target.column < current.column + length
-
-
-def targetted_line_is_passed(target, current):
-    return current.line > target.line
+    def targetted_line_is_passed(self):
+        return self.current.line > self.target.line
 
