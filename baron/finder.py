@@ -1,4 +1,4 @@
-from .walker import NodeWalker
+from .render import RenderWalker
 
 
 def find(tree, line, column):
@@ -46,7 +46,7 @@ class PathHandler:
             }
 
 
-class PositionFinder(NodeWalker):
+class PositionFinder(RenderWalker):
     def find(self, tree, line, column):
         self.current = Position(1,1)
         self.target = Position(line, column)
