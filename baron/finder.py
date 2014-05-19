@@ -54,7 +54,8 @@ class PositionFinder(NodeWalker):
         self.current = Position(1,1)
         self.target = Position(line, column)
         self.path_found = False
-        self.path = Path()
+        self.stop = self.CONTINUE
+        self.path = PathHandler()
 
         self.walk(tree)
         return self.path.get_path() if self.path_found else None
@@ -62,33 +63,35 @@ class PositionFinder(NodeWalker):
     def after_list(self, node, pos):
         if self.path_found:
             self.path.add_list_level(pos)
-            return self.STOP
-        return self.CONTINUE
+
+        return self.stop
 
     def after_dict(self, item, render_pos, render_key, key_type):
         if self.path_found:
             if key_type == 'formatting':
                 self.path.reset()
             self.path.add_dict_level(render_key, item["type"], render_pos)
-            return self.STOP
-        return self.CONTINUE
+
+        return self.stop
 
     # The constant node is not interesting for the path: every leaf node is
     # a constant. What's more interesting is the parent node, with its type
-    # and position_in_rendering_list, so the function returns an empty
-    # PathHandler() object that will be filled by the callee later on.
+    # and position_in_rendering_list.
     def on_constant(self, constant):
         if constant == "\n":
             self.current.advance_line()
             if targetted_line_is_passed(self.target, self.current):
-                return self.STOP
-        else:
-            advance_by = len(constant)
-            if is_on_targetted_node(self.target, self.current, advance_by):
-                self.path_found = True
-                return self.STOP
-            self.current.advance_columns(advance_by)
-        return self.CONTINUE
+                self.stop = self.STOP
+            return self.stop
+
+        advance_by = len(constant)
+        if is_on_targetted_node(self.target, self.current, advance_by):
+            self.path_found = True
+            self.stop = self.STOP
+            return self.stop
+
+        self.current.advance_columns(advance_by)
+        return self.stop
 
 
 def is_on_targetted_node(target, current, length):
