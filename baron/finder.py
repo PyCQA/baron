@@ -27,9 +27,6 @@ class Position:
 
 class PathHandler:
     def __init__(self):
-        self.reset()
-
-    def reset(self):
         self.path = []
         self.node_type = None
         self.position_in_rendering_list = None
@@ -86,15 +83,14 @@ class PositionFinder(RenderWalker):
 
     def after_formatting(self, node, pos, key):
         if self.path_found:
-            self.path.reset()
             self.path.push(key)
-            self.path.setPositionIfNotSet(pos)
 
         return self.stop
 
     def after_node(self, node, pos, key):
         if self.path_found:
-            self.path.push(pos)
+            self.path.push(key)
+            self.path.setPositionIfNotSet(pos)
             self.path.setTypeIfNotSet(node['type'])
 
         return self.stop

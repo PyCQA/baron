@@ -1,5 +1,6 @@
 from baron.baron import parse
 from baron.finder import find, get_node_at_end_of_path
+from baron.render import get_node_at_position_in_rendering_list
 from baron.utils import string_instance
 
 simplecode = """vara = 1"""
@@ -25,6 +26,8 @@ def check_path(code, line, column, target_path):
     if path:
         node = get_node_at_end_of_path(tree, path)
         assert not isinstance(node, string_instance)
+        targetted_child = get_node_at_position_in_rendering_list(node, path['position_in_rendering_list'])
+        assert isinstance(targetted_child, string_instance)
 
 
 def test_sc_line_before_scope():
@@ -56,7 +59,7 @@ def test_sc_assignement_target():
 
 
 def test_sc_assignement_first_formatting():
-    path = make_path([0, "first_formatting"], "assignment", 1)
+    path = make_path([0, "first_formatting", 0], "space", 0)
     check_path(simplecode, 1, 5, path)
 
 
@@ -66,7 +69,7 @@ def test_sc_assignement_operator():
 
 
 def test_sc_assignement_second_formatting():
-    path = make_path([0, "second_formatting"], "assignment", 4)
+    path = make_path([0, "second_formatting", 0], "space", 0)
     check_path(simplecode, 1, 7, path)
 
 
@@ -83,7 +86,7 @@ def test_bc_l1_def():
 
 
 def test_bc_l1_def_first_formatting():
-    path = make_path([0, "first_formatting"], "funcdef", 2)
+    path = make_path([0, "first_formatting", 0], "space", 0)
     check_path(bigcode, 1, 4, path)
 
 
@@ -113,7 +116,7 @@ def test_bc_l1_comma():
 
 
 def test_bc_l1_comma_second_formatting():
-    path = make_path([0, "arguments", 1, "second_formatting"], "comma", 2)
+    path = make_path([0, "arguments", 1, "second_formatting", 0], "space", 0)
     check_path(bigcode, 1, 14, path)
 
 
@@ -136,7 +139,7 @@ def test_bc_l1_colon():
 
 
 def test_bc_l1_space():
-    path = make_path([0, "value", 0, "formatting"], "endl", 0)
+    path = make_path([0, "value", 0, "formatting", 0], "space", 0)
     check_path(bigcode, 1, 21, path)
 
 
@@ -161,7 +164,7 @@ def test_bc_l2_assign_var():
 
 
 def test_bc_l2_assign_first_formatting():
-    path = make_path([0, "value", 1, "first_formatting"], "assignment", 1)
+    path = make_path([0, "value", 1, "first_formatting", 0], "space", 0)
     check_path(bigcode, 2, 8, path)
 
 
@@ -176,7 +179,7 @@ def test_bc_l2_assign_equal():
 
 
 def test_bc_l2_assign_second_formatting():
-    path = make_path([0, "value", 1, "second_formatting"], "assignment", 4)
+    path = make_path([0, "value", 1, "second_formatting", 0], "space", 0)
     check_path(bigcode, 2, 11, path)
 
 
@@ -239,7 +242,7 @@ def test_bc_l5_def():
 
 
 def test_bc_l5_def_first_formatting():
-    path = make_path([1, "first_formatting"], "funcdef", 2)
+    path = make_path([1, "first_formatting", 0], "space", 0)
     check_path(bigcode, 5, 4, path)
 
 
@@ -265,7 +268,7 @@ def test_bc_l5_arg1():
 
 
 def test_bc_l5_arg1_first_formatting():
-    path = make_path([1, "arguments", 0, "first_formatting"], "def_argument", 1)
+    path = make_path([1, "arguments", 0, "first_formatting", 0], "space", 0)
     check_path(bigcode, 5, 14, path)
 
 
@@ -275,7 +278,7 @@ def test_bc_l5_arg1_equal():
 
 
 def test_bc_l5_arg1_second_formatting():
-    path = make_path([1, "arguments", 0, "second_formatting"], "def_argument", 3)
+    path = make_path([1, "arguments", 0, "second_formatting", 0], "space", 0)
     check_path(bigcode, 5, 16, path)
 
 
@@ -296,7 +299,7 @@ def test_bc_l5_args_comma():
 
 
 def test_bc_l5_args_comma_second_formatting():
-    path = make_path([1, "arguments", 1, "second_formatting"], "comma", 2)
+    path = make_path([1, "arguments", 1, "second_formatting", 0], "space", 0)
     check_path(bigcode, 5, 25, path)
 
 
@@ -361,7 +364,7 @@ def test_bc_l6_assign_var_dot_name():
 
 
 def test_bc_l6_assign_first_formatting():
-    path = make_path([1, "value", 1, "first_formatting"], "assignment", 1)
+    path = make_path([1, "value", 1, "first_formatting", 0], "space", 0)
     check_path(bigcode, 6, 14, path)
 
 
@@ -371,7 +374,7 @@ def test_bc_l6_assign_equal():
 
 
 def test_bc_l6_assign_second_formatting():
-    path = make_path([1, "value", 1, "second_formatting"], "assignment", 4)
+    path = make_path([1, "value", 1, "second_formatting", 0], "space", 0)
     check_path(bigcode, 6, 16, path)
 
 
