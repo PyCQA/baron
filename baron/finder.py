@@ -5,6 +5,13 @@ def find(tree, line, column):
     return PositionFinder().find(tree, line, column)
 
 
+def get_node_at_end_of_path(tree, path):
+    node = tree
+    for key in path['path']:
+        node = node[key]
+    return node
+
+
 class Position:
     def __init__(self, line, column):
         self.line = line
@@ -108,8 +115,6 @@ class PositionFinder(RenderWalker):
 
         advance_by = len(constant)
         if self.is_on_targetted_node(advance_by):
-            if key:
-                self.path.push(key)
             self.path.setPositionIfNotSet(pos)
             self.path_found = True
             self.stop = self.STOP

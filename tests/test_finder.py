@@ -1,5 +1,6 @@
 from baron.baron import parse
-from baron.finder import find
+from baron.finder import find, get_node_at_end_of_path
+from baron.utils import string_instance
 
 simplecode = """vara = 1"""
 
@@ -16,8 +17,14 @@ def make_path(path, type, pos):
     return {"path": path, "type": type, "position_in_rendering_list": pos}
 
 
-def check_path(code, line, column, target_node):
-    assert find(parse(code), line, column) == target_node
+def check_path(code, line, column, target_path):
+    tree = parse(code)
+    path = find(tree, line, column)
+    assert path == target_path
+
+    if path:
+        node = get_node_at_end_of_path(tree, path)
+        assert not isinstance(node, string_instance)
 
 
 def test_sc_line_before_scope():
@@ -41,7 +48,7 @@ def test_sc_assignment():
 
 
 def test_sc_assignement_target():
-    path = make_path([0, "target", "value"], "name", 0)
+    path = make_path([0, "target"], "name", 0)
     check_path(simplecode, 1, 1, path)
     check_path(simplecode, 1, 2, path)
     check_path(simplecode, 1, 3, path)
@@ -63,8 +70,8 @@ def test_sc_assignement_second_formatting():
     check_path(simplecode, 1, 7, path)
 
 
-def test_sc_assignement_target():
-    path = make_path([0, "value", "value"], "int", 0)
+def test_sc_assignement_value():
+    path = make_path([0, "value"], "int", 0)
     check_path(simplecode, 1, 8, path)
 
 
@@ -81,7 +88,7 @@ def test_bc_l1_def_first_formatting():
 
 
 def test_bc_l1_def_name():
-    path = make_path([0, "name"], "funcdef", 3)
+    path = make_path([0], "funcdef", 3)
     check_path(bigcode, 1, 5, path)
     check_path(bigcode, 1, 6, path)
     check_path(bigcode, 1, 7, path)
@@ -93,7 +100,7 @@ def test_bc_l1_def_left_paren():
 
 
 def test_bc_l1_arg1():
-    path = make_path([0, "arguments", 0, "name"], "def_argument", 0)
+    path = make_path([0, "arguments", 0], "def_argument", 0)
     check_path(bigcode, 1, 9, path)
     check_path(bigcode, 1, 10, path)
     check_path(bigcode, 1, 11, path)
@@ -111,7 +118,7 @@ def test_bc_l1_comma_second_formatting():
 
 
 def test_bc_l1_arg2():
-    path = make_path([0, "arguments", 2, "name"], "def_argument", 0)
+    path = make_path([0, "arguments", 2], "def_argument", 0)
     check_path(bigcode, 1, 15, path)
     check_path(bigcode, 1, 16, path)
     check_path(bigcode, 1, 17, path)
@@ -139,7 +146,7 @@ def test_bc_l1_out_of_scope():
 
 
 def test_bc_l2_endl():
-    path = make_path([0, "value", 0, "indent"], "endl", 2)
+    path = make_path([0, "value", 0], "endl", 2)
     check_path(bigcode, 2, 1, path)
     check_path(bigcode, 2, 2, path)
     check_path(bigcode, 2, 3, path)
@@ -147,7 +154,7 @@ def test_bc_l2_endl():
 
 
 def test_bc_l2_assign_var():
-    path = make_path([0, "value", 1, "target", "value"], "name", 0)
+    path = make_path([0, "value", 1, "target"], "name", 0)
     check_path(bigcode, 2, 5, path)
     check_path(bigcode, 2, 6, path)
     check_path(bigcode, 2, 7, path)
@@ -159,7 +166,7 @@ def test_bc_l2_assign_first_formatting():
 
 
 def test_bc_l2_assign_operator():
-    path = make_path([0, "value", 1, "operator"], "assignment", 2)
+    path = make_path([0, "value", 1], "assignment", 2)
     check_path(bigcode, 2, 9, path)
 
 
@@ -174,7 +181,7 @@ def test_bc_l2_assign_second_formatting():
 
 
 def test_bc_l2_assign_value():
-    path = make_path([0, "value", 1, "value", "value"], "int", 0)
+    path = make_path([0, "value", 1, "value"], "int", 0)
     check_path(bigcode, 2, 12, path)
 
 
@@ -193,7 +200,7 @@ def test_bc_l4_decorator_at():
 
 
 def test_bc_l4_decorator_name():
-    path = make_path([1, "decorators", 0, "value", "value", 0, "value"], "name", 0)
+    path = make_path([1, "decorators", 0, "value", "value", 0], "name", 0)
     check_path(bigcode, 4, 2, path)
     check_path(bigcode, 4, 3, path)
     check_path(bigcode, 4, 4, path)
@@ -206,7 +213,7 @@ def test_bc_l4_decorator_left_paren():
 
 
 def test_bc_l4_decorator_arg1():
-    path = make_path([1, "decorators", 0, "call", "value", 0, "value", "value"], "string", 1)
+    path = make_path([1, "decorators", 0, "call", "value", 0, "value"], "string", 1)
     check_path(bigcode, 4, 7, path)
     check_path(bigcode, 4, 8, path)
     check_path(bigcode, 4, 9, path)
@@ -237,7 +244,7 @@ def test_bc_l5_def_first_formatting():
 
 
 def test_bc_l5_def_name():
-    path = make_path([1, "name"], "funcdef", 3)
+    path = make_path([1], "funcdef", 3)
     check_path(bigcode, 5, 5, path)
     check_path(bigcode, 5, 6, path)
     check_path(bigcode, 5, 7, path)
@@ -250,7 +257,7 @@ def test_bc_l5_left_paren():
 
 
 def test_bc_l5_arg1():
-    path = make_path([1, "arguments", 0, "name"], "def_argument", 0)
+    path = make_path([1, "arguments", 0], "def_argument", 0)
     check_path(bigcode, 5, 10, path)
     check_path(bigcode, 5, 11, path)
     check_path(bigcode, 5, 12, path)
@@ -273,7 +280,7 @@ def test_bc_l5_arg1_second_formatting():
 
 
 def test_bc_l5_arg1_value():
-    path = make_path([1, "arguments", 0, "value", "value"], "name", 0)
+    path = make_path([1, "arguments", 0, "value"], "name", 0)
     check_path(bigcode, 5, 17, path)
     check_path(bigcode, 5, 18, path)
     check_path(bigcode, 5, 19, path)
@@ -300,7 +307,7 @@ def test_bc_l5_arg2_operator():
 
 
 def test_bc_l5_arg2_name():
-    path = make_path([1, "arguments", 2, "value", "value"], "name", 0)
+    path = make_path([1, "arguments", 2, "value"], "name", 0)
     check_path(bigcode, 5, 28, path)
     check_path(bigcode, 5, 29, path)
     check_path(bigcode, 5, 30, path)
@@ -325,7 +332,7 @@ def test_bc_l5_out_of_scope():
 
 
 def test_bc_l6_endl():
-    path = make_path([1, "value", 0, "indent"], "endl", 2)
+    path = make_path([1, "value", 0], "endl", 2)
     check_path(bigcode, 6, 1, path)
     check_path(bigcode, 6, 2, path)
     check_path(bigcode, 6, 3, path)
@@ -333,7 +340,7 @@ def test_bc_l6_endl():
 
 
 def test_bc_l6_assign_var():
-    path = make_path([1, "value", 1, "target", "value", 0, "value"], "name", 0)
+    path = make_path([1, "value", 1, "target", "value", 0], "name", 0)
     check_path(bigcode, 6, 5, path)
     check_path(bigcode, 6, 6, path)
     check_path(bigcode, 6, 7, path)
@@ -346,7 +353,7 @@ def test_bc_l6_assign_var_dot():
 
 
 def test_bc_l6_assign_var_dot_name():
-    path = make_path([1, "value", 1, "target", "value", 2, "value"], "name", 0)
+    path = make_path([1, "value", 1, "target", "value", 2], "name", 0)
     check_path(bigcode, 6, 10, path)
     check_path(bigcode, 6, 11, path)
     check_path(bigcode, 6, 12, path)
@@ -369,7 +376,7 @@ def test_bc_l6_assign_second_formatting():
 
 
 def test_bc_l6_assign_value():
-    path = make_path([1, "value", 1, "value", "value"], "int", 0)
+    path = make_path([1, "value", 1, "value"], "int", 0)
     check_path(bigcode, 6, 17, path)
 
 
