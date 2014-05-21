@@ -5,6 +5,7 @@ from baron.utils import string_instance
 
 simplecode = """vara = 1"""
 
+
 bigcode = """def fun(arg1, arg2): 
     var *= 1
 
@@ -12,6 +13,9 @@ bigcode = """def fun(arg1, arg2):
 def fun2(arg1 = default, **kwargs):
     arg1.attr = 3
 """
+
+
+splitcode = """var \\\n  = 2"""
 
 
 def make_path(path, type, pos):
@@ -386,3 +390,48 @@ def test_bc_l6_assign_value():
 def test_bc_l6_out_of_scope():
     check_path(bigcode, 6, 18, None)
     check_path(bigcode, 7, 0, None)
+
+
+def test_sc_l1_var():
+    path = make_path([0, "target"], "name", 0)
+    check_path(splitcode, 1, 1, path)
+    check_path(splitcode, 1, 2, path)
+    check_path(splitcode, 1, 3, path)
+
+
+def test_sc_l1_first_space():
+    path = make_path([0, "first_formatting", 0], "space", 0)
+    check_path(splitcode, 1, 4, path)
+    check_path(splitcode, 1, 5, path)
+
+
+def test_sc_l1_out_of_scope():
+    check_path(splitcode, 1, 6, None)
+    check_path(splitcode, 2, 0, None)
+
+
+def test_sc_l2_first_space():
+    path = make_path([0, "first_formatting", 0], "space", 0)
+    check_path(splitcode, 2, 1, path)
+    check_path(splitcode, 2, 2, path)
+
+
+def test_sc_l2_operator():
+    path = make_path([0], "assignment", 3)
+    check_path(splitcode, 2, 3, path)
+
+
+def test_sc_l2_second_space():
+    path = make_path([0, "second_formatting", 0], "space", 0)
+    check_path(splitcode, 2, 4, path)
+
+
+def test_sc_l2_value():
+    path = make_path([0, "value"], "int", 0)
+    check_path(splitcode, 2, 5, path)
+
+
+def test_sc_l2_out_of_scope():
+    check_path(splitcode, 2, 6, None)
+    check_path(splitcode, 3, 0, None)
+

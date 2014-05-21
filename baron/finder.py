@@ -103,20 +103,23 @@ class PositionFinder(RenderWalker):
         prevents unnecessary tree travelling when the targetted column
         is out of bounds.
         """
-        if constant == "\n":
-            self.current.advance_line()
-            if self.targetted_line_is_passed():
-                self.stop = self.STOP
-            return self.stop
+        newlines_split = intersperce(constant.split("\n"), "\n")
+        for c in newlines_split:
+            if c == "\n":
+                self.current.advance_line()
+                if self.targetted_line_is_passed():
+                    self.stop = self.STOP
+                    break
 
-        advance_by = len(constant)
-        if self.is_on_targetted_node(advance_by):
-            self.path.setPositionIfNotSet(pos)
-            self.path_found = True
-            self.stop = self.STOP
-            return self.stop
+            else:
+                advance_by = len(c)
+                if self.is_on_targetted_node(advance_by):
+                    self.path.setPositionIfNotSet(pos)
+                    self.path_found = True
+                    self.stop = self.STOP
+                    break
+                self.current.advance_columns(advance_by)
 
-        self.current.advance_columns(advance_by)
         return self.stop
 
     def is_on_targetted_node(self, advance_by):
@@ -127,3 +130,11 @@ class PositionFinder(RenderWalker):
     def targetted_line_is_passed(self):
         return self.current.line > self.target.line
 
+
+# Stolen shamelessly from http://stackoverflow.com/a/5656097/1013628
+def intersperce(iterable, delimiter):
+    it = iter(iterable)
+    yield next(it)
+    for x in it:
+        yield delimiter
+        yield x
