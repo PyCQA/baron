@@ -4865,7 +4865,12 @@ def test_advanced_comparison():
               ],
               [{
                 "type": "comparison",
-                "value": "",
+                "value": {
+                    "type": "complex_operator",
+                    "first": value,
+                    "second": value2,
+                    "formatting": [{"type": "space", "value": after_space[0][1]}],
+                },
                 "first": {
                           "type": "name",
                           "value": 'a',
@@ -4874,12 +4879,7 @@ def test_advanced_comparison():
                            "value": 'b'},
                 "first_formatting": [],
                 "second_formatting": [],
-                "middle_formatting": [
-                    {"type": "name", "value": value},
-                    {"type": "space", "value": after_space[0][1]},
-                    {"type": "name", "value": value2},
-                ],
-               }])
+              }])
         parse_simple([
                ('NAME', 'a'),
                (token_name, value, [], after_space),
@@ -4888,7 +4888,12 @@ def test_advanced_comparison():
               ],
               [{
                 "type": "comparison",
-                "value": "",
+                "value": {
+                    "type": "complex_operator",
+                    "first": value,
+                    "second": value2,
+                    "formatting": [{"type": "space", "value": after_space[0][1]}],
+                },
                 "first": {"type": "name",
                           "value": 'a'},
                 "second": {
@@ -4897,12 +4902,7 @@ def test_advanced_comparison():
                           },
                 "first_formatting": [],
                 "second_formatting": [],
-                "middle_formatting": [
-                    {"type": "name", "value": value},
-                    {"type": "space", "value": after_space[0][1]},
-                    {"type": "name", "value": value2},
-                ],
-               }])
+              }])
 
 def test_advanced_comparison_first_space():
     "a <b"
@@ -4915,7 +4915,12 @@ def test_advanced_comparison_first_space():
               ],
               [{
                 "type": "comparison",
-                "value": "",
+                "value": {
+                    "type": "complex_operator",
+                    "first": value,
+                    "second": value2,
+                    "formatting": [{"type": "space", "value": after_space[0][1]}],
+                },
                 "first": {
                           "type": "name",
                           "value": 'a',
@@ -4924,12 +4929,7 @@ def test_advanced_comparison_first_space():
                            "value": 'b'},
                 "first_formatting": [{"type": "space", "value": " "}],
                 "second_formatting": [],
-                "middle_formatting": [
-                    {"type": "name", "value": value},
-                    {"type": "space", "value": after_space[0][1]},
-                    {"type": "name", "value": value2},
-                ],
-               }])
+              }])
         parse_simple([
                ('NAME', 'a'),
                (token_name, value, [('SPACE', " ")], after_space),
@@ -4938,7 +4938,12 @@ def test_advanced_comparison_first_space():
               ],
               [{
                 "type": "comparison",
-                "value": "",
+                "value": {
+                    "type": "complex_operator",
+                    "first": value,
+                    "second": value2,
+                    "formatting": [{"type": "space", "value": after_space[0][1]}],
+                },
                 "first": {"type": "name",
                           "value": 'a'},
                 "second": {
@@ -4947,12 +4952,7 @@ def test_advanced_comparison_first_space():
                           },
                 "first_formatting": [{"type": "space", "value": " "}],
                 "second_formatting": [],
-                "middle_formatting": [
-                    {"type": "name", "value": value},
-                    {"type": "space", "value": after_space[0][1]},
-                    {"type": "name", "value": value2},
-                ],
-               }])
+              }])
 
 def test_advanced_comparison_second_space():
     "a< b"
@@ -4965,7 +4965,12 @@ def test_advanced_comparison_second_space():
               ],
               [{
                 "type": "comparison",
-                "value": "",
+                "value": {
+                    "type": "complex_operator",
+                    "first": value,
+                    "second": value2,
+                    "formatting": [{"type": "space", "value": after_space[0][1]}],
+                },
                 "first": {
                           "type": "name",
                           "value": 'a',
@@ -4974,12 +4979,7 @@ def test_advanced_comparison_second_space():
                            "value": 'b'},
                 "first_formatting": [],
                 "second_formatting": [{"type": "space", "value": " "}],
-                "middle_formatting": [
-                    {"type": "name", "value": value},
-                    {"type": "space", "value": after_space[0][1]},
-                    {"type": "name", "value": value2},
-                ],
-               }])
+              }])
         parse_simple([
                ('NAME', 'a'),
                (token_name, value, [], after_space),
@@ -4988,7 +4988,12 @@ def test_advanced_comparison_second_space():
               ],
               [{
                 "type": "comparison",
-                "value": "",
+                "value": {
+                    "type": "complex_operator",
+                    "first": value,
+                    "second": value2,
+                    "formatting": [{"type": "space", "value": after_space[0][1]}],
+                },
                 "first": {"type": "name",
                           "value": 'a'},
                 "second": {
@@ -4997,12 +5002,7 @@ def test_advanced_comparison_second_space():
                           },
                 "first_formatting": [],
                 "second_formatting": [{"type": "space", "value": " "}],
-                "middle_formatting": [
-                    {"type": "name", "value": value},
-                    {"type": "space", "value": after_space[0][1]},
-                    {"type": "name", "value": value2},
-                ],
-               }])
+              }])
 
 def test_advanced_comparison_spaces():
     "a < b"
@@ -5015,7 +5015,12 @@ def test_advanced_comparison_spaces():
               ],
               [{
                 "type": "comparison",
-                "value": "",
+                "value": {
+                    "type": "complex_operator",
+                    "first": value,
+                    "second": value2,
+                    "formatting": [{"type": "space", "value": after_space[0][1]}],
+                },
                 "first": {
                           "type": "name",
                           "value": 'a',
@@ -5024,12 +5029,7 @@ def test_advanced_comparison_spaces():
                            "value": 'b'},
                 "first_formatting": [{"type": "space", "value": " "}],
                 "second_formatting": [{"type": "space", "value": " "}],
-                "middle_formatting": [
-                    {"type": "name", "value": value},
-                    {"type": "space", "value": after_space[0][1]},
-                    {"type": "name", "value": value2},
-                ],
-               }])
+              }])
         parse_simple([
                ('NAME', 'a'),
                (token_name, value, [('SPACE', " ")], after_space),
@@ -5038,7 +5038,12 @@ def test_advanced_comparison_spaces():
               ],
               [{
                 "type": "comparison",
-                "value": "",
+                "value": {
+                    "type": "complex_operator",
+                    "first": value,
+                    "second": value2,
+                    "formatting": [{"type": "space", "value": after_space[0][1]}],
+                },
                 "first": {"type": "name",
                           "value": 'a'},
                 "second": {
@@ -5047,12 +5052,7 @@ def test_advanced_comparison_spaces():
                           },
                 "first_formatting": [{"type": "space", "value": " "}],
                 "second_formatting": [{"type": "space", "value": " "}],
-                "middle_formatting": [
-                    {"type": "name", "value": value},
-                    {"type": "space", "value": after_space[0][1]},
-                    {"type": "name", "value": value2},
-                ],
-               }])
+              }])
 
 def test_advanced_comparison_spaces_atomtrailers():
     "a.b < c"
@@ -5067,7 +5067,12 @@ def test_advanced_comparison_spaces_atomtrailers():
               ],
               [{
                 "type": "comparison",
-                "value": "",
+                "value": {
+                    "type": "complex_operator",
+                    "first": value,
+                    "second": value2,
+                    "formatting": [{"type": "space", "value": after_space[0][1]}],
+                },
                 "first": {
                           "type": "atomtrailers",
                           "value": [{
@@ -5088,12 +5093,7 @@ def test_advanced_comparison_spaces_atomtrailers():
                           },
                 "first_formatting": [{"type": "space", "value": " "}],
                 "second_formatting": [{"type": "space", "value": " "}],
-                "middle_formatting": [
-                    {"type": "name", "value": value},
-                    {"type": "space", "value": after_space[0][1]},
-                    {"type": "name", "value": value2},
-                ],
-               }])
+              }])
 
 def test_chained_advanced_comparison():
     "a<b<c"
@@ -5109,70 +5109,32 @@ def test_chained_advanced_comparison():
               ],
               [{
                 "type": "comparison",
-                "value": "",
+                "value": {
+                    "type": "complex_operator",
+                    "first": value,
+                    "second": value2,
+                    "formatting": [{"type": "space", "value": after_space[0][1]}],
+                },
                 "first": {
                           "type": "name",
                           "value": 'a',
                          },
-                "second": {"type": "comparison", "value": "",
-                                     "first": {"type": "name",
-                                            "value": "b"},
-                                     "second": {"type": "name",
-                                             "value": "c"},
-                                     "first_formatting": [],
-                                     "second_formatting": [],
-                                     "middle_formatting": [
-                                         {"type": "name", "value": value},
-                                         {"type": "space", "value": after_space[0][1]},
-                                         {"type": "name", "value": value2},
-                                     ],
-
-                          },
+                "second": {
+                    "type": "comparison",
+                    "value": {
+                        "type": "complex_operator",
+                        "first": value,
+                        "second": value2,
+                        "formatting": [{"type": "space", "value": after_space[0][1]}],
+                    },
+                    "first": {"type": "name", "value": "b"},
+                    "second": {"type": "name", "value": "c"},
+                    "first_formatting": [],
+                    "second_formatting": [],
+                },
                 "first_formatting": [],
                 "second_formatting": [],
-                "middle_formatting": [
-                    {"type": "name", "value": value},
-                    {"type": "space", "value": after_space[0][1]},
-                    {"type": "name", "value": value2},
-                ],
-               }])
-        parse_simple([
-               ('NAME', 'a'),
-               (token_name, value, [], after_space),
-               (token_name2, value2),
-               ('NAME', 'b'),
-               (token_name, value, [], after_space),
-               (token_name2, value2),
-               ('NAME', 'c'),
-              ],
-              [{"type": "comparison", "value": "",
-                          "first": {
-                                 "type": "name",
-                                 "value": 'a',
-                                },
-                          "second": {
-                                  "type": "comparison",
-                                  "value": "",
-                                  "first": {"type": "name",
-                                            "value": "b"},
-                                  "second": {"type": "name",
-                                             "value": "c"},
-                                  "first_formatting": [],
-                                  "second_formatting": [],
-                                  "middle_formatting": [
-                                      {"type": "name", "value": value},
-                                      {"type": "space", "value": after_space[0][1]},
-                                      {"type": "name", "value": value2},
-                                  ],
-                                 },
-                          "first_formatting": [],
-                          "second_formatting": [],
-                          "middle_formatting": [
-                              {"type": "name", "value": value},
-                              {"type": "space", "value": after_space[0][1]},
-                              {"type": "name", "value": value2},
-                          ],
-                         }])
+              }])
         parse_simple([
                ('NAME', 'a'),
                (token_name, value, [], after_space),
@@ -5184,69 +5146,29 @@ def test_chained_advanced_comparison():
               ],
               [{
                 "type": "comparison",
-                "value": "",
-                "first": {"type": "name",
-                          "value": 'a'},
-                "second": {"type": "comparison", "value": "",
-                                     "first": {
-                                            "type": "name",
-                                            "value": "b",
-                                           },
-                                     "second": {"type": "name",
-                                             "value": "c"},
-                                     "first_formatting": [],
-                                     "second_formatting": [],
-                                     "middle_formatting": [
-                                         {"type": "name", "value": value},
-                                         {"type": "space", "value": after_space[0][1]},
-                                         {"type": "name", "value": value2},
-                                     ],
-                                    },
+                "value": {
+                    "type": "complex_operator",
+                    "first": value,
+                    "second": value2,
+                    "formatting": [{"type": "space", "value": after_space[0][1]}],
+                },
+                "first": {"type": "name", "value": 'a'},
+                "second": {
+                    "type": "comparison",
+                    "value": {
+                        "type": "complex_operator",
+                        "first": value,
+                        "second": value2,
+                        "formatting": [{"type": "space", "value": after_space[0][1]}],
+                    },
+                    "first": {"type": "name", "value": "b"},
+                    "second": {"type": "name", "value": "c"},
+                    "first_formatting": [],
+                    "second_formatting": [],
+                },
                 "first_formatting": [],
                 "second_formatting": [],
-                "middle_formatting": [
-                    {"type": "name", "value": value},
-                    {"type": "space", "value": after_space[0][1]},
-                    {"type": "name", "value": value2},
-                ],
-               }])
-        parse_simple([
-               ('NAME', 'a'),
-               (token_name, value, [], after_space),
-               (token_name2, value2),
-               ('NAME', 'b'),
-               (token_name, value, [], after_space),
-               (token_name2, value2),
-               ('NAME', 'c'),
-              ],
-              [{"type": "comparison", "value": "",
-                          "first": {"type": "name",
-                                 "value": 'a'},
-                          "second": {
-                                  "type": "comparison",
-                                  "value": "",
-                                  "first": {
-                                            "type": "name",
-                                            "value": "b",
-                                           },
-                                  "second": {"type": "name",
-                                             "value": "c"},
-                                  "first_formatting": [],
-                                  "second_formatting": [],
-                                  "middle_formatting": [
-                                      {"type": "name", "value": value},
-                                      {"type": "space", "value": after_space[0][1]},
-                                      {"type": "name", "value": value2},
-                                  ],
-                                 },
-                          "first_formatting": [],
-                          "second_formatting": [],
-                          "middle_formatting": [
-                                  {"type": "name", "value": value},
-                                  {"type": "space", "value": after_space[0][1]},
-                                  {"type": "name", "value": value2},
-                              ],
-                         }])
+              }])
         parse_simple([
                ('NAME', 'a'),
                (token_name, value, [], after_space),
@@ -5258,32 +5180,28 @@ def test_chained_advanced_comparison():
               ],
               [{
                 "type": "comparison",
-                "value": "",
-                "first": {"type": "name",
-                          "value": 'a'},
-                "second": {"type": "comparison", "value": "",
-                                     "first": {"type": "name",
-                                            "value": "b"},
-                                     "second": {
-                                             "type": "name",
-                                             "value": "c",
-                                            },
-                                     "first_formatting": [],
-                                     "second_formatting": [],
-                                     "middle_formatting": [
-                                         {"type": "name", "value": value},
-                                         {"type": "space", "value": after_space[0][1]},
-                                         {"type": "name", "value": value2},
-                                     ],
-                                    },
+                "value": {
+                    "type": "complex_operator",
+                    "first": value,
+                    "second": value2,
+                    "formatting": [{"type": "space", "value": after_space[0][1]}],
+                },
+                "first": {"type": "name", "value": 'a'},
+                "second": {"type": "comparison",
+                    "value": {
+                        "type": "complex_operator",
+                        "first": value,
+                        "second": value2,
+                        "formatting": [{"type": "space", "value": after_space[0][1]}],
+                    },
+                    "first": {"type": "name", "value": "b"},
+                    "second": {"type": "name", "value": "c"},
+                    "first_formatting": [],
+                    "second_formatting": [],
+                },
                 "first_formatting": [],
                 "second_formatting": [],
-                "middle_formatting": [
-                    {"type": "name", "value": value},
-                    {"type": "space", "value": after_space[0][1]},
-                    {"type": "name", "value": value2},
-                ],
-               }])
+              }])
         parse_simple([
                ('NAME', 'a'),
                (token_name, value, [], after_space),
@@ -5293,34 +5211,98 @@ def test_chained_advanced_comparison():
                (token_name2, value2),
                ('NAME', 'c'),
               ],
-              [{"type": "comparison", "value": "",
-                          "first": {"type": "name",
-                                 "value": 'a'},
-                          "second": {
-                                  "type": "comparison",
-                                  "value": "",
-                                  "first": {"type": "name",
-                                            "value": "b"},
-                                  "second": {
-                                             "type": "name",
-                                             "value": "c",
-                                            },
-                                  "first_formatting": [],
-                                  "second_formatting": [],
-                                  "middle_formatting": [
-                                      {"type": "name", "value": value},
-                                      {"type": "space", "value": after_space[0][1]},
-                                      {"type": "name", "value": value2},
-                                  ],
-                                 },
-                          "first_formatting": [],
-                          "second_formatting": [],
-                          "middle_formatting": [
-                              {"type": "name", "value": value},
-                              {"type": "space", "value": after_space[0][1]},
-                              {"type": "name", "value": value2},
-                          ],
-                         }])
+              [{
+                "type": "comparison",
+                "value": {
+                    "type": "complex_operator",
+                    "first": value,
+                    "second": value2,
+                    "formatting": [{"type": "space", "value": after_space[0][1]}],
+                },
+                "first": {"type": "name", "value": 'a'},
+                "second": {
+                    "type": "comparison",
+                    "value": {
+                        "type": "complex_operator",
+                        "first": value,
+                        "second": value2,
+                        "formatting": [{"type": "space", "value": after_space[0][1]}],
+                    },
+                    "first": {"type": "name", "value": "b"},
+                    "second": {"type": "name", "value": "c"},
+                    "first_formatting": [],
+                    "second_formatting": [],
+                },
+                "first_formatting": [],
+                "second_formatting": [],
+              }])
+        parse_simple([
+               ('NAME', 'a'),
+               (token_name, value, [], after_space),
+               (token_name2, value2),
+               ('NAME', 'b'),
+               (token_name, value, [], after_space),
+               (token_name2, value2),
+               ('NAME', 'c'),
+              ],
+              [{
+                "type": "comparison",
+                "value": {
+                    "type": "complex_operator",
+                    "first": value,
+                    "second": value2,
+                    "formatting": [{"type": "space", "value": after_space[0][1]}],
+                },
+                "first": {"type": "name", "value": 'a'},
+                "second": {"type": "comparison",
+                    "value": {
+                        "type": "complex_operator",
+                        "first": value,
+                        "second": value2,
+                        "formatting": [{"type": "space", "value": after_space[0][1]}],
+                    },
+                    "first": {"type": "name", "value": "b"},
+                    "second": {"type": "name", "value": "c"},
+                    "first_formatting": [],
+                    "second_formatting": [],
+                },
+                "first_formatting": [],
+                "second_formatting": [],
+              }])
+        parse_simple([
+               ('NAME', 'a'),
+               (token_name, value, [], after_space),
+               (token_name2, value2),
+               ('NAME', 'b'),
+               (token_name, value, [], after_space),
+               (token_name2, value2),
+               ('NAME', 'c'),
+              ],
+              [{
+                "type": "comparison",
+                "value": {
+                    "type": "complex_operator",
+                    "first": value,
+                    "second": value2,
+                    "formatting": [{"type": "space", "value": after_space[0][1]}],
+                },
+                "first": {"type": "name", "value": 'a'},
+                "second": {
+                    "type": "comparison",
+                    "value": {
+                        "type": "complex_operator",
+                        "first": value,
+                        "second": value2,
+                        "formatting": [{"type": "space", "value": after_space[0][1]}],
+                    },
+                    "first": {"type": "name", "value": "b"},
+                    "second": {"type": "name", "value": "c"},
+                    "first_formatting": [],
+                    "second_formatting": [],
+                },
+                "first_formatting": [],
+                "second_formatting": [],
+              }])
 
 def test_not():
     "not a"

@@ -119,15 +119,16 @@ def include_operators(pg):
         (expr, comparison_operator, comparison_operator2, comparison_) = pack
         return {
             "type": "comparison",
-            "value": "",
+            "value": {
+                "type": "complex_operator",
+                "first": comparison_operator.value,
+                "second": comparison_operator2.value,
+                "formatting": comparison_operator.hidden_tokens_after
+            },
             "first": expr,
             "second": comparison_,
             "first_formatting": comparison_operator.hidden_tokens_before,
             "second_formatting": comparison_operator2.hidden_tokens_after,
-            "middle_formatting": 
-                [{"type": "name", "value": comparison_operator.value}]
-                + comparison_operator.hidden_tokens_after
-                + [{"type": "name", "value": comparison_operator2.value}],
         }
 
     @pg.production("expr : xor_expr VBAR expr")

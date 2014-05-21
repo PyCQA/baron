@@ -405,10 +405,14 @@ rendering_dictionnary = {
             ("formatting", "second_formatting", True),
             ("key",        "second",            True),
         ],
+        "complex_operator": [
+            ("key",        "first",      True),
+            ("formatting", "formatting", True),
+            ("key",        "second",     True),
+        ],
         "comparison": [
             ("key",        "first",             True),
             ("formatting", "first_formatting",  True),
-            ("list",       "middle_formatting", True),
             ("key",        "value",             True),
             ("formatting", "second_formatting", True),
             ("key",        "second",            True),
