@@ -692,4 +692,3 @@ class RenderWalker:
                 break
 
         return stop
-
