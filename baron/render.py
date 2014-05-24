@@ -668,13 +668,13 @@ class RenderWalker:
         if key_type not in node_types:
             raise NotImplemented("Unknown key type: %s" % key_type)
 
-        return getattr(self, 'before_'+key_type.replace("constant", "leaf"))(item, position, render_key)
+        return getattr(self, 'before_' + key_type.replace("constant", "leaf"))(item, position, render_key)
 
     def after(self, key_type, item, position, render_key):
         if key_type not in node_types:
             raise NotImplemented("Unknown key type: %s" % key_type)
 
-        return getattr(self, 'after_'+key_type.replace("constant", "leaf"))(item, position, render_key)
+        return getattr(self, 'after_' + key_type.replace("constant", "leaf"))(item, position, render_key)
 
     def walk(self, node):
         stop = self.CONTINUE
