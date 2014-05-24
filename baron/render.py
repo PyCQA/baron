@@ -682,13 +682,18 @@ class RenderWalker:
         for key_type, item, render_pos, render_key in render(node):
             if key_type == 'constant':
                 stop = self.on_leaf(item, render_pos, render_key)
-            else:
-                stop = self.before(key_type, item, render_pos, render_key)
                 if stop:
                     break
-                stop = self.walk(item)
-                stop |= self.after(key_type, item, render_pos, render_key)
+                else:
+                    continue
 
+            stop = self.before(key_type, item, render_pos, render_key)
+            if stop:
+                break
+
+            stop = self.walk(item)
+
+            stop |= self.after(key_type, item, render_pos, render_key)
             if stop:
                 break
 
