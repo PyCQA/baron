@@ -4,7 +4,10 @@ from baron.render import node_types, rendering_dictionnary
 
 @pytest.fixture(params=rendering_dictionnary.keys())
 def dictionnary_node(request):
-    return {'key': request.param, 'value': rendering_dictionnary[request.param]}
+    return {
+        'key': request.param,
+        'value': rendering_dictionnary[request.param]
+    }
 
 
 def test_dictionnary_key_validity(dictionnary_node):
