@@ -1,8 +1,5 @@
 def render(node):
-    if isinstance(node, list):
-        return render_list(node)
-    else:
-        return render_node(node)
+    return render_list(node) if isinstance(node, list) else render_node(node)
 
 
 def render_list(node):
