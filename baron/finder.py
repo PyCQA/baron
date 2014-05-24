@@ -1,7 +1,7 @@
 from .render import RenderWalker
 
 
-def find(tree, line, column):
+def position_to_path(tree, line, column):
     return PositionFinder().find(tree, line, column)
 
 

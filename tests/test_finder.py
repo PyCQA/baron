@@ -1,5 +1,5 @@
 from baron.baron import parse
-from baron.finder import find, get_node_at_end_of_path
+from baron.finder import position_to_path, get_node_at_end_of_path
 from baron.render import get_node_at_position_in_rendering_list
 from baron.utils import string_instance
 
@@ -24,7 +24,7 @@ def make_path(path, type, pos):
 
 def check_path(code, line, column, target_path):
     tree = parse(code)
-    path = find(tree, line, column)
+    path = position_to_path(tree, line, column)
     assert path == target_path
 
     if path:
