@@ -175,8 +175,8 @@ looks like this:
          |
     second
 
-The exact way to render a node can be find in the [code of the dumps
-function](https://github.com/Psycojoker/baron/blob/master/baron/dumper.py).
+The exact way to render a node can be find in the [rendering
+dictionnary](baron/render.py).
 
 Tests
 =====
