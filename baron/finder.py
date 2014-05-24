@@ -5,7 +5,7 @@ def position_to_path(tree, line, column):
     return PositionFinder().find(tree, line, column)
 
 
-def get_node_at_end_of_path(tree, path):
+def path_to_node(tree, path):
     node = tree
     for key in path['path']:
         node = node[key]
