@@ -17,4 +17,3 @@ def test_dictionnary_dependent_validity(dictionnary_node):
         assert dependent == True \
             or isinstance(dependent, str) \
             or (isinstance(dependent, list) and all([isinstance(d, str) for d in dependent]))
-
