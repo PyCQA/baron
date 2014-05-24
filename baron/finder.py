@@ -108,7 +108,8 @@ class PositionFinder(RenderWalker):
         for c in newlines_split:
             if c == "\n":
                 self.current.advance_line()
-                if self.targetted_line_is_passed():
+                # if target lined is passed
+                if self.current.line > self.target.line:
                     self.stop = self.STOP
                     break
 
@@ -127,9 +128,6 @@ class PositionFinder(RenderWalker):
         return self.target.line == self.current.line \
             and self.target.column >= self.current.column \
             and self.target.column <  self.current.column + advance_by
-
-    def targetted_line_is_passed(self):
-        return self.current.line > self.target.line
 
 
 # Stolen shamelessly from http://stackoverflow.com/a/5656097/1013628
