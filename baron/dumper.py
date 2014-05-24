@@ -14,4 +14,3 @@ class Dumper(RenderWalker):
         self.dump = ''
         self.walk(tree)
         return self.dump
-

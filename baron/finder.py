@@ -97,7 +97,7 @@ class PositionFinder(RenderWalker):
 
     def on_constant(self, constant, pos, key):
         """Determine if we're on the targetted node.
-        
+
         If the targetted column is reached, `stop` and `path_found` are
         set. If the targetted line is passed, only `stop` is set. This
         prevents unnecessary tree travelling when the targetted column
