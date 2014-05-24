@@ -26,10 +26,10 @@ Basic Usage
 RedBaron
 ========
 
-There is a good chance that you'll want to use
-[RedBaron](https://github.com/Psycojoker/redbaron) instead of using Baron
-directly. Think of Baron as the "bytecode of python source code" and RedBaron
-as some sort of usable layer on top of it.
+There is a good chance that you'll want to use `RedBaron
+<https://github.com/Psycojoker/redbaron>`_ instead of using Baron directly.
+Think of Baron as the "bytecode of python source code" and RedBaron as some
+sort of usable layer on top of it.
 
 Table of Content
 ================
