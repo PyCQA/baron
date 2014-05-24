@@ -12,44 +12,6 @@ def get_node_at_end_of_path(tree, path):
     return node
 
 
-class Position:
-    def __init__(self, line, column):
-        self.line = line
-        self.column = column
-
-    def advance_columns(self, columns):
-        self.column += columns
-
-    def advance_line(self):
-        self.line += 1
-        self.column = 1
-
-
-class PathHandler:
-    def __init__(self):
-        self.path = []
-        self.node_type = None
-        self.position_in_rendering_list = None
-
-    def push(self, elem):
-        self.path = [elem] + self.path
-
-    def set_type_if_not_set(self, type):
-        if self.node_type is None:
-            self.node_type = type
-
-    def set_position_if_not_set(self, pos):
-        if self.position_in_rendering_list is None:
-            self.position_in_rendering_list = pos
-
-    def get_path(self):
-        return {
-            "path": self.path,
-            "type": self.node_type,
-            "position_in_rendering_list": self.position_in_rendering_list
-        }
-
-
 class PositionFinder(RenderWalker):
     """Find a node by line and column and return the path to it.
 
@@ -137,3 +99,41 @@ def intersperce(iterable, delimiter):
     for x in it:
         yield delimiter
         yield x
+
+
+class Position:
+    def __init__(self, line, column):
+        self.line = line
+        self.column = column
+
+    def advance_columns(self, columns):
+        self.column += columns
+
+    def advance_line(self):
+        self.line += 1
+        self.column = 1
+
+
+class PathHandler:
+    def __init__(self):
+        self.path = []
+        self.node_type = None
+        self.position_in_rendering_list = None
+
+    def push(self, elem):
+        self.path = [elem] + self.path
+
+    def set_type_if_not_set(self, type):
+        if self.node_type is None:
+            self.node_type = type
+
+    def set_position_if_not_set(self, pos):
+        if self.position_in_rendering_list is None:
+            self.position_in_rendering_list = pos
+
+    def get_path(self):
+        return {
+            "path": self.path,
+            "type": self.node_type,
+            "position_in_rendering_list": self.position_in_rendering_list
+        }
