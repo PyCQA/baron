@@ -34,10 +34,7 @@ def get_node_at_position_in_rendering_list(node, position_in_rendering_list):
     render_list = rendering_dictionnary[node['type']]
     key_type, render_key, dependent = render_list[position_in_rendering_list]
 
-    if key_type == 'constant':
-        return render_key
-    else:
-        return node[render_key]
+    return render_key if key_type == 'constant' else node[render_key]
 
 
 node_types = ['node', 'list', 'key', 'formatting', 'constant']
