@@ -34,11 +34,11 @@ class PathHandler:
     def push(self, elem):
         self.path = [elem] + self.path
 
-    def setTypeIfNotSet(self, type):
+    def set_type_if_not_set(self, type):
         if self.node_type is None:
             self.node_type = type
 
-    def setPositionIfNotSet(self, pos):
+    def set_position_if_not_set(self, pos):
         if self.position_in_rendering_list is None:
             self.position_in_rendering_list = pos
 
@@ -77,7 +77,7 @@ class PositionFinder(RenderWalker):
         if self.path_found:
             self.path.push(key)
             if 'type' in node:
-                self.path.setTypeIfNotSet(node['type'])
+                self.path.set_type_if_not_set(node['type'])
 
         return self.stop
 
@@ -90,8 +90,8 @@ class PositionFinder(RenderWalker):
     def after_node(self, node, pos, key):
         if self.path_found:
             self.path.push(key)
-            self.path.setPositionIfNotSet(pos)
-            self.path.setTypeIfNotSet(node['type'])
+            self.path.set_position_if_not_set(pos)
+            self.path.set_type_if_not_set(node['type'])
 
         return self.stop
 
@@ -114,7 +114,7 @@ class PositionFinder(RenderWalker):
             else:
                 advance_by = len(c)
                 if self.is_on_targetted_node(advance_by):
-                    self.path.setPositionIfNotSet(pos)
+                    self.path.set_position_if_not_set(pos)
                     self.path_found = True
                     self.stop = self.STOP
                     break
