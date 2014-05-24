@@ -18,11 +18,14 @@ def render_node(node):
 
         if key_type in ['list', 'formatting']:
             yield (key_type, node[render_key], pos, render_key)
+
         elif key_type == 'key':
             key_type = 'constant' if isinstance(node[render_key], str) else key_type
             yield (key_type, node[render_key], pos, render_key)
+
         elif key_type == 'constant':
             yield ('constant', render_key, pos, None)
+
         else:
             raise NotImplementedError("Unknown key type: %s" % key_type)
 
@@ -30,6 +33,7 @@ def render_node(node):
 def get_node_at_position_in_rendering_list(node, position_in_rendering_list):
     render_list = rendering_dictionnary[node['type']]
     key_type, render_key, dependent = render_list[position_in_rendering_list]
+
     if key_type == 'constant':
         return render_key
     else:
