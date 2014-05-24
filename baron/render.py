@@ -56,19 +56,19 @@ rendering_dictionnary = {
         "left_parenthesis":  [("key", "value", True)],
         "right_parenthesis": [("key", "value", True)],
 
-        "break":    [("key", "type", True)],
-        "continue": [("key", "type", True)],
-        "pass":     [("key", "type", True)],
+        "break":             [("key", "type", True)],
+        "continue":          [("key", "type", True)],
+        "pass":              [("key", "type", True)],
 
-        "dotted_name":  [("list", "value", True)],
-        "ifelseblock":  [("list", "value", True)],
-        "atomtrailers": [("list", "value", True)],
-        "string_chain": [("list", "value", True)],
+        "dotted_name":       [("list", "value", True)],
+        "ifelseblock":       [("list", "value", True)],
+        "atomtrailers":      [("list", "value", True)],
+        "string_chain":      [("list", "value", True)],
 
         "endl": [
-            ("formatting", "formatting",  True),
-            ("key",        "value",       True),
-            ("key",        "indent",      True),
+            ("formatting", "formatting",        True),
+            ("key",        "value",             True),
+            ("key",        "indent",            True),
         ],
 
         "star": [
@@ -111,7 +111,7 @@ rendering_dictionnary = {
         # node or being standalone, this is bad
         "comment": [
             ("formatting", "formatting", "formatting"),
-            ("key",        "value",      True),
+            ("key",        "value",             True),
         ],
 
         "ternary_operator": [
@@ -160,9 +160,9 @@ rendering_dictionnary = {
         ],
 
         "decorator": [
-            ("constant",   "@",     True),
-            ("key",        "value", True),
-            ("key",        "call",  "call"),
+            ("constant",   "@",                 True),
+            ("key",        "value",             True),
+            ("key",        "call",              "call"),
         ],
 
         "class": [
@@ -249,20 +249,20 @@ rendering_dictionnary = {
             ("key",        "value",             "value"),
         ],
         "list_argument": [
-            ("constant",   "*",          True),
-            ("formatting", "formatting", True),
-            ("key",        "value",      True),
+            ("constant",   "*",                 True),
+            ("formatting", "formatting",        True),
+            ("key",        "value",             True),
         ],
         "dict_argument": [
-            ("constant",   "**",         True),
-            ("formatting", "formatting", True),
-            ("key",        "value",      True),
+            ("constant",   "**",                True),
+            ("formatting", "formatting",        True),
+            ("key",        "value",             True),
         ],
 
         "return": [
-            ("constant",   "return",     True),
-            ("formatting", "formatting", True),
-            ("key",        "value",      "value"),
+            ("constant",   "return",            True),
+            ("formatting", "formatting",        True),
+            ("key",        "value",             "value"),
         ],
 
         "raise": [
@@ -310,8 +310,8 @@ rendering_dictionnary = {
             ("formatting", "fourth_formatting", True),
         ],
         "argument_generator_comprehension": [
-            ("key",  "result",     True),
-            ("list", "generators", True),
+            ("key",  "result",                  True),
+            ("list", "generators",              True),
         ],
         "generator_comprehension": [
             ("formatting", "first_formatting",  True),
@@ -388,9 +388,9 @@ rendering_dictionnary = {
         ],
 
         "unitary_operator": [
-            ("key",        "value",      True),
-            ("formatting", "formatting", True),
-            ("key",        "target",     True),
+            ("key",        "value",             True),
+            ("formatting", "formatting",        True),
+            ("key",        "target",            True),
         ],
         "binary_operator": [
             ("key",        "first",             True),
@@ -407,9 +407,9 @@ rendering_dictionnary = {
             ("key",        "second",            True),
         ],
         "complex_operator": [
-            ("key",        "first",      True),
-            ("formatting", "formatting", True),
-            ("key",        "second",     True),
+            ("key",        "first",             True),
+            ("formatting", "formatting",        True),
+            ("key",        "second",            True),
         ],
         "comparison": [
             ("key",        "first",             True),
@@ -437,14 +437,14 @@ rendering_dictionnary = {
         ],
 
         "del": [
-            ("constant",   "del",        True),
-            ("formatting", "formatting", True),
-            ("key",        "value",      True),
+            ("constant",   "del",               True),
+            ("formatting", "formatting",        True),
+            ("key",        "value",             True),
         ],
         "yield": [
-            ("constant",   "yield",      True),
-            ("formatting", "formatting", True),
-            ("key",        "value",      "value"),
+            ("constant",   "yield",             True),
+            ("formatting", "formatting",        True),
+            ("key",        "value",             "value"),
         ],
         "yield_atom": [
             ("constant",   "(",                 True),
@@ -470,9 +470,9 @@ rendering_dictionnary = {
             ("key",        "locals",            "locals"),
         ],
         "global": [
-            ("constant",   "global",     True),
-            ("formatting", "formatting", True),
-            ("list",       "value",      True),
+            ("constant",   "global",            True),
+            ("formatting", "formatting",        True),
+            ("list",       "value",             True),
         ],
 
         "while": [
@@ -568,7 +568,7 @@ rendering_dictionnary = {
             ("formatting", "first_formatting",  True),
             ("constant",   "{",                 True),
             ("formatting", "second_formatting", True),
-            ("key",        "value",            True),
+            ("key",        "value",             True),
             ("formatting", "third_formatting",  True),
             ("constant",   "}",                 True),
             ("formatting", "fourth_formatting", True),
@@ -577,7 +577,7 @@ rendering_dictionnary = {
             ("formatting", "first_formatting",  True),
             ("constant",   "{",                 True),
             ("formatting", "second_formatting", True),
-            ("key",        "value",            True),
+            ("key",        "value",             True),
             ("formatting", "third_formatting",  True),
             ("constant",   "}",                 True),
             ("formatting", "fourth_formatting", True),
