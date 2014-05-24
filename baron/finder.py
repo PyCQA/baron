@@ -44,10 +44,10 @@ class PathHandler:
 
     def get_path(self):
         return {
-                "path": self.path,
-                "type": self.node_type,
-                "position_in_rendering_list": self.position_in_rendering_list
-            }
+            "path": self.path,
+            "type": self.node_type,
+            "position_in_rendering_list": self.position_in_rendering_list
+        }
 
 
 class PositionFinder(RenderWalker):
@@ -104,6 +104,7 @@ class PositionFinder(RenderWalker):
         is out of bounds.
         """
         newlines_split = intersperce(constant.split("\n"), "\n")
+
         for c in newlines_split:
             if c == "\n":
                 self.current.advance_line()
