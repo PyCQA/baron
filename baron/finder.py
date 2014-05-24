@@ -12,6 +12,10 @@ def path_to_node(tree, path):
     return node
 
 
+def position_to_node(tree, line, column):
+    return path_to_node(tree, position_to_path(tree, line, column))
+
+
 class PositionFinder(RenderWalker):
     """Find a node by line and column and return the path to it.
 

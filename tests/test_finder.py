@@ -1,5 +1,5 @@
 from baron.baron import parse
-from baron.finder import position_to_path, path_to_node
+from baron.finder import position_to_path, path_to_node, position_to_node
 from baron.render import get_node_at_position_in_rendering_list
 from baron.utils import string_instance
 
@@ -32,6 +32,8 @@ def check_path(code, line, column, target_path):
         assert not isinstance(node, string_instance)
         targetted_child = get_node_at_position_in_rendering_list(node, path['position_in_rendering_list'])
         assert isinstance(targetted_child, string_instance)
+
+        assert position_to_node(tree, line, column) is node
 
 
 def test_sc_line_before_scope():
