@@ -95,7 +95,7 @@ class PositionFinder(RenderWalker):
 
         return self.stop
 
-    def on_constant(self, constant, pos, key):
+    def on_leaf(self, constant, pos, key):
         """Determine if we're on the targetted node.
 
         If the targetted column is reached, `stop` and `path_found` are
