@@ -16,12 +16,33 @@ Installation
 Basic Usage
 ===========
 
-::
+Baron provides two main functions: `parse` to transform a string into
+the fst and `dumps` to transform the fst back into a string:
+
+.. ipython:: python
+    :suppress:
+
+    import sys
+    sys.path.append("..")
+
+.. ipython:: python
 
     from baron import parse, dumps
 
-    ast = parse(source_code_string)
-    source_code_string == dumps(ast)
+    source_code = "a = 1"
+    fst = parse(source_code)
+    generated_source_code = dumps(fst)
+    generated_source_code
+    source_code == generated_source_code
+
+Like said in the introduction, the FST keeps the formatting:
+
+.. ipython:: python
+
+    source_code = "a=1"
+    generated_source_code = dumps(parse(source_code))
+    generated_source_code
+
 
 RedBaron
 ========
