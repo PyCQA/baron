@@ -39,7 +39,7 @@ Like said in the introduction, the FST keeps the formatting:
 
 .. ipython:: python
 
-    source_code = "a=1"
+    source_code = "a = 1"
     generated_source_code = dumps(parse(source_code))
     generated_source_code
 
