@@ -44,6 +44,45 @@ Like said in the introduction, the FST keeps the formatting:
     generated_source_code
 
 
+Helpers
+-------
+
+Baron also provides 3 helper functions `show`, `show_file` and
+`show_node` to explore the FST (in iPython for example).  Those
+functions will print a formatted version of the FST so you can play with
+it to explore the FST and have an idea of what you are playing with.
+
+`show` is used directly on a string:
+
+.. ipython:: python
+
+    from baron.helpers import show
+
+    show("a = 1")
+
+    show("a +=  b")
+
+`show_file` is used on the path of a file:
+
+::
+
+    from baron.helpers import show_file
+
+    show_file("/path/to/a/file")
+
+`show_node` is used on an already parsed string:
+
+.. ipython:: python
+
+    from baron import parse
+    from baron.helpers import show_node
+
+    fst = parse("a = 1")
+
+    show_node(fst)
+
+
+
 RedBaron
 ========
 
