@@ -100,7 +100,7 @@ modify it only once or twice in the future with clear indications on how to
 migrate.
 
 **Baron is targeting python 2.[67]**. It has not been tested on python3 but
-should be working for most parts (except the new grammar like "yield from",
+should be working for most parts (except the new grammar like <code>yield from</code>,
 obviously).
 
 Documentation
@@ -117,7 +117,7 @@ show(string)
 show_file(file_path)
 ```
 
-Those 2 functions will print a formated version of the FST so you can play with
+Those 2 functions will print a formatted version of the FST so you can play with
 it to explore the FST and have an idea of what you are playing with. Example:
 
 ```python
@@ -155,11 +155,11 @@ In [6]: show("a +  b")
 Every node has a <code>type</code> key and all nodes of the same type share the same
 structure (if you find that it is not the case, please open an issue). And
 nearly all nodes have a <code>value</code> key (except the obvious one that
-never change like 'pass') that represents the data.
+never change like <code>pass</code>) that represents the data.
 
 The <code>*\_formatting</code> value represents the formatting of the node. They
-are always around syntax element of Python, here, the "+" (the only exception
-to this rules are string since you code things like that in Python:
+are always around syntax elements of Python, here, the "+" (the only exception
+to this rule are string since you code things like that in Python:
 <code>"a" ru'b' "cd" """ef"""</code>). The translation
 looks like this:
 
@@ -175,7 +175,7 @@ looks like this:
          |
     second
 
-The exact way to render a node can be find in the [rendering
+The exact way to render a node can be found in the [rendering
 dictionnary](baron/render.py).
 
 Tests
