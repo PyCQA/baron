@@ -35,13 +35,18 @@ the fst and `dumps` to transform the fst back into a string:
     generated_source_code
     source_code == generated_source_code
 
-Like said in the introduction, the FST keeps the formatting:
+Like said in the introduction, the FST keeps the formatting contrary to
+an AST. Here the following 3 codes are equivalent but their formatting
+is different. Baron sees and the difference so when dumping back the
+FST, all the formatting is kept:
 
 .. ipython:: python
 
-    source_code = "a = 1"
-    generated_source_code = dumps(parse(source_code))
-    generated_source_code
+    dumps(parse("a = 1"))
+
+    dumps(parse("a=1"))
+
+    dumps(parse( "a   =   1"))
 
 
 Helpers
