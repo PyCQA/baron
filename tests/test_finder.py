@@ -27,7 +27,9 @@ def check_path(code, line, column, target_path):
     path = position_to_path(tree, line, column)
     assert path == target_path
 
-    if path:
+    if not path:
+        assert position_to_node(tree, line, column) is None
+    else:
         node = path_to_node(tree, path)
         assert not isinstance(node, string_instance)
         targetted_child = get_node_at_position_in_rendering_list(node, path['position_in_rendering_list'])

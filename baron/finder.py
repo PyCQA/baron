@@ -6,6 +6,8 @@ def position_to_path(tree, line, column):
 
 
 def path_to_node(tree, path):
+    if path is None:
+        return None
     node = tree
     for key in path['path']:
         node = node[key]
