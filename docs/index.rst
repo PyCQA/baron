@@ -126,6 +126,16 @@ column number. Line and column numbers **start at 1** line in a text editor.
     position_to_node(tree, 3, 8)
     position_to_path(tree, 3, 8)
 
+Baron also provides another function :file:`path_to_node` which translate a
+path to a node:
+
+.. ipython:: python
+
+    from baron.finder import path_to_node
+
+    path = position_to_path(tree, 3, 8)
+    path_to_node(tree, path)
+
 
 RedBaron
 ========
