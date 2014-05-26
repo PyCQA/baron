@@ -95,7 +95,7 @@ or a path to this node. Baron provides 2 helpers function for that:
 :file:`position_to_node` and :file:`position_to_path`.
 
 Both function takes a FST tree as first argument, then the line number and the
-column number. Line and column numbers **start at 1** line in a text editor.
+column number. Line and column numbers **start at 1** like in a text editor.
 
 :file:`position_to_node` return the FST node.
 
