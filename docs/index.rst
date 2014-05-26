@@ -87,6 +87,45 @@ it to explore the FST and have an idea of what you are playing with.
     show_node(fst)
 
 
+Translating a position to a path to a node or a node directly
+-------------------------------------------------------------
+
+A common task is translating a position in a file into either a node of the FST
+or a path to this node. Baron provides 2 helpers function for that:
+:file:`position_to_node` and :file:`position_to_path`.
+
+Both function takes a FST tree as first argument, then the line number and the
+column number. Line and column numbers **start at 1** line in a text editor.
+
+:file:`position_to_node` return the FST node.
+
+:file:`position_to_path` return a dictionary which contains 3 values:
+
+* the :file:`path` key contains the path, a list of int and strings which
+  represent either the key to take in a dict or the number in a list
+* the :file:`type` key contains the type of the FST node
+* the :file:`position_in_rendering_list` key contains the position of the
+  rendering list of this node on which the position passed to the function is.
+  Like on a :file:`if` FST node if the position is on the 'if' or on the space
+  after the 'if' etc ...
+
+.. ipython:: python
+
+    from baron import parse
+    from baron.finder import position_to_node, position_to_path
+
+    some_code = """\
+    from baron import parse
+    from baron.helpers import show_node
+    fst = parse("a = 1")
+    show_node(fst)
+    """
+
+    tree = parse(some_code)
+
+    position_to_node(tree, 3, 8)
+    position_to_path(tree, 3, 8)
+
 
 RedBaron
 ========
