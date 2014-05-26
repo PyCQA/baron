@@ -1,5 +1,5 @@
 from baron.baron import parse
-from baron.finder import position_to_path, path_to_node, position_to_node
+from baron.path import position_to_path, path_to_node, position_to_node
 from baron.render import get_node_at_position_in_rendering_list
 from baron.utils import string_instance
 
