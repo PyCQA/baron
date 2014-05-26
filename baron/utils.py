@@ -1,15 +1,8 @@
 import sys
 
 
-if sys.version_info[0] == 2:
-    python_version = 2
-else:
-    python_version = 3
-
-if python_version == 3:
-    string_instance = str
-else:
-    string_instance = basestring
+python_version = sys.version_info[0]
+string_instance = str if python_version == 3 else basestring
 
 
 class FlexibleIterator():
