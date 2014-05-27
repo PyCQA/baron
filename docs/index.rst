@@ -19,8 +19,10 @@ Installation
 Basic Usage
 ===========
 
-Baron provides two main functions: `parse` to transform a string into
-the fst and `dumps` to transform the fst back into a string:
+Baron provides two main functions:
+
+* :file:`parse` to transform a string into Baron's FST;
+* :file:`dumps` to transform the FST back into a string.
 
 .. ipython:: python
     :suppress:
