@@ -79,35 +79,47 @@ it to explore the FST and have an idea of what you are playing with.
 
 .. ipython:: python
 
-    from baron import parse
     from baron.helpers import show_node
 
     fst = parse("a = 1")
 
     show_node(fst)
 
+Under the hood, the FST follows the JSON format so the helpers are
+simply encapsulting json pretty printers.
 
-Translating a position to a path to a node or a node directly
--------------------------------------------------------------
+Locate a Node
+-------------
 
-A common task is translating a position in a file into either a node of the FST
-or a path to this node. Baron provides 2 helper functions for that:
-:file:`position_to_node` and :file:`position_to_path`.
+Since Baron produces a tree, a path is sufficient to locate univocally
+a node in the tree. A common task where a path is involved is when
+translating a position in a file (a line and a column) into a node of
+the FST.
 
-Both function takes a FST tree as first argument, then the line number and the
-column number. Line and column numbers **start at 1** like in a text editor.
+Baron provides 2 helper functions for that: :file:`position_to_node` and
+:file:`position_to_path`. Both function takes a FST tree as first
+argument, then the line number and the column number. Line and column
+numbers **start at 1**, like in a text editor.
 
-:file:`position_to_node` returns the FST node.
+:file:`position_to_node` returns an FST node. This is okay if you only
+want to know which node it is but not enough to locate the node in the
+tree. Indeed, there can be mutiple identical nodes within the tree.
 
-:file:`position_to_path` returns a dictionary which contains 3 values:
+That's where :file:`position_to_path` is useful. It returns a dictionary
+in JSON format which contains 3 values:
 
-* the :file:`path` key contains the path, a list of int and strings which
-  represent either the key to take in a dict or the number in a list
-* the :file:`type` key contains the type of the FST node
-* the :file:`position_in_rendering_list` key contains the position of the
-  rendering list of this node on which the position passed to the function is.
-  Like on a :file:`if` FST node if the position is on the `if` or on the space
-  after the `if`, etc.
+* the :file:`path` key contains the path: a list of int and strings which
+  represent either the key to take in a Node or the index in a ListNode
+  (e.g. "target", "value", 0)
+* the :file:`type` key tells the type of the FST node (e.g.
+  "function", "assignment", "class")
+* the :file:`position_in_rendering_list` key is the rendering position
+  of the the node compared to its parent node. This is especially needed
+  when the character pointed on is actually not a node itself but only
+  a part of a parent node. It's a little complicated but don't worry,
+  examples will follow.
+
+Let's first see the difference between the two functions:
 
 .. ipython:: python
 
@@ -123,18 +135,90 @@ column number. Line and column numbers **start at 1** like in a text editor.
 
     tree = parse(some_code)
 
-    position_to_node(tree, 3, 8)
-    position_to_path(tree, 3, 8)
+    node = position_to_node(tree, 3, 8)
+    show_node(node)
+    path = position_to_path(tree, 3, 8)
+    path
 
-Baron also provides another function :file:`path_to_node` which translates a
-path to a node:
+Okay, the first gives the node and the second the path to the node. Both
+also give its type but what does the keys in the path correspond to
+exactly? The path tells you that to get to the node, you must take the
+4th index of the root ListNode, followed twice by the "value" key of
+first the "assignment" Node and next the "atomtrailers" Node. Finally,
+take the 0th index in the resulting ListNode. Mmmh, let's try:
+
+.. ipython:: python
+
+    show_node(tree[4]["value"]["value"][0])
+
+Neat. This is so common that there is a function to do that:
 
 .. ipython:: python
 
     from baron.finder import path_to_node
 
-    path = position_to_path(tree, 3, 8)
-    path_to_node(tree, path)
+    show_node(path_to_node(tree, path))
+
+With the two above, that's a total of three functions to locate a node.
+
+And what about the :file:`position_in_rendering_list`? To understand,
+the best is an example. What happens if you try to locate the node
+corresponding to the left parenthesis on line 3?
+
+.. ipython:: python
+
+    position_to_path(tree, 3, 12)
+
+    show_node(tree[4]["value"]["value"][1])
+
+As you can see, the information given by the path is that I'm on a call
+node. No parenthesis in sight. That's where the
+:file:`position_in_rendering_list` proves useful. It tells you where you
+are located in the rendering dictionnary:
+
+.. ipython:: python
+
+    from baron import rendering_dictionnary
+
+    rendering_dictionnary["call"]
+
+    rendering_dictionnary["call"][1]
+
+Oh I see. Because the parenthesis is a constant, there is no specific
+node for the parenthesis. So the path can only go as far as the parent
+node, here "call", and show you the position in the rendering
+dictionnary.
+
+Yes, that's it. For example, it allows you to distinguish the left and
+right parenthesis in a call. 
+
+.. ipython:: python
+
+    position_to_path(tree, 3, 20)
+
+    rendering_dictionnary["call"][5]
+
+To conclude this section, let's look at a last example of path:
+
+.. ipython:: python
+
+    from baron.finder import position_to_path
+
+    fst = parse("a(1)")
+
+    position_to_path(fst, 1, 1)
+    position_to_path(fst, 1, 2)
+    position_to_path(fst, 1, 3)
+    position_to_path(fst, 1, 4)
+
+By the way, out of bound positions are handled gracefully:
+
+.. ipython:: python
+
+    print(position_to_node(fst, -1, 1))
+    print(position_to_node(fst, 1, 0))
+    print(position_to_node(fst, 1, 5))
+    print(position_to_node(fst, 2, 4))
 
 
 RedBaron
