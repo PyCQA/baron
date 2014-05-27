@@ -79,7 +79,7 @@ class PositionFinder(RenderWalker):
         prevents unnecessary tree travelling when the targetted column
         is out of bounds.
         """
-        newlines_split = intersperce(constant.split("\n"), "\n")
+        newlines_split = split_on_newlines(constant)
 
         for c in newlines_split:
             if c == "\n":
@@ -104,6 +104,10 @@ class PositionFinder(RenderWalker):
         return self.target.line == self.current.line \
             and self.target.column >= self.current.column \
             and self.target.column <  self.current.column + advance_by
+
+
+def split_on_newlines(constant):
+    return ["\n"] if constant == "\n" else intersperce(constant.split("\n"), "\n")
 
 
 # Stolen shamelessly from http://stackoverflow.com/a/5656097/1013628
