@@ -1,6 +1,14 @@
 from .render import RenderWalker
 
 
+def path(path = [], node_type = None, position_in_rendering_list = None):
+    return {
+        "path": path,
+        "type": node_type,
+        "position_in_rendering_list": position_in_rendering_list
+    }
+
+
 def position_to_path(tree, line, column):
     return PositionFinder().find(tree, line, column)
 
@@ -138,8 +146,5 @@ class PathHandler:
             self.position_in_rendering_list = pos
 
     def get_path(self):
-        return {
-            "path": self.path,
-            "type": self.node_type,
-            "position_in_rendering_list": self.position_in_rendering_list
-        }
+        return path(self.path, self.node_type, self.position_in_rendering_list)
+
