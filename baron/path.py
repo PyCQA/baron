@@ -26,6 +26,10 @@ def position_to_node(tree, line, column):
     return path_to_node(tree, position_to_path(tree, line, column))
 
 
+def node_to_bounding_box(node):
+    return BoundingBox().compute(node)
+
+
 class PositionFinder(RenderWalker):
     """Find a node by line and column and return the path to it.
 
@@ -106,6 +110,36 @@ class PositionFinder(RenderWalker):
             and self.target.column <  self.current.column + advance_by
 
 
+class BoundingBox(RenderWalker):
+    """Compute the bounding box of the given node.
+
+    Top-left position is always (1,1). Walk the whole node while
+    incrementing the position and at the end store previous position as
+    the bottom-right position.
+    """
+    def compute(self, tree, target_path = None):
+        self.current_position = Position(1, 1)
+        self.left_of_current_position = Position(1, 0)
+        self.stop = self.CONTINUE
+
+        left = Position(1,1)
+        self.walk(tree)
+        right = self.left_of_current_position
+        return ((left.line, left.column), (right.line, right.column))
+
+    def on_leaf(self, constant, pos, key):
+        newlines_split = split_on_newlines(constant)
+
+        for c in newlines_split:
+            if c == "\n":
+                self.current_position.advance_line()
+            elif c != "":
+                self.current_position.advance_columns(len(c))
+                self.left_of_current_position = self.current_position.left()
+
+        return self.stop
+
+
 def split_on_newlines(constant):
     return ["\n"] if constant == "\n" else intersperce(constant.split("\n"), "\n")
 
@@ -130,6 +164,9 @@ class Position:
     def advance_line(self):
         self.line += 1
         self.column = 1
+
+    def left(self):
+        return Position(self.line, self.column - 1)
 
 
 class PathHandler:

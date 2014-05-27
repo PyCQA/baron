@@ -1,12 +1,15 @@
 from baron.baron import parse
 from baron.path import position_to_path, path_to_node, position_to_node
+from baron.path import node_to_bounding_box
 from baron.render import get_node_at_position_in_rendering_list
 from baron.utils import string_instance
+
 
 simplecode = """vara = 1"""
 
 
-bigcode = """def fun(arg1, arg2): 
+bigcode = """\
+def fun(arg1, arg2): 
     var *= 1
 
 @deco("arg")
@@ -16,6 +19,23 @@ def fun2(arg1 = default, **kwargs):
 
 
 splitcode = """var \\\n  = 2"""
+
+
+funcdefcode = """\
+def function(arg1):
+    a = 1
+    b = 2
+"""
+
+
+classcode = """\
+class MyClass(BaseClass):
+    def __init__(self, arg1):
+        self.a = arg1
+
+    def getA():
+        return self.a
+"""
 
 
 def make_path(path, type, pos):
@@ -36,6 +56,36 @@ def check_path(code, line, column, target_path):
         assert isinstance(targetted_child, string_instance)
 
         assert position_to_node(tree, line, column) is node
+
+
+def test_bb_name():
+    node = parse("var")[0]
+    assert node_to_bounding_box(node) == ((1, 1), (1, 3))
+
+
+def test_bb_string():
+    node = parse("\"hello\"")[0]
+    assert node_to_bounding_box(node) == ((1, 1), (1, 7))
+
+
+def test_bb_comment():
+    node = parse("# comment")[0]
+    assert node_to_bounding_box(node) == ((1, 1), (1, 9))
+
+
+def test_bb_funcdef():
+    node = parse(funcdefcode)[0]
+    assert node_to_bounding_box(node) == ((1, 1), (3, 9))
+
+
+def test_bb_class():
+    node = parse(classcode)[0]
+    assert node_to_bounding_box(node) == ((1, 1), (6, 21))
+
+
+def test_bb_split_assignment():
+    node = parse(splitcode)[0]
+    assert node_to_bounding_box(node) == ((1, 1), (2, 5))
 
 
 def test_sc_line_before_scope():
