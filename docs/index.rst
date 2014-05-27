@@ -53,7 +53,7 @@ Helpers
 -------
 
 Baron also provides 3 helper functions `show`, `show_file` and
-`show_node` to explore the FST (in iPython for example).  Those
+`show_node` to explore the FST (in iPython for example). Those
 functions will print a formatted version of the FST so you can play with
 it to explore the FST and have an idea of what you are playing with.
 
@@ -67,7 +67,7 @@ it to explore the FST and have an idea of what you are playing with.
 
     show("a +=  b")
 
-`show_file` is used on the path of a file:
+`show_file` is used on a file path:
 
 ::
 
@@ -86,7 +86,7 @@ it to explore the FST and have an idea of what you are playing with.
     show_node(fst)
 
 Under the hood, the FST follows the JSON format so the helpers are
-simply encapsulting json pretty printers.
+simply encapsulating json pretty printers.
 
 Locate a Node
 -------------
@@ -97,7 +97,7 @@ translating a position in a file (a line and a column) into a node of
 the FST.
 
 Baron provides 2 helper functions for that: :file:`position_to_node` and
-:file:`position_to_path`. Both function takes a FST tree as first
+:file:`position_to_path`. Both functions take a FST tree as first
 argument, then the line number and the column number. Line and column
 numbers **start at 1**, like in a text editor.
 
@@ -114,7 +114,7 @@ in JSON format which contains 3 values:
 * the :file:`type` key tells the type of the FST node (e.g.
   "function", "assignment", "class")
 * the :file:`position_in_rendering_list` key is the rendering position
-  of the the node compared to its parent node. This is especially needed
+  of the node compared to its parent node. This is especially needed
   when the character pointed on is actually not a node itself but only
   a part of a parent node. It's a little complicated but don't worry,
   examples will follow.
@@ -140,7 +140,7 @@ Let's first see the difference between the two functions:
     path = position_to_path(tree, 3, 8)
     path
 
-Okay, the first gives the node and the second the path to the node. Both
+Okay, the first one gives the node and the second one the node path. Both
 also give its type but what does the keys in the path correspond to
 exactly? The path tells you that to get to the node, you must take the
 4th index of the root ListNode, followed twice by the "value" key of
