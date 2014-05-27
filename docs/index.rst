@@ -37,8 +37,8 @@ the fst and `dumps` to transform the fst back into a string:
 
 Like said in the introduction, the FST keeps the formatting contrary to
 an AST. Here the following 3 codes are equivalent but their formatting
-is different. Baron sees the difference so when dumping back the FST,
-all the formatting is kept:
+is different. Baron keeps the difference so when dumping back the FST,
+all the formatting is respected:
 
 .. ipython:: python
 
@@ -85,8 +85,8 @@ it to explore the FST and have an idea of what you are playing with.
 
     show_node(fst)
 
-Under the hood, the FST follows the JSON format so the helpers are
-simply encapsulating json pretty printers.
+Under the hood, the FST is serialized into JSON so the helpers are
+simply encapsulating JSON pretty printers.
 
 Locate a Node
 -------------
@@ -140,12 +140,12 @@ Let's first see the difference between the two functions:
     path = position_to_path(tree, 3, 8)
     path
 
-Okay, the first one gives the node and the second one the node path. Both
-also give its type but what does the keys in the path correspond to
-exactly? The path tells you that to get to the node, you must take the
-4th index of the root ListNode, followed twice by the "value" key of
-first the "assignment" Node and next the "atomtrailers" Node. Finally,
-take the 0th index in the resulting ListNode. Mmmh, let's try:
+The first one gives the node and the second one the node path. Both also give
+its type but what does the keys in the path correspond to exactly? The path
+tells you that to get to the node, you must take the 4th index of the root
+ListNode, followed twice by the "value" key of first the "assignment" Node and
+next the "atomtrailers" Node. Finally, take the 0th index in the resulting
+ListNode:
 
 .. ipython:: python
 
@@ -184,13 +184,12 @@ are located in the rendering dictionnary:
 
     rendering_dictionnary["call"][1]
 
-Oh I see. Because the parenthesis is a constant, there is no specific
-node for the parenthesis. So the path can only go as far as the parent
-node, here "call", and show you the position in the rendering
-dictionnary.
+Because the parenthesis is a constant, there is no specific node for the
+parenthesis. So the path can only go as far as the parent node, here "call",
+and show you the position in the rendering dictionnary.
 
-Yes, that's it. For example, it allows you to distinguish the left and
-right parenthesis in a call. 
+For example, it allows you to distinguish the left and right parenthesis in a
+call.
 
 .. ipython:: python
 
