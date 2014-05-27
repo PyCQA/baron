@@ -40,10 +40,10 @@ Baron provides two main functions:
     generated_source_code
     source_code == generated_source_code
 
-Like said in the introduction, the FST keeps the formatting contrary to
-an AST. Here the following 3 codes are equivalent but their formatting
-is different. Baron keeps the difference so when dumping back the FST,
-all the formatting is respected:
+Like said in the introduction, the FST keeps the formatting unlike ASTs.
+Here the following 3 codes are equivalent but their formatting is
+different. Baron keeps the difference so when dumping back the FST, all
+the formatting is respected:
 
 .. ipython:: python
 
