@@ -339,7 +339,7 @@ corresponding to the left parenthesis on line 3?
 As you can see, the information given by the path is that I'm on a call
 node. No parenthesis in sight. That's where the
 :file:`position_in_rendering_list` proves useful. It tells you where you
-are located in the rendering dictionnary:
+are located in the rendering dictionary:
 
 .. ipython:: python
 
@@ -351,7 +351,7 @@ are located in the rendering dictionnary:
 
 Because the parenthesis is a constant, there is no specific node for the
 parenthesis. So the path can only go as far as the parent node, here "call",
-and show you the position in the rendering dictionnary.
+and show you the position in the rendering dictionary.
 
 For example, it allows you to distinguish the left and right parenthesis in a
 call.
