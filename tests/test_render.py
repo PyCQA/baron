@@ -1,12 +1,12 @@
 import pytest
-from baron.render import node_types, rendering_dictionnary
+from baron.render import node_types, nodes_rendering_order
 
 
-@pytest.fixture(params=rendering_dictionnary.keys())
+@pytest.fixture(params=nodes_rendering_order.keys())
 def dictionnary_node(request):
     return {
         'key': request.param,
-        'value': rendering_dictionnary[request.param]
+        'value': nodes_rendering_order[request.param]
     }
 
 

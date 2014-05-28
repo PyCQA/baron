@@ -8,7 +8,7 @@ def render_list(node):
 
 
 def render_node(node):
-    for pos, (key_type, render_key, dependent) in enumerate(rendering_dictionnary[node['type']]):
+    for pos, (key_type, render_key, dependent) in enumerate(nodes_rendering_order[node['type']]):
         if not dependent and not node.get(render_key):
             continue
         elif isinstance(dependent, str) and not node.get(dependent):
@@ -31,7 +31,7 @@ def render_node(node):
 
 
 def get_node_at_position_in_rendering_list(node, position_in_rendering_list):
-    render_list = rendering_dictionnary[node['type']]
+    render_list = nodes_rendering_order[node['type']]
     key_type, render_key, dependent = render_list[position_in_rendering_list]
 
     return render_key if key_type == 'constant' else node[render_key]
@@ -40,7 +40,7 @@ def get_node_at_position_in_rendering_list(node, position_in_rendering_list):
 node_types = ['node', 'list', 'key', 'formatting', 'constant']
 
 
-rendering_dictionnary = {
+nodes_rendering_order = {
         "int":               [("key", "value", True)],
         "name":              [("key", "value", True)],
         "hexa":              [("key", "value", True)],

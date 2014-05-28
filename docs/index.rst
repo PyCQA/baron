@@ -183,11 +183,11 @@ are located in the rendering dictionnary:
 
 .. ipython:: python
 
-    from baron import rendering_dictionnary
+    from baron import nodes_rendering_order
 
-    rendering_dictionnary["call"]
+    nodes_rendering_order["call"]
 
-    rendering_dictionnary["call"][1]
+    nodes_rendering_order["call"][1]
 
 Because the parenthesis is a constant, there is no specific node for the
 parenthesis. So the path can only go as far as the parent node, here "call",
@@ -200,7 +200,7 @@ call.
 
     position_to_path(tree, 3, 20)
 
-    rendering_dictionnary["call"][5]
+    nodes_rendering_order["call"][5]
 
 To conclude this section, let's look at a last example of path:
 
