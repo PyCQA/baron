@@ -99,6 +99,160 @@ Show_node
 Under the hood, the FST is serialized into JSON so the helpers are
 simply encapsulating JSON pretty printers.
 
+Rendering the FST
+-----------------
+
+Baron renders the FST back into source code by following the
+instructions given by the :file:`nodes_rendering_order` dictionnary. It
+gives, for each FST node, the order in which the node must be rendered.
+
+.. ipython:: python
+
+    from baron import nodes_rendering_order
+
+    nodes_rendering_order["name"]
+    nodes_rendering_order["tuple"]
+
+For a "name" node, it is a list containing a unique tuple but it can
+contain multiple ones like for a "tuple" node.
+
+
+To render a node, you just need to render each element of the list one
+by one. As you can see, they are all formatted as a 3-tuple. The first
+column is the type which is one of the following:
+
+.. ipython:: python
+
+    from baron.render import node_types
+
+    node_types
+
+Apart for the "constant" node, the second column contains the key of the
+FST node which must be rendered. The first column explains how that key
+must be rendered. We'll see the third column later.
+
+* A "node" node is one of the nodes in the :file:`nodes_rendering_order`
+  we just introduced, it is rendered by following the rules mentionned
+  here. This is indeed a recursive definition.
+* A "key" node is either a branch of the tree if the corresponding FST
+  node's key contains another node or a leaf if it contains a string. In
+  the former case, it is rendered by rendering its content. In the
+  latter, the string is outputted directly.
+* A "list" node is like a "key" node but can contains 0, 1 or several
+  other nodes. For example, Baron's root node is a "list" node since
+  a python program is a list of statements. It is rendered by rendering
+  each of its elements in order.
+* A "formatting" node is similar in behaviour to a "list" node but
+  contains only formatting nodes. This is basically where Baron
+  distinguish itself from ASTs.
+* A "constant" node is a leaf of the FST tree. The second column always
+  contains a string which is outputted directly. Compared to a "key"
+  node containing a string, the "constant" node is identical for every
+  instance of the nodes (e.g. the left parenthesis character "(" in
+  a function call node) while the "key" node's value can change (e.g.
+  the name of the function in a function call node).
+
+
+Walktrough
+~~~~~~~~~~
+
+Let's see all this is in action by rendering a "lambda" node. First, the
+root node is always a "list" node and since we are only parsing one
+statement, the root node contains our "lambda" node at index 0:
+
+.. ipython:: python
+
+    fst = parse("lambda x, y = 1: x + y")
+
+    fst[0]["type"]
+
+Now, let's see how to render a "lambda" node:
+
+.. ipython:: python
+
+    nodes_rendering_order["lambda"]
+
+Okay, first the string constant "lambda", then a first_formatting node
+which represents the space between the string "lambda" and the variable
+"x".
+
+.. ipython:: python
+
+    fst[0]["first_formatting"]
+
+The "first_formatting" contains a list whose unique element is a "space"
+node.
+
+.. ipython:: python
+
+    fst[0]["first_formatting"][0]
+
+    nodes_rendering_order["space"]
+
+Which in turn is rendered by looking at the value key of the space node.
+It's a string so it is outputted directly.
+
+.. ipython:: python
+
+    fst[0]["first_formatting"][0]["value"]
+
+So far we have outputted "lambda ". Tedious but exhaustive.
+
+We have exhausted the "first_formatting" node so we go back up the tree.
+Next is the "list" node representing the arguments:
+
+.. ipython:: python
+
+    fst[0]["arguments"]
+
+Rendering a "list" node is done one element at a time. First
+a "def_argument", then a "comma" and again a "def_argument".
+
+.. ipython:: python
+
+    fst[0]["arguments"][0]
+
+    nodes_rendering_order["def_argument"]
+
+The first "def_argument" is rendered by first outputting the content of
+a name "key" node, which is string and thus outputted directly:
+
+.. ipython:: python
+
+    fst[0]["arguments"][0]["name"]
+
+Now, we have outputted "lambda x". At first glance we could say we
+should render the second element of the "def_argument" node but as we'll
+see in the next section, it is not the case thanks to the third column
+of the tuple.
+
+Dependent rendering
+~~~~~~~~~~~~~~~~~~~
+
+Sometimes, some node elements must not be outputted. In our
+"def_argument" example, all but the first are conditional. They are only
+rendered if the FST's "value" node exists and is not empty. Let's
+compare the two "def_arguments" FST nodes:
+
+.. ipython:: python
+
+    fst[0]["arguments"][0]
+
+    fst[0]["arguments"][2]
+
+The "value" is empty for the former "def_argument" but not for the
+latter because only the latter has a default assignment "= 1".
+
+.. ipython:: python
+
+    dumps(fst[0]["arguments"][0])
+
+    dumps(fst[0]["arguments"][2])
+
+We will conclude here now that we have seen an example of every aspect
+of FST rendering. Understanding everything is not required to use Baron
+since :file:`dumps` handles all the complexity.
+
 Locate a Node
 -------------
 
