@@ -103,7 +103,7 @@ Rendering the FST
 -----------------
 
 Baron renders the FST back into source code by following the
-instructions given by the :file:`nodes_rendering_order` dictionnary. It
+instructions given by the :file:`nodes_rendering_order` dictionary. It
 gives, for each FST node, the order in which the node must be rendered.
 
 .. ipython:: python
@@ -113,7 +113,7 @@ gives, for each FST node, the order in which the node must be rendered.
     nodes_rendering_order["name"]
     nodes_rendering_order["tuple"]
 
-For a "name" node, it is a list containing a unique tuple but it can
+For a "name" node, it is a list containing an unique tuple but it can
 contain multiple ones like for a "tuple" node.
 
 
@@ -138,8 +138,8 @@ must be rendered. We'll see the third column later.
   node's key contains another node or a leaf if it contains a string. In
   the former case, it is rendered by rendering its content. In the
   latter, the string is outputted directly.
-* A "list" node is like a "key" node but can contains 0, 1 or several
-  other nodes. For example, Baron's root node is a "list" node since
+* A "list" node is like a "key" node but can contain 0, 1 or several
+  other nodes. For example, Baron root node is a "list" node since
   a python program is a list of statements. It is rendered by rendering
   each of its elements in order.
 * A "formatting" node is similar in behaviour to a "list" node but
