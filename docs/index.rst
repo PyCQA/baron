@@ -62,7 +62,9 @@ Baron also provides 3 helper functions `show`, `show_file` and
 functions will print a formatted version of the FST so you can play with
 it to explore the FST and have an idea of what you are playing with.
 
-`show` is used directly on a string:
+Show
+~~~~
+:file:`show` is used directly on a string:
 
 .. ipython:: python
 
@@ -72,7 +74,9 @@ it to explore the FST and have an idea of what you are playing with.
 
     show("a +=  b")
 
-`show_file` is used on a file path:
+Show_file
+~~~~~~~~~
+:file:`show_file` is used on a file path:
 
 ::
 
@@ -80,7 +84,9 @@ it to explore the FST and have an idea of what you are playing with.
 
     show_file("/path/to/a/file")
 
-`show_node` is used on an already parsed string:
+Show_node
+~~~~~~~~~
+:file:`show_node` is used on an already parsed string:
 
 .. ipython:: python
 
