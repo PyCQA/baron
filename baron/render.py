@@ -681,6 +681,9 @@ class RenderWalker:
                 else:
                     continue
 
+            if key_type in ['list', 'formatting'] and len(item) == 0:
+                continue
+
             stop = self.before(key_type, item, render_pos, render_key)
             if stop:
                 break
