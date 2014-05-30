@@ -19,16 +19,11 @@ def render_node(node):
         elif isinstance(dependent, list) and not all([node.get(x) for x in dependent]):
             continue
 
-        if key_type in ['list', 'formatting']:
-            yield (key_type, node[render_key], pos, render_key)
-
-        elif key_type == 'key':
+        if key_type in ['key', 'list', 'formatting']:
             key_type = 'constant' if isinstance(node[render_key], string_instance) else key_type
             yield (key_type, node[render_key], pos, render_key)
-
         elif key_type == 'constant':
             yield ('constant', render_key, pos, None)
-
         else:
             raise NotImplementedError("Unknown key type: %s" % key_type)
 
