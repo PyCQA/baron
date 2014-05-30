@@ -679,26 +679,28 @@ class RenderWalker:
         return to_call(item, position, render_key)
 
     def walk(self, node):
-        stop = self.CONTINUE
+        return self._walk(node)
+
+    def _walk(self, node):
         for key_type, item, render_pos, render_key in render(node):
-            if key_type == 'constant':
-                stop = self.on_leaf(item, render_pos, render_key)
-                if stop:
-                    break
-                else:
-                    continue
-
-            if key_type in ['list', 'formatting'] and len(item) == 0:
-                continue
-
-            stop = self.before(key_type, item, render_pos, render_key)
+            stop = self._walk_on_item(key_type, item, render_pos, render_key)
             if stop:
-                break
+                return stop
+        return self.CONTINUE
 
-            stop = self.walk(item)
+    def _walk_on_item(self, key_type, item, render_pos, render_key):
+        if key_type == 'constant':
+            return self.on_leaf(item, render_pos, render_key)
 
-            stop |= self.after(key_type, item, render_pos, render_key)
-            if stop:
-                break
+        if key_type in ['list', 'formatting'] and len(item) == 0:
+            return self.CONTINUE
+
+        stop = self.before(key_type, item, render_pos, render_key)
+        if stop:
+            return stop
+
+        stop |= self._walk(item)
+
+        stop |= self.after(key_type, item, render_pos, render_key)
 
         return stop

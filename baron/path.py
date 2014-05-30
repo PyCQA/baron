@@ -1,4 +1,4 @@
-from .render import RenderWalker
+from .render import RenderWalker, render
 
 
 def path(path = None, node_type = None, position_in_rendering_list = None):
@@ -111,6 +111,35 @@ class PositionFinder(RenderWalker):
         return self.target.line == self.current.line \
             and self.target.column >= self.current.column \
             and self.target.column <  self.current.column + advance_by
+
+
+class PathWalker(RenderWalker):
+    def walk(self, tree):
+        self.current_path = path()
+
+        super().walk(tree)
+
+    def _walk(self, node):
+        for key_type, item, render_pos, render_key in render(node):
+            if render_key != None:
+                self.current_path["path"].append(render_key)
+            if key_type != 'constant':
+                old_type = self.current_path["type"]
+                self.current_path["type"] = item["type"] if "type" in item else key_type
+            old_pos = self.current_path["position_in_rendering_list"]
+            self.current_path["position_in_rendering_list"] = render_pos
+
+            stop = self._walk_on_item(key_type, item, render_pos, render_key)
+
+            if render_key != None:
+                self.current_path["path"].pop()
+            if key_type != 'constant':
+                self.current_path["type"] = old_type
+            self.current_path["position_in_rendering_list"] = old_pos
+
+            if stop:
+                return stop
+        return self.CONTINUE
 
 
 class BoundingBox(RenderWalker):
