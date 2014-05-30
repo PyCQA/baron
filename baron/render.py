@@ -1,3 +1,6 @@
+from .utils import string_instance
+
+
 def render(node):
     return render_list(node) if isinstance(node, list) else render_node(node)
 
@@ -20,7 +23,7 @@ def render_node(node):
             yield (key_type, node[render_key], pos, render_key)
 
         elif key_type == 'key':
-            key_type = 'constant' if isinstance(node[render_key], str) else key_type
+            key_type = 'constant' if isinstance(node[render_key], string_instance) else key_type
             yield (key_type, node[render_key], pos, render_key)
 
         elif key_type == 'constant':
