@@ -624,7 +624,14 @@ nodes_rendering_order = {
 
 
 class RenderWalker:
-    '''Inherit me and overload the methods you want'''
+    '''Inherit me and overload the methods you want
+    
+    Please pay attention that the arguments "render_pos" and
+    "render_key" are relative to the parent of the node given by the
+    "node" argument. For example, if walking on a list node and
+    before_node(..., 1, 1) is called, 1 means the node was the 2nd
+    element in the parent list node.
+    '''
     CONTINUE = False
     STOP = True
 
