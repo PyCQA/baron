@@ -1,9 +1,9 @@
 from .render import RenderWalker
 
 
-def path(path = [], node_type = None, position_in_rendering_list = None):
+def path(path = None, node_type = None, position_in_rendering_list = None):
     return {
-        "path": path,
+        "path": [] if path is None else path,
         "type": node_type,
         "position_in_rendering_list": position_in_rendering_list
     }
@@ -42,36 +42,38 @@ class PositionFinder(RenderWalker):
         self.target = Position(line, column)
         self.path_found = False
         self.stop = self.CONTINUE
-        self.path = PathHandler()
+        self.path = path()
 
         self.walk(tree)
-        return self.path.get_path() if self.path_found else None
+        return self.path if self.path_found else None
 
     def after_list(self, node, pos, key):
         if self.path_found:
-            self.path.push(key)
+            self.path['path'].insert(0, key)
 
         return self.stop
 
     def after_key(self, node, pos, key):
         if self.path_found:
-            self.path.push(key)
-            if 'type' in node:
-                self.path.set_type_if_not_set(node['type'])
+            self.path['path'].insert(0, key)
+            if self.path['type'] is None and 'type' in node:
+                self.path['type'] = node['type']
 
         return self.stop
 
     def after_formatting(self, node, pos, key):
         if self.path_found:
-            self.path.push(key)
+            self.path['path'].insert(0, key)
 
         return self.stop
 
     def after_node(self, node, pos, key):
         if self.path_found:
-            self.path.push(key)
-            self.path.set_position_if_not_set(pos)
-            self.path.set_type_if_not_set(node['type'])
+            self.path['path'].insert(0, key)
+            if self.path['position_in_rendering_list'] is None:
+                self.path['position_in_rendering_list'] = pos
+            if self.path['type'] is None:
+                self.path['type'] = node['type']
 
         return self.stop
 
@@ -96,7 +98,8 @@ class PositionFinder(RenderWalker):
             else:
                 advance_by = len(c)
                 if self.is_on_targetted_node(advance_by):
-                    self.path.set_position_if_not_set(pos)
+                    if self.path['position_in_rendering_list'] is None:
+                        self.path['position_in_rendering_list'] = pos
                     self.path_found = True
                     self.stop = self.STOP
                     break
@@ -167,25 +170,4 @@ class Position:
 
     def left(self):
         return Position(self.line, self.column - 1)
-
-
-class PathHandler:
-    def __init__(self):
-        self.path = []
-        self.node_type = None
-        self.position_in_rendering_list = None
-
-    def push(self, elem):
-        self.path = [elem] + self.path
-
-    def set_type_if_not_set(self, type):
-        if self.node_type is None:
-            self.node_type = type
-
-    def set_position_if_not_set(self, pos):
-        if self.position_in_rendering_list is None:
-            self.position_in_rendering_list = pos
-
-    def get_path(self):
-        return path(self.path, self.node_type, self.position_in_rendering_list)
 
