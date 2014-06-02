@@ -8,7 +8,6 @@ def dumps(tree):
 class Dumper(RenderWalker):
     def on_leaf(self, constant, pos, key):
         self.dump += constant
-        return self.CONTINUE
 
     def dump(self, tree):
         self.dump = ''

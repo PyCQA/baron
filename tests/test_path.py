@@ -48,19 +48,18 @@ class PathWalkerTester(PathWalker):
         self.paths = paths
 
     def before(self, *args):
-        return self.process_test('>')
+        self.process_test('>')
 
     def after(self, *args):
-        return self.process_test('<')
+        self.process_test('<')
 
     def on_leaf(self, *args):
-        return self.process_test('-')
+        self.process_test('-')
 
     def process_test(self, type):
         first = self.paths.pop(0)
         assert first[0] == type
         assert first[1] == self.current_path
-        return self.CONTINUE
 
 
 def check_path(code, positions, target_path):

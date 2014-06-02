@@ -47,7 +47,6 @@ class PositionFinder(RenderWalker):
         self.current = Position(1,1)
         self.target = Position(line, column)
         self.path_found = False
-        self.stop = self.CONTINUE
         self.path = path()
 
         self.walk(tree)
@@ -57,21 +56,15 @@ class PositionFinder(RenderWalker):
         if self.path_found:
             self.path['path'].insert(0, key)
 
-        return self.stop
-
     def after_key(self, node, pos, key):
         if self.path_found:
             self.path['path'].insert(0, key)
             if self.path['type'] is None and 'type' in node:
                 self.path['type'] = node['type']
 
-        return self.stop
-
     def after_formatting(self, node, pos, key):
         if self.path_found:
             self.path['path'].insert(0, key)
-
-        return self.stop
 
     def after_node(self, node, pos, key):
         if self.path_found:
@@ -80,8 +73,6 @@ class PositionFinder(RenderWalker):
                 self.path['position_in_rendering_list'] = pos
             if self.path['type'] is None:
                 self.path['type'] = node['type']
-
-        return self.stop
 
     def on_leaf(self, constant, pos, key):
         """Determine if we're on the targetted node.
@@ -98,8 +89,7 @@ class PositionFinder(RenderWalker):
                 self.current.advance_line()
                 # if target lined is passed
                 if self.current.line > self.target.line:
-                    self.stop = self.STOP
-                    break
+                    return self.STOP
 
             else:
                 advance_by = len(c)
@@ -109,11 +99,8 @@ class PositionFinder(RenderWalker):
                     if self.path['position_in_rendering_list'] is None:
                         self.path['position_in_rendering_list'] = pos
                     self.path_found = True
-                    self.stop = self.STOP
-                    break
+                    return self.STOP
                 self.current.advance_columns(advance_by)
-
-        return self.stop
 
     def is_on_targetted_node(self, advance_by):
         return self.target.line == self.current.line \
@@ -146,8 +133,7 @@ class PathWalker(RenderWalker):
             self.current_path["position_in_rendering_list"] = old_pos
 
             if stop:
-                return stop
-        return self.CONTINUE
+                return self.STOP
 
 
 class BoundingBox(PathWalker):
@@ -164,7 +150,6 @@ class BoundingBox(PathWalker):
         self.left = None
         self.right = None
         self.found = True if self.target_path is None else False
-        self.stop = self.CONTINUE
 
         self.walk(tree)
         if self.found and self.left is None:
@@ -175,7 +160,10 @@ class BoundingBox(PathWalker):
         return (self.left, self.right)
 
     def on_leaf(self, constant, pos, key):
-        self.set_left_if_found()
+        if self.current_path == self.target_path:
+            self.found = True
+        if self.left is None and self.found:
+            self.left = (self.current_position.line, self.current_position.column)
 
         newlines_split = split_on_newlines(constant)
 
@@ -186,19 +174,9 @@ class BoundingBox(PathWalker):
                 self.current_position.advance_columns(len(c))
                 self.left_of_current_position = self.current_position.left()
 
-        self.set_right_if_found()
-        return self.stop
-
-    def set_left_if_found(self):
-        if self.current_path == self.target_path:
-            self.found = True
-        if self.left is None and self.found:
-            self.left = (self.current_position.line, self.current_position.column)
-
-    def set_right_if_found(self):
         if self.right is None and self.found and self.current_path == self.target_path:
-            self.stop = self.STOP
             self.right = (self.left_of_current_position.line, self.left_of_current_position.column)
+            return self.STOP
 
 
 def split_on_newlines(constant):

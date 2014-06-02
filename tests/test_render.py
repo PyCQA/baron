@@ -25,10 +25,10 @@ class RenderWalkerTester(RenderWalker):
         self.steps = steps
 
     def before(self, *args):
-        return self.process_test('>', *args)
+        self.process_test('>', *args)
 
     def after(self, *args):
-        return self.process_test('<', *args)
+        self.process_test('<', *args)
 
     def on_leaf(self, *args):
         first = self.steps.pop(0)
@@ -36,7 +36,6 @@ class RenderWalkerTester(RenderWalker):
         assert first[1] == args[0]
         assert first[2] == args[1]
         assert first[3] == args[2]
-        return self.CONTINUE
 
     def process_test(self, *args):
         first = self.steps.pop(0)
@@ -48,7 +47,6 @@ class RenderWalkerTester(RenderWalker):
             assert first[2] == args[2].__class__.__name__
         assert first[3] == args[3]
         assert first[4] == args[4]
-        return self.CONTINUE
 
 
 def test_walk_assignment():

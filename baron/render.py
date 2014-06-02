@@ -637,35 +637,34 @@ class RenderWalker:
     before_node(..., 1, 1) is called, 1 means the node was the 2nd
     element in the parent list node.
     '''
-    CONTINUE = False
     STOP = True
 
     def before_list(self, node, render_pos, render_key):
-        return self.CONTINUE
+        pass
 
     def after_list(self, node, render_pos, render_key):
-        return self.CONTINUE
+        pass
 
     def before_formatting(self, node, render_pos, render_key):
-        return self.CONTINUE
+        pass
 
     def after_formatting(self, node, render_pos, render_key):
-        return self.CONTINUE
+        pass
 
     def before_node(self, node, render_pos, render_key):
-        return self.CONTINUE
+        pass
 
     def after_node(self, node, render_pos, render_key):
-        return self.CONTINUE
+        pass
 
     def before_key(self, node, render_pos, render_key):
-        return self.CONTINUE
+        pass
 
     def after_key(self, node, render_pos, render_key):
-        return self.CONTINUE
+        pass
 
     def on_leaf(self, node, render_pos, render_key):
-        return self.CONTINUE
+        pass
 
     def before(self, key_type, item, position, render_key):
         if key_type not in node_types:
@@ -689,23 +688,24 @@ class RenderWalker:
     def _walk(self, node):
         for key_type, item, render_pos, render_key in render(node):
             stop = self._walk_on_item(key_type, item, render_pos, render_key)
-            if stop:
-                return stop
-        return self.CONTINUE
+            if stop == self.STOP:
+                return self.STOP
 
     def _walk_on_item(self, key_type, item, render_pos, render_key):
         if key_type == 'constant':
             return self.on_leaf(item, render_pos, render_key)
 
         if key_type in ['list', 'formatting'] and len(item) == 0:
-            return self.CONTINUE
+            return
 
-        stop = self.before(key_type, item, render_pos, render_key)
-        if stop:
-            return stop
+        stop = []
+        stop += [self.before(key_type, item, render_pos, render_key)]
+        if any(stop):
+            return self.STOP
 
-        stop |= self._walk(item)
+        stop += [self._walk(item)]
+        stop += [self.after(key_type, item, render_pos, render_key)]
 
-        stop |= self.after(key_type, item, render_pos, render_key)
+        if any(stop):
+            return self.STOP
 
-        return stop
