@@ -2,7 +2,12 @@ from .utils import string_instance
 
 
 def render(node):
-    return render_list(node) if isinstance(node, list) else render_node(node)
+    if isinstance(node, list):
+        return render_list(node)
+    elif isinstance(node, dict):
+        return render_node(node)
+    else:
+        return [('constant', node, None, None)]
 
 
 def render_list(node):
