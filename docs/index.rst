@@ -444,10 +444,3 @@ The available methods that you can overload are:
 * :file:`on_leaf` called when encountering a leaf of the FST (can be a constant (like "def" in a function definition) or an actual value like the value a name node)
 
 Every methods has the same signature: :file:`(self, node, render_pos, render_key)`.
-
-
-Table of Content
-================
-
-.. toctree::
-   :maxdepth: 2
