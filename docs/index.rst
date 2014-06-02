@@ -104,22 +104,25 @@ Rendering the FST
 
 Baron renders the FST back into source code by following the
 instructions given by the :file:`nodes_rendering_order` dictionary. It
-gives, for each FST node, the order in which the node must be rendered.
+gives, for everynode FST node, the order in which the node must be rendered.
 
 .. ipython:: python
 
     from baron import nodes_rendering_order
+    from baron.helpers import show_node
 
     nodes_rendering_order["name"]
+    show_node(parse("a_name")[0])
     nodes_rendering_order["tuple"]
+    show_node(parse("(a_name,another_name,yet_another_name)")[0])
+    nodes_rendering_order["comma"]
 
 For a "name" node, it is a list containing an unique tuple but it can
 contain multiple ones like for a "tuple" node.
 
-
 To render a node, you just need to render each element of the list one
-by one. As you can see, they are all formatted as a 3-tuple. The first
-column is the type which is one of the following:
+by one in the given order. As you can see, they are all formatted as a
+3-tuple. The first column is the type which is one of the following:
 
 .. ipython:: python
 
@@ -149,8 +152,10 @@ must be rendered. We'll see the third column later.
   contains a string which is outputted directly. Compared to a "key"
   node containing a string, the "constant" node is identical for every
   instance of the nodes (e.g. the left parenthesis character "(" in
-  a function call node) while the "key" node's value can change (e.g.
-  the name of the function in a function call node).
+  a function call node of the "def" keyword of a function definition)
+  while the "key" node's value can change (e.g.  the name of the
+  function in a function
+  call node).
 
 
 Walktrough
@@ -165,6 +170,9 @@ statement, the root node contains our "lambda" node at index 0:
     fst = parse("lambda x, y = 1: x + y")
 
     fst[0]["type"]
+
+For reference, you can find the (long) FST produced by the lambda node at the
+end of this section.
 
 Now, let's see how to render a "lambda" node:
 
@@ -226,6 +234,12 @@ should render the second element of the "def_argument" node but as we'll
 see in the next section, it is not the case thanks to the third column
 of the tuple.
 
+For reference, the FST of the lambda node:
+
+.. ipython:: python
+
+    show_node(fst[0])
+
 Dependent rendering
 ~~~~~~~~~~~~~~~~~~~
 
@@ -239,6 +253,8 @@ compare the two "def_arguments" FST nodes:
     fst[0]["arguments"][0]
 
     fst[0]["arguments"][2]
+
+    nodes_rendering_order[fst[0]["arguments"][2]["type"]]
 
 The "value" is empty for the former "def_argument" but not for the
 latter because only the latter has a default assignment "= 1".
