@@ -37,6 +37,24 @@ def make_path(path = None, node_type = None, position_in_rendering_list = None):
         ])
 
 
+def make_position(line, column):
+    return namedtuple('Position', ['line', 'column'])._make([line, column])
+
+
+def advance_columns(position, columns):
+    return position._replace(column = position.column + columns)
+
+
+def advance_lines(position, lines = 1):
+    if lines == 0:
+        return position
+    return position._replace(line = position.line + lines, column = 1)
+
+
+def left_of(position):
+    return position._replace(column = position.column - 1)
+
+
 class PositionFinder(RenderWalker):
     """Find a node by line and column and return the path to it.
 
@@ -45,8 +63,8 @@ class PositionFinder(RenderWalker):
     the path while going back up the tree.
     """
     def find(self, tree, line, column):
-        self.current = Position(1,1)
-        self.target = Position(line, column)
+        self.current = make_position(1,1)
+        self.target = make_position(line, column)
         self.path_found = False
         self.path = []
         self.node_type = None
@@ -89,7 +107,7 @@ class PositionFinder(RenderWalker):
 
         for c in newlines_split:
             if c == "\n":
-                self.current.advance_line()
+                self.current = advance_lines(self.current)
                 # if target lined is passed
                 if self.current.line > self.target.line:
                     return self.STOP
@@ -102,7 +120,7 @@ class PositionFinder(RenderWalker):
                     self.position_in_rendering_list = pos
                     self.path_found = True
                     return self.STOP
-                self.current.advance_columns(advance_by)
+                self.current = advance_columns(self.current, advance_by)
 
     def is_on_targetted_node(self, advance_by):
         return self.target.line == self.current.line \
@@ -156,17 +174,17 @@ class BoundingBox(PathWalker):
     """
     def compute(self, tree, target_path = None):
         self.target_path = target_path
-        self.current_position = Position(1, 1)
-        self.left_of_current_position = Position(1, 0)
+        self.current_position = make_position(1, 1)
+        self.left_of_current_position = make_position(1, 0)
         self.left = None
         self.right = None
         self.found = True if self.target_path is None else False
 
         self.walk(tree)
         if self.found and self.left is None:
-            self.left = (1, 1)
+            self.left = make_position(1, 1)
         if self.found and self.right is None:
-            self.right = (self.left_of_current_position.line, self.left_of_current_position.column)
+            self.right = self.left_of_current_position
 
         return (self.left, self.right)
 
@@ -174,19 +192,19 @@ class BoundingBox(PathWalker):
         if self.current_decorated_path() == self.target_path:
             self.found = True
         if self.left is None and self.found:
-            self.left = (self.current_position.line, self.current_position.column)
+            self.left = self.current_position
 
         newlines_split = split_on_newlines(constant)
 
         for c in newlines_split:
             if c == "\n":
-                self.current_position.advance_line()
+                self.current_position = advance_lines(self.current_position)
             elif c != "":
-                self.current_position.advance_columns(len(c))
-                self.left_of_current_position = self.current_position.left()
+                self.current_position = advance_columns(self.current_position, len(c))
+                self.left_of_current_position = left_of(self.current_position)
 
         if self.right is None and self.found and self.current_decorated_path() == self.target_path:
-            self.right = (self.left_of_current_position.line, self.left_of_current_position.column)
+            self.right = self.left_of_current_position
             return self.STOP
 
 
@@ -201,20 +219,4 @@ def intersperce(iterable, delimiter):
     for x in it:
         yield delimiter
         yield x
-
-
-class Position:
-    def __init__(self, line, column):
-        self.line = line
-        self.column = column
-
-    def advance_columns(self, columns):
-        self.column += columns
-
-    def advance_line(self):
-        self.line += 1
-        self.column = 1
-
-    def left(self):
-        return Position(self.line, self.column - 1)
 
