@@ -16,6 +16,14 @@ Installation
 
     pip install baron
 
+RedBaron
+========
+
+There is a good chance that you'll want to use `RedBaron
+<https://github.com/Psycojoker/redbaron>`_ instead of using Baron directly.
+Think of Baron as the "bytecode of python source code" and RedBaron as some
+sort of usable layer on top of it, a bit like dom/jQuery or html/Beautifulsoup.
+
 Basic Usage
 ===========
 
@@ -400,14 +408,6 @@ By the way, out of bound positions are handled gracefully:
     print(position_to_node(fst, 1, 5))
     print(position_to_node(fst, 2, 4))
 
-
-RedBaron
-========
-
-There is a good chance that you'll want to use `RedBaron
-<https://github.com/Psycojoker/redbaron>`_ instead of using Baron directly.
-Think of Baron as the "bytecode of python source code" and RedBaron as some
-sort of usable layer on top of it, a bit like dom/jQuery or html/Beautifulsoup.
 
 Table of Content
 ================
