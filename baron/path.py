@@ -139,9 +139,13 @@ class PathWalker(RenderWalker):
 class BoundingBox(PathWalker):
     """Compute the bounding box of the given node.
 
-    Top-left position is always (1,1). Walk the whole node while
-    incrementing the position and at the end store previous position as
-    the bottom-right position.
+    First, walk to the target path while incrementing the position.
+    When reached, the top-left position is set to the current position.
+    Then walke the whole node, still incrementing the position. When
+    arriving at the end of the node, store the previous position, not
+    the current one, as the bottom-right position.
+    If no target path is given, assume the targetted node is the whole
+    tree.
     """
     def compute(self, tree, target_path = None):
         self.target_path = target_path
