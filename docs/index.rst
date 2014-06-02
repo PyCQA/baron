@@ -408,6 +408,43 @@ By the way, out of bound positions are handled gracefully:
     print(position_to_node(fst, 1, 5))
     print(position_to_node(fst, 2, 4))
 
+RenderWalker
+============
+
+Internally, Baron uses a walker to traverse a FST tree, it's a generic
+class that you are free to use. To do so, you inherit from it and
+overload the chosen methods. You then launch an instance using it's
+:file:`walk` method. Here is how the :file:`Dumper` (called by the
+function :file:`dumps`) is written using it:
+
+.. ipython:: python
+
+    from baron.render import RenderWalker
+
+    class Dumper(RenderWalker):
+        """Usage: Dumper().dump(tree)"""
+        def on_leaf(self, constant, pos, key):
+            self.dump += constant
+            return self.CONTINUE
+        def dump(self, tree):
+            self.dump = ''
+            self.walk(tree)
+            return self.dump
+
+The available methods that you can overload are:
+
+* :file:`before_list` called before encountering a list of nodes
+* :file:`after_list` called after encountering a list of nodes
+* :file:`before_formatting` called before encountering a formatting list
+* :file:`after_formatting` called after encountering a formatting list
+* :file:`before_node` called before encountering a node
+* :file:`after_node` called after encountering a node
+* :file:`before_key` called before encountering a key type entry
+* :file:`after_key` called after encountering a key type entry
+* :file:`on_leaf` called when encountering a leaf of the FST (can be a constant (like "def" in a function definition) or an actual value like the value a name node)
+
+Every methods has the same signature: :file:`(self, node, render_pos, render_key)`.
+
 
 Table of Content
 ================
