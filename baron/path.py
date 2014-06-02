@@ -1,13 +1,6 @@
 from .render import RenderWalker, render
 from .utils import string_instance
-
-
-def path(path = None, node_type = None, position_in_rendering_list = None):
-    return {
-        "path": [] if path is None else path,
-        "type": node_type,
-        "position_in_rendering_list": position_in_rendering_list
-    }
+from collections import namedtuple
 
 
 def position_to_path(tree, line, column):
@@ -18,7 +11,7 @@ def path_to_node(tree, path):
     if path is None:
         return None
     node = tree
-    for key in path['path']:
+    for key in path.path:
         if not isinstance(node[key], string_instance):
             node = node[key]
     return node
@@ -36,6 +29,14 @@ def path_to_bounding_box(tree, path):
     return BoundingBox().compute(tree, path)
 
 
+def make_path(path = None, node_type = None, position_in_rendering_list = None):
+    return namedtuple('Position', ['path', 'node_type', 'position_in_rendering_list'])._make([
+            [] if path is None else path,
+            node_type,
+            position_in_rendering_list
+        ])
+
+
 class PositionFinder(RenderWalker):
     """Find a node by line and column and return the path to it.
 
@@ -47,32 +48,34 @@ class PositionFinder(RenderWalker):
         self.current = Position(1,1)
         self.target = Position(line, column)
         self.path_found = False
-        self.path = path()
+        self.path = []
+        self.node_type = None
+        self.position_in_rendering_list = None
 
         self.walk(tree)
-        return self.path if self.path_found else None
+        return make_path(self.path, self.node_type, self.position_in_rendering_list) if self.path_found else None
 
     def after_list(self, node, pos, key):
         if self.path_found:
-            self.path['path'].insert(0, key)
+            self.path.insert(0, key)
 
     def after_key(self, node, pos, key):
         if self.path_found:
-            self.path['path'].insert(0, key)
-            if self.path['type'] is None and 'type' in node:
-                self.path['type'] = node['type']
+            self.path.insert(0, key)
+            if self.node_type is None and 'type' in node:
+                self.node_type = node['type']
 
     def after_formatting(self, node, pos, key):
         if self.path_found:
-            self.path['path'].insert(0, key)
+            self.path.insert(0, key)
 
     def after_node(self, node, pos, key):
         if self.path_found:
-            self.path['path'].insert(0, key)
-            if self.path['position_in_rendering_list'] is None:
-                self.path['position_in_rendering_list'] = pos
-            if self.path['type'] is None:
-                self.path['type'] = node['type']
+            self.path.insert(0, key)
+            if self.position_in_rendering_list is None:
+                self.position_in_rendering_list = pos
+            if self.node_type is None:
+                self.node_type = node['type']
 
     def on_leaf(self, constant, pos, key):
         """Determine if we're on the targetted node.
@@ -95,9 +98,8 @@ class PositionFinder(RenderWalker):
                 advance_by = len(c)
                 if self.is_on_targetted_node(advance_by):
                     if key is not None:
-                        self.path['path'].insert(0, key)
-                    if self.path['position_in_rendering_list'] is None:
-                        self.path['position_in_rendering_list'] = pos
+                        self.path.insert(0, key)
+                    self.position_in_rendering_list = pos
                     self.path_found = True
                     return self.STOP
                 self.current.advance_columns(advance_by)
@@ -110,27 +112,32 @@ class PositionFinder(RenderWalker):
 
 class PathWalker(RenderWalker):
     def walk(self, tree):
-        self.current_path = path()
+        self.current_path = []
+        self.current_node_type = None
+        self.current_position_in_rendering_list = None
 
         RenderWalker.walk(self, tree)
+
+    def current_decorated_path(self):
+        return make_path(self.current_path, self.current_node_type, self.current_position_in_rendering_list)
 
     def _walk(self, node):
         for key_type, item, render_pos, render_key in render(node):
             if render_key != None:
-                self.current_path["path"].append(render_key)
+                self.current_path.append(render_key)
             if key_type != 'constant':
-                old_type = self.current_path["type"]
-                self.current_path["type"] = item["type"] if "type" in item else key_type
-            old_pos = self.current_path["position_in_rendering_list"]
-            self.current_path["position_in_rendering_list"] = render_pos
+                old_type = self.current_node_type
+                self.current_node_type = item["type"] if "type" in item else key_type
+            old_pos = self.current_position_in_rendering_list
+            self.current_position_in_rendering_list = render_pos
 
             stop = self._walk_on_item(key_type, item, render_pos, render_key)
 
             if render_key != None:
-                self.current_path["path"].pop()
+                self.current_path.pop()
             if key_type != 'constant':
-                self.current_path["type"] = old_type
-            self.current_path["position_in_rendering_list"] = old_pos
+                self.current_node_type = old_type
+            self.current_position_in_rendering_list = old_pos
 
             if stop:
                 return self.STOP
@@ -164,7 +171,7 @@ class BoundingBox(PathWalker):
         return (self.left, self.right)
 
     def on_leaf(self, constant, pos, key):
-        if self.current_path == self.target_path:
+        if self.current_decorated_path() == self.target_path:
             self.found = True
         if self.left is None and self.found:
             self.left = (self.current_position.line, self.current_position.column)
@@ -178,7 +185,7 @@ class BoundingBox(PathWalker):
                 self.current_position.advance_columns(len(c))
                 self.left_of_current_position = self.current_position.left()
 
-        if self.right is None and self.found and self.current_path == self.target_path:
+        if self.right is None and self.found and self.current_decorated_path() == self.target_path:
             self.right = (self.left_of_current_position.line, self.left_of_current_position.column)
             return self.STOP
 

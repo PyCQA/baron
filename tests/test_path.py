@@ -1,5 +1,5 @@
 from baron.baron import parse
-from baron.path import path, PathWalker
+from baron.path import make_path, PathWalker
 from baron.path import position_to_path, path_to_node, position_to_node
 from baron.path import path_to_bounding_box, node_to_bounding_box
 from baron.render import get_node_at_position_in_rendering_list
@@ -39,10 +39,6 @@ class MyClass(BaseClass):
 """
 
 
-def make_path(path, type, pos):
-    return {"path": path, "type": type, "position_in_rendering_list": pos}
-
-
 class PathWalkerTester(PathWalker):
     def __init__(self, paths):
         self.paths = paths
@@ -59,7 +55,7 @@ class PathWalkerTester(PathWalker):
     def process_test(self, type):
         first = self.paths.pop(0)
         assert first[0] == type
-        assert first[1] == self.current_path
+        assert first[1] == self.current_decorated_path()
 
 
 def check_path(code, positions, target_path):
@@ -76,7 +72,7 @@ def check_path(code, positions, target_path):
         node = path_to_node(tree, path)
         assert not isinstance(node, string_instance)
 
-        targetted_child = get_node_at_position_in_rendering_list(node, path['position_in_rendering_list'])
+        targetted_child = get_node_at_position_in_rendering_list(node, path.position_in_rendering_list)
         assert isinstance(targetted_child, string_instance)
 
         assert position_to_node(tree, line, column) is node
@@ -89,25 +85,25 @@ def check_path(code, positions, target_path):
 def test_path_walker_assignment():
     node = parse("a = 1")
     walker = PathWalkerTester([
-    ('>', path([0], 'assignment', 0)),
-        ('>', path([0, 'target'], 'name', 0)),
-            ('-', path([0, 'target', 'value'], 'name', 0)),
-        ('<', path([0, 'target'], 'name', 0)),
-        ('>', path([0, 'first_formatting'], 'formatting', 1)),
-            ('>', path([0, 'first_formatting', 0], 'space', 0)),
-                ('-', path([0, 'first_formatting', 0, 'value'], 'space', 0)),
-            ('<', path([0, 'first_formatting', 0], 'space', 0)),
-        ('<', path([0, 'first_formatting'], 'formatting', 1)),
-        ('-', path([0], 'assignment', 3)),
-        ('>', path([0, 'second_formatting'], 'formatting', 4)),
-            ('>', path([0, 'second_formatting', 0], 'space', 0)),
-                ('-', path([0, 'second_formatting', 0, 'value'], 'space', 0)),
-            ('<', path([0, 'second_formatting', 0], 'space', 0)),
-        ('<', path([0, 'second_formatting'], 'formatting', 4)),
-        ('>', path([0, 'value'], 'int', 5)),
-            ('-', path([0, 'value', 'value'], 'int', 0)),
-        ('<', path([0, 'value'], 'int', 5)),
-    ('<', path([0], 'assignment', 0)),
+    ('>', make_path([0], 'assignment', 0)),
+        ('>', make_path([0, 'target'], 'name', 0)),
+            ('-', make_path([0, 'target', 'value'], 'name', 0)),
+        ('<', make_path([0, 'target'], 'name', 0)),
+        ('>', make_path([0, 'first_formatting'], 'formatting', 1)),
+            ('>', make_path([0, 'first_formatting', 0], 'space', 0)),
+                ('-', make_path([0, 'first_formatting', 0, 'value'], 'space', 0)),
+            ('<', make_path([0, 'first_formatting', 0], 'space', 0)),
+        ('<', make_path([0, 'first_formatting'], 'formatting', 1)),
+        ('-', make_path([0], 'assignment', 3)),
+        ('>', make_path([0, 'second_formatting'], 'formatting', 4)),
+            ('>', make_path([0, 'second_formatting', 0], 'space', 0)),
+                ('-', make_path([0, 'second_formatting', 0, 'value'], 'space', 0)),
+            ('<', make_path([0, 'second_formatting', 0], 'space', 0)),
+        ('<', make_path([0, 'second_formatting'], 'formatting', 4)),
+        ('>', make_path([0, 'value'], 'int', 5)),
+            ('-', make_path([0, 'value', 'value'], 'int', 0)),
+        ('<', make_path([0, 'value'], 'int', 5)),
+    ('<', make_path([0], 'assignment', 0)),
     ])
 
     walker.walk(node)
