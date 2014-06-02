@@ -55,6 +55,10 @@ def left_of(position):
     return position._replace(column = position.column - 1)
 
 
+def make_bounding_box(top_left = None, bottom_right = None):
+    return namedtuple("BoundingBox", ["top_left", "bottom_right"])._make([top_left, bottom_right])
+
+
 class PositionFinder(RenderWalker):
     """Find a node by line and column and return the path to it.
 
@@ -186,7 +190,7 @@ class BoundingBox(PathWalker):
         if self.found and self.right is None:
             self.right = self.left_of_current_position
 
-        return (self.left, self.right)
+        return make_bounding_box(self.left, self.right)
 
     def on_leaf(self, constant, pos, key):
         if self.current_decorated_path() == self.target_path:
