@@ -32,6 +32,10 @@ def node_to_bounding_box(node):
     return BoundingBox().compute(node)
 
 
+def path_to_bounding_box(tree, path):
+    return BoundingBox().compute(tree, path)
+
+
 class PositionFinder(RenderWalker):
     """Find a node by line and column and return the path to it.
 
@@ -146,7 +150,7 @@ class PathWalker(RenderWalker):
         return self.CONTINUE
 
 
-class BoundingBox(RenderWalker):
+class BoundingBox(PathWalker):
     """Compute the bounding box of the given node.
 
     Top-left position is always (1,1). Walk the whole node while
@@ -154,16 +158,25 @@ class BoundingBox(RenderWalker):
     the bottom-right position.
     """
     def compute(self, tree, target_path = None):
+        self.target_path = target_path
         self.current_position = Position(1, 1)
         self.left_of_current_position = Position(1, 0)
+        self.left = None
+        self.right = None
+        self.found = True if self.target_path is None else False
         self.stop = self.CONTINUE
 
-        left = Position(1,1)
         self.walk(tree)
-        right = self.left_of_current_position
-        return ((left.line, left.column), (right.line, right.column))
+        if self.found and self.left is None:
+            self.left = (1, 1)
+        if self.found and self.right is None:
+            self.right = (self.left_of_current_position.line, self.left_of_current_position.column)
+
+        return (self.left, self.right)
 
     def on_leaf(self, constant, pos, key):
+        self.set_left_if_found()
+
         newlines_split = split_on_newlines(constant)
 
         for c in newlines_split:
@@ -173,7 +186,19 @@ class BoundingBox(RenderWalker):
                 self.current_position.advance_columns(len(c))
                 self.left_of_current_position = self.current_position.left()
 
+        self.set_right_if_found()
         return self.stop
+
+    def set_left_if_found(self):
+        if self.current_path == self.target_path:
+            self.found = True
+        if self.left is None and self.found:
+            self.left = (self.current_position.line, self.current_position.column)
+
+    def set_right_if_found(self):
+        if self.right is None and self.found and self.current_path == self.target_path:
+            self.stop = self.STOP
+            self.right = (self.left_of_current_position.line, self.left_of_current_position.column)
 
 
 def split_on_newlines(constant):
