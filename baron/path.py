@@ -112,7 +112,7 @@ class PathWalker(RenderWalker):
     def walk(self, tree):
         self.current_path = path()
 
-        super().walk(tree)
+        RenderWalker.walk(self, tree)
 
     def _walk(self, node):
         for key_type, item, render_pos, render_key in render(node):
