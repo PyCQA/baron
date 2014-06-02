@@ -1,4 +1,5 @@
 from .render import RenderWalker, render
+from .utils import string_instance
 
 
 def path(path = None, node_type = None, position_in_rendering_list = None):
@@ -18,7 +19,8 @@ def path_to_node(tree, path):
         return None
     node = tree
     for key in path['path']:
-        node = node[key]
+        if not isinstance(node[key], string_instance):
+            node = node[key]
     return node
 
 
@@ -98,6 +100,8 @@ class PositionFinder(RenderWalker):
             else:
                 advance_by = len(c)
                 if self.is_on_targetted_node(advance_by):
+                    if key is not None:
+                        self.path['path'].insert(0, key)
                     if self.path['position_in_rendering_list'] is None:
                         self.path['position_in_rendering_list'] = pos
                     self.path_found = True
