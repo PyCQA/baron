@@ -185,10 +185,9 @@ class BoundingBox(PathWalker):
         self.found = True if self.target_path is None else False
 
         self.walk(tree)
-        if self.found and self.left is None:
-            self.left = make_position(1, 1)
-        if self.found and self.right is None:
-            self.right = self.left_of_current_position
+
+        if self.found and self.top_left is None and self.bottom_right is None:
+            return make_bounding_box(make_position(1, 1), self.left_of_current_position)
 
         return make_bounding_box(self.left, self.right)
 
