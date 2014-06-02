@@ -30,23 +30,23 @@ class RenderWalkerTester(RenderWalker):
     def after(self, *args):
         self.process_test('<', *args)
 
-    def on_leaf(self, *args):
-        first = self.steps.pop(0)
-        assert first[0] == 'constant'
-        assert first[1] == args[0]
-        assert first[2] == args[1]
-        assert first[3] == args[2]
+    def on_leaf(self, node, render_pos, render_key):
+        _node_type, _node, _render_pos, _render_key = self.steps.pop(0)
+        assert _node_type == 'constant'
+        assert _node == node
+        assert _render_pos == render_pos
+        assert _render_key == render_key
 
-    def process_test(self, *args):
-        first = self.steps.pop(0)
-        assert first[0] == args[0]
-        assert first[1] == args[1]
-        if "type" in args[2]:
-            assert first[2] == args[2]["type"]
+    def process_test(self, direction, node_type, node, render_pos, render_key):
+        _direction, _node_type, _node, _render_pos, _render_key = self.steps.pop(0)
+        assert _direction == direction
+        assert _node_type == node_type
+        if "type" in node:
+            assert _node == node["type"]
         else:
-            assert first[2] == args[2].__class__.__name__
-        assert first[3] == args[3]
-        assert first[4] == args[4]
+            assert _node == node.__class__.__name__
+        assert _render_pos == render_pos
+        assert _render_key == render_key
 
 
 def test_walk_assignment():
@@ -137,3 +137,4 @@ def fun(arg1):
     ])
 
     walker.walk(node)
+

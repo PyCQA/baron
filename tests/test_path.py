@@ -52,10 +52,10 @@ class PathWalkerTester(PathWalker):
     def on_leaf(self, *args):
         self.process_test('-')
 
-    def process_test(self, type):
-        first = self.paths.pop(0)
-        assert first[0] == type
-        assert first[1] == self.current_decorated_path()
+    def process_test(self, node_type):
+        _node_type, _path = self.paths.pop(0)
+        assert _node_type == node_type
+        assert _path == self.current_decorated_path()
 
 
 def check_path(code, positions, target_path):
