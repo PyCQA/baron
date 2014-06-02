@@ -37,7 +37,7 @@ def get_node_at_position_in_rendering_list(node, position_in_rendering_list):
     return render_key if key_type == 'constant' else node[render_key]
 
 
-node_types = {'node', 'list', 'key', 'formatting', 'constant'}
+node_types = set('node', 'list', 'key', 'formatting', 'constant')
 
 
 nodes_rendering_order = {
