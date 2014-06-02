@@ -142,26 +142,26 @@ Apart for the "constant" node, the second column contains the key of the
 FST node which must be rendered. The first column explains how that key
 must be rendered. We'll see the third column later.
 
-* A "node" node is one of the nodes in the :file:`nodes_rendering_order`
+* A :file:`node` node is one of the nodes in the :file:`nodes_rendering_order`
   we just introduced, it is rendered by following the rules mentionned
   here. This is indeed a recursive definition.
-* A "key" node is either a branch of the tree if the corresponding FST
+* A :file:`key` node is either a branch of the tree if the corresponding FST
   node's key contains another node or a leaf if it contains a string. In
   the former case, it is rendered by rendering its content. In the
   latter, the string is outputted directly.
-* A "list" node is like a "key" node but can contain 0, 1 or several
-  other nodes. For example, Baron root node is a "list" node since
+* A :file:`list` node is like a :file:`key` node but can contain 0, 1 or several
+  other nodes. For example, Baron root node is a :file:`list` node since
   a python program is a list of statements. It is rendered by rendering
   each of its elements in order.
-* A "formatting" node is similar in behaviour to a "list" node but
+* A :file:`formatting` node is similar in behaviour to a :file:`list` node but
   contains only formatting nodes. This is basically where Baron
   distinguish itself from ASTs.
-* A "constant" node is a leaf of the FST tree. The second column always
-  contains a string which is outputted directly. Compared to a "key"
-  node containing a string, the "constant" node is identical for every
-  instance of the nodes (e.g. the left parenthesis character "(" in
-  a function call node of the "def" keyword of a function definition)
-  while the "key" node's value can change (e.g.  the name of the
+* A :file:`constant` node is a leaf of the FST tree. The second column always
+  contains a string which is outputted directly. Compared to a :file:`key`
+  node containing a string, the :file:`constant` node is identical for every
+  instance of the nodes (e.g. the left parenthesis character :file:`(` in
+  a function call node of the :file:`def` keyword of a function definition)
+  while the :file:`key` node's value can change (e.g.  the name of the
   function in a function
   call node).
 
