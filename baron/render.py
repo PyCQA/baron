@@ -339,10 +339,6 @@ nodes_rendering_order = {
             ("constant",   "in",                True),
             ("formatting", "fourth_formatting", True),
             ("key",        "target",            True),
-    #if isinstance(node["target"], list):
-    #    yield dump_node_list(node["target"])
-    #else:
-    #    yield dump_node(node["target"])
             ("list",       "ifs",               True),
         ],
         "comprehension_if": [
