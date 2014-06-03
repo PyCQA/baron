@@ -66,79 +66,6 @@ def make_bounding_box(top_left=None, bottom_right=None):
         ])
 
 
-class PositionFinder(RenderWalker):
-    """Find a node by line and column and return the path to it.
-
-    First, walk through all the nodes while maintaining the current line
-    and column. When the targetted node is found, stop there and build
-    the path while going back up the tree.
-    """
-    def find(self, tree, line, column):
-        self.current = make_position(1, 1)
-        self.target = make_position(line, column)
-        self.path_found = False
-        self.path = []
-        self.node_type = None
-        self.position_in_rendering_list = None
-
-        self.walk(tree)
-        return make_path(self.path, self.node_type, self.position_in_rendering_list) if self.path_found else None
-
-    def after_list(self, node, pos, key):
-        if self.path_found:
-            self.path.insert(0, key)
-
-    def after_key(self, node, pos, key):
-        if self.path_found:
-            self.path.insert(0, key)
-            if self.node_type is None and 'type' in node:
-                self.node_type = node['type']
-
-    def after_formatting(self, node, pos, key):
-        if self.path_found:
-            self.path.insert(0, key)
-
-    def after_node(self, node, pos, key):
-        if self.path_found:
-            self.path.insert(0, key)
-            if self.position_in_rendering_list is None:
-                self.position_in_rendering_list = pos
-            if self.node_type is None:
-                self.node_type = node['type']
-
-    def on_leaf(self, constant, pos, key):
-        """Determine if we're on the targetted node.
-
-        If the targetted column is reached, `stop` and `path_found` are
-        set. If the targetted line is passed, only `stop` is set. This
-        prevents unnecessary tree travelling when the targetted column
-        is out of bounds.
-        """
-        newlines_split = split_on_newlines(constant)
-
-        for c in newlines_split:
-            if c == "\n":
-                self.current = advance_lines(self.current)
-                # if target lined is passed
-                if self.current.line > self.target.line:
-                    return self.STOP
-
-            else:
-                advance_by = len(c)
-                if self.is_on_targetted_node(advance_by):
-                    if key is not None:
-                        self.path.insert(0, key)
-                    self.position_in_rendering_list = pos
-                    self.path_found = True
-                    return self.STOP
-                self.current = advance_columns(self.current, advance_by)
-
-    def is_on_targetted_node(self, advance_by):
-        return self.target.line == self.current.line \
-            and self.target.column >= self.current.column \
-            and self.target.column < self.current.column + advance_by
-
-
 class PathWalker(RenderWalker):
     def walk(self, tree):
         self.current_path = []
@@ -170,6 +97,51 @@ class PathWalker(RenderWalker):
 
             if stop:
                 return self.STOP
+
+
+class PositionFinder(PathWalker):
+    """Find a node by line and column and return the path to it.
+
+    First, walk through all the nodes while maintaining the current line
+    and column. When the targetted node is found, stop there and build
+    the path while going back up the tree.
+    """
+    def find(self, tree, line, column):
+        self.current = make_position(1, 1)
+        self.target = make_position(line, column)
+        self.found_path = None
+
+        self.walk(tree)
+        return self.found_path
+
+    def on_leaf(self, constant, pos, key):
+        """Determine if we're on the targetted node.
+
+        If the targetted column is reached, `stop` and `path_found` are
+        set. If the targetted line is passed, only `stop` is set. This
+        prevents unnecessary tree travelling when the targetted column
+        is out of bounds.
+        """
+        newlines_split = split_on_newlines(constant)
+
+        for c in newlines_split:
+            if c == "\n":
+                self.current = advance_lines(self.current)
+                # if target line is passed
+                if self.current.line > self.target.line:
+                    return self.STOP
+
+            else:
+                advance_by = len(c)
+                if self.is_on_targetted_node(advance_by):
+                    self.found_path = self.current_decorated_path()
+                    return self.STOP
+                self.current = advance_columns(self.current, advance_by)
+
+    def is_on_targetted_node(self, advance_by):
+        return self.target.line == self.current.line \
+            and self.target.column >= self.current.column \
+            and self.target.column < self.current.column + advance_by
 
 
 class BoundingBox(PathWalker):
