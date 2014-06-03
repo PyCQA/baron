@@ -180,8 +180,8 @@ class BoundingBox(PathWalker):
         self.target_path = target_path
         self.current_position = make_position(1, 1)
         self.left_of_current_position = make_position(1, 0)
-        self.left = None
-        self.right = None
+        self.top_left = None
+        self.bottom_right = None
         self.found = True if self.target_path is None else False
 
         self.walk(tree)
@@ -189,13 +189,12 @@ class BoundingBox(PathWalker):
         if self.found and self.top_left is None and self.bottom_right is None:
             return make_bounding_box(make_position(1, 1), self.left_of_current_position)
 
-        return make_bounding_box(self.left, self.right)
+        return make_bounding_box(self.top_left, self.bottom_right)
 
     def on_leaf(self, constant, pos, key):
         if self.current_decorated_path() == self.target_path:
             self.found = True
-        if self.left is None and self.found:
-            self.left = self.current_position
+            self.top_left = self.current_position
 
         newlines_split = split_on_newlines(constant)
 
@@ -206,8 +205,8 @@ class BoundingBox(PathWalker):
                 self.current_position = advance_columns(self.current_position, len(c))
                 self.left_of_current_position = left_of(self.current_position)
 
-        if self.right is None and self.found and self.current_decorated_path() == self.target_path:
-            self.right = self.left_of_current_position
+        if self.bottom_right is None and self.found and self.current_decorated_path() == self.target_path:
+            self.bottom_right = self.left_of_current_position
             return self.STOP
 
 
