@@ -1,6 +1,7 @@
 from .render import RenderWalker, render
 from .utils import string_instance
 from collections import namedtuple
+from copy import copy
 
 
 def position_to_path(tree, line, column):
@@ -31,14 +32,17 @@ def path_to_bounding_box(tree, path):
 
 def make_path(path=None, node_type=None, position_in_rendering_list=None):
     return namedtuple('Path', ['path', 'node_type', 'position_in_rendering_list'])._make([
-        [] if path is None else path,
-        node_type,
-        position_in_rendering_list
+        [] if path is None else copy(path),
+        copy(node_type),
+        copy(position_in_rendering_list)
     ])
 
 
 def make_position(line, column):
-    return namedtuple('Position', ['line', 'column'])._make([line, column])
+    return namedtuple('Position', ['line', 'column'])._make([
+            copy(line),
+            copy(column)
+        ])
 
 
 def advance_columns(position, columns):
@@ -56,7 +60,10 @@ def left_of(position):
 
 
 def make_bounding_box(top_left=None, bottom_right=None):
-    return namedtuple("BoundingBox", ["top_left", "bottom_right"])._make([top_left, bottom_right])
+    return namedtuple("BoundingBox", ["top_left", "bottom_right"])._make([
+            copy(top_left),
+            copy(bottom_right)
+        ])
 
 
 class PositionFinder(RenderWalker):
