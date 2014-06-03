@@ -20,7 +20,7 @@ RedBaron
 ========
 
 There is a good chance that you'll want to use `RedBaron
-<https://github.com/Psycojoker/redbaron>`_ instead of using Baron directly.
+<https://redbaron.readthedocs.org>`_ instead of using Baron directly.
 Think of Baron as the "bytecode of python source code" and RedBaron as some
 sort of usable layer on top of it, a bit like dom/jQuery or html/Beautifulsoup.
 
