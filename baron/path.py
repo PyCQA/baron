@@ -29,12 +29,12 @@ def path_to_bounding_box(tree, path):
     return BoundingBox().compute(tree, path)
 
 
-def make_path(path = None, node_type = None, position_in_rendering_list = None):
+def make_path(path=None, node_type=None, position_in_rendering_list=None):
     return namedtuple('Position', ['path', 'node_type', 'position_in_rendering_list'])._make([
-            [] if path is None else path,
-            node_type,
-            position_in_rendering_list
-        ])
+        [] if path is None else path,
+        node_type,
+        position_in_rendering_list
+    ])
 
 
 def make_position(line, column):
@@ -42,20 +42,20 @@ def make_position(line, column):
 
 
 def advance_columns(position, columns):
-    return position._replace(column = position.column + columns)
+    return position._replace(column=position.column + columns)
 
 
-def advance_lines(position, lines = 1):
+def advance_lines(position, lines=1):
     if lines == 0:
         return position
-    return position._replace(line = position.line + lines, column = 1)
+    return position._replace(line=position.line + lines, column=1)
 
 
 def left_of(position):
-    return position._replace(column = position.column - 1)
+    return position._replace(column=position.column - 1)
 
 
-def make_bounding_box(top_left = None, bottom_right = None):
+def make_bounding_box(top_left=None, bottom_right=None):
     return namedtuple("BoundingBox", ["top_left", "bottom_right"])._make([top_left, bottom_right])
 
 
@@ -67,7 +67,7 @@ class PositionFinder(RenderWalker):
     the path while going back up the tree.
     """
     def find(self, tree, line, column):
-        self.current = make_position(1,1)
+        self.current = make_position(1, 1)
         self.target = make_position(line, column)
         self.path_found = False
         self.path = []
@@ -129,7 +129,7 @@ class PositionFinder(RenderWalker):
     def is_on_targetted_node(self, advance_by):
         return self.target.line == self.current.line \
             and self.target.column >= self.current.column \
-            and self.target.column <  self.current.column + advance_by
+            and self.target.column < self.current.column + advance_by
 
 
 class PathWalker(RenderWalker):
@@ -145,7 +145,7 @@ class PathWalker(RenderWalker):
 
     def _walk(self, node):
         for key_type, item, render_pos, render_key in render(node):
-            if render_key != None:
+            if render_key is not None:
                 self.current_path.append(render_key)
             if key_type != 'constant':
                 old_type = self.current_node_type
@@ -155,7 +155,7 @@ class PathWalker(RenderWalker):
 
             stop = self._walk_on_item(key_type, item, render_pos, render_key)
 
-            if render_key != None:
+            if render_key is not None:
                 self.current_path.pop()
             if key_type != 'constant':
                 self.current_node_type = old_type
@@ -176,7 +176,7 @@ class BoundingBox(PathWalker):
     If no target path is given, assume the targetted node is the whole
     tree.
     """
-    def compute(self, tree, target_path = None):
+    def compute(self, tree, target_path=None):
         self.target_path = target_path
         self.current_position = make_position(1, 1)
         self.left_of_current_position = make_position(1, 0)
@@ -222,4 +222,3 @@ def intersperce(iterable, delimiter):
     for x in it:
         yield delimiter
         yield x
-
