@@ -30,7 +30,7 @@ def path_to_bounding_box(tree, path):
 
 
 def make_path(path=None, node_type=None, position_in_rendering_list=None):
-    return namedtuple('Position', ['path', 'node_type', 'position_in_rendering_list'])._make([
+    return namedtuple('Path', ['path', 'node_type', 'position_in_rendering_list'])._make([
         [] if path is None else path,
         node_type,
         position_in_rendering_list
