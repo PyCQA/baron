@@ -16,6 +16,11 @@ Installation
 
     pip install baron
 
+Github (source, bug tracker etc...)
+===================================
+
+https://github.com/psycojoker/baron
+
 RedBaron
 ========
 
