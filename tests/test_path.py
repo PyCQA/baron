@@ -40,6 +40,16 @@ class MyClass(BaseClass):
 
 
 class PathWalkerTester(PathWalker):
+    """This class is used exclusively to test the PathWalker
+    
+    It works by walking along with the PathWalker and for each step,
+    i.e. for each before, after and on_leaf method called, it checks if
+    the step was indeed intended.
+    To specify intended steps, you should simply pass a list of tuples.
+    The first item tells what kind of step it should be ('>' for before,
+    '<' for after and '-' for on_leaf) and the second is what the
+    current path should be at that step.
+    """
     def __init__(self, paths):
         self.paths = paths
 
@@ -84,6 +94,7 @@ def check_path(code, positions, target_path):
 
 def test_path_walker_assignment():
     node = parse("a = 1")
+    # Indentation is purely visual sugar
     walker = PathWalkerTester([
     ('>', make_path([0], 'assignment', 0)),
         ('>', make_path([0, 'target'], 'name', 0)),
