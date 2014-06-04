@@ -27,7 +27,7 @@ directly. Think of Baron as the "bytecode of python source code" and RedBaron
 as some sort of usable layer on top of it.
 
 If you don't know what Baron is or don't understand yet why it might be
-useful for you, read the next section.
+useful for you, read the « Why is this important? » section.
 
 Documentation
 =============
