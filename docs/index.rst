@@ -16,7 +16,7 @@ Installation
 
     pip install baron
 
-Github (source, bug tracker etc...)
+Github (source, bug tracker, etc.)
 ===================================
 
 https://github.com/psycojoker/baron
@@ -448,4 +448,4 @@ The available methods that you can overload are:
 * :file:`after_key` called after encountering a key type entry
 * :file:`on_leaf` called when encountering a leaf of the FST (can be a constant (like "def" in a function definition) or an actual value like the value a name node)
 
-Every methods has the same signature: :file:`(self, node, render_pos, render_key)`.
+Every method has the same signature: :file:`(self, node, render_pos, render_key)`.
