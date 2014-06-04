@@ -1,10 +1,10 @@
 Introduction
 ============
 
-Baron is a Full Syntax Tree (FST) library for Python. By opposition to an AST which
+Baron is a Full Syntax Tree (FST) library for Python. By opposition to an [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) which
 drops some syntax information in the process of its creation (like empty lines,
 comments, formatting), a FST keeps everything and guarantees the operation
-<code>ast\_to\_code(code\_to\_ast(source\_code)) == source\_code</code>.
+<code>fst\_to\_code(code\_to\_fst(source\_code)) == source\_code</code>.
 
 Installation
 ============
@@ -17,8 +17,8 @@ Basic Usage
 ```python
 from baron import parse, dumps
 
-ast = parse(source_code_string)
-source_code_string == dumps(ast)
+fst = parse(source_code_string)
+source_code_string == dumps(fst)
 ```
 
 There is a good chance that you'll want to use
@@ -29,7 +29,10 @@ as some sort of usable layer on top of it.
 If you don't know what Baron is or don't understand yet why it might be
 useful for you, read the next section.
 
-'Documentation' is below.
+Documentation
+=============
+
+Baron documentation is available on [Read The Docs](http://baron.readthedocs.org/en/latest/).
 
 Why is this important?
 ======================
@@ -102,81 +105,6 @@ migrate.
 **Baron is targeting python 2.[67]**. It has not been tested on python3 but
 should be working for most parts (except the new grammar like <code>yield from</code>,
 obviously).
-
-Documentation
-=============
-
-At the moment Baron doesn't have any documentation yet. The usage of the only
-2 functions provided by Baron is shown above. Apart from that, Baron provides 2
-helper functions to explore the FST (in iPython for example). Example:
-
-```python
-from baron.helpers import show, show_file
-
-show(string)
-show_file(file_path)
-```
-
-Those 2 functions will print a formatted version of the FST so you can play with
-it to explore the FST and have an idea of what you are playing with. Example:
-
-```python
-In [5]: from baron.helpers import show
-
-In [6]: show("a +  b")
-[
-    {
-        "first_formatting": [
-            {
-                "type": "space", 
-                "value": " "
-            }
-        ], 
-        "value": "+", 
-        "second_formatting": [
-            {
-                "type": "space", 
-                "value": "  "
-            }
-        ], 
-        "second": {
-            "type": "name", 
-            "value": "b"
-        }, 
-        "type": "binary_operator", 
-        "first": {
-            "type": "name", 
-            "value": "a"
-        }
-    }
-]
-```
-
-Every node has a <code>type</code> key and all nodes of the same type share the same
-structure (if you find that it is not the case, please open an issue). And
-nearly all nodes have a <code>value</code> key (except the obvious one that
-never change like <code>pass</code>) that represents the data.
-
-The <code>*\_formatting</code> value represents the formatting of the node. They
-are always around syntax elements of Python, here, the "+" (the only exception
-to this rule are string since you code things like that in Python:
-<code>"a" ru'b' "cd" """ef"""</code>). The translation
-looks like this:
-
-    a +  b
-    |||| |
-    first
-     ||| |
-    first_formatting
-      || |
-    value|
-       | |
-    second_formatting
-         |
-    second
-
-The exact way to render a node can be found in the [rendering
-dictionnary](baron/render.py).
 
 Tests
 =====
