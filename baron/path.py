@@ -149,7 +149,7 @@ class BoundingBox(PathWalker):
 
     First, walk to the target path while incrementing the position.
     When reached, the top-left position is set to the current position.
-    Then walke the whole node, still incrementing the position. When
+    Then walk the whole node, still incrementing the position. When
     arriving at the end of the node, store the previous position, not
     the current one, as the bottom-right position.
     If no target path is given, assume the targetted node is the whole

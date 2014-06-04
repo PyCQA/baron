@@ -2,7 +2,7 @@ from .utils import string_instance
 
 
 def render(node):
-    """Recipe to render a given FST node
+    """Recipe to render a given FST node.
 
     The FST is composed of branch nodes which are either lists or dicts
     and of leaf nodes which are strings. Branch nodes can have other
@@ -661,7 +661,7 @@ nodes_rendering_order = {
 
 
 class RenderWalker:
-    """Inherit me and overload the methods you want
+    """Inherit me and overload the methods you want.
     
     When calling walk on a FST node, this class will traverse all the
     node's subtree by following the recipe given by the `render`
