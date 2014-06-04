@@ -55,7 +55,7 @@ def group_generator(sequence):
             current += next(iterator)
             current += next(iterator)
 
-            # I'm obligatory in a case where I have something like that:
+            # It's required in a case where I have something like that:
             # ['123.123e', '[+-]', '123']
             assert re.match(r'^\d+[eE][-+]?\d+$', current) or re.match(r'^\d*.\d*[eE][-+]?\d+$', current)
 

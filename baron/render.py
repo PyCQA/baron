@@ -629,7 +629,7 @@ nodes_rendering_order = {
 
 
 class RenderWalker:
-    '''Inherit me and overload the methods you want
+    '''Inherit me and overload the methods you want.
     
     Please pay attention that the arguments "render_pos" and
     "render_key" are relative to the parent of the node given by the
