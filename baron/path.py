@@ -86,7 +86,7 @@ class PathWalker(RenderWalker):
         self.current_node_type = None
         self.current_position_in_rendering_list = None
 
-        RenderWalker.walk(self, tree)
+        super(PathWalker, self).walk(tree)
 
     def current_decorated_path(self):
         return make_path(self.current_path, self.current_node_type, self.current_position_in_rendering_list)
