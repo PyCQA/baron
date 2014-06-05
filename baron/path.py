@@ -1,5 +1,5 @@
 from .render import RenderWalker, render
-from .utils import string_instance
+from .utils import string_instance, is_newline, split_on_newlines
 from collections import namedtuple
 from copy import copy
 
@@ -125,7 +125,7 @@ class PositionFinder(PathWalker):
         newlines_split = split_on_newlines(constant)
 
         for c in newlines_split:
-            if c == "\n":
+            if is_newline(c):
                 self.current = advance_lines(self.current)
                 # if target line is passed
                 if self.current.line > self.target.line:
@@ -178,7 +178,7 @@ class BoundingBox(PathWalker):
         newlines_split = split_on_newlines(constant)
 
         for c in newlines_split:
-            if c == "\n":
+            if is_newline(c):
                 self.current_position = advance_lines(self.current_position)
             elif c != "":
                 self.current_position = advance_columns(self.current_position, len(c))
@@ -188,15 +188,3 @@ class BoundingBox(PathWalker):
             self.bottom_right = self.left_of_current_position
             return self.STOP
 
-
-def split_on_newlines(constant):
-    return ["\n"] if constant == "\n" else intersperce(constant.split("\n"), "\n")
-
-
-# Stolen shamelessly from http://stackoverflow.com/a/5656097/1013628
-def intersperce(iterable, delimiter):
-    it = iter(iterable)
-    yield next(it)
-    for x in it:
-        yield delimiter
-        yield x

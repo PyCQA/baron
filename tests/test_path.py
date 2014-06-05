@@ -20,6 +20,7 @@ def fun2(arg1 = default, **kwargs):
 
 
 splitcode = """var \\\n  = 2"""
+windows_splitcode = """var \\\r\n  = 2"""
 
 
 funcdefcode = """\
@@ -448,13 +449,27 @@ def test_sc_l1_var():
     check_path(splitcode, [(1, 1), (1, 2), (1, 3)], path)
 
 
+def test_sc_l1_var_win():
+    path = make_path([0, "target", "value"], "name", 0)
+    check_path(windows_splitcode, [(1, 1), (1, 2), (1, 3)], path)
+
+
 def test_sc_l1_l2_first_space():
     path = make_path([0, "first_formatting", 0, "value"], "space", 0)
     check_path(splitcode, [(1, 4), (1, 5), (2, 1), (2, 2)], path)
 
 
+def test_sc_l1_l2_first_space_win():
+    path = make_path([0, "first_formatting", 0, "value"], "space", 0)
+    check_path(windows_splitcode, [(1, 4), (1, 5), (2, 1), (2, 2)], path)
+
+
 def test_sc_l1_out_of_scope():
     check_path(splitcode, [(1, 6), (2, 0)], None)
+
+    
+def test_sc_l1_out_of_scope_win():
+    check_path(windows_splitcode, [(1, 6), (2, 0)], None)
 
 
 def test_sc_l2_operator():
@@ -462,16 +477,35 @@ def test_sc_l2_operator():
     check_path(splitcode, [(2, 3)], path)
 
 
+def test_sc_l2_operator_win():
+    path = make_path([0], "assignment", 3)
+    check_path(windows_splitcode, [(2, 3)], path)
+
+
 def test_sc_l2_second_space():
     path = make_path([0, "second_formatting", 0, "value"], "space", 0)
     check_path(splitcode, [(2, 4)], path)
+
+
+def test_sc_l2_second_space_win():
+    path = make_path([0, "second_formatting", 0, "value"], "space", 0)
+    check_path(windows_splitcode, [(2, 4)], path)
 
 
 def test_sc_l2_value():
     path = make_path([0, "value", "value"], "int", 0)
     check_path(splitcode, [(2, 5)], path)
 
+    
+def test_sc_l2_value_win():
+    path = make_path([0, "value", "value"], "int", 0)
+    check_path(windows_splitcode, [(2, 5)], path)
+
 
 def test_sc_l2_out_of_scope():
     check_path(splitcode, [(2, 6), (3, 0)], None)
+
+    
+def test_sc_l2_out_of_scope_win():
+    check_path(windows_splitcode, [(2, 6), (3, 0)], None)
 
