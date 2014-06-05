@@ -49,8 +49,8 @@ class PathWalkerTester(PathWalker):
     To specify the expected steps, you should simply pass a list of
     tuples. The first field tells what kind of step it should be:
       * '>' for calling the `before` method, i.e. going down the tree,
-      * '<' for calling the `after` method, i.e. going up the tree '-'
-      * for calling `on_leaf` method
+      * '<' for calling the `after` method, i.e. going up the tree
+      * '-' for calling the `on_leaf` method
     and the second is what the current path should be at that step.
     """
     def __init__(self, paths):
