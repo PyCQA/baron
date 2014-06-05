@@ -39,24 +39,38 @@ def make_path(path=None, node_type=None, position_in_rendering_list=None):
 
 
 def make_position(line, column):
-    return namedtuple('Position', ['line', 'column'])._make([
-            copy(line),
-            copy(column)
-        ])
+    return Position(line, column)
 
 
-def advance_columns(position, columns):
-    return position._replace(column=position.column + columns)
+class Position:
+    def __init__(self, line, column):
+        self.line = line
+        self.column = column
 
+    def advance_columns(self, columns):
+        self.column += columns
 
-def advance_lines(position, lines=1):
-    if lines == 0:
-        return position
-    return position._replace(line=position.line + lines, column=1)
+    def advance_line(self):
+        self.line += 1
+        self.column = 1
 
+    def left(self):
+        return Position(self.line, self.column - 1)
 
-def left_of(position):
-    return position._replace(column=position.column - 1)
+    def __eq__(self, other):
+        if isinstance(other, tuple) or isinstance(other, list):
+            try:
+                return self.line == other[0] and self.column == other[1]
+            except IndexError:
+                return False
+
+        try:
+            return self.line == other.line and self.column == other.column
+        except AttributeError:
+            return False
+
+    def __repr__(self):
+        return 'Position (%s, %s)' % (str(self.line), str(self.column))
 
 
 def make_bounding_box(top_left=None, bottom_right=None):
@@ -126,7 +140,7 @@ class PositionFinder(PathWalker):
 
         for c in newlines_split:
             if is_newline(c):
-                self.current = advance_lines(self.current)
+                self.current.advance_line()
                 # if target line is passed
                 if self.current.line > self.target.line:
                     return self.STOP
@@ -136,7 +150,7 @@ class PositionFinder(PathWalker):
                 if self.is_on_targetted_node(advance_by):
                     self.found_path = self.current_decorated_path()
                     return self.STOP
-                self.current = advance_columns(self.current, advance_by)
+                self.current.advance_columns(advance_by)
 
     def is_on_targetted_node(self, advance_by):
         return self.target.line == self.current.line \
@@ -173,18 +187,18 @@ class BoundingBox(PathWalker):
     def on_leaf(self, constant, pos, key):
         if self.current_decorated_path() == self.target_path:
             self.found = True
-            self.top_left = self.current_position
+            self.top_left = copy(self.current_position)
 
         newlines_split = split_on_newlines(constant)
 
         for c in newlines_split:
             if is_newline(c):
-                self.current_position = advance_lines(self.current_position)
+                self.current_position.advance_line()
             elif c != "":
-                self.current_position = advance_columns(self.current_position, len(c))
-                self.left_of_current_position = left_of(self.current_position)
+                self.current_position.advance_columns(len(c))
+                self.left_of_current_position = self.current_position.left()
 
         if self.bottom_right is None and self.found and self.current_decorated_path() == self.target_path:
-            self.bottom_right = self.left_of_current_position
+            self.bottom_right = copy(self.left_of_current_position)
             return self.STOP
 
