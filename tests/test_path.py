@@ -45,11 +45,13 @@ class PathWalkerTester(PathWalker):
     
     It works by walking along with the PathWalker and for each step,
     i.e. for each before, after and on_leaf method called, it checks if
-    the step was indeed intended.
-    To specify intended steps, you should simply pass a list of tuples.
-    The first item tells what kind of step it should be ('>' for before,
-    '<' for after and '-' for on_leaf) and the second is what the
-    current path should be at that step.
+    that step was indeed expected.
+    To specify the expected steps, you should simply pass a list of
+    tuples. The first field tells what kind of step it should be:
+      * '>' for calling the `before` method, i.e. going down the tree,
+      * '<' for calling the `after` method, i.e. going up the tree '-'
+      * for calling `on_leaf` method
+    and the second is what the current path should be at that step.
     """
     def __init__(self, paths):
         self.paths = paths
