@@ -7,7 +7,7 @@ def render(node):
     The FST is composed of branch nodes which are either lists or dicts
     and of leaf nodes which are strings. Branch nodes can have other
     list, dict or leaf nodes as childs.
-    
+
     To render a string, simply output it. To render a list, render each
     of its elements in order. To render a dict, you must follow the
     node's entry in the nodes_rendering_order dictionnary and its
@@ -662,7 +662,7 @@ nodes_rendering_order = {
 
 class RenderWalker:
     """Inherit me and overload the methods you want.
-    
+
     When calling walk() on a FST node, this class will traverse all the
     node's subtree by following the recipe given by the `render`
     function for the node and recursively for all its childs. At each
