@@ -91,12 +91,12 @@ def is_newline(text):
 def split_on_newlines(text):
     newlines = newline_regex.finditer(text)
     if not newlines:
-        return [text]
-
-    current_position = 0
-    for newline in newlines:
-        yield text[current_position:newline.start(1)]
-        yield text[newline.start(1):newline.end(1)]
-        current_position = newline.end(1)
-    yield text[current_position:]
+        yield text
+    else:
+        current_position = 0
+        for newline in newlines:
+            yield text[current_position:newline.start(1)]
+            yield text[newline.start(1):newline.end(1)]
+            current_position = newline.end(1)
+        yield text[current_position:]
 
