@@ -178,7 +178,7 @@ class BoundingBox(PathWalker):
         newlines_split = constant.splitlines(True)
 
         for c in newlines_split:
-            if c in "\r\n:
+            if c in "\r\n":
                 self.current_position = advance_lines(self.current_position)
             elif c != "":
                 self.current_position = advance_columns(self.current_position, len(c))
