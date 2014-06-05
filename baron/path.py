@@ -1,5 +1,5 @@
 from .render import RenderWalker, render
-from .utils import string_instance
+from .utils import string_instance, is_newline, split_on_newlines
 from collections import namedtuple
 from copy import copy
 
@@ -122,10 +122,10 @@ class PositionFinder(PathWalker):
         prevents unnecessary tree travelling when the targetted column
         is out of bounds.
         """
-        newlines_split = constant.splitlines(True)
+        newlines_split = split_on_newlines(constant)
 
         for c in newlines_split:
-            if c.endswith("\n"):
+            if is_newline(c):
                 self.current = advance_lines(self.current)
                 # if target line is passed
                 if self.current.line > self.target.line:
@@ -175,10 +175,10 @@ class BoundingBox(PathWalker):
             self.found = True
             self.top_left = self.current_position
 
-        newlines_split = constant.splitlines(True)
+        newlines_split = split_on_newlines(constant)
 
         for c in newlines_split:
-            if c.endswith("\n"):
+            if is_newline(c):
                 self.current_position = advance_lines(self.current_position)
             elif c != "":
                 self.current_position = advance_columns(self.current_position, len(c))
@@ -187,3 +187,4 @@ class BoundingBox(PathWalker):
         if self.bottom_right is None and self.found and self.current_decorated_path() == self.target_path:
             self.bottom_right = self.left_of_current_position
             return self.STOP
+
