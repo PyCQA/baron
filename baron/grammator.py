@@ -86,8 +86,7 @@ def generate_parse(print_function):
 
 
     @pg.production("statement : ENDMARKER")
-    def end(pack):
-        (endmarker) = pack
+    def end(_):
         return [None]
 
 
