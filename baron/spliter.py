@@ -57,4 +57,4 @@ def split_generator(sequence):
             next(iterator)
 
         if not_found:
-            raise Exception("Untreaded elements: %s" % iterator.rest_of_the_sequence().__repr__()[:50])
+            raise Exception("Untreated elements: %s" % iterator.rest_of_the_sequence().__repr__()[:50])
