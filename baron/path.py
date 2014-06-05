@@ -176,7 +176,6 @@ class BoundingBox(PathWalker):
             self.top_left = self.current_position
 
         newlines_split = constant.splitlines(True)
-        print(newlines_split)
 
         for c in newlines_split:
             if c.endswith("\n"):
