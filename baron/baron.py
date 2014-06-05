@@ -43,8 +43,9 @@ def parse(source_code, print_function=None):
     # I don't want to recursively cross the tree to hope to find it
     # This solution behave in the expected way for 90% of the case
     newline_appended = False
-    if source_code and source_code[-1] != "\n":
-        source_code += "\n"
+    linesep = "\r\n" if source_code.endswith("\r\n") else "\n"
+    if source_code and source_code[-1] != linesep:
+        source_code += linesep
         newline_appended = True
 
     if print_function is None:

@@ -122,10 +122,10 @@ class PositionFinder(PathWalker):
         prevents unnecessary tree travelling when the targetted column
         is out of bounds.
         """
-        newlines_split = split_on_newlines(constant)
+        newlines_split = constant.splitlines(True)
 
         for c in newlines_split:
-            if c == "\n":
+            if c in "\r\n":
                 self.current = advance_lines(self.current)
                 # if target line is passed
                 if self.current.line > self.target.line:
@@ -175,10 +175,10 @@ class BoundingBox(PathWalker):
             self.found = True
             self.top_left = self.current_position
 
-        newlines_split = split_on_newlines(constant)
+        newlines_split = constant.splitlines(True)
 
         for c in newlines_split:
-            if c == "\n":
+            if c in "\r\n:
                 self.current_position = advance_lines(self.current_position)
             elif c != "":
                 self.current_position = advance_columns(self.current_position, len(c))
@@ -187,16 +187,3 @@ class BoundingBox(PathWalker):
         if self.bottom_right is None and self.found and self.current_decorated_path() == self.target_path:
             self.bottom_right = self.left_of_current_position
             return self.STOP
-
-
-def split_on_newlines(constant):
-    return ["\n"] if constant == "\n" else intersperce(constant.split("\n"), "\n")
-
-
-# Stolen shamelessly from http://stackoverflow.com/a/5656097/1013628
-def intersperce(iterable, delimiter):
-    it = iter(iterable)
-    yield next(it)
-    for x in it:
-        yield delimiter
-        yield x
