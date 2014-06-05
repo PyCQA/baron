@@ -125,7 +125,7 @@ class PositionFinder(PathWalker):
         newlines_split = constant.splitlines(True)
 
         for c in newlines_split:
-            if c in "\r\n":
+            if c.endswith("\n"):
                 self.current = advance_lines(self.current)
                 # if target line is passed
                 if self.current.line > self.target.line:
@@ -176,9 +176,10 @@ class BoundingBox(PathWalker):
             self.top_left = self.current_position
 
         newlines_split = constant.splitlines(True)
+        print(newlines_split)
 
         for c in newlines_split:
-            if c in "\r\n":
+            if c.endswith("\n"):
                 self.current_position = advance_lines(self.current_position)
             elif c != "":
                 self.current_position = advance_columns(self.current_position, len(c))
