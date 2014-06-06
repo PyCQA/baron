@@ -5,10 +5,15 @@ from copy import copy
 
 
 def position_to_path(tree, line, column):
+    """Path to the node located at the given line and column
+    
+    This function locates a node in the rendered source code
+    """
     return PositionFinder().find(tree, line, column)
 
 
 def path_to_node(tree, path):
+    """FST node located at the given path"""
     if path is None:
         return None
     node = tree
@@ -19,14 +24,22 @@ def path_to_node(tree, path):
 
 
 def position_to_node(tree, line, column):
+    """FST node located at the given line and column"""
     return path_to_node(tree, position_to_path(tree, line, column))
 
 
 def node_to_bounding_box(node):
+    """Bounding box of the given node
+    
+    The bounding box of a node represents its left most and right most
+    position in the rendered source code. Its left position is here
+    always (1, 1).
+    """
     return BoundingBox().compute(node)
 
 
 def path_to_bounding_box(tree, path):
+    """Absolute bounding box of the node located at the given path"""
     return BoundingBox().compute(tree, path)
 
 
