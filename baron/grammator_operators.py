@@ -107,7 +107,6 @@ def include_operators(pg):
         return {
             "type": "comparison",
             "value": comparison_operator.value,
-            "middle_formatting": [],
             "first": expr,
             "second": comparison_,
             "first_formatting": comparison_operator.hidden_tokens_before,

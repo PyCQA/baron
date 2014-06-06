@@ -4504,7 +4504,7 @@ def test_comparison():
                            "value": 'b'},
                 "first_formatting": [],
                 "second_formatting": [],
-                "middle_formatting": [], }])
+                }])
         parse_simple([
                ('NAME', 'a'),
                (token_name, value),
@@ -4521,7 +4521,7 @@ def test_comparison():
                           },
                 "first_formatting": [],
                 "second_formatting": [],
-                "middle_formatting": [], }])
+                }])
 
 def test_comparison_first_space():
     "a <b"
@@ -4542,7 +4542,6 @@ def test_comparison_first_space():
                            "value": 'b'},
                 "first_formatting": [{"type": "space", "value": " "}],
                 "second_formatting": [],
-                "middle_formatting": [],
                }])
         parse_simple([
                ('NAME', 'a'),
@@ -4560,7 +4559,6 @@ def test_comparison_first_space():
                           },
                 "first_formatting": [{"type": "space", "value": " "}],
                 "second_formatting": [],
-                "middle_formatting": [],
                }])
 
 def test_comparison_second_space():
@@ -4582,7 +4580,6 @@ def test_comparison_second_space():
                            "value": 'b'},
                 "first_formatting": [],
                 "second_formatting": [{"type": "space", "value": " "}],
-                "middle_formatting": [],
                }])
         parse_simple([
                ('NAME', 'a'),
@@ -4600,7 +4597,6 @@ def test_comparison_second_space():
                           },
                 "first_formatting": [],
                 "second_formatting": [{"type": "space", "value": " "}],
-                "middle_formatting": [],
                }])
 
 def test_comparison_spaces():
@@ -4622,7 +4618,6 @@ def test_comparison_spaces():
                            "value": 'b'},
                 "first_formatting": [{"type": "space", "value": " "}],
                 "second_formatting": [{"type": "space", "value": " "}],
-                "middle_formatting": [],
                }])
         parse_simple([
                ('NAME', 'a'),
@@ -4640,7 +4635,6 @@ def test_comparison_spaces():
                           },
                 "first_formatting": [{"type": "space", "value": " "}],
                 "second_formatting": [{"type": "space", "value": " "}],
-                "middle_formatting": [],
                }])
 
 def test_comparison_spaces_atomtrailers():
@@ -4676,7 +4670,6 @@ def test_comparison_spaces_atomtrailers():
                           },
                 "first_formatting": [{"type": "space", "value": " "}],
                 "second_formatting": [{"type": "space", "value": " "}],
-                "middle_formatting": [],
                }])
 
 def test_chained_comparison():
@@ -4705,11 +4698,9 @@ def test_chained_comparison():
                                       "value": "c"},
                            "first_formatting": [],
                            "second_formatting": [],
-                           "middle_formatting": [],
                           },
                 "first_formatting": [],
                 "second_formatting": [],
-                "middle_formatting": [],
                }])
         parse_simple([
                ('NAME', 'a'),
@@ -4733,11 +4724,9 @@ def test_chained_comparison():
                                    "value": "c"},
                         "first_formatting": [],
                         "second_formatting": [],
-                        "middle_formatting": [],
                        },
                 "first_formatting": [],
                 "second_formatting": [],
-                "middle_formatting": [],
                }])
         parse_simple([
                ('NAME', 'a'),
@@ -4761,11 +4750,9 @@ def test_chained_comparison():
                                       "value": "c"},
                            "first_formatting": [],
                            "second_formatting": [],
-                           "middle_formatting": []
                           },
                 "first_formatting": [],
                 "second_formatting": [],
-                "middle_formatting": [],
                }])
         parse_simple([
                ('NAME', 'a'),
@@ -4788,11 +4775,9 @@ def test_chained_comparison():
                                              "value": "c"},
                                   "first_formatting": [],
                                   "second_formatting": [],
-                                  "middle_formatting": [],
                                  },
                           "first_formatting": [],
                           "second_formatting": [],
-                          "middle_formatting": [],
                          }])
         parse_simple([
                ('NAME', 'a'),
@@ -4815,11 +4800,9 @@ def test_chained_comparison():
                                             },
                                      "first_formatting": [],
                                      "second_formatting": [],
-                                     "middle_formatting": [],
                           },
                 "first_formatting": [],
                 "second_formatting": [],
-                "middle_formatting": [],
                }])
         parse_simple([
                ('NAME', 'a'),
@@ -4842,11 +4825,9 @@ def test_chained_comparison():
                                             },
                                   "first_formatting": [],
                                   "second_formatting": [],
-                                  "middle_formatting": [],
                                  },
                           "first_formatting": [],
                           "second_formatting": [],
-                          "middle_formatting": [],
                          }])
 
 advanced_comparison_tokens = (
