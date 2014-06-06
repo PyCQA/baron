@@ -1463,5 +1463,5 @@ def test_endl_dont_grab_comment_as_indent():
            ('ENDL', '\n', [], [('COMMENT', '# pouet')])
         ],[
            {"type": "endl", "value": "\n", "indent": "", "formatting": []},
-           {"type": "comment", "value": "# pouet"},
+           {"type": "comment", "value": "# pouet", "formatting": []},
           ])
