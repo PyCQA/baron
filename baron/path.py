@@ -55,7 +55,7 @@ def make_position(line, column):
     return Position(line, column)
 
 
-class Position:
+class Position(object):
     def __init__(self, line, column):
         self.line = line
         self.column = column

@@ -660,7 +660,7 @@ nodes_rendering_order = {
     }
 
 
-class RenderWalker:
+class RenderWalker(object):
     """Inherit me and overload the methods you want.
 
     When calling walk() on a FST node, this class will traverse all the
