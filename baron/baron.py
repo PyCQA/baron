@@ -44,7 +44,7 @@ def parse(source_code, print_function=None):
     # This solution behave in the expected way for 90% of the case
     newline_appended = False
     linesep = "\r\n" if source_code.endswith("\r\n") else "\n"
-    if source_code and source_code.endswith(linesep):
+    if source_code and not source_code.endswith(linesep):
         source_code += linesep
         newline_appended = True
 
