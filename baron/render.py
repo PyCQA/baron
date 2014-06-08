@@ -373,7 +373,7 @@ nodes_rendering_order = {
             ("formatting", "third_formatting",  True),
             ("constant",   "in",                True),
             ("formatting", "fourth_formatting", True),
-            ("key",        "target",            True),
+            ("list",       "target",            True),
             ("list",       "ifs",               True),
         ],
         "comprehension_if": [
