@@ -116,7 +116,7 @@ def include_data_structures(pg):
 
 
     @pg.production("atom : LEFT_SQUARE_BRACKET listmaker RIGHT_SQUARE_BRACKET")
-    def list(pack):
+    def list_(pack):
         (left_bracket, listmaker, right_bracket,) = pack
         return {
                 "type": "list",
