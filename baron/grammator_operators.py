@@ -50,6 +50,7 @@ def include_operators(pg):
         (target, equal, value) = pack
         return {
             "type": "assignment",
+            "operator": None,
             "value": value,
             "target": target,
             "first_formatting": equal.hidden_tokens_before,
@@ -106,7 +107,6 @@ def include_operators(pg):
         return {
             "type": "comparison",
             "value": comparison_operator.value,
-            "middle_formatting": [],
             "first": expr,
             "second": comparison_,
             "first_formatting": comparison_operator.hidden_tokens_before,

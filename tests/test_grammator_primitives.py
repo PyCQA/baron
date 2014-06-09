@@ -460,7 +460,7 @@ def test_print():
           [{
             "type": "print",
             "formatting": [],
-            "value": None,
+            "value": [],
             "destination_formatting": [],
             "destination": None,
           }])
@@ -599,7 +599,7 @@ def test_print_redirect():
             "type": "print",
             "formatting": [{"type": "space",
                             "value": " "}],
-            "value": None,
+            "value": [],
             "destination_formatting": [{"type": "space",
                                         "value": " "}],
             "destination": {

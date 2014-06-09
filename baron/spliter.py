@@ -50,11 +50,11 @@ def split_generator(sequence):
         if iterator.show_next().__repr__().startswith("'\\x"):
             # guys, seriously, how do you manage to put this shit in your code?
             # I mean, I don't even know how this is possible!
-            # example of guitly file: ve/lib/python2.7/site-packages/tests/test_oauth.py
+            # example of guilty file: ve/lib/python2.7/site-packages/tests/test_oauth.py
             # example of crapy unicode stuff found in some source files: \x0c\xef\xbb\xbf
             not_found = False
             # let's drop that crap
             next(iterator)
 
         if not_found:
-            raise Exception("Untreaded elements: %s" % iterator.rest_of_the_sequence().__repr__()[:50])
+            raise Exception("Untreated elements: %s" % iterator.rest_of_the_sequence().__repr__()[:50])

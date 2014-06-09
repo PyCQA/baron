@@ -1,8 +1,45 @@
+from .utils import string_instance
+
+
 def render(node):
+    """Recipe to render a given FST node.
+
+    The FST is composed of branch nodes which are either lists or dicts
+    and of leaf nodes which are strings. Branch nodes can have other
+    list, dict or leaf nodes as childs.
+
+    To render a string, simply output it. To render a list, render each
+    of its elements in order. To render a dict, you must follow the
+    node's entry in the nodes_rendering_order dictionnary and its
+    dependents constraints.
+
+    This function hides all this algorithmic complexity by returning
+    a structured rendering recipe, whatever the type of node. But even
+    better, you should subclass the RenderWalker which simplifies
+    drastically working with the rendered FST.
+
+    The recipe is a list of steps, each step correspond to a child and
+    is actually a 4-uple composed of the following fields:
+    * `key_type` is a string determining the type of the child in the
+        second field (`item`) of the tuple. It can be one of:
+      * 'constant': the child is a string
+      * 'node': the child is a dict
+      * 'key': the child is an element of a dict
+      * 'list': the child is a list
+      * 'formatting': the child is a list specialized in formatting
+    * `item` is the child itself: either a string, a dict or a list.
+    * `render_pos` gives the child's index in the recipe list, by taking
+        gaps produced by dependency constraints into account.
+    * `render_key` gives the key used to access this child from the
+        parent node. It's a string if the node is a dict or a number if
+        its a list.
+    """
     if isinstance(node, list):
         return render_list(node)
-    else:
+    elif isinstance(node, dict):
         return render_node(node)
+    else:
+        return [('constant', node, None, None)]
 
 
 def render_list(node):
@@ -11,7 +48,7 @@ def render_list(node):
 
 
 def render_node(node):
-    for pos, (key_type, render_key, dependent) in enumerate(rendering_dictionnary[node['type']]):
+    for pos, (key_type, render_key, dependent) in enumerate(nodes_rendering_order[node['type']]):
         if not dependent and not node.get(render_key):
             continue
         elif isinstance(dependent, str) and not node.get(dependent):
@@ -19,10 +56,8 @@ def render_node(node):
         elif isinstance(dependent, list) and not all([node.get(x) for x in dependent]):
             continue
 
-        if key_type in ['list', 'formatting']:
-            yield (key_type, node[render_key], pos, render_key)
-        elif key_type == 'key':
-            key_type = 'constant' if isinstance(node[render_key], str) else key_type
+        if key_type in ['key', 'list', 'formatting']:
+            key_type = 'constant' if isinstance(node[render_key], string_instance) else key_type
             yield (key_type, node[render_key], pos, render_key)
         elif key_type == 'constant':
             yield ('constant', render_key, pos, None)
@@ -31,18 +66,16 @@ def render_node(node):
 
 
 def get_node_at_position_in_rendering_list(node, position_in_rendering_list):
-    render_list = rendering_dictionnary[node['type']]
+    render_list = nodes_rendering_order[node['type']]
     key_type, render_key, dependent = render_list[position_in_rendering_list]
-    if key_type == 'constant':
-        return render_key
-    else:
-        return node[render_key]
+
+    return render_key if key_type == 'constant' else node[render_key]
 
 
-node_types = ['node', 'list', 'key', 'formatting', 'constant']
+node_types = set(['node', 'list', 'key', 'formatting', 'constant'])
 
 
-rendering_dictionnary = {
+nodes_rendering_order = {
         "int":               [("key", "value", True)],
         "name":              [("key", "value", True)],
         "hexa":              [("key", "value", True)],
@@ -55,19 +88,19 @@ rendering_dictionnary = {
         "left_parenthesis":  [("key", "value", True)],
         "right_parenthesis": [("key", "value", True)],
 
-        "break":    [("key", "type", True)],
-        "continue": [("key", "type", True)],
-        "pass":     [("key", "type", True)],
+        "break":             [("key", "type", True)],
+        "continue":          [("key", "type", True)],
+        "pass":              [("key", "type", True)],
 
-        "dotted_name":  [("list", "value", True)],
-        "ifelseblock":  [("list", "value", True)],
-        "atomtrailers": [("list", "value", True)],
-        "string_chain": [("list", "value", True)],
+        "dotted_name":       [("list", "value", True)],
+        "ifelseblock":       [("list", "value", True)],
+        "atomtrailers":      [("list", "value", True)],
+        "string_chain":      [("list", "value", True)],
 
         "endl": [
-            ("formatting", "formatting",  True),
-            ("key",        "value",       True),
-            ("key",        "indent",      True),
+            ("formatting", "formatting",        True),
+            ("key",        "value",             True),
+            ("key",        "indent",            True),
         ],
 
         "star": [
@@ -110,7 +143,7 @@ rendering_dictionnary = {
         # node or being standalone, this is bad
         "comment": [
             ("formatting", "formatting", "formatting"),
-            ("key",        "value",      True),
+            ("key",        "value",             True),
         ],
 
         "ternary_operator": [
@@ -152,16 +185,16 @@ rendering_dictionnary = {
             ("formatting", "first_formatting",  True),
             ("constant",   "(",                 True),
             ("formatting", "second_formatting", True),
-            ("key",        "value",             True),
+            ("list",       "value",             True),
             ("formatting", "third_formatting",  True),
             ("constant",   ")",                 True),
             ("formatting", "fourth_formatting", True),
         ],
 
         "decorator": [
-            ("constant",   "@",     True),
-            ("key",        "value", True),
-            ("key",        "call",  "call"),
+            ("constant",   "@",                 True),
+            ("key",        "value",             True),
+            ("key",        "call",              "call"),
         ],
 
         "class": [
@@ -201,7 +234,7 @@ rendering_dictionnary = {
             ("formatting", "first_formatting",  True),
             ("constant",   "(",                 True),
             ("formatting", "second_formatting", True),
-            ("list",       "value",             True),
+            ("key",        "value",             True),
             ("formatting", "third_formatting",  True),
             ("constant",   ")",                 True),
             ("formatting", "fourth_formatting", True),
@@ -248,20 +281,20 @@ rendering_dictionnary = {
             ("key",        "value",             "value"),
         ],
         "list_argument": [
-            ("constant",   "*",          True),
-            ("formatting", "formatting", True),
-            ("key",        "value",      True),
+            ("constant",   "*",                 True),
+            ("formatting", "formatting",        True),
+            ("key",        "value",             True),
         ],
         "dict_argument": [
-            ("constant",   "**",         True),
-            ("formatting", "formatting", True),
-            ("key",        "value",      True),
+            ("constant",   "**",                True),
+            ("formatting", "formatting",        True),
+            ("key",        "value",             True),
         ],
 
         "return": [
-            ("constant",   "return",     True),
-            ("formatting", "formatting", True),
-            ("key",        "value",      "value"),
+            ("constant",   "return",            True),
+            ("formatting", "formatting",        True),
+            ("key",        "value",             "value"),
         ],
 
         "raise": [
@@ -309,8 +342,8 @@ rendering_dictionnary = {
             ("formatting", "fourth_formatting", True),
         ],
         "argument_generator_comprehension": [
-            ("key",  "result",     True),
-            ("list", "generators", True),
+            ("key",  "result",                  True),
+            ("list", "generators",              True),
         ],
         "generator_comprehension": [
             ("formatting", "first_formatting",  True),
@@ -341,10 +374,6 @@ rendering_dictionnary = {
             ("constant",   "in",                True),
             ("formatting", "fourth_formatting", True),
             ("key",        "target",            True),
-    #if isinstance(node["target"], list):
-    #    yield dump_node_list(node["target"])
-    #else:
-    #    yield dump_node(node["target"])
             ("list",       "ifs",               True),
         ],
         "comprehension_if": [
@@ -387,9 +416,9 @@ rendering_dictionnary = {
         ],
 
         "unitary_operator": [
-            ("key",        "value",      True),
-            ("formatting", "formatting", True),
-            ("key",        "target",     True),
+            ("key",        "value",             True),
+            ("formatting", "formatting",        True),
+            ("key",        "target",            True),
         ],
         "binary_operator": [
             ("key",        "first",             True),
@@ -406,9 +435,9 @@ rendering_dictionnary = {
             ("key",        "second",            True),
         ],
         "complex_operator": [
-            ("key",        "first",      True),
-            ("formatting", "formatting", True),
-            ("key",        "second",     True),
+            ("key",        "first",             True),
+            ("formatting", "formatting",        True),
+            ("key",        "second",            True),
         ],
         "comparison": [
             ("key",        "first",             True),
@@ -425,7 +454,7 @@ rendering_dictionnary = {
             ("formatting", "second_formatting", True),
             ("constant",   ":",                 True),
             ("formatting", "third_formatting",  True),
-            ("key",        "value",             True),
+            ("list",       "value",             True),
         ],
         "with_context_item": [
             ("key",        "value",             True),
@@ -436,14 +465,14 @@ rendering_dictionnary = {
         ],
 
         "del": [
-            ("constant",   "del",        True),
-            ("formatting", "formatting", True),
-            ("key",        "value",      True),
+            ("constant",   "del",               True),
+            ("formatting", "formatting",        True),
+            ("key",        "value",             True),
         ],
         "yield": [
-            ("constant",   "yield",      True),
-            ("formatting", "formatting", True),
-            ("key",        "value",      "value"),
+            ("constant",   "yield",             True),
+            ("formatting", "formatting",        True),
+            ("key",        "value",             "value"),
         ],
         "yield_atom": [
             ("constant",   "(",                 True),
@@ -469,9 +498,9 @@ rendering_dictionnary = {
             ("key",        "locals",            "locals"),
         ],
         "global": [
-            ("constant",   "global",     True),
-            ("formatting", "formatting", True),
-            ("list",       "value",      True),
+            ("constant",   "global",            True),
+            ("formatting", "formatting",        True),
+            ("list",       "value",             True),
         ],
 
         "while": [
@@ -567,7 +596,7 @@ rendering_dictionnary = {
             ("formatting", "first_formatting",  True),
             ("constant",   "{",                 True),
             ("formatting", "second_formatting", True),
-            ("key",        "value",            True),
+            ("list",       "value",             True),
             ("formatting", "third_formatting",  True),
             ("constant",   "}",                 True),
             ("formatting", "fourth_formatting", True),
@@ -576,7 +605,7 @@ rendering_dictionnary = {
             ("formatting", "first_formatting",  True),
             ("constant",   "{",                 True),
             ("formatting", "second_formatting", True),
-            ("key",        "value",            True),
+            ("list",       "value",             True),
             ("formatting", "third_formatting",  True),
             ("constant",   "}",                 True),
             ("formatting", "fourth_formatting", True),
@@ -593,7 +622,7 @@ rendering_dictionnary = {
             ("formatting", "first_formatting",  True),
             ("constant",   "import",            True),
             ("formatting", "second_formatting", True),
-            ("key",        "value",             True),
+            ("list",       "value",             True),
         ],
         "from_import": [
             ("constant",   "from",              True),
@@ -602,7 +631,7 @@ rendering_dictionnary = {
             ("formatting", "second_formatting", True),
             ("constant",   "import",            True),
             ("formatting", "third_formatting",  True),
-            ("key",        "targets",           True),
+            ("list",       "targets",           True),
         ],
 
         "dotted_as_name": [
@@ -626,69 +655,95 @@ rendering_dictionnary = {
             ("constant",   ">>",                     "destination"),
             ("formatting", "destination_formatting", "destination"),
             ("key",        "destination",            "destination"),
-            ("key",        "value",                  "value"),
+            ("list",       "value",                  "value"),
         ],
     }
 
 
-class RenderWalker:
-    '''Inherit me and overload the methods you want'''
-    CONTINUE = False
+class RenderWalker(object):
+    """Inherit me and overload the methods you want.
+
+    When calling walk() on a FST node, this class will traverse all the
+    node's subtree by following the recipe given by the `render`
+    function for the node and recursively for all its childs. At each
+    recipe step, it will call methods that you can override to make a
+    specific process.
+    For "node", "key", "list" and "formatting" childs it will call the
+    `before` method when going down the tree and the `after` method when
+    going up. The `on_leaf` method is called exclusively for "constant"
+    childs which are strings. There are also specific
+    `before_[node,key,list,formatting]` and
+    `after_[node,key,list,formatting]` methods provided for convenience.
+    """
     STOP = True
 
     def before_list(self, node, render_pos, render_key):
-        return self.CONTINUE
+        pass
 
     def after_list(self, node, render_pos, render_key):
-        return self.CONTINUE
+        pass
 
     def before_formatting(self, node, render_pos, render_key):
-        return self.CONTINUE
+        pass
 
     def after_formatting(self, node, render_pos, render_key):
-        return self.CONTINUE
+        pass
 
     def before_node(self, node, render_pos, render_key):
-        return self.CONTINUE
+        pass
 
     def after_node(self, node, render_pos, render_key):
-        return self.CONTINUE
+        pass
 
     def before_key(self, node, render_pos, render_key):
-        return self.CONTINUE
+        pass
 
     def after_key(self, node, render_pos, render_key):
-        return self.CONTINUE
+        pass
 
-    def on_constant(self, node, render_pos, render_key):
-        return self.CONTINUE
+    def on_leaf(self, node, render_pos, render_key):
+        pass
 
     def before(self, key_type, item, position, render_key):
         if key_type not in node_types:
             raise NotImplemented("Unknown key type: %s" % key_type)
 
-        return getattr(self, 'before_'+key_type)(item, position, render_key)
+        to_call = getattr(self, 'before_' + key_type.replace("constant", "leaf"))
+
+        return to_call(item, position, render_key)
 
     def after(self, key_type, item, position, render_key):
         if key_type not in node_types:
             raise NotImplemented("Unknown key type: %s" % key_type)
 
-        return getattr(self, 'after_'+key_type)(item, position, render_key)
+        to_call = getattr(self, 'after_' + key_type.replace("constant", "leaf"))
+
+        return to_call(item, position, render_key)
 
     def walk(self, node):
-        stop = self.CONTINUE
+        return self._walk(node)
+
+    def _walk(self, node):
         for key_type, item, render_pos, render_key in render(node):
-            if key_type == 'constant':
-                stop = self.on_constant(item, render_pos, render_key)
-            else:
-                stop = self.before(key_type, item, render_pos, render_key)
-                if stop:
-                    break
-                stop = self.walk(item)
-                stop |= self.after(key_type, item, render_pos, render_key)
+            stop = self._walk_on_item(key_type, item, render_pos, render_key)
+            if stop == self.STOP:
+                return self.STOP
 
-            if stop:
-                break
+    def _walk_on_item(self, key_type, item, render_pos, render_key):
+        if key_type == 'constant':
+            return self.on_leaf(item, render_pos, render_key)
 
-        return stop
+        if key_type in ['list', 'formatting'] and len(item) == 0:
+            return
+
+        stop = []
+        stop += [self.before(key_type, item, render_pos, render_key)]
+        if any(stop):
+            return self.STOP
+
+        stop += [self._walk(item)]
+        stop += [self.after(key_type, item, render_pos, render_key)]
+
+        if any(stop):
+            return self.STOP
 
