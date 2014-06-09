@@ -9,7 +9,7 @@ syntax information in the process of its creation (like empty lines,
 comments, formatting), a FST keeps everything and guarantees the
 operation :file:`fst_to_code(code_to_fst(source_code)) == source_code`.
 
-If you want to Understanding why this is important, read this:
+If you want to understand why this is important, read this:
 https://github.com/psycojoker/baron#why-is-this-important
 
 Installation
