@@ -185,7 +185,7 @@ nodes_rendering_order = {
             ("formatting", "first_formatting",  True),
             ("constant",   "(",                 True),
             ("formatting", "second_formatting", True),
-            ("key",        "value",             True),
+            ("list",       "value",             True),
             ("formatting", "third_formatting",  True),
             ("constant",   ")",                 True),
             ("formatting", "fourth_formatting", True),
@@ -234,7 +234,7 @@ nodes_rendering_order = {
             ("formatting", "first_formatting",  True),
             ("constant",   "(",                 True),
             ("formatting", "second_formatting", True),
-            ("list",       "value",             True),
+            ("key",        "value",             True),
             ("formatting", "third_formatting",  True),
             ("constant",   ")",                 True),
             ("formatting", "fourth_formatting", True),
@@ -454,7 +454,7 @@ nodes_rendering_order = {
             ("formatting", "second_formatting", True),
             ("constant",   ":",                 True),
             ("formatting", "third_formatting",  True),
-            ("key",        "value",             True),
+            ("list",       "value",             True),
         ],
         "with_context_item": [
             ("key",        "value",             True),
@@ -596,7 +596,7 @@ nodes_rendering_order = {
             ("formatting", "first_formatting",  True),
             ("constant",   "{",                 True),
             ("formatting", "second_formatting", True),
-            ("key",        "value",             True),
+            ("list",       "value",             True),
             ("formatting", "third_formatting",  True),
             ("constant",   "}",                 True),
             ("formatting", "fourth_formatting", True),
@@ -605,7 +605,7 @@ nodes_rendering_order = {
             ("formatting", "first_formatting",  True),
             ("constant",   "{",                 True),
             ("formatting", "second_formatting", True),
-            ("key",        "value",             True),
+            ("list",       "value",             True),
             ("formatting", "third_formatting",  True),
             ("constant",   "}",                 True),
             ("formatting", "fourth_formatting", True),
@@ -622,7 +622,7 @@ nodes_rendering_order = {
             ("formatting", "first_formatting",  True),
             ("constant",   "import",            True),
             ("formatting", "second_formatting", True),
-            ("key",        "value",             True),
+            ("list",       "value",             True),
         ],
         "from_import": [
             ("constant",   "from",              True),
@@ -631,7 +631,7 @@ nodes_rendering_order = {
             ("formatting", "second_formatting", True),
             ("constant",   "import",            True),
             ("formatting", "third_formatting",  True),
-            ("key",        "targets",           True),
+            ("list",       "targets",           True),
         ],
 
         "dotted_as_name": [
@@ -655,7 +655,7 @@ nodes_rendering_order = {
             ("constant",   ">>",                     "destination"),
             ("formatting", "destination_formatting", "destination"),
             ("key",        "destination",            "destination"),
-            ("key",        "value",                  "value"),
+            ("list",       "value",                  "value"),
         ],
     }
 

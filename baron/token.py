@@ -31,6 +31,12 @@ class BaronToken(BaseBox):
                 "value": token[1],
                 "formatting": list(map(self._translate_tokens_to_ast_node, token[2]) if len(token) >= 3 else []),
             }
+        if token[0] == "COMMENT":
+            return {
+                "type": token[0].lower(),
+                "value": token[1],
+                "formatting": [],
+            }
         return {
             "type": token[0].lower(),
             "value": token[1],

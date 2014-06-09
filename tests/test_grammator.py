@@ -746,6 +746,25 @@ def test_comment():
             "value": "\n",
           }])
 
+def test_comment_consistant():
+    """
+      # comment
+    """
+    parse_multi([
+             ('COMMENT', '# comment'),
+             ('ENDL', '\n'),
+          ],
+          [{
+            "formatting": [],
+            "type": "comment",
+            "value": "# comment",
+          },{
+            "formatting": [],
+            "indent": "",
+            "type": "endl",
+            "value": "\n",
+          }])
+
 def test_with_a():
     """
     with a: pass
@@ -1463,5 +1482,5 @@ def test_endl_dont_grab_comment_as_indent():
            ('ENDL', '\n', [], [('COMMENT', '# pouet')])
         ],[
            {"type": "endl", "value": "\n", "indent": "", "formatting": []},
-           {"type": "comment", "value": "# pouet"},
+           {"type": "comment", "value": "# pouet", "formatting": []},
           ])
