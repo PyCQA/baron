@@ -321,7 +321,7 @@ Let's first see the difference between the two functions:
 .. ipython:: python
 
     from baron import parse
-    from baron.finder import position_to_node, position_to_path
+    from baron.path import position_to_node, position_to_path
 
     some_code = """\
     from baron import parse
@@ -352,7 +352,7 @@ Neat. This is so common that there is a function to do that:
 
 .. ipython:: python
 
-    from baron.finder import path_to_node
+    from baron.path import path_to_node
 
     show_node(path_to_node(tree, path))
 
@@ -398,7 +398,7 @@ To conclude this section, let's look at a last example of path:
 
 .. ipython:: python
 
-    from baron.finder import position_to_path
+    from baron.path import position_to_path
 
     fst = parse("a(1)")
 
