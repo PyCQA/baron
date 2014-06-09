@@ -120,7 +120,7 @@ Rendering the FST
 
 Baron renders the FST back into source code by following the
 instructions given by the :file:`nodes_rendering_order` dictionary. It
-gives, for everynode FST node, the order in which the node must be rendered.
+gives, for every FST node, the order in which the node must be rendered.
 
 .. ipython:: python
 
