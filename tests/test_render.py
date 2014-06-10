@@ -20,6 +20,9 @@ def test_dictionnary_dependent_validity(dictionnary_node):
             or (isinstance(dependent, str) and dependent in keys) \
             or (isinstance(dependent, list) and all([d in keys for d in dependent]))
 
+        if key_type == 'bool':
+            assert dependent is False
+
 
 class RenderWalkerTester(RenderWalker):
     def __init__(self, steps):
