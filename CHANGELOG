@@ -27,7 +27,7 @@ Changelog
 0.1.2 (2014-04-08)
 ------------------
 
-- baron.dumps now accept a signle FST node, it was only working with a list of
+- baron.dumps now accept a single FST node, it was only working with a list of
   FST nodes
 - don't add a endl node at the end if not present in the input string
 - de-uniformise call_arguments and function_arguments node, this is just
