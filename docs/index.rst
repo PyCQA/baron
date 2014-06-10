@@ -171,6 +171,10 @@ must be rendered. We'll see the third column later.
   character :file:`(` in a function call node or the :file:`def` keyword
   of a function definition) while the :file:`key` node's value can
   change (e.g. the name of the function in a function call node).
+* A :file:`bool` node is a node used exclusively for conditional
+  rendering. It's exact use will be explained later on with the tuple's
+  third column but the main point for now is to know that they are never
+  rendered.
 
 
 Walktrough

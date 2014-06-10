@@ -33,6 +33,8 @@ def render(node):
     * `render_key` gives the key used to access this child from the
         parent node. It's a string if the node is a dict or a number if
         its a list.
+    Please note that "bool" `key_types` are never rendered, that's why
+    they are not shown here.
     """
     if isinstance(node, list):
         return render_list(node)
