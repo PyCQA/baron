@@ -49,8 +49,10 @@ def render_list(node):
 
 def render_node(node):
     for pos, (key_type, render_key, dependent) in enumerate(nodes_rendering_order[node['type']]):
-        if not dependent and not node.get(render_key):
+        if not dependent:
             continue
+        elif key_type == "bool":
+            raise NotImplementedError("Bool keys are only used for dependency, they cannot be rendered. Please set the \"%s\"'s dependent key in \"%s\" node to False" % ((key_type, render_key, dependent), node['type']))
         elif isinstance(dependent, str) and not node.get(dependent):
             continue
         elif isinstance(dependent, list) and not all([node.get(x) for x in dependent]):
@@ -61,8 +63,6 @@ def render_node(node):
             yield (key_type, node[render_key], pos, render_key)
         elif key_type == 'constant':
             yield ('constant', render_key, pos, None)
-        elif key_type == "bool":
-            continue
         else:
             raise NotImplementedError("Unknown key type: %s" % key_type)
 

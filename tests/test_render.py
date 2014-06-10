@@ -1,6 +1,6 @@
 import pytest
 from baron import parse
-from baron.render import node_types, nodes_rendering_order, RenderWalker
+from baron.render import render, node_types, nodes_rendering_order, RenderWalker
 
 
 @pytest.fixture(params=nodes_rendering_order.keys())
@@ -22,6 +22,20 @@ def test_dictionnary_dependent_validity(dictionnary_node):
 
         if key_type == 'bool':
             assert dependent is False
+
+
+def test_render_dictionnary_bad_bool_dependency():
+    nodes_rendering_order['bad_bool_dependency'] = [('bool', True, True)]
+    with pytest.raises(NotImplementedError) as e:
+        list(render({'type': 'bad_bool_dependency'}))
+    assert str(e.value) == "Bool keys are only used for dependency, they cannot be rendered. Please set the \"('bool', True, True)\"'s dependent key in \"bad_bool_dependency\" node to False"
+
+
+def test_render_dictionnary_bad_bool_dependency2():
+    nodes_rendering_order['bad_bool_dependency2'] = [('bool', False, 'other_key')]
+    with pytest.raises(NotImplementedError) as e:
+        list(render({'type': 'bad_bool_dependency2'}))
+    assert str(e.value) == "Bool keys are only used for dependency, they cannot be rendered. Please set the \"('bool', False, 'other_key')\"'s dependent key in \"bad_bool_dependency2\" node to False"
 
 
 class RenderWalkerTester(RenderWalker):
