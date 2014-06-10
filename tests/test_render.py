@@ -14,11 +14,11 @@ def test_dictionnary_key_validity(dictionnary_node):
 
 
 def test_dictionnary_dependent_validity(dictionnary_node):
+    keys = set([t[1] for t in dictionnary_node])
     for key_type, render_key, dependent in dictionnary_node:
-        assert dependent == True \
-            or isinstance(dependent, str) \
-            or isinstance(dependent, bool) \
-            or (isinstance(dependent, list) and all([isinstance(d, str) for d in dependent]))
+        assert isinstance(dependent, bool) \
+            or (isinstance(dependent, str) and dependent in keys) \
+            or (isinstance(dependent, list) and all([d in keys for d in dependent]))
 
 
 class RenderWalkerTester(RenderWalker):
