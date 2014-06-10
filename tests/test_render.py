@@ -1,6 +1,6 @@
 import pytest
 from baron import parse
-from baron.render import node_types, nodes_rendering_order, RenderWalker
+from baron.render import render, node_types, nodes_rendering_order, RenderWalker
 
 
 @pytest.fixture(params=nodes_rendering_order.keys())
@@ -14,10 +14,35 @@ def test_dictionnary_key_validity(dictionnary_node):
 
 
 def test_dictionnary_dependent_validity(dictionnary_node):
+    keys = set([t[1] for t in dictionnary_node])
     for key_type, render_key, dependent in dictionnary_node:
-        assert dependent == True \
-            or isinstance(dependent, str) \
-            or (isinstance(dependent, list) and all([isinstance(d, str) for d in dependent]))
+        assert isinstance(dependent, bool) \
+            or (isinstance(dependent, str) and dependent in keys) \
+            or (isinstance(dependent, list) and all([d in keys for d in dependent]))
+
+        if key_type == 'bool':
+            assert dependent is False
+
+
+def test_render_dictionnary_bad_type():
+    nodes_rendering_order['bad_type'] = [('wtf', 'hello', True)]
+    with pytest.raises(NotImplementedError) as e:
+        list(render({'type': 'bad_type'}))
+    assert str(e.value) == "Unknown key type \"wtf\" in \"bad_type\" node"
+
+
+def test_render_dictionnary_bad_bool_dependency():
+    nodes_rendering_order['bad_bool_dependency'] = [('bool', True, True)]
+    with pytest.raises(NotImplementedError) as e:
+        list(render({'type': 'bad_bool_dependency'}))
+    assert str(e.value) == "Bool keys are only used for dependency, they cannot be rendered. Please set the \"('bool', True, True)\"'s dependent key in \"bad_bool_dependency\" node to False"
+
+
+def test_render_dictionnary_bad_bool_dependency2():
+    nodes_rendering_order['bad_bool_dependency2'] = [('bool', False, 'other_key')]
+    with pytest.raises(NotImplementedError) as e:
+        list(render({'type': 'bad_bool_dependency2'}))
+    assert str(e.value) == "Bool keys are only used for dependency, they cannot be rendered. Please set the \"('bool', False, 'other_key')\"'s dependent key in \"bad_bool_dependency2\" node to False"
 
 
 class RenderWalkerTester(RenderWalker):

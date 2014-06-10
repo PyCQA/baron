@@ -33,6 +33,8 @@ def render(node):
     * `render_key` gives the key used to access this child from the
         parent node. It's a string if the node is a dict or a number if
         its a list.
+    Please note that "bool" `key_types` are never rendered, that's why
+    they are not shown here.
     """
     if isinstance(node, list):
         return render_list(node)
@@ -49,8 +51,10 @@ def render_list(node):
 
 def render_node(node):
     for pos, (key_type, render_key, dependent) in enumerate(nodes_rendering_order[node['type']]):
-        if not dependent and not node.get(render_key):
+        if not dependent:
             continue
+        elif key_type == "bool":
+            raise NotImplementedError("Bool keys are only used for dependency, they cannot be rendered. Please set the \"%s\"'s dependent key in \"%s\" node to False" % ((key_type, render_key, dependent), node['type']))
         elif isinstance(dependent, str) and not node.get(dependent):
             continue
         elif isinstance(dependent, list) and not all([node.get(x) for x in dependent]):
@@ -62,7 +66,7 @@ def render_node(node):
         elif key_type == 'constant':
             yield ('constant', render_key, pos, None)
         else:
-            raise NotImplementedError("Unknown key type: %s" % key_type)
+            raise NotImplementedError("Unknown key type \"%s\" in \"%s\" node" % (key_type, node['type']))
 
 
 def get_node_at_position_in_rendering_list(node, position_in_rendering_list):
@@ -72,7 +76,7 @@ def get_node_at_position_in_rendering_list(node, position_in_rendering_list):
     return render_key if key_type == 'constant' else node[render_key]
 
 
-node_types = set(['node', 'list', 'key', 'formatting', 'constant'])
+node_types = set(['node', 'list', 'key', 'formatting', 'constant', 'bool'])
 
 
 nodes_rendering_order = {
@@ -212,6 +216,7 @@ nodes_rendering_order = {
             ("constant",   ":",                 True),
             ("formatting", "sixth_formatting",  True),
             ("list",       "value",             True),
+            ("bool",       "parenthesis",       False),
         ],
 
         "repr": [
@@ -247,6 +252,7 @@ nodes_rendering_order = {
             ("formatting", "third_formatting",  "with_parenthesis"),
             ("constant",   ")",                 "with_parenthesis"),
             ("formatting", "fourth_formatting", "with_parenthesis"),
+            ("bool",       "with_parenthesis",  False),
         ],
 
         "funcdef": [
@@ -403,6 +409,7 @@ nodes_rendering_order = {
             ("constant",   ":",                 "has_two_colons"),
             ("formatting", "fourth_formatting", "has_two_colons"),
             ("key",        "step",              ["has_two_colons", "step"]),
+            ("bool",       "has_two_colons",    False),
         ],
 
         "assignment": [
@@ -640,6 +647,7 @@ nodes_rendering_order = {
             ("constant",   "as",                "as"),
             ("formatting", "second_formatting", "as"),
             ("key",        "target",            "as"),
+            ("bool",       "as",                False),
         ],
         "name_as_name": [
             ("key",        "value",             True),
@@ -647,6 +655,7 @@ nodes_rendering_order = {
             ("constant",   "as",                "as"),
             ("formatting", "second_formatting", "as"),
             ("key",        "target",            "as"),
+            ("bool",       "as",                False),
         ],
 
         "print": [

@@ -133,7 +133,7 @@ gives, for every FST node, the order in which the node must be rendered.
     show_node(parse("(a_name,another_name,yet_another_name)")[0])
     nodes_rendering_order["comma"]
 
-For a "name" node, it is a list containing an unique tuple but it can
+For a "name" node, it is a list containing a unique tuple but it can
 contain multiple ones like for a "tuple" node.
 
 To render a node, you just need to render each element of the list one
@@ -164,14 +164,17 @@ must be rendered. We'll see the third column later.
 * A :file:`formatting` node is similar in behaviour to a :file:`list` node but
   contains only formatting nodes. This is basically where Baron
   distinguish itself from ASTs.
-* A :file:`constant` node is a leaf of the FST tree. The second column always
-  contains a string which is outputted directly. Compared to a :file:`key`
-  node containing a string, the :file:`constant` node is identical for every
-  instance of the nodes (e.g. the left parenthesis character :file:`(` in
-  a function call node of the :file:`def` keyword of a function definition)
-  while the :file:`key` node's value can change (e.g.  the name of the
-  function in a function
-  call node).
+* A :file:`constant` node is a leaf of the FST tree. The second column
+  always contain a string which is outputted directly. Compared to
+  a :file:`key` node containing a string, the :file:`constant` node is
+  identical for every instance of the nodes (e.g. the left parenthesis
+  character :file:`(` in a function call node or the :file:`def` keyword
+  of a function definition) while the :file:`key` node's value can
+  change (e.g. the name of the function in a function call node).
+* A :file:`bool` node is a node used exclusively for conditional
+  rendering. It's exact use will be explained later on with the tuple's
+  third column but the main point for now is to know that they are never
+  rendered.
 
 
 Walktrough
@@ -247,7 +250,7 @@ a name "key" node, which is string and thus outputted directly:
 
 Now, we have outputted "lambda x". At first glance we could say we
 should render the second element of the "def_argument" node but as we'll
-see in the next section, it is not the case thanks to the third column
+see in the next section, it is not the case because of the third column
 of the tuple.
 
 For reference, the FST of the lambda node:
@@ -273,7 +276,7 @@ compare the two "def_arguments" FST nodes:
     nodes_rendering_order[fst[0]["arguments"][2]["type"]]
 
 The "value" is empty for the former "def_argument" but not for the
-latter because only the latter has a default assignment "= 1".
+latter because it has a default value of "= 1".
 
 .. ipython:: python
 
@@ -281,9 +284,20 @@ latter because only the latter has a default assignment "= 1".
 
     dumps(fst[0]["arguments"][2])
 
+The rule here is that the third column of a node is one of:
+* True, it is always rendered;
+* False, it is never rendered;
+* A string, it is rendered conditionnally. It is not rendered if the key
+  it references is either empty or False. It also must reference an
+  existing key. In our example above, it references the existing "value"
+  key which is empty in the first case and not empty in the second.
+
+This is how "bool" nodes are never outputted: their third column is
+always False.
+
 We will conclude here now that we have seen an example of every aspect
 of FST rendering. Understanding everything is not required to use Baron
-since :file:`dumps` handles all the complexity.
+since :file:`dumps` handles all the complexity under the hood.
 
 Locate a Node
 -------------
