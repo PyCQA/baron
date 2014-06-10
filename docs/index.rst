@@ -133,7 +133,7 @@ gives, for every FST node, the order in which the node must be rendered.
     show_node(parse("(a_name,another_name,yet_another_name)")[0])
     nodes_rendering_order["comma"]
 
-For a "name" node, it is a list containing an unique tuple but it can
+For a "name" node, it is a list containing a unique tuple but it can
 contain multiple ones like for a "tuple" node.
 
 To render a node, you just need to render each element of the list one
@@ -247,7 +247,7 @@ a name "key" node, which is string and thus outputted directly:
 
 Now, we have outputted "lambda x". At first glance we could say we
 should render the second element of the "def_argument" node but as we'll
-see in the next section, it is not the case thanks to the third column
+see in the next section, it is not the case because of the third column
 of the tuple.
 
 For reference, the FST of the lambda node:
@@ -273,7 +273,7 @@ compare the two "def_arguments" FST nodes:
     nodes_rendering_order[fst[0]["arguments"][2]["type"]]
 
 The "value" is empty for the former "def_argument" but not for the
-latter because only the latter has a default assignment "= 1".
+latter because it has a default value of "= 1".
 
 .. ipython:: python
 
@@ -283,7 +283,7 @@ latter because only the latter has a default assignment "= 1".
 
 We will conclude here now that we have seen an example of every aspect
 of FST rendering. Understanding everything is not required to use Baron
-since :file:`dumps` handles all the complexity.
+since :file:`dumps` handles all the complexity under the hood.
 
 Locate a Node
 -------------
