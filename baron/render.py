@@ -61,6 +61,8 @@ def render_node(node):
             yield (key_type, node[render_key], pos, render_key)
         elif key_type == 'constant':
             yield ('constant', render_key, pos, None)
+        elif key_type == "bool":
+            continue
         else:
             raise NotImplementedError("Unknown key type: %s" % key_type)
 
@@ -72,7 +74,7 @@ def get_node_at_position_in_rendering_list(node, position_in_rendering_list):
     return render_key if key_type == 'constant' else node[render_key]
 
 
-node_types = set(['node', 'list', 'key', 'formatting', 'constant'])
+node_types = set(['node', 'list', 'key', 'formatting', 'constant', 'bool'])
 
 
 nodes_rendering_order = {
@@ -212,6 +214,7 @@ nodes_rendering_order = {
             ("constant",   ":",                 True),
             ("formatting", "sixth_formatting",  True),
             ("list",       "value",             True),
+            ("bool",       "parenthesis",       False),
         ],
 
         "repr": [
@@ -247,6 +250,7 @@ nodes_rendering_order = {
             ("formatting", "third_formatting",  "with_parenthesis"),
             ("constant",   ")",                 "with_parenthesis"),
             ("formatting", "fourth_formatting", "with_parenthesis"),
+            ("bool",       "with_parenthesis",  False),
         ],
 
         "funcdef": [
@@ -403,6 +407,7 @@ nodes_rendering_order = {
             ("constant",   ":",                 "has_two_colons"),
             ("formatting", "fourth_formatting", "has_two_colons"),
             ("key",        "step",              ["has_two_colons", "step"]),
+            ("bool",       "has_two_colons",    False),
         ],
 
         "assignment": [
@@ -640,6 +645,7 @@ nodes_rendering_order = {
             ("constant",   "as",                "as"),
             ("formatting", "second_formatting", "as"),
             ("key",        "target",            "as"),
+            ("bool",       "as",                False),
         ],
         "name_as_name": [
             ("key",        "value",             True),
@@ -647,6 +653,7 @@ nodes_rendering_order = {
             ("constant",   "as",                "as"),
             ("formatting", "second_formatting", "as"),
             ("key",        "target",            "as"),
+            ("bool",       "as",                False),
         ],
 
         "print": [
