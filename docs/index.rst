@@ -284,6 +284,17 @@ latter because it has a default value of "= 1".
 
     dumps(fst[0]["arguments"][2])
 
+The rule here is that the third column of a node is one of:
+* True, it is always rendered;
+* False, it is never rendered;
+* A string, it is rendered conditionnally. It is not rendered if the key
+  it references is either empty or False. It also must reference an
+  existing key. In our example above, it references the existing "value"
+  key which is empty in the first case and not empty in the second.
+
+This is how "bool" nodes are never outputted: their third column is
+always False.
+
 We will conclude here now that we have seen an example of every aspect
 of FST rendering. Understanding everything is not required to use Baron
 since :file:`dumps` handles all the complexity under the hood.
