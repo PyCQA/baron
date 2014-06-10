@@ -164,14 +164,13 @@ must be rendered. We'll see the third column later.
 * A :file:`formatting` node is similar in behaviour to a :file:`list` node but
   contains only formatting nodes. This is basically where Baron
   distinguish itself from ASTs.
-* A :file:`constant` node is a leaf of the FST tree. The second column always
-  contains a string which is outputted directly. Compared to a :file:`key`
-  node containing a string, the :file:`constant` node is identical for every
-  instance of the nodes (e.g. the left parenthesis character :file:`(` in
-  a function call node of the :file:`def` keyword of a function definition)
-  while the :file:`key` node's value can change (e.g.  the name of the
-  function in a function
-  call node).
+* A :file:`constant` node is a leaf of the FST tree. The second column
+  always contain a string which is outputted directly. Compared to
+  a :file:`key` node containing a string, the :file:`constant` node is
+  identical for every instance of the nodes (e.g. the left parenthesis
+  character :file:`(` in a function call node or the :file:`def` keyword
+  of a function definition) while the :file:`key` node's value can
+  change (e.g. the name of the function in a function call node).
 
 
 Walktrough
