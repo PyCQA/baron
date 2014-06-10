@@ -24,6 +24,13 @@ def test_dictionnary_dependent_validity(dictionnary_node):
             assert dependent is False
 
 
+def test_render_dictionnary_bad_type():
+    nodes_rendering_order['bad_type'] = [('wtf', 'hello', True)]
+    with pytest.raises(NotImplementedError) as e:
+        list(render({'type': 'bad_type'}))
+    assert str(e.value) == "Unknown key type \"wtf\" in \"bad_type\" node"
+
+
 def test_render_dictionnary_bad_bool_dependency():
     nodes_rendering_order['bad_bool_dependency'] = [('bool', True, True)]
     with pytest.raises(NotImplementedError) as e:

@@ -64,7 +64,7 @@ def render_node(node):
         elif key_type == 'constant':
             yield ('constant', render_key, pos, None)
         else:
-            raise NotImplementedError("Unknown key type: %s" % key_type)
+            raise NotImplementedError("Unknown key type \"%s\" in \"%s\" node" % (key_type, node['type']))
 
 
 def get_node_at_position_in_rendering_list(node, position_in_rendering_list):
