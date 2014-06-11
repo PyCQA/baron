@@ -4,7 +4,7 @@
 from setuptools import setup
 
 setup(name='baron',
-      version='0.1.3',
+      version='0.2',
       description='Full Syntax Tree for python to make writing refactoring code a realist task',
       author='Laurent Peuch',
       long_description=open("README.md", "r").read(),
