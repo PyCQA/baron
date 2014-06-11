@@ -1,7 +1,7 @@
 from .render import RenderWalker, render
 from .utils import string_instance, is_newline, split_on_newlines
 from collections import namedtuple
-from copy import copy
+from copy import deepcopy
 
 
 def position_to_path(tree, line, column):
@@ -45,9 +45,9 @@ def path_to_bounding_box(tree, path):
 
 def make_path(path=None, node_type=None, position_in_rendering_list=None):
     return namedtuple('Path', ['path', 'node_type', 'position_in_rendering_list'])._make([
-        [] if path is None else copy(path),
-        copy(node_type),
-        copy(position_in_rendering_list)
+        [] if path is None else deepcopy(path),
+        deepcopy(node_type),
+        deepcopy(position_in_rendering_list)
     ])
 
 
@@ -92,8 +92,8 @@ class Position(object):
 
 def make_bounding_box(top_left=None, bottom_right=None):
     return namedtuple("BoundingBox", ["top_left", "bottom_right"])._make([
-            copy(top_left),
-            copy(bottom_right)
+            deepcopy(top_left),
+            deepcopy(bottom_right)
         ])
 
 
@@ -204,7 +204,7 @@ class BoundingBox(PathWalker):
     def on_leaf(self, constant, pos, key):
         if self.current_decorated_path() == self.target_path:
             self.found = True
-            self.top_left = copy(self.current_position)
+            self.top_left = deepcopy(self.current_position)
 
         newlines_split = split_on_newlines(constant)
 
@@ -216,6 +216,6 @@ class BoundingBox(PathWalker):
                 self.left_of_current_position = self.current_position.left()
 
         if self.bottom_right is None and self.found and self.current_decorated_path() == self.target_path:
-            self.bottom_right = copy(self.left_of_current_position)
+            self.bottom_right = deepcopy(self.left_of_current_position)
             return self.STOP
 
