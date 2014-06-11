@@ -1,5 +1,5 @@
 from baron.baron import parse
-from baron.path import make_path, PathWalker
+from baron.path import make_path, is_empty, PathWalker
 from baron.path import position_to_path, path_to_node, position_to_node
 from baron.path import path_to_bounding_box, node_to_bounding_box
 from baron.render import get_node_at_position_in_rendering_list
@@ -93,6 +93,11 @@ def check_path(code, positions, target_path):
     if target_path is not None:
         bounding_box = (positions[0], positions[-1])
         assert path_to_bounding_box(tree, path) == bounding_box
+
+
+def test_path_empty():
+    assert is_empty(make_path())
+    assert not is_empty(make_path([1], "type", 0))
 
 
 def test_path_walker_assignment():

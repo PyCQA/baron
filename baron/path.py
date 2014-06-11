@@ -51,6 +51,10 @@ def make_path(path=None, node_type=None, position_in_rendering_list=None):
     ])
 
 
+def is_empty(path):
+    return path.path == [] and path.node_type is None and path.position_in_rendering_list is None
+
+
 def make_position(line, column):
     return Position(line, column)
 
