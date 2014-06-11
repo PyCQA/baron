@@ -73,7 +73,7 @@ def test_two_parenthesis_comma():
         ('ENDL', '\n'),
         ('RIGHT_PARENTHESIS', ')'),
     ]) == [
-        ('LEFT_PARENTHESIS', '(', [], [('ENDL', '\n'), ]),
+        ('LEFT_PARENTHESIS', '(', [], [('ENDL', '\n'),]),
         ('COMMA', ',', [], [('ENDL', '\n')]),
         ('RIGHT_PARENTHESIS', ')'),
     ]
@@ -91,7 +91,7 @@ def test_tuple_one():
         ('ENDL', '\n'),
         ('RIGHT_PARENTHESIS', ')'),
     ]) == [
-        ('LEFT_PARENTHESIS', '(', [], [('ENDL', '\n'), ]),
+        ('LEFT_PARENTHESIS', '(', [], [('ENDL', '\n'),]),
         ('NAME', 'a'),
         ('COMMA', ',', [('ENDL', '\n')], [('ENDL', '\n')]),
         ('NAME', 'a'),
@@ -111,7 +111,7 @@ def test_set_one():
         ('ENDL', '\n'),
         ('RIGHT_BRACKET', '}'),
     ]) == [
-        ('LEFT_BRACKET', '{', [], [('ENDL', '\n'), ]),
+        ('LEFT_BRACKET', '{', [], [('ENDL', '\n'),]),
         ('NAME', 'a'),
         ('COMMA', ',', [('ENDL', '\n')], [('ENDL', '\n')]),
         ('NAME', 'a'),
@@ -131,7 +131,7 @@ def test_list_one():
         ('ENDL', '\n'),
         ('RIGHT_SQUARE_BRACKET', ']'),
     ]) == [
-        ('LEFT_SQUARE_BRACKET', '[', [], [('ENDL', '\n'), ]),
+        ('LEFT_SQUARE_BRACKET', '[', [], [('ENDL', '\n'),]),
         ('NAME', 'a'),
         ('COMMA', ',', [('ENDL', '\n')], [('ENDL', '\n')]),
         ('NAME', 'a'),
