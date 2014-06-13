@@ -677,12 +677,12 @@ class RenderWalker(object):
     function for the node and recursively for all its childs. At each
     recipe step, it will call methods that you can override to make a
     specific process.
-    For "node", "key", "list" and "formatting" childs it will call the
-    `before` method when going down the tree and the `after` method when
-    going up. The `on_leaf` method is called exclusively for "constant"
-    childs which are strings. There are also specific
-    `before_[node,key,list,formatting]` and
-    `after_[node,key,list,formatting]` methods provided for convenience.
+    For every "node", "key", "list", "formatting" and "constant" childs,
+    it will call the `before` method when going down the tree and the
+    `after` method when going up. There are also specific
+    `before_[node,key,list,formatting,constant]` and
+    `after_[node,key,list,formatting,constant]` methods provided for
+    convenience.
     """
     STOP = True
 
