@@ -100,34 +100,33 @@ def make_bounding_box(top_left=None, bottom_right=None):
 class PathWalker(RenderWalker):
     def walk(self, tree):
         self.current_path = []
-        self.current_node_type = None
-        self.current_position_in_rendering_list = None
+        self.current_node_type = [None]
+        self.current_position_in_rendering_list = [None]
 
         super(PathWalker, self).walk(tree)
 
     def current_decorated_path(self):
-        return make_path(self.current_path, self.current_node_type, self.current_position_in_rendering_list)
+        return make_path(self.current_path, self.current_node_type[-1], self.current_position_in_rendering_list[-1])
 
-    def _walk(self, node):
-        for key_type, item, render_pos, render_key in render(node):
-            if render_key is not None:
-                self.current_path.append(render_key)
-            if key_type != 'constant':
-                old_type = self.current_node_type
-                self.current_node_type = item["type"] if "type" in item else key_type
-            old_pos = self.current_position_in_rendering_list
-            self.current_position_in_rendering_list = render_pos
+    def before(self, key_type, item, render_pos, render_key):
+        if render_key is not None:
+            self.current_path.append(render_key)
+        if key_type != 'constant':
+            self.current_node_type.append(item["type"] if "type" in item else key_type)
+        self.current_position_in_rendering_list.append(render_pos)
 
-            stop = self._walk_on_item(key_type, item, render_pos, render_key)
+        return super(PathWalker, self).before(key_type, item, render_pos, render_key)
 
-            if render_key is not None:
-                self.current_path.pop()
-            if key_type != 'constant':
-                self.current_node_type = old_type
-            self.current_position_in_rendering_list = old_pos
+    def after(self, key_type, item, render_pos, render_key):
+        stop = super(PathWalker, self).after(key_type, item, render_pos, render_key)
 
-            if stop:
-                return self.STOP
+        if render_key is not None:
+            self.current_path.pop()
+        if key_type != 'constant':
+            self.current_node_type.pop()
+        self.current_position_in_rendering_list.pop()
+
+        return stop
 
 
 class PositionFinder(PathWalker):
@@ -145,7 +144,7 @@ class PositionFinder(PathWalker):
         self.walk(tree)
         return self.found_path
 
-    def on_leaf(self, constant, pos, key):
+    def before_leaf(self, constant, pos, key):
         """Determine if we're on the targetted node.
 
         If the targetted column is reached, `stop` and `path_found` are
@@ -201,12 +200,17 @@ class BoundingBox(PathWalker):
 
         return make_bounding_box(self.top_left, self.bottom_right)
 
-    def on_leaf(self, constant, pos, key):
+    def before(self, key_type, item, position, render_key):
+        stop = super(BoundingBox, self).before(key_type, item, position, render_key)
+
         if self.current_decorated_path() == self.target_path:
             self.found = True
             self.top_left = deepcopy(self.current_position)
 
-        newlines_split = split_on_newlines(constant)
+        if key_type != 'constant':
+            return stop
+
+        newlines_split = split_on_newlines(item)
 
         for c in newlines_split:
             if is_newline(c):
@@ -215,7 +219,11 @@ class BoundingBox(PathWalker):
                 self.current_position.advance_columns(len(c))
                 self.left_of_current_position = self.current_position.left()
 
+        return stop
+
+    def after(self, key_type, item, position, render_key):
         if self.bottom_right is None and self.found and self.current_decorated_path() == self.target_path:
             self.bottom_right = deepcopy(self.left_of_current_position)
-            return self.STOP
+
+        return super(BoundingBox, self).after(key_type, item, position, render_key)
 

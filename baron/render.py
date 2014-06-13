@@ -710,7 +710,10 @@ class RenderWalker(object):
     def after_key(self, node, render_pos, render_key):
         pass
 
-    def on_leaf(self, node, render_pos, render_key):
+    def before_leaf(self, node, render_pos, render_key):
+        pass
+
+    def after_leaf(self, node, render_pos, render_key):
         pass
 
     def before(self, key_type, item, position, render_key):
@@ -739,20 +742,17 @@ class RenderWalker(object):
                 return self.STOP
 
     def _walk_on_item(self, key_type, item, render_pos, render_key):
-        if key_type == 'constant':
-            return self.on_leaf(item, render_pos, render_key)
-
         if key_type in ['list', 'formatting'] and len(item) == 0:
             return
 
-        stop = []
-        stop += [self.before(key_type, item, render_pos, render_key)]
-        if any(stop):
+        stop_before = self.before(key_type, item, render_pos, render_key)
+        if stop_before:
             return self.STOP
 
-        stop += [self._walk(item)]
-        stop += [self.after(key_type, item, render_pos, render_key)]
+        stop = self._walk(item) if key_type != 'constant' else False
 
-        if any(stop):
+        stop_after = self.after(key_type, item, render_pos, render_key)
+
+        if stop or stop_after:
             return self.STOP
 
