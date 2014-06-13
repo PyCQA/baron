@@ -50,52 +50,69 @@ class RenderWalkerTester(RenderWalker):
         self.steps = steps
 
     def before(self, *args):
-        self.process_test('>', *args)
+        super(RenderWalkerTester, self).before(*args)
+        return self.process_test('>', *args)
 
     def after(self, *args):
-        self.process_test('<', *args)
-
-    def on_leaf(self, node, render_pos, render_key):
-        _node_type, _node, _render_pos, _render_key = self.steps.pop(0)
-        assert _node_type == 'constant'
-        assert _node == node
-        assert _render_pos == render_pos
-        assert _render_key == render_key
+        stop = self.process_test('<', *args)
+        super(RenderWalkerTester, self).after(*args)
+        return stop
 
     def process_test(self, direction, node_type, node, render_pos, render_key):
-        _direction, _node_type, _node, _render_pos, _render_key = self.steps.pop(0)
+        _direction, _node_type, _node, _render_pos, _render_key, _stop = self.steps.pop(0)
         assert _direction == direction
         assert _node_type == node_type
-        if "type" in node:
+        if node_type == 'constant':
+            assert _node == node
+        elif "type" in node:
             assert _node == node["type"]
         else:
             assert _node == node.__class__.__name__
         assert _render_pos == render_pos
         assert _render_key == render_key
+        return _stop
+
+
+def test_walk_stop():
+    node = parse("a = 1")
+    walker = RenderWalkerTester([
+    ('>', 'node', 'assignment', 0, 0, False),
+        ('>', 'key', 'name', 0, 'target', False),
+            ('>', 'constant', 'a', 0, 'value', True),
+        ('<', 'key', 'name', 0, 'target', False),
+    ('<', 'node', 'assignment', 0, 0, False),
+    ])
+
+    walker.walk(node)
 
 
 def test_walk_assignment():
     node = parse("a = 1")
     walker = RenderWalkerTester([
-    ('>', 'node', 'assignment', 0, 0),
-        ('>', 'key', 'name', 0, 'target'),
-            ('constant', 'a', 0, 'value'),
-        ('<', 'key', 'name', 0, 'target'),
-        ('>', 'formatting', 'list', 1, 'first_formatting'),
-            ('>', 'node', 'space', 0, 0),
-                ('constant', ' ', 0, 'value'),
-            ('<', 'node', 'space', 0, 0),
-        ('<', 'formatting', 'list', 1, 'first_formatting'),
-        ('constant', '=', 3, None),
-        ('>', 'formatting', 'list', 4, 'second_formatting'),
-            ('>', 'node', 'space', 0, 0),
-                ('constant', ' ', 0, 'value'),
-            ('<', 'node', 'space', 0, 0),
-        ('<', 'formatting', 'list', 4, 'second_formatting'),
-        ('>', 'key', 'int', 5, 'value'),
-            ('constant', '1', 0, 'value'),
-        ('<', 'key', 'int', 5, 'value'),
-    ('<', 'node', 'assignment', 0, 0),
+    ('>', 'node', 'assignment', 0, 0, False),
+        ('>', 'key', 'name', 0, 'target', False),
+            ('>', 'constant', 'a', 0, 'value', False),
+            ('<', 'constant', 'a', 0, 'value', False),
+        ('<', 'key', 'name', 0, 'target', False),
+        ('>', 'formatting', 'list', 1, 'first_formatting', False),
+            ('>', 'node', 'space', 0, 0, False),
+                ('>', 'constant', ' ', 0, 'value', False),
+                ('<', 'constant', ' ', 0, 'value', False),
+            ('<', 'node', 'space', 0, 0, False),
+        ('<', 'formatting', 'list', 1, 'first_formatting', False),
+        ('>', 'constant', '=', 3, None, False),
+        ('<', 'constant', '=', 3, None, False),
+        ('>', 'formatting', 'list', 4, 'second_formatting', False),
+            ('>', 'node', 'space', 0, 0, False),
+                ('>', 'constant', ' ', 0, 'value', False),
+                ('<', 'constant', ' ', 0, 'value', False),
+            ('<', 'node', 'space', 0, 0, False),
+        ('<', 'formatting', 'list', 4, 'second_formatting', False),
+        ('>', 'key', 'int', 5, 'value', False),
+            ('>', 'constant', '1', 0, 'value', False),
+            ('<', 'constant', '1', 0, 'value', False),
+        ('<', 'key', 'int', 5, 'value', False),
+    ('<', 'node', 'assignment', 0, 0, False),
     ])
 
     walker.walk(node)
@@ -109,56 +126,74 @@ def fun(arg1):
     pass
 """)
     walker = RenderWalkerTester([
-    ('>', 'node', 'endl', 0, 0),
-        ('constant', '\n', 1, 'value'),
-        ('constant', '', 2, 'indent'),
-    ('<', 'node', 'endl', 0, 0),
-    ('>', 'node', 'funcdef', 1, 1),
-        ('>', 'list', 'list', 0, 'decorators'),
-            ('>', 'node', 'decorator', 0, 0),
-                ('constant', '@', 0, None),
-                ('>', 'key', 'dotted_name', 1, 'value'),
-                    ('>', 'list', 'list', 0, 'value'),
-                        ('>', 'node', 'name', 0, 0),
-                            ('constant', 'deco', 0, 'value'),
-                        ('<', 'node', 'name', 0, 0),
-                    ('<', 'list', 'list', 0, 'value'),
-                ('<', 'key', 'dotted_name', 1, 'value'),
-            ('<', 'node', 'decorator', 0, 0),
-            ('>', 'node', 'endl', 1, 1),
-                ('constant', '\n', 1, 'value'),
-                ('constant', '', 2, 'indent'),
-            ('<', 'node', 'endl', 1, 1),
-        ('<', 'list', 'list', 0, 'decorators'),
-        ('constant', 'def', 1, None),
-        ('>', 'formatting', 'list', 2, 'first_formatting'),
-            ('>', 'node', 'space', 0, 0),
-                ('constant', ' ', 0, 'value'),
-            ('<', 'node', 'space', 0, 0),
-        ('<', 'formatting', 'list', 2, 'first_formatting'),
-        ('constant', 'fun', 3, 'name'),
-        ('constant', '(', 5, None),
-        ('>', 'list', 'list', 7, 'arguments'),
-            ('>', 'node', 'def_argument', 0, 0),
-                ('constant', 'arg1', 0, 'name'),
-            ('<', 'node', 'def_argument', 0, 0),
-        ('<', 'list', 'list', 7, 'arguments'),
-        ('constant', ')', 9, None),
-        ('constant', ':', 11, None),
-        ('>', 'list', 'list', 13, 'value'),
-            ('>', 'node', 'endl', 0, 0),
-                ('constant', '\n', 1, 'value'),
-                ('constant', '    ', 2, 'indent'),
-            ('<', 'node', 'endl', 0, 0),
-            ('>', 'node', 'pass', 1, 1),
-                ('constant', 'pass', 0, 'type'),
-            ('<', 'node', 'pass', 1, 1),
-            ('>', 'node', 'endl', 2, 2),
-                ('constant', '\n', 1, 'value'),
-                ('constant', '', 2, 'indent'),
-            ('<', 'node', 'endl', 2, 2),
-        ('<', 'list', 'list', 13, 'value'),
-    ('<', 'node', 'funcdef', 1, 1),
+    ('>', 'node', 'endl', 0, 0, False),
+        ('>', 'constant', '\n', 1, 'value', False),
+        ('<', 'constant', '\n', 1, 'value', False),
+        ('>', 'constant', '', 2, 'indent', False),
+        ('<', 'constant', '', 2, 'indent', False),
+    ('<', 'node', 'endl', 0, 0, False),
+    ('>', 'node', 'funcdef', 1, 1, False),
+        ('>', 'list', 'list', 0, 'decorators', False),
+            ('>', 'node', 'decorator', 0, 0, False),
+                ('>', 'constant', '@', 0, None, False),
+                ('<', 'constant', '@', 0, None, False),
+                ('>', 'key', 'dotted_name', 1, 'value', False),
+                    ('>', 'list', 'list', 0, 'value', False),
+                        ('>', 'node', 'name', 0, 0, False),
+                            ('>', 'constant', 'deco', 0, 'value', False),
+                            ('<', 'constant', 'deco', 0, 'value', False),
+                        ('<', 'node', 'name', 0, 0, False),
+                    ('<', 'list', 'list', 0, 'value', False),
+                ('<', 'key', 'dotted_name', 1, 'value', False),
+            ('<', 'node', 'decorator', 0, 0, False),
+            ('>', 'node', 'endl', 1, 1, False),
+                ('>', 'constant', '\n', 1, 'value', False),
+                ('<', 'constant', '\n', 1, 'value', False),
+                ('>', 'constant', '', 2, 'indent', False),
+                ('<', 'constant', '', 2, 'indent', False),
+            ('<', 'node', 'endl', 1, 1, False),
+        ('<', 'list', 'list', 0, 'decorators', False),
+        ('>', 'constant', 'def', 1, None, False),
+        ('<', 'constant', 'def', 1, None, False),
+        ('>', 'formatting', 'list', 2, 'first_formatting', False),
+            ('>', 'node', 'space', 0, 0, False),
+                ('>', 'constant', ' ', 0, 'value', False),
+                ('<', 'constant', ' ', 0, 'value', False),
+            ('<', 'node', 'space', 0, 0, False),
+        ('<', 'formatting', 'list', 2, 'first_formatting', False),
+        ('>', 'constant', 'fun', 3, 'name', False),
+        ('<', 'constant', 'fun', 3, 'name', False),
+        ('>', 'constant', '(', 5, None, False),
+        ('<', 'constant', '(', 5, None, False),
+        ('>', 'list', 'list', 7, 'arguments', False),
+            ('>', 'node', 'def_argument', 0, 0, False),
+                ('>', 'constant', 'arg1', 0, 'name', False),
+                ('<', 'constant', 'arg1', 0, 'name', False),
+            ('<', 'node', 'def_argument', 0, 0, False),
+        ('<', 'list', 'list', 7, 'arguments', False),
+        ('>', 'constant', ')', 9, None, False),
+        ('<', 'constant', ')', 9, None, False),
+        ('>', 'constant', ':', 11, None, False),
+        ('<', 'constant', ':', 11, None, False),
+        ('>', 'list', 'list', 13, 'value', False),
+            ('>', 'node', 'endl', 0, 0, False),
+                ('>', 'constant', '\n', 1, 'value', False),
+                ('<', 'constant', '\n', 1, 'value', False),
+                ('>', 'constant', '    ', 2, 'indent', False),
+                ('<', 'constant', '    ', 2, 'indent', False),
+            ('<', 'node', 'endl', 0, 0, False),
+            ('>', 'node', 'pass', 1, 1, False),
+                ('>', 'constant', 'pass', 0, 'type', False),
+                ('<', 'constant', 'pass', 0, 'type', False),
+            ('<', 'node', 'pass', 1, 1, False),
+            ('>', 'node', 'endl', 2, 2, False),
+                ('>', 'constant', '\n', 1, 'value', False),
+                ('<', 'constant', '\n', 1, 'value', False),
+                ('>', 'constant', '', 2, 'indent', False),
+                ('<', 'constant', '', 2, 'indent', False),
+            ('<', 'node', 'endl', 2, 2, False),
+        ('<', 'list', 'list', 13, 'value', False),
+    ('<', 'node', 'funcdef', 1, 1, False),
     ])
 
     walker.walk(node)

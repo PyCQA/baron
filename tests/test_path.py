@@ -50,20 +50,18 @@ class PathWalkerTester(PathWalker):
     tuples. The first field tells what kind of step it should be:
       * '>' for calling the `before` method, i.e. going down the tree,
       * '<' for calling the `after` method, i.e. going up the tree
-      * '-' for calling the `on_leaf` method
     and the second is what the current path should be at that step.
     """
     def __init__(self, paths):
         self.paths = paths
 
     def before(self, *args):
+        super(PathWalkerTester, self).before(*args)
         self.process_test('>')
 
     def after(self, *args):
         self.process_test('<')
-
-    def on_leaf(self, *args):
-        self.process_test('-')
+        super(PathWalkerTester, self).after(*args)
 
     def process_test(self, node_type):
         _node_type, _path = self.paths.pop(0)
@@ -106,21 +104,26 @@ def test_path_walker_assignment():
     walker = PathWalkerTester([
     ('>', make_path([0], 'assignment', 0)),
         ('>', make_path([0, 'target'], 'name', 0)),
-            ('-', make_path([0, 'target', 'value'], 'name', 0)),
+            ('>', make_path([0, 'target', 'value'], 'name', 0)),
+            ('<', make_path([0, 'target', 'value'], 'name', 0)),
         ('<', make_path([0, 'target'], 'name', 0)),
         ('>', make_path([0, 'first_formatting'], 'formatting', 1)),
             ('>', make_path([0, 'first_formatting', 0], 'space', 0)),
-                ('-', make_path([0, 'first_formatting', 0, 'value'], 'space', 0)),
+                ('>', make_path([0, 'first_formatting', 0, 'value'], 'space', 0)),
+                ('<', make_path([0, 'first_formatting', 0, 'value'], 'space', 0)),
             ('<', make_path([0, 'first_formatting', 0], 'space', 0)),
         ('<', make_path([0, 'first_formatting'], 'formatting', 1)),
-        ('-', make_path([0], 'assignment', 3)),
+        ('>', make_path([0], 'assignment', 3)),
+        ('<', make_path([0], 'assignment', 3)),
         ('>', make_path([0, 'second_formatting'], 'formatting', 4)),
             ('>', make_path([0, 'second_formatting', 0], 'space', 0)),
-                ('-', make_path([0, 'second_formatting', 0, 'value'], 'space', 0)),
+                ('>', make_path([0, 'second_formatting', 0, 'value'], 'space', 0)),
+                ('<', make_path([0, 'second_formatting', 0, 'value'], 'space', 0)),
             ('<', make_path([0, 'second_formatting', 0], 'space', 0)),
         ('<', make_path([0, 'second_formatting'], 'formatting', 4)),
         ('>', make_path([0, 'value'], 'int', 5)),
-            ('-', make_path([0, 'value', 'value'], 'int', 0)),
+            ('>', make_path([0, 'value', 'value'], 'int', 0)),
+            ('<', make_path([0, 'value', 'value'], 'int', 0)),
         ('<', make_path([0, 'value'], 'int', 5)),
     ('<', make_path([0], 'assignment', 0)),
     ])

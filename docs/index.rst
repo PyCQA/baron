@@ -445,7 +445,7 @@ function :file:`dumps`) is written using it:
 
     class Dumper(RenderWalker):
         """Usage: Dumper().dump(tree)"""
-        def on_leaf(self, constant, pos, key):
+        def before_leaf(self, constant, pos, key):
             self.dump += constant
             return self.CONTINUE
         def dump(self, tree):
@@ -463,6 +463,7 @@ The available methods that you can overload are:
 * :file:`after_node` called after encountering a node
 * :file:`before_key` called before encountering a key type entry
 * :file:`after_key` called after encountering a key type entry
-* :file:`on_leaf` called when encountering a leaf of the FST (can be a constant (like "def" in a function definition) or an actual value like the value a name node)
+* :file:`before_leaf` called before encountering a leaf of the FST (can be a constant (like "def" in a function definition) or an actual value like the value a name node)
+* :file:`after_leaf` called after encountering a leaf of the FST (can be a constant (like "def" in a function definition) or an actual value like the value a name node)
 
 Every method has the same signature: :file:`(self, node, render_pos, render_key)`.
