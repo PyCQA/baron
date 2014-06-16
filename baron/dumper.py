@@ -6,7 +6,7 @@ def dumps(tree):
 
 
 class Dumper(RenderWalker):
-    def before_leaf(self, constant, pos, key):
+    def before_leaf(self, constant, key):
         self.dump += constant
 
     def dump(self, tree):
