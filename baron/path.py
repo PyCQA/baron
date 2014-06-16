@@ -167,7 +167,7 @@ class BoundingBox(PathWalker):
         self.left_of_current_position = make_position(1, 0)
         self.top_left = None
         self.bottom_right = None
-        self.found = True if self.target_path is None else False
+        self.found = True if self.target_path is None or len(target_path) == 0 else False
 
         self.walk(tree)
 
