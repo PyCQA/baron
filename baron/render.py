@@ -60,7 +60,7 @@ def render_node(node):
             key_type = 'constant' if isinstance(node[render_key], string_instance) else key_type
             yield (key_type, node[render_key], render_key)
         elif key_type == 'constant':
-            yield ('constant', render_key, None)
+            yield ('constant', render_key, render_key)
         else:
             raise NotImplementedError("Unknown key type \"%s\" in \"%s\" node" % (key_type, node['type']))
 
