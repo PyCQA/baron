@@ -68,6 +68,23 @@ def render_node(node):
 node_types = set(['node', 'list', 'key', 'formatting', 'constant', 'bool'])
 
 
+def node_keys(node):
+    return [key for (_, key, _) in nodes_rendering_order[node['type']]]
+
+
+def child_by_key(node, key):
+    if isinstance(node, list):
+        return node[key]
+
+    if key in node:
+        return node[key]
+
+    if key in node_keys(node):
+        return key
+
+    raise AttributeError("Cannot access key \"%s\" in node \"%s\"" % (key, node))
+
+
 nodes_rendering_order = {
         "int":               [("key", "value", True)],
         "name":              [("key", "value", True)],
