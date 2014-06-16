@@ -161,16 +161,6 @@ def test_bb_split_assignment():
     assert node_to_bounding_box(node) == ((1, 1), (2, 5))
 
 
-def test_bb_constant():
-    node = "="
-    assert node_to_bounding_box(node) == ((1, 1), (1, 1))
-
-
-def test_bb_constant_2():
-    node = "+="
-    assert node_to_bounding_box(node) == ((1, 1), (1, 2))
-
-
 def test_sc_out_of_scope():
     check_path(simplecode, [(-1, 3), (1, -3), (3, 3), (1, 100)], None)
 

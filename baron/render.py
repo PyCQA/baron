@@ -38,8 +38,6 @@ def render(node):
         return render_list(node)
     elif isinstance(node, dict):
         return render_node(node)
-    else:
-        return [('constant', node, None, None)]
 
 
 def render_list(node):
