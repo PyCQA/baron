@@ -19,7 +19,7 @@ def render(node):
     drastically working with the rendered FST.
 
     The recipe is a list of steps, each step correspond to a child and
-    is actually a 4-uple composed of the following fields:
+    is actually a 3-uple composed of the following fields:
     * `key_type` is a string determining the type of the child in the
         second field (`item`) of the tuple. It can be one of:
       * 'constant': the child is a string
@@ -28,8 +28,6 @@ def render(node):
       * 'list': the child is a list
       * 'formatting': the child is a list specialized in formatting
     * `item` is the child itself: either a string, a dict or a list.
-    * `render_pos` gives the child's index in the recipe list, by taking
-        gaps produced by dependency constraints into account.
     * `render_key` gives the key used to access this child from the
         parent node. It's a string if the node is a dict or a number if
         its a list.
@@ -46,11 +44,11 @@ def render(node):
 
 def render_list(node):
     for pos, child in enumerate(node):
-        yield ('node', child, pos, pos)
+        yield ('node', child, pos)
 
 
 def render_node(node):
-    for pos, (key_type, render_key, dependent) in enumerate(nodes_rendering_order[node['type']]):
+    for key_type, render_key, dependent in nodes_rendering_order[node['type']]:
         if not dependent:
             continue
         elif key_type == "bool":
@@ -62,18 +60,11 @@ def render_node(node):
 
         if key_type in ['key', 'list', 'formatting']:
             key_type = 'constant' if isinstance(node[render_key], string_instance) else key_type
-            yield (key_type, node[render_key], pos, render_key)
+            yield (key_type, node[render_key], render_key)
         elif key_type == 'constant':
-            yield ('constant', render_key, pos, None)
+            yield ('constant', render_key, None)
         else:
             raise NotImplementedError("Unknown key type \"%s\" in \"%s\" node" % (key_type, node['type']))
-
-
-def get_node_at_position_in_rendering_list(node, position_in_rendering_list):
-    render_list = nodes_rendering_order[node['type']]
-    key_type, render_key, dependent = render_list[position_in_rendering_list]
-
-    return render_key if key_type == 'constant' else node[render_key]
 
 
 node_types = set(['node', 'list', 'key', 'formatting', 'constant', 'bool'])
@@ -686,72 +677,72 @@ class RenderWalker(object):
     """
     STOP = True
 
-    def before_list(self, node, render_pos, render_key):
+    def before_list(self, node, render_key):
         pass
 
-    def after_list(self, node, render_pos, render_key):
+    def after_list(self, node, render_key):
         pass
 
-    def before_formatting(self, node, render_pos, render_key):
+    def before_formatting(self, node, render_key):
         pass
 
-    def after_formatting(self, node, render_pos, render_key):
+    def after_formatting(self, node, render_key):
         pass
 
-    def before_node(self, node, render_pos, render_key):
+    def before_node(self, node, render_key):
         pass
 
-    def after_node(self, node, render_pos, render_key):
+    def after_node(self, node, render_key):
         pass
 
-    def before_key(self, node, render_pos, render_key):
+    def before_key(self, node, render_key):
         pass
 
-    def after_key(self, node, render_pos, render_key):
+    def after_key(self, node, render_key):
         pass
 
-    def before_leaf(self, node, render_pos, render_key):
+    def before_leaf(self, node, render_key):
         pass
 
-    def after_leaf(self, node, render_pos, render_key):
+    def after_leaf(self, node, render_key):
         pass
 
-    def before(self, key_type, item, position, render_key):
+    def before(self, key_type, item, render_key):
         if key_type not in node_types:
             raise NotImplemented("Unknown key type: %s" % key_type)
 
         to_call = getattr(self, 'before_' + key_type.replace("constant", "leaf"))
 
-        return to_call(item, position, render_key)
+        return to_call(item, render_key)
 
-    def after(self, key_type, item, position, render_key):
+    def after(self, key_type, item, render_key):
         if key_type not in node_types:
             raise NotImplemented("Unknown key type: %s" % key_type)
 
         to_call = getattr(self, 'after_' + key_type.replace("constant", "leaf"))
 
-        return to_call(item, position, render_key)
+        return to_call(item, render_key)
 
     def walk(self, node):
         return self._walk(node)
 
     def _walk(self, node):
-        for key_type, item, render_pos, render_key in render(node):
-            stop = self._walk_on_item(key_type, item, render_pos, render_key)
+        for key_type, item, render_key in render(node):
+            stop = self._walk_on_item(key_type, item, render_key)
             if stop == self.STOP:
                 return self.STOP
 
-    def _walk_on_item(self, key_type, item, render_pos, render_key):
+    def _walk_on_item(self, key_type, item, render_key):
         if key_type in ['list', 'formatting'] and len(item) == 0:
             return
 
-        stop_before = self.before(key_type, item, render_pos, render_key)
+        stop_before = self.before(key_type, item, render_key)
         if stop_before:
             return self.STOP
 
         stop = self._walk(item) if key_type != 'constant' else False
 
-        stop_after = self.after(key_type, item, render_pos, render_key)
+        stop_after = self.after(key_type, item, render_key)
 
         if stop or stop_after:
             return self.STOP
