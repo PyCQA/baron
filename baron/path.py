@@ -61,6 +61,25 @@ class Position(object):
     def left(self):
         return Position(self.line, self.column - 1)
 
+    def __add__(self, other):
+        if isinstance(other, Position):
+            return Position(self.line + other.line,
+                    self.column + other.column)
+        else:
+            return Position(self.line + other[0],
+                    self.column + other[1])
+
+    def __neg__(self):
+        return Position(-self.line, -self.column)
+
+    def __sub__(self, other):
+        if isinstance(other, Position):
+            return Position(self.line - other.line,
+                    self.column - other.column)
+        else:
+            return Position(self.line - other[0],
+                    self.column - other[1])
+
     def __eq__(self, other):
         if isinstance(other, tuple) or isinstance(other, list):
             try:
@@ -75,6 +94,9 @@ class Position(object):
 
     def __repr__(self):
         return 'Position (%s, %s)' % (str(self.line), str(self.column))
+
+    def to_tuple(self):
+        return (self.line, self.column)
 
 
 def make_bounding_box(top_left=None, bottom_right=None):
