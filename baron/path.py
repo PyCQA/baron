@@ -98,6 +98,10 @@ class Position(object):
     def to_tuple(self):
         return (self.line, self.column)
 
+    @classmethod
+    def from_tuple(class_, tup):
+        return class_(tup[0], tup[1])
+
 
 def make_bounding_box(top_left=None, bottom_right=None):
     return namedtuple("BoundingBox", ["top_left", "bottom_right"])._make([
