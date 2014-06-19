@@ -1,7 +1,5 @@
 from ast import parse as python_ast_parse
 
-from rply.errors import ParsingError
-
 from .spliter import split
 from .grouper import group
 from .tokenizer import tokenize as _tokenize
@@ -10,6 +8,7 @@ from .future import has_print_function, replace_print_by_name
 from .grammator import generate_parse
 from .indentation_marker import mark_indentation
 from .inner_formatting_grouper import group as inner_group
+from .parser import ParsingError
 
 
 parse_tokens = generate_parse(False)
