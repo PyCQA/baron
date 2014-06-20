@@ -104,7 +104,7 @@ migrate.
 
 **Baron is targeting python 2.[67]**. It has not been tested on python3 but
 should be working for most parts (except the new grammar like <code>yield from</code>,
-obviously).
+obviously). Baron **runs** under python 2 and python 3.
 
 Tests
 =====
