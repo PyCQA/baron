@@ -129,12 +129,12 @@ def test_bb_name():
 
 def test_bb_string():
     node = parse("\"hello\"")[0]
-    assert node_to_bounding_box(node) == ((1, 1), (1, 7))
+    assert path_to_bounding_box(node, []) == ((1, 1), (1, 7))
 
 
 def test_bb_comment():
     node = parse("# comment")[0]
-    assert node_to_bounding_box(node) == ((1, 1), (1, 9))
+    assert path_to_bounding_box(node, None) == ((1, 1), (1, 9))
 
 
 def test_bb_funcdef():
