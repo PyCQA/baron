@@ -47,21 +47,30 @@ def make_position(line, column):
 
 
 class Position(object):
+    """Handles a cursor's line and column
+    
+    Operations requiring another Position as argument can be given
+    a tuple instead for convenience.
+    """
     def __init__(self, line, column):
         self.line = line
         self.column = column
 
     def advance_columns(self, columns):
+        """(3, 10) -> (3, 11)"""
         self.column += columns
 
     def advance_line(self):
+        """(3, 10) -> (4, 1)"""
         self.line += 1
         self.column = 1
 
     def left(self):
+        """(3, 10) -> (3, 9)"""
         return Position(self.line, self.column - 1)
 
     def __add__(self, other):
+        """(1, 1) + (1, 1) -> (2, 2)"""
         if isinstance(other, Position):
             return Position(self.line + other.line,
                     self.column + other.column)
@@ -70,9 +79,11 @@ class Position(object):
                     self.column + other[1])
 
     def __neg__(self):
+        """(1, -1) -> (-1, 1)"""
         return Position(-self.line, -self.column)
 
     def __sub__(self, other):
+        """(1, 1) - (1, 1) -> (0, 0)"""
         if isinstance(other, Position):
             return Position(self.line - other.line,
                     self.column - other.column)
@@ -81,6 +92,7 @@ class Position(object):
                     self.column - other[1])
 
     def __eq__(self, other):
+        """Compares Positions or Position and tuple"""
         if isinstance(other, tuple) or isinstance(other, list):
             try:
                 return self.line == other[0] and self.column == other[1]
