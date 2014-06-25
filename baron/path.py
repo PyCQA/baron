@@ -111,6 +111,11 @@ def make_bounding_box(top_left=None, bottom_right=None):
 
 
 class PathWalker(RenderWalker):
+    """Gives the current path while walking the rendered tree
+    
+    It adds an attribute "current_path" which is updated each time the
+    walker takes a step.
+    """
     def walk(self, tree):
         self.current_path = []
 
