@@ -8,6 +8,11 @@ def dictionnary_node(request):
     return nodes_rendering_order[request.param]
 
 
+def test_render_crap():
+    with pytest.raises(NotImplementedError):
+        render("crap")
+
+
 def test_dictionnary_key_validity(dictionnary_node):
     for key_type, render_key, dependent in dictionnary_node:
         assert key_type in node_types
