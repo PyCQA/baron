@@ -1,5 +1,5 @@
 from baron.baron import parse
-from baron.path import PathWalker
+from baron.path import PathWalker, Position, make_position
 from baron.path import position_to_path, path_to_node, position_to_node
 from baron.path import path_to_bounding_box, node_to_bounding_box
 from baron.utils import string_instance
@@ -499,4 +499,41 @@ def test_sc_l2_out_of_scope():
     
 def test_sc_l2_out_of_scope_win():
     check_path(windows_splitcode, [(2, 6), (3, 0)], None)
+
+
+def test_position_equality():
+    assert make_position(1, 2) == make_position(1, 2)
+    assert make_position(1, 2) == (1, 2)
+    assert make_position(1, 2) != make_position(2, 1)
+    assert make_position(1, 2) != (2, 1)
+
+
+def test_position_opposite():
+    assert make_position(1, 2) == - make_position(-1, -2)
+
+
+def test_position_arithmetic():
+    assert make_position(1, 2) + make_position(1, 2) == (2, 4)
+    assert make_position(1, 2) + (1, 2) == (2, 4)
+    assert make_position(1, 2) - make_position(2, 1) == (-1, 1)
+    assert make_position(1, 2) - (2, 1) == (-1, 1)
+
+
+def test_position_advance():
+    position = make_position(1, 1)
+    position.advance_columns(3)
+    assert position == (1, 4)
+    position.advance_line()
+    assert position == (2, 1)
+    position.advance_columns(4)
+    assert position == (2, 5)
+
+
+def test_position_left():
+    assert make_position(1, 2).left() == (1, 1)
+
+
+def test_postion_around_the_world():
+    assert make_position(1, 2) == Position.from_tuple(make_position(1, 2).to_tuple())
+
 
