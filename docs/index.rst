@@ -477,3 +477,11 @@ for the :file:`dumps` function:
 As you can see it is quite simple since it only needs the
 :file:`before_leaf` method.
 
+PathWalker Helper
+-----------------
+
+If while walking you need to know the current path of the node, then you
+should subclass :file:`PathWalker` instead:
+
+.. autoclass:: baron.render.PathWalker
+
