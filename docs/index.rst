@@ -436,42 +436,44 @@ always False.
 
 We will conclude here now that we have seen an example of every aspect
 of FST rendering. Understanding everything is not required to use Baron
-since :file:`dumps` handles all the complexity under the hood.
+since several helpers like :file:`render`, :file:`RenderWalker` or
+:file:`dumps` which handles all the complexity under the hood.
 
-RenderWalker
-------------
+Render Helper
+-------------
 
-Internally, Baron uses a walker to traverse a FST tree, it's a generic
-class that you are free to use. To do so, you inherit from it and
-overload the chosen methods. You then launch an instance using it's
-:file:`walk` method. Here is how the :file:`Dumper` (called by the
-function :file:`dumps`) is written using it:
+Baron provides a render function helper which walks recursively the
+:file:`nodes_rendering_order` dictionnary for you:
+
+.. autofunction:: baron.render.render
+
+RenderWalker Helper
+-------------------
+
+But even easier, Baron provides a walker class whose job is to walk the
+fst while rendering it and to call user-provided callbacks at each step:
+ 
+.. autoclass:: baron.render.RenderWalker
+
+Internally, Baron uses the :file:`RenderWalker` for multiple tasks like
+for the :file:`dumps` function:
 
 .. ipython:: python
 
     from baron.render import RenderWalker
 
+    def dumps(tree):
+        return Dumper().dump(tree)
+
     class Dumper(RenderWalker):
-        """Usage: Dumper().dump(tree)"""
-        def before_leaf(self, constant, pos, key):
+        def before_leaf(self, constant, key):
             self.dump += constant
-            return self.CONTINUE
+
         def dump(self, tree):
             self.dump = ''
             self.walk(tree)
             return self.dump
 
-The available methods that you can overload are:
+As you can see it is quite simple since it only needs the
+:file:`before_leaf` method.
 
-* :file:`before_list` called before encountering a list of nodes
-* :file:`after_list` called after encountering a list of nodes
-* :file:`before_formatting` called before encountering a formatting list
-* :file:`after_formatting` called after encountering a formatting list
-* :file:`before_node` called before encountering a node
-* :file:`after_node` called after encountering a node
-* :file:`before_key` called before encountering a key type entry
-* :file:`after_key` called after encountering a key type entry
-* :file:`before_leaf` called before encountering a leaf of the FST (can be a constant (like "def" in a function definition) or an actual value like the value a name node)
-* :file:`after_leaf` called after encountering a leaf of the FST (can be a constant (like "def" in a function definition) or an actual value like the value a name node)
-
-Every method has the same signature: :file:`(self, node, render_pos, render_key)`.

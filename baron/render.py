@@ -691,6 +691,20 @@ class RenderWalker(object):
     `before_[node,key,list,formatting,constant]` and
     `after_[node,key,list,formatting,constant]` methods provided for
     convenience.
+
+    The latter are called on specific steps:
+    * before_list: called before encountering a list of nodes
+    * after_list: called after encountering a list of nodes
+    * before_formatting: called before encountering a formatting list
+    * after_formatting: called after encountering a formatting list
+    * before_node: called before encountering a node
+    * after_node: called after encountering a node
+    * before_key: called before encountering a key type entry
+    * after_key: called after encountering a key type entry
+    * before_leaf: called before encountering a leaf of the FST (can be a constant (like "def" in a function definition) or an actual value like the value a name node)
+    * after_leaf: called after encountering a leaf of the FST (can be a constant (like "def" in a function definition) or an actual value like the value a name node)
+
+    Every method has the same signature: (self, node, render_pos, render_key).
     """
     STOP = True
 
