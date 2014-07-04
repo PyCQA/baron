@@ -65,15 +65,22 @@ class RenderWalkerTester(RenderWalker):
 
     def process_test(self, direction, node_type, node, render_key):
         _direction, _node_type, _node, _render_key, _stop = self.steps.pop(0)
-        assert _direction == direction
-        assert _node_type == node_type
+        target = (_direction, _node_type, _node, _render_key)
         if node_type == 'constant':
-            assert _node == node
+            assert target == (direction, node_type, node, render_key)
         elif "type" in node:
-            assert _node == node["type"]
+            assert target == (direction, node_type, node["type"], render_key)
         else:
-            assert _node == node.__class__.__name__
-        assert _render_key == render_key
+            assert target == (direction, node_type, node.__class__.__name__, render_key)
+        #assert _direction == direction
+        #assert _node_type == node_type
+        #if node_type == 'constant':
+        #    assert _node == node
+        #elif "type" in node:
+        #    assert _node == node["type"]
+        #else:
+        #    assert _node == node.__class__.__name__
+        #assert _render_key == render_key
         return _stop
 
 
@@ -131,6 +138,8 @@ def fun(arg1):
 """)
     walker = RenderWalkerTester([
     ('>', 'node', 'endl', 0, False),
+        ('>', 'formatting', 'list', 'formatting', False),
+        ('<', 'formatting', 'list', 'formatting', False),
         ('>', 'constant', '\n', 'value', False),
         ('<', 'constant', '\n', 'value', False),
         ('>', 'constant', '', 'indent', False),
@@ -151,6 +160,8 @@ def fun(arg1):
                 ('<', 'key', 'dotted_name', 'value', False),
             ('<', 'node', 'decorator', 0, False),
             ('>', 'node', 'endl', 1, False),
+                ('>', 'formatting', 'list', 'formatting', False),
+                ('<', 'formatting', 'list', 'formatting', False),
                 ('>', 'constant', '\n', 'value', False),
                 ('<', 'constant', '\n', 'value', False),
                 ('>', 'constant', '', 'indent', False),
@@ -167,20 +178,32 @@ def fun(arg1):
         ('<', 'formatting', 'list', 'first_formatting', False),
         ('>', 'constant', 'fun', 'name', False),
         ('<', 'constant', 'fun', 'name', False),
+        ('>', 'formatting', 'list', 'second_formatting', False),
+        ('<', 'formatting', 'list', 'second_formatting', False),
         ('>', 'constant', '(', '(', False),
         ('<', 'constant', '(', '(', False),
+        ('>', 'formatting', 'list', 'third_formatting', False),
+        ('<', 'formatting', 'list', 'third_formatting', False),
         ('>', 'list', 'list', 'arguments', False),
             ('>', 'node', 'def_argument', 0, False),
                 ('>', 'constant', 'arg1', 'name', False),
                 ('<', 'constant', 'arg1', 'name', False),
             ('<', 'node', 'def_argument', 0, False),
         ('<', 'list', 'list', 'arguments', False),
+        ('>', 'formatting', 'list', 'fourth_formatting', False),
+        ('<', 'formatting', 'list', 'fourth_formatting', False),
         ('>', 'constant', ')', ')', False),
         ('<', 'constant', ')', ')', False),
+        ('>', 'formatting', 'list', 'fifth_formatting', False),
+        ('<', 'formatting', 'list', 'fifth_formatting', False),
         ('>', 'constant', ':', ':', False),
         ('<', 'constant', ':', ':', False),
+        ('>', 'formatting', 'list', 'sixth_formatting', False),
+        ('<', 'formatting', 'list', 'sixth_formatting', False),
         ('>', 'list', 'list', 'value', False),
             ('>', 'node', 'endl', 0, False),
+                ('>', 'formatting', 'list', 'formatting', False),
+                ('<', 'formatting', 'list', 'formatting', False),
                 ('>', 'constant', '\n', 'value', False),
                 ('<', 'constant', '\n', 'value', False),
                 ('>', 'constant', '    ', 'indent', False),
@@ -191,6 +214,8 @@ def fun(arg1):
                 ('<', 'constant', 'pass', 'type', False),
             ('<', 'node', 'pass', 1, False),
             ('>', 'node', 'endl', 2, False),
+                ('>', 'formatting', 'list', 'formatting', False),
+                ('<', 'formatting', 'list', 'formatting', False),
                 ('>', 'constant', '\n', 'value', False),
                 ('<', 'constant', '\n', 'value', False),
                 ('>', 'constant', '', 'indent', False),

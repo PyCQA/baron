@@ -187,6 +187,13 @@ def test_bc_l1_def():
 
 
 def test_bc_l1_def_first_formatting():
+    tree = parse(bigcode)
+    path = [0, "first_formatting"]
+    assert path_to_bounding_box(tree, path) == ((1, 4), (1, 4))
+
+    path = [0, "first_formatting", 0]
+    assert path_to_bounding_box(tree, path) == ((1, 4), (1, 4))
+
     path = [0, "first_formatting", 0, "value"]
     check_path(bigcode, [(1, 4)], path)
 
@@ -194,6 +201,12 @@ def test_bc_l1_def_first_formatting():
 def test_bc_l1_def_name():
     path = [0, "name"]
     check_path(bigcode, [(1, 5), (1, 6), (1, 7)], path)
+
+
+def test_bc_l1_def_second_formatting():
+    path = [0, "second_formatting"]
+    tree = parse(bigcode)
+    assert path_to_bounding_box(tree, path) == ((1, 8), (1, 7))
 
 
 def test_bc_l1_def_left_paren():

@@ -750,9 +750,6 @@ class RenderWalker(object):
                 return self.STOP
 
     def _walk_on_item(self, key_type, item, render_key):
-        if key_type in ['list', 'formatting'] and len(item) == 0:
-            return
-
         stop_before = self.before(key_type, item, render_key)
         if stop_before:
             return self.STOP
