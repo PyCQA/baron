@@ -201,6 +201,52 @@ By the way, out of bound positions are handled gracefully:
     print(position_to_node(fst, 2, 4))
 
 
+Bounding Box
+------------
+
+Sometimes you want to know what are the left most and right most
+position of a rendered node or part of it. It is not a trivial task
+since you do not know easily the each rendered line's length. That's why
+two helpers :file:`node_to_bounding_box` and
+:file:`path_to_bounding_box` are provided. Examples are worth a thousand
+words so:
+
+.. ipython:: python
+
+    from baron.path import node_to_bounding_box, path_to_bounding_box
+
+    fst = parse("a(1)\nb(2)")
+
+    fst
+    node_to_bounding_box(fst)
+    path_to_bounding_box(fst, [])
+
+    fst[0]
+    node_to_bounding_box(fst[0])
+    path_to_bounding_box(fst, [0])
+
+    fst[0]["value"]
+    node_to_bounding_box(fst[1])
+    path_to_bounding_box(fst, [1])
+
+    fst[0]["value"][1]
+    node_to_bounding_box(fst[0]["value"][1])
+    path_to_bounding_box(fst, [0, "value", 1])
+
+    fst[0]["value"][1]["value"]
+    node_to_bounding_box(fst[0]["value"][1]["value"])
+    path_to_bounding_box(fst, [0, "value", 1, "value"])
+
+The bounding box positions follow the same convention as for when
+locating a node: the line and column starts at 1.
+
+As you can see, the major difference between the two functions is that
+:file:`node_to_bounding_box` will always give a left position of
+:file:`(1, 1)` since it considers you want the bounding box of the
+whole node while :file:`path_to_bounding_box` takes the location of the
+node in the fst into account.
+
+
 Rendering the FST
 =================
 
