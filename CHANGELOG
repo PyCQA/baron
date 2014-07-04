@@ -4,7 +4,9 @@ Changelog
 0.3 (unreleased)
 ----------------
 
-- Path becomes a simple list
+- path becomes a simple list and is easier to deal with
+- bounding box allows you to know the left most and right most position
+  of a node see https://baron.readthedocs.org/en/latest/#bounding-box
 
 0.2 (2014-06-11)
 ----------------
@@ -21,7 +23,8 @@ Changelog
 - new dictionary that provides the informations on how to render a FST node:
   nodes_rendering_order see https://baron.readthedocs.org/en/latest/#rendering-the-fst
 - new utilities to find a node, see https://baron.readthedocs.org/en/latest/#locate-a-node
-- new generic class that provide templates to work on the FST see https://baron.readthedocs.org/en/latest/#renderwalker
+- new generic class that provide templates to work on the FST see
+  https://baron.readthedocs.org/en/latest/#rendering-the-fst
 
 0.1.3 (2014-04-13)
 ------------------
