@@ -132,19 +132,9 @@ numbers **start at 1**, like in a text editor.
 want to know which node it is but not enough to locate the node in the
 tree. Indeed, there can be mutiple identical nodes within the tree.
 
-That's where :file:`position_to_path` is useful. It returns a dictionary
-in JSON format which contains 3 values:
-
-* the :file:`path` key contains the path: a list of int and strings which
-  represent either the key to take in a Node or the index in a ListNode
-  (e.g. "target", "value", 0)
-* the :file:`type` key tells the type of the FST node (e.g.
-  "function", "assignment", "class")
-* the :file:`position_in_rendering_list` key is the rendering position
-  of the node compared to its parent node. This is especially needed
-  when the character pointed on is actually not a node itself but only
-  a part of a parent node. It's a little complicated but don't worry,
-  examples will follow.
+That's where :file:`position_to_path` is useful. It returns a list of
+int and strings which represent either the key to take in a Node or the
+index in a ListNode. For example: :file:`["target", "value", 0]`)
 
 Let's first see the difference between the two functions:
 
@@ -167,12 +157,11 @@ Let's first see the difference between the two functions:
     path = position_to_path(tree, 3, 8)
     path
 
-The first one gives the node and the second one the node path. Both also give
-its type but what does the keys in the path correspond to exactly? The path
-tells you that to get to the node, you must take the 4th index of the root
-ListNode, followed twice by the "value" key of first the "assignment" Node and
-next the "atomtrailers" Node. Finally, take the 0th index in the resulting
-ListNode:
+The first one gives the node and the second one the node's path in the
+tree. The latter tells you that to get to the node, you must take the
+4th index of the root ListNode, followed twice by the "value" key of
+first the "assignment" Node and next the "atomtrailers" Node. Finally,
+take the 0th index in the resulting ListNode:
 
 .. ipython:: python
 
@@ -188,43 +177,8 @@ Neat. This is so common that there is a function to do that:
 
 With the two above, that's a total of three functions to locate a node.
 
-And what about the :file:`position_in_rendering_list`? To understand,
-the best is an example. What happens if you try to locate the node
-corresponding to the left parenthesis on line 3?
-
-.. ipython:: python
-
-    position_to_path(tree, 3, 12)
-
-    show_node(tree[4]["value"]["value"][1])
-
-As you can see, the information given by the path is that I'm on a call
-node. No parenthesis in sight. That's where the
-:file:`position_in_rendering_list` proves useful. It tells you where you
-are located in the rendering dictionary:
-
-.. ipython:: python
-
-    from baron import nodes_rendering_order
-
-    nodes_rendering_order["call"]
-
-    nodes_rendering_order["call"][1]
-
-Because the parenthesis is a constant, there is no specific node for the
-parenthesis. So the path can only go as far as the parent node, here "call",
-and show you the position in the rendering dictionary.
-
-For example, it allows you to distinguish the left and right parenthesis in a
-call.
-
-.. ipython:: python
-
-    position_to_path(tree, 3, 20)
-
-    nodes_rendering_order["call"][5]
-
-To conclude this section, let's look at a last example of path:
+You can also locate easily a "constant" node like a left parenthesis in
+a :file:`funcdef` node:
 
 .. ipython:: python
 
