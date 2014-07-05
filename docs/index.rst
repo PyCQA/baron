@@ -238,7 +238,7 @@ words so:
     path_to_bounding_box(fst, [0, "value", 1, "value"])
 
 The bounding box positions follow the same convention as for when
-locating a node: the line and column starts at 1.
+locating a node: the line and column start at 1.
 
 As you can see, the major difference between the two functions is that
 :file:`node_to_bounding_box` will always give a left position of
@@ -437,7 +437,7 @@ always False.
 We will conclude here now that we have seen an example of every aspect
 of FST rendering. Understanding everything is not required to use Baron
 since several helpers like :file:`render`, :file:`RenderWalker` or
-:file:`dumps` which handles all the complexity under the hood.
+:file:`dumps` handle all the complexity under the hood.
 
 Render Helper
 -------------
