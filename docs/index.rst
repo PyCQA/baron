@@ -115,8 +115,159 @@ Show_node
 Under the hood, the FST is serialized into JSON so the helpers are
 simply encapsulating JSON pretty printers.
 
+Locate a Node
+-------------
+
+Since Baron produces a tree, a path is sufficient to locate univocally
+a node in the tree. A common task where a path is involved is when
+translating a position in a file (a line and a column) into a node of
+the FST.
+
+Baron provides 2 helper functions for that:
+
+* :file:`position_to_node(fst, line, column)`
+* :file:`position_to_path(fst, line, column)`
+
+Both take a FST tree as first argument, then the line number and the
+column number. Line and column numbers **start at 1**, like in a text
+editor.
+
+:file:`position_to_node` returns an FST node. This is okay if you only
+want to know which node it is but not enough to locate the node in the
+tree. Indeed, there can be mutiple identical nodes within the tree.
+
+That's where :file:`position_to_path` is useful. It returns a list of
+int and strings which represent either the key to take in a Node or the
+index in a ListNode. For example: :file:`["target", "value", 0]`)
+
+Let's first see the difference between the two functions:
+
+.. ipython:: python
+
+    from baron import parse
+    from baron.path import position_to_node, position_to_path
+
+    some_code = """\
+    from baron import parse
+    from baron.helpers import show_node
+    fst = parse("a = 1")
+    show_node(fst)
+    """
+
+    tree = parse(some_code)
+
+    node = position_to_node(tree, 3, 8)
+    show_node(node)
+    path = position_to_path(tree, 3, 8)
+    path
+
+The first one gives the node and the second one the node's path in the
+tree. The latter tells you that to get to the node, you must take the
+4th index of the root ListNode, followed twice by the "value" key of
+first the "assignment" Node and next the "atomtrailers" Node. Finally,
+take the 0th index in the resulting ListNode:
+
+.. ipython:: python
+
+    show_node(tree[4]["value"]["value"][0])
+
+Neat. This is so common that there is a function to do that:
+
+.. ipython:: python
+
+    from baron.path import path_to_node
+
+    show_node(path_to_node(tree, path))
+
+With the two above, that's a total of three functions to locate a node.
+
+You can also locate easily a "constant" node like a left parenthesis in
+a :file:`funcdef` node:
+
+.. ipython:: python
+
+    from baron.path import position_to_path
+
+    fst = parse("a(1)")
+
+    position_to_path(fst, 1, 1)
+    position_to_path(fst, 1, 2)
+    position_to_path(fst, 1, 3)
+    position_to_path(fst, 1, 4)
+
+By the way, out of bound positions are handled gracefully:
+
+.. ipython:: python
+
+    print(position_to_node(fst, -1, 1))
+    print(position_to_node(fst, 1, 0))
+    print(position_to_node(fst, 1, 5))
+    print(position_to_node(fst, 2, 4))
+
+
+Bounding Box
+------------
+
+Sometimes you want to know what are the left most and right most
+position of a rendered node or part of it. It is not a trivial task
+since you do not know easily the each rendered line's length. That's why
+baron provides two helpers
+
+* :file:`node_to_bounding_box(fst)`
+* :file:`path_to_bounding_box(fst, path)`
+
+Examples are worth a thousand words so:
+
+.. ipython:: python
+
+    from baron.path import node_to_bounding_box, path_to_bounding_box
+
+    fst = parse("a(1)\nb(2)")
+
+    fst
+    print dumps(fst)
+    node_to_bounding_box(fst)
+    path_to_bounding_box(fst, [])
+
+    fst[0]
+    print dumps(fst[0])
+    node_to_bounding_box(fst[0])
+    path_to_bounding_box(fst, [0])
+
+    fst[0]["value"]
+    print dumps(fst[0]["value"])
+    node_to_bounding_box(fst[1])
+    path_to_bounding_box(fst, [1])
+
+    fst[0]["value"][1]
+    print dumps(fst[0]["value"][1])
+    node_to_bounding_box(fst[0]["value"][1])
+    path_to_bounding_box(fst, [0, "value", 1])
+
+    fst[0]["value"][1]["value"]
+    print dumps(fst[0]["value"][1]["value"])
+    node_to_bounding_box(fst[0]["value"][1]["value"])
+    path_to_bounding_box(fst, [0, "value", 1, "value"])
+
+The bounding box positions follow the same convention as for when
+locating a node: the line and column start at 1.
+
+As you can see, the major difference between the two functions is that
+:file:`node_to_bounding_box` will always give a left position of
+:file:`(1, 1)` since it considers you want the bounding box of the
+whole node while :file:`path_to_bounding_box` takes the location of the
+node in the fst into account.
+
+
 Rendering the FST
------------------
+=================
+
+This section is quite advanced and you will maybe never need to use what
+is in here. But if you want to process the whole rendered fst or part of
+it as a chunk, please read along since several helpers are provided.
+
+Understanding core rendering
+----------------------------
 
 Baron renders the FST back into source code by following the
 instructions given by the :file:`nodes_rendering_order` dictionary. It
@@ -287,183 +438,88 @@ latter because it has a default value of "= 1".
 The rule here is that the third column of a node is one of:
 * True, it is always rendered;
 * False, it is never rendered;
-* A string, it is rendered conditionnally. It is not rendered if the key
-  it references is either empty or False. It also must reference an
-  existing key. In our example above, it references the existing "value"
-  key which is empty in the first case and not empty in the second.
+* A string, it is rendered conditionnally. It is not rendered if the key it references is either empty or False. It also must reference an existing key. In our example above, it references the existing "value" key which is empty in the first case and not empty in the second.
 
 This is how "bool" nodes are never outputted: their third column is
 always False.
 
 We will conclude here now that we have seen an example of every aspect
 of FST rendering. Understanding everything is not required to use Baron
-since :file:`dumps` handles all the complexity under the hood.
+since several helpers like :file:`render`, :file:`RenderWalker` or
+:file:`dumps` handle all the complexity under the hood.
 
-Locate a Node
+Render Helper
 -------------
 
-Since Baron produces a tree, a path is sufficient to locate univocally
-a node in the tree. A common task where a path is involved is when
-translating a position in a file (a line and a column) into a node of
-the FST.
+Baron provides a render function helper which walks recursively the
+:file:`nodes_rendering_order` dictionnary for you:
 
-Baron provides 2 helper functions for that: :file:`position_to_node` and
-:file:`position_to_path`. Both functions take a FST tree as first
-argument, then the line number and the column number. Line and column
-numbers **start at 1**, like in a text editor.
+.. autofunction:: baron.render.render
 
-:file:`position_to_node` returns an FST node. This is okay if you only
-want to know which node it is but not enough to locate the node in the
-tree. Indeed, there can be mutiple identical nodes within the tree.
+RenderWalker Helper
+-------------------
 
-That's where :file:`position_to_path` is useful. It returns a dictionary
-in JSON format which contains 3 values:
+But even easier, Baron provides a walker class whose job is to walk the
+fst while rendering it and to call user-provided callbacks at each step:
+ 
+.. autoclass:: baron.render.RenderWalker
 
-* the :file:`path` key contains the path: a list of int and strings which
-  represent either the key to take in a Node or the index in a ListNode
-  (e.g. "target", "value", 0)
-* the :file:`type` key tells the type of the FST node (e.g.
-  "function", "assignment", "class")
-* the :file:`position_in_rendering_list` key is the rendering position
-  of the node compared to its parent node. This is especially needed
-  when the character pointed on is actually not a node itself but only
-  a part of a parent node. It's a little complicated but don't worry,
-  examples will follow.
+Internally, Baron uses the :file:`RenderWalker` for multiple tasks like
+for the :file:`dumps` function:
 
-Let's first see the difference between the two functions:
-
-.. ipython:: python
-
-    from baron import parse
-    from baron.path import position_to_node, position_to_path
-
-    some_code = """\
-    from baron import parse
-    from baron.helpers import show_node
-    fst = parse("a = 1")
-    show_node(fst)
-    """
-
-    tree = parse(some_code)
-
-    node = position_to_node(tree, 3, 8)
-    show_node(node)
-    path = position_to_path(tree, 3, 8)
-    path
-
-The first one gives the node and the second one the node path. Both also give
-its type but what does the keys in the path correspond to exactly? The path
-tells you that to get to the node, you must take the 4th index of the root
-ListNode, followed twice by the "value" key of first the "assignment" Node and
-next the "atomtrailers" Node. Finally, take the 0th index in the resulting
-ListNode:
-
-.. ipython:: python
-
-    show_node(tree[4]["value"]["value"][0])
-
-Neat. This is so common that there is a function to do that:
-
-.. ipython:: python
-
-    from baron.path import path_to_node
-
-    show_node(path_to_node(tree, path))
-
-With the two above, that's a total of three functions to locate a node.
-
-And what about the :file:`position_in_rendering_list`? To understand,
-the best is an example. What happens if you try to locate the node
-corresponding to the left parenthesis on line 3?
-
-.. ipython:: python
-
-    position_to_path(tree, 3, 12)
-
-    show_node(tree[4]["value"]["value"][1])
-
-As you can see, the information given by the path is that I'm on a call
-node. No parenthesis in sight. That's where the
-:file:`position_in_rendering_list` proves useful. It tells you where you
-are located in the rendering dictionary:
-
-.. ipython:: python
-
-    from baron import nodes_rendering_order
-
-    nodes_rendering_order["call"]
-
-    nodes_rendering_order["call"][1]
-
-Because the parenthesis is a constant, there is no specific node for the
-parenthesis. So the path can only go as far as the parent node, here "call",
-and show you the position in the rendering dictionary.
-
-For example, it allows you to distinguish the left and right parenthesis in a
-call.
-
-.. ipython:: python
-
-    position_to_path(tree, 3, 20)
-
-    nodes_rendering_order["call"][5]
-
-To conclude this section, let's look at a last example of path:
-
-.. ipython:: python
-
-    from baron.path import position_to_path
-
-    fst = parse("a(1)")
-
-    position_to_path(fst, 1, 1)
-    position_to_path(fst, 1, 2)
-    position_to_path(fst, 1, 3)
-    position_to_path(fst, 1, 4)
-
-By the way, out of bound positions are handled gracefully:
-
-.. ipython:: python
-
-    print(position_to_node(fst, -1, 1))
-    print(position_to_node(fst, 1, 0))
-    print(position_to_node(fst, 1, 5))
-    print(position_to_node(fst, 2, 4))
-
-RenderWalker
-============
-
-Internally, Baron uses a walker to traverse a FST tree, it's a generic
-class that you are free to use. To do so, you inherit from it and
-overload the chosen methods. You then launch an instance using it's
-:file:`walk` method. Here is how the :file:`Dumper` (called by the
-function :file:`dumps`) is written using it:
-
-.. ipython:: python
+::
 
     from baron.render import RenderWalker
 
+    def dumps(tree):
+        return Dumper().dump(tree)
+
     class Dumper(RenderWalker):
-        """Usage: Dumper().dump(tree)"""
-        def before_leaf(self, constant, pos, key):
+        def before_leaf(self, constant, key):
             self.dump += constant
-            return self.CONTINUE
+
         def dump(self, tree):
             self.dump = ''
             self.walk(tree)
             return self.dump
 
-The available methods that you can overload are:
+As you can see it is quite simple since it only needs the
+:file:`before_leaf` method.
 
-* :file:`before_list` called before encountering a list of nodes
-* :file:`after_list` called after encountering a list of nodes
-* :file:`before_formatting` called before encountering a formatting list
-* :file:`after_formatting` called after encountering a formatting list
-* :file:`before_node` called before encountering a node
-* :file:`after_node` called after encountering a node
-* :file:`before_key` called before encountering a key type entry
-* :file:`after_key` called after encountering a key type entry
-* :file:`before_leaf` called before encountering a leaf of the FST (can be a constant (like "def" in a function definition) or an actual value like the value a name node)
-* :file:`after_leaf` called after encountering a leaf of the FST (can be a constant (like "def" in a function definition) or an actual value like the value a name node)
+PathWalker Helper
+-----------------
 
-Every method has the same signature: :file:`(self, node, render_pos, render_key)`.
+If while walking you need to know the current path of the node, then you
+should subclass :file:`PathWalker` instead:
+
+.. autoclass:: baron.path.PathWalker
+
+Here is a succint example of what you should expect when using the
+:file:`PathWalker`:
+
+.. ipython:: python
+
+    from baron.path import PathWalker
+
+    fst = parse("a = 1")
+
+    class PathWalkerPrinter(PathWalker):
+        def before(self, key_type, item, render_key):
+            super(PathWalkerPrinter, self).before(key_type, item, render_key)
+            print(self.current_path)
+        def after(self, key_type, item, render_key):
+            print(self.current_path)
+            super(PathWalkerPrinter, self).after(key_type, item, render_key)
+
+    walker = PathWalkerPrinter()
+    walker.walk(fst)
+
+Like in the example, don't forget to call the before and after methods
+of the parent class. Furthermore, you need to respect the order
+specified above, that is:
+
+* Calling :file:`super().before()` should be done before your code using
+  the :file:`self.path` attribute.
+* Calling :file:`super().after()` should be done after your code using
+  the :file:`self.path` attribute.
+
