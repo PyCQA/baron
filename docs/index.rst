@@ -218,22 +218,27 @@ words so:
     fst = parse("a(1)\nb(2)")
 
     fst
+    print dumps(fst)
     node_to_bounding_box(fst)
     path_to_bounding_box(fst, [])
 
     fst[0]
+    print dumps(fst[0])
     node_to_bounding_box(fst[0])
     path_to_bounding_box(fst, [0])
 
     fst[0]["value"]
+    print dumps(fst[0]["value"])
     node_to_bounding_box(fst[1])
     path_to_bounding_box(fst, [1])
 
     fst[0]["value"][1]
+    print dumps(fst[0]["value"][1])
     node_to_bounding_box(fst[0]["value"][1])
     path_to_bounding_box(fst, [0, "value", 1])
 
     fst[0]["value"][1]["value"]
+    print dumps(fst[0]["value"][1]["value"])
     node_to_bounding_box(fst[0]["value"][1]["value"])
     path_to_bounding_box(fst, [0, "value", 1, "value"])
 
