@@ -248,4 +248,3 @@ class BoundingBox(PathWalker):
             self.bottom_right = deepcopy(self.left_of_current_position)
 
         return super(BoundingBox, self).after(key_type, item, render_key)
-
