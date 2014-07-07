@@ -460,7 +460,7 @@ fst while rendering it and to call user-provided callbacks at each step:
 Internally, Baron uses the :file:`RenderWalker` for multiple tasks like
 for the :file:`dumps` function:
 
-.. ipython:: python
+::
 
     from baron.render import RenderWalker
 
@@ -486,4 +486,3 @@ If while walking you need to know the current path of the node, then you
 should subclass :file:`PathWalker` instead:
 
 .. autoclass:: baron.path.PathWalker
-
