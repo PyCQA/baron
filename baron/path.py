@@ -1,5 +1,5 @@
-from .render import RenderWalker, render, child_by_key
-from .utils import string_instance, is_newline, split_on_newlines
+from .render import RenderWalker, child_by_key
+from .utils import is_newline, split_on_newlines
 from collections import namedtuple
 from copy import deepcopy
 
