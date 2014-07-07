@@ -123,10 +123,14 @@ a node in the tree. A common task where a path is involved is when
 translating a position in a file (a line and a column) into a node of
 the FST.
 
-Baron provides 2 helper functions for that: :file:`position_to_node` and
-:file:`position_to_path`. Both functions take a FST tree as first
-argument, then the line number and the column number. Line and column
-numbers **start at 1**, like in a text editor.
+Baron provides 2 helper functions for that:
+
+* :file:`position_to_node(fst, line, column)`
+* :file:`position_to_path(fst, line, column)`
+
+Both take a FST tree as first argument, then the line number and the
+column number. Line and column numbers **start at 1**, like in a text
+editor.
 
 :file:`position_to_node` returns an FST node. This is okay if you only
 want to know which node it is but not enough to locate the node in the
@@ -207,9 +211,12 @@ Bounding Box
 Sometimes you want to know what are the left most and right most
 position of a rendered node or part of it. It is not a trivial task
 since you do not know easily the each rendered line's length. That's why
-two helpers :file:`node_to_bounding_box` and
-:file:`path_to_bounding_box` are provided. Examples are worth a thousand
-words so:
+baron provides two helpers
+
+* :file:`node_to_bounding_box(fst)`
+* :file:`path_to_bounding_box(fst, path)`
+
+Examples are worth a thousand words so:
 
 .. ipython:: python
 
