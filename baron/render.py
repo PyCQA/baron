@@ -36,8 +36,10 @@ def render(node):
     """
     if isinstance(node, list):
         return render_list(node)
+
     elif isinstance(node, dict):
         return render_node(node)
+
     else:
         raise NotImplementedError("You tried to render a %s. Only list and dicts can be rendered." % node.__class__.__name__)
 
