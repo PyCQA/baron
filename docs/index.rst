@@ -493,3 +493,32 @@ If while walking you need to know the current path of the node, then you
 should subclass :file:`PathWalker` instead:
 
 .. autoclass:: baron.path.PathWalker
+
+Here is a succint example of what you should expect when using the
+:file:`PathWalker`:
+
+.. ipython:: python
+
+    fst = parse("a = 1")
+
+    class PathWalkerPrinter(PathWalker):
+        def before(self, node, render_key):
+            super(PathWalkerTester, self).before(node, render_key)
+            print(self.path)
+
+        def after(self, node, render_key):
+            print(self.path)
+            super(PathWalkerTester, self).after(node, render_key)
+
+    walker = PathWalkerTester()
+    walker.walk(fst)
+
+Like in the example, don't forget to call the before and after methods
+of the parent class. Furthermore, you need to respect the order
+specified above, that is:
+
+* Calling :file:`super().before()` should be done before your code using
+  the :file:`self.path` attribute.
+* Calling :file:`super().after()` should be done after your code using
+  the :file:`self.path` attribute.
+
