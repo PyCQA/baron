@@ -483,5 +483,5 @@ PathWalker Helper
 If while walking you need to know the current path of the node, then you
 should subclass :file:`PathWalker` instead:
 
-.. autoclass:: baron.render.PathWalker
+.. autoclass:: baron.path.PathWalker
 
