@@ -776,4 +776,3 @@ class RenderWalker(object):
 
         if stop or stop_after:
             return self.STOP
-
