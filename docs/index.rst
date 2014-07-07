@@ -499,18 +499,19 @@ Here is a succint example of what you should expect when using the
 
 .. ipython:: python
 
+    from baron.path import PathWalker
+
     fst = parse("a = 1")
 
     class PathWalkerPrinter(PathWalker):
         def before(self, node, render_key):
-            super(PathWalkerTester, self).before(node, render_key)
+            super(PathWalkerPrinter, self).before(node, render_key)
             print(self.path)
-
         def after(self, node, render_key):
             print(self.path)
-            super(PathWalkerTester, self).after(node, render_key)
+            super(PathWalkerPrinter, self).after(node, render_key)
 
-    walker = PathWalkerTester()
+    walker = PathWalkerPrinter()
     walker.walk(fst)
 
 Like in the example, don't forget to call the before and after methods
