@@ -504,12 +504,12 @@ Here is a succint example of what you should expect when using the
     fst = parse("a = 1")
 
     class PathWalkerPrinter(PathWalker):
-        def before(self, node, render_key):
-            super(PathWalkerPrinter, self).before(node, render_key)
-            print(self.path)
-        def after(self, node, render_key):
-            print(self.path)
-            super(PathWalkerPrinter, self).after(node, render_key)
+        def before(self, key_type, item, render_key):
+            super(PathWalkerPrinter, self).before(key_type, item, render_key)
+            print(self.current_path)
+        def after(self, key_type, item, render_key):
+            print(self.current_path)
+            super(PathWalkerPrinter, self).after(key_type, item, render_key)
 
     walker = PathWalkerPrinter()
     walker.walk(fst)
