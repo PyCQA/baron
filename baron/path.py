@@ -48,7 +48,7 @@ def make_position(line, column):
 
 class Position(object):
     """Handles a cursor's line and column
-    
+
     Operations requiring another Position as argument can be given
     a tuple instead for convenience.
     """
@@ -124,7 +124,7 @@ def make_bounding_box(top_left=None, bottom_right=None):
 
 class PathWalker(RenderWalker):
     """Gives the current path while walking the rendered tree
-    
+
     It adds an attribute "current_path" which is updated each time the
     walker takes a step.
     """
