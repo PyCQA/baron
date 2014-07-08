@@ -16,7 +16,7 @@ Baron provides two main functions:
 
     from baron import parse, dumps
 
-    source_code = "def f(x = 1):\n    return x"
+    source_code = "def f(x = 1):\n    return x\n"
     fst = parse(source_code)
     generated_source_code = dumps(fst)
     generated_source_code
