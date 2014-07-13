@@ -7328,7 +7328,7 @@ def test_assignment():
             },
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
-            "operator": None,
+            "operator": "",
         }
     ])
     parse_simple([
@@ -7348,7 +7348,7 @@ def test_assignment():
             },
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
-            "operator": None,
+            "operator": "",
         }
     ])
 
@@ -7376,7 +7376,7 @@ def test_assignment_assignment():
                 },
                 "first_formatting": [{"type": "space", "value": " "}],
                 "second_formatting": [{"type": "space", "value": " "}],
-                "operator": None,
+                "operator": "",
             },
             "target": {
                 "type": "name",
@@ -7384,7 +7384,7 @@ def test_assignment_assignment():
             },
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
-            "operator": None,
+            "operator": "",
         }
     ])
     parse_simple([
@@ -7408,7 +7408,7 @@ def test_assignment_assignment():
                 },
                 "first_formatting": [{"type": "space", "value": " "}],
                 "second_formatting": [{"type": "space", "value": " "}],
-                "operator": None,
+                "operator": "",
             },
             "target": {
                 "type": "name",
@@ -7416,7 +7416,7 @@ def test_assignment_assignment():
             },
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
-            "operator": None,
+            "operator": "",
         }
     ])
     parse_simple([
@@ -7440,7 +7440,7 @@ def test_assignment_assignment():
                 },
                 "first_formatting": [{"type": "space", "value": " "}],
                 "second_formatting": [{"type": "space", "value": " "}],
-                "operator": None,
+                "operator": "",
             },
             "target": {
                 "type": "name",
@@ -7448,7 +7448,7 @@ def test_assignment_assignment():
             },
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
-            "operator": None,
+            "operator": "",
         }
     ])
     parse_simple([
@@ -7472,12 +7472,12 @@ def test_assignment_assignment():
                 },
                 "first_formatting": [{"type": "space", "value": " "}],
                 "second_formatting": [{"type": "space", "value": " "}],
-                "operator": None,
+                "operator": "",
             },
             "target": {"type": "name", "value": 'a'},
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
-            "operator": None,
+            "operator": "",
         }
     ])
     parse_simple([
@@ -7501,7 +7501,7 @@ def test_assignment_assignment():
                 },
                 "first_formatting": [{"type": "space", "value": " "}],
                 "second_formatting": [{"type": "space", "value": " "}],
-                "operator": None,
+                "operator": "",
             },
             "target": {
                 "type": "name",
@@ -7509,7 +7509,7 @@ def test_assignment_assignment():
             },
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
-            "operator": None,
+            "operator": "",
         }
     ])
     parse_simple([
@@ -7533,7 +7533,7 @@ def test_assignment_assignment():
                 },
                 "first_formatting": [{"type": "space", "value": " "}],
                 "second_formatting": [{"type": "space", "value": " "}],
-                "operator": None,
+                "operator": "",
             },
             "target": {
                 "type": "name",
@@ -7541,7 +7541,7 @@ def test_assignment_assignment():
             },
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
-            "operator": None,
+            "operator": "",
         }
     ])
 
@@ -7826,7 +7826,7 @@ def test_a_equal_yield_b():
         {
             "first_formatting": [{"type": "space", "value": " "}],
             "type": "assignment",
-            "operator": None,
+            "operator": "",
             "target": {
                 "type": "name",
                 "value": "a"

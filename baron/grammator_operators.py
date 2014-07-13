@@ -50,7 +50,7 @@ def include_operators(pg):
         (target, equal, value) = pack
         return {
             "type": "assignment",
-            "operator": None,
+            "operator": "",
             "value": value,
             "target": target,
             "first_formatting": equal.hidden_tokens_before,
