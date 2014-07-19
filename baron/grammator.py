@@ -414,7 +414,7 @@ def generate_parse(print_function):
             "type": "call_argument",
             "first_formatting": [],
             "second_formatting": [],
-            "name": {},
+            "name": "",
             "value": name
         }]
 
