@@ -84,7 +84,7 @@ def include_control_structures(pg):
             "third_formatting": as_.hidden_tokens_after,
             "fourth_formatting": colon.hidden_tokens_before,
             "fifth_formatting": colon.hidden_tokens_after,
-            "delimiteur": "as",
+            "delimiter": "as",
             "target": test2,
             "exception": test,
             "value": suite
@@ -100,7 +100,7 @@ def include_control_structures(pg):
             "third_formatting": comma.hidden_tokens_after,
             "fourth_formatting": colon.hidden_tokens_before,
             "fifth_formatting": colon.hidden_tokens_after,
-            "delimiteur": ",",
+            "delimiter": ",",
             "target": test2,
             "exception": test,
             "value": suite
@@ -116,7 +116,7 @@ def include_control_structures(pg):
             "third_formatting": [],
             "fourth_formatting": colon.hidden_tokens_before,
             "fifth_formatting": colon.hidden_tokens_after,
-            "delimiteur": "",
+            "delimiter": "",
             "target": {},
             "exception": {},
             "value": suite
@@ -132,7 +132,7 @@ def include_control_structures(pg):
             "third_formatting": [],
             "fourth_formatting": colon.hidden_tokens_before,
             "fifth_formatting": colon.hidden_tokens_after,
-            "delimiteur": "",
+            "delimiter": "",
             "target": {},
             "exception": test,
             "value": suite
