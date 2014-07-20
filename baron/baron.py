@@ -1,7 +1,5 @@
 from ast import parse as python_ast_parse
 
-from rply.errors import ParsingError
-
 from .spliter import split
 from .grouper import group
 from .tokenizer import tokenize as _tokenize
@@ -10,6 +8,7 @@ from .future import has_print_function, replace_print_by_name
 from .grammator import generate_parse
 from .indentation_marker import mark_indentation
 from .inner_formatting_grouper import group as inner_group
+from .parser import ParsingError
 
 
 parse_tokens = generate_parse(False)
@@ -37,14 +36,15 @@ def _parse(tokens, print_function):
 
 def parse(source_code, print_function=None):
     # Python syntax requires source code to end with an ENDL token
-    # the endl token is removed afterward, if, and only if, it's the last token of the root level
+    # the endl token is removed afterward if and only if it's the last token of the root level
     # It is possible that this token end up in a 'suite' grammar rule
     # which means that it is 'traped' in an indented block of code
-    # I don't want to recursivly travers the tree to hope to find it
+    # I don't want to recursively cross the tree to hope to find it
     # This solution behave in the expected way for 90% of the case
     newline_appended = False
-    if source_code and source_code[-1] != "\n":
-        source_code += "\n"
+    linesep = "\r\n" if source_code.endswith("\r\n") else "\n"
+    if source_code and not source_code.endswith(linesep):
+        source_code += linesep
         newline_appended = True
 
     if print_function is None:

@@ -2,12 +2,12 @@ from .utils import string_instance
 
 
 def render(node):
-    """Recipe to render a given FST node
+    """Recipe to render a given FST node.
 
     The FST is composed of branch nodes which are either lists or dicts
     and of leaf nodes which are strings. Branch nodes can have other
     list, dict or leaf nodes as childs.
-    
+
     To render a string, simply output it. To render a list, render each
     of its elements in order. To render a dict, you must follow the
     node's entry in the nodes_rendering_order dictionnary and its
@@ -18,39 +18,43 @@ def render(node):
     better, you should subclass the RenderWalker which simplifies
     drastically working with the rendered FST.
 
-    The recipe is a list of steps, each step correspond to a child and
-    is actually a 4-uple composed of the following fields:
-    * `key_type` is a string determining the type of the child in the
-        second field (`item`) of the tuple. It can be one of:
+    The recipe is a list of steps, each step correspond to a child and is actually a 3-uple composed of the following fields:
+
+    * `key_type` is a string determining the type of the child in the second field (`item`) of the tuple. It can be one of:
+
       * 'constant': the child is a string
       * 'node': the child is a dict
       * 'key': the child is an element of a dict
       * 'list': the child is a list
       * 'formatting': the child is a list specialized in formatting
+
     * `item` is the child itself: either a string, a dict or a list.
-    * `render_pos` gives the child's index in the recipe list, by taking
-        gaps produced by dependency constraints into account.
-    * `render_key` gives the key used to access this child from the
-        parent node. It's a string if the node is a dict or a number if
-        its a list.
+    * `render_key` gives the key used to access this child from the parent node. It's a string if the node is a dict or a number if its a list.
+
+    Please note that "bool" `key_types` are never rendered, that's why
+    they are not shown here.
     """
     if isinstance(node, list):
         return render_list(node)
+
     elif isinstance(node, dict):
         return render_node(node)
+
     else:
-        return [('constant', node, None, None)]
+        raise NotImplementedError("You tried to render a %s. Only list and dicts can be rendered." % node.__class__.__name__)
 
 
 def render_list(node):
     for pos, child in enumerate(node):
-        yield ('node', child, pos, pos)
+        yield ('node', child, pos)
 
 
 def render_node(node):
-    for pos, (key_type, render_key, dependent) in enumerate(nodes_rendering_order[node['type']]):
-        if not dependent and not node.get(render_key):
+    for key_type, render_key, dependent in nodes_rendering_order[node['type']]:
+        if not dependent:
             continue
+        elif key_type == "bool":
+            raise NotImplementedError("Bool keys are only used for dependency, they cannot be rendered. Please set the \"%s\"'s dependent key in \"%s\" node to False" % ((key_type, render_key, dependent), node['type']))
         elif isinstance(dependent, str) and not node.get(dependent):
             continue
         elif isinstance(dependent, list) and not all([node.get(x) for x in dependent]):
@@ -58,21 +62,31 @@ def render_node(node):
 
         if key_type in ['key', 'list', 'formatting']:
             key_type = 'constant' if isinstance(node[render_key], string_instance) else key_type
-            yield (key_type, node[render_key], pos, render_key)
+            yield (key_type, node[render_key], render_key)
         elif key_type == 'constant':
-            yield ('constant', render_key, pos, None)
+            yield ('constant', render_key, render_key)
         else:
-            raise NotImplementedError("Unknown key type: %s" % key_type)
+            raise NotImplementedError("Unknown key type \"%s\" in \"%s\" node" % (key_type, node['type']))
 
 
-def get_node_at_position_in_rendering_list(node, position_in_rendering_list):
-    render_list = nodes_rendering_order[node['type']]
-    key_type, render_key, dependent = render_list[position_in_rendering_list]
-
-    return render_key if key_type == 'constant' else node[render_key]
+node_types = set(['node', 'list', 'key', 'formatting', 'constant', 'bool'])
 
 
-node_types = set(['node', 'list', 'key', 'formatting', 'constant'])
+def node_keys(node):
+    return [key for (_, key, _) in nodes_rendering_order[node['type']]]
+
+
+def child_by_key(node, key):
+    if isinstance(node, list):
+        return node[key]
+
+    if key in node:
+        return node[key]
+
+    if key in node_keys(node):
+        return key
+
+    raise AttributeError("Cannot access key \"%s\" in node \"%s\"" % (key, node))
 
 
 nodes_rendering_order = {
@@ -185,7 +199,7 @@ nodes_rendering_order = {
             ("formatting", "first_formatting",  True),
             ("constant",   "(",                 True),
             ("formatting", "second_formatting", True),
-            ("key",        "value",             True),
+            ("list",       "value",             True),
             ("formatting", "third_formatting",  True),
             ("constant",   ")",                 True),
             ("formatting", "fourth_formatting", True),
@@ -212,6 +226,7 @@ nodes_rendering_order = {
             ("constant",   ":",                 True),
             ("formatting", "sixth_formatting",  True),
             ("list",       "value",             True),
+            ("bool",       "parenthesis",       False),
         ],
 
         "repr": [
@@ -234,7 +249,7 @@ nodes_rendering_order = {
             ("formatting", "first_formatting",  True),
             ("constant",   "(",                 True),
             ("formatting", "second_formatting", True),
-            ("list",       "value",             True),
+            ("key",        "value",             True),
             ("formatting", "third_formatting",  True),
             ("constant",   ")",                 True),
             ("formatting", "fourth_formatting", True),
@@ -247,6 +262,7 @@ nodes_rendering_order = {
             ("formatting", "third_formatting",  "with_parenthesis"),
             ("constant",   ")",                 "with_parenthesis"),
             ("formatting", "fourth_formatting", "with_parenthesis"),
+            ("bool",       "with_parenthesis",  False),
         ],
 
         "funcdef": [
@@ -403,6 +419,7 @@ nodes_rendering_order = {
             ("constant",   ":",                 "has_two_colons"),
             ("formatting", "fourth_formatting", "has_two_colons"),
             ("key",        "step",              ["has_two_colons", "step"]),
+            ("bool",       "has_two_colons",    False),
         ],
 
         "assignment": [
@@ -454,7 +471,7 @@ nodes_rendering_order = {
             ("formatting", "second_formatting", True),
             ("constant",   ":",                 True),
             ("formatting", "third_formatting",  True),
-            ("key",        "value",             True),
+            ("list",       "value",             True),
         ],
         "with_context_item": [
             ("key",        "value",             True),
@@ -596,7 +613,7 @@ nodes_rendering_order = {
             ("formatting", "first_formatting",  True),
             ("constant",   "{",                 True),
             ("formatting", "second_formatting", True),
-            ("key",        "value",             True),
+            ("list",       "value",             True),
             ("formatting", "third_formatting",  True),
             ("constant",   "}",                 True),
             ("formatting", "fourth_formatting", True),
@@ -605,7 +622,7 @@ nodes_rendering_order = {
             ("formatting", "first_formatting",  True),
             ("constant",   "{",                 True),
             ("formatting", "second_formatting", True),
-            ("key",        "value",             True),
+            ("list",       "value",             True),
             ("formatting", "third_formatting",  True),
             ("constant",   "}",                 True),
             ("formatting", "fourth_formatting", True),
@@ -622,7 +639,7 @@ nodes_rendering_order = {
             ("formatting", "first_formatting",  True),
             ("constant",   "import",            True),
             ("formatting", "second_formatting", True),
-            ("key",        "value",             True),
+            ("list",       "value",             True),
         ],
         "from_import": [
             ("constant",   "from",              True),
@@ -631,7 +648,7 @@ nodes_rendering_order = {
             ("formatting", "second_formatting", True),
             ("constant",   "import",            True),
             ("formatting", "third_formatting",  True),
-            ("key",        "targets",           True),
+            ("list",       "targets",           True),
         ],
 
         "dotted_as_name": [
@@ -640,6 +657,7 @@ nodes_rendering_order = {
             ("constant",   "as",                "as"),
             ("formatting", "second_formatting", "as"),
             ("key",        "target",            "as"),
+            ("bool",       "as",                False),
         ],
         "name_as_name": [
             ("key",        "value",             True),
@@ -647,6 +665,7 @@ nodes_rendering_order = {
             ("constant",   "as",                "as"),
             ("formatting", "second_formatting", "as"),
             ("key",        "target",            "as"),
+            ("bool",       "as",                False),
         ],
 
         "print": [
@@ -655,90 +674,107 @@ nodes_rendering_order = {
             ("constant",   ">>",                     "destination"),
             ("formatting", "destination_formatting", "destination"),
             ("key",        "destination",            "destination"),
-            ("key",        "value",                  "value"),
+            ("list",       "value",                  "value"),
         ],
     }
 
 
-class RenderWalker:
-    """Inherit me and overload the methods you want
-    
-    When calling walk on a FST node, this class will traverse all the
+class RenderWalker(object):
+    """Inherit me and overload the methods you want.
+
+    When calling walk() on a FST node, this class will traverse all the
     node's subtree by following the recipe given by the `render`
-    function for the node and recursively for all its childs.  For
-    "node", "key", "list" and "formatting" childs it will call the
-    corresponding `before` and `after` methods and for "constant" childs
-    it will call `on_leaf`.
+    function for the node and recursively for all its childs. At each
+    recipe step, it will call methods that you can override to make a
+    specific process.
+
+    For every "node", "key", "list", "formatting" and "constant" childs,
+    it will call the `before` method when going down the tree and the
+    `after` method when going up. There are also specific
+    `before_[node,key,list,formatting,constant]` and
+    `after_[node,key,list,formatting,constant]` methods provided for
+    convenience.
+
+    The latter are called on specific steps:
+
+    * before_list: called before encountering a list of nodes
+    * after_list: called after encountering a list of nodes
+    * before_formatting: called before encountering a formatting list
+    * after_formatting: called after encountering a formatting list
+    * before_node: called before encountering a node
+    * after_node: called after encountering a node
+    * before_key: called before encountering a key type entry
+    * after_key: called after encountering a key type entry
+    * before_leaf: called before encountering a leaf of the FST (can be a constant (like "def" in a function definition) or an actual value like the value a name node)
+    * after_leaf: called after encountering a leaf of the FST (can be a constant (like "def" in a function definition) or an actual value like the value a name node)
+
+    Every method has the same signature: (self, node, render_pos, render_key).
     """
     STOP = True
 
-    def before_list(self, node, render_pos, render_key):
+    def before_list(self, node, render_key):
         pass
 
-    def after_list(self, node, render_pos, render_key):
+    def after_list(self, node, render_key):
         pass
 
-    def before_formatting(self, node, render_pos, render_key):
+    def before_formatting(self, node, render_key):
         pass
 
-    def after_formatting(self, node, render_pos, render_key):
+    def after_formatting(self, node, render_key):
         pass
 
-    def before_node(self, node, render_pos, render_key):
+    def before_node(self, node, render_key):
         pass
 
-    def after_node(self, node, render_pos, render_key):
+    def after_node(self, node, render_key):
         pass
 
-    def before_key(self, node, render_pos, render_key):
+    def before_key(self, node, render_key):
         pass
 
-    def after_key(self, node, render_pos, render_key):
+    def after_key(self, node, render_key):
         pass
 
-    def on_leaf(self, node, render_pos, render_key):
+    def before_leaf(self, node, render_key):
         pass
 
-    def before(self, key_type, item, position, render_key):
+    def after_leaf(self, node, render_key):
+        pass
+
+    def before(self, key_type, item, render_key):
         if key_type not in node_types:
             raise NotImplemented("Unknown key type: %s" % key_type)
 
         to_call = getattr(self, 'before_' + key_type.replace("constant", "leaf"))
 
-        return to_call(item, position, render_key)
+        return to_call(item, render_key)
 
-    def after(self, key_type, item, position, render_key):
+    def after(self, key_type, item, render_key):
         if key_type not in node_types:
             raise NotImplemented("Unknown key type: %s" % key_type)
 
         to_call = getattr(self, 'after_' + key_type.replace("constant", "leaf"))
 
-        return to_call(item, position, render_key)
+        return to_call(item, render_key)
 
     def walk(self, node):
         return self._walk(node)
 
     def _walk(self, node):
-        for key_type, item, render_pos, render_key in render(node):
-            stop = self._walk_on_item(key_type, item, render_pos, render_key)
+        for key_type, item, render_key in render(node):
+            stop = self._walk_on_item(key_type, item, render_key)
             if stop == self.STOP:
                 return self.STOP
 
-    def _walk_on_item(self, key_type, item, render_pos, render_key):
-        if key_type == 'constant':
-            return self.on_leaf(item, render_pos, render_key)
-
-        if key_type in ['list', 'formatting'] and len(item) == 0:
-            return
-
-        stop = []
-        stop += [self.before(key_type, item, render_pos, render_key)]
-        if any(stop):
+    def _walk_on_item(self, key_type, item, render_key):
+        stop_before = self.before(key_type, item, render_key)
+        if stop_before:
             return self.STOP
 
-        stop += [self._walk(item)]
-        stop += [self.after(key_type, item, render_pos, render_key)]
+        stop = self._walk(item) if key_type != 'constant' else False
 
-        if any(stop):
+        stop_after = self.after(key_type, item, render_key)
+
+        if stop or stop_after:
             return self.STOP
-

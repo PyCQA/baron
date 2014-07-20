@@ -72,13 +72,14 @@ def test_dumy_if_if():
         ('IF', 'if', [], [('SPACE', ' ')]),
         ('NAME', 'b'),
         ('COLON', ':'),
-        ('ENDL', '\n', [],  [('SPACE', '        ')]),
+        ('ENDL', '\n', [], [('SPACE', '        ')]),
         ('INDENT', ''),
         ('PASS', 'pass'),
         ('ENDL', '\n'),
         ('DEDENT', ''),
         ('DEDENT', ''),
     ])
+
 
 def test_dummy_if_followed():
     """
@@ -106,6 +107,7 @@ def test_dummy_if_followed():
         ('NAME', 'pouet'),
     ])
 
+
 def test_dummy_if_followed_blank_line():
     """
     if a:
@@ -132,6 +134,7 @@ def test_dummy_if_followed_blank_line():
         ('DEDENT', ''),
     ])
 
+
 def test_dumy_if_dendent_quite_a_lot():
     """
     if a:
@@ -145,15 +148,15 @@ def test_dumy_if_dendent_quite_a_lot():
         ('IF', 'if', [], [('SPACE', ' ')]),
         ('NAME', 'a'),
         ('COLON', ':'),
-        ('ENDL', '\n', [], [('SPACE', '    '*1)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 1)]),
         ('IF', 'if', [], [('SPACE', ' ')]),
         ('NAME', 'b'),
         ('COLON', ':'),
-        ('ENDL', '\n', [], [('SPACE', '    '*2)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 2)]),
         ('IF', 'if', [], [('SPACE', ' ')]),
         ('NAME', 'c'),
         ('COLON', ':'),
-        ('ENDL', '\n', [], [('SPACE', '    '*3)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 3)]),
         ('PASS', 'pass'),
         ('ENDL', '\n'),
         ('ENDL', '\n'),
@@ -162,17 +165,17 @@ def test_dumy_if_dendent_quite_a_lot():
         ('IF', 'if', [], [('SPACE', ' ')]),
         ('NAME', 'a'),
         ('COLON', ':'),
-        ('ENDL', '\n', [], [('SPACE', '    '*1)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 1)]),
         ('INDENT', ''),
         ('IF', 'if', [], [('SPACE', ' ')]),
         ('NAME', 'b'),
         ('COLON', ':'),
-        ('ENDL', '\n', [], [('SPACE', '    '*2)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 2)]),
         ('INDENT', ''),
         ('IF', 'if', [], [('SPACE', ' ')]),
         ('NAME', 'c'),
         ('COLON', ':'),
-        ('ENDL', '\n', [], [('SPACE', '    '*3)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 3)]),
         ('INDENT', ''),
         ('PASS', 'pass'),
         ('ENDL', '\n'),
@@ -182,6 +185,7 @@ def test_dumy_if_dendent_quite_a_lot():
         ('DEDENT', ''),
         ('NAME', 'pouet'),
     ])
+
 
 def test_dumy_if_dendent_a_lot():
     """
@@ -200,27 +204,27 @@ def test_dumy_if_dendent_a_lot():
         ('IF', 'if', [], [('SPACE', ' ')]),
         ('NAME', 'a'),
         ('COLON', ':'),
-        ('ENDL', '\n', [], [('SPACE', '    '*1)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 1)]),
         ('IF', 'if', [], [('SPACE', ' ')]),
         ('NAME', 'b'),
         ('COLON', ':'),
-        ('ENDL', '\n', [], [('SPACE', '    '*2)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 2)]),
         ('IF', 'if', [], [('SPACE', ' ')]),
         ('NAME', 'c'),
         ('COLON', ':'),
-        ('ENDL', '\n', [], [('SPACE', '    '*3)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 3)]),
         ('PASS', 'pass'),
-        ('ENDL', '\n', [], [('SPACE', '    '*1)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 1)]),
         ('IF', 'if', [], [('SPACE', ' ')]),
         ('NAME', 'd'),
         ('COLON', ':'),
-        ('ENDL', '\n', [], [('SPACE', '    '*2)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 2)]),
         ('PASS', 'pass'),
-        ('ENDL', '\n', [], [('SPACE', '    '*2)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 2)]),
         ('IF', 'if', [], [('SPACE', ' ')]),
         ('NAME', 'e'),
         ('COLON', ':'),
-        ('ENDL', '\n', [], [('SPACE', '    '*3)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 3)]),
         ('PASS', 'pass'),
         ('ENDL', '\n'),
         ('ENDL', '\n'),
@@ -229,33 +233,33 @@ def test_dumy_if_dendent_a_lot():
         ('IF', 'if', [], [('SPACE', ' ')]),
         ('NAME', 'a'),
         ('COLON', ':'),
-        ('ENDL', '\n', [], [('SPACE', '    '*1)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 1)]),
         ('INDENT', ''),
         ('IF', 'if', [], [('SPACE', ' ')]),
         ('NAME', 'b'),
         ('COLON', ':'),
-        ('ENDL', '\n', [], [('SPACE', '    '*2)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 2)]),
         ('INDENT', ''),
         ('IF', 'if', [], [('SPACE', ' ')]),
         ('NAME', 'c'),
         ('COLON', ':'),
-        ('ENDL', '\n', [], [('SPACE', '    '*3)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 3)]),
         ('INDENT', ''),
         ('PASS', 'pass'),
-        ('ENDL', '\n', [], [('SPACE', '    '*1)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 1)]),
         ('DEDENT', ''),
         ('DEDENT', ''),
         ('IF', 'if', [], [('SPACE', ' ')]),
         ('NAME', 'd'),
         ('COLON', ':'),
-        ('ENDL', '\n', [], [('SPACE', '    '*2)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 2)]),
         ('INDENT', ''),
         ('PASS', 'pass'),
-        ('ENDL', '\n', [], [('SPACE', '    '*2)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 2)]),
         ('IF', 'if', [], [('SPACE', ' ')]),
         ('NAME', 'e'),
         ('COLON', ':'),
-        ('ENDL', '\n', [], [('SPACE', '    '*3)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 3)]),
         ('INDENT', ''),
         ('PASS', 'pass'),
         ('ENDL', '\n'),
@@ -265,6 +269,7 @@ def test_dumy_if_dendent_a_lot():
         ('DEDENT', ''),
         ('NAME', 'pouet'),
     ])
+
 
 def test_trailing_spaces():
     """
@@ -282,9 +287,9 @@ def test_trailing_spaces():
         ('IF', 'if', [], [('SPACE', ' ')]),
         ('NAME', 'b'),
         ('COLON', ':'),
-        ('ENDL', '\n', [], [('SPACE', '    '*2)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 2)]),
         ('ENDL', '\n', [], [('SPACE', '    ')]),
-        ('ENDL', '\n', [], [('SPACE', '    '*2)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 2)]),
         ('PASS', 'pass'),
         ('ENDL', '\n'),
     ], [
@@ -296,15 +301,16 @@ def test_trailing_spaces():
         ('IF', 'if', [], [('SPACE', ' ')]),
         ('NAME', 'b'),
         ('COLON', ':'),
-        ('ENDL', '\n', [], [('SPACE', '    '*2)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 2)]),
         ('ENDL', '\n', [], [('SPACE', '    ')]),
         ('INDENT', ''),
-        ('ENDL', '\n', [], [('SPACE', '    '*2)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 2)]),
         ('PASS', 'pass'),
         ('ENDL', '\n'),
         ('DEDENT', ''),
         ('DEDENT', ''),
     ])
+
 
 def test_tab_and_spaces_because_some_people_are_horrible():
     """
@@ -316,7 +322,7 @@ def test_tab_and_spaces_because_some_people_are_horrible():
         ('IF', 'if', [], [('SPACE', ' ')]),
         ('NAME', 'a'),
         ('COLON', ':'),
-        ('ENDL', '\n', [], [('SPACE', '    '*2)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 2)]),
         ('PASS', 'pass'),
         ('ENDL', '\n', [], [('SPACE', '	')]),
         ('PASS', 'pass'),
@@ -324,7 +330,7 @@ def test_tab_and_spaces_because_some_people_are_horrible():
         ('IF', 'if', [], [('SPACE', ' ')]),
         ('NAME', 'a'),
         ('COLON', ':'),
-        ('ENDL', '\n', [], [('SPACE', '    '*2)]),
+        ('ENDL', '\n', [], [('SPACE', '    ' * 2)]),
         ('INDENT', ''),
         ('PASS', 'pass'),
         ('ENDL', '\n', [], [('SPACE', '	')]),

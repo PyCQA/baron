@@ -8,7 +8,7 @@ def include_primivites(pg, print_function):
             (print_,) = pack
             return {
                 "type": "print",
-                "value": None,
+                "value": [],
                 "destination": None,
                 "destination_formatting": [],
                 "formatting": [],
@@ -32,7 +32,7 @@ def include_primivites(pg, print_function):
             (print_, right_shift, test) = pack
             return {
                 "type": "print",
-                "value": None,
+                "value": [],
                 "destination": test,
                 "destination_formatting": right_shift.hidden_tokens_after,
                 "formatting": print_.hidden_tokens_after,

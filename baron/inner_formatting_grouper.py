@@ -3,6 +3,9 @@ from .utils import FlexibleIterator
 class UnExpectedFormattingToken(Exception):
         pass
 
+class GroupingError(Exception):
+        pass
+
 
 GROUP_THOSE = (
     "ENDL",
@@ -119,7 +122,7 @@ def fail_on_bad_token(token, debug_file_content, in_grouping_mode):
     debug_file_content = list(zip(range(1, len(debug_file_content) + 1), debug_file_content))
     debug_file_content = debug_file_content[-8:]
     debug_file_content = "\n".join(["%4s %s" % (x[0], x[1]) for x in debug_file_content])
-    raise Exception("Fail to group formatting tokens, here:\n%s <----\n\n'%s' should have been in: %s\n\nCurrent value of 'in_grouping_mode': %s" % (debug_file_content, token, ', '.join(sorted(GROUP_ON)), in_grouping_mode))
+    raise GroupingError("Fail to group formatting tokens, here:\n%s <----\n\n'%s' should have been in: %s\n\nCurrent value of 'in_grouping_mode': %s" % (debug_file_content, token, ', '.join(sorted(GROUP_ON)), in_grouping_mode))
 
 
 def _append_to_debug_file_content(token):

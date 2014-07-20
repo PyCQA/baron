@@ -1,4 +1,5 @@
 import sys
+import re
 
 
 python_version = sys.version_info[0]
@@ -72,8 +73,30 @@ def create_node_from_token(token, **kwargs):
         result.update(kwargs)
     return result
 
+
 def create_node(name, value, **kwargs):
     result = {"type": name, "value": value}
     if kwargs:
         result.update(kwargs)
     return result
+
+
+newline_regex = re.compile("(\r\n|\n|\r)")
+
+
+def is_newline(text):
+    return newline_regex.match(text)
+
+
+def split_on_newlines(text):
+    newlines = newline_regex.finditer(text)
+    if not newlines:
+        yield text
+    else:
+        current_position = 0
+        for newline in newlines:
+            yield text[current_position:newline.start(1)]
+            yield text[newline.start(1):newline.end(1)]
+            current_position = newline.end(1)
+        yield text[current_position:]
+

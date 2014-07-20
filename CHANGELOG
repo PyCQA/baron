@@ -1,24 +1,30 @@
 Changelog
 =========
 
-0.2 (unreleased)
+0.3 (unreleased)
 ----------------
 
-- feature: baron now run in python3 (*but* doesn't implement python3 grammar
-  yet) by Pierre Penninckx https://github.com/ibizaman
+- path becomes a simple list and is easier to deal with
+- bounding box allows you to know the left most and right most position
+  of a node see https://baron.readthedocs.org/en/latest/#bounding-box
+
+0.2 (2014-06-11)
+----------------
+
+- Baron now provides documentation on https://baron.readthedocs.org
+- feature: baron now run in python3 (*but* doesn't implement the full python3
+  grammar yet) by Pierre Penninckx https://github.com/ibizaman
 - feature: drop the usage of ast.py to find print_function, this allow any
   version of python to parse any other version of python also by Pierre
   Penninckx
 - fix: rare bug where a comment end up being confused as an indentation level
-
-Planned:
-- dumper class
-- dictionary that contains the order un which the items of a node must be
-  rendered
-- <del>in the function "lambda_" in dumper.py, there is a call to a now deleted
-  function "funcdef_argument", this will crash a redering of lambda</del> in
-  fact, this case won't happen since "argument" isn't a FST node anymore, this is
-  just dead code that needs to be clean. This will be removed from the CHANGELOG
+- 2 new helpers: show_file and show_node, see https://baron.readthedocs.org/en/latest/#show-file
+  and https://baron.readthedocs.org/en/latest/#show-node
+- new dictionary that provides the informations on how to render a FST node:
+  nodes_rendering_order see https://baron.readthedocs.org/en/latest/#rendering-the-fst
+- new utilities to find a node, see https://baron.readthedocs.org/en/latest/#locate-a-node
+- new generic class that provide templates to work on the FST see
+  https://baron.readthedocs.org/en/latest/#rendering-the-fst
 
 0.1.3 (2014-04-13)
 ------------------
@@ -29,7 +35,7 @@ Planned:
 0.1.2 (2014-04-08)
 ------------------
 
-- baron.dumps now accept a signle FST node, it was only working with a list of
+- baron.dumps now accept a single FST node, it was only working with a list of
   FST nodes
 - don't add a endl node at the end if not present in the input string
 - de-uniformise call_arguments and function_arguments node, this is just

@@ -86,8 +86,7 @@ def generate_parse(print_function):
 
 
     @pg.production("statement : ENDMARKER")
-    def end(pack):
-        (endmarker) = pack
+    def end(_):
         return [None]
 
 
@@ -304,7 +303,7 @@ def generate_parse(print_function):
     # TODO tests
     @pg.production("decorator : endl")
     def decorator_endl(pack):
-        # thanks ipythons dev, you appears to be the only one in the world that
+        # thanks iPython devs, you appear to be the only one in the world that
         # split decorators with empty lines... like seriously.
         (endl,) = pack
         return endl
@@ -415,7 +414,7 @@ def generate_parse(print_function):
             "type": "call_argument",
             "first_formatting": [],
             "second_formatting": [],
-            "name": {},
+            "name": "",
             "value": name
         }]
 
@@ -530,7 +529,7 @@ def generate_parse(print_function):
             "value": test,
         }]
 
-    # TODO refactor those 2 to uniformise with argument_star and argument_star_star
+    # TODO refactor those 2 to standardize with argument_star and argument_star_star
     @pg.production("parameter : STAR NAME")
     def parameter_star(pack):
         (star, name,) = pack
