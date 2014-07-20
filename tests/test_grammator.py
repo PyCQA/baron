@@ -1253,7 +1253,7 @@ def test_decorator_parenthesis_arg():
                         "first_formatting": [],
                         "value": [
                             {
-                                "name": {},
+                                "name": "",
                                 "first_formatting": [],
                                 "second_formatting": [],
                                 "type": "call_argument",

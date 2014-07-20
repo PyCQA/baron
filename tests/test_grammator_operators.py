@@ -9278,7 +9278,7 @@ def test_call_one():
                     "fourth_formatting": [],
                     "value": [
                         {
-                            "name": {},
+                            "name": "",
                             "first_formatting": [],
                             "second_formatting": [],
                             "type": "call_argument",
@@ -9319,7 +9319,7 @@ def test_call_two():
                     "fourth_formatting": [],
                     "value": [
                         {
-                            "name": {},
+                            "name": "",
                             "first_formatting": [],
                             "second_formatting": [],
                             "type": "call_argument",
@@ -9334,7 +9334,7 @@ def test_call_two():
                             "second_formatting": [{"type": "space", "value": " "}],
                         },
                         {
-                            "name": {},
+                            "name": "",
                             "first_formatting": [],
                             "second_formatting": [],
                             "type": "call_argument",
@@ -9378,7 +9378,7 @@ def test_call_two_star_arg():
                     "fourth_formatting": [],
                     "value": [
                         {
-                            "name": {},
+                            "name": "",
                             "first_formatting": [],
                             "second_formatting": [],
                             "type": "call_argument",
@@ -9393,7 +9393,7 @@ def test_call_two_star_arg():
                             "second_formatting": [{"type": "space", "value": " "}],
                         },
                         {
-                            "name": {},
+                            "name": "",
                             "first_formatting": [],
                             "second_formatting": [],
                             "type": "call_argument",
@@ -9453,7 +9453,7 @@ def test_call_two_star_arg_kwarg():
                     "fourth_formatting": [],
                     "value": [
                         {
-                            "name": {},
+                            "name": "",
                             "first_formatting": [],
                             "second_formatting": [],
                             "type": "call_argument",
@@ -9468,7 +9468,7 @@ def test_call_two_star_arg_kwarg():
                             "second_formatting": [{"type": "space", "value": " "}],
                         },
                         {
-                            "name": {},
+                            "name": "",
                             "first_formatting": [],
                             "second_formatting": [],
                             "type": "call_argument",
