@@ -7,6 +7,12 @@ Changelog
 - path becomes a simple list and is easier to deal with
 - bounding box allows you to know the left most and right most position
   of a node see https://baron.readthedocs.org/en/latest/#bounding-box
+- redbaron is classified as supporting python3
+  https://github.com/Psycojoker/baron/pull/51
+- ensure than when a key is a string, it's empty value is an empty string and
+  not None to avoid breaking libs that use introspection to guess the type of
+  the key
+- key renaming in the FST: "delimiteur" -> "delimiter"
 
 0.2 (2014-06-11)
 ----------------
