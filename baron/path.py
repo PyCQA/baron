@@ -2,6 +2,7 @@ from .render import RenderWalker, child_by_key
 from .utils import is_newline, split_on_newlines
 from collections import namedtuple
 from copy import deepcopy
+from functools import total_ordering
 
 
 def position_to_path(tree, line, column):
@@ -49,6 +50,7 @@ def make_position(line, column):
     return Position(line, column)
 
 
+@total_ordering
 class Position(object):
     """Handles a cursor's line and column
 
@@ -95,17 +97,27 @@ class Position(object):
                     self.column - other[1])
 
     def __eq__(self, other):
-        """Compares Positions or Position and tuple"""
-        if isinstance(other, tuple) or isinstance(other, list):
-            try:
-                return self.line == other[0] and self.column == other[1]
-            except IndexError:
-                return False
-
+        """Compares Positions or Position and tuple
+        
+        Will not fail if other is an unsupported type"""
         try:
-            return self.line == other.line and self.column == other.column
-        except AttributeError:
+            if isinstance(other, (tuple, list)):
+                return self.line == other[0] and self.column == other[1]
+            else:
+                return self.line == other.line and self.column == other.column
+        except (AttributeError, IndexError):
             return False
+
+    def __lt__(self, other):
+        """Compares Positions or Position and tuple
+
+        Fails if other's type is not a tuple, list or Position
+        """
+        if isinstance(other, (tuple, list)):
+            return (self.line, self.column) < (other[0], other[1])
+        else:
+            return (self.line, self.column) < (other.line, other.column)
+
 
     def __repr__(self):
         return 'Position (%s, %s)' % (str(self.line), str(self.column))

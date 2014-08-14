@@ -5,6 +5,22 @@ from baron.path import path_to_bounding_box, node_to_bounding_box
 from baron.utils import string_instance
 
 
+def test_position_compare():
+    assert Position(1, 2) < Position(1, 3)
+    assert Position(0, 9) < Position(1, 3)
+    assert Position(1, 2) <= Position(1, 3)
+    assert Position(0, 9) <= Position(1, 3)
+    assert Position(1, 2) <= Position(1, 2)
+    assert Position(1, 2) == Position(1, 2)
+
+    assert Position(1, 4) > Position(1, 3)
+    assert Position(2, 0) > Position(1, 3)
+    assert Position(1, 4) >= Position(1, 3)
+    assert Position(2, 0) >= Position(1, 3)
+    assert Position(1, 4) >= Position(1, 4)
+    assert Position(1, 4) == Position(1, 4)
+
+
 simplecode = """vara = 1"""
 
 
