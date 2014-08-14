@@ -653,19 +653,17 @@ nodes_rendering_order = {
 
         "dotted_as_name": [
             ("key",        "value",             True),
-            ("formatting", "first_formatting",  "as"),
-            ("constant",   "as",                "as"),
-            ("formatting", "second_formatting", "as"),
-            ("key",        "target",            "as"),
-            ("bool",       "as",                False),
+            ("formatting", "first_formatting",  "target"),
+            ("constant",   "as",                "target"),
+            ("formatting", "second_formatting", "target"),
+            ("key",        "target",            "target"),
         ],
         "name_as_name": [
             ("key",        "value",             True),
-            ("formatting", "first_formatting",  "as"),
-            ("constant",   "as",                "as"),
-            ("formatting", "second_formatting", "as"),
-            ("key",        "target",            "as"),
-            ("bool",       "as",                False),
+            ("formatting", "first_formatting",  "target"),
+            ("constant",   "as",                "target"),
+            ("formatting", "second_formatting", "target"),
+            ("key",        "target",            "target"),
         ],
 
         "print": [
