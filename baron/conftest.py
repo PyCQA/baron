@@ -1,5 +1,6 @@
 import json
 
+
 def pytest_assertrepr_compare(config, op, left, right):
     if isinstance(left, list) and isinstance(right, list) and op == "==":
         with open("/tmp/a", "w") as a:
