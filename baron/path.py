@@ -38,12 +38,12 @@ def node_to_bounding_box(node):
     position in the rendered source code. Its left position is here
     always (1, 1).
     """
-    return BoundingBox().compute(node)
+    return BoundingBoxFinder().compute(node)
 
 
 def path_to_bounding_box(tree, path):
     """Absolute bounding box of the node located at the given path"""
-    return BoundingBox().compute(tree, path)
+    return BoundingBoxFinder().compute(tree, path)
 
 
 def make_position(line, column):
@@ -130,8 +130,11 @@ class Position(object):
         return class_(tup[0], tup[1])
 
 
+BoundingBox = namedtuple("BoundingBox", ["top_left", "bottom_right"])
+
+
 def make_bounding_box(top_left=None, bottom_right=None):
-    return namedtuple("BoundingBox", ["top_left", "bottom_right"])._make([
+    return BoundingBox([
             deepcopy(top_left),
             deepcopy(bottom_right)
         ])
@@ -208,7 +211,7 @@ class PositionFinder(PathWalker):
             and self.target.column < self.current.column + advance_by
 
 
-class BoundingBox(PathWalker):
+class BoundingBoxFinder(PathWalker):
     """Compute the bounding box of the given node.
 
     First, walk to the target path while incrementing the position.
@@ -235,7 +238,7 @@ class BoundingBox(PathWalker):
         return make_bounding_box(self.top_left, self.bottom_right)
 
     def before(self, key_type, item, render_key):
-        stop = super(BoundingBox, self).before(key_type, item, render_key)
+        stop = super(BoundingBoxFinder, self).before(key_type, item, render_key)
 
         if self.current_path == self.target_path:
             self.found = True
@@ -259,4 +262,4 @@ class BoundingBox(PathWalker):
         if self.bottom_right is None and self.found and self.current_path == self.target_path:
             self.bottom_right = deepcopy(self.left_of_current_position)
 
-        return super(BoundingBox, self).after(key_type, item, render_key)
+        return super(BoundingBoxFinder, self).after(key_type, item, render_key)
