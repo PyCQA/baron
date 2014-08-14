@@ -15,6 +15,8 @@ do
         sed 's/, *$//' /tmp/a > /tmp/aa
         sed 's/, *$//' /tmp/b > /tmp/bb
         colordiff -W $(stty size | cut -d " " -f 2) -y /tmp/aa /tmp/bb
+        echo
+        grep ":[0-9]\+:" /tmp/.baron_test_ouput | sed -n '$d;1p'
     elif [ "$1" == "dump" ] && [ "$(grep ': AssertionError' /tmp/.baron_test_ouput)" ] && [ ! "$(grep 'Warning: couldn.t write dumps output to debug file' /tmp/.baron_test_ouput)" ]
     then
         grep "   def" /tmp/.baron_test_ouput | head -n 1 | sed 's/^ *//'
