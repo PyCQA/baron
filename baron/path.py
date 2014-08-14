@@ -70,9 +70,15 @@ class Position(object):
         self.line += 1
         self.column = 1
 
+    @property
     def left(self):
         """(3, 10) -> (3, 9)"""
         return Position(self.line, self.column - 1)
+
+    @property
+    def right(self):
+        """(3, 10) -> (3, 11)"""
+        return Position(self.line, self.column + 1)
 
     def __add__(self, other):
         """(1, 1) + (1, 1) -> (2, 2)"""
@@ -254,7 +260,7 @@ class BoundingBoxFinder(PathWalker):
                 self.current_position.advance_line()
             elif c != "":
                 self.current_position.advance_columns(len(c))
-                self.left_of_current_position = self.current_position.left()
+                self.left_of_current_position = self.current_position.left
 
         return stop
 

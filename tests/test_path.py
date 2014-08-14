@@ -559,7 +559,11 @@ def test_position_advance():
 
 
 def test_position_left():
-    assert make_position(1, 2).left() == (1, 1)
+    assert make_position(1, 2).left == (1, 1)
+
+
+def test_position_right():
+    assert make_position(1, 2).right == (1, 3)
 
 
 def test_postion_around_the_world():
