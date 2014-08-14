@@ -13,6 +13,8 @@ Changelog
   not None to avoid breaking libs that use introspection to guess the type of
   the key
 - key renaming in the FST: "delimiteur" -> "delimiter"
+- name_as_name and dotted_as_name node don't have the "as" key anymore as it
+  was useless (it can be deduce from the state of the "target" key)
 
 0.2 (2014-06-11)
 ----------------
