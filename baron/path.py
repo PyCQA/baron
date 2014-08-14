@@ -5,12 +5,12 @@ from copy import deepcopy
 from functools import total_ordering
 
 
-def position_to_path(tree, line, column):
+def position_to_path(tree, position):
     """Path to the node located at the given line and column
 
     This function locates a node in the rendered source code
     """
-    return PositionFinder().find(tree, line, column)
+    return PositionFinder().find(tree, position)
 
 
 def path_to_node(tree, path):
@@ -26,9 +26,9 @@ def path_to_node(tree, path):
     return node
 
 
-def position_to_node(tree, line, column):
+def position_to_node(tree, position):
     """FST node located at the given line and column"""
-    return path_to_node(tree, position_to_path(tree, line, column))
+    return path_to_node(tree, position_to_path(tree, position))
 
 
 def node_to_bounding_box(node):
@@ -46,8 +46,16 @@ def path_to_bounding_box(tree, path):
     return BoundingBoxFinder().compute(tree, path)
 
 
-def make_position(line, column):
-    return Position(line, column)
+def make_position(position):
+    """Creates a Position
+
+    Use this function if you're not sure if the argument position is
+    a tuple or a Position
+    """
+    try:
+        return Position(position.line, position.column)
+    except AttributeError:
+        return Position(position[0], position[1])
 
 
 @total_ordering
@@ -145,11 +153,22 @@ class Position(object):
 BoundingBox = namedtuple("BoundingBox", ["top_left", "bottom_right"])
 
 
-def make_bounding_box(top_left=None, bottom_right=None):
-    return BoundingBox([
-            deepcopy(top_left),
-            deepcopy(bottom_right)
-        ])
+def make_bounding_box(bounding_box):
+    """Creates a BoundingBox
+
+    Use this function if you're not sure if the argument bounding_box is
+    a tuple of tuple, a tuple of Position or a BoundingBox
+    """
+    try:
+        return BoundingBox(
+                make_position(bounding_box.top_left),
+                make_position(bounding_box.bottom_right)
+            )
+    except AttributeError:
+        return BoundingBox(
+                make_position(bounding_box[0]),
+                make_position(bounding_box[1])
+            )
 
 
 class PathWalker(RenderWalker):
@@ -185,9 +204,9 @@ class PositionFinder(PathWalker):
     and column. When the targetted node is found, stop there and build
     the path while going back up the tree.
     """
-    def find(self, tree, line, column):
-        self.current = make_position(1, 1)
-        self.target = make_position(line, column)
+    def find(self, tree, position):
+        self.current = Position(1, 1)
+        self.target = make_position(position)
         self.found_path = None
 
         self.walk(tree)
@@ -236,8 +255,8 @@ class BoundingBoxFinder(PathWalker):
     """
     def compute(self, tree, target_path=None):
         self.target_path = target_path
-        self.current_position = make_position(1, 1)
-        self.left_of_current_position = make_position(1, 0)
+        self.current_position = Position(1, 1)
+        self.left_of_current_position = Position(1, 0)
         self.top_left = None
         self.bottom_right = None
         self.found = True if self.target_path is None or len(target_path) == 0 else False
@@ -245,9 +264,9 @@ class BoundingBoxFinder(PathWalker):
         self.walk(tree)
 
         if self.found and self.top_left is None and self.bottom_right is None:
-            return make_bounding_box(make_position(1, 1), self.left_of_current_position)
+            return BoundingBox(Position(1, 1), self.left_of_current_position)
 
-        return make_bounding_box(self.top_left, self.bottom_right)
+        return BoundingBox(self.top_left, self.bottom_right)
 
     def before(self, key_type, item, render_key):
         stop = super(BoundingBoxFinder, self).before(key_type, item, render_key)
