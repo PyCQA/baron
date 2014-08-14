@@ -102,6 +102,12 @@ class Position(object):
             return Position(self.line - other[0],
                     self.column - other[1])
 
+    def __nonzero__(self):
+        return self.line >= 0 and self.column >= 0
+
+    def __bool__(self):
+        return self.__nonzero__()
+
     def __eq__(self, other):
         """Compares Positions or Position and tuple
         

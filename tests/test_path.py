@@ -21,6 +21,13 @@ def test_position_compare():
     assert Position(1, 4) == Position(1, 4)
 
 
+def test_position_bool():
+    assert bool(Position(1, 2)) == True
+    assert bool(Position(-1, 2)) == False
+    assert bool(Position(1, -2)) == False
+    assert bool(Position(-1, -2)) == False
+
+
 simplecode = """vara = 1"""
 
 
