@@ -41,7 +41,7 @@ class MyClass(BaseClass):
 
 class PathWalkerTester(PathWalker):
     """This class is used exclusively to test the PathWalker
-    
+
     It works by walking along with the PathWalker and for each step,
     i.e. for each before, after and on_leaf method called, it checks if
     that step was indeed expected.
@@ -471,7 +471,7 @@ def test_sc_l1_l2_first_space_win():
 def test_sc_l1_out_of_scope():
     check_path(splitcode, [(1, 6), (2, 0)], None)
 
-    
+
 def test_sc_l1_out_of_scope_win():
     check_path(windows_splitcode, [(1, 6), (2, 0)], None)
 
@@ -500,7 +500,7 @@ def test_sc_l2_value():
     path = [0, "value", "value"]
     check_path(splitcode, [(2, 5)], path)
 
-    
+
 def test_sc_l2_value_win():
     path = [0, "value", "value"]
     check_path(windows_splitcode, [(2, 5)], path)
@@ -509,7 +509,7 @@ def test_sc_l2_value_win():
 def test_sc_l2_out_of_scope():
     check_path(splitcode, [(2, 6), (3, 0)], None)
 
-    
+
 def test_sc_l2_out_of_scope_win():
     check_path(windows_splitcode, [(2, 6), (3, 0)], None)
 
@@ -548,5 +548,3 @@ def test_position_left():
 
 def test_postion_around_the_world():
     assert make_position(1, 2) == Position.from_tuple(make_position(1, 2).to_tuple())
-
-
