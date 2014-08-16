@@ -50,7 +50,6 @@ def render_list(node):
 
 
 def render_node(node, strict=False):
-    print strict
     for key_type, render_key, dependent in nodes_rendering_order[node['type']]:
         if not dependent:
             continue
@@ -75,7 +74,7 @@ def render_node(node, strict=False):
                 elif isinstance(dependent, list):
                     assert all([x in node for x in dependent])
             except AssertionError as e:
-                print "Where node == %s" % node
+                print("Where node == %s" % node)
                 raise e
 
         if key_type in ['key', 'list', 'formatting']:
