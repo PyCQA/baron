@@ -644,7 +644,7 @@ nodes_rendering_order = {
         "from_import": [
             ("constant",   "from",              True),
             ("formatting", "first_formatting",  True),
-            ("key",        "value",             True),
+            ("list",       "value",             True),
             ("formatting", "second_formatting", True),
             ("constant",   "import",            True),
             ("formatting", "third_formatting",  True),
@@ -652,7 +652,7 @@ nodes_rendering_order = {
         ],
 
         "dotted_as_name": [
-            ("key",        "value",             True),
+            ("list",       "value",             True),
             ("formatting", "first_formatting",  "target"),
             ("constant",   "as",                "target"),
             ("formatting", "second_formatting", "target"),
