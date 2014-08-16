@@ -21,6 +21,8 @@ Changelog
 - dumps now accept a strict boolean argument to check the validity of the FST
   on dumping, but this isn't that much a public feature and should probably be
   changed of API in the futur
+- name_as_name and dotted_as_name empty value for target is now an empty string
+  and not None since this is a string type key
 
 0.2 (2014-06-11)
 ----------------
