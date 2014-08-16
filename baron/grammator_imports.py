@@ -82,7 +82,7 @@ def include_imports(pg):
         return [{
                  "type": "name_as_name",
                  "value": name.value,
-                 "target": None,
+                 "target": "",
                  "first_formatting": [],
                  "second_formatting": []
                 }]
@@ -132,7 +132,7 @@ def include_imports(pg):
                  "value": dotted_name,
                  "first_formatting": [],
                  "second_formatting": [],
-                 "target": None
+                 "target": ""
                 }]
 
     @pg.production("dotted_name : dotted_name dotted_name_element")

@@ -22,7 +22,7 @@ def test_simple_import():
                     "type": "dotted_as_name",
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None,
+                    "target": "",
                 }
             ],
             "first_formatting": [],
@@ -61,7 +61,7 @@ def test_import_basic_dot():
                     "type": "dotted_as_name",
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None,
+                    "target": "",
                 }
             ],
             "first_formatting": [],
@@ -90,7 +90,7 @@ def test_import_basic_dot():
                     "type": "dotted_as_name",
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None,
+                    "target": "",
                 }
             ],
             "first_formatting": [],
@@ -145,7 +145,7 @@ def test_import_more_dot():
                     "type": "dotted_as_name",
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None
+                    "target": ""
                 }
             ],
             "first_formatting": [],
@@ -205,7 +205,7 @@ def test_import_a_b():
                     "type": "dotted_as_name",
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None
+                    "target": ""
                 },
                 {
                     "type": "comma",
@@ -227,7 +227,7 @@ def test_import_a_b():
                     "type": "dotted_as_name",
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None
+                    "target": ""
                 }
             ],
             "first_formatting": [],
@@ -261,7 +261,7 @@ def test_import_a_b_as_c():
                     "type": "dotted_as_name",
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None
+                    "target": ""
                 },
                 {
                     "type": "comma",
@@ -326,7 +326,7 @@ def test_import_a_b_c_d():
                     "type": "dotted_as_name",
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None
+                    "target": ""
                 },
                 {
                     "type": "comma",
@@ -348,7 +348,7 @@ def test_import_a_b_c_d():
                     "type": "dotted_as_name",
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None
+                    "target": ""
                 },
                 {
                     "type": "comma",
@@ -370,7 +370,7 @@ def test_import_a_b_c_d():
                     "type": "dotted_as_name",
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None
+                    "target": ""
                 },
                 {
                     "type": "comma",
@@ -392,7 +392,7 @@ def test_import_a_b_c_d():
                     "type": "dotted_as_name",
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None
+                    "target": ""
                 }
             ],
             "first_formatting": [],
@@ -423,7 +423,7 @@ def test_from_a_import_b():
                     "value": 'b',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None,
+                    "target": "",
                 }
             ],
             "first_formatting": [{"type": "space", "value": " "}],
@@ -466,7 +466,7 @@ def test_from_a_dot_c_import_b():
                     "value": 'b',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None,
+                    "target": "",
                 }
             ],
             "first_formatting": [{"type": "space", "value": " "}],
@@ -505,7 +505,7 @@ def test_from_a_dot_c_import_b():
                     "value": 'b',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None,
+                    "target": "",
                 }
             ],
             "first_formatting": [{"type": "space", "value": " "}],
@@ -550,7 +550,7 @@ def test_from_a_dot_c_import_b_d():
                     "value": 'b',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None,
+                    "target": "",
                 },
                 {
                     "type": "comma",
@@ -567,7 +567,7 @@ def test_from_a_dot_c_import_b_d():
                     "value": 'd',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None
+                    "target": ""
                 }
             ],
             "first_formatting": [{"type": "space", "value": " "}],
@@ -613,7 +613,7 @@ def test_from_a_dot_c_import_b_d():
                     "value": 'b',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None
+                    "target": ""
                 },
                 {
                     "type": "comma",
@@ -630,7 +630,7 @@ def test_from_a_dot_c_import_b_d():
                     "value": 'd',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None,
+                    "target": "",
                 }
             ],
             "first_formatting": [{"type": "space", "value": " "}],
@@ -676,7 +676,7 @@ def test_from_a_dot_c_import_b_d():
                     "value": 'b',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None,
+                    "target": "",
                 },
                 {
                     "type": "comma",
@@ -693,7 +693,7 @@ def test_from_a_dot_c_import_b_d():
                     "value": 'd',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None
+                    "target": ""
                 }
             ],
             "first_formatting": [{"type": "space", "value": " "}],
@@ -734,7 +734,7 @@ def test_from_a_dot_c_import_b_d():
                     "value": 'b',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None
+                    "target": ""
                 },
                 {
                     "type": "comma",
@@ -751,7 +751,7 @@ def test_from_a_dot_c_import_b_d():
                     "value": 'd',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None,
+                    "target": "",
                 }
             ],
             "first_formatting": [{"type": "space", "value": " "}],
@@ -823,7 +823,7 @@ def test_from_a_import_parenthesis_b():
                     "value": 'b',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None,
+                    "target": "",
                 },
                 {
                     "type": "right_parenthesis",
@@ -865,7 +865,7 @@ def test_from_a_import_parenthesis_b_without_space():
                     "value": 'b',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None,
+                    "target": "",
                 },
                 {
                     "type": "right_parenthesis",
@@ -908,7 +908,7 @@ def test_from_a_import_parenthesis_b_comma():
                     "value": 'b',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None,
+                    "target": "",
                 },
                 {
                     "type": "comma",
@@ -955,7 +955,7 @@ def test_from_a_import_parenthesis_b_space():
                     "value": 'b',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None,
+                    "target": "",
                 },
                 {
                     "type": "space",
@@ -1063,7 +1063,7 @@ def test_from_dot_a_import_b():
                     "value": 'b',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None,
+                    "target": "",
                 }
             ],
             "first_formatting": [{"type": "space", "value": " "}],
@@ -1113,7 +1113,7 @@ def test_from_dot_dot_dot_a_import_b():
                     "value": 'b',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None,
+                    "target": "",
                 }
             ],
             "first_formatting": [{"type": "space", "value": " "}],
@@ -1159,7 +1159,7 @@ def test_from_dot_dot_dot_a_import_b():
                     "value": 'b',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None,
+                    "target": "",
                 }
             ],
             "first_formatting": [{"type": "space", "value": " "}],
@@ -1205,7 +1205,7 @@ def test_from_dot_dot_dot_a_import_b():
                     "value": 'b',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None,
+                    "target": "",
                 }
             ],
             "first_formatting": [{"type": "space", "value": " "}],
@@ -1243,7 +1243,7 @@ def test_from_no_space_dot_a_import_b():
                     "value": 'b',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None,
+                    "target": "",
                 }
             ],
             "first_formatting": [],
@@ -1276,7 +1276,7 @@ def test_from_dot_import_b():
                     "value": 'b',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None,
+                    "target": "",
                 }
             ],
             "first_formatting": [{"type": "space", "value": " "}],
@@ -1309,7 +1309,7 @@ def test_from_dot_no_space_import_b():
                     "value": 'b',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None,
+                    "target": "",
                 }
             ],
             "first_formatting": [{"type": "space", "value": " "}],
@@ -1342,7 +1342,7 @@ def test_from_no_space_dot_import_b():
                     "value": 'b',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None,
+                    "target": "",
                 }
             ],
             "first_formatting": [],
@@ -1375,7 +1375,7 @@ def test_from_no_space_dot_no_sapceimport_b():
                     "value": 'b',
                     "first_formatting": [],
                     "second_formatting": [],
-                    "target": None,
+                    "target": "",
                 }
             ],
             "first_formatting": [],
