@@ -35,4 +35,4 @@ def check_dumps(source_code):
         sys.stdout.write("Warning: couldn't write dumps output to debug file, exception: %s\n\n" % e)
         sys.stdout.write("Tree: %s" % json.dumps(baron_parse(source_code), indent=4) + "\n")
 
-    assert dumps(baron_parse(source_code)) == source_code
+    assert dumps(baron_parse(source_code), strict=True) == source_code

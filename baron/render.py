@@ -1,7 +1,7 @@
 from .utils import string_instance
 
 
-def render(node):
+def render(node, strict=False):
     """Recipe to render a given FST node.
 
     The FST is composed of branch nodes which are either lists or dicts
@@ -38,7 +38,7 @@ def render(node):
         return render_list(node)
 
     elif isinstance(node, dict):
-        return render_node(node)
+        return render_node(node, strict=strict)
 
     else:
         raise NotImplementedError("You tried to render a %s. Only list and dicts can be rendered." % node.__class__.__name__)
@@ -49,7 +49,8 @@ def render_list(node):
         yield ('node', child, pos)
 
 
-def render_node(node):
+def render_node(node, strict=False):
+    print strict
     for key_type, render_key, dependent in nodes_rendering_order[node['type']]:
         if not dependent:
             continue
@@ -59,6 +60,23 @@ def render_node(node):
             continue
         elif isinstance(dependent, list) and not all([node.get(x) for x in dependent]):
             continue
+
+        if strict:
+            try:
+                if key_type == "key":
+                    assert isinstance(node[render_key], (dict, str, type(None)))
+                elif key_type in ("list", "formatting"):
+                    assert isinstance(node[render_key], list)
+
+                if dependent is True:
+                    pass
+                elif isinstance(dependent, str):
+                    assert dependent in node
+                elif isinstance(dependent, list):
+                    assert all([x in node for x in dependent])
+            except AssertionError as e:
+                print "Where node == %s" % node
+                raise e
 
         if key_type in ['key', 'list', 'formatting']:
             key_type = 'constant' if isinstance(node[render_key], string_instance) else key_type
@@ -710,6 +728,9 @@ class RenderWalker(object):
     """
     STOP = True
 
+    def __init__(self, strict=False):
+        self.strict = strict
+
     def before_list(self, node, render_key):
         pass
 
@@ -760,7 +781,7 @@ class RenderWalker(object):
         return self._walk(node)
 
     def _walk(self, node):
-        for key_type, item, render_key in render(node):
+        for key_type, item, render_key in render(node, strict=getattr(self, "strict", False)):
             stop = self._walk_on_item(key_type, item, render_key)
             if stop == self.STOP:
                 return self.STOP

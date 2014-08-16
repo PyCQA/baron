@@ -1,8 +1,8 @@
 from .render import RenderWalker
 
 
-def dumps(tree):
-    return Dumper().dump(tree)
+def dumps(tree, strict=False):
+    return Dumper(strict=strict).dump(tree)
 
 
 class Dumper(RenderWalker):

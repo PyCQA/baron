@@ -52,6 +52,7 @@ class PathWalkerTester(PathWalker):
     and the second is what the current path should be at that step.
     """
     def __init__(self, paths):
+        super(PathWalkerTester, self).__init__(strict=True)
         self.paths = paths
 
     def before(self, *args):

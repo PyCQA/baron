@@ -52,6 +52,7 @@ def test_render_dictionnary_bad_bool_dependency2():
 
 class RenderWalkerTester(RenderWalker):
     def __init__(self, steps):
+        super(RenderWalkerTester, self).__init__(strict=True)
         self.steps = steps
 
     def before(self, *args):
