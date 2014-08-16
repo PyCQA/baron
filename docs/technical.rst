@@ -16,7 +16,7 @@ rendered.
 
 .. ipython:: python
 
-    from baron import nodes_rendering_order
+    from baron import nodes_rendering_order, parse
     from baron.helpers import show_node
 
     nodes_rendering_order["name"]
@@ -173,6 +173,8 @@ latter because it has a default value of "= 1".
 
 .. ipython:: python
 
+    from baron import dumps
+
     dumps(fst[0]["arguments"][0])
 
     dumps(fst[0]["arguments"][2])
@@ -243,6 +245,8 @@ Here is a succint example of what you should expect when using the
 :file:`PathWalker`:
 
 .. ipython:: python
+
+    from baron.path import PathWalker
 
     fst = parse("a = 1")
 

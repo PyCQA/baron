@@ -34,6 +34,7 @@ Let's first see the difference between the two functions:
 
     from baron import parse
     from baron.path import position_to_node, position_to_path
+    from baron.helpers import show_node
 
     some_code = """\
     from baron import parse
@@ -109,6 +110,7 @@ Examples are worth a thousand words so:
 .. ipython:: python
 
     from baron.path import node_to_bounding_box, path_to_bounding_box
+    from baron import dumps
 
     fst = parse("a(1)\nb(2)")
 
