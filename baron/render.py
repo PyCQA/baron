@@ -20,16 +20,16 @@ def render(node):
 
     The recipe is a list of steps, each step correspond to a child and is actually a 3-uple composed of the following fields:
 
-    * `key_type` is a string determining the type of the child in the second field (`item`) of the tuple. It can be one of:
+    - `key_type` is a string determining the type of the child in the second field (`item`) of the tuple. It can be one of:
 
-      * 'constant': the child is a string
-      * 'node': the child is a dict
-      * 'key': the child is an element of a dict
-      * 'list': the child is a list
-      * 'formatting': the child is a list specialized in formatting
+      - 'constant': the child is a string
+      - 'node': the child is a dict
+      - 'key': the child is an element of a dict
+      - 'list': the child is a list
+      - 'formatting': the child is a list specialized in formatting
 
-    * `item` is the child itself: either a string, a dict or a list.
-    * `render_key` gives the key used to access this child from the parent node. It's a string if the node is a dict or a number if its a list.
+    - `item` is the child itself: either a string, a dict or a list.
+    - `render_key` gives the key used to access this child from the parent node. It's a string if the node is a dict or a number if its a list.
 
     Please note that "bool" `key_types` are never rendered, that's why
     they are not shown here.
