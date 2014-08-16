@@ -15,6 +15,9 @@ Changelog
 - key renaming in the FST: "delimiteur" -> "delimiter"
 - name_as_name and dotted_as_name node don't have the "as" key anymore as it
   was useless (it can be deduce from the state of the "target" key)
+- dotted_name node doesn't exist anymore, its existance was unjustified. In
+  import, from_import and decorator node, it has been replaced from a key to a
+  dict (with only a list inside of it) to a simple list.
 
 0.2 (2014-06-11)
 ----------------
