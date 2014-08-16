@@ -1,9 +1,10 @@
+import sys
+
 from baron.grammator import generate_parse
 from baron.dumper import dumps
 from baron.baron import parse as baron_parse
 from baron.utils import python_version
 
-import sys
 if python_version == 3:
     from itertools import zip_longest
 else:
@@ -28,7 +29,6 @@ def check_dumps(source_code):
         open("/tmp/c", "w").write(source_code)
         open("/tmp/d", "w").write(dumps(baron_parse(source_code)))
     except Exception as e:
-        import sys
         import json
         import traceback
         traceback.print_exc(file=sys.stdout)
