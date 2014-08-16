@@ -226,4 +226,3 @@ def fun(arg1):
     ])
 
     walker.walk(node)
-
