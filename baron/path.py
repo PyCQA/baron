@@ -1,6 +1,5 @@
 from .render import RenderWalker, child_by_key
 from .utils import is_newline, split_on_newlines, total_ordering
-from collections import namedtuple
 from copy import deepcopy
 
 
@@ -45,28 +44,20 @@ def path_to_bounding_box(tree, path):
     return BoundingBoxFinder().compute(tree, path)
 
 
-def make_position(position):
-    """Creates a Position
-
-    Use this function if you're not sure if the argument position is
-    a tuple or a Position
-    """
-    try:
-        return Position(position.line, position.column)
-    except AttributeError:
-        return Position(position[0], position[1])
-
-
 @total_ordering
 class Position(object):
     """Handles a cursor's line and column
 
     Operations requiring another Position as argument can be given
-    a tuple instead for convenience.
+    an iterable instead for convenience.
     """
-    def __init__(self, line, column):
-        self.line = line
-        self.column = column
+    def __init__(self, position):
+        if hasattr(position, 'line') and hasattr(position, 'column'):
+            self.line = position.line
+            self.column = position.column
+        else:
+            self.line = position[0]
+            self.column = position[1]
 
     def advance_columns(self, columns):
         """(3, 10) -> (3, 11)"""
@@ -80,34 +71,28 @@ class Position(object):
     @property
     def left(self):
         """(3, 10) -> (3, 9)"""
-        return Position(self.line, self.column - 1)
+        return Position((self.line, self.column - 1))
 
     @property
     def right(self):
         """(3, 10) -> (3, 11)"""
-        return Position(self.line, self.column + 1)
+        return Position((self.line, self.column + 1))
 
     def __add__(self, other):
         """(1, 1) + (1, 1) -> (2, 2)"""
-        if isinstance(other, Position):
-            return Position(self.line + other.line,
-                    self.column + other.column)
-        else:
-            return Position(self.line + other[0],
-                    self.column + other[1])
+        other = Position(other)
+        return Position((self.line + other.line,
+                        self.column + other.column))
 
     def __neg__(self):
         """(1, -1) -> (-1, 1)"""
-        return Position(-self.line, -self.column)
+        return Position((-self.line, -self.column))
 
     def __sub__(self, other):
         """(1, 1) - (1, 1) -> (0, 0)"""
-        if isinstance(other, Position):
-            return Position(self.line - other.line,
-                    self.column - other.column)
-        else:
-            return Position(self.line - other[0],
-                    self.column - other[1])
+        other = Position(other)
+        return Position((self.line - other.line,
+                        self.column - other.column))
 
     def __nonzero__(self):
         return self.line >= 0 and self.column >= 0
@@ -120,22 +105,15 @@ class Position(object):
         
         Will not fail if other is an unsupported type"""
         try:
-            if isinstance(other, (tuple, list)):
-                return self.line == other[0] and self.column == other[1]
-            else:
-                return self.line == other.line and self.column == other.column
+            other = Position(other)
+            return self.line == other.line and self.column == other.column
         except (AttributeError, IndexError):
             return False
 
     def __lt__(self, other):
-        """Compares Positions or Position and tuple
-
-        Fails if other's type is not a tuple, list or Position
-        """
-        if isinstance(other, (tuple, list)):
-            return (self.line, self.column) < (other[0], other[1])
-        else:
-            return (self.line, self.column) < (other.line, other.column)
+        """Compares Position with Position or iterable"""
+        other = Position(other)
+        return (self.line, self.column) < (other.line, other.column)
 
 
     def __repr__(self):
@@ -144,30 +122,23 @@ class Position(object):
     def to_tuple(self):
         return (self.line, self.column)
 
-    @classmethod
-    def from_tuple(class_, tup):
-        return class_(tup[0], tup[1])
 
+class BoundingBox:
+    def __init__(self, bounding_box):
+        if hasattr(bounding_box, 'top_left') and hasattr(bounding_box, 'bottom_right'):
+            self.top_left = Position(bounding_box.top_left)
+            self.bottom_right = Position(bounding_box.bottom_right)
+        else:
+            self.top_left = Position(bounding_box[0])
+            self.bottom_right = Position(bounding_box[1])
 
-BoundingBox = namedtuple("BoundingBox", ["top_left", "bottom_right"])
-
-
-def make_bounding_box(bounding_box):
-    """Creates a BoundingBox
-
-    Use this function if you're not sure if the argument bounding_box is
-    a tuple of tuple, a tuple of Position or a BoundingBox
-    """
-    try:
-        return BoundingBox(
-                make_position(bounding_box.top_left),
-                make_position(bounding_box.bottom_right)
-            )
-    except AttributeError:
-        return BoundingBox(
-                make_position(bounding_box[0]),
-                make_position(bounding_box[1])
-            )
+    def __eq__(self, other):
+        """Compares BoundingBox with BoundingBox or iterable"""
+        try:
+            other = BoundingBox(other)
+            return self.top_left == other.top_left and self.bottom_right == other.bottom_right
+        except (AttributeError, IndexError):
+            return False
 
 
 class PathWalker(RenderWalker):
@@ -204,8 +175,8 @@ class PositionFinder(PathWalker):
     the path while going back up the tree.
     """
     def find(self, tree, position):
-        self.current = Position(1, 1)
-        self.target = make_position(position)
+        self.current = Position((1, 1))
+        self.target = Position(position)
         self.found_path = None
 
         self.walk(tree)
@@ -254,8 +225,8 @@ class BoundingBoxFinder(PathWalker):
     """
     def compute(self, tree, target_path=None):
         self.target_path = target_path
-        self.current_position = Position(1, 1)
-        self.left_of_current_position = Position(1, 0)
+        self.current_position = Position((1, 1))
+        self.left_of_current_position = Position((1, 0))
         self.top_left = None
         self.bottom_right = None
         self.found = True if self.target_path is None or len(target_path) == 0 else False
@@ -263,9 +234,9 @@ class BoundingBoxFinder(PathWalker):
         self.walk(tree)
 
         if self.found and self.top_left is None and self.bottom_right is None:
-            return BoundingBox(Position(1, 1), self.left_of_current_position)
+            return BoundingBox((Position((1, 1)), self.left_of_current_position))
 
-        return BoundingBox(self.top_left, self.bottom_right)
+        return BoundingBox((self.top_left, self.bottom_right))
 
     def before(self, key_type, item, render_key):
         stop = super(BoundingBoxFinder, self).before(key_type, item, render_key)

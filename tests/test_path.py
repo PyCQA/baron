@@ -1,5 +1,5 @@
 from baron.baron import parse
-from baron.path import PathWalker, Position, make_position, BoundingBox, make_bounding_box
+from baron.path import PathWalker, Position, BoundingBox
 from baron.path import position_to_path, path_to_node, position_to_node
 from baron.path import path_to_bounding_box, node_to_bounding_box
 from baron.utils import string_instance
@@ -7,9 +7,9 @@ from baron.utils import string_instance
 
 def test_position():
     pos1 = (1, 2)
-    pos2 = Position(1, 2)
-    pos3 = make_position((1, 2))
-    pos4 = make_position(Position(1, 2))
+    pos2 = Position((1, 2))
+    pos3 = Position((1, 2))
+    pos4 = Position(Position((1, 2)))
 
     assert pos1 == pos2
     assert pos2 == pos3
@@ -21,39 +21,39 @@ def test_position():
 
 
 def test_position_compare():
-    assert Position(1, 2) < Position(1, 3)
-    assert Position(0, 9) < Position(1, 3)
-    assert Position(1, 2) <= Position(1, 3)
-    assert Position(0, 9) <= Position(1, 3)
-    assert Position(1, 2) <= Position(1, 2)
-    assert Position(1, 2) == Position(1, 2)
+    assert Position((1, 2)) < Position((1, 3))
+    assert Position((0, 9)) < Position((1, 3))
+    assert Position((1, 2)) <= Position((1, 3))
+    assert Position((0, 9)) <= Position((1, 3))
+    assert Position((1, 2)) <= Position((1, 2))
+    assert Position((1, 2)) == Position((1, 2))
 
-    assert Position(1, 4) > Position(1, 3)
-    assert Position(2, 0) > Position(1, 3)
-    assert Position(1, 4) >= Position(1, 3)
-    assert Position(2, 0) >= Position(1, 3)
-    assert Position(1, 4) >= Position(1, 4)
-    assert Position(1, 4) == Position(1, 4)
+    assert Position((1, 4)) > Position((1, 3))
+    assert Position((2, 0)) > Position((1, 3))
+    assert Position((1, 4)) >= Position((1, 3))
+    assert Position((2, 0)) >= Position((1, 3))
+    assert Position((1, 4)) >= Position((1, 4))
+    assert Position((1, 4)) == Position((1, 4))
 
 
 def test_position_bool():
-    assert bool(Position(1, 2)) == True
-    assert bool(Position(-1, 2)) == False
-    assert bool(Position(1, -2)) == False
-    assert bool(Position(-1, -2)) == False
+    assert bool(Position((1, 2))) == True
+    assert bool(Position((-1, 2))) == False
+    assert bool(Position((1, -2))) == False
+    assert bool(Position((-1, -2))) == False
 
 
 def test_bounding_box():
     bb1 = ((1, 2), (3, 4))
-    bb2 = BoundingBox((1, 2), (3, 4))
-    bb3 = BoundingBox(Position(1, 2), (3, 4))
-    bb4 = BoundingBox((1, 2), Position(3, 4))
-    bb5 = BoundingBox(Position(1, 2), Position(3, 4))
-    bb6 = make_bounding_box(((1, 2), (3, 4)))
-    bb7 = make_bounding_box((Position(1, 2), (3, 4)))
-    bb8 = make_bounding_box(((1, 2), Position(3, 4)))
-    bb9 = make_bounding_box((Position(1, 2), Position(3, 4)))
-    bb10 = make_bounding_box(BoundingBox((1, 2), (3, 4)))
+    bb2 = BoundingBox(((1, 2), (3, 4)))
+    bb3 = BoundingBox((Position((1, 2)), (3, 4)))
+    bb4 = BoundingBox(((1, 2), Position((3, 4))))
+    bb5 = BoundingBox((Position((1, 2)), Position((3, 4))))
+    bb6 = BoundingBox(((1, 2), (3, 4)))
+    bb7 = BoundingBox((Position((1, 2)), (3, 4)))
+    bb8 = BoundingBox(((1, 2), Position((3, 4))))
+    bb9 = BoundingBox((Position((1, 2)), Position((3, 4))))
+    bb10 = BoundingBox(BoundingBox(((1, 2), (3, 4))))
 
     assert bb1 == bb2
     assert bb2 == bb3
@@ -586,25 +586,25 @@ def test_sc_l2_out_of_scope_win():
 
 
 def test_position_equality():
-    assert Position(1, 2) == Position(1, 2)
-    assert Position(1, 2) == (1, 2)
-    assert Position(1, 2) != Position(2, 1)
-    assert Position(1, 2) != (2, 1)
+    assert Position((1, 2)) == Position((1, 2))
+    assert Position((1, 2)) == (1, 2)
+    assert Position((1, 2)) != Position((2, 1))
+    assert Position((1, 2)) != (2, 1)
 
 
 def test_position_opposite():
-    assert Position(1, 2) == - Position(-1, -2)
+    assert Position((1, 2)) == - Position((-1, -2))
 
 
 def test_position_arithmetic():
-    assert Position(1, 2) + Position(1, 2) == (2, 4)
-    assert Position(1, 2) + (1, 2) == (2, 4)
-    assert Position(1, 2) - Position(2, 1) == (-1, 1)
-    assert Position(1, 2) - (2, 1) == (-1, 1)
+    assert Position((1, 2)) + Position((1, 2)) == (2, 4)
+    assert Position((1, 2)) + (1, 2) == (2, 4)
+    assert Position((1, 2)) - Position((2, 1)) == (-1, 1)
+    assert Position((1, 2)) - (2, 1) == (-1, 1)
 
 
 def test_position_advance():
-    position = Position(1, 1)
+    position = Position((1, 1))
     position.advance_columns(3)
     assert position == (1, 4)
     position.advance_line()
@@ -614,14 +614,14 @@ def test_position_advance():
 
 
 def test_position_left():
-    assert Position(1, 2).left == (1, 1)
+    assert Position((1, 2)).left == (1, 1)
 
 
 def test_position_right():
-    assert Position(1, 2).right == (1, 3)
+    assert Position((1, 2)).right == (1, 3)
 
 
 def test_postion_around_the_world():
-    assert Position(1, 2) == Position.from_tuple(Position(1, 2).to_tuple())
+    assert Position((1, 2)) == Position(Position((1, 2)).to_tuple())
 
 
