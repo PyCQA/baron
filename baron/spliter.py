@@ -6,6 +6,10 @@ def split(sequence):
     return list(split_generator(sequence))
 
 
+class UntreatedError(Exception):
+    pass
+
+
 def split_generator(sequence):
     iterator = FlexibleIterator(sequence)
     while True:
@@ -57,4 +61,4 @@ def split_generator(sequence):
             next(iterator)
 
         if not_found:
-            raise Exception("Untreated elements: %s" % iterator.rest_of_the_sequence().__repr__()[:50])
+            raise UntreatedError("Untreated elements: %s" % iterator.rest_of_the_sequence().__repr__()[:50])
