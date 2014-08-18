@@ -13,6 +13,12 @@ Changelog
   not None to avoid breaking libs that use introspection to guess the type of
   the key
 - key renaming in the FST: "delimiteur" -> "delimiter"
+- Position's left and right functions become properties and thus
+  attributes
+- Position objects can be compared to other Position objects or any
+  iterables
+- make_position and make_bounding_box functions are deleted in favor of
+  always using the corresponding class' constructor
 
 0.2 (2014-06-11)
 ----------------
