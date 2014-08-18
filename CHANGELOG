@@ -23,6 +23,8 @@ Changelog
   changed of API in the futur
 - name_as_name and dotted_as_name empty value for target is now an empty string
   and not None since this is a string type key
+- all raised exceptions inherit from a common base exception to ease try/catch
+  constructions
 
 0.2 (2014-06-11)
 ----------------
