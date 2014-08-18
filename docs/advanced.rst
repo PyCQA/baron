@@ -99,8 +99,8 @@ Bounding Box
 
 Sometimes you want to know what are the left most and right most
 position of a rendered node or part of it. It is not a trivial task
-since you do not know easily the each rendered line's length. That's why
-baron provides two helpers
+since you do not know easily each rendered line's length. That's why
+baron provides two helpers:
 
 * :file:`node_to_bounding_box(fst)`
 * :file:`path_to_bounding_box(fst, path)`
@@ -139,8 +139,9 @@ Examples are worth a thousand words so:
     node_to_bounding_box(fst[0]["value"][1]["value"])
     path_to_bounding_box(fst, [0, "value", 1, "value"])
 
-The bounding box positions follow the same convention as for when
-locating a node: the line and column start at 1.
+The bounding box's `top_left` and `bottom_right` positions follow the
+same convention as for when locating a node: the line and column start
+at 1.
 
 As you can see, the major difference between the two functions is that
 :file:`node_to_bounding_box` will always give a left position of
