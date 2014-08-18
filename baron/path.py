@@ -140,6 +140,9 @@ class BoundingBox:
         except (AttributeError, IndexError):
             return False
 
+    def __repr__(self):
+        return 'BoundingBox (%s, %s)' % (str(self.top_left), str(self.bottom_right))
+
 
 class PathWalker(RenderWalker):
     """Gives the current path while walking the rendered tree
