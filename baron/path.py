@@ -1,8 +1,7 @@
 from .render import RenderWalker, child_by_key
-from .utils import is_newline, split_on_newlines
+from .utils import is_newline, split_on_newlines, total_ordering
 from collections import namedtuple
 from copy import deepcopy
-from functools import total_ordering
 
 
 def position_to_path(tree, position):
