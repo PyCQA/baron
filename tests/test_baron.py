@@ -23,5 +23,5 @@ def test_error_grouping():
 
 def test_error_untreated_error():
     with pytest.raises(UntreatedError):
-        parse("é")
+        parse("\xc3")
 
