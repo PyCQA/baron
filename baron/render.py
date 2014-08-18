@@ -1,3 +1,4 @@
+import sys
 from .utils import string_instance
 
 
@@ -74,7 +75,7 @@ def render_node(node, strict=False):
                 elif isinstance(dependent, list):
                     assert all([x in node for x in dependent])
             except AssertionError as e:
-                print("Where node == %s" % node)
+                sys.stdout.write("Where node == %s\n" % node)
                 raise e
 
         if key_type in ['key', 'list', 'formatting']:
