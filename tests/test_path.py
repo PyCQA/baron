@@ -22,13 +22,6 @@ splitcode = """var \\\n  = 2"""
 windows_splitcode = """var \\\r\n  = 2"""
 
 
-funcdefcode = """\
-def function(arg1):
-    a = 1
-    b = 2
-"""
-
-
 classcode = """\
 class MyClass(BaseClass):
     def __init__(self, arg1):
@@ -139,13 +132,13 @@ def test_bb_comment():
 
 
 def test_bb_funcdef():
-    node = parse(funcdefcode)[0]
-    assert node_to_bounding_box(node) == ((1, 1), (3, 9))
+    node = parse(bigcode)[0]
+    assert node_to_bounding_box(node) == ((1, 1), (4, 0))
 
 
 def test_bb_class():
     node = parse(classcode)[0]
-    assert node_to_bounding_box(node) == ((1, 1), (6, 21))
+    assert node_to_bounding_box(node) == ((1, 1), (7, 0))
 
 
 def test_bb_split_assignment():

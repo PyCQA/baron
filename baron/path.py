@@ -237,6 +237,7 @@ class BoundingBox(PathWalker):
         for c in newlines_split:
             if is_newline(c):
                 self.current_position.advance_line()
+                self.left_of_current_position = self.current_position.left
             elif c != "":
                 self.current_position.advance_columns(len(c))
                 self.left_of_current_position = self.current_position.left()
