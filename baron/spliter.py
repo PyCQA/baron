@@ -1,12 +1,12 @@
 import string
-from .utils import FlexibleIterator
+from .utils import FlexibleIterator, BaronError
 
 
 def split(sequence):
     return list(split_generator(sequence))
 
 
-class UntreatedError(Exception):
+class UntreatedError(BaronError):
     pass
 
 

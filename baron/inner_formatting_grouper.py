@@ -1,9 +1,9 @@
-from .utils import FlexibleIterator
+from .utils import FlexibleIterator, BaronError
 
-class UnExpectedFormattingToken(Exception):
+class UnExpectedFormattingToken(BaronError):
         pass
 
-class GroupingError(Exception):
+class GroupingError(BaronError):
         pass
 
 
