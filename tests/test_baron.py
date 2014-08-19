@@ -1,4 +1,6 @@
-from baron import parse, ParsingError, UnExpectedFormattingToken, GroupingError
+# -*- coding: utf-8 -*-
+
+from baron import parse, ParsingError, UnExpectedFormattingToken, GroupingError, UntreatedError
 import pytest
 
 
@@ -20,3 +22,7 @@ def test_error_grouping():
     with pytest.raises(GroupingError):
         parse("   (a\n b")
 
+
+def test_error_untreated_error():
+    with pytest.raises(UntreatedError):
+        parse("?")

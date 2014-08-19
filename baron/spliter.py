@@ -1,9 +1,13 @@
 import string
-from .utils import FlexibleIterator
+from .utils import FlexibleIterator, BaronError
 
 
 def split(sequence):
     return list(split_generator(sequence))
+
+
+class UntreatedError(BaronError):
+    pass
 
 
 def split_generator(sequence):
@@ -57,4 +61,4 @@ def split_generator(sequence):
             next(iterator)
 
         if not_found:
-            raise Exception("Untreated elements: %s" % iterator.rest_of_the_sequence().__repr__()[:50])
+            raise UntreatedError("Untreated elements: %s" % iterator.rest_of_the_sequence().__repr__()[:50])

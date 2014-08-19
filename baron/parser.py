@@ -11,9 +11,10 @@ from rply.parser import LRParser
 from rply.parsergenerator import LRTable
 from rply.errors import ParserGeneratorWarning
 from rply.grammar import Grammar
+from .utils import BaronError
 
 
-class ParsingError(Exception):
+class ParsingError(BaronError):
     pass
 
 

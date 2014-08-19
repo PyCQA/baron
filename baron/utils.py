@@ -6,6 +6,10 @@ python_version = sys.version_info[0]
 string_instance = str if python_version == 3 else basestring
 
 
+class BaronError(Exception):
+    pass
+
+
 class FlexibleIterator():
     def __init__(self, sequence):
         self.sequence = sequence

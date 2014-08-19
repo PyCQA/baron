@@ -24,6 +24,8 @@ Changelog
 - name_as_name and dotted_as_name empty value for target is now an empty string
   and not None since this is a string type key
 - boundingbox now includes the newlines at the end of a node
+- all raised exceptions inherit from a common base exception to ease try/catch
+  constructions
 
 0.2 (2014-06-11)
 ----------------
