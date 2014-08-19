@@ -26,6 +26,12 @@ Changelog
 - boundingbox now includes the newlines at the end of a node
 - all raised exceptions inherit from a common base exception to ease try/catch
   constructions
+- Position's left and right functions become properties and thus
+  attributes
+- Position objects can be compared to other Position objects or any
+  iterables
+- make_position and make_bounding_box functions are deleted in favor of
+  always using the corresponding class' constructor
 
 0.2 (2014-06-11)
 ----------------
