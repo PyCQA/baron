@@ -48,8 +48,9 @@ def path_to_bounding_box(tree, path):
 class Position(object):
     """Handles a cursor's line and column
 
-    Operations requiring another Position as argument can be given
-    an iterable instead for convenience.
+    Operations requiring another Position as argument can be given an
+    indexable object of len >= 2 where the index 0 contains the line and
+    the index 1 contains the column. For example a tuple of len 2.
     """
     def __init__(self, position):
         if hasattr(position, 'line') and hasattr(position, 'column'):
@@ -113,7 +114,7 @@ class Position(object):
         return self.line == other.line and self.column == other.column
 
     def __lt__(self, other):
-        """Compares Position with Position or iterable"""
+        """Compares Position with Position or indexable object"""
         other = Position(other)
         return (self.line, self.column) < (other.line, other.column)
 
@@ -126,6 +127,13 @@ class Position(object):
 
 
 class BoundingBox:
+    """Handles a selection's top_left and bottom_right position
+
+    Operations requiring another BoundingBox as argument can be given an
+    indexable object of len >= 2 where the index 0 contains the top_left
+    position, either as a Position or an indexable object. The index
+    1 must contain, in a similar manner, the bottom_right position.
+    """
     def __init__(self, bounding_box):
         if hasattr(bounding_box, 'top_left') and hasattr(bounding_box, 'bottom_right'):
             self.top_left = Position(bounding_box.top_left)
