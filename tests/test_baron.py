@@ -25,4 +25,4 @@ def test_error_grouping():
 
 def test_error_untreated_error():
     with pytest.raises(UntreatedError):
-        parse(u"\xe9")
+        parse("?")
