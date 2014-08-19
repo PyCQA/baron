@@ -104,11 +104,11 @@ class Position(object):
         """Compares Positions or Position and tuple
         
         Will not fail if other is an unsupported type"""
-        try:
-            other = Position(other)
-            return self.line == other.line and self.column == other.column
-        except (AttributeError, IndexError):
+        if not (hasattr(other, 'line') and hasattr(other, 'column')) and len(other) < 2:
             return False
+
+        other = Position(other)
+        return self.line == other.line and self.column == other.column
 
     def __lt__(self, other):
         """Compares Position with Position or iterable"""
@@ -133,12 +133,12 @@ class BoundingBox:
             self.bottom_right = Position(bounding_box[1])
 
     def __eq__(self, other):
-        """Compares BoundingBox with BoundingBox or iterable"""
-        try:
-            other = BoundingBox(other)
-            return self.top_left == other.top_left and self.bottom_right == other.bottom_right
-        except (AttributeError, IndexError):
+        """Compares BoundingBox with BoundingBox or indexable object"""
+        if not (hasattr(other, 'top_left') and hasattr(other, 'bottom_right')) and len(other) < 2:
             return False
+
+        other = BoundingBox(other)
+        return self.top_left == other.top_left and self.bottom_right == other.bottom_right
 
     def __repr__(self):
         return 'BoundingBox (%s, %s)' % (str(self.top_left), str(self.bottom_right))
