@@ -55,9 +55,11 @@ class Position(object):
         if hasattr(position, 'line') and hasattr(position, 'column'):
             self.line = position.line
             self.column = position.column
-        else:
+        elif len(position) >= 2:
             self.line = position[0]
             self.column = position[1]
+        else:
+            raise AttributeError(position)
 
     def advance_columns(self, columns):
         """(3, 10) -> (3, 11)"""
@@ -128,9 +130,11 @@ class BoundingBox:
         if hasattr(bounding_box, 'top_left') and hasattr(bounding_box, 'bottom_right'):
             self.top_left = Position(bounding_box.top_left)
             self.bottom_right = Position(bounding_box.bottom_right)
-        else:
+        elif len(bounding_box) >= 2:
             self.top_left = Position(bounding_box[0])
             self.bottom_right = Position(bounding_box[1])
+        else:
+            raise AttributeError(bounding_box)
 
     def __eq__(self, other):
         """Compares BoundingBox with BoundingBox or indexable object"""
