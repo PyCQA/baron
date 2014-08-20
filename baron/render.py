@@ -63,10 +63,26 @@ def render_node(node, strict=False):
 
         if strict:
             try:
-                if key_type == "key":
+                # XXX this is HORRIBLE and should be fixed
+                # this is because of the complex_operator that has break uniformisation of key
+                if key_type == "string" and node["type"] == "comparison" and render_key == "value":
                     assert isinstance(node[render_key], (dict, str, type(None)))
+                # XXX this too
+                # this is because def_argument@name is a string except when it's this kind of thing:
+                # def foo((bar, baz)): pass
+                # it probably should be moved to a key pointing to a {"type": "name", "value": "..."}
+                elif key_type == "string" and node["type"] == "def_argument" and render_key == "name":
+                    assert isinstance(node[render_key], (dict, str, type(None)))
+                elif key_type == "key":
+                    assert isinstance(node[render_key], (dict, type(None)))
+                elif key_type == "string":
+                    assert isinstance(node[render_key], str)
                 elif key_type in ("list", "formatting"):
                     assert isinstance(node[render_key], list)
+                elif key_type == "constant":
+                    pass
+                else:
+                    raise Exception("Invalid key_type '%s', should be one of those: key, string, list, formatting" % key_type)
 
                 if dependent is True:
                     pass
@@ -75,10 +91,10 @@ def render_node(node, strict=False):
                 elif isinstance(dependent, list):
                     assert all([x in node for x in dependent])
             except AssertionError as e:
-                sys.stdout.write("Where node == %s\n" % node)
+                sys.stdout.write("Where node.type == '%s', render_key == '%s' and node == %s\n" % (node["type"], render_key, node))
                 raise e
 
-        if key_type in ['key', 'list', 'formatting']:
+        if key_type in ['key', 'string', 'list', 'formatting']:
             key_type = 'constant' if isinstance(node[render_key], string_instance) else key_type
             yield (key_type, node[render_key], render_key)
         elif key_type == 'constant':
@@ -87,7 +103,7 @@ def render_node(node, strict=False):
             raise NotImplementedError("Unknown key type \"%s\" in \"%s\" node" % (key_type, node['type']))
 
 
-node_types = set(['node', 'list', 'key', 'formatting', 'constant', 'bool'])
+node_types = set(['node', 'list', 'key', 'formatting', 'constant', 'bool', 'string'])
 
 
 def node_keys(node):
@@ -108,21 +124,21 @@ def child_by_key(node, key):
 
 
 nodes_rendering_order = {
-        "int":               [("key", "value", True)],
-        "name":              [("key", "value", True)],
-        "hexa":              [("key", "value", True)],
-        "octa":              [("key", "value", True)],
-        "float":             [("key", "value", True)],
-        "space":             [("key", "value", True)],
-        "binary":            [("key", "value", True)],
-        "complex":           [("key", "value", True)],
-        "float_exponant":    [("key", "value", True)],
-        "left_parenthesis":  [("key", "value", True)],
-        "right_parenthesis": [("key", "value", True)],
+        "int":               [("string", "value", True)],
+        "name":              [("string", "value", True)],
+        "hexa":              [("string", "value", True)],
+        "octa":              [("string", "value", True)],
+        "float":             [("string", "value", True)],
+        "space":             [("string", "value", True)],
+        "binary":            [("string", "value", True)],
+        "complex":           [("string", "value", True)],
+        "float_exponant":    [("string", "value", True)],
+        "left_parenthesis":  [("string", "value", True)],
+        "right_parenthesis": [("string", "value", True)],
 
-        "break":             [("key", "type", True)],
-        "continue":          [("key", "type", True)],
-        "pass":              [("key", "type", True)],
+        "break":             [("string", "type", True)],
+        "continue":          [("string", "type", True)],
+        "pass":              [("string", "type", True)],
 
         "dotted_name":       [("list", "value", True)],
         "ifelseblock":       [("list", "value", True)],
@@ -131,43 +147,43 @@ nodes_rendering_order = {
 
         "endl": [
             ("formatting", "formatting",        True),
-            ("key",        "value",             True),
-            ("key",        "indent",            True),
+            ("string",     "value",             True),
+            ("string",     "indent",            True),
         ],
 
         "star": [
             ("formatting", "first_formatting",  True),
-            ("key",        "value",             True),
+            ("string",     "value",             True),
             ("formatting", "second_formatting", True),
         ],
         "string": [
             ("formatting", "first_formatting",  True),
-            ("key",        "value",             True),
+            ("string",     "value",             True),
             ("formatting", "second_formatting", True),
         ],
         "raw_string": [
             ("formatting", "first_formatting",  True),
-            ("key",        "value",             True),
+            ("string",     "value",             True),
             ("formatting", "second_formatting", True),
         ],
         "binary_string": [
             ("formatting", "first_formatting",  True),
-            ("key",        "value",             True),
+            ("string",     "value",             True),
             ("formatting", "second_formatting", True),
         ],
         "unicode_string": [
             ("formatting", "first_formatting",  True),
-            ("key",        "value",             True),
+            ("string",     "value",             True),
             ("formatting", "second_formatting", True),
         ],
         "binary_raw_string": [
             ("formatting", "first_formatting",  True),
-            ("key",        "value",             True),
+            ("string",     "value",             True),
             ("formatting", "second_formatting", True),
         ],
         "unicode_raw_string": [
             ("formatting", "first_formatting",  True),
-            ("key",        "value",             True),
+            ("string",     "value",             True),
             ("formatting", "second_formatting", True),
         ],
 
@@ -175,7 +191,7 @@ nodes_rendering_order = {
         # node or being standalone, this is bad
         "comment": [
             ("formatting", "formatting", "formatting"),
-            ("key",        "value",             True),
+            ("string",     "value",             True),
         ],
 
         "ternary_operator": [
@@ -233,7 +249,7 @@ nodes_rendering_order = {
             ("list",       "decorators",        True),
             ("constant",   "class",             True),
             ("formatting", "first_formatting",  True),
-            ("key",        "name",              True),
+            ("string",     "name",              True),
             ("formatting", "second_formatting", True),
             ("constant",   "(",                 "parenthesis"),
             ("formatting", "third_formatting",  True),
@@ -287,7 +303,7 @@ nodes_rendering_order = {
             ("list",       "decorators",        True),
             ("constant",   "def",               True),
             ("formatting", "first_formatting",  True),
-            ("key",        "name",              True),
+            ("string",     "name",              True),
             ("formatting", "second_formatting", True),
             ("constant",   "(",                 True),
             ("formatting", "third_formatting",  True),
@@ -301,14 +317,14 @@ nodes_rendering_order = {
         ],
 
         "call_argument": [
-            ("key",        "name",              "name"),
+            ("string",     "name",              "name"),
             ("formatting", "first_formatting",  "name"),
             ("constant",   "=",                 "name"),
             ("formatting", "second_formatting", "name"),
             ("key",        "value",             True),
         ],
         "def_argument": [
-            ("key",        "name",              True),
+            ("string",     "name",              True),
             ("formatting", "first_formatting",  "value"),
             ("constant",   "=",                 "value"),
             ("formatting", "second_formatting", "value"),
@@ -444,40 +460,40 @@ nodes_rendering_order = {
             ("key",        "target",            True),
             ("formatting", "first_formatting",  True),
             # FIXME should probably be a different node type
-            ("key",        "operator",          "operator"),
+            ("string",     "operator",          "operator"),
             ("constant",   "=",                 True),
             ("formatting", "second_formatting", True),
             ("key",        "value",             True),
         ],
 
         "unitary_operator": [
-            ("key",        "value",             True),
+            ("string",     "value",             True),
             ("formatting", "formatting",        True),
             ("key",        "target",            True),
         ],
         "binary_operator": [
             ("key",        "first",             True),
             ("formatting", "first_formatting",  True),
-            ("key",        "value",             True),
+            ("string",     "value",             True),
             ("formatting", "second_formatting", True),
             ("key",        "second",            True),
         ],
         "boolean_operator": [
             ("key",        "first",             True),
             ("formatting", "first_formatting",  True),
-            ("key",        "value",             True),
+            ("string",     "value",             True),
             ("formatting", "second_formatting", True),
             ("key",        "second",            True),
         ],
         "complex_operator": [
-            ("key",        "first",             True),
+            ("string",     "first",             True),
             ("formatting", "formatting",        True),
-            ("key",        "second",            True),
+            ("string",     "second",            True),
         ],
         "comparison": [
             ("key",        "first",             True),
             ("formatting", "first_formatting",  True),
-            ("key",        "value",             True),
+            ("string",     "value",             True),
             ("formatting", "second_formatting", True),
             ("key",        "second",            True),
         ],
@@ -611,7 +627,7 @@ nodes_rendering_order = {
             ("formatting", "first_formatting",  True),
             ("key",        "exception",         "exception"),
             ("formatting", "second_formatting", "delimiter"),
-            ("key",        "delimiter",         "delimiter"),
+            ("string",     "delimiter",         "delimiter"),
             ("formatting", "third_formatting",  "delimiter"),
             ("key",        "target",            "delimiter"),
             ("formatting", "fourth_formatting", True),
@@ -674,14 +690,14 @@ nodes_rendering_order = {
             ("formatting", "first_formatting",  "target"),
             ("constant",   "as",                "target"),
             ("formatting", "second_formatting", "target"),
-            ("key",        "target",            "target"),
+            ("string",     "target",            "target"),
         ],
         "name_as_name": [
-            ("key",        "value",             True),
+            ("string",     "value",             True),
             ("formatting", "first_formatting",  "target"),
             ("constant",   "as",                "target"),
             ("formatting", "second_formatting", "target"),
-            ("key",        "target",            "target"),
+            ("string",     "target",            "target"),
         ],
 
         "print": [
@@ -765,7 +781,8 @@ class RenderWalker(object):
         if key_type not in node_types:
             raise NotImplemented("Unknown key type: %s" % key_type)
 
-        to_call = getattr(self, 'before_' + key_type.replace("constant", "leaf"))
+        # XXX this second replace is BAD and should be removed
+        to_call = getattr(self, 'before_' + key_type.replace("constant", "leaf").replace("string", "key"))
 
         return to_call(item, render_key)
 
@@ -773,7 +790,8 @@ class RenderWalker(object):
         if key_type not in node_types:
             raise NotImplemented("Unknown key type: %s" % key_type)
 
-        to_call = getattr(self, 'after_' + key_type.replace("constant", "leaf"))
+        # XXX there too
+        to_call = getattr(self, 'after_' + key_type.replace("constant", "leaf").replace("string", "key"))
 
         return to_call(item, render_key)
 
