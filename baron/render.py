@@ -64,14 +64,10 @@ def render_node(node, strict=False):
         if strict:
             try:
                 # XXX this is HORRIBLE and should be fixed
-                # this is because of the complex_operator that has break uniformisation of key
-                if key_type == "string" and node["type"] == "comparison" and render_key == "value":
-                    assert isinstance(node[render_key], (dict, str, type(None)))
-                # XXX this too
                 # this is because def_argument@name is a string except when it's this kind of thing:
                 # def foo((bar, baz)): pass
                 # it probably should be moved to a key pointing to a {"type": "name", "value": "..."}
-                elif key_type == "string" and node["type"] == "def_argument" and render_key == "name":
+                if key_type == "string" and node["type"] == "def_argument" and render_key == "name":
                     assert isinstance(node[render_key], (dict, str, type(None)))
                 elif key_type == "key":
                     assert isinstance(node[render_key], (dict, type(None)))
