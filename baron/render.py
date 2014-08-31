@@ -326,6 +326,15 @@ nodes_rendering_order = {
             ("formatting", "second_formatting", "value"),
             ("key",        "value",             "value"),
         ],
+        "def_argument_tuple": [
+            ("formatting", "first_formatting",  True),
+            ("constant",   "(",                 True),
+            ("formatting", "second_formatting", True),
+            ("list",       "value",             True),
+            ("formatting", "third_formatting",  True),
+            ("constant",   ")",                 True),
+            ("formatting", "fourth_formatting", True),
+        ],
         "list_argument": [
             ("constant",   "*",                 True),
             ("formatting", "formatting",        True),

@@ -448,19 +448,12 @@ def generate_parse(print_function):
     def parameter_fplist(pack):
         (left_parenthesis, fplist, right_parenthesis) = pack
         return [{
-            "type": "def_argument",
-            "first_formatting": [],
-            "second_formatting": [],
-            "value": {},
-            "name": {
-                "type": "tuple",
-                "first_formatting": left_parenthesis.hidden_tokens_after,
-                "second_formatting": left_parenthesis.hidden_tokens_before,
-                "third_formatting": right_parenthesis.hidden_tokens_before,
-                "fourth_formatting": right_parenthesis.hidden_tokens_after,
-                "value": fplist,
-                "with_parenthesis": True
-            }
+            "type": "def_argument_tuple",
+            "first_formatting": left_parenthesis.hidden_tokens_after,
+            "second_formatting": left_parenthesis.hidden_tokens_before,
+            "third_formatting": right_parenthesis.hidden_tokens_before,
+            "fourth_formatting": right_parenthesis.hidden_tokens_after,
+            "value": fplist,
         }]
 
 

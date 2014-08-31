@@ -1566,32 +1566,25 @@ def test_fplist():
             "type": "funcdef",
             "arguments": [
                 {
-                    "type": "def_argument",
-                    "value": {},
+                    "type": "def_argument_tuple",
                     "first_formatting": [],
                     "second_formatting": [],
-                    "name": {
-                        "type": "tuple",
-                        "first_formatting": [],
-                        "second_formatting": [],
-                        "third_formatting": [],
-                        "fourth_formatting": [],
-                        "with_parenthesis": True,
-                        "value": [
-                            {
-                                "type": "def_argument",
-                                "value": {},
-                                "first_formatting": [],
-                                "second_formatting": [],
-                                "name": "b",
-                            },
-                            {
-                                "type": "comma",
-                                "first_formatting": [],
-                                "second_formatting": [],
-                            }
-                        ],
-                    }
+                    "third_formatting": [],
+                    "fourth_formatting": [],
+                    "value": [
+                        {
+                            "type": "def_argument",
+                            "value": {},
+                            "first_formatting": [],
+                            "second_formatting": [],
+                            "name": "b",
+                        },
+                        {
+                            "type": "comma",
+                            "first_formatting": [],
+                            "second_formatting": [],
+                        }
+                    ],
                 }
             ],
             "name": "a",
@@ -1639,39 +1632,32 @@ def test_fplist_two():
             "type": "funcdef",
             "arguments": [
                 {
-                    "type": "def_argument",
-                    "value": {},
+                    "type": "def_argument_tuple",
                     "first_formatting": [],
                     "second_formatting": [],
-                    "name": {
-                        "type": "tuple",
-                        "first_formatting": [],
-                        "second_formatting": [],
-                        "third_formatting": [],
-                        "fourth_formatting": [],
-                        "with_parenthesis": True,
-                        "value": [
-                            {
-                                "type": "def_argument",
-                                "value": {},
-                                "first_formatting": [],
-                                "second_formatting": [],
-                                "name": "b",
-                            },
-                            {
-                                "type": "comma",
-                                "first_formatting": [],
-                                "second_formatting": [],
-                            },
-                            {
-                                "type": "def_argument",
-                                "value": {},
-                                "first_formatting": [],
-                                "second_formatting": [],
-                                "name": "c",
-                            }
-                        ],
-                    }
+                    "third_formatting": [],
+                    "fourth_formatting": [],
+                    "value": [
+                        {
+                            "type": "def_argument",
+                            "value": {},
+                            "first_formatting": [],
+                            "second_formatting": [],
+                            "name": "b",
+                        },
+                        {
+                            "type": "comma",
+                            "first_formatting": [],
+                            "second_formatting": [],
+                        },
+                        {
+                            "type": "def_argument",
+                            "value": {},
+                            "first_formatting": [],
+                            "second_formatting": [],
+                            "name": "c",
+                        }
+                    ],
                 }
             ],
             "name": "a",
