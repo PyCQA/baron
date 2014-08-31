@@ -485,7 +485,7 @@ nodes_rendering_order = {
             ("formatting", "second_formatting", True),
             ("key",        "second",            True),
         ],
-        "complex_operator": [
+        "comparison_operator": [
             ("string",     "first",             True),
             ("formatting", "formatting",        True),
             ("string",     "second",            True),

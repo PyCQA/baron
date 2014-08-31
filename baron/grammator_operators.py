@@ -120,7 +120,7 @@ def include_operators(pg):
         return {
             "type": "comparison",
             "value": {
-                "type": "complex_operator",
+                "type": "comparison_operator",
                 "first": comparison_operator.value,
                 "second": comparison_operator2.value,
                 "formatting": comparison_operator.hidden_tokens_after
