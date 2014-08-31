@@ -106,8 +106,13 @@ def include_operators(pg):
         (expr, comparison_operator, comparison_) = pack
         return {
             "type": "comparison",
-            "value": comparison_operator.value,
             "first": expr,
+            "value": {
+                "type": "comparison_operator",
+                "first": comparison_operator.value,
+                "second": "",
+                "formatting": [],
+            },
             "second": comparison_,
             "first_formatting": comparison_operator.hidden_tokens_before,
             "second_formatting": comparison_operator.hidden_tokens_after

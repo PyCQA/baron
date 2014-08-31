@@ -5585,7 +5585,12 @@ def test_comparison():
         ], [
             {
                 "type": "comparison",
-                "value": value,
+                "value": {
+                    "type": "comparison_operator",
+                    "first": value,
+                    "second": "",
+                    "formatting": [],
+                },
                 "first": {
                     "type": "name",
                     "value": 'a',
@@ -5605,7 +5610,12 @@ def test_comparison():
         ], [
             {
                 "type": "comparison",
-                "value": value,
+                "value": {
+                    "type": "comparison_operator",
+                    "first": value,
+                    "second": "",
+                    "formatting": [],
+                },
                 "first": {
                     "type": "name",
                     "value": 'a'
@@ -5630,7 +5640,12 @@ def test_comparison_first_space():
         ], [
             {
                 "type": "comparison",
-                "value": value,
+                "value": {
+                    "type": "comparison_operator",
+                    "first": value,
+                    "second": "",
+                    "formatting": [],
+                },
                 "first": {
                     "type": "name",
                     "value": 'a',
@@ -5650,7 +5665,12 @@ def test_comparison_first_space():
         ], [
             {
                 "type": "comparison",
-                "value": value,
+                "value": {
+                    "type": "comparison_operator",
+                    "first": value,
+                    "second": "",
+                    "formatting": [],
+                },
                 "first": {
                     "type": "name",
                     "value": 'a'
@@ -5675,7 +5695,12 @@ def test_comparison_second_space():
         ], [
             {
                 "type": "comparison",
-                "value": value,
+                "value": {
+                    "type": "comparison_operator",
+                    "first": value,
+                    "second": "",
+                    "formatting": [],
+                },
                 "first": {
                     "type": "name",
                     "value": 'a',
@@ -5695,7 +5720,12 @@ def test_comparison_second_space():
         ], [
             {
                 "type": "comparison",
-                "value": value,
+                "value": {
+                    "type": "comparison_operator",
+                    "first": value,
+                    "second": "",
+                    "formatting": [],
+                },
                 "first": {
                     "type": "name",
                     "value": 'a'
@@ -5720,7 +5750,12 @@ def test_comparison_spaces():
         ], [
             {
                 "type": "comparison",
-                "value": value,
+                "value": {
+                    "type": "comparison_operator",
+                    "first": value,
+                    "second": "",
+                    "formatting": [],
+                },
                 "first": {
                     "type": "name",
                     "value": 'a',
@@ -5740,7 +5775,12 @@ def test_comparison_spaces():
         ], [
             {
                 "type": "comparison",
-                "value": value,
+                "value": {
+                    "type": "comparison_operator",
+                    "first": value,
+                    "second": "",
+                    "formatting": [],
+                },
                 "first": {
                     "type": "name",
                     "value": 'a'
@@ -5767,7 +5807,12 @@ def test_comparison_spaces_atomtrailers():
         ], [
             {
                 "type": "comparison",
-                "value": value,
+                "value": {
+                    "type": "comparison_operator",
+                    "first": value,
+                    "second": "",
+                    "formatting": [],
+                },
                 "first": {
                     "type": "atomtrailers",
                     "value": [
@@ -5808,14 +5853,24 @@ def test_chained_comparison():
         ], [
             {
                 "type": "comparison",
-                "value": value,
+                "value":  {
+                    "type": "comparison_operator",
+                    "first": value,
+                    "second": "",
+                    "formatting": [],
+                },
                 "first": {
                     "type": "name",
                     "value": 'a',
                 },
                 "second": {
                     "type": "comparison",
-                    "value": value,
+                    "value": {
+                        "type": "comparison_operator",
+                        "first": value,
+                        "second": "",
+                        "formatting": [],
+                    },
                     "first": {
                         "type": "name",
                         "value": "b"
@@ -5840,14 +5895,24 @@ def test_chained_comparison():
         ], [
             {
                 "type": "comparison",
-                "value": value,
+                "value":   {
+                    "type": "comparison_operator",
+                    "first": value,
+                    "second": "",
+                    "formatting": [],
+                },
                 "first": {
                     "type": "name",
                     "value": 'a',
                 },
                 "second": {
                     "type": "comparison",
-                    "value": value,
+                    "value": {
+                        "type": "comparison_operator",
+                        "first": value,
+                        "second": "",
+                        "formatting": [],
+                    },
                     "first": {
                         "type": "name",
                         "value": "b"
@@ -5872,14 +5937,24 @@ def test_chained_comparison():
         ], [
             {
                 "type": "comparison",
-                "value": value,
+                "value": {
+                    "type": "comparison_operator",
+                    "first": value,
+                    "second": "",
+                    "formatting": [],
+                },
                 "first": {
                     "type": "name",
                     "value": 'a'
                 },
                 "second": {
                     "type": "comparison",
-                    "value": value,
+                    "value": {
+                        "type": "comparison_operator",
+                        "first": value,
+                        "second": "",
+                        "formatting": [],
+                    },
                     "first": {
                         "type": "name",
                         "value": "b",
@@ -5904,14 +5979,24 @@ def test_chained_comparison():
         ], [
             {
                 "type": "comparison",
-                "value": value,
+                "value": {
+                    "type": "comparison_operator",
+                    "first": value,
+                    "second": "",
+                    "formatting": [],
+                },
                 "first": {
                     "type": "name",
                     "value": 'a'
                 },
                 "second": {
                     "type": "comparison",
-                    "value": value,
+                    "value": {
+                        "type": "comparison_operator",
+                        "first": value,
+                        "second": "",
+                        "formatting": [],
+                    },
                     "first": {
                         "type": "name",
                         "value": "b",
@@ -5936,14 +6021,24 @@ def test_chained_comparison():
         ], [
             {
                 "type": "comparison",
-                "value": value,
+                "value": {
+                    "type": "comparison_operator",
+                    "first": value,
+                    "second": "",
+                    "formatting": [],
+                },
                 "first": {
                     "type": "name",
                     "value": 'a'
                 },
                 "second": {
                     "type": "comparison",
-                    "value": value,
+                    "value": {
+                        "type": "comparison_operator",
+                        "first": value,
+                        "second": "",
+                        "formatting": [],
+                    },
                     "first": {
                         "type": "name",
                         "value": "b"
@@ -5968,14 +6063,24 @@ def test_chained_comparison():
         ], [
             {
                 "type": "comparison",
-                "value": value,
+                "value": {
+                    "type": "comparison_operator",
+                    "first": value,
+                    "second": "",
+                    "formatting": [],
+                },
                 "first": {
                     "type": "name",
                     "value": 'a'
                 },
                 "second": {
                     "type": "comparison",
-                    "value": value,
+                    "value": {
+                        "type": "comparison_operator",
+                        "first": value,
+                        "second": "",
+                        "formatting": [],
+                    },
                     "first": {
                         "type": "name",
                         "value": "b"

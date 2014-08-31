@@ -488,12 +488,12 @@ nodes_rendering_order = {
         "comparison_operator": [
             ("string",     "first",             True),
             ("formatting", "formatting",        True),
-            ("string",     "second",            True),
+            ("string",     "second",            "second"),
         ],
         "comparison": [
             ("key",        "first",             True),
             ("formatting", "first_formatting",  True),
-            ("string",     "value",             True),
+            ("key",        "value",             True),
             ("formatting", "second_formatting", True),
             ("key",        "second",            True),
         ],
