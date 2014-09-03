@@ -126,7 +126,7 @@ class Position(object):
         return (self.line, self.column)
 
 
-class BoundingBox:
+class BoundingBox(object):
     """Handles a selection's top_left and bottom_right position
 
     Operations requiring another BoundingBox as argument can be given an
