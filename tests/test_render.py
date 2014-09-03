@@ -73,15 +73,6 @@ class RenderWalkerTester(RenderWalker):
             assert target == (direction, node_type, node["type"], render_key)
         else:
             assert target == (direction, node_type, node.__class__.__name__, render_key)
-        #assert _direction == direction
-        #assert _node_type == node_type
-        #if node_type == 'constant':
-        #    assert _node == node
-        #elif "type" in node:
-        #    assert _node == node["type"]
-        #else:
-        #    assert _node == node.__class__.__name__
-        #assert _render_key == render_key
         return _stop
 
 
