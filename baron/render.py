@@ -85,10 +85,9 @@ def render_node(node, strict=False):
                 raise e
 
         if key_type in ['key', 'string', 'list', 'formatting']:
-            key_type = 'constant' if isinstance(node[render_key], string_instance) else key_type
             yield (key_type, node[render_key], render_key)
-        elif key_type == 'constant':
-            yield ('constant', render_key, render_key)
+        elif key_type in ['constant', 'string']:
+            yield (key_type, render_key, render_key)
         else:
             raise NotImplementedError("Unknown key type \"%s\" in \"%s\" node" % (key_type, node['type']))
 
@@ -808,7 +807,7 @@ class RenderWalker(object):
         if stop_before:
             return self.STOP
 
-        stop = self._walk(item) if key_type != 'constant' else False
+        stop = self._walk(item) if key_type not in ['constant', 'string'] else False
 
         stop_after = self.after(key_type, item, render_key)
 
