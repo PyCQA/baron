@@ -105,7 +105,7 @@ class Position(object):
 
     def __eq__(self, other):
         """Compares Positions or Position and tuple
-        
+
         Will not fail if other is an unsupported type"""
         if not (hasattr(other, 'line') and hasattr(other, 'column')) and len(other) < 2:
             return False
