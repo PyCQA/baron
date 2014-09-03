@@ -768,18 +768,23 @@ class RenderWalker(object):
     def after_key(self, node, render_key):
         pass
 
-    def before_leaf(self, node, render_key):
+    def before_constant(self, node, render_key):
         pass
 
-    def after_leaf(self, node, render_key):
+    def after_constant(self, node, render_key):
+        pass
+
+    def before_string(self, node, render_key):
+        pass
+
+    def after_string(self, node, render_key):
         pass
 
     def before(self, key_type, item, render_key):
         if key_type not in node_types:
             raise NotImplemented("Unknown key type: %s" % key_type)
 
-        # XXX this second replace is BAD and should be removed
-        to_call = getattr(self, 'before_' + key_type.replace("constant", "leaf").replace("string", "key"))
+        to_call = getattr(self, 'before_' + key_type)
 
         return to_call(item, render_key)
 
@@ -787,8 +792,7 @@ class RenderWalker(object):
         if key_type not in node_types:
             raise NotImplemented("Unknown key type: %s" % key_type)
 
-        # XXX there too
-        to_call = getattr(self, 'after_' + key_type.replace("constant", "leaf").replace("string", "key"))
+        to_call = getattr(self, 'after_' + key_type)
 
         return to_call(item, render_key)
 
