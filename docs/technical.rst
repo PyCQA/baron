@@ -221,8 +221,11 @@ for the :file:`dumps` function:
         return Dumper().dump(tree)
 
     class Dumper(RenderWalker):
-        def before_leaf(self, constant, key):
+        def before_constant(self, constant, key):
             self.dump += constant
+
+        def before_string(self, string, key):
+            self.dump += string
 
         def dump(self, tree):
             self.dump = ''
@@ -230,7 +233,8 @@ for the :file:`dumps` function:
             return self.dump
 
 As you can see it is quite simple since it only needs the
-:file:`before_leaf` method.
+:file:`before_constant` and the :file:`before_string` methods with the same
+exact code.
 
 PathWalker Helper
 -----------------
