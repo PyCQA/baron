@@ -110,8 +110,8 @@ node.
 
     nodes_rendering_order["space"]
 
-Which in turn is rendered by looking at the value key of the space node.
-It's a string so it is outputted directly.
+Which in turn is rendered by printing the value of the string of the space
+node.
 
 .. ipython:: python
 
@@ -136,7 +136,7 @@ a "def_argument", then a "comma" and again a "def_argument".
     nodes_rendering_order["def_argument"]
 
 The first "def_argument" is rendered by first outputting the content of
-a name "key" node, which is string and thus outputted directly:
+a name "string" node:
 
 .. ipython:: python
 
