@@ -105,7 +105,7 @@ class Position(object):
 
     def __eq__(self, other):
         """Compares Positions or Position and tuple
-        
+
         Will not fail if other is an unsupported type"""
         if not (hasattr(other, 'line') and hasattr(other, 'column')) and len(other) < 2:
             return False
@@ -126,7 +126,7 @@ class Position(object):
         return (self.line, self.column)
 
 
-class BoundingBox:
+class BoundingBox(object):
     """Handles a selection's top_left and bottom_right position
 
     Operations requiring another BoundingBox as argument can be given an
@@ -197,7 +197,7 @@ class PositionFinder(PathWalker):
         self.walk(tree)
         return self.found_path
 
-    def before_leaf(self, constant, key):
+    def before_constant(self, constant, key):
         """Determine if we're on the targetted node.
 
         If the targetted column is reached, `stop` and `path_found` are
@@ -220,6 +220,8 @@ class PositionFinder(PathWalker):
                     self.found_path = deepcopy(self.current_path)
                     return self.STOP
                 self.current.advance_columns(advance_by)
+
+    before_string = before_constant
 
     def is_on_targetted_node(self, advance_by):
         return self.target.line == self.current.line \
@@ -260,7 +262,7 @@ class BoundingBoxFinder(PathWalker):
             self.found = True
             self.top_left = deepcopy(self.current_position)
 
-        if key_type != 'constant':
+        if key_type not in ['constant', 'string']:
             return stop
 
         newlines_split = split_on_newlines(item)
