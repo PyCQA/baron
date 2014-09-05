@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.3.1 (2014-09-04)
+------------------
+
+- setup.py wasn't working if wheel wasn't used because the CHANGELOG file
+  wasn't included in the MANIFEST.in
+
 0.3 (2014-08-21)
 ----------------
 
