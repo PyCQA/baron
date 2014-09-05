@@ -287,7 +287,7 @@ nodes_rendering_order = {
             ("bool",       "with_parenthesis",  False),
         ],
 
-        "funcdef": [
+        "def": [
             ("list",       "decorators",        True),
             ("constant",   "def",               True),
             ("formatting", "first_formatting",  True),

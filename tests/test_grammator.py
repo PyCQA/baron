@@ -387,7 +387,7 @@ def test_funcdef_stmt_indent():
         ('DEDENT', ''),
     ], [
         {
-            "type": "funcdef",
+            "type": "def",
             "name": "a",
             "decorators": [],
             "first_formatting": [{"type": "space", "value": " "}],
@@ -436,7 +436,7 @@ def test_funcdef_stmt_one_parameter_indent():
         ('DEDENT', ''),
     ], [
         {
-            "type": "funcdef",
+            "type": "def",
             "name": "a",
             "decorators": [],
             "first_formatting": [{"type": "space", "value": " "}],
@@ -494,7 +494,7 @@ def test_funcdef_stmt_one_parameter_comma_indent():
         ('DEDENT', ''),
     ], [
         {
-            "type": "funcdef",
+            "type": "def",
             "decorators": [],
             "name": "a",
             "first_formatting": [{"type": "space", "value": " "}],
@@ -559,7 +559,7 @@ def test_funcdef_stmt_one_parameter_comma_default_indent():
         ('DEDENT', ''),
     ], [
         {
-            "type": "funcdef",
+            "type": "def",
             "decorators": [],
             "name": "a",
             "first_formatting": [{"type": "space", "value": " "}],
@@ -777,7 +777,7 @@ def test_funcdef_stmt_one_start_parameter_indent():
         ('DEDENT', ''),
     ], [
         {
-            "type": "funcdef",
+            "type": "def",
             "name": "a",
             "decorators": [],
             "first_formatting": [{"type": "space", "value": " "}],
@@ -836,7 +836,7 @@ def test_funcdef_stmt_one_star_star_parameter_indent():
         ('DEDENT', ''),
     ], [
         {
-            "type": "funcdef",
+            "type": "def",
             "name": "a",
             "decorators": [],
             "first_formatting": [{"type": "space", "value": " "}],
@@ -1099,7 +1099,7 @@ def test_decorator():
             "fifth_formatting": [],
             "fourth_formatting": [],
             "sixth_formatting": [{"type": "space", "value": " "}],
-            "type": "funcdef",
+            "type": "def",
             "arguments": [],
             "name": "b",
             "decorators": [
@@ -1165,7 +1165,7 @@ def test_decorator_parenthesis():
             "fifth_formatting": [],
             "fourth_formatting": [],
             "sixth_formatting": [{"type": "space", "value": " "}],
-            "type": "funcdef",
+            "type": "def",
             "arguments": [],
             "name": "b",
             "decorators": [
@@ -1239,7 +1239,7 @@ def test_decorator_parenthesis_arg():
             "fifth_formatting": [],
             "fourth_formatting": [],
             "sixth_formatting": [{"type": "space", "value": " "}],
-            "type": "funcdef",
+            "type": "def",
             "arguments": [],
             "name": "b",
             "decorators": [
@@ -1325,7 +1325,7 @@ def test_decorator_two():
             "fifth_formatting": [],
             "fourth_formatting": [],
             "sixth_formatting": [{"type": "space", "value": " "}],
-            "type": "funcdef",
+            "type": "def",
             "arguments": [],
             "name": "b",
             "decorators": [
@@ -1563,7 +1563,7 @@ def test_fplist():
             "fifth_formatting": [],
             "fourth_formatting": [],
             "sixth_formatting": [{"type": "space", "value": " "}],
-            "type": "funcdef",
+            "type": "def",
             "arguments": [
                 {
                     "type": "def_argument_tuple",
@@ -1629,7 +1629,7 @@ def test_fplist_two():
             "fifth_formatting": [],
             "fourth_formatting": [],
             "sixth_formatting": [{"type": "space", "value": " "}],
-            "type": "funcdef",
+            "type": "def",
             "arguments": [
                 {
                     "type": "def_argument_tuple",
@@ -1700,7 +1700,7 @@ def test_fplist_alone():
             "fifth_formatting": [],
             "fourth_formatting": [],
             "sixth_formatting": [{"type": "space", "value": " "}],
-            "type": "funcdef",
+            "type": "def",
             "arguments": [
                 {
                     "type": "associative_parenthesis",

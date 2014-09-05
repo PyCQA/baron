@@ -137,7 +137,7 @@ def fun(arg1):
         ('>', 'string', '', 'indent', False),
         ('<', 'string', '', 'indent', False),
     ('<', 'node', 'endl', 0, False),
-    ('>', 'node', 'funcdef', 1, False),
+    ('>', 'node', 'def', 1, False),
         ('>', 'list', 'list', 'decorators', False),
             ('>', 'node', 'decorator', 0, False),
                 ('>', 'constant', '@', '@', False),
@@ -214,7 +214,7 @@ def fun(arg1):
                 ('<', 'string', '', 'indent', False),
             ('<', 'node', 'endl', 2, False),
         ('<', 'list', 'list', 'value', False),
-    ('<', 'node', 'funcdef', 1, False),
+    ('<', 'node', 'def', 1, False),
     ])
 
     walker.walk(node)

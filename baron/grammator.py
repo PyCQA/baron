@@ -369,7 +369,7 @@ def generate_parse(print_function):
     def function_definition(pack):
         (def_, name, left_parenthesis, parameters, right_parenthesis, colon, suite) = pack
         return [{
-            "type": "funcdef",
+            "type": "def",
             "decorators": [],
             "name": name.value,
             "first_formatting": def_.hidden_tokens_after,
