@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.4 (unreleased)
+----------------
+
+- new rendering type in the nodes_rendering_order dictionary: string. This
+  remove an ambiguity where a key could be pointing to a dict or a string, thus
+  forcing third party tools to do guessing.
+
 0.3.1 (2014-09-04)
 ------------------
 
