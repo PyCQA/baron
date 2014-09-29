@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.4 (unreleased)
+0.4 (2014-09-29)
 ----------------
 
 - new rendering type in the nodes_rendering_order dictionary: string. This
