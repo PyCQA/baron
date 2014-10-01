@@ -1,13 +1,17 @@
 Changelog
 =========
 
+0.5 (unreleased)
+----------------
+
+- rename "funcdef" node to "def" node to be way more intuitive.
+
 0.4 (2014-09-29)
 ----------------
 
 - new rendering type in the nodes_rendering_order dictionary: string. This
   remove an ambiguity where a key could be pointing to a dict or a string, thus
   forcing third party tools to do guessing.
-- rename "funcdef" node to "def" node to be way more intuitive.
 
 0.3.1 (2014-09-04)
 ------------------
