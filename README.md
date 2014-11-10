@@ -21,9 +21,9 @@ fst = parse(source_code_string)
 source_code_string == dumps(fst)
 ```
 
-There is a good chance that you'll want to use
+Except if you want to do low level things, **use
 [RedBaron](https://github.com/Psycojoker/redbaron) instead of using Baron
-directly. Think of Baron as the "bytecode of python source code" and RedBaron
+directly**. Think of Baron as the "bytecode of python source code" and RedBaron
 as some sort of usable layer on top of it.
 
 If you don't know what Baron is or don't understand yet why it might be
