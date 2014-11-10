@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.5 (unreleased)
+0.5 (2014-11-10)
 ----------------
 
 - rename "funcdef" node to "def" node to be way more intuitive.
