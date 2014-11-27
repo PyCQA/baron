@@ -407,30 +407,6 @@ def generate_parse(print_function):
             "value": name_.value,
         }
 
-    @pg.production("argument : test")
-    def argument_one(pack):
-        (name,) = pack
-        return [{
-            "type": "call_argument",
-            "first_formatting": [],
-            "second_formatting": [],
-            "name": "",
-            "value": name
-        }]
-
-
-    @pg.production("parameter : name")
-    def parameter_one(pack):
-        (name,) = pack
-        return [{
-            "type": "def_argument",
-            "first_formatting": [],
-            "second_formatting": [],
-            "value": {},
-            "name": name["value"]
-        }]
-
-
     @pg.production("parameter : LEFT_PARENTHESIS parameter RIGHT_PARENTHESIS")
     def parameter_fpdef(pack):
         (left_parenthesis, parameter, right_parenthesis) = pack
@@ -473,27 +449,35 @@ def generate_parse(print_function):
     # I guess it's yet another legacy mistake
     # python give me 'SyntaxError: keyword can't be an expression' when I try to
     # put something else than a name (looks like a custom SyntaxError)
-    @pg.production("argument : test EQUAL test")
+    @pg.production("argument : test maybe_test")
     def named_argument(pack):
-        (name, equal, test) = pack
+        (name, (equal, test)) = pack
         return [{
             "type": "call_argument",
-            "first_formatting": equal.hidden_tokens_before,
-            "second_formatting": equal.hidden_tokens_after,
+            "first_formatting": equal.hidden_tokens_before if equal else [],
+            "second_formatting": equal.hidden_tokens_after if equal else [],
+            "value": test if equal else name,
+            "name": name["value"] if equal else ""
+        }]
+
+    @pg.production("parameter : name maybe_test")
+    def parameter_with_default(pack):
+        (name, (equal, test)) = pack
+        return [{
+            "type": "def_argument",
+            "first_formatting": equal.hidden_tokens_before if equal else [],
+            "second_formatting": equal.hidden_tokens_after if equal else [],
             "value": test,
             "name": name["value"]
         }]
 
-    @pg.production("parameter : name EQUAL test")
-    def parameter_with_default(pack):
-        (name, equal, test) = pack
-        return [{
-            "type": "def_argument",
-            "first_formatting": equal.hidden_tokens_before,
-            "second_formatting": equal.hidden_tokens_after,
-            "value": test,
-            "name": name["value"]
-        }]
+    @pg.production("maybe_test : EQUAL test")
+    def maybe_test(pack):
+        return pack
+
+    @pg.production("maybe_test : ")
+    def maybe_test_empty(pack):
+        return (None, {})
 
     @pg.production("argument : test comp_for")
     def generator_comprehension(pack):
