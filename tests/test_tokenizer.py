@@ -28,8 +28,8 @@ def test_name_number():
 
 def test_number():
     match('1234', 'INT')
-    match('1234L', 'INT')
-    match('1234l', 'INT')
+    match('1234L', 'LONG')
+    match('1234l', 'LONG')
 
 
 def test_float():

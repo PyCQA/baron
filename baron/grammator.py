@@ -609,6 +609,7 @@ def generate_parse(print_function):
 
     # TODO test all the things (except INT)
     @pg.production("atom : INT")
+    @pg.production("atom : LONG")
     @pg.production("atom : OCTA")
     @pg.production("atom : HEXA")
     @pg.production("atom : BINARY")

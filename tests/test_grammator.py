@@ -19,6 +19,17 @@ def test_int():
     ])
 
 
+def test_long():
+    "123234L"
+    parse_simple([('LONG', '123234L')], [
+        {
+            "type": "long",
+            "section": "number",
+            "value": "123234L",
+        }
+    ])
+
+
 def test_name():
     "a"
     parse_simple([('NAME', 'a')], [{"type": "name", "value": "a",}])

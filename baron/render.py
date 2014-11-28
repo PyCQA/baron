@@ -113,6 +113,7 @@ def child_by_key(node, key):
 
 nodes_rendering_order = {
         "int":               [("string", "value", True)],
+        "long":              [("string", "value", True)],
         "name":              [("string", "value", True)],
         "hexa":              [("string", "value", True)],
         "octa":              [("string", "value", True)],
