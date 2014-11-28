@@ -462,14 +462,14 @@ def test_funcdef_stmt_one_parameter_indent():
                     "indent": "    "
                 },
                 {
-        "type": "pass",
-    },
+                    "type": "pass",
+                },
                 {
-        "type": "endl",
-        "formatting": [],
-        "indent": "",
-        "value": "\n"
-    }
+                    "type": "endl",
+                    "formatting": [],
+                    "indent": "",
+                    "value": "\n"
+                }
             ],
         }
     ])
