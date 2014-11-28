@@ -305,27 +305,18 @@ nodes_rendering_order = {
         ],
 
         "call_argument": [
-            ("string",     "name",              "name"),
-            ("formatting", "first_formatting",  "name"),
-            ("constant",   "=",                 "name"),
-            ("formatting", "second_formatting", "name"),
+            ("key",        "target",            "target"),
+            ("formatting", "first_formatting",  "target"),
+            ("constant",   "=",                 "target"),
+            ("formatting", "second_formatting", "target"),
             ("key",        "value",             True),
         ],
         "def_argument": [
-            ("string",     "name",              True),
+            ("key",        "target",            True),
             ("formatting", "first_formatting",  "value"),
             ("constant",   "=",                 "value"),
             ("formatting", "second_formatting", "value"),
             ("key",        "value",             "value"),
-        ],
-        "def_argument_tuple": [
-            ("formatting", "first_formatting",  True),
-            ("constant",   "(",                 True),
-            ("formatting", "second_formatting", True),
-            ("list",       "value",             True),
-            ("formatting", "third_formatting",  True),
-            ("constant",   ")",                 True),
-            ("formatting", "fourth_formatting", True),
         ],
         "list_argument": [
             ("constant",   "*",                 True),

@@ -407,42 +407,55 @@ def generate_parse(print_function):
             "value": name_.value,
         }
 
-    @pg.production("parameter : LEFT_PARENTHESIS parameter RIGHT_PARENTHESIS")
+    @pg.production("parameter : LEFT_PARENTHESIS name RIGHT_PARENTHESIS maybe_test")
     def parameter_fpdef(pack):
-        (left_parenthesis, parameter, right_parenthesis) = pack
+        (left_parenthesis, name, right_parenthesis, (equal, test)) = pack
         return [{
-            "type": "associative_parenthesis",
-            "first_formatting": left_parenthesis.hidden_tokens_before,
-            "second_formatting": left_parenthesis.hidden_tokens_after,
-            "third_formatting": right_parenthesis.hidden_tokens_before,
-            "fourth_formatting": right_parenthesis.hidden_tokens_after,
-            "value": parameter[0]
+            "type": "def_argument",
+            "first_formatting": equal.hidden_tokens_before if equal else [],
+            "second_formatting": equal.hidden_tokens_after if equal else [],
+            "value": test,
+            "target": {
+                "type": "associative_parenthesis",
+                "first_formatting": left_parenthesis.hidden_tokens_before,
+                "second_formatting": left_parenthesis.hidden_tokens_after,
+                "third_formatting": right_parenthesis.hidden_tokens_before,
+                "fourth_formatting": right_parenthesis.hidden_tokens_after,
+                "value": name
+            }
         }]
 
 
-    @pg.production("parameter : LEFT_PARENTHESIS fplist RIGHT_PARENTHESIS")
+    @pg.production("parameter : LEFT_PARENTHESIS fplist RIGHT_PARENTHESIS maybe_test")
     def parameter_fplist(pack):
-        (left_parenthesis, fplist, right_parenthesis) = pack
+        (left_parenthesis, fplist, right_parenthesis, (equal, test)) = pack
         return [{
-            "type": "def_argument_tuple",
-            "first_formatting": left_parenthesis.hidden_tokens_after,
-            "second_formatting": left_parenthesis.hidden_tokens_before,
-            "third_formatting": right_parenthesis.hidden_tokens_before,
-            "fourth_formatting": right_parenthesis.hidden_tokens_after,
-            "value": fplist,
+            "type": "def_argument",
+            "first_formatting": equal.hidden_tokens_before if equal else [],
+            "second_formatting": equal.hidden_tokens_after if equal else [],
+            "value": test,
+            "target": {
+                "type": "tuple",
+                "with_parenthesis": True,
+                "first_formatting": left_parenthesis.hidden_tokens_after,
+                "second_formatting": left_parenthesis.hidden_tokens_before,
+                "third_formatting": right_parenthesis.hidden_tokens_before,
+                "fourth_formatting": right_parenthesis.hidden_tokens_after,
+                "value": fplist,
+            },
         }]
 
 
-    @pg.production("fplist : fplist parameter")
+    @pg.production("fplist : fplist name")
     def fplist_recur(pack):
-        (fplist, parameter) = pack
-        return fplist + parameter
+        (fplist, name) = pack
+        return fplist + [name]
 
 
-    @pg.production("fplist : parameter comma")
+    @pg.production("fplist : name comma")
     def fplist(pack):
-        (parameter, comma) = pack
-        return parameter + [comma]
+        (name, comma) = pack
+        return [name, comma]
 
 
     # really strange that left part of argument grammar can be a test
@@ -457,7 +470,7 @@ def generate_parse(print_function):
             "first_formatting": equal.hidden_tokens_before if equal else [],
             "second_formatting": equal.hidden_tokens_after if equal else [],
             "value": test if equal else name,
-            "name": name["value"] if equal else ""
+            "target": name if equal else {}
         }]
 
     @pg.production("parameter : name maybe_test")
@@ -468,7 +481,7 @@ def generate_parse(print_function):
             "first_formatting": equal.hidden_tokens_before if equal else [],
             "second_formatting": equal.hidden_tokens_after if equal else [],
             "value": test,
-            "name": name["value"]
+            "target": name
         }]
 
     @pg.production("maybe_test : EQUAL test")

@@ -280,7 +280,7 @@ def test_bc_l1_def_left_paren():
 
 
 def test_bc_l1_arg1():
-    path = [0, "arguments", 0, "name"]
+    path = [0, "arguments", 0, "target", "value"]
     check_path(bigcode, [(1, 9), (1, 10), (1, 11), (1, 12)], path)
 
 
@@ -295,7 +295,7 @@ def test_bc_l1_comma_second_formatting():
 
 
 def test_bc_l1_arg2():
-    path = [0, "arguments", 2, "name"]
+    path = [0, "arguments", 2, "target", "value"]
     check_path(bigcode, [(1, 15), (1, 16), (1, 17), (1, 18)], path)
 
 
@@ -411,7 +411,7 @@ def test_bc_l5_left_paren():
 
 
 def test_bc_l5_arg1():
-    path = [1, "arguments", 0, "name"]
+    path = [1, "arguments", 0, "target", "value"]
     check_path(bigcode, [(5, 10), (5, 11), (5, 12), (5, 13)], path)
 
 

@@ -450,7 +450,10 @@ def test_funcdef_stmt_one_parameter_indent():
                     "type": "def_argument",
                     "first_formatting": [],
                     "second_formatting": [],
-                    "name": "x",
+                    "target": {
+                        "type": "name",
+                        "value": "x",
+                    },
                     "value": {},
                 }
             ],
@@ -508,7 +511,10 @@ def test_funcdef_stmt_one_parameter_comma_indent():
                     "type": "def_argument",
                     "first_formatting": [],
                     "second_formatting": [],
-                    "name": "x",
+                    "target": {
+                        "type": "name",
+                        "value": "x",
+                    },
                     "value": {},
                 },
                 {
@@ -573,7 +579,10 @@ def test_funcdef_stmt_one_parameter_comma_default_indent():
                     "type": "def_argument",
                     "first_formatting": [],
                     "second_formatting": [],
-                    "name": "x",
+                    "target": {
+                        "type": "name",
+                        "value": "x",
+                    },
                     "value": {
                         "type": "int",
                         "value": "1",
@@ -1253,7 +1262,7 @@ def test_decorator_parenthesis_arg():
                         "first_formatting": [],
                         "value": [
                             {
-                                "name": "",
+                                "target": {},
                                 "first_formatting": [],
                                 "second_formatting": [],
                                 "type": "call_argument",
@@ -1566,25 +1575,29 @@ def test_fplist():
             "type": "def",
             "arguments": [
                 {
-                    "type": "def_argument_tuple",
+                    "type": "def_argument",
                     "first_formatting": [],
                     "second_formatting": [],
-                    "third_formatting": [],
-                    "fourth_formatting": [],
-                    "value": [
-                        {
-                            "type": "def_argument",
-                            "value": {},
-                            "first_formatting": [],
-                            "second_formatting": [],
-                            "name": "b",
+                    "value": {},
+                    "target": {
+                        "first_formatting": [],
+                        "second_formatting": [],
+                        "third_formatting": [],
+                        "fourth_formatting": [],
+                        "type": "tuple",
+                        "with_parenthesis": True,
+                        "value": [
+                            {
+                            "value": "b",
+                            "type": "name",
                         },
                         {
-                            "type": "comma",
-                            "first_formatting": [],
-                            "second_formatting": [],
-                        }
-                    ],
+                                "first_formatting": [],
+                                "second_formatting": [],
+                                "type": "comma",
+                            }
+                        ],
+                    },
                 }
             ],
             "name": "a",
@@ -1632,32 +1645,33 @@ def test_fplist_two():
             "type": "def",
             "arguments": [
                 {
-                    "type": "def_argument_tuple",
+                    "type": "def_argument",
                     "first_formatting": [],
                     "second_formatting": [],
-                    "third_formatting": [],
-                    "fourth_formatting": [],
-                    "value": [
-                        {
-                            "type": "def_argument",
-                            "value": {},
-                            "first_formatting": [],
-                            "second_formatting": [],
-                            "name": "b",
-                        },
-                        {
-                            "type": "comma",
-                            "first_formatting": [],
-                            "second_formatting": [],
-                        },
-                        {
-                            "type": "def_argument",
-                            "value": {},
-                            "first_formatting": [],
-                            "second_formatting": [],
-                            "name": "c",
-                        }
-                    ],
+                    "value": {},
+                    "target": {
+                        "type": "tuple",
+                        "with_parenthesis": True,
+                        "first_formatting": [],
+                        "second_formatting": [],
+                        "third_formatting": [],
+                        "fourth_formatting": [],
+                        "value": [
+                            {
+                                "type": "name",
+                                "value": "b",
+                            },
+                            {
+                                "type": "comma",
+                                "first_formatting": [],
+                                "second_formatting": [],
+                            },
+                            {
+                                "type": "name",
+                                "value": "c",
+                            }
+                        ],
+                    }
                 }
             ],
             "name": "a",
@@ -1703,17 +1717,20 @@ def test_fplist_alone():
             "type": "def",
             "arguments": [
                 {
-                    "type": "associative_parenthesis",
+                    "type": "def_argument",
+                    "value": {},
                     "first_formatting": [],
                     "second_formatting": [],
-                    "third_formatting": [],
-                    "fourth_formatting": [],
-                    "value": {
-                        "value": {},
-                        "type": "def_argument",
+                    "target": {
+                        "type": "associative_parenthesis",
                         "first_formatting": [],
                         "second_formatting": [],
-                        "name": "b",
+                        "third_formatting": [],
+                        "fourth_formatting": [],
+                        "value": {
+                            "type": "name",
+                            "value": "b",
+                        }
                     }
                 }
             ],
@@ -1743,4 +1760,98 @@ def test_endl_dont_grab_comment_as_indent():
     ], [
         {"type": "endl", "value": "\n", "indent": "", "formatting": []},
         {"type": "comment", "value": "# pouet", "formatting": []},
+    ])
+
+
+def test_regression_def_argument_tuple():
+    """
+    def function_name((a,b)=c):\n    pass\n
+    """
+    parse_multi([
+        ('DEF', 'def', [], [('SPACE', ' ')]),
+        ('NAME', 'function_name'),
+        ('LEFT_PARENTHESIS', '('),
+        ('LEFT_PARENTHESIS', '('),
+        ('NAME', 'a'),
+        ('COMMA', ','),
+        ('NAME', 'b'),
+        ('RIGHT_PARENTHESIS', ')'),
+        ('EQUAL', '='),
+        ('NAME', 'c'),
+        ('RIGHT_PARENTHESIS', ')'),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n', [], []),
+        ('DEDENT', ''),
+        ('ENDMARKER', '')
+    ], [
+        {
+            'arguments': [
+                {
+                    'first_formatting': [],
+                    'second_formatting': [],
+                    'type': 'def_argument',
+                    'target': {
+                        'type': 'tuple',
+                        'first_formatting': [],
+                        'with_parenthesis': True,
+                        'fourth_formatting': [],
+                        'second_formatting': [],
+                        'third_formatting': [],
+                        'value': [
+                            {
+                                'value': 'a',
+                                'type': 'name',
+                            },
+                            {
+                                'first_formatting': [],
+                                'second_formatting': [],
+                                'type': 'comma'
+                            },
+                            {
+                                'value': 'b',
+                                'type': 'name',
+                            }
+                        ]
+                    },
+                    'value': {
+                        'type': 'name',
+                        'value': 'c',
+                    }
+                }
+            ],
+            'decorators': [],
+            'fifth_formatting': [],
+            'first_formatting': [
+                {
+                    'type': 'space',
+                    'value': ' '
+                }
+            ],
+            'fourth_formatting': [],
+            'name': 'function_name',
+            'second_formatting': [],
+            'sixth_formatting': [],
+            'third_formatting': [],
+            'type': 'def',
+            'value': [
+                {
+                    'formatting': [],
+                    'indent': '    ',
+                    'type': 'endl',
+                    'value': '\n'
+                },
+                {
+                    'type': 'pass'
+                },
+                {
+                    'formatting': [],
+                    'indent': '',
+                    'type': 'endl',
+                    'value': '\n'
+                }
+            ]
+        }
     ])
