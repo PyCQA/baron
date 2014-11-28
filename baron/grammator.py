@@ -446,16 +446,20 @@ def generate_parse(print_function):
         }]
 
 
-    @pg.production("fplist : fplist name")
+    @pg.production("fplist : fplist parameter")
     def fplist_recur(pack):
         (fplist, name) = pack
-        return fplist + [name]
+        if name[0]["type"] == "def_argument":
+            name = [name[0]["target"]]
+        return fplist + name
 
 
-    @pg.production("fplist : name comma")
+    @pg.production("fplist : parameter comma")
     def fplist(pack):
         (name, comma) = pack
-        return [name, comma]
+        if name[0]["type"] == "def_argument":
+            name = [name[0]["target"]]
+        return name + [comma]
 
 
     # really strange that left part of argument grammar can be a test

@@ -1866,3 +1866,120 @@ def test_regression_def_argument_tuple():
             ]
         }
     ])
+
+
+def test_regression_def_argument_tuple_nested():
+    """
+    def function_name((a,(x,y))=c):\n    pass\n
+    """
+    parse_multi([
+        ('DEF', 'def', [], [('SPACE', ' ')]),
+        ('NAME', 'function_name'),
+        ('LEFT_PARENTHESIS', '('),
+        ('LEFT_PARENTHESIS', '('),
+        ('NAME', 'a'),
+        ('COMMA', ','),
+        ('LEFT_PARENTHESIS', '('),
+        ('NAME', 'x'),
+        ('COMMA', ','),
+        ('NAME', 'y'),
+        ('RIGHT_PARENTHESIS', ')'),
+        ('RIGHT_PARENTHESIS', ')'),
+        ('EQUAL', '='),
+        ('NAME', 'c'),
+        ('RIGHT_PARENTHESIS', ')'),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+        ('ENDMARKER', ''),
+    ], [
+        {
+            'arguments': [
+                {
+                    'first_formatting': [],
+                    'second_formatting': [],
+                    'type': 'def_argument',
+                    'target': {
+                        'type': 'tuple',
+                        'first_formatting': [],
+                        'with_parenthesis': True,
+                        'fourth_formatting': [],
+                        'second_formatting': [],
+                        'third_formatting': [],
+                        'value': [
+                            {
+                                'value': 'a',
+                                'type': 'name',
+                            },
+                            {
+                                'first_formatting': [],
+                                'second_formatting': [],
+                                'type': 'comma'
+                            },
+                            {
+                                'type': 'tuple',
+                                'first_formatting': [],
+                                'with_parenthesis': True,
+                                'fourth_formatting': [],
+                                'second_formatting': [],
+                                'third_formatting': [],
+                                'value': [
+                                    {
+                                        'value': 'x',
+                                        'type': 'name',
+                                    },
+                                    {
+                                        'first_formatting': [],
+                                        'second_formatting': [],
+                                        'type': 'comma'
+                                    },
+                                    {
+                                        'value': 'y',
+                                        'type': 'name',
+                                    },
+                                ]
+                            },
+                        ]
+                    },
+                    'value': {
+                        'type': 'name',
+                        'value': 'c',
+                    }
+                }
+            ],
+            'decorators': [],
+            'fifth_formatting': [],
+            'first_formatting': [
+                {
+                    'type': 'space',
+                    'value': ' '
+                }
+            ],
+            'fourth_formatting': [],
+            'name': 'function_name',
+            'second_formatting': [],
+            'sixth_formatting': [],
+            'third_formatting': [],
+            'type': 'def',
+            'value': [
+                {
+                    'formatting': [],
+                    'indent': '    ',
+                    'type': 'endl',
+                    'value': '\n'
+                },
+                {
+                    'type': 'pass'
+                },
+                {
+                    'formatting': [],
+                    'indent': '',
+                    'type': 'endl',
+                    'value': '\n'
+                }
+            ]
+        }
+    ])
