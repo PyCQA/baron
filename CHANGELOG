@@ -1,6 +1,18 @@
 Changelog
 =========
 
+0.6 (unreleased)
+----------------
+
+- FST structure modification: def_argument_tuple is no more and all arguments
+  now have a coherent structure:
+  * def_argument node name attribute has been renamed to target, like in assign
+  * target attribute now points to a dict, not to a string
+  * old name -> string are now target -> name_node
+  * def_argument_tuple is now a def_argument where target points to a tuple
+  * this specific tuple will only has name and comma and tuple members (no more
+    def_argument for name)
+
 0.5 (2014-11-10)
 ----------------
 
