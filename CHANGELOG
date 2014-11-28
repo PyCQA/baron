@@ -12,6 +12,7 @@ Changelog
   * def_argument_tuple is now a def_argument where target points to a tuple
   * this specific tuple will only has name and comma and tuple members (no more
     def_argument for name)
+- new node: long, before int and long where merged but that was causing problems
 
 0.5 (2014-11-10)
 ----------------
