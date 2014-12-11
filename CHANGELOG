@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.6 (unreleased)
+0.6 (2014-12-11)
 ----------------
 
 - FST structure modification: def_argument_tuple is no more and all arguments
