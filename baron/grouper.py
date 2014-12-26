@@ -78,11 +78,11 @@ def group_generator(sequence):
             if re.match(r'^\s+$', str(iterator.show_next())):
                 current += next(iterator)
 
-        if (re.match(r'^\d+$', current) and iterator.show_next() and iterator.show_next() == ".") or\
-           (current == "." and iterator.show_next() and re.match(r'^\d+[jJ]?$', iterator.show_next())):
+        if (re.match(r'^\d+$', current) and iterator.show_next() and iterator.show_next() in [".", "e", "E"]) or\
+           (current == "." and iterator.show_next() and re.match(r'^\d+(-\d+)?[jJeE]?$', iterator.show_next())):
             current += next(iterator)
 
-            while iterator.show_next() and re.match(r'^\d*[jJeE]?$', iterator.show_next()) and re.match(r'^\d*[jJeE]?$', iterator.show_next()).group():
+            while iterator.show_next() and re.match(r'^-?\d*[jJeE]?$', iterator.show_next()) and re.match(r'^-?\d*[jJeE]?$', iterator.show_next()).group():
                 current += next(iterator)
 
         if re.match(r'^\d+\.$', current) and iterator.show_next() and re.match(r'^\d*[eE]\d*$', iterator.show_next()):
