@@ -35,6 +35,10 @@ def group(sequence):
     return list(group_generator(sequence))
 
 
+def match_on_next(regex, iterator):
+    return iterator.show_next() and re.match(regex, iterator.show_next())
+
+
 def group_generator(sequence):
     iterator = FlexibleIterator(sequence)
     current = None
@@ -78,20 +82,20 @@ def group_generator(sequence):
             if re.match(r'^\s+$', str(iterator.show_next())):
                 current += next(iterator)
 
-        if (re.match(r'^\d+$', current) and iterator.show_next() and iterator.show_next() in [".", "e", "E"]) or\
-           (current == "." and iterator.show_next() and re.match(r'^\d+(-\d+)?[jJeE]?$', iterator.show_next())):
+        if (re.match(r'^\d+$', current) and match_on_next(r'^[.eE]$', iterator)) or\
+           (current == "." and match_on_next(r'^\d+(-\d+)?[jJeE]?$', iterator)):
             current += next(iterator)
 
-            while iterator.show_next() and re.match(r'^-?\d*[jJeE]?$', iterator.show_next()) and re.match(r'^-?\d*[jJeE]?$', iterator.show_next()).group():
+            while match_on_next(r'^-?\d*[jJeE]?$', iterator) and match_on_next(r'^-?\d*[jJeE]?$', iterator).group():
                 current += next(iterator)
 
-        if re.match(r'^\d+\.$', current) and iterator.show_next() and re.match(r'^\d*[eE]\d*$', iterator.show_next()):
+        if re.match(r'^\d+\.$', current) and match_on_next(r'^\d*[eE]\d*$', iterator):
             current += next(iterator)
 
-        if re.match(r'^\d+\.?[eE]$', current) and iterator.show_next() and re.match(r'^\d+$', iterator.show_next()):
+        if re.match(r'^\d+\.?[eE]$', current) and match_on_next(r'^\d+$', iterator):
             current += next(iterator)
 
-        if re.match(r'^\d+\.?\d*[eE]$', current) and iterator.show_next() and iterator.show_next() in "-+" and re.match(r'^\d+$', iterator.show_next(2) if iterator.show_next(2) else ""):
+        if re.match(r'^\d+\.?\d*[eE]$', current) and match_on_next(r'^[-+]$', iterator) and iterator.show_next(2) and re.match(r'^\d+$', iterator.show_next(2)):
             current += next(iterator)
             current += next(iterator)
 
