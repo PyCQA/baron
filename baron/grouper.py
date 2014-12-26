@@ -61,7 +61,7 @@ def group_generator(sequence):
 
             # It's required in a case where I have something like that:
             # ['123.123e', '[+-]', '123']
-            assert re.match(r'^\d+[eE][-+]?\d+$', current) or re.match(r'^\d*.\d*[eE][-+]?\d+$', current)
+            assert re.match(r'^\d+[eE][-+]?\d+[jJ]?$', current) or re.match(r'^\d*.\d*[eE][-+]?\d+[jJ]?$', current)
 
         if current == "\\" and iterator.show_next() in ('\n', '\r\n'):
             current += next(iterator)
@@ -82,11 +82,11 @@ def group_generator(sequence):
             if re.match(r'^\s+$', str(iterator.show_next())):
                 current += next(iterator)
 
-        if (re.match(r'^\d+$', current) and match_on_next(r'^[.eE]$', iterator)) or\
-           (current == "." and match_on_next(r'^\d+(-\d+)?[jJeE]?$', iterator)):
+        if (re.match(r'^\d+$', current) and match_on_next(r'^\.$', iterator)) or\
+           (current == "." and match_on_next(r'^\d+([jJ]|[eE]\d+)?$', iterator)):
             current += next(iterator)
 
-            while match_on_next(r'^-?\d*[jJeE]?$', iterator) and match_on_next(r'^-?\d*[jJeE]?$', iterator).group():
+            if match_on_next(r'^\d*[jJ]?$', iterator) and match_on_next(r'^\d*[jJ]?$', iterator).group():
                 current += next(iterator)
 
         if re.match(r'^\d+\.$', current) and match_on_next(r'^\d*[eE]\d*$', iterator):
