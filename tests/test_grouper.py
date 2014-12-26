@@ -200,3 +200,4 @@ def test_float_exponant():
     assert group(['1', '.', 'e', '-', '2']) == ['1.e-2']
     assert group(['1', '.', 'e', '2']) == ['1.e2']
     assert group(['1', '.', 'e2']) == ['1.e2']
+    assert group(['.', '3', 'e', '5', '5']) == ['.3e55']
