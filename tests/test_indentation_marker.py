@@ -275,8 +275,8 @@ def test_trailing_spaces():
     """
     if a:
         if b:
-            
-        
+ 
+ 
             pass
     """
     check([
@@ -337,3 +337,38 @@ def test_tab_and_spaces_because_some_people_are_horrible():
         ('PASS', 'pass'),
         ('DEDENT', ''),
     ])
+
+
+def test_try_pass_on_same_line():
+    """
+    try: pass
+
+    except:
+        pass
+    """
+    check([
+        ('TRY', 'try'),
+        ('COLON', ':', [], [('SPACE', ' ')]),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('ENDL', '\n'),
+        ('EXCEPT', 'except'),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+    ], [
+        ('TRY', 'try'),
+        ('COLON', ':', [], [('SPACE', ' ')]),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('ENDL', '\n'),
+        ('EXCEPT', 'except'),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+    ])
+

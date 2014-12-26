@@ -367,6 +367,10 @@ def test_backslash_in_comment():
 def test_regression():
     assert split("(r'[\"\\'](.|\n|\r)*[\"\\']', 'STRING'),") == ["(", "r", "'[\"\\'](.|\n|\r)*[\"\\']'", ",", " ", "'STRING'", ")", ","]
 
+
+def test_try_pass():
+    assert split("try: pass\n\nexcept:\n    pass") == ['try', ':', ' ', 'pass', '\n', '\n', 'except', ':', '\n', '    ', 'pass']
+
 # TODO: make this test pass in python3 also
 # requires to remove dependency on ast.py
 if python_version == 2:
