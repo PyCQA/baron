@@ -183,6 +183,8 @@ def test_complex():
     assert group(['1', '.', '1j']) == ['1.1j']
     assert group(['1', '.', '1J']) == ['1.1J']
     assert group(['1J']) == ['1J']
+    assert group(['1', 'e', '-', '1', 'j']) == ['1e-1j']
+    assert group(['1', 'e', '-1', 'j']) == ['1e-1j']
 
 
 def test_float_exponant():
