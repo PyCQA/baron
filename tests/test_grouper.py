@@ -2,14 +2,21 @@
 # -*- coding:Utf-8 -*-
 
 from baron.grouper import group
+from baron.spliter import split
+import pytest
+
+
+def grouper_test(input, split_output, group_output):
+    assert split(input) == split_output
+    assert group(split_output) == group_output
 
 
 def test_empty():
-    assert group([]) == []
+    grouper_test("", [], [])
 
 
 def test_one():
-    assert group(['a']) == ['a']
+    grouper_test('a', ['a'], ['a'])
 
 
 def test_random():
@@ -17,189 +24,187 @@ def test_random():
 
 
 def test_add_egual():
-    assert group(["+", "="]) == ["+="]
+    grouper_test("+=", ["+", "="], ["+="])
 
 
 def test_add_add():
-    assert group(["+", "+"]) == ["+", "+"]
+    grouper_test("++", ["+", "+"], ["+", "+"])
 
 
 def test_add_egual_double():
-    assert group(["+", "=", "+", "="]) == ["+=", "+="]
+    grouper_test("+=+=", ["+", "=", "+", "="], ["+=", "+="])
 
 
 def test_add_egual_random():
-    assert group(list(" qsd += qsd")) == [" ", "q", "s", "d", " ", "+=", " ", "q", "s", "d"]
+    grouper_test(" qsd+=qsd", [' ', 'qsd', '+', '=', 'qsd'], [' ', 'qsd', '+=', 'qsd'])
 
 
 def test_minus_egual():
-    assert group(["-", "="]) == ["-="]
+    grouper_test("-=", ["-", "="], ["-="])
 
 
 def test_mult_egual():
-    assert group(["*", "="]) == ["*="]
+    grouper_test("*=", ["*", "="], ["*="])
 
 
 def test_div_egual():
-    assert group(["/", "="]) == ["/="]
+    grouper_test("/=", ["/", "="], ["/="])
 
 
 def test_modulo_egual():
-    assert group(["%", "="]) == ["%="]
+    grouper_test("%=", ["%", "="], ["%="])
 
 
 def test_amper_egual():
-    assert group(["&", "="]) == ["&="]
+    grouper_test("&=", ["&", "="], ["&="])
 
 
 def test_bar_egual():
-    assert group(["|", "="]) == ["|="]
+    grouper_test("|=", ["|", "="], ["|="])
 
 
 def test_power_egual():
-    assert group(["^", "="]) == ["^="]
+    grouper_test("^=", ["^", "="], ["^="])
 
 
 def test_less_less():
-    assert group(["<", "<"]) == ["<<"]
+    grouper_test("<<", ["<", "<"], ["<<"])
 
 
 def test_more_more():
-    assert group([">", ">"]) == [">>"]
+    grouper_test(">>", [">", ">"], [">>"])
 
 
 def test_egual_egual():
-    assert group(["=", "="]) == ["=="]
+    grouper_test("==", ["=", "="], ["=="])
 
 
 def test_different():
-    assert group(["!", "="]) == ["!="]
+    grouper_test("!=", ["!", "="], ["!="])
 
 
 def test_inferior_egual():
-    assert group([">", "="]) == [">="]
+    grouper_test(">=", [">", "="], [">="])
 
 
 def test_superior_egual():
-    assert group(["<", "="]) == ["<="]
+    grouper_test("<=", ["<", "="], ["<="])
 
 
 def test_different_old_style():
-    assert group(["<", ">"]) == ["<>"]
+    grouper_test("<>", ["<", ">"], ["<>"])
 
 
 def test_power_power_egual():
-    assert group(["*", "*", "="]) == ["**="]
+    grouper_test("**=", ["*", "*", "="], ["**="])
 
 
 def test_div_div_egual():
-    assert group(["/", "/", "="]) == ["//="]
+    grouper_test("//=", ["/", "/", "="], ["//="])
 
 
 def test_less_less_egual():
-    assert group(["<", "<", "="]) == ["<<="]
+    grouper_test("<<=", ["<", "<", "="], ["<<="])
 
 
 def test_more_more_egual():
-    assert group([">", ">", "="]) == [">>="]
+    grouper_test(">>=", [">", ">", "="], [">>="])
 
 
 def test_decorator():
-    assert group(["@", "pouet"]) == ["@", "pouet"]
+    grouper_test("@pouet", ["@", "pouet"], ["@", "pouet"])
 
 
 def test_endl():
-    assert group(["\r", "\n"]) == ["\r\n"]
+    grouper_test("\r\n", ["\r", "\n"], ["\r\n"])
 
 
 def test_raw_string():
-    assert group(["r", "'pouet'"]) == ["r'pouet'"]
-    assert group(["R", "'pouet'"]) == ["R'pouet'"]
+    grouper_test("r'pouet'", ["r", "'pouet'"], ["r'pouet'"])
+    grouper_test("R'pouet'", ["R", "'pouet'"], ["R'pouet'"])
 
 
 def test_unicode_string():
-    assert group(["u", "'pouet'"]) == ["u'pouet'"]
-    assert group(["U", "'pouet'"]) == ["U'pouet'"]
+    grouper_test("u'pouet'", ["u", "'pouet'"], ["u'pouet'"])
+    grouper_test("U'pouet'", ["U", "'pouet'"], ["U'pouet'"])
 
 
 def test_binary_string():
-    assert group(["b", "'pouet'"]) == ["b'pouet'"]
-    assert group(["B", "'pouet'"]) == ["B'pouet'"]
+    grouper_test("b'pouet'", ["b", "'pouet'"], ["b'pouet'"])
+    grouper_test("B'pouet'", ["B", "'pouet'"], ["B'pouet'"])
 
 
 def test_binary_raw_string():
-    assert group(["br", "'pouet'"]) == ["br'pouet'"]
-    assert group(["Br", "'pouet'"]) == ["Br'pouet'"]
-    assert group(["bR", "'pouet'"]) == ["bR'pouet'"]
-    assert group(["BR", "'pouet'"]) == ["BR'pouet'"]
+    grouper_test("br'pouet'", ["br", "'pouet'"], ["br'pouet'"])
+    grouper_test("Br'pouet'", ["Br", "'pouet'"], ["Br'pouet'"])
+    grouper_test("bR'pouet'", ["bR", "'pouet'"], ["bR'pouet'"])
+    grouper_test("BR'pouet'", ["BR", "'pouet'"], ["BR'pouet'"])
 
 
 def test_unicode_raw_string():
-    assert group(["ur", "'pouet'"]) == ["ur'pouet'"]
-    assert group(["Ur", "'pouet'"]) == ["Ur'pouet'"]
-    assert group(["uR", "'pouet'"]) == ["uR'pouet'"]
-    assert group(["UR", "'pouet'"]) == ["UR'pouet'"]
+    grouper_test("ur'pouet'", ["ur", "'pouet'"], ["ur'pouet'"])
+    grouper_test("Ur'pouet'", ["Ur", "'pouet'"], ["Ur'pouet'"])
+    grouper_test("uR'pouet'", ["uR", "'pouet'"], ["uR'pouet'"])
+    grouper_test("UR'pouet'", ["UR", "'pouet'"], ["UR'pouet'"])
 
 
 def test_exponant():
-    assert group(['1e', '+', '123']) == ['1e+123']
-    assert group(['1e', '-', '123']) == ['1e-123']
-    assert group(['1.1e', '+', '123']) == ['1.1e+123']
-    assert group(['1.1e', '-', '123']) == ['1.1e-123']
-    assert group(['.1e', '+', '123']) == ['.1e+123']
-    assert group(['.1e', '-', '123']) == ['.1e-123']
+    grouper_test("1e+123", ['1e', '+', '123'], ['1e+123'])
+    grouper_test("1e-123", ['1e', '-', '123'], ['1e-123'])
+    grouper_test("1.1e+123", ['1', '.', '1e', '+', '123'], ['1.1e+123'])
+    grouper_test("1.1e-123", ['1', '.', '1e', '-', '123'], ['1.1e-123'])
+    grouper_test(".1e+123", ['.', '1e', '+', '123'], ['.1e+123'])
+    grouper_test(".1e-123", ['.', '1e', '-', '123'], ['.1e-123'])
 
 
 def test_endl_with_backslash():
-    assert group(['\\', '\n']) == ['\\\n']
+    grouper_test("\\\n", ['\\', '\n'], ['\\\n'])
 
 
 def test_space_endl_with_backslash():
-    assert group([' 	 ', '\\', '\n', '   ']) == [' 	 \\\n   ']
-    assert group([' 	 ', '\\', '\n', 'pouet']) == [' 	 \\\n', 'pouet']
+    grouper_test(" 	 \\\n   ", [' 	 ', '\\', '\n', '   '], [' 	 \\\n   '])
+    grouper_test(" 	 \\\npouet", [' 	 ', '\\', '\n', 'pouet'], [' 	 \\\n', 'pouet'])
 
 
 def test_regression():
-    assert group(['0x045e', ':', ' ']) == ['0x045e', ':', ' ']
-    assert group(['180', '.', '\n']) == ['180.', '\n']
+    grouper_test("0x045e: ", ['0x045e', ':', ' '], ['0x045e', ':', ' '])
+    grouper_test("180.\n", ['180', '.', '\n'], ['180.', '\n'])
 
 
 def test_backslash_window_endl():
-    assert group(['\\', '\r', '\n']) == ['\\\r\n']
+    grouper_test("\\\r\n", ['\\', '\r', '\n'], ['\\\r\n'])
 
 
 def test_regression_float():
-    assert group(['1', '.']) == ['1.']
-    assert group(['.', '1']) == ['.1']
-    assert group(['1', '.', '1']) == ['1.1']
-    assert group(['7', '.', '629e', '-', '6']) == ['7.629e-6']
+    grouper_test('1.', ['1', '.'], ['1.'])
+    grouper_test('.1', ['.', '1'], ['.1'])
+    grouper_test('1.1', ['1', '.', '1'], ['1.1'])
+    grouper_test('7.629e-6', ['7', '.', '629e', '-', '6'], ['7.629e-6'])
 
 
 def test_complex():
-    assert group(['.', '1j']) == ['.1j']
-    assert group(['.', '1J']) == ['.1J']
-    assert group(['1', '.', 'j']) == ['1.j']
-    assert group(['1', '.', 'J']) == ['1.J']
-    assert group(['1', '.', '1j']) == ['1.1j']
-    assert group(['1', '.', '1J']) == ['1.1J']
-    assert group(['1J']) == ['1J']
-    assert group(['1e', '-', '1j']) == ['1e-1j']
+    grouper_test(".1j", ['.', '1j'], ['.1j'])
+    grouper_test(".1J", ['.', '1J'], ['.1J'])
+    grouper_test("1.j", ['1', '.', 'j'], ['1.j'])
+    grouper_test("1.J", ['1', '.', 'J'], ['1.J'])
+    grouper_test("1.1j", ['1', '.', '1j'], ['1.1j'])
+    grouper_test("1.1J", ['1', '.', '1J'], ['1.1J'])
+    grouper_test("1J", ['1J'], ['1J'])
+    grouper_test("1e-1j", ['1e', '-', '1j'], ['1e-1j'])
 
 
 def test_float_exponant():
-    assert group(['1E1']) == ['1E1']
-    assert group(['1E', '-', '2']) == ['1E-2']
-    assert group(['1E', '+', '2']) == ['1E+2']
-    assert group(['1', '.', 'E', '+', '2']) == ['1.E+2']
-    assert group(['1', '.', 'E', '-', '2']) == ['1.E-2']
-    assert group(['1', '.', 'E', '2']) == ['1.E2']
-    assert group(['1', '.', 'E2']) == ['1.E2']
-    assert group(['1e1']) == ['1e1']
-    assert group(['1e', '-', '2']) == ['1e-2']
-    assert group(['1e', '+', '2']) == ['1e+2']
-    assert group(['1', '.', 'e', '+', '2']) == ['1.e+2']
-    assert group(['1', '.', 'e', '-', '2']) == ['1.e-2']
-    assert group(['1', '.', 'e', '2']) == ['1.e2']
-    assert group(['1', '.', 'e2']) == ['1.e2']
-    assert group(['.', '3e55']) == ['.3e55']
+    grouper_test("1E1", ['1E1'], ['1E1'])
+    grouper_test("1E-2", ['1E', '-', '2'], ['1E-2'])
+    grouper_test("1E+2", ['1E', '+', '2'], ['1E+2'])
+    grouper_test("1.E+2", ['1', '.', 'E', '+', '2'], ['1.E+2'])
+    grouper_test("1.E-2", ['1', '.', 'E', '-', '2'], ['1.E-2'])
+    grouper_test("1.E2", ['1', '.', 'E2'], ['1.E2'])
+    grouper_test("1e1", ['1e1'], ['1e1'])
+    grouper_test("1e-2", ['1e', '-', '2'], ['1e-2'])
+    grouper_test("1e+2", ['1e', '+', '2'], ['1e+2'])
+    grouper_test("1.e+2", ['1', '.', 'e', '+', '2'], ['1.e+2'])
+    grouper_test("1.e-2", ['1', '.', 'e', '-', '2'], ['1.e-2'])
+    grouper_test("1.e2", ['1', '.', 'e2'], ['1.e2'])
+    grouper_test(".3e55", ['.', '3e55'], ['.3e55'])
 
