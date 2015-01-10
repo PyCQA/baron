@@ -619,6 +619,7 @@ def generate_parse(print_function):
     @pg.production("atom : BINARY")
     @pg.production("atom : FLOAT")
     @pg.production("atom : FLOAT_EXPONANT")
+    @pg.production("atom : FLOAT_EXPONANT_COMPLEX")
     @pg.production("atom : COMPLEX")
     def int(pack):
         (int_,) = pack
