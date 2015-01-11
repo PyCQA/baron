@@ -2897,3 +2897,29 @@ def test_strings():
         ], [
             (i, 'dummy', [('SPACE', ' ')], [('SPACE', ' ')]),
         ])
+
+
+def test_inconsistancy_on_space_grouping():
+    group([
+        ('LEFT_PARENTHESIS', '('),
+        ('SPACE', ' '),
+        ('INT', '1'),
+        ('SPACE', ' '),
+        ('RIGHT_PARENTHESIS', ')'),
+    ], [
+        ('LEFT_PARENTHESIS', '(', [], [('SPACE', ' ')]),
+        ('INT', '1'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+    ])
+
+    group([
+        ('LEFT_PARENTHESIS', '('),
+        ('SPACE', ' '),
+        ('STRING', '"a"'),
+        ('SPACE', ' '),
+        ('RIGHT_PARENTHESIS', ')'),
+    ], [
+        ('LEFT_PARENTHESIS', '(', [], [('SPACE', ' ')]),
+        ('STRING', '"a"'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+    ])

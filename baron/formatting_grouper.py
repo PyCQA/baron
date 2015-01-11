@@ -57,19 +57,22 @@ BOTH = (
     "COMMA",
     "FOR",
     "COLON",
+    "BACKQUOTE",
+)
+
+STRING = (
     "STRING",
     "RAW_STRING",
     "UNICODE_STRING",
     "UNICODE_RAW_STRING",
     "BINARY_STRING",
     "BINARY_RAW_STRING",
-    "BACKQUOTE",
 )
 
 GROUP_SPACE_BEFORE = BOTH + (
     "RIGHT_PARENTHESIS",
     "COMMENT",
-)
+) + STRING
 
 GROUP_SPACE_AFTER = BOTH + (
     "FROM",
@@ -121,10 +124,17 @@ def group_generator(sequence):
             new_current = next(iterator)
             current = (new_current[0], new_current[1], [current])
 
-        if current[0] in GROUP_SPACE_AFTER and\
+        if current[0] in GROUP_SPACE_AFTER + STRING and\
             (iterator.show_next() and iterator.show_next()[0] in ("SPACE", "COMMENT")) and\
             (not iterator.show_next(2) or (iterator.show_next(2) and not less_prioritary_than(current[0], iterator.show_next(2)[0]))):
+
+            # do not be greedy when you are grouping on strings
+            if current[0] in STRING and iterator.show_next(2) and iterator.show_next(2)[0] in GROUP_SPACE_BEFORE:
+                yield current
+                continue
+
             after_space = next(iterator)
             current = (current[0], current[1], current[2] if len(current) > 2 else [], [after_space])
+
 
         yield current
