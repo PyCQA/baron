@@ -1,6 +1,6 @@
-from .utils import FlexibleIterator
+from .utils import FlexibleIterator, BaronError
 
-class UnExpectedSpaceToken(Exception):
+class UnExpectedSpaceToken(BaronError):
     pass
 
 PRIORITY_ORDER = (
