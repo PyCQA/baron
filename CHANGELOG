@@ -7,6 +7,7 @@ Changelog
 - fix: the string was having a greedy behavior on grouping the string tokens
   surrounding it (for string chains), this ends up creating an inconsistancy in
   the way string was grouped in general
+- fix: better number parsing handling, everything isn't fixed yet
 
 0.6 (2014-12-11)
 ----------------
