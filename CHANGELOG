@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.7 (unreleased)
+0.6.1 (2015-01-31)
 ------------------
 
 - fix: the string was having a greedy behavior on grouping the string tokens
