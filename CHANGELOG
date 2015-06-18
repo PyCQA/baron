@@ -9,6 +9,7 @@ Changelog
   the way string was grouped in general
 - fix: better number parsing handling, everything isn't fixed yet
 - make all (expected) errors inherit from the same BaronError class
+- fix: parsing fails correctly if a quoted string is not closed
 
 0.6 (2014-12-11)
 ----------------
