@@ -8,6 +8,7 @@ Changelog
   surrounding it (for string chains), this ends up creating an inconsistancy in
   the way string was grouped in general
 - fix: better number parsing handling, everything isn't fixed yet
+- make all (expected) errors inherit from the same BaronError class
 
 0.6 (2014-12-11)
 ----------------
