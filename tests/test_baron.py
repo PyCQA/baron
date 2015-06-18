@@ -35,3 +35,12 @@ def test_error_untreated_error():
     with pytest.raises(BaronError):
         parse("?")
 
+
+def test_missing_quote_yields_error():
+    with pytest.raises(UntreatedError):
+        parse("'")
+    with pytest.raises(UntreatedError):
+        parse("'\n")
+    with pytest.raises(UntreatedError):
+        parse("'\n")
+
