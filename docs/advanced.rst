@@ -36,12 +36,8 @@ Let's first see the difference between the two functions:
     from baron.path import position_to_node, position_to_path
     from baron.helpers import show_node
 
-    some_code = """\
-    from baron import parse
-    from baron.helpers import show_node
-    fst = parse("a = 1")
-    show_node(fst)
-    """
+    some_code = """from baron import parse\nfrom baron.helpers import show_node\nfst = parse("a = 1")\nshow_node(fst)"""
+    print some_code
 
     tree = parse(some_code)
 
