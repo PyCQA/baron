@@ -45,9 +45,9 @@ Let's first see the difference between the two functions:
 
     tree = parse(some_code)
 
-    node = position_to_node(tree, 3, 8)
+    node = position_to_node(tree, (3, 8))
     show_node(node)
-    path = position_to_path(tree, 3, 8)
+    path = position_to_path(tree, (3, 8))
     path
 
 The first one gives the node and the second one the node's path in the
@@ -79,19 +79,19 @@ a :file:`funcdef` node:
 
     fst = parse("a(1)")
 
-    position_to_path(fst, 1, 1)
-    position_to_path(fst, 1, 2)
-    position_to_path(fst, 1, 3)
-    position_to_path(fst, 1, 4)
+    position_to_path(fst, (1, 1))
+    position_to_path(fst, (1, 2))
+    position_to_path(fst, (1, 3))
+    position_to_path(fst, (1, 4))
 
 By the way, out of bound positions are handled gracefully:
 
 .. ipython:: python
 
-    print(position_to_node(fst, -1, 1))
-    print(position_to_node(fst, 1, 0))
-    print(position_to_node(fst, 1, 5))
-    print(position_to_node(fst, 2, 4))
+    print(position_to_node(fst, (-1, 1)))
+    print(position_to_node(fst, (1, 0)))
+    print(position_to_node(fst, (1, 5)))
+    print(position_to_node(fst, (2, 4)))
 
 
 Bounding Box
@@ -148,4 +148,3 @@ As you can see, the major difference between the two functions is that
 :file:`(1, 1)` since it considers you want the bounding box of the whole
 node while :file:`path_to_bounding_box` takes the location of the node
 in the fst into account.
-
