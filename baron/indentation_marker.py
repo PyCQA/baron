@@ -1,4 +1,4 @@
-from .utils import FlexibleIterator
+from .utils import FlexibleIterator, BaronError
 import sys
 
 """
@@ -19,9 +19,15 @@ decheck the last one every time I encounter a meaningfull line. Still need to
 test this idea.
 """
 
+class UnexpectedIndentation(BaronError):
+    pass
+
 
 def mark_indentation(sequence):
-    return list(mark_indentation_generator(sequence))
+    try:
+        return list(mark_indentation_generator(sequence))
+    except TypeError as e:
+        raise UnexpectedIndentation(*e.args)
 
 
 def get_space(node):

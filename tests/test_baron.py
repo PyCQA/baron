@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from baron import parse, BaronError, ParsingError, UnExpectedFormattingToken, GroupingError, UntreatedError
+from baron import (parse, BaronError, ParsingError,
+                   UnExpectedFormattingToken, GroupingError,
+                   UntreatedError, UnexpectedIndentation)
 import pytest
 
 
@@ -43,4 +45,12 @@ def test_missing_quote_yields_error():
         parse("'\n")
     with pytest.raises(UntreatedError):
         parse("'\n")
+
+
+def test_error_bad_indentation():
+    with pytest.raises(UnexpectedIndentation):
+        parse("def fun():\nass")
+    with pytest.raises(BaronError):
+        parse("def fun():\nass")
+
 
