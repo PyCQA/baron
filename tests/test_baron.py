@@ -43,7 +43,7 @@ def test_missing_quote_yields_error():
         parse("'")
     with pytest.raises(UntreatedError):
         parse("'\n")
-    with pytest.raises(UntreatedError):
+    with pytest.raises(BaronError):
         parse("'\n")
 
 
