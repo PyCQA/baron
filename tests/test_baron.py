@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from baron import parse, BaronError, ParsingError, UnExpectedFormattingToken, GroupingError, UntreatedError
+from baron import (parse, BaronError, ParsingError,
+                   UnExpectedFormattingToken, GroupingError,
+                   UntreatedError)
 import pytest
 
 
@@ -41,6 +43,18 @@ def test_missing_quote_yields_error():
         parse("'")
     with pytest.raises(UntreatedError):
         parse("'\n")
-    with pytest.raises(UntreatedError):
+    with pytest.raises(BaronError):
         parse("'\n")
+
+
+def test_error_bad_indentation():
+    """ Regression test case
+
+    It shows a discrepency between python2 and python3 in string
+    comparisons with None.
+    """
+    with pytest.raises(ParsingError):
+        parse("def fun():\nass")
+    with pytest.raises(BaronError):
+        parse("def fun():\nass")
 
