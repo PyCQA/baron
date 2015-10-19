@@ -2,7 +2,6 @@ from . import grouper
 from . import spliter
 from .baron import parse, tokenize
 from .dumper import dumps
-from .indentation_marker import UnexpectedIndentation
 from .inner_formatting_grouper import GroupingError, UnExpectedFormattingToken
 from .parser import ParsingError
 from .render import nodes_rendering_order

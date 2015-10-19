@@ -2,7 +2,7 @@
 
 from baron import (parse, BaronError, ParsingError,
                    UnExpectedFormattingToken, GroupingError,
-                   UntreatedError, UnexpectedIndentation)
+                   UntreatedError)
 import pytest
 
 
@@ -48,9 +48,13 @@ def test_missing_quote_yields_error():
 
 
 def test_error_bad_indentation():
-    with pytest.raises(UnexpectedIndentation):
+    """ Regression test case
+
+    It shows a discrepency between python2 and python3 in string
+    comparisons with None.
+    """
+    with pytest.raises(ParsingError):
         parse("def fun():\nass")
     with pytest.raises(BaronError):
         parse("def fun():\nass")
-
 

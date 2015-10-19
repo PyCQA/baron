@@ -1,4 +1,4 @@
-from .utils import FlexibleIterator, BaronError
+from .utils import FlexibleIterator
 import sys
 
 """
@@ -19,25 +19,25 @@ decheck the last one every time I encounter a meaningfull line. Still need to
 test this idea.
 """
 
-class UnexpectedIndentation(BaronError):
-    pass
-
 
 def mark_indentation(sequence):
-    try:
-        return list(mark_indentation_generator(sequence))
-    except TypeError as e:
-        raise UnexpectedIndentation(*e.args)
+    return list(mark_indentation_generator(sequence))
+
+
+def transform_tabs_to_spaces(string):
+    return string.replace("\t", " "*8)
 
 
 def get_space(node):
-    if len(node) < 3:
-        sys.stdout.write("WARNING")
+    """ Return space formatting information of node.
+
+    If the node does not have a third formatting item - like in
+    a ('ENDL', '\n') node - then we return None as a flag value. This is
+    maybe not the best behavior but it seems to work for now.
+    """
+    if len(node) < 3 or len(node[3]) == 0:
         return None
-    if len(node[3]) == 0:
-        sys.stdout.write("WARNING")
-        return None
-    return node[3][0][1].replace("	", " "*8)
+    return transform_tabs_to_spaces(node[3][0][1])
 
 
 def mark_indentation_generator(sequence):
@@ -58,7 +58,6 @@ def mark_indentation_generator(sequence):
                 yield ('DEDENT', '')
                 indentations.pop()
 
-        #sys.stdout.write(current, iterator.show_next())
         if current[0] == "COLON" and iterator.show_next()[0] == "ENDL":
             if iterator.show_next(2)[0] not in ("ENDL",):
                 indentations.append(get_space(iterator.show_next()))
@@ -80,10 +79,27 @@ def mark_indentation_generator(sequence):
         if indentations and current[0] == "ENDL" and (len(current) != 4 or get_space(current) != indentations[-1]) and iterator.show_next()[0] != "ENDL":
             new_indent = get_space(current) if len(current) == 4 else ""
             yield current
-            while indentations and indentations[-1] > new_indent:
+            while indentations and string_is_bigger(indentations[-1], new_indent):
                 indentations.pop()
                 yield ('DEDENT', '')
             yield next(iterator)
             continue
 
         yield current
+
+
+def string_is_bigger(s1, s2):
+    """ Return s1 > s2 by taking into account None values.
+
+    None is always smaller than any string.
+
+    None > "string" works in python2 but not in python3. This function
+    makes it work in python3 too.
+    """
+    if s1 is None:
+        return False
+    elif s2 is None:
+        return True
+    else:
+        return s1 > s2
+
