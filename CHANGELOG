@@ -3,6 +3,7 @@ Changelog
 
 0.6.2 (unreleased)
 
+- fix race condition when generating parser cache file
 - make all user-facing errors inherit from the same BaronError class
 
 0.6.1 (2015-01-31)
