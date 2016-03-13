@@ -233,6 +233,7 @@ nodes_rendering_order = {
             ("key",        "value",             True),
             ("key",        "call",              "call"),
         ],
+        "dotted_name": [("list", "value",       True),],
 
         "class": [
             ("list",       "decorators",        True),
