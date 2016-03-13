@@ -124,6 +124,7 @@ nodes_rendering_order = {
         "float_exponant":    [("string", "value", True)],
         "left_parenthesis":  [("string", "value", True)],
         "right_parenthesis": [("string", "value", True)],
+        "float_exponant_complex":    [("string", "value", True)],
 
         "break":             [("string", "type", True)],
         "continue":          [("string", "type", True)],
