@@ -32,7 +32,7 @@ useful for you, read the [« Why is this important? » section](#why-is-this-i
 Documentation
 =============
 
-Baron documentation is available on [Read The Docs](http://baron.readthedocs.org/en/latest/).
+Baron documentation is available on [Read The Docs](http://baron.pycqa.org/en/latest/).
 
 Why is this important?
 ======================
