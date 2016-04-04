@@ -118,7 +118,7 @@ You can reach us on [irc.freenode.net#baron](https://webchat.freenode.net/?chann
 Code of Conduct
 ===============
 
-As a member of [PyCQA](https://github.com/PyCQA), Baron follows its (Code of Conduct)[http://meta.pycqa.org/en/latest/code-of-conduct.html].
+As a member of [PyCQA](https://github.com/PyCQA), Baron follows its [Code of Conduct][http://meta.pycqa.org/en/latest/code-of-conduct.html].
 
 Misc
 ====
