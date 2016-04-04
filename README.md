@@ -22,7 +22,7 @@ source_code_string == dumps(fst)
 ```
 
 Except if you want to do low level things, **use
-[RedBaron](https://github.com/Psycojoker/redbaron) instead of using Baron
+[RedBaron](https://github.com/PyCQA/redbaron) instead of using Baron
 directly**. Think of Baron as the "bytecode of python source code" and RedBaron
 as some sort of usable layer on top of it.
 
