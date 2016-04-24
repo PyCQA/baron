@@ -1,5 +1,6 @@
 from .utils import FlexibleIterator, BaronError
 
+
 class UnExpectedFormattingToken(BaronError):
         pass
 
