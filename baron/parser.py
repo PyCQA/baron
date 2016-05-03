@@ -63,16 +63,23 @@ class BaronParserGenerator(ParserGenerator):
         table = None
         if os.path.exists(cache_file):
             with open(cache_file) as f:
-                data = json.load(f)
-                stat_result = os.fstat(f.fileno())
-            if (
-                os.name == "nt" or (
-                    stat_result.st_uid == os.getuid() and
-                    stat.S_IMODE(stat_result.st_mode) == 0o0600
-                )
-            ):
-                if self.data_is_valid(g, data):
-                    table = LRTable.from_cache(g, data)
+                try:
+                    data = json.load(f)
+                except:
+                    os.remove(cache_file)
+                    data = None
+
+                if data is not None:
+                    stat_result = os.fstat(f.fileno())
+                    if (
+                        os.name == "nt" or (
+                            stat_result.st_uid == os.getuid() and
+                            stat.S_IMODE(stat_result.st_mode) == 0o0600
+                        )
+                    ):
+                        if self.data_is_valid(g, data):
+                            table = LRTable.from_cache(g, data)
+
         if table is None:
             table = LRTable.from_grammar(g)
             try:
