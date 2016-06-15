@@ -55,7 +55,7 @@ Changelog
 
 - path becomes a simple list and is easier to deal with
 - bounding box allows you to know the left most and right most position
-  of a node see https://baron.readthedocs.org/en/latest/#bounding-box
+  of a node see https://baron.readthedocs.io/en/latest/#bounding-box
 - redbaron is classified as supporting python3
   https://github.com/Psycojoker/baron/pull/51
 - ensure than when a key is a string, it's empty value is an empty string and
@@ -85,20 +85,20 @@ Changelog
 0.2 (2014-06-11)
 ----------------
 
-- Baron now provides documentation on https://baron.readthedocs.org
+- Baron now provides documentation on https://baron.readthedocs.io
 - feature: baron now run in python3 (*but* doesn't implement the full python3
   grammar yet) by Pierre Penninckx https://github.com/ibizaman
 - feature: drop the usage of ast.py to find print_function, this allow any
   version of python to parse any other version of python also by Pierre
   Penninckx
 - fix: rare bug where a comment end up being confused as an indentation level
-- 2 new helpers: show_file and show_node, see https://baron.readthedocs.org/en/latest/#show-file
-  and https://baron.readthedocs.org/en/latest/#show-node
+- 2 new helpers: show_file and show_node, see https://baron.readthedocs.io/en/latest/#show-file
+  and https://baron.readthedocs.io/en/latest/#show-node
 - new dictionary that provides the informations on how to render a FST node:
-  nodes_rendering_order see https://baron.readthedocs.org/en/latest/#rendering-the-fst
-- new utilities to find a node, see https://baron.readthedocs.org/en/latest/#locate-a-node
+  nodes_rendering_order see https://baron.readthedocs.io/en/latest/#rendering-the-fst
+- new utilities to find a node, see https://baron.readthedocs.io/en/latest/#locate-a-node
 - new generic class that provide templates to work on the FST see
-  https://baron.readthedocs.org/en/latest/#rendering-the-fst
+  https://baron.readthedocs.io/en/latest/#rendering-the-fst
 
 0.1.3 (2014-04-13)
 ------------------
