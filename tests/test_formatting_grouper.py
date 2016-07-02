@@ -2859,6 +2859,18 @@ def test_comment():
         ('COMMENT', '#', [('SPACE', ' ')]),
     ])
 
+# FIXEME: This is test to fix bug with comments
+# def test_comment_2():
+#     """
+#     #
+#     a = 2
+#     """
+#     group([
+#         ('COMMENT', '#'), ('ENDL', '\n'), ('NAME', 'a'), ('SPACE', ' '), ('EQUAL', '='), ('SPACE', ' '), ('INT', '2')
+#     ], [
+#         ('COMMENT', '#'), ('ENDL', '\n'), ('NAME', 'a'), ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]), ('INT', '2')
+#     ])
+
 
 def test_repr():
     """
