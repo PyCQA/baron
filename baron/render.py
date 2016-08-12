@@ -530,7 +530,7 @@ nodes_rendering_order = {
             ("formatting", "first_formatting",  True),
             ("constant",   "from",              True),
             ("formatting", "second_formatting", True),
-            ("key",        "value",             "value"),
+            ("list",       "value",             True),
         ],
         "yield_from_atom": [
             ("constant",   "(",                 True),
@@ -539,8 +539,8 @@ nodes_rendering_order = {
             ("formatting", "second_formatting", True),
             ("constant",   "from",              True),
             ("formatting", "third_formatting",  True),
-            ("key",        "value",             "value"),
-            ("formatting", "fourth_formatting",  True),
+            ("list",       "value",             True),
+            ("formatting", "fourth_formatting", True),
             ("constant",   ")",                 True),
         ],
         "exec": [
