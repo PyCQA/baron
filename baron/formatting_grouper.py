@@ -110,11 +110,7 @@ def group(sequence):
 
 def group_generator(sequence):
     iterator = FlexibleIterator(sequence)
-    current = None, None
-    while True:
-        if iterator.end():
-            return
-
+    while not iterator.end():
         current = next(iterator)
 
         if current is None:
