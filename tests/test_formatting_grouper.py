@@ -2923,3 +2923,39 @@ def test_inconsistancy_on_space_grouping():
         ('STRING', '"a"'),
         ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
     ])
+
+
+def test_space_before_comment():
+    group([
+        ('ENDL', '\n'),
+        ('SPACE', ' '),
+        ('COMMENT', '# hello'),
+        ('ENDL', '\n'),
+        ('IMPORT', 'import'),
+        ('SPACE', ' '),
+        ('NAME', 're'),
+        ('ENDL', '\n'),
+        ('COMMENT', '# hi'),
+        ('ENDL', '\n'),
+        ('IMPORT', 'import'),
+        ('SPACE', ' '),
+        ('NAME', 'sys'),
+        ('ENDL', '\n'),
+        ('ENDMARKER', ''),
+    ], [
+        ('ENDL', '\n', [], [('SPACE', ' ')]),
+        ('COMMENT', '# hello'),
+        ('ENDL', '\n'),
+        ('IMPORT', 'import', [], [('SPACE', ' ')]),
+        ('NAME', 're'),
+        ('ENDL', '\n'),
+        ('COMMENT', '# hi'),
+        ('ENDL', '\n'),
+        ('IMPORT', 'import', [], [('SPACE', ' ')]),
+        ('NAME', 'sys'),
+        ('ENDL', '\n'),
+        ('ENDMARKER', '')
+    ]
+
+    )
+
