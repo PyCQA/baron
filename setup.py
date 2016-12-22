@@ -12,12 +12,12 @@ except ImportError:
 
 
 setup(name='baron',
-      version='0.6',
+      version='0.6.2',
       description='Full Syntax Tree for python to make writing refactoring code a realist task',
       author='Laurent Peuch',
       long_description=read_md("README.md") + "\n\n" + open("CHANGELOG", "r").read(),
       author_email='cortex@worlddomination.be',
-      url='https://github.com/Psycojoker/baron',
+      url='https://github.com/PyCQA/baron',
       install_requires=['rply'],
       packages=['baron'],
       license='lgplv3+',

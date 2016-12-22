@@ -2897,3 +2897,65 @@ def test_strings():
         ], [
             (i, 'dummy', [('SPACE', ' ')], [('SPACE', ' ')]),
         ])
+
+
+def test_inconsistancy_on_space_grouping():
+    group([
+        ('LEFT_PARENTHESIS', '('),
+        ('SPACE', ' '),
+        ('INT', '1'),
+        ('SPACE', ' '),
+        ('RIGHT_PARENTHESIS', ')'),
+    ], [
+        ('LEFT_PARENTHESIS', '(', [], [('SPACE', ' ')]),
+        ('INT', '1'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+    ])
+
+    group([
+        ('LEFT_PARENTHESIS', '('),
+        ('SPACE', ' '),
+        ('STRING', '"a"'),
+        ('SPACE', ' '),
+        ('RIGHT_PARENTHESIS', ')'),
+    ], [
+        ('LEFT_PARENTHESIS', '(', [], [('SPACE', ' ')]),
+        ('STRING', '"a"'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+    ])
+
+
+def test_space_before_comment():
+    group([
+        ('ENDL', '\n'),
+        ('SPACE', ' '),
+        ('COMMENT', '# hello'),
+        ('ENDL', '\n'),
+        ('IMPORT', 'import'),
+        ('SPACE', ' '),
+        ('NAME', 're'),
+        ('ENDL', '\n'),
+        ('COMMENT', '# hi'),
+        ('ENDL', '\n'),
+        ('IMPORT', 'import'),
+        ('SPACE', ' '),
+        ('NAME', 'sys'),
+        ('ENDL', '\n'),
+        ('ENDMARKER', ''),
+    ], [
+        ('ENDL', '\n', [], [('SPACE', ' ')]),
+        ('COMMENT', '# hello'),
+        ('ENDL', '\n'),
+        ('IMPORT', 'import', [], [('SPACE', ' ')]),
+        ('NAME', 're'),
+        ('ENDL', '\n'),
+        ('COMMENT', '# hi'),
+        ('ENDL', '\n'),
+        ('IMPORT', 'import', [], [('SPACE', ' ')]),
+        ('NAME', 'sys'),
+        ('ENDL', '\n'),
+        ('ENDMARKER', '')
+    ]
+
+    )
+

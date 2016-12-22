@@ -12,10 +12,12 @@ class UntreatedError(BaronError):
 
 def split_generator(sequence):
     iterator = FlexibleIterator(sequence)
-    while True:
-        if iterator.end():
-            return
 
+    # Pay attention that if a next() call fails, a StopIteration error
+    # is raised. This coincidently is the same error used by python to
+    # understand that a function using yield has finished processing.
+    # It's not a bad thing, but it must be kept in mind.
+    while not iterator.end():
         not_found = True
 
         if iterator.next_in("#"):
@@ -30,15 +32,25 @@ def split_generator(sequence):
                 result += next(iterator)
                 result += next(iterator)
                 result += iterator.grab_string(lambda iterator: not iterator.next_starts_with(section * 3))
-                result += next(iterator)
-                result += next(iterator)
-                result += next(iterator)
+                # This next() call can fail if no closing quote exists. We
+                # still want to yield so we catch it.
+                try:
+                    result += next(iterator)
+                    result += next(iterator)
+                    result += next(iterator)
+                except StopIteration:
+                    pass
                 yield result
             elif iterator.next_in(section):
                 not_found = False
                 result = next(iterator)
                 result += iterator.grab_string(lambda iterator: iterator.show_next() not in section)
-                result += next(iterator)
+                # This next() call can fail if no closing quote exists. We
+                # still want to yield so we catch it.
+                try:
+                    result += next(iterator)
+                except StopIteration:
+                    pass
                 yield result
 
         for section in (string.ascii_letters + "_" + "1234567890", " \t"):

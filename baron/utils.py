@@ -33,12 +33,12 @@ class FlexibleIterator():
         return self.sequence[self.position + 1: self.position + 1 + size_of_choice] == sentence
 
     def next_in(self, choice):
-        if self.position + 1 == len(self.sequence):
+        if self.position + 1 >= len(self.sequence):
             return False
         return self.sequence[self.position + 1] in choice
 
     def show_next(self, at=1):
-        if self.position + at == len(self.sequence):
+        if self.position + at >= len(self.sequence):
             return None
         return self.sequence[self.position + at]
 

@@ -22,7 +22,7 @@ source_code_string == dumps(fst)
 ```
 
 Except if you want to do low level things, **use
-[RedBaron](https://github.com/Psycojoker/redbaron) instead of using Baron
+[RedBaron](https://github.com/PyCQA/redbaron) instead of using Baron
 directly**. Think of Baron as the "bytecode of python source code" and RedBaron
 as some sort of usable layer on top of it.
 
@@ -32,7 +32,7 @@ useful for you, read the [« Why is this important? » section](#why-is-this-i
 Documentation
 =============
 
-Baron documentation is available on [Read The Docs](http://baron.readthedocs.org/en/latest/).
+Baron documentation is available on [Read The Docs](http://baron.readthedocs.io/en/latest/).
 
 Why is this important?
 ======================
@@ -113,7 +113,12 @@ Run either `py.test tests/` or `nosetests` in the baron directory.
 Community
 =========
 
-You can reach us on [irc.freenode.net#baron](https://webchat.freenode.net/?channels=%23baron).
+You can reach us on [irc.freenode.net#baron](https://webchat.freenode.net/?channels=%23baron) or [irc.freenode.net##python-code-quality](https://webchat.freenode.net/?channels=%23%23python-code-quality).
+
+Code of Conduct
+===============
+
+As a member of [PyCQA](https://github.com/PyCQA), Baron follows its [Code of Conduct](http://meta.pycqa.org/en/latest/code-of-conduct.html).
 
 Misc
 ====

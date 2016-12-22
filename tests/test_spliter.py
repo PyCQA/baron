@@ -2,8 +2,9 @@
 # -*- coding:Utf-8 -*-
 
 
-from baron.spliter import split
+from baron.spliter import split, UntreatedError
 from baron.utils import python_version
+import pytest
 
 
 def test_empty():
@@ -319,6 +320,20 @@ def test_multi_string():
 
 def test_multi_string_other_quotes():
     assert split('"""pouet pouet"""') == ['"""pouet pouet"""']
+
+
+def test_missing_quote_yields_error():
+    with pytest.raises(UntreatedError):
+        split("'")
+
+    with pytest.raises(UntreatedError):
+        split("'''")
+
+    with pytest.raises(UntreatedError):
+        split('"')
+
+    with pytest.raises(UntreatedError):
+        split('"""')
 
 
 def test_escape():

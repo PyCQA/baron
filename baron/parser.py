@@ -1,3 +1,4 @@
+import errno
 import os
 import json
 import stat
@@ -74,9 +75,14 @@ class BaronParserGenerator(ParserGenerator):
                     table = LRTable.from_cache(g, data)
         if table is None:
             table = LRTable.from_grammar(g)
-            fd = os.open(cache_file, os.O_RDWR | os.O_CREAT | os.O_EXCL, 0o0600)
-            with os.fdopen(fd, "w") as f:
-                json.dump(self.serialize_table(table), f)
+            try:
+                fd = os.open(cache_file, os.O_RDWR | os.O_CREAT | os.O_EXCL, 0o0600)
+            except OSError as e:
+                if e.errno != errno.EEXIST:
+                    raise
+            else:
+                with os.fdopen(fd, "w") as f:
+                    json.dump(self.serialize_table(table), f)
         # meh :(
         #if table.sr_conflicts:
             #warnings.warn(

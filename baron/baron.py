@@ -1,5 +1,3 @@
-from ast import parse as python_ast_parse
-
 from .spliter import split
 from .grouper import group
 from .tokenizer import tokenize as _tokenize

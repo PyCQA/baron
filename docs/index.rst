@@ -13,12 +13,12 @@ comments, formatting), a FST keeps everything and guarantees the
 operation :file:`fst_to_code(code_to_fst(source_code)) == source_code`.
 
 If you want to understand why this is important, read this:
-https://github.com/psycojoker/baron#why-is-this-important
+https://github.com/PyCQA/baron#why-is-this-important
 
 Github (code, bug tracker, etc.)
 --------------------------------
 
-https://github.com/psycojoker/baron
+https://github.com/PyCQA/baron
 
 Installation
 ------------
@@ -31,7 +31,7 @@ RedBaron
 --------
 
 There is a good chance that you'll want to use `RedBaron
-<https://redbaron.readthedocs.org>`_ instead of using Baron directly.
+<https://redbaron.readthedocs.io>`_ instead of using Baron directly.
 Think of Baron as the "bytecode of python source code" and RedBaron as
 some sort of usable layer on top of it, a bit like dom/jQuery or
 html/Beautifulsoup.
