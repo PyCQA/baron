@@ -483,3 +483,7 @@ def test_exponant_complex():
     match("-.1E+1J", "FLOAT_EXPONANT_COMPLEX")
 
 # TODO 1.1e1j
+
+
+def test_backslash():
+    match("\\\n", "SPACE")

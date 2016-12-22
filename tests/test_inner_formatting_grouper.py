@@ -163,3 +163,23 @@ def test_dict_one():
         ('NAME', 'a'),
         ('RIGHT_BRACKET', '}', [('ENDL', '\n')], []),
     ]
+
+
+def test_number_backslash():
+    assert group([
+        ('INT', '3'),
+        ('SPACE', '\\'),
+    ]) == [
+        ('INT', '3'),
+        ('SPACE', '\\'),
+    ]
+
+
+def test_number_backslash_newline():
+    assert group([
+        ('INT', '3'),
+        ('SPACE', '\\\n'),
+    ]) == [
+        ('INT', '3'),
+        ('SPACE', '\\\n'),
+    ]
