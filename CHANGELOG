@@ -8,6 +8,7 @@ Changelog
 - make all user-facing errors inherit from the same BaronError class
 - fix: dotted_name and float_exponant_complex were missing from
   nodes_rendering_order
+- group formatting at start of file or preceded by space with comment
 
 0.6.1 (2015-01-31)
 ------------------
