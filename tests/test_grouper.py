@@ -191,6 +191,7 @@ def test_complex():
     grouper_test("1.1J", ['1', '.', '1J'], ['1.1J'])
     grouper_test("1J", ['1J'], ['1J'])
     grouper_test("1e-1j", ['1e', '-', '1j'], ['1e-1j'])
+    grouper_test("1e1j", ['1e1j'], ['1e1j'])
 
 
 def test_float_exponant():
