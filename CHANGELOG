@@ -1,8 +1,9 @@
 Changelog
 =========
 
-0.6.3 (unreleased)
+0.6.3 (2017-01-02)
 ------------------
+
 - group formatting at start of file or preceded by space with comment
 
 0.6.2 (2016-03-18)
