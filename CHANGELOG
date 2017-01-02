@@ -1,14 +1,17 @@
 Changelog
 =========
 
-0.6.2 (unreleased)
+0.6.3 (unreleased)
+------------------
+- group formatting at start of file or preceded by space with comment
+
+0.6.2 (2016-03-18)
 ------------------
 
 - fix race condition when generating parser cache file
 - make all user-facing errors inherit from the same BaronError class
 - fix: dotted_name and float_exponant_complex were missing from
   nodes_rendering_order
-- group formatting at start of file or preceded by space with comment
 
 0.6.1 (2015-01-31)
 ------------------
