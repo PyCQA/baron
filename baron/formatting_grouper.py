@@ -114,18 +114,19 @@ def group(sequence):
 
 def group_generator(sequence):
     iterator = FlexibleIterator(sequence)
+
     while not iterator.end():
         current = next(iterator)
 
         if current is None:
             return
 
-        if current[0] in ("SPACE") and iterator.show_next() and iterator.show_next()[0] in GROUP_SPACE_BEFORE:
+        if current[0] == "SPACE" and iterator.show_next() and iterator.show_next()[0] in GROUP_SPACE_BEFORE:
             new_current = next(iterator)
             current = (new_current[0], new_current[1], [current])
 
         if current[0] in GROUP_SPACE_AFTER + STRING and\
-            (iterator.show_next() and iterator.show_next()[0] in ("SPACE")) and\
+            (iterator.show_next() and iterator.show_next()[0] == "SPACE") and\
                 (not iterator.show_next(2) or (iterator.show_next(2) and not less_prioritary_than(current[0], iterator.show_next(2)[0]))):
 
             # do not be greedy when you are grouping on strings
