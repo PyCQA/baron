@@ -1,7 +1,9 @@
 from .utils import FlexibleIterator, BaronError
 
+
 class UnExpectedSpaceToken(BaronError):
     pass
+
 
 PRIORITY_ORDER = (
     "IMPORT",
@@ -95,6 +97,7 @@ GROUP_SPACE_AFTER = BOTH + (
     "LAMBDA",
 )
 
+
 def less_prioritary_than(a, b):
     if b not in PRIORITY_ORDER:
         return False
@@ -103,6 +106,7 @@ def less_prioritary_than(a, b):
         return True
 
     return PRIORITY_ORDER.index(a) < PRIORITY_ORDER.index(b)
+
 
 def group(sequence):
     return list(group_generator(sequence))
@@ -122,7 +126,7 @@ def group_generator(sequence):
 
         if current[0] in GROUP_SPACE_AFTER + STRING and\
             (iterator.show_next() and iterator.show_next()[0] in ("SPACE")) and\
-            (not iterator.show_next(2) or (iterator.show_next(2) and not less_prioritary_than(current[0], iterator.show_next(2)[0]))):
+                (not iterator.show_next(2) or (iterator.show_next(2) and not less_prioritary_than(current[0], iterator.show_next(2)[0]))):
 
             # do not be greedy when you are grouping on strings
             if current[0] in STRING and iterator.show_next(2) and iterator.show_next(2)[0] in GROUP_SPACE_BEFORE:
@@ -131,6 +135,5 @@ def group_generator(sequence):
 
             after_space = next(iterator)
             current = (current[0], current[1], current[2] if len(current) > 2 else [], [after_space])
-
 
         yield current
