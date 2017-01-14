@@ -2925,6 +2925,21 @@ def test_inconsistancy_on_space_grouping():
     ])
 
 
+def test_space_before_comment_simple():
+    group([
+        ('ENDL', '\n'),
+        ('SPACE', ' '),
+        ('COMMENT', '# hello'),
+        ('ENDL', '\n'),
+    ], [
+        ('ENDL', '\n', [], [('SPACE', ' ')]),
+        ('COMMENT', '# hello'),
+        ('ENDL', '\n'),
+    ]
+
+    )
+
+
 def test_space_before_comment():
     group([
         ('ENDL', '\n'),

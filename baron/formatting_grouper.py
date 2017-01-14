@@ -136,4 +136,10 @@ def group_generator(sequence):
             after_space = next(iterator)
             current = (current[0], current[1], current[2] if len(current) > 2 else [], [after_space])
 
+        # in case of "def a():  # comment\n pass"
+        # not really happy about this solution but that avoid a broken release
+        if current[0] == "COLON" and iterator.show_next() and iterator.show_next()[0] == "COMMENT":
+            comment = next(iterator)
+            current = (current[0], current[1], ((current[2]) if len(current) > 3 else []) + [comment])
+
         yield current
