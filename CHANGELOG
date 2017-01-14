@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.6.4 (2017-01-14)
+------------------
+
+- fix regression in case a comment follow the ":" of a if/def/other
+
 0.6.3 (2017-01-02)
 ------------------
 
