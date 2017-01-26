@@ -12,7 +12,7 @@ except ImportError:
 
 
 setup(name='baron',
-      version='0.6.4',
+      version='0.6.5',
       description='Full Syntax Tree for python to make writing refactoring code a realist task',
       author='Laurent Peuch',
       long_description=read_md("README.md") + "\n\n" + open("CHANGELOG", "r").read(),
