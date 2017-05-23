@@ -10,7 +10,7 @@ def render(node, strict=False):
 
     To render a string, simply output it. To render a list, render each
     of its elements in order. To render a dict, you must follow the
-    node's entry in the nodes_rendering_order dictionnary and its
+    node's entry in the nodes_rendering_order dictionary and its
     dependents constraints.
 
     This function hides all this algorithmic complexity by returning
