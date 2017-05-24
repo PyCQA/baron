@@ -193,6 +193,10 @@ def test_try_finally():
 
 
 def test_try_except():
+    check_dumps("try: pass\n\nexcept:\n    pass\n")
+
+
+def test_try_except_named():
     check_dumps("try : pass\nexcept Exception : pass\n")
 
 

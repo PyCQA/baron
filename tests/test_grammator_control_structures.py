@@ -1706,3 +1706,144 @@ def test_try_except_as_stmt_indent():
 ],
         }
     ])
+
+def test_try_excepts_stmt_empty_same_line():
+    """
+    try: pass
+    except:
+        pass
+    """
+    parse_multi([
+        ('TRY', 'try'),
+        ('COLON', ':'),
+        ('PASS', 'pass', [('SPACE', ' ')]),
+        ('ENDL', '\n'),
+        ('EXCEPT', 'except'),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+    ], [
+        {
+            "type": "try",
+            "first_formatting": [],
+            "second_formatting": [],
+            "else": {},
+            "finally": {},
+            "excepts": [
+                {
+                    "type": "except",
+                    "first_formatting": [],
+                    "second_formatting": [],
+                    "third_formatting": [],
+                    "fourth_formatting": [],
+                    "fifth_formatting": [],
+                    "delimiter": "",
+                    "target": {},
+                    "exception": {},
+                    "value": [
+                        {
+                            "type": "endl",
+                            "formatting": [],
+                            "value": "\n",
+                            "indent": "    "
+                        },
+                        {
+                            "type": "pass",
+                        },
+                        {
+                            "indent": "",
+                            "formatting": [],
+                            "type": "endl",
+                            "value": "\n"
+                        }
+                    ]
+                }
+            ],
+            "value": [
+                {
+                     "type": "pass",
+                },
+                {
+                     "indent": "",
+                     "formatting": [],
+                     "type": "endl",
+                     "value": "\n"
+                }
+            ],
+        }
+    ])
+
+def test_try_excepts_stmt_empty_same_line_spaced():
+    """
+    try: pass
+
+    except:
+        pass
+    """
+    parse_multi([
+        ('TRY', 'try'),
+        ('COLON', ':'),
+        ('PASS', 'pass', [('SPACE', ' ')]),
+        ('ENDL', '\n'),
+        ('ENDL', '\n'),
+        ('EXCEPT', 'except'),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+    ], [
+        {
+            "type": "try",
+            "first_formatting": [],
+            "second_formatting": [],
+            "else": {},
+            "finally": {},
+            "excepts": [
+                {
+                    "type": "except",
+                    "first_formatting": [],
+                    "second_formatting": [],
+                    "third_formatting": [],
+                    "fourth_formatting": [],
+                    "fifth_formatting": [],
+                    "delimiter": "",
+                    "target": {},
+                    "exception": {},
+                    "value": [
+                        {
+                            "type": "endl",
+                            "formatting": [],
+                            "value": "\n",
+                            "indent": "    "
+                        },
+                        {
+                            "type": "pass",
+                        },
+                        {
+                            "indent": "",
+                            "formatting": [],
+                            "type": "endl",
+                            "value": "\n"
+                        }
+                    ]
+                }
+            ],
+            "value": [
+                {
+                     "type": "pass",
+                },
+                {
+                     "indent": "",
+                     "formatting": [],
+                     "type": "endl",
+                     "value": "\n"
+                }
+            ],
+        }
+    ])
+
