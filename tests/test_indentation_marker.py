@@ -337,3 +337,41 @@ def test_tab_and_spaces_because_some_people_are_horrible():
         ('PASS', 'pass'),
         ('DEDENT', ''),
     ])
+
+
+def test_comment_in_middle_of_ifelseblock():
+    check([
+        ('ENDL', '\n'),
+        ('IF', 'if', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('COMMENT', '# comment'),
+        ('ENDL', '\n'),
+        ('ELSE', 'else'),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+    ], [
+        ('ENDL', '\n'),
+        ('IF', 'if', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('COMMENT', '# comment'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+        ('ELSE', 'else'),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+    ])

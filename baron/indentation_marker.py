@@ -83,7 +83,7 @@ def mark_indentation_generator(sequence):
         # if we were in an indented situation and that the next line has a lower indentation
         if indentations and current[0] == "ENDL":
             the_indentation_level_changed = get_space(current) is None or get_space(current) != indentations[-1]
-            if the_indentation_level_changed and iterator.show_next()[0] != "ENDL":
+            if the_indentation_level_changed and iterator.show_next()[0] not in ("ENDL", "COMMENT"):
                 new_indent = get_space(current) if len(current) == 4 else ""
                 yield current
 
