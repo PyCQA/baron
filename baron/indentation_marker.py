@@ -53,19 +53,23 @@ def mark_indentation_generator(sequence):
         if current is None:
             return
 
+        # end of the file, I need to pop all indentations left and put the
+        # corresponding dedent token for them
         if current[0] == "ENDMARKER" and indentations:
             while len(indentations) > 0:
                 yield ('DEDENT', '')
                 indentations.pop()
 
-        if current[0] == "COLON" and iterator.show_next()[0] == "ENDL":
+        # if were are at ":\n" like in "if stuff:\n"
+        if current[0] == "COLON" and iterator.show_next(1)[0] == "ENDL":
+            # if we aren't in "if stuff:\n\n"
             if iterator.show_next(2)[0] not in ("ENDL",):
                 indentations.append(get_space(iterator.show_next()))
                 yield current
                 yield next(iterator)
                 yield ('INDENT', '')
                 continue
-            else:
+            else:  # else, skip all "\n"
                 yield current
                 for i in iterator:
                     if i[0] == 'ENDL' and iterator.show_next()[0] not in ('ENDL',):
@@ -76,14 +80,19 @@ def mark_indentation_generator(sequence):
                     yield i
                 continue
 
-        if indentations and current[0] == "ENDL" and (len(current) != 4 or get_space(current) != indentations[-1]) and iterator.show_next()[0] != "ENDL":
-            new_indent = get_space(current) if len(current) == 4 else ""
-            yield current
-            while indentations and string_is_bigger(indentations[-1], new_indent):
-                indentations.pop()
-                yield ('DEDENT', '')
-            yield next(iterator)
-            continue
+        # if we were in an indented situation and that the next line has a lower indentation
+        if indentations and current[0] == "ENDL":
+            the_indentation_level_changed = get_space(current) is None or get_space(current) != indentations[-1]
+            if the_indentation_level_changed and iterator.show_next()[0] != "ENDL":
+                new_indent = get_space(current) if len(current) == 4 else ""
+                yield current
+
+                # pop until reaching the matching indentation level
+                while indentations and string_is_bigger(indentations[-1], new_indent):
+                    indentations.pop()
+                    yield ('DEDENT', '')
+                yield next(iterator)
+                continue
 
         yield current
 
