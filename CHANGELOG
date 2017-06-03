@@ -1,6 +1,14 @@
 Changelog
 =========
 
+0.6.6 (unreleased)
+------------------
+
+- fix situation where a deindented comment between a if and elif/else broken
+  parsing, see https://github.com/PyCQA/baron/issues/87
+- around 35-40% parsing speed improvment on big files by duncf
+  https://github.com/PyCQA/baron/pull/99
+
 0.6.5 (2017-01-26)
 ------------------
 
