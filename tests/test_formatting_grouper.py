@@ -1244,7 +1244,6 @@ def test_combine_div_modulo_mult():
     ])
 
 
-
 def test_arith_expr_plus():
     "a+b"
     group([
@@ -1256,7 +1255,6 @@ def test_arith_expr_plus():
         ('PLUS', '+'),
         ('NAME', 'b'),
     ])
-
 
 
 def test_arith_expr_add_first_space():
@@ -1273,7 +1271,6 @@ def test_arith_expr_add_first_space():
     ])
 
 
-
 def test_arith_expr_add_second_space():
     "a+ b"
     group([
@@ -1286,7 +1283,6 @@ def test_arith_expr_add_second_space():
         ('PLUS', '+', [], [('SPACE', ' ')]),
         ('NAME', 'b'),
     ])
-
 
 
 def test_arith_expr_add_spaces():
@@ -1302,7 +1298,6 @@ def test_arith_expr_add_spaces():
         ('PLUS', '+', [('SPACE', ' ')], [('SPACE', ' ')]),
         ('NAME', 'b'),
     ])
-
 
 
 def test_arith_expr_add_spaces_atomtrailers():
@@ -1337,7 +1332,6 @@ def test_arith_expr_substract():
     ])
 
 
-
 def test_arith_expr_substract_first_space():
     "a -b"
     group([
@@ -1350,7 +1344,6 @@ def test_arith_expr_substract_first_space():
         ('MINUS', '-', [('SPACE', ' ')]),
         ('NAME', 'b'),
     ])
-
 
 
 def test_arith_expr_substract_second_space():
@@ -1367,7 +1360,6 @@ def test_arith_expr_substract_second_space():
     ])
 
 
-
 def test_arith_expr_substract_spaces():
     "a - b"
     group([
@@ -1381,7 +1373,6 @@ def test_arith_expr_substract_spaces():
         ('MINUS', '-', [('SPACE', ' ')], [('SPACE', ' ')]),
         ('NAME', 'b'),
     ])
-
 
 
 def test_arith_expr_substract_spaces_atomtrailers():
@@ -1433,7 +1424,6 @@ def test_arith_expr_left_shift():
     ])
 
 
-
 def test_arith_expr_left_shift_first_space():
     "a <<b"
     group([
@@ -1448,7 +1438,6 @@ def test_arith_expr_left_shift_first_space():
     ])
 
 
-
 def test_arith_expr_left_shift_second_space():
     "a<< b"
     group([
@@ -1461,7 +1450,6 @@ def test_arith_expr_left_shift_second_space():
         ('LEFT_SHIFT', '<<', [], [('SPACE', ' ')]),
         ('NAME', 'b'),
     ])
-
 
 
 def test_arith_expr_left_shift_spaces():
@@ -2858,6 +2846,50 @@ def test_comment():
     ], [
         ('COMMENT', '#', [('SPACE', ' ')]),
     ])
+
+# FIXEME: This is test to fix bug with comments
+# def test_comment_2():
+#     # FIXME: This is test to fix bug with comments
+#     """
+#     #
+#     a = 2
+#     """
+#     group([
+#         ('COMMENT', '#'),
+#         ('ENDL', '\n'),
+#         ('NAME', 'a'),
+#         ('SPACE', ' '),
+#         ('EQUAL', '='),
+#         ('SPACE', ' '),
+#         ('INT', '2')
+#     ], [
+#         ('COMMENT', '#'),
+#         ('ENDL', '\n'),
+#         ('NAME', 'a'),
+#         ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
+#         ('INT', '2')
+#     ])
+#
+#
+# def test_comment_3():
+#     # FIXME: This is test to fix bug with comments
+#     """
+#     #foo
+#     #bar
+#     """
+#     group([
+#         ('COMMENT', '#'),
+#         ('NAME', 'foo'),
+#         ('ENDL', '\n'),
+#         ('COMMENT', '#'),
+#         ('NAME', 'bar'),
+#     ], [
+#         ('COMMENT', '#'),
+#         ('NAME', 'foo'),
+#         ('ENDL', '\n'),
+#         ('COMMENT', '#'),
+#         ('NAME', 'bar'),
+#     ])
 
 
 def test_repr():
