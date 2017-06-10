@@ -21,7 +21,7 @@ fst = parse(source_code_string)
 source_code_string == dumps(fst)
 ```
 
-Except if you want to do low level things, **use
+Unless you want to do low level things, **use
 [RedBaron](https://github.com/PyCQA/redbaron) instead of using Baron
 directly**. Think of Baron as the "bytecode of python source code" and RedBaron
 as some sort of usable layer on top of it.
