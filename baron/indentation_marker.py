@@ -35,7 +35,7 @@ def get_space(node):
     a ('ENDL', '\n') node - then we return None as a flag value. This is
     maybe not the best behavior but it seems to work for now.
     """
-    if len(node) < 3 or len(node[3]) == 0:
+    if len(node) < 4 or len(node[3]) == 0:
         return None
     return transform_tabs_to_spaces(node[3][0][1])
 
