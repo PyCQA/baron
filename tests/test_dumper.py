@@ -534,3 +534,8 @@ def test_try_import_after_colon():
 
 def test_single_object():
     assert baron.dumps({"type": "name", "value": "a"}) == "a"
+
+
+def test_keyword_only_marker():
+    check_dumps("def foo(a, *, b, c):    pass\n")
+    check_dumps("def foo(a, *  , b, c):    pass\n")
