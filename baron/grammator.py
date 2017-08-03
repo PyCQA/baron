@@ -655,10 +655,12 @@ def generate_parse(print_function):
     # TODO tests those other kind of strings
     @pg.production("string : STRING")
     @pg.production("string : RAW_STRING")
+    @pg.production("string : INTERPOLATED_STRING")
     @pg.production("string : UNICODE_STRING")
     @pg.production("string : BINARY_STRING")
     @pg.production("string : UNICODE_RAW_STRING")
     @pg.production("string : BINARY_RAW_STRING")
+    @pg.production("string : INTERPOLATED_RAW_STRING")
     def string(pack):
         (string_,) = pack
         return [{

@@ -2889,7 +2889,7 @@ def test_strings():
     """
     I don't this because python allow to write stuff like 'qsd' rb"qsd" u'pouet'
     """
-    for i in ('STRING', 'RAW_STRING', 'UNICODE_STRING', 'UNICODE_RAW_STRING', 'BINARY_STRING', 'BINARY_RAW_STRING'):
+    for i in ('STRING', 'RAW_STRING', 'UNICODE_STRING', 'INTERPOLATED_STRING', 'UNICODE_RAW_STRING', 'BINARY_STRING', 'INTERPOLATED_RAW_STRING', 'BINARY_RAW_STRING'):
         group([
             ('SPACE', ' '),
             (i, 'dummy'),
