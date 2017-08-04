@@ -513,6 +513,8 @@ nodes_rendering_order = {
         "yield": [
             ("constant",   "yield",             True),
             ("formatting", "formatting",        True),
+            ("constant",   "from",              "from"),
+            ("formatting", "first_formatting",  "from"),
             ("key",        "value",             "value"),
         ],
         "yield_atom": [

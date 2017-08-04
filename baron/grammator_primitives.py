@@ -69,13 +69,24 @@ def include_primivites(pg, print_function):
 
 
     @pg.production("return_stmt : RETURN")
-    @pg.production("yield_expr : YIELD")
     def return_empty(pack):
         (token,) = pack
         return {
             "type": token.name.lower(),
             "value": None,
             "formatting": token.hidden_tokens_after,
+        }
+
+
+    @pg.production("yield_expr : YIELD ")
+    def yield_expr(pack):
+        (yield_,) = pack
+        return {
+            "type": yield_.name.lower(),
+            "first_formatting": [],
+            "from": None,
+            "value": None,
+            "formatting": yield_.hidden_tokens_after,
         }
 
 
@@ -256,6 +267,18 @@ def include_primivites(pg, print_function):
             "type": token.name.lower(),
             "value": testlist,
             "formatting": token.hidden_tokens_after,
+        }
+
+
+    @pg.production("yield_expr : YIELD FROM testlist")
+    def yield_from_expr(pack):
+        (yield_, from_, test) = pack
+        return {
+            "type": yield_.name.lower(),
+            "first_formatting": from_.hidden_tokens_after,
+            "from": True,
+            "value": test,
+            "formatting": yield_.hidden_tokens_after,
         }
 
     @pg.production("lambdef : LAMBDA COLON test")
