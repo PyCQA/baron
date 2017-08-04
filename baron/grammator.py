@@ -140,9 +140,29 @@ def generate_parse(print_function):
     @pg.production("compound_stmt : classdef")
     @pg.production("compound_stmt : with_stmt")
     @pg.production("compound_stmt : decorated")
+    @pg.production("compound_stmt : async_stmt")
     def small_and_compound_stmt(pack):
         (statement,) = pack
         return statement
+
+
+    @pg.production("async : ASYNC")
+    def async__(pack):
+        (async_, ) = pack
+        return {
+            "type": "async",
+            "formatting": async_.hidden_tokens_after
+
+        }
+
+    @pg.production("async_stmt : async with_stmt")
+    @pg.production("async_stmt : async for_stmt")
+    @pg.production("async_stmt : async funcdef")
+    def async_stmt(pack):
+        (async_, statement,) = pack
+        statement[0]["async"] = async_
+        return statement
+
 
     if not print_function:
         @pg.production("small_stmt : print_stmt")
@@ -179,6 +199,7 @@ def generate_parse(print_function):
         (with_, with_items, colon, suite) = pack
         return [{
             "type": "with",
+            "async": {},
             "value": suite,
             "first_formatting": with_.hidden_tokens_after,
             "second_formatting": colon.hidden_tokens_before,
@@ -370,6 +391,7 @@ def generate_parse(print_function):
         (def_, name, left_parenthesis, parameters, right_parenthesis, colon, suite) = pack
         return [{
             "type": "def",
+            "async": {},
             "decorators": [],
             "name": name.value,
             "first_formatting": def_.hidden_tokens_after,

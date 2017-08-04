@@ -289,7 +289,13 @@ nodes_rendering_order = {
             ("bool",       "with_parenthesis",  False),
         ],
 
+        "async": [
+            ("constant",    "async",        True),
+            ("formatting",  "formatting",   True),
+
+        ],
         "def": [
+            ("key",        "async",             "async"),
             ("list",       "decorators",        True),
             ("constant",   "def",               True),
             ("formatting", "first_formatting",  True),
@@ -489,6 +495,7 @@ nodes_rendering_order = {
         ],
 
         "with": [
+            ("key",        "async",             "async"),        
             ("constant",   "with",              True),
             ("formatting", "first_formatting",  True),
             ("list",       "contexts",          True),
@@ -555,6 +562,7 @@ nodes_rendering_order = {
             ("key",        "else",              "else"),
         ],
         "for": [
+            ("key",        "async",             "async"),
             ("constant",   "for",               True),
             ("formatting", "first_formatting",  True),
             ("key",        "iterator",          True),
