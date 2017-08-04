@@ -365,11 +365,26 @@ def generate_parse(print_function):
         }] + endl
 
 
-    @pg.production("funcdef : DEF NAME LEFT_PARENTHESIS parameters RIGHT_PARENTHESIS COLON suite")
+    @pg.production("deftypehint : ")
+    def deftypehint_empty(pack):
+        return {}
+
+    @pg.production("deftypehint : ROCKET names")
+    def deftypehint(pack):
+        (rocket, names_ ) = pack
+        return {
+            "type": "deftypehint",
+            "name": names_,
+            "first_formatting": rocket.hidden_tokens_before,
+            "second_formatting": rocket.hidden_tokens_after,
+        }
+
+    @pg.production("funcdef : DEF NAME LEFT_PARENTHESIS parameters RIGHT_PARENTHESIS deftypehint COLON suite")
     def function_definition(pack):
-        (def_, name, left_parenthesis, parameters, right_parenthesis, colon, suite) = pack
+        (def_, name, left_parenthesis, parameters, right_parenthesis, deftypehint_, colon, suite) = pack
         return [{
             "type": "def",
+            "deftypehint": deftypehint_,
             "decorators": [],
             "name": name.value,
             "first_formatting": def_.hidden_tokens_after,

@@ -51,6 +51,7 @@ GROUP_ON = (
     "DOUBLE_SLASH",
     "PLUS",
     "MINUS",
+    "ROCKET",
     "LEFT_SHIFT",
     "RIGHT_SHIFT",
     "AMPER",

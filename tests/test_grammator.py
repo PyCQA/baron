@@ -400,6 +400,7 @@ def test_funcdef_stmt_indent():
         {
             "type": "def",
             "name": "a",
+            "deftypehint": {},
             "decorators": [],
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
@@ -428,6 +429,65 @@ def test_funcdef_stmt_indent():
         }
     ])
 
+
+
+def test_funcdef_stmt_deftypehint():
+    """
+    def a() -> str:
+        pass
+    """
+    parse_multi([
+        ('DEF', 'def', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('LEFT_PARENTHESIS', '('),
+        ('RIGHT_PARENTHESIS', ')', [], [('SPACE', ' ')]),
+        ('ROCKET', '->', [], [('SPACE', '    ')]),
+        ('NAME', 'str'),
+        ('COLON', ':', [], []),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+    ], [
+        {
+            "type": "def",
+            "name": "a",
+            "deftypehint": {
+                "first_formatting": [],
+                "name": [{'type': 'name', 'value': 'str'}],
+                "second_formatting": [{'type': 'space', 'value': '    '}],
+                "type": 'deftypehint',
+            },
+            "decorators": [],
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
+            "third_formatting": [],
+            "fourth_formatting": [],
+            "fifth_formatting": [],
+            "sixth_formatting": [],
+            "arguments": [],
+            "value": [
+                {
+                    "type": "endl",
+                    "value": "\n",
+                    "formatting": [],
+                    "indent": "    "
+                },
+                {
+                    "type": "pass",
+                },
+                {
+                    "type": "endl",
+                    "formatting": [],
+                    "indent": "",
+                    "value": "\n"
+                }
+            ],
+        }
+    ])
+
+
 def test_funcdef_stmt_one_parameter_indent():
     """
     def a ( x ) :
@@ -449,6 +509,7 @@ def test_funcdef_stmt_one_parameter_indent():
         {
             "type": "def",
             "name": "a",
+            "deftypehint": {},
             "decorators": [],
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
@@ -511,6 +572,7 @@ def test_funcdef_stmt_one_parameter_comma_indent():
             "type": "def",
             "decorators": [],
             "name": "a",
+            "deftypehint": {},
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [{"type": "space", "value": " "}],
@@ -579,6 +641,7 @@ def test_funcdef_stmt_one_parameter_comma_default_indent():
             "type": "def",
             "decorators": [],
             "name": "a",
+            "deftypehint": {},
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [{"type": "space", "value": " "}],
@@ -799,6 +862,7 @@ def test_funcdef_stmt_one_start_parameter_indent():
         {
             "type": "def",
             "name": "a",
+            "deftypehint": {},
             "decorators": [],
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [],
@@ -859,6 +923,7 @@ def test_funcdef_stmt_one_star_star_parameter_indent():
             "type": "def",
             "name": "a",
             "decorators": [],
+            "deftypehint": {},
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [],
             "third_formatting": [],
@@ -1120,6 +1185,7 @@ def test_decorator():
             "fourth_formatting": [],
             "sixth_formatting": [{"type": "space", "value": " "}],
             "type": "def",
+            "deftypehint": {},
             "arguments": [],
             "name": "b",
             "decorators": [
@@ -1186,6 +1252,7 @@ def test_decorator_parenthesis():
             "fourth_formatting": [],
             "sixth_formatting": [{"type": "space", "value": " "}],
             "type": "def",
+            "deftypehint": {},
             "arguments": [],
             "name": "b",
             "decorators": [
@@ -1260,6 +1327,7 @@ def test_decorator_parenthesis_arg():
             "fourth_formatting": [],
             "sixth_formatting": [{"type": "space", "value": " "}],
             "type": "def",
+            "deftypehint": {},
             "arguments": [],
             "name": "b",
             "decorators": [
@@ -1346,6 +1414,7 @@ def test_decorator_two():
             "fourth_formatting": [],
             "sixth_formatting": [{"type": "space", "value": " "}],
             "type": "def",
+            "deftypehint": {},
             "arguments": [],
             "name": "b",
             "decorators": [
@@ -1584,6 +1653,7 @@ def test_fplist():
             "fourth_formatting": [],
             "sixth_formatting": [{"type": "space", "value": " "}],
             "type": "def",
+            "deftypehint": {},
             "arguments": [
                 {
                     "type": "def_argument",
@@ -1654,6 +1724,7 @@ def test_fplist_two():
             "fourth_formatting": [],
             "sixth_formatting": [{"type": "space", "value": " "}],
             "type": "def",
+            "deftypehint": {},
             "arguments": [
                 {
                     "type": "def_argument",
@@ -1726,6 +1797,7 @@ def test_fplist_alone():
             "fourth_formatting": [],
             "sixth_formatting": [{"type": "space", "value": " "}],
             "type": "def",
+            "deftypehint": {},
             "arguments": [
                 {
                     "type": "def_argument",
@@ -1847,6 +1919,7 @@ def test_regression_def_argument_tuple():
             'sixth_formatting': [],
             'third_formatting': [],
             'type': 'def',
+            'deftypehint': {},
             'value': [
                 {
                     'formatting': [],
@@ -1964,6 +2037,7 @@ def test_regression_def_argument_tuple_nested():
             'sixth_formatting': [],
             'third_formatting': [],
             'type': 'def',
+            'deftypehint': {},
             'value': [
                 {
                     'formatting': [],
