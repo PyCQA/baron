@@ -155,6 +155,7 @@ def generate_parse(print_function):
 
         }
 
+
     @pg.production("async_stmt : async with_stmt")
     @pg.production("async_stmt : async for_stmt")
     @pg.production("async_stmt : async funcdef")

@@ -294,6 +294,11 @@ nodes_rendering_order = {
             ("formatting",  "formatting",   True),
 
         ],
+        "await": [
+            ("constant",    "await",        True),
+            ("formatting",  "formatting",   True),
+
+        ],
         "def": [
             ("key",        "async",             "async"),
             ("list",       "decorators",        True),
@@ -495,7 +500,7 @@ nodes_rendering_order = {
         ],
 
         "with": [
-            ("key",        "async",             "async"),        
+            ("key",        "async",             "async"),
             ("constant",   "with",              True),
             ("formatting", "first_formatting",  True),
             ("list",       "contexts",          True),

@@ -8489,6 +8489,17 @@ def test_expr_comma_list_3_items():
     ])
 
 
+def test_await_a():
+    "await a"
+    parse_simple([
+        ('AWAIT', 'await', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+    ], [[
+        {'formatting': [{'type': 'space', 'value': ' '}], 'type': 'await'},
+        {'type': 'atomtrailers', 'value': [{'type': 'name', 'value': 'a'}]},
+    ]])
+
+
 def test_implicit_tuple_space():
     "a, b , c"
     parse_simple([

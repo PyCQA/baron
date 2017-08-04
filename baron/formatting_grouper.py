@@ -80,6 +80,7 @@ GROUP_SPACE_AFTER = BOTH + (
     "FROM",
     "TILDE",
     "ASYNC",
+    "AWAIT",
     "RETURN",
     "YIELD",
     "WITH",
