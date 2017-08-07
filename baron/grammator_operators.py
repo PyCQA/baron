@@ -28,6 +28,32 @@ def include_operators(pg):
             "value": value
         }
 
+    @pg.production("vardef_stmt : name typehint EQUAL testlist")
+    def vardef_typed_with_value(pack):
+        (target,  typehint_, equal, value) = pack
+        return {
+            "type": "vardef",
+            "typehint": typehint_,
+            "first_formatting": equal.hidden_tokens_before,
+            "second_formatting": equal.hidden_tokens_after,
+            "operator": equal.value,
+            "target": target,
+            "value": value
+        }
+
+    @pg.production("vardef_stmt : name typehint")
+    def vardef_typed(pack):
+        (target,  typehint_,) = pack
+        return {
+            "type": "vardef",
+            "typehint": typehint_,
+            "first_formatting": [],
+            "second_formatting": [],
+            "operator": '',
+            "target": target,
+            "value": {}
+        }
+
     @pg.production("augassign_operator : PLUS_EQUAL")
     @pg.production("augassign_operator : MINUS_EQUAL")
     @pg.production("augassign_operator : STAR_EQUAL")

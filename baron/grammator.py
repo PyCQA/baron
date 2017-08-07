@@ -152,6 +152,7 @@ def generate_parse(print_function):
 
 
     @pg.production("small_stmt : expr_stmt")
+    @pg.production("small_stmt : vardef_stmt")
     @pg.production("expr_stmt : testlist")
     @pg.production("testlist : test")
     @pg.production("test : or_test")
@@ -476,6 +477,24 @@ def generate_parse(print_function):
             "value": test if equal else name,
             "target": name if equal else {}
         }]
+
+
+    @pg.production("maybe_typehint : COLON name")
+    @pg.production("typehint : COLON name")
+    def typehint(pack):
+        (colon_, name_) = pack
+        return {
+            "type": "typehint",
+            "first_formatting": colon_.hidden_tokens_before,
+            "value": name_,
+            "second_formatting": colon_.hidden_tokens_after,
+     }
+
+
+    @pg.production("maybe_typehint : ")
+    def typehint_empty(pack):
+        return {}
+
 
     @pg.production("parameter : name maybe_test")
     def parameter_with_default(pack):

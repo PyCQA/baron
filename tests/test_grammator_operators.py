@@ -7458,6 +7458,66 @@ def test_assignment():
     ])
 
 
+def test_typed_vardef():
+    "a : int"
+    parse_simple([
+        ('NAME', 'a'),
+        ('COLON', ':', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'int'),
+    ], [
+        {
+            "type": "vardef",
+            "typehint": {
+                "first_formatting": [{"type": "space", "value": " "}],
+                "second_formatting": [{"type": "space", "value": " "}],
+                "type": "typehint",
+                "value": {"type": "name", "value": "int"},
+            },
+            "value": {},
+            "target": {
+                "type": "name",
+                "value": 'a'
+            },
+            "first_formatting": [],
+            "second_formatting": [],
+            "operator": "",
+        }
+    ])
+
+
+def test_typed_assignment():
+    "a : int = 1"
+    parse_simple([
+        ('NAME', 'a'),
+        ('COLON', ':', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'int'),
+        ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('INT', '1'),
+    ], [
+        {
+            "type": "vardef",
+            "typehint": {
+                "first_formatting": [{"type": "space", "value": " "}],
+                "second_formatting": [{"type": "space", "value": " "}],
+                "type": "typehint",
+                "value": {"type": "name", "value": "int"},
+            },
+            "value": {
+                "section": "number",
+                "type": "int",
+                "value": "1",
+            },
+            "target": {
+                "type": "name",
+                "value": 'a'
+            },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "operator": "=",
+        }
+    ])
+
+
 def test_assignment_assignment():
     "a = b = c"
     parse_simple([
