@@ -34,6 +34,7 @@ def include_operators(pg):
     @pg.production("augassign_operator : SLASH_EQUAL")
     @pg.production("augassign_operator : PERCENT_EQUAL")
     @pg.production("augassign_operator : AMPER_EQUAL")
+    @pg.production("augassign_operator : AT_EQUAL")    
     @pg.production("augassign_operator : VBAR_EQUAL")
     @pg.production("augassign_operator : CIRCUMFLEX_EQUAL")
     @pg.production("augassign_operator : LEFT_SHIFT_EQUAL")

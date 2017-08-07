@@ -7658,6 +7658,7 @@ augmented_assignment_tokens = (
     ('SLASH_EQUAL', '/='),
     ('PERCENT_EQUAL', '%='),
     ('AMPER_EQUAL', '&='),
+    ('AT_EQUAL', '@='),    
     ('VBAR_EQUAL', '|='),
     ('CIRCUMFLEX_EQUAL', '^='),
     ('LEFT_SHIFT_EQUAL', '<<='),
