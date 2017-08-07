@@ -230,6 +230,10 @@ def test_amper_equal():
     match('&=', 'AMPER_EQUAL')
 
 
+def test_at_equal():
+    match('@=', 'AT_EQUAL')
+
+
 def test_vbar_equal():
     match('|=', 'VBAR_EQUAL')
 
