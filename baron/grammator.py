@@ -399,13 +399,25 @@ def generate_parse(print_function):
 
     @pg.production("argslist : argslist argument")
     @pg.production("parameters : parameters parameter")
+    @pg.production("parameters : parameters typed_parameter")
     def parameters_parameters_parameter(pack,):
         (parameters, parameter,) = pack
         return parameters + parameter
 
     @pg.production("argslist : argument")
     @pg.production("parameters : parameter")
+    @pg.production("parameters : typed_parameter")
     def parameters_parameter(pack,):
+        (parameter,) = pack
+        return parameter
+
+    @pg.production("untyped_parameters : untyped_parameters parameter")
+    def untyped_parameters_untyped_parameters_parameter(pack,):
+        (parameters, parameter,) = pack
+        return parameters + parameter
+
+    @pg.production("untyped_parameters : parameter")
+    def untyped_parameters_parameter(pack,):
         (parameter,) = pack
         return parameter
 
@@ -490,6 +502,34 @@ def generate_parse(print_function):
             "second_formatting": equal.hidden_tokens_after if equal else [],
             "value": test if equal else name,
             "target": name if equal else {}
+        }]
+
+
+    @pg.production("maybe_typehint : COLON name")
+    @pg.production("typehint : COLON name")
+    def typehint(pack):
+        (colon_, name_) = pack
+        return {
+            "type": "typehint",
+            "first_formatting": colon_.hidden_tokens_before,
+            "value": name_,
+            "second_formatting": colon_.hidden_tokens_after,
+        }
+
+    @pg.production("maybe_typehint : ")
+    def typehint_empty(pack):
+        return {}
+
+    @pg.production("typed_parameter : name maybe_typehint maybe_test")
+    def parameter_with_default(pack):
+        (name, typehint_, (equal, test)) = pack
+        return [{
+            "type": "def_argument",
+            "typehint": typehint_,
+            "first_formatting": equal.hidden_tokens_before if equal else [],
+            "second_formatting": equal.hidden_tokens_after if equal else [],
+            "value": test,
+            "target": name
         }]
 
     @pg.production("parameter : name maybe_test")

@@ -320,8 +320,15 @@ nodes_rendering_order = {
             ("formatting", "second_formatting", "target"),
             ("key",        "value",             True),
         ],
+        "typehint": [
+            ("formatting", "first_formatting",  True),
+            ("constant",   ":",                 True),
+            ("formatting", "second_formatting", True),
+            ("key",        "value",             True),
+        ],
         "def_argument": [
             ("key",        "target",            True),
+            ("key",        "typehint",          "typehint"),
             ("formatting", "first_formatting",  "value"),
             ("constant",   "=",                 "value"),
             ("formatting", "second_formatting", "value"),
