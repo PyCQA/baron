@@ -146,6 +146,12 @@ def generate_parse(print_function):
         return statement
 
 
+    @pg.production("async_maybe : ")
+    def async__(pack):
+        return {}
+
+
+    @pg.production("async_maybe : ASYNC")
     @pg.production("async : ASYNC")
     def async__(pack):
         (async_, ) = pack
@@ -386,13 +392,12 @@ def generate_parse(print_function):
             "formatting": at.hidden_tokens_after,
         }] + endl
 
-
-    @pg.production("funcdef : DEF NAME LEFT_PARENTHESIS parameters RIGHT_PARENTHESIS COLON suite")
+    @pg.production("funcdef : async_maybe DEF NAME LEFT_PARENTHESIS parameters RIGHT_PARENTHESIS COLON suite")
     def function_definition(pack):
-        (def_, name, left_parenthesis, parameters, right_parenthesis, colon, suite) = pack
+        (async_maybe, def_, name, left_parenthesis, parameters, right_parenthesis, colon, suite) = pack
         return [{
             "type": "def",
-            "async": {},
+            "async": async_maybe,
             "decorators": [],
             "name": name.value,
             "first_formatting": def_.hidden_tokens_after,
