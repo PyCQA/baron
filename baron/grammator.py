@@ -514,6 +514,15 @@ def generate_parse(print_function):
             "value": test,
         }]
 
+    @pg.production("parameter : STAR")
+    def argument_short_varargs(pack):
+        (star, ) = pack
+        return [{
+            "type": "list_argument",
+            "formatting": [],
+            "value": [],
+        }]
+
     @pg.production("argument : DOUBLE_STAR test")
     def argument_star_star(pack):
         (double_star, test,) = pack

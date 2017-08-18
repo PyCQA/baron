@@ -488,6 +488,63 @@ def test_funcdef_stmt_one_parameter_indent():
         }
     ])
 
+
+def test_funcdef_stmt_short_varargs_parameter_indent():
+    """
+    def a ( * ) :
+        pass
+    """
+    parse_multi([
+        ('DEF', 'def', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('LEFT_PARENTHESIS', '(', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('STAR', '*'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+        ('COLON', ':', [('SPACE', ' ')]),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+    ], [
+        {
+            "type": "def",
+            "name": "a",
+            "decorators": [],
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [{"type": "space", "value": " "}],
+            "fifth_formatting": [{"type": "space", "value": " "}],
+            "sixth_formatting": [],
+            "arguments": [
+                {
+                    "type": "list_argument",
+                    "formatting": [],
+                    "value": [],
+                }
+            ],
+            "value": [
+                {
+                    "type": "endl",
+                    "value": "\n",
+                    "formatting": [],
+                    "indent": "    "
+                },
+                {
+                    "type": "pass",
+                },
+                {
+                    "type": "endl",
+                    "formatting": [],
+                    "indent": "",
+                    "value": "\n"
+                }
+            ],
+        }
+    ])
+
+
 def test_funcdef_stmt_one_parameter_comma_indent():
     """
     def a ( x , ) :
