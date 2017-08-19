@@ -349,6 +349,10 @@ nodes_rendering_order = {
             ("constant",   ",",                 "traceback"),
             ("formatting", "fifth_formatting",  "traceback"),
             ("key",        "traceback",         "traceback"),
+            ("formatting", "sixth_formatting",  "from"),
+            ("constant",   "from",              "from"),
+            ("formatting", "seventh_formatting","from"),
+            ("key",        "from",              "from"),
         ],
 
         "assert": [

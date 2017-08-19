@@ -69,6 +69,7 @@ GROUP_ON = (
     "OR",
     "IF",
     "ELSE",
+    "FROM"
     "EQUAL",
     "PLUS_EQUAL",
     "MINUS_EQUAL",

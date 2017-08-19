@@ -99,7 +99,10 @@ def include_primivites(pg, print_function):
             "second_formatting": [],
             "third_formatting": [],
             "fourth_formatting": [],
-            "fifth_formatting": []
+            "fifth_formatting": [],
+            "sixth_formatting": [],
+            "seventh_formatting": [],
+            "from": None,
         }
 
 
@@ -115,7 +118,29 @@ def include_primivites(pg, print_function):
             "second_formatting": [],
             "third_formatting": [],
             "fourth_formatting": [],
-            "fifth_formatting": []
+            "fifth_formatting": [],
+            "sixth_formatting": [],
+            "seventh_formatting": [],
+            "from": None,
+        }
+
+
+    @pg.production("raise_stmt : RAISE test FROM test")
+    def raise_stmt_from(pack):
+        (raise_, test, from_, test2) = pack
+        return {
+            "type": "raise",
+            "value": test,
+            "instance": None,
+            "traceback": None,
+            "first_formatting": raise_.hidden_tokens_after,
+            "second_formatting": [],
+            "third_formatting": [],
+            "fourth_formatting": [],
+            "fifth_formatting": [],
+            "sixth_formatting": from_.hidden_tokens_before,
+            "seventh_formatting": from_.hidden_tokens_after,
+            "from": test2,
         }
 
 
@@ -131,7 +156,10 @@ def include_primivites(pg, print_function):
             "second_formatting": comma.hidden_tokens_before,
             "third_formatting": comma.hidden_tokens_after,
             "fourth_formatting": [],
-            "fifth_formatting": []
+            "fifth_formatting": [],
+            "sixth_formatting": [],
+            "seventh_formatting": [],
+            "from": None,
         }
 
 
@@ -147,7 +175,10 @@ def include_primivites(pg, print_function):
             "second_formatting": comma.hidden_tokens_before,
             "third_formatting": comma.hidden_tokens_after,
             "fourth_formatting": comma2.hidden_tokens_before,
-            "fifth_formatting": comma2.hidden_tokens_after
+            "fifth_formatting": comma2.hidden_tokens_after,
+            "sixth_formatting": [],
+            "seventh_formatting": [],
+            "from": None,
         }
 
 
