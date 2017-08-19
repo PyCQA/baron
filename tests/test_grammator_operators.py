@@ -7458,6 +7458,55 @@ def test_assignment():
     ])
 
 
+def test_assignment_unpack():
+    "a, *b = c"
+    parse_simple([
+        ('NAME', 'a'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('STAR', '*'),
+        ('NAME', 'b'),
+        ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'c'),
+    ], [
+        {
+            "type": "assignment",
+            "value": {
+                "type": "name",
+                "value": 'c',
+            },
+            'target': {
+                'first_formatting': [],
+                'fourth_formatting': [],
+                'second_formatting': [],
+                'third_formatting': [],
+                'type': 'tuple',
+                'value': [
+                    {'type': 'name', 'value': 'a'},
+                    {
+                        'first_formatting': [],
+                         'second_formatting': [{'type': 'space', 'value': ' '}],
+                         'type': 'comma',
+                    },
+                    {
+                        "type": "list_argument",
+                        "formatting": [],
+                        "value": {
+                            "type": "name",
+                            "value": "b",
+                        },
+                    },
+                ],
+                'with_parenthesis': False,
+            },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "operator": "",
+        }
+    ])
+
+
+
+
 def test_assignment_assignment():
     "a = b = c"
     parse_simple([

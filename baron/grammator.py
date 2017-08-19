@@ -505,6 +505,19 @@ def generate_parse(print_function):
             "generators": comp_for,
         }]
 
+    @pg.production("atom : STAR NAME")
+    def atom_star(pack):
+        (star, name,) = pack
+        print(name)
+        return {
+            "type": "list_argument",
+            "formatting": star.hidden_tokens_after,
+            "value": {
+                "type": "name",
+                "value": name.value,
+            }
+        }
+
     @pg.production("argument : STAR test")
     def argument_star(pack):
         (star, test,) = pack
