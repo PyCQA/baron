@@ -642,6 +642,15 @@ def generate_parse(print_function):
             "value": string_chain
         }
 
+    @pg.production("atom : DOT DOT DOT")
+    def ellipsis(pack):
+        (first_, middle_, last_) = pack
+        return {
+            "type": "name",
+            "formatting": first_.hidden_tokens_after,
+            "value": "...",
+        }
+
     @pg.production("strings : string strings")
     def strings_string_strings(pack):
         (string_, strings_) = pack
