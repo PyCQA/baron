@@ -21,7 +21,9 @@ As a reference and an overview, here is screenshot of vimdiff showing the differ
 
 .. image:: grammar-python-2.7-3.6-diff-1.png
 
-.. image:: grammar-python-2.7-3.6-diff-1.png
+.. image:: grammar-python-2.7-3.6-diff-2.png
+
+.. image:: grammar-python-2.7-3.6-diff-3.png
 
 List of differences
 ===================
