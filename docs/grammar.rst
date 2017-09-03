@@ -31,8 +31,13 @@ List of differences
 **Some of the diff have been edited to isolate the focused difference of the
 section**
 
+Python 3.3 is the based grammar I've started diffing with, some of the grammar
+differences marked as 3.3 are actually from older python version.
+
 Print function
 ~~~~~~~~~~~~~~
+
+Python 3.3 or earlier
 
 .. image:: ./grammar_diff/print_function.png
 
@@ -44,25 +49,35 @@ TODO
 Typed arguments
 ~~~~~~~~~~~~~~~
 
+Python 3.3 or earlier
+
 .. image:: ./grammar_diff/typed_args.png
 
 Function return type
 ~~~~~~~~~~~~~~~~~~~~
+
+Python 3.3 or earlier
 
 .. image:: ./grammar_diff/function_return_type.png
 
 Nonlocal statement
 ~~~~~~~~~~~~~~~~~~
 
+Python 3.3 or earlier
+
 .. image:: ./grammar_diff/nonlocal_statement.png
 
 Exec function
 ~~~~~~~~~~~~~
 
+Python 3.3 or earlier
+
 .. image:: ./grammar_diff/exec_function.png
 
 *var generalisation
 ~~~~~~~~~~~~~~~~~~~
+
+Python 3.3 or earlier
 
 .. image:: ./grammar_diff/testlist_start_expressiong.png
 
@@ -75,15 +90,21 @@ Exec function
 Raise from
 ~~~~~~~~~~
 
+Python 3.3 or earlier
+
 .. image:: ./grammar_diff/raise_from.png
 
 Ellipsis in from import
 ~~~~~~~~~~~~~~~~~~~~~~~
 
+Python 3.3 or earlier
+
 .. image:: ./grammar_diff/ellipsis_in_from_import.png
 
 New lambda grammar
 ~~~~~~~~~~~~~~~~~~
+
+Python 3.3 or earlier
 
 I have no idea on what to do with this one yet.
 
@@ -93,6 +114,8 @@ I have no idea on what to do with this one yet.
 
 Remove old list comprehension syntax
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Python 3.3 or earlier
 
 I'm not sure on how to handle both situations (and it is needed? Old list
 comprehension syntax is like super edgy, I really wonder if anyonne has
@@ -105,6 +128,8 @@ actually used that one that?)
 False|True|None|... are now atoms in the grammar
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Python 3.3 or earlier
+
 Do I need to do anything about that?
 
 .. image:: ./grammar_diff/more_atoms.png
@@ -112,12 +137,16 @@ Do I need to do anything about that?
 Inheritance in class definition uses arglist now
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Python 3.3 or earlier
+
 I have no idea on why this is here but that's easy to change.
 
 .. image:: ./grammar_diff/class_inherit_is_arglist_now.png
 
 Yield From
 ~~~~~~~~~~
+
+Python 3.3 or earlier
 
 .. image:: ./grammar_diff/yield_from.png
 
@@ -137,14 +166,20 @@ to support (and we already do) so we don't have to do anything.
 No more commat syntax in except close
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Python 3.3 or earlier
+
 .. image:: ./grammar_diff/no_more_commat_in_execption_close.png
 
 No more backquote syntax
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
+Python 3.3 or earlier
+
 .. image:: ./grammar_diff/no_more_backquote_syntax.png
 
 No more '.' '.' '.' in the grammar
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Python 3.3 or earlier
 
 .. image:: ./grammar_diff/ellipsis_is_first_class_now_not_needed_anymore.png
