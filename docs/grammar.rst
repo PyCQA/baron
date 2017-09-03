@@ -43,6 +43,9 @@ Python 3.3 or earlier
 
 Already done since the start.
 
+This is handle at the parser initialisation level, is activate or not the
+print_function rule.
+
 TODO
 ----
 
@@ -53,12 +56,59 @@ Python 3.3 or earlier
 
 .. image:: ./grammar_diff/typed_args.png
 
+Action:
+
+::
+
+    # parameters
+    # this is mixed with the removal of def a((b, c)): style
+    # which will probably need to continue supporting
+
+    CHANGE parameters: '(' [varargslist] ')'
+                               ^
+    TO parameters: '(' [typedargslist] ')'
+                             ^
+
+::
+
+    # CHANGE
+    varargslist: ((fpdef ['=' test] ',')*
+                  ('*' NAME [',' '**' NAME] | '**' NAME) |
+                  fpdef ['=' test] (',' fpdef ['=' test])* [','])
+    fpdef: NAME | '(' fplist ')'
+    fplist: fpdef (',' fpdef)* [',']
+
+    # TO
+    typedargslist: (tfpdef ['=' test] (',' tfpdef ['=' test])* [',' [
+            '*' [tfpdef] (',' tfpdef ['=' test])* [',' ['**' tfpdef [',']]]
+          | '**' tfpdef [',']]]
+      | '*' [tfpdef] (',' tfpdef ['=' test])* [',' ['**' tfpdef [',']]]
+      | '**' tfpdef [','])
+    tfpdef: NAME [':' test]
+    varargslist: (vfpdef ['=' test] (',' vfpdef ['=' test])* [',' [
+            '*' [vfpdef] (',' vfpdef ['=' test])* [',' ['**' vfpdef [',']]]
+          | '**' vfpdef [',']]]
+      | '*' [vfpdef] (',' vfpdef ['=' test])* [',' ['**' vfpdef [',']]]
+      | '**' vfpdef [',']
+    )
+    vfpdef: NAME
+
+
+
 Function return type
 ~~~~~~~~~~~~~~~~~~~~
 
 Python 3.3 or earlier
 
 .. image:: ./grammar_diff/function_return_type.png
+
+Action:
+
+::
+
+    ADD '->' to the lexer
+    ADD ['->' test] to funcdef rule
+    funcdef: 'def' NAME parameters ['->' test] ':' suite
 
 Nonlocal statement
 ~~~~~~~~~~~~~~~~~~
@@ -67,12 +117,26 @@ Python 3.3 or earlier
 
 .. image:: ./grammar_diff/nonlocal_statement.png
 
+Action:
+
+::
+
+    ADD 'nonlocal' to lexer
+    ADD 'nonlocal_stmt' to 'small_stmt'
+
+    ADD new rule:
+    nonlocal_stmt: 'nonlocal' NAME (',' NAME)*
+
 Exec function
 ~~~~~~~~~~~~~
 
 Python 3.3 or earlier
 
 .. image:: ./grammar_diff/exec_function.png
+
+Like print_function but for 'exec'.
+
+No one seems to be using that.
 
 *var generalisation
 ~~~~~~~~~~~~~~~~~~~
@@ -81,9 +145,15 @@ Python 3.3 or earlier
 
 .. image:: ./grammar_diff/testlist_start_expressiong.png
 
+.
+
 .. image:: ./grammar_diff/star_expr.png
 
+.
+
 .. image:: ./grammar_diff/star_expr_in_testlist_comp.png
+
+.
 
 .. image:: ./grammar_diff/star_expr_in_expr_list.png
 
@@ -93,6 +163,19 @@ Raise from
 Python 3.3 or earlier
 
 .. image:: ./grammar_diff/raise_from.png
+
+Action:
+
+::
+
+    # 2.7
+    raise_stmt: 'raise' [test [',' test [',' test]]]
+
+    # 3.3
+    raise_stmt: 'raise' [test ['from' test]]
+
+    # merge
+    raise_stmt: 'raise' [test [(',' test [',' test]] | 'from' test)]
 
 Ellipsis in from import
 ~~~~~~~~~~~~~~~~~~~~~~~
