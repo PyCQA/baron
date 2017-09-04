@@ -80,6 +80,22 @@ def test_float_exponant():
     match('.5678E-10', 'FLOAT_EXPONANT')
 
 
+def test_floating_point_parser_bug_85():
+    from baron import parse
+    assert parse('d*e-1') == [
+        {'first': {'first': {'type': 'name', 'value': 'd'},
+                   'first_formatting': [],
+                   'second': {'type': 'name', 'value': 'e'},
+                   'second_formatting': [],
+                   'type': 'binary_operator',
+                   'value': '*'},
+         'first_formatting': [],
+         'second': {'section': 'number', 'type': 'int', 'value': '1'},
+         'second_formatting': [],
+         'type': 'binary_operator',
+         'value': '-'}]
+
+
 def test_left_parenthesis():
     match('(', 'LEFT_PARENTHESIS')
 

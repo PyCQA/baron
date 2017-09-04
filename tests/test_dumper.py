@@ -534,3 +534,7 @@ def test_try_import_after_colon():
 
 def test_single_object():
     assert baron.dumps({"type": "name", "value": "a"}) == "a"
+
+
+def test_crash_issue_85():
+    check_dumps('d*e-1\n')

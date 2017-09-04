@@ -96,7 +96,7 @@ def group_generator(sequence):
         if re.match(r'^\d+\.?[eE]$', current) and match_on_next(r'^\d+$', iterator):
             current += next(iterator)
 
-        if re.match(r'^\d*\.?\d*[eE]$', current) and match_on_next(r'^[-+]$', iterator) and iterator.show_next(2) and re.match(r'^\d+$', iterator.show_next(2)):
+        if re.match(r'^\d*\.?\d*[eE]$', current) and not re.match('[eE]', current) and match_on_next(r'^[-+]$', iterator) and iterator.show_next(2) and re.match(r'^\d+$', iterator.show_next(2)):
             current += next(iterator)
             current += next(iterator)
 
