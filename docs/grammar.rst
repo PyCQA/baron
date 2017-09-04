@@ -233,6 +233,106 @@ Python 3.3 or earlier
 
 .. image:: ./grammar_diff/yield_from.png
 
+Async Funcdef
+~~~~~~~~~~~~~
+
+Python 3.5
+
+Before:
+
+::
+
+    decorated: decorators (classdef | funcdef)
+
+After:
+
+::
+
+    decorated: decorators (classdef | funcdef | async_funcdef)
+    async_funcdef: ASYNC funcdef
+
+
+Await atom
+~~~~~~~~~~
+
+Python 3.5
+
+Before:
+
+::
+
+    power: atom trailer* ['**' factor]
+
+After:
+
+::
+
+    power: atom_expr ['**' factor]
+    atom_expr: [AWAIT] atom trailer*
+
+Matrix operator
+~~~~~~~~~~~~~~~
+
+Python 3.5
+
+::
+
+    ADD '@' and '@=' to the lexer
+    ADD '@=' in augassign
+    ADD '@' in term
+
+::
+
+    augassign: ('+=' | '-=' | '*=' | '@=' | '/=' | '%=' | '&=' | '|=' | '^=' |
+                '<<=' | '>>=' | '**=' | '//=')
+
+    term: factor (('*'|'@'|'/'|'%'|'//') factor)*
+
+Kwargs expressions
+~~~~~~~~~~~~~~~~~~
+
+Python 3.5
+
+Before:
+
+::
+
+    dictorsetmaker: ( (test ':' test (comp_for | (',' test ':' test)* [','])) |
+                      (test (comp_for | (',' test)* [','])) )
+
+    arglist: (argument ',')* (argument [',']
+                             |'*' test (',' argument)* [',' '**' test]
+                             |'**' test)
+
+    # The reason that keywords are test nodes instead of NAME is that using NAME
+    # results in an ambiguity. ast.c makes sure it's a NAME.
+    argument: test [comp_for] | test '=' test
+
+After:
+
+::
+
+    dictorsetmaker: ( ((test ':' test | '**' expr)
+                       (comp_for | (',' (test ':' test | '**' expr))* [','])) |
+                      ((test | star_expr)
+                       (comp_for | (',' (test | star_expr))* [','])) )
+
+    # can be simplified apparently
+    arglist: argument (',' argument)*  [',']
+
+    # The reason that keywords are test nodes instead of NAME is that using NAME
+    # results in an ambiguity. ast.c makes sure it's a NAME.
+    # "test '=' test" is really "keyword '=' test", but we have no such token.
+    # These need to be in a single rule to avoid grammar that is ambiguous
+    # to our LL(1) parser. Even though 'test' includes '*expr' in star_expr,
+    # we explicitly match '*' here, too, to give it proper precedence.
+    # Illegal combinations and orderings are blocked in ast.c:
+    # multiple (test comp_for) arguments are blocked; keyword unpackings
+    # that precede iterable unpackings are blocked; etc.
+    argument: ( test [comp_for] |
+                test '=' test |
+                '**' test |
+                '*' test )
 
 
 
