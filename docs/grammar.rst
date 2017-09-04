@@ -47,7 +47,7 @@ Still, some stuff for the lexer are probably missing in this list like:
 I need to got through all release notes to see that.
 
 Print function
-~~~~~~~~~~~~~~
+--------------
 
 Python 3.3 or earlier
 
@@ -59,10 +59,10 @@ This is handle at the parser initialisation level, is activate or not the
 print_function rule.
 
 TODO
-----
+~~~~
 
 Typed arguments
-~~~~~~~~~~~~~~~
+---------------
 
 Python 3.3 or earlier
 
@@ -108,7 +108,7 @@ Action:
 
 
 Function return type
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
 Python 3.3 or earlier
 
@@ -123,7 +123,7 @@ Action:
     funcdef: 'def' NAME parameters ['->' test] ':' suite
 
 Nonlocal statement
-~~~~~~~~~~~~~~~~~~
+------------------
 
 Python 3.3 or earlier
 
@@ -140,7 +140,7 @@ Action:
     nonlocal_stmt: 'nonlocal' NAME (',' NAME)*
 
 Exec function
-~~~~~~~~~~~~~
+-------------
 
 Python 3.3 or earlier
 
@@ -151,7 +151,7 @@ Like print_function but for 'exec'.
 No one seems to be using that.
 
 *var generalisation
-~~~~~~~~~~~~~~~~~~~
+-------------------
 
 Python 3.3 or earlier
 
@@ -170,7 +170,7 @@ Python 3.3 or earlier
 .. image:: ./grammar_diff/star_expr_in_expr_list.png
 
 Raise from
-~~~~~~~~~~
+----------
 
 Python 3.3 or earlier
 
@@ -190,14 +190,14 @@ Action:
     raise_stmt: 'raise' [test [(',' test [',' test]] | 'from' test)]
 
 Ellipsis in from import
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 Python 3.3 or earlier
 
 .. image:: ./grammar_diff/ellipsis_in_from_import.png
 
 New lambda grammar
-~~~~~~~~~~~~~~~~~~
+------------------
 
 Python 3.3 or earlier
 
@@ -208,7 +208,7 @@ I have no idea on what to do with this one yet.
 .. image:: ./grammar_diff/new_grammar_for_if_cond.png
 
 Remove old list comprehension syntax
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------
 
 Python 3.3 or earlier
 
@@ -221,7 +221,7 @@ actually used that one that?)
 .. image:: ./grammar_diff/no_more_list_for_rule.png
 
 False|True|None|... are now atoms in the grammar
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------------------
 
 Python 3.3 or earlier
 
@@ -230,7 +230,7 @@ Do I need to do anything about that?
 .. image:: ./grammar_diff/more_atoms.png
 
 Inheritance in class definition uses arglist now
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------------------
 
 Python 3.3 or earlier
 
@@ -239,14 +239,14 @@ I have no idea on why this is here but that's easy to change.
 .. image:: ./grammar_diff/class_inherit_is_arglist_now.png
 
 Yield From
-~~~~~~~~~~
+----------
 
 Python 3.3 or earlier
 
 .. image:: ./grammar_diff/yield_from.png
 
 Async Funcdef
-~~~~~~~~~~~~~
+-------------
 
 Python 3.5
 
@@ -265,7 +265,7 @@ After:
 
 
 Await atom
-~~~~~~~~~~
+----------
 
 Python 3.5
 
@@ -283,7 +283,7 @@ After:
     atom_expr: [AWAIT] atom trailer*
 
 Matrix operator
-~~~~~~~~~~~~~~~
+---------------
 
 Python 3.5
 
@@ -301,7 +301,7 @@ Python 3.5
     term: factor (('*'|'@'|'/'|'%'|'//') factor)*
 
 Kwargs expressions
-~~~~~~~~~~~~~~~~~~
+------------------
 
 Python 3.5
 
@@ -349,7 +349,7 @@ After:
 
 
 Variables annotations
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
 Python 3.6
 
@@ -369,7 +369,7 @@ After:
     annassign: ':' test ['=' test]
 
 async for loop
-~~~~~~~~~~~~~~
+--------------
 
 Python 3.6
 
@@ -387,7 +387,7 @@ After:
 
 
 Refactoring in typedargslist ?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------
 
 I think this is for asynchronous generator and comprehension:
 
@@ -435,27 +435,27 @@ After:
 
 
 Nothing to do
--------------
+~~~~~~~~~~~~~
 
 Those are things that have been removed from python3 grammar but we still need
 to support (and we already do) so we don't have to do anything.
 
 No more commat syntax in except close
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------
 
 Python 3.3 or earlier
 
 .. image:: ./grammar_diff/no_more_commat_in_execption_close.png
 
 No more backquote syntax
-~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------
 
 Python 3.3 or earlier
 
 .. image:: ./grammar_diff/no_more_backquote_syntax.png
 
 No more '.' '.' '.' in the grammar
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------------
 
 Python 3.3 or earlier
 
