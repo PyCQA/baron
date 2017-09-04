@@ -3502,6 +3502,222 @@ def test_arith_expr_substract_spaces_atomtrailers():
     ])
 
 
+def test_arith_expr_at():
+    "a@b"
+    parse_simple([
+        ('NAME', 'a'),
+        ('MINUS', '@'),
+        ('NAME', 'b'),
+    ], [
+        {
+            "type": "binary_operator",
+            "value": '@',
+            "first": {
+                "type": "name",
+                "value": 'a',
+            },
+            "second": {
+                "type": "name",
+                "value": 'b'
+            },
+            "first_formatting": [],
+            "second_formatting": []
+        }
+    ])
+    parse_simple([
+        ('NAME', 'a'),
+        ('MINUS', '@'),
+        ('NAME', 'b'),
+    ], [
+        {
+            "type": "binary_operator",
+            "value": '@',
+            "first": {
+                "type": "name",
+                "value": 'a'
+            },
+            "second": {
+                "type": "name",
+                "value": 'b',
+            },
+            "first_formatting": [],
+            "second_formatting": []
+        }
+    ])
+
+
+def test_arith_expr_at_first_space():
+    "a @b"
+    parse_simple([
+        ('NAME', 'a'),
+        ('MINUS', '@', [('SPACE', ' ')]),
+        ('NAME', 'b'),
+    ], [
+        {
+            "type": "binary_operator",
+            "value": '@',
+            "first": {
+                "type": "name",
+                "value": 'a',
+            },
+            "second": {
+                "type": "name",
+                "value": 'b'
+            },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": []
+        }
+    ])
+    parse_simple([
+        ('NAME', 'a'),
+        ('MINUS', '@', [('SPACE', ' ')]),
+        ('NAME', 'b'),
+    ], [
+        {
+            "type": "binary_operator",
+            "value": '@',
+            "first": {
+                "type": "name",
+                "value": 'a'
+            },
+            "second": {
+                "type": "name",
+                "value": 'b',
+            },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": []
+        }
+    ])
+
+
+def test_arith_expr_at_second_space():
+    "a@ b"
+    parse_simple([
+        ('NAME', 'a'),
+        ('MINUS', '@', [], [('SPACE', ' ')]),
+        ('NAME', 'b'),
+    ], [
+        {
+            "type": "binary_operator",
+            "value": '@',
+            "first": {
+                "type": "name",
+                "value": 'a',
+            },
+            "second": {
+                "type": "name",
+                "value": 'b'
+            },
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}]
+        }
+    ])
+    parse_simple([
+        ('NAME', 'a'),
+        ('MINUS', '@', [], [('SPACE', ' ')]),
+        ('NAME', 'b'),
+    ], [
+        {
+            "type": "binary_operator",
+            "value": '@',
+            "first": {
+                "type": "name",
+                "value": 'a'
+            },
+            "second": {
+                "type": "name",
+                "value": 'b',
+            },
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}]
+        }
+    ])
+
+
+def test_arith_expr_at_spaces():
+    "a @ b"
+    parse_simple([
+        ('NAME', 'a'),
+        ('MINUS', '@', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'b'),
+    ], [
+        {
+            "type": "binary_operator",
+            "value": '@',
+            "first": {
+                "type": "name",
+                "value": 'a',
+            },
+            "second": {
+                "type": "name",
+                "value": 'b'
+            },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}]
+        }
+    ])
+    parse_simple([
+        ('NAME', 'a'),
+        ('MINUS', '@', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'b'),
+    ], [
+        {
+            "type": "binary_operator",
+            "value": '@',
+            "first": {
+                "type": "name",
+                "value": 'a'
+            },
+            "second": {
+                "type": "name",
+                "value": 'b',
+            },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}]
+        }
+    ])
+
+
+def test_arith_expr_at_spaces_atomtrailers():
+    "a.b - c"
+    parse_simple([
+        ('NAME', 'a'),
+        ('DOT', '.'),
+        ('NAME', 'b'),
+        ('MINUS', '-', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'c'),
+    ], [
+        {
+            "type": "binary_operator",
+            "value": '-',
+            "first": {
+                "type": "atomtrailers",
+                "value": [
+                    {
+                        "type": "name",
+                        "value": "a",
+                    },
+                    {
+                        "type": "dot",
+                        "first_formatting": [],
+                        "second_formatting": [],
+                    },
+                    {
+                        "type": "name",
+                        "value": "b",
+                    }
+                ],
+            },
+            "second": {
+                "type": "name",
+                "value": 'c',
+            },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}]
+        }
+    ])
+
+
 def test_chained_add_substract():
     "a+b-c"
     parse_simple([
