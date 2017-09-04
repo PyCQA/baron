@@ -384,9 +384,9 @@ def test_ellipsis():
     "..."
     parse_simple([('DOT', '.'), ('DOT', '.'),('DOT', '.')], [
         {
-            "type": "name",
-            "formatting": [],
-            "value": "...",
+            "type": "ellipsis",
+            "first_formatting": [],
+            "second_formatting": [],
         }
     ])
 

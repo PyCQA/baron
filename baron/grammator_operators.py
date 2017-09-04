@@ -254,6 +254,7 @@ def include_operators(pg):
         }]
 
     @pg.production("subscript : DOT DOT DOT")
+    @pg.production("atom : DOT DOT DOT")
     def subscript_ellipsis(pack):
         (dot1, dot2, dot3) = pack
         return {
