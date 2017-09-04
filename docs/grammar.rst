@@ -61,14 +61,16 @@ Already done since the start.
 This is handle at the parser initialisation level, is activate or not the
 print_function rule.
 
-Ellipsis in from import
------------------------
+Ellipsis as atom (to replace 'pass')
+------------------------------------
 
 Python 3.3 or earlier
 
 Baron: https://github.com/PyCQA/baron/pull/121
 
-.. image:: ./grammar_diff/ellipsis_in_from_import.png
+::
+
+    ADD '...' in atom rule
 
 Matrix operator
 ---------------
@@ -92,6 +94,13 @@ Baron: https://github.com/PyCQA/baron/pull/117
 
 TODO
 ====
+
+Ellipsis in from import
+-----------------------
+
+Python 3.3 or earlier
+
+.. image:: ./grammar_diff/ellipsis_in_from_import.png
 
 Typed arguments
 ---------------
