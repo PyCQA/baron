@@ -309,6 +309,27 @@ def test_unicode_string():
     match("U'''pouet pouet'''", "UNICODE_STRING")
 
 
+def test_interpolated_string():
+    match("f'He said his name is {name!r}.'", 'INTERPOLATED_STRING')
+    match("f'The value is {value}.'", 'INTERPOLATED_STRING')
+    match('F"He said his name is {name!r}."', 'INTERPOLATED_STRING')
+    match('f"The value is {value}."', 'INTERPOLATED_STRING')
+    match("F'{date} was on a {date:%A}'", 'INTERPOLATED_STRING')
+    match("f'a={d[\"a\"]}'", 'INTERPOLATED_STRING')
+    match("F'{(lambda x: x*2)(3)}'", 'INTERPOLATED_STRING')
+
+
+def test_interpolated_raw_string():
+    match("fr'He said his name is {name!r}.'", 'INTERPOLATED_RAW_STRING')
+    match("fr'The value is {value}.'", 'INTERPOLATED_RAW_STRING')
+    match('Fr"He said his name is {name!r}."', 'INTERPOLATED_RAW_STRING')
+    match('fR"The value is {value}."', 'INTERPOLATED_RAW_STRING')
+    match("FR'{date} was on a {date:%A}'", 'INTERPOLATED_RAW_STRING')
+    match("fr'a={d[\"a\"]}'", 'INTERPOLATED_RAW_STRING')
+    match("FR'{(lambda x: x*2)(3)}'", 'INTERPOLATED_RAW_STRING')
+    match("FR'{(lambda x: x*2)(3)}'", 'INTERPOLATED_RAW_STRING')
+
+
 def test_raw_string():
     match('r"pouet pouet"', 'RAW_STRING')
     match("r'pouet pouet'", "RAW_STRING")

@@ -35,6 +35,8 @@ GROUP_ON = (
     # TODO test everything bellow
     "STRING",
     "RAW_STRING",
+    "INTERPOLATED_STRING",
+    "INTERPOLATED_RAW_STRING",
     "BINARY_STRING",
     "BINARY_RAW_STRING",
     "UNICODE_STRING",
