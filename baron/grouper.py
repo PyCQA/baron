@@ -48,14 +48,22 @@ def group_generator(sequence):
             return
 
         current = next(iterator)
+
+        # classical grouping using to_group
         if current in to_group_keys and matching_found(to_group, current, iterator.show_next()):
             current += next(iterator)
         if current in to_group_keys and matching_found(to_group, current, iterator.show_next()):
             current += next(iterator)
+
+        # unicode/raw/binary string notation
         if current in list('uUrRbB') and str(iterator.show_next()).startswith(('"', "'")):
             current += next(iterator)
+
+        # in case of unicode_raw or binary_raw string notation
         if str(current).lower() in ["ur", "br"] and str(iterator.show_next()).startswith(('"', "'")):
             current += next(iterator)
+
+        # float exponant notation
         if any([re.match(x, current) for x in (r'^\d+[eE]$', r'^\d+\.\d*[eE]$', r'^\.\d+[eE]$')]):
             current += next(iterator)
             current += next(iterator)
@@ -64,17 +72,20 @@ def group_generator(sequence):
             # ['123.123e', '[+-]', '123']
             assert re.match(r'^\d+[eE][-+]?\d+[jJ]?$', current) or re.match(r'^\d*.\d*[eE][-+]?\d+[jJ]?$', current)
 
+        # escaped endl
         if current == "\\" and iterator.show_next() in ('\n', '\r\n'):
             current += next(iterator)
             if re.match(r'^\s+$', str(iterator.show_next())):
                 current += next(iterator)
 
+        # escaped endl in window notation
         if current == "\\" and iterator.show_next() == "\r" and iterator.show_next(2) == "\n":
             current += next(iterator)
             current += next(iterator)
             if re.match(r'^\s+$', str(iterator.show_next())):
                 current += next(iterator)
 
+        # space before escaped endl
         if re.match(r'^\s+$', current) and iterator.show_next() == "\\":
             current += next(iterator)
             current += next(iterator)
@@ -83,6 +94,7 @@ def group_generator(sequence):
             if re.match(r'^\s+$', str(iterator.show_next())):
                 current += next(iterator)
 
+        # complex number notation
         if (re.match(r'^\d+$', current) and match_on_next(r'^\.$', iterator)) or\
            (current == "." and match_on_next(r'^\d+([jJ]|[eE]\d*)?$', iterator)):
             current += next(iterator)
