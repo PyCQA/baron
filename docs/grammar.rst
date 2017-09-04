@@ -46,6 +46,9 @@ Still, some stuff for the lexer are probably missing in this list like:
 
 I need to got through all release notes to see that.
 
+Done
+====
+
 Print function
 --------------
 
@@ -59,7 +62,7 @@ This is handle at the parser initialisation level, is activate or not the
 print_function rule.
 
 TODO
-~~~~
+====
 
 Typed arguments
 ---------------
@@ -435,7 +438,7 @@ After:
 
 
 Nothing to do
-~~~~~~~~~~~~~
+=============
 
 Those are things that have been removed from python3 grammar but we still need
 to support (and we already do) so we don't have to do anything.
