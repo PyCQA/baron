@@ -337,6 +337,88 @@ After:
 
 
 
+Variables annotations
+~~~~~~~~~~~~~~~~~~~~~
+
+Python 3.6
+
+Before:
+
+::
+
+    expr_stmt: testlist_star_expr (augassign (yield_expr|testlist) |
+                         ('=' (yield_expr|testlist_star_expr))*)
+
+After:
+
+::
+
+    expr_stmt: testlist_star_expr (annassign | augassign (yield_expr|testlist) |
+                         ('=' (yield_expr|testlist_star_expr))*)
+    annassign: ':' test ['=' test]
+
+async for loop
+~~~~~~~~~~~~~~
+
+Python 3.6
+
+Before:
+
+::
+
+    comp_for: 'for' exprlist 'in' or_test [comp_iter]
+
+After:
+
+::
+
+    comp_for: [ASYNC] 'for' exprlist 'in' or_test [comp_iter]
+
+
+Refactoring in typedargslist ?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+I think this is for asynchronous generator and comprehension:
+
+* https://docs.python.org/3/whatsnew/3.6.html#whatsnew36-pep525
+* https://docs.python.org/3/whatsnew/3.6.html#whatsnew36-pep530
+
+Before:
+
+::
+
+    typedargslist: (tfpdef ['=' test] (',' tfpdef ['=' test])* [','
+           ['*' [tfpdef] (',' tfpdef ['=' test])* [',' '**' tfpdef] | '**' tfpdef]]
+         |  '*' [tfpdef] (',' tfpdef ['=' test])* [',' '**' tfpdef] | '**' tfpdef)
+    varargslist: (vfpdef ['=' test] (',' vfpdef ['=' test])* [','
+           ['*' [vfpdef] (',' vfpdef ['=' test])* [',' '**' vfpdef] | '**' vfpdef]]
+         |  '*' [vfpdef] (',' vfpdef ['=' test])* [',' '**' vfpdef] | '**' vfpdef)
+
+After:
+
+::
+
+    typedargslist: (tfpdef ['=' test] (',' tfpdef ['=' test])* [','
+           ['*' [tfpdef] (',' tfpdef ['=' test])* [',' ['**' tfpdef [',']]]
+          | '**' tfpdef [',']]]
+      | '*' [tfpdef] (',' tfpdef ['=' test])* [',' ['**' tfpdef [',']]]
+      | '**' tfpdef [','])
+    varargslist: (vfpdef ['=' test] (',' vfpdef ['=' test])* [','
+           ['*' [vfpdef] (',' vfpdef ['=' test])* [',' ['**' vfpdef [',']]]
+         | '**' vfpdef [',']]]
+      | '*' [vfpdef] (',' vfpdef ['=' test])* [',' ['**' vfpdef [',']]]
+      | '**' vfpdef [',']
+    )
+
+
+
+
+
+
+
+
+
+
 
 
 
