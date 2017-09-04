@@ -9,6 +9,7 @@ Changelog
 
 Python 3 parsing:
 - support ellipsis https://github.com/PyCQA/baron/pull/121 by odcinek
+- support matrix operator https://github.com/PyCQA/baron/pull/117 by odcinek
 
 0.6.6 (2017-06-12)
 ------------------
