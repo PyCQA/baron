@@ -92,6 +92,18 @@ Baron: https://github.com/PyCQA/baron/pull/117
 
     term: factor (('*'|'@'|'/'|'%'|'//') factor)*
 
+
+f-strings
+---------
+
+Python 3.6
+
+Baron: https://github.com/PyCQA/baron/pull/110
+
+::
+
+    add f'' rf'' fr'' to the lexer
+
 TODO
 ====
 
