@@ -148,6 +148,7 @@ def include_operators(pg):
     @pg.production("term : factor SLASH term")
     @pg.production("term : factor PERCENT term")
     @pg.production("term : factor DOUBLE_SLASH term")
+    @pg.production("term : factor AT term")
     @pg.production("power : atom DOUBLE_STAR factor")
     @pg.production("power : atom DOUBLE_STAR power")
     def binary_operator_node(pack):
