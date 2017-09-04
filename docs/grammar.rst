@@ -61,6 +61,15 @@ Already done since the start.
 This is handle at the parser initialisation level, is activate or not the
 print_function rule.
 
+Ellipsis in from import
+-----------------------
+
+Python 3.3 or earlier
+
+Baron: https://github.com/PyCQA/baron/pull/121
+
+.. image:: ./grammar_diff/ellipsis_in_from_import.png
+
 TODO
 ====
 
@@ -191,13 +200,6 @@ Action:
 
     # merge
     raise_stmt: 'raise' [test [(',' test [',' test]] | 'from' test)]
-
-Ellipsis in from import
------------------------
-
-Python 3.3 or earlier
-
-.. image:: ./grammar_diff/ellipsis_in_from_import.png
 
 New lambda grammar
 ------------------
