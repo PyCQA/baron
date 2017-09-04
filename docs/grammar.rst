@@ -34,6 +34,18 @@ section**
 Python 3.3 is the based grammar I've started diffing with, some of the grammar
 differences marked as 3.3 are actually from older python version.
 
+Current status
+==============
+
+Grammar diff has been done up to python 3.6.2.
+
+Still, some stuff for the lexer are probably missing in this list like:
+
+* fstrings
+* adding _ in numbers
+
+I need to got through all release notes to see that.
+
 Print function
 ~~~~~~~~~~~~~~
 
@@ -336,7 +348,6 @@ After:
 
 
 
-
 Variables annotations
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -409,6 +420,7 @@ After:
       | '*' [vfpdef] (',' vfpdef ['=' test])* [',' ['**' vfpdef [',']]]
       | '**' vfpdef [',']
     )
+
 
 
 
