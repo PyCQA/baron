@@ -70,6 +70,26 @@ Baron: https://github.com/PyCQA/baron/pull/121
 
 .. image:: ./grammar_diff/ellipsis_in_from_import.png
 
+Matrix operator
+---------------
+
+Python 3.5
+
+Baron: https://github.com/PyCQA/baron/pull/117
+
+::
+
+    ADD '@' and '@=' to the lexer
+    ADD '@=' in augassign
+    ADD '@' in term
+
+::
+
+    augassign: ('+=' | '-=' | '*=' | '@=' | '/=' | '%=' | '&=' | '|=' | '^=' |
+                '<<=' | '>>=' | '**=' | '//=')
+
+    term: factor (('*'|'@'|'/'|'%'|'//') factor)*
+
 TODO
 ====
 
@@ -286,24 +306,6 @@ After:
 
     power: atom_expr ['**' factor]
     atom_expr: [AWAIT] atom trailer*
-
-Matrix operator
----------------
-
-Python 3.5
-
-::
-
-    ADD '@' and '@=' to the lexer
-    ADD '@=' in augassign
-    ADD '@' in term
-
-::
-
-    augassign: ('+=' | '-=' | '*=' | '@=' | '/=' | '%=' | '&=' | '|=' | '^=' |
-                '<<=' | '>>=' | '**=' | '//=')
-
-    term: factor (('*'|'@'|'/'|'%'|'//') factor)*
 
 Kwargs expressions
 ------------------
