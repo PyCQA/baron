@@ -329,6 +329,15 @@ def test_interpolated_raw_string():
     match("FR'{(lambda x: x*2)(3)}'", 'INTERPOLATED_RAW_STRING')
     match("FR'{(lambda x: x*2)(3)}'", 'INTERPOLATED_RAW_STRING')
 
+    match("rf'He said his name is {name!r}.'", 'INTERPOLATED_RAW_STRING')
+    match("rf'The value is {value}.'", 'INTERPOLATED_RAW_STRING')
+    match('rF"He said his name is {name!r}."', 'INTERPOLATED_RAW_STRING')
+    match('Rf"The value is {value}."', 'INTERPOLATED_RAW_STRING')
+    match("RF'{date} was on a {date:%A}'", 'INTERPOLATED_RAW_STRING')
+    match("rf'a={d[\"a\"]}'", 'INTERPOLATED_RAW_STRING')
+    match("RF'{(lambda x: x*2)(3)}'", 'INTERPOLATED_RAW_STRING')
+    match("RF'{(lambda x: x*2)(3)}'", 'INTERPOLATED_RAW_STRING')
+
 
 def test_raw_string():
     match('r"pouet pouet"', 'RAW_STRING')

@@ -86,6 +86,7 @@ TOKENS = (
     (r'[uU][rR]["\'](.|\n|\r)*["\']', 'UNICODE_RAW_STRING'),
     (r'[bB][rR]["\'](.|\n|\r)*["\']', 'BINARY_RAW_STRING'),
     (r'[fF][rR]["\'](.|\n|\r)*["\']', 'INTERPOLATED_RAW_STRING'),
+    (r'[rR][fF]["\'](.|\n|\r)*["\']', 'INTERPOLATED_RAW_STRING'),
 )
 
 

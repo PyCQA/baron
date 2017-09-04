@@ -54,7 +54,7 @@ def group_generator(sequence):
             current += next(iterator)
         if current in list('uUfFrRbB') and str(iterator.show_next()).startswith(('"', "'")):
             current += next(iterator)
-        if str(current).lower() in ["ur", "br", "fr"] and str(iterator.show_next()).startswith(('"', "'")):
+        if str(current).lower() in ["ur", "br", "fr", "rf"] and str(iterator.show_next()).startswith(('"', "'")):
             current += next(iterator)
         if any([re.match(x, current) for x in (r'^\d+[eE]$', r'^\d+\.\d*[eE]$', r'^\.\d+[eE]$')]):
             current += next(iterator)
