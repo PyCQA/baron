@@ -178,15 +178,4 @@ def group_generator(sequence):
                     debug_file_content += _append_to_debug_file_content(iterator.show_next())
                     current = append_to_token_after(current, [next(iterator)])
 
-
-        if current[0] == "SPACE":
-            debug_file_content = debug_file_content.split("\n")
-            debug_file_content = list(zip(range(1, len(debug_file_content) + 1), debug_file_content))
-            debug_file_content = debug_file_content[-3:]
-            debug_file_content = "\n".join(["%4s %s" % (x[0], x[1]) for x in debug_file_content])
-            debug_file_content += "<--- here"
-            debug_text = "Unexpected '%s' token:\n\n" % current[0].lower() + debug_file_content + "\n\n"
-            debug_text += "Should have been grouped on either %s (before) or %s (after) token." % (debug_previous_token, iterator.show_next())
-            raise UnExpectedFormattingToken(debug_text)
-
         yield current
