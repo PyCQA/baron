@@ -132,6 +132,7 @@ def generate_parse(print_function):
     @pg.production("small_stmt : assert_stmt")
     @pg.production("small_stmt : raise_stmt")
     @pg.production("small_stmt : global_stmt")
+    @pg.production("small_stmt : nonlocal_stmt")
     @pg.production("compound_stmt : if_stmt")
     @pg.production("compound_stmt : while_stmt")
     @pg.production("compound_stmt : for_stmt")

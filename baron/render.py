@@ -504,7 +504,11 @@ nodes_rendering_order = {
             ("formatting", "second_formatting", "as"),
             ("key",        "as",                "as"),
         ],
-
+        "nonlocal": [
+            ("constant",    "nonlocal",         True),
+            ("formatting", "formatting",        True),
+            ("list",        "value",            True),
+        ],
         "del": [
             ("constant",   "del",               True),
             ("formatting", "formatting",        True),

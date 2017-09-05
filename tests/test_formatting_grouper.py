@@ -2548,6 +2548,18 @@ def test_global_two():
     ])
 
 
+def test_nonlocal():
+    "global a"
+    group([
+        ('NONLOCAL', 'nonlocal'),
+        ('SPACE', ' '),
+        ('NAME', 'a'),
+    ], [
+        ('NONLOCAL', 'nonlocal', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+    ])
+
+
 def test_print():
     "print"
     group([

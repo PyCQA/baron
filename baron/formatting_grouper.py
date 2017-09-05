@@ -91,6 +91,7 @@ GROUP_SPACE_AFTER = BOTH + (
     "RAISE",
     "EXEC",
     "GLOBAL",
+    "NONLOCAL",
     "PRINT",
     "INDENT",
     "WHILE",

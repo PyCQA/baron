@@ -235,6 +235,16 @@ def include_primivites(pg, print_function):
         }
 
 
+    @pg.production("nonlocal_stmt : NONLOCAL names")
+    def nonlocal_stmt(pack):
+        (token, names) = pack
+        return {
+            "type": "nonlocal",
+            "formatting": token.hidden_tokens_after,
+            "value": names,
+        }
+
+
     @pg.production("names : NAME")
     def names_name(pack):
         (name,) = pack
