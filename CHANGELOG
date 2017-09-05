@@ -95,7 +95,7 @@ Python 3 parsing:
 - bounding box allows you to know the left most and right most position
   of a node see https://baron.readthedocs.io/en/latest/#bounding-box
 - redbaron is classified as supporting python3
-  https://github.com/Psycojoker/baron/pull/51
+  https://github.com/PyCQA/baron/pull/51
 - ensure than when a key is a string, it's empty value is an empty string and
   not None to avoid breaking libs that use introspection to guess the type of
   the key
@@ -152,7 +152,7 @@ Python 3 parsing:
 - don't add a endl node at the end if not present in the input string
 - de-uniformise call_arguments and function_arguments node, this is just
   creating more problems that anything else
-- fix https://github.com/Psycojoker/redbaron/issues/4
+- fix https://github.com/PyCQA/redbaron/issues/4
 - fix the fact that baron can't parse "{1,}" (but "{1}" is working)
 
 0.1.1 (2014-03-23)
