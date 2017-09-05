@@ -46,6 +46,35 @@ def test_dumy_if():
     ])
 
 
+def test_dumy_def_space():
+    """
+    def foo():
+        pass     
+    """
+    # https://github.com/PyCQA/baron/issues/101
+    check([
+        ('DEF', 'def', [], [('SPACE', ' ')]),
+        ('NAME', 'foo'),
+        ('LEFT_PARENTHESIS', '('),
+        ('RIGHT_PARENTHESIS', ')'),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('PASS', 'pass'),
+        ('ENDL', '\n', [('SPACE', '   ')]),
+    ],  [
+        ('DEF', 'def', [], [('SPACE', ' ')]),
+        ('NAME', 'foo'),
+        ('LEFT_PARENTHESIS', '('),
+        ('RIGHT_PARENTHESIS', ')'),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n', [('SPACE', '   ')]),
+        ('DEDENT', ''),
+    ])
+
+
 def test_dumy_if_if():
     """
     if a:

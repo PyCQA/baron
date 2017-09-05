@@ -51,6 +51,15 @@ def test_hexa():
     match('0x123ABCDL', 'HEXA')
 
 
+def test_grouped():
+    match('100_000', 'INT')
+    match('10_000_000.', 'FLOAT')
+    match('10_000_000.0', 'FLOAT')
+    match('0xCAFE_F00D', 'HEXA')
+    match('0o123_45', 'OCTA')
+    match('0b_0011_1111_0100_1110', 'BINARY')
+
+
 def test_octa():
     match('012345', 'OCTA')
     match('0o12345', 'OCTA')
@@ -78,6 +87,22 @@ def test_float_exponant():
     match('.5678e-10', 'FLOAT_EXPONANT')
     match('.5678E+10', 'FLOAT_EXPONANT')
     match('.5678E-10', 'FLOAT_EXPONANT')
+
+
+def test_floating_point_parser_bug_85():
+    from baron import parse
+    assert parse('d*e-1') == [
+        {'first': {'first': {'type': 'name', 'value': 'd'},
+                   'first_formatting': [],
+                   'second': {'type': 'name', 'value': 'e'},
+                   'second_formatting': [],
+                   'type': 'binary_operator',
+                   'value': '*'},
+         'first_formatting': [],
+         'second': {'section': 'number', 'type': 'int', 'value': '1'},
+         'second_formatting': [],
+         'type': 'binary_operator',
+         'value': '-'}]
 
 
 def test_left_parenthesis():
@@ -230,6 +255,10 @@ def test_amper_equal():
     match('&=', 'AMPER_EQUAL')
 
 
+def test_at_equal():
+    match('@=', 'AT_EQUAL')
+
+
 def test_vbar_equal():
     match('|=', 'VBAR_EQUAL')
 
@@ -287,6 +316,36 @@ def test_unicode_string():
     match("U'pouet pouet'", "UNICODE_STRING")
     match('U"""pouet pouet"""', 'UNICODE_STRING')
     match("U'''pouet pouet'''", "UNICODE_STRING")
+
+
+def test_interpolated_string():
+    match("f'He said his name is {name!r}.'", 'INTERPOLATED_STRING')
+    match("f'The value is {value}.'", 'INTERPOLATED_STRING')
+    match('F"He said his name is {name!r}."', 'INTERPOLATED_STRING')
+    match('f"The value is {value}."', 'INTERPOLATED_STRING')
+    match("F'{date} was on a {date:%A}'", 'INTERPOLATED_STRING')
+    match("f'a={d[\"a\"]}'", 'INTERPOLATED_STRING')
+    match("F'{(lambda x: x*2)(3)}'", 'INTERPOLATED_STRING')
+
+
+def test_interpolated_raw_string():
+    match("fr'He said his name is {name!r}.'", 'INTERPOLATED_RAW_STRING')
+    match("fr'The value is {value}.'", 'INTERPOLATED_RAW_STRING')
+    match('Fr"He said his name is {name!r}."', 'INTERPOLATED_RAW_STRING')
+    match('fR"The value is {value}."', 'INTERPOLATED_RAW_STRING')
+    match("FR'{date} was on a {date:%A}'", 'INTERPOLATED_RAW_STRING')
+    match("fr'a={d[\"a\"]}'", 'INTERPOLATED_RAW_STRING')
+    match("FR'{(lambda x: x*2)(3)}'", 'INTERPOLATED_RAW_STRING')
+    match("FR'{(lambda x: x*2)(3)}'", 'INTERPOLATED_RAW_STRING')
+
+    match("rf'He said his name is {name!r}.'", 'INTERPOLATED_RAW_STRING')
+    match("rf'The value is {value}.'", 'INTERPOLATED_RAW_STRING')
+    match('rF"He said his name is {name!r}."', 'INTERPOLATED_RAW_STRING')
+    match('Rf"The value is {value}."', 'INTERPOLATED_RAW_STRING')
+    match("RF'{date} was on a {date:%A}'", 'INTERPOLATED_RAW_STRING')
+    match("rf'a={d[\"a\"]}'", 'INTERPOLATED_RAW_STRING')
+    match("RF'{(lambda x: x*2)(3)}'", 'INTERPOLATED_RAW_STRING')
+    match("RF'{(lambda x: x*2)(3)}'", 'INTERPOLATED_RAW_STRING')
 
 
 def test_raw_string():
@@ -483,3 +542,7 @@ def test_exponant_complex():
     match("-.1E+1J", "FLOAT_EXPONANT_COMPLEX")
 
 # TODO 1.1e1j
+
+
+def test_backslash():
+    match("\\\n", "SPACE")

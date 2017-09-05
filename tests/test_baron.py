@@ -18,7 +18,7 @@ def test_error_parsing_error():
 
 
 def test_error_unexpected_formatting():
-    with pytest.raises(UnExpectedFormattingToken):
+    with pytest.raises(ParsingError):
         parse("   a\nb")
     with pytest.raises(BaronError):
         parse("   a\nb")

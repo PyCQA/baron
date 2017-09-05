@@ -34,6 +34,7 @@ def include_operators(pg):
     @pg.production("augassign_operator : SLASH_EQUAL")
     @pg.production("augassign_operator : PERCENT_EQUAL")
     @pg.production("augassign_operator : AMPER_EQUAL")
+    @pg.production("augassign_operator : AT_EQUAL")
     @pg.production("augassign_operator : VBAR_EQUAL")
     @pg.production("augassign_operator : CIRCUMFLEX_EQUAL")
     @pg.production("augassign_operator : LEFT_SHIFT_EQUAL")
@@ -147,6 +148,7 @@ def include_operators(pg):
     @pg.production("term : factor SLASH term")
     @pg.production("term : factor PERCENT term")
     @pg.production("term : factor DOUBLE_SLASH term")
+    @pg.production("term : factor AT term")
     @pg.production("power : atom DOUBLE_STAR factor")
     @pg.production("power : atom DOUBLE_STAR power")
     def binary_operator_node(pack):
@@ -254,6 +256,7 @@ def include_operators(pg):
         }]
 
     @pg.production("subscript : DOT DOT DOT")
+    @pg.production("atom : DOT DOT DOT")
     def subscript_ellipsis(pack):
         (dot1, dot2, dot3) = pack
         return {

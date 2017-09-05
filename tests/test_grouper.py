@@ -166,6 +166,10 @@ def test_space_endl_with_backslash():
     grouper_test(" 	 \\\npouet", [' 	 ', '\\', '\n', 'pouet'], [' 	 \\\n', 'pouet'])
 
 
+def test_number_with_backslash():
+    grouper_test("3\\\n", ['3', '\\', '\n'], ['3', '\\\n'])
+
+
 def test_regression():
     grouper_test("0x045e: ", ['0x045e', ':', ' '], ['0x045e', ':', ' '])
     grouper_test("180.\n", ['180', '.', '\n'], ['180.', '\n'])

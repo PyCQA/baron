@@ -12,6 +12,7 @@ to_group = (
     ("&", "="),
     ("|", "="),
     ("^", "="),
+    ("@", "="),
     ("/", "/"),
     ("*", "*"),
     ("<", "<"),
@@ -51,9 +52,9 @@ def group_generator(sequence):
             current += next(iterator)
         if current in to_group_keys and matching_found(to_group, current, iterator.show_next()):
             current += next(iterator)
-        if current in list('uUrRbB') and str(iterator.show_next()).startswith(('"', "'")):
+        if current in list('uUfFrRbB') and str(iterator.show_next()).startswith(('"', "'")):
             current += next(iterator)
-        if str(current).lower() in ["ur", "br"] and str(iterator.show_next()).startswith(('"', "'")):
+        if str(current).lower() in ["ur", "br", "fr", "rf"] and str(iterator.show_next()).startswith(('"', "'")):
             current += next(iterator)
         if any([re.match(x, current) for x in (r'^\d+[eE]$', r'^\d+\.\d*[eE]$', r'^\.\d+[eE]$')]):
             current += next(iterator)
@@ -95,7 +96,7 @@ def group_generator(sequence):
         if re.match(r'^\d+\.?[eE]$', current) and match_on_next(r'^\d+$', iterator):
             current += next(iterator)
 
-        if re.match(r'^\d*\.?\d*[eE]$', current) and match_on_next(r'^[-+]$', iterator) and iterator.show_next(2) and re.match(r'^\d+$', iterator.show_next(2)):
+        if re.match(r'^\d*\.?\d*[eE]$', current) and not re.match('[eE]', current) and match_on_next(r'^[-+]$', iterator) and iterator.show_next(2) and re.match(r'^\d+$', iterator.show_next(2)):
             current += next(iterator)
             current += next(iterator)
 

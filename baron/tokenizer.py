@@ -5,7 +5,7 @@ from .utils import BaronError
 class UnknowItem(BaronError):
     pass
 
-KEYWORDS = ("and", "as", "assert", "break", "class", "continue", "def", "del", "elif", "else", "except", "exec", "finally", "for", "from", "global", "if", "import", "in", "is", "lambda", "not", "or", "pass", "print", "raise", "return", "try", "while", "with", "yield")
+KEYWORDS = ("and", "as", "assert", "break", "class", "continue", "def", "del", "elif", "else", "except", "exec", "finally", "for", "from", "global", "nonlocal", "if", "import", "in", "is", "lambda", "not", "or", "pass", "print", "raise", "return", "try", "while", "with", "yield")
 
 TOKENS = (
     (r'[a-zA-Z_]\w*', 'NAME'),
@@ -20,14 +20,14 @@ TOKENS = (
     (r'\d+\.[jJ]', 'COMPLEX'),
     (r'\d+[jJ]', 'COMPLEX'),
     (r'\d+\.', 'FLOAT'),
-    (r'\d*\.\d+[lL]?', 'FLOAT'),
-    (r'\d+\.\d*[lL]?', 'FLOAT'),
+    (r'\d*[_\d]*\.[_\d]+[lL]?', 'FLOAT'),
+    (r'\d+[_\d]+\.[_\d]*[lL]?', 'FLOAT'),
     (r'\.', 'DOT'),
-    (r'[1-9]+\d*[lL]', 'LONG'),
-    (r'[1-9]+\d*', 'INT'),
-    (r'0[xX][\da-fA-F]+[lL]?', 'HEXA'),
-    (r'(0[oO][0-7]+)|(0[0-7]*)[lL]?', 'OCTA'),
-    (r'0[bB][01]+[lL]?', 'BINARY'),
+    (r'[1-9]+[_\d]*[lL]', 'LONG'),
+    (r'[1-9]+[_\d]*', 'INT'),
+    (r'0[xX][\d_a-fA-F]+[lL]?', 'HEXA'),
+    (r'(0[oO][0-7]+)|(0[0-7_]*)[lL]?', 'OCTA'),
+    (r'0[bB][01_]+[lL]?', 'BINARY'),
     (r'\(', 'LEFT_PARENTHESIS'),
     (r'\)', 'RIGHT_PARENTHESIS'),
     (r':', 'COLON'),
@@ -40,6 +40,7 @@ TOKENS = (
     (r'/', 'SLASH'),
     (r'\|', 'VBAR'),
     (r'&', 'AMPER'),
+    (r'@', 'AT'),
     (r'<', 'LESS'),
     (r'>', 'GREATER'),
     (r'=', 'EQUAL'),
@@ -61,6 +62,7 @@ TOKENS = (
     (r'\*\*', 'DOUBLE_STAR'),
     (r'\+=', 'PLUS_EQUAL'),
     (r'-=', 'MINUS_EQUAL'),
+    (r'@=', 'AT_EQUAL'),
     (r'\*=', 'STAR_EQUAL'),
     (r'/=', 'SLASH_EQUAL'),
     (r'%=', 'PERCENT_EQUAL'),
@@ -78,10 +80,13 @@ TOKENS = (
     (r'(\s|\\\n|\\\r\n)+', 'SPACE'),
     (r'["\'](.|\n|\r)*["\']', 'STRING'),
     (r'[uU]["\'](.|\n|\r)*["\']', 'UNICODE_STRING'),
+    (r'[fF]["\'](.|\n|\r)*["\']', 'INTERPOLATED_STRING'),
     (r'[rR]["\'](.|\n|\r)*["\']', 'RAW_STRING'),
     (r'[bB]["\'](.|\n|\r)*["\']', 'BINARY_STRING'),
     (r'[uU][rR]["\'](.|\n|\r)*["\']', 'UNICODE_RAW_STRING'),
     (r'[bB][rR]["\'](.|\n|\r)*["\']', 'BINARY_RAW_STRING'),
+    (r'[fF][rR]["\'](.|\n|\r)*["\']', 'INTERPOLATED_RAW_STRING'),
+    (r'[rR][fF]["\'](.|\n|\r)*["\']', 'INTERPOLATED_RAW_STRING'),
 )
 
 

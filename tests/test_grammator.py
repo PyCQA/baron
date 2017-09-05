@@ -380,6 +380,17 @@ def test_file_input_simple_stmt_one_item_semicolon_space():
     ])
 
 
+def test_ellipsis():
+    "..."
+    parse_simple([('DOT', '.'), ('DOT', '.'),('DOT', '.')], [
+        {
+            "type": "ellipsis",
+            "first_formatting": [],
+            "second_formatting": [],
+        }
+    ])
+
+
 def test_funcdef_stmt_indent():
     """
     def a () :

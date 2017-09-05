@@ -2148,6 +2148,7 @@ augmented_assignment_tokens = (
     ('SLASH_EQUAL', '/='),
     ('PERCENT_EQUAL', '%='),
     ('AMPER_EQUAL', '&='),
+    ('AT_EQUAL', '@='),
     ('VBAR_EQUAL', '|='),
     ('CIRCUMFLEX_EQUAL', '^='),
     ('LEFT_SHIFT_EQUAL', '<<='),
@@ -2547,6 +2548,18 @@ def test_global_two():
     ])
 
 
+def test_nonlocal():
+    "global a"
+    group([
+        ('NONLOCAL', 'nonlocal'),
+        ('SPACE', ' '),
+        ('NAME', 'a'),
+    ], [
+        ('NONLOCAL', 'nonlocal', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+    ])
+
+
 def test_print():
     "print"
     group([
@@ -2889,7 +2902,7 @@ def test_strings():
     """
     I don't this because python allow to write stuff like 'qsd' rb"qsd" u'pouet'
     """
-    for i in ('STRING', 'RAW_STRING', 'UNICODE_STRING', 'UNICODE_RAW_STRING', 'BINARY_STRING', 'BINARY_RAW_STRING'):
+    for i in ('STRING', 'RAW_STRING', 'UNICODE_STRING', 'INTERPOLATED_STRING', 'UNICODE_RAW_STRING', 'BINARY_STRING', 'INTERPOLATED_RAW_STRING', 'BINARY_RAW_STRING'):
         group([
             ('SPACE', ' '),
             (i, 'dummy'),
