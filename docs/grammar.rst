@@ -119,6 +119,26 @@ RedBaron: probably nothing to do (to be confirmed)
 
     modify lexer to handle this
 
+Nonlocal statement
+------------------
+
+Python 3.3 or earlier
+
+Baron: https://github.com/PyCQA/baron/pull/112
+RedBaron: TODO
+
+.. image:: ./grammar_diff/nonlocal_statement.png
+
+Action:
+
+::
+
+    ADD 'nonlocal' to lexer
+    ADD 'nonlocal_stmt' to 'small_stmt'
+
+    ADD new rule:
+    nonlocal_stmt: 'nonlocal' NAME (',' NAME)*
+
 TODO
 ====
 
@@ -189,23 +209,6 @@ Action:
     ADD '->' to the lexer
     ADD ['->' test] to funcdef rule
     funcdef: 'def' NAME parameters ['->' test] ':' suite
-
-Nonlocal statement
-------------------
-
-Python 3.3 or earlier
-
-.. image:: ./grammar_diff/nonlocal_statement.png
-
-Action:
-
-::
-
-    ADD 'nonlocal' to lexer
-    ADD 'nonlocal_stmt' to 'small_stmt'
-
-    ADD new rule:
-    nonlocal_stmt: 'nonlocal' NAME (',' NAME)*
 
 Exec function
 -------------

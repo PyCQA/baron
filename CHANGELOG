@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.6.7 (unreleased)
+0.7 (unreleased)
 ------------------
 
 - fix line continuation https://github.com/PyCQA/baron/pull/92 by ibizaman
@@ -14,6 +14,7 @@ Python 3 parsing:
 - support matrix operator https://github.com/PyCQA/baron/pull/117 by odcinek
 - support f-strings https://github.com/PyCQA/baron/pull/110 by odcinek
 - support numeric literals https://github.com/PyCQA/baron/pull/111 by odcinek
+- support nonlocal statement https://github.com/PyCQA/baron/pull/112 by odcinek
 
 0.6.6 (2017-06-12)
 ------------------
