@@ -65,6 +65,7 @@ Ellipsis as atom (to replace 'pass')
 ------------------------------------
 
 Python 3.3 or earlier
+RedBaron: probably nothing to do (to be confirmed)
 
 Baron: https://github.com/PyCQA/baron/pull/121
 
@@ -78,6 +79,7 @@ Matrix operator
 Python 3.5
 
 Baron: https://github.com/PyCQA/baron/pull/117
+RedBaron: probably nothing to do (to be confirmed)
 
 ::
 
@@ -99,6 +101,7 @@ f-strings
 Python 3.6
 
 Baron: https://github.com/PyCQA/baron/pull/110
+RedBaron: TODO
 
 ::
 
