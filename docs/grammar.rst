@@ -107,6 +107,18 @@ RedBaron: TODO
 
     add f'' rf'' fr'' to the lexer
 
+Underscore in numeric literals
+------------------------------
+
+Python 3.6
+
+Baron: https://github.com/PyCQA/baron/pull/111
+RedBaron: probably nothing to do (to be confirmed)
+
+::
+
+    modify lexer to handle this
+
 TODO
 ====
 
