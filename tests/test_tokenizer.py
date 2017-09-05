@@ -51,6 +51,15 @@ def test_hexa():
     match('0x123ABCDL', 'HEXA')
 
 
+def test_grouped():
+    match('100_000', 'INT')
+    match('10_000_000.', 'FLOAT')
+    match('10_000_000.0', 'FLOAT')
+    match('0xCAFE_F00D', 'HEXA')
+    match('0o123_45', 'OCTA')
+    match('0b_0011_1111_0100_1110', 'BINARY')
+
+
 def test_octa():
     match('012345', 'OCTA')
     match('0o12345', 'OCTA')
