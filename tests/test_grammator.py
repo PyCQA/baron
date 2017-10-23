@@ -58,6 +58,28 @@ def test_string():
     ])
 
 
+def test_ellipsis():
+  """a = ..."""
+  parse_simple([
+      ('NAME', 'a'),
+      ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
+      ('ELLIPSIS', '...'),
+  ], [
+      {
+          'type': 'assignment',
+          'target': {'type': 'name', 'value': 'a'},
+          'first_formatting': [{'type': 'space', 'value': ' '}],
+          'operator': '',
+          'second_formatting': [{'type': 'space', 'value': ' '}],
+          'value': {
+              'type': 'ellipsis',
+              'first_formatting': [],
+              'second_formatting': []
+          }
+      },
+  ])
+
+
 def test_file_input_empty():
     ""
     parse_multi([], [])
@@ -419,6 +441,9 @@ def test_funcdef_stmt_indent():
             "fifth_formatting": [{"type": "space", "value": " "}],
             "sixth_formatting": [{"type": "space", "value": " "}],
             "arguments": [],
+            "before_rarrow_formatting": [],
+            "after_rarrow_formatting": [],
+            "annotation": [],
             "value": [
                 {
                     "type": "endl",
@@ -476,9 +501,15 @@ def test_funcdef_stmt_one_parameter_indent():
                         "type": "name",
                         "value": "x",
                     },
+                    "before_colon_formatting": [],
+                    "after_colon_formatting": [],
+                    "annotation": [],
                     "value": {},
                 }
             ],
+            "before_rarrow_formatting": [],
+            "after_rarrow_formatting": [],
+            "annotation": [],
             "value": [
                 {
                     "type": "endl",
@@ -537,6 +568,9 @@ def test_funcdef_stmt_one_parameter_comma_indent():
                         "type": "name",
                         "value": "x",
                     },
+                    "before_colon_formatting": [],
+                    "after_colon_formatting": [],
+                    "annotation": [],
                     "value": {},
                 },
                 {
@@ -545,6 +579,9 @@ def test_funcdef_stmt_one_parameter_comma_indent():
                     "second_formatting": [{"type": "space", "value": " "}],
                 }
             ],
+            "before_rarrow_formatting": [],
+            "after_rarrow_formatting": [],
+            "annotation": [],
             "value": [
                 {
                     "type": "endl",
@@ -605,6 +642,9 @@ def test_funcdef_stmt_one_parameter_comma_default_indent():
                         "type": "name",
                         "value": "x",
                     },
+                    "before_colon_formatting": [],
+                    "after_colon_formatting": [],
+                    "annotation": [],
                     "value": {
                         "type": "int",
                         "value": "1",
@@ -617,6 +657,9 @@ def test_funcdef_stmt_one_parameter_comma_default_indent():
                     "second_formatting": [{"type": "space", "value": " "}],
                 }
             ],
+            "before_rarrow_formatting": [],
+            "after_rarrow_formatting": [],
+            "annotation": [],
             "value": [
                 {
                     "type": "endl",
@@ -636,6 +679,192 @@ def test_funcdef_stmt_one_parameter_comma_default_indent():
             ],
         }
     ])
+
+
+def test_funcdef_stmt_indent_complex_annotation():
+    """
+    def a () -> Optional[Dict[str,'SomeType']] :
+        pass
+    """
+    parse_multi([
+        ('DEF', 'def', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('LEFT_PARENTHESIS', '(', [('SPACE', ' ')]),
+        ('RIGHT_PARENTHESIS', ')'),
+        ('RARROW', '->', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'Optional'),
+        ('LEFT_SQUARE_BRACKET', '['),
+        ('NAME', 'Dict'),
+        ('LEFT_SQUARE_BRACKET', '['),
+        ('NAME', 'str'),
+        ('COMMA', ','),
+        ('STRING', "'SomeType'"),
+        ('RIGHT_SQUARE_BRACKET', ']'),
+        ('RIGHT_SQUARE_BRACKET', ']'),
+        ('COLON', ':', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+    ], [
+        {
+            "type": "def",
+            "name": "a",
+            "decorators": [],
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [],
+            "fourth_formatting": [],
+            "fifth_formatting": [{"type": "space", "value": " "}],
+            "sixth_formatting": [{"type": "space", "value": " "}],
+            "arguments": [],
+            "before_rarrow_formatting": [{"type": "space", "value": " "}],
+            "after_rarrow_formatting": [{"type": "space", "value": " "}],
+            "annotation": [
+                {
+                    'type': 'atomtrailers',
+                    'value': [
+                        {'type': 'name', 'value': 'Optional'},
+                        {
+                            'first_formatting': [],
+                            'second_formatting': [],
+                            'value': {
+                                'type': 'atomtrailers',
+                                'value': [
+                                    {'type': 'name', 'value': 'Dict'},
+                                    {
+                                        'first_formatting': [],
+                                        'second_formatting': [],
+                                        'value': {
+                                            'first_formatting': [],
+                                            'second_formatting': [],
+                                            'value': [
+                                                {
+                                                    'type': 'name',
+                                                    'value': 'str'
+                                                },
+                                                {
+                                                    'first_formatting': [],
+                                                    'second_formatting': [],
+                                                    'type': 'comma',
+                                                },
+                                                {
+                                                    'first_formatting': [],
+                                                    'second_formatting': [],
+                                                    'type': 'string',
+                                                    'value': "'SomeType'",
+                                                }
+                                            ],
+                                            'fourth_formatting': [],
+                                            'type': 'tuple',
+                                            'third_formatting': [],
+                                            'with_parenthesis': False,
+                                        },
+                                        'fourth_formatting': [],
+                                        'type': 'getitem',
+                                        'third_formatting': [],
+                                    },
+                                ],
+                            },
+                            'fourth_formatting': [],
+                            'type': 'getitem',
+                            'third_formatting': [],
+                        },
+                    ],
+                }
+            ],
+            "value": [
+                {
+                    "type": "endl",
+                    "value": "\n",
+                    "formatting": [],
+                    "indent": "    "
+                },
+                {
+                    "type": "pass",
+                },
+                {
+                    "type": "endl",
+                    "formatting": [],
+                    "indent": "",
+                    "value": "\n"
+                }
+            ],
+        }
+    ])
+
+
+def test_funcdef_stmt_one_parameter_indent_annotations():
+    """
+    def a ( x : int ) -> str :
+        pass
+    """
+    parse_multi([
+        ('DEF', 'def', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('LEFT_PARENTHESIS', '(', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'x'),
+        ('COLON', ':', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'int'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+        ('RARROW', '->', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'str'),
+        ('COLON', ':', [('SPACE', ' ')]),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+    ], [
+        {
+            "type": "def",
+            "name": "a",
+            "decorators": [],
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [{"type": "space", "value": " "}],
+            "fifth_formatting": [{"type": "space", "value": " "}],
+            "sixth_formatting": [],
+            "arguments": [
+                {
+                    "type": "def_argument",
+                    "first_formatting": [],
+                    "second_formatting": [],
+                    "target": {
+                        "type": "name",
+                        "value": "x",
+                    },
+                    "before_colon_formatting": [{"type": "space", "value": " "}],
+                    "after_colon_formatting": [{"type": "space", "value": " "}],
+                    "annotation": [{"type": "name", "value": "int"}],
+                    "value": {},
+                }
+            ],
+            "before_rarrow_formatting": [{"type": "space", "value": " "}],
+            "after_rarrow_formatting": [{"type": "space", "value": " "}],
+            "annotation": [{"type": "name", "value": "str"}],
+            "value": [
+                {
+                    "type": "endl",
+                    "value": "\n",
+                    "formatting": [],
+                    "indent": "    "
+                },
+                {
+                    "type": "pass",
+                },
+                {
+                    "type": "endl",
+                    "formatting": [],
+                    "indent": "",
+                    "value": "\n"
+                }
+            ],
+        }
+    ])
+
 
 def test_class_empty():
     """
@@ -827,6 +1056,9 @@ def test_funcdef_stmt_one_start_parameter_indent():
                     }
                 }
             ],
+            "before_rarrow_formatting": [],
+            "after_rarrow_formatting": [],
+            "annotation": [],
             "value": [
                 {
                     "type": "endl",
@@ -886,6 +1118,9 @@ def test_funcdef_stmt_one_star_star_parameter_indent():
                     }
                 }
             ],
+            "before_rarrow_formatting": [],
+            "after_rarrow_formatting": [],
+            "annotation": [],
             "value": [
                 {
                     "type": "endl",
@@ -1155,6 +1390,9 @@ def test_decorator():
                     "value": "\n",
                 }
             ],
+            "before_rarrow_formatting": [],
+            "after_rarrow_formatting": [],
+            "annotation": [],
             "value": [
                 {
                     "type": "pass",
@@ -1228,6 +1466,9 @@ def test_decorator_parenthesis():
                     "value": "\n",
                 }
             ],
+            "before_rarrow_formatting": [],
+            "after_rarrow_formatting": [],
+            "annotation": [],
             "value": [
                 {
                     "type": "pass",
@@ -1313,6 +1554,9 @@ def test_decorator_parenthesis_arg():
                     "value": "\n",
                 }
             ],
+            "before_rarrow_formatting": [],
+            "after_rarrow_formatting": [],
+            "annotation": [],
             "value": [
                 {
                     "type": "pass",
@@ -1401,6 +1645,9 @@ def test_decorator_two():
                     "value": "\n",
                 }
             ],
+            "before_rarrow_formatting": [],
+            "after_rarrow_formatting": [],
+            "annotation": [],
             "value": [
                 {
                     "type": "pass",
@@ -1601,6 +1848,9 @@ def test_fplist():
                     "first_formatting": [],
                     "second_formatting": [],
                     "value": {},
+                    "before_colon_formatting": [],
+                    "after_colon_formatting": [],
+                    "annotation": [],
                     "target": {
                         "first_formatting": [],
                         "second_formatting": [],
@@ -1624,6 +1874,9 @@ def test_fplist():
             ],
             "name": "a",
             "decorators": [],
+            "before_rarrow_formatting": [],
+            "after_rarrow_formatting": [],
+            "annotation": [],
             "value": [
                 {
                     "type": "pass",
@@ -1671,6 +1924,9 @@ def test_fplist_two():
                     "first_formatting": [],
                     "second_formatting": [],
                     "value": {},
+                    "before_colon_formatting": [],
+                    "after_colon_formatting": [],
+                    "annotation": [],
                     "target": {
                         "type": "tuple",
                         "with_parenthesis": True,
@@ -1698,6 +1954,9 @@ def test_fplist_two():
             ],
             "name": "a",
             "decorators": [],
+            "before_rarrow_formatting": [],
+            "after_rarrow_formatting": [],
+            "annotation": [],
             "value": [
                 {
                     "type": "pass",
@@ -1743,6 +2002,9 @@ def test_fplist_alone():
                     "value": {},
                     "first_formatting": [],
                     "second_formatting": [],
+                    "before_colon_formatting": [],
+                    "after_colon_formatting": [],
+                    "annotation": [],
                     "target": {
                         "type": "associative_parenthesis",
                         "first_formatting": [],
@@ -1758,6 +2020,9 @@ def test_fplist_alone():
             ],
             "name": "a",
             "decorators": [],
+            "before_rarrow_formatting": [],
+            "after_rarrow_formatting": [],
+            "annotation": [],
             "value": [
                 {
                     "type": "pass",
@@ -1838,6 +2103,9 @@ def test_regression_def_argument_tuple():
                             }
                         ]
                     },
+                    "before_colon_formatting": [],
+                    "after_colon_formatting": [],
+                    "annotation": [],
                     'value': {
                         'type': 'name',
                         'value': 'c',
@@ -1857,6 +2125,9 @@ def test_regression_def_argument_tuple():
             'second_formatting': [],
             'sixth_formatting': [],
             'third_formatting': [],
+            'before_rarrow_formatting': [],
+            'after_rarrow_formatting': [],
+            'annotation': [],
             'type': 'def',
             'value': [
                 {
@@ -1955,6 +2226,9 @@ def test_regression_def_argument_tuple_nested():
                             },
                         ]
                     },
+                    'before_colon_formatting': [],
+                    'after_colon_formatting': [],
+                    'annotation': [],
                     'value': {
                         'type': 'name',
                         'value': 'c',
@@ -1975,6 +2249,9 @@ def test_regression_def_argument_tuple_nested():
             'sixth_formatting': [],
             'third_formatting': [],
             'type': 'def',
+            'before_rarrow_formatting': [],
+            'after_rarrow_formatting': [],
+            'annotation': [],
             'value': [
                 {
                     'formatting': [],

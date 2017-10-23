@@ -901,7 +901,10 @@ def test_lambda_arguments():
                     "target": {
                         "value": "argument",
                         "type": "name",
-                    }
+                    },
+                    "before_colon_formatting": [],
+                    "after_colon_formatting": [],
+                    "annotation": [],
                 }
             ]
         }

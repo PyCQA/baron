@@ -1160,7 +1160,10 @@ def test_list_comprehension_lambda_with_arguments():
                                 "target": {
                                     "type": "name",
                                     "value": "argument",
-                                }
+                                },
+                                "before_colon_formatting": [],
+                                "after_colon_formatting": [],
+                                "annotation": [],
                             }
                         ],
                         "value": {

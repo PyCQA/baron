@@ -366,7 +366,27 @@ def generate_parse(print_function):
         }] + endl
 
 
-    @pg.production("funcdef : DEF NAME LEFT_PARENTHESIS parameters RIGHT_PARENTHESIS COLON suite")
+    @pg.production("funcdef : DEF NAME LEFT_PARENTHESIS typedargslist RIGHT_PARENTHESIS RARROW annotation COLON suite")
+    def function_definition_with_return_annotation(pack):
+        (def_, name, left_parenthesis, parameters, right_parenthesis, rarrow, annotation, colon, suite) = pack
+        return [{
+            "type": "def",
+            "decorators": [],
+            "name": name.value,
+            "first_formatting": def_.hidden_tokens_after,
+            "second_formatting": left_parenthesis.hidden_tokens_before,
+            "third_formatting": left_parenthesis.hidden_tokens_after,
+            "fourth_formatting": right_parenthesis.hidden_tokens_before,
+            "before_rarrow_formatting": rarrow.hidden_tokens_before,
+            "after_rarrow_formatting": rarrow.hidden_tokens_after,
+            "annotation": annotation,
+            "fifth_formatting": colon.hidden_tokens_before,
+            "sixth_formatting": colon.hidden_tokens_after,
+            "arguments": parameters,
+            "value": suite,
+        }]
+
+    @pg.production("funcdef : DEF NAME LEFT_PARENTHESIS typedargslist RIGHT_PARENTHESIS COLON suite")
     def function_definition(pack):
         (def_, name, left_parenthesis, parameters, right_parenthesis, colon, suite) = pack
         return [{
@@ -377,6 +397,9 @@ def generate_parse(print_function):
             "second_formatting": left_parenthesis.hidden_tokens_before,
             "third_formatting": left_parenthesis.hidden_tokens_after,
             "fourth_formatting": right_parenthesis.hidden_tokens_before,
+            "before_rarrow_formatting": [],
+            "after_rarrow_formatting": [],
+            "annotation": [],
             "fifth_formatting": colon.hidden_tokens_before,
             "sixth_formatting": colon.hidden_tokens_after,
             "arguments": parameters,
@@ -385,12 +408,16 @@ def generate_parse(print_function):
 
     @pg.production("argslist : argslist argument")
     @pg.production("parameters : parameters parameter")
+    @pg.production("typedargslist : typedargslist parameter")
+    @pg.production("typedargslist : typedargslist typedparameter")
     def parameters_parameters_parameter(pack,):
         (parameters, parameter,) = pack
         return parameters + parameter
 
     @pg.production("argslist : argument")
     @pg.production("parameters : parameter")
+    @pg.production("typedargslist : parameter")
+    @pg.production("typedargslist : typedparameter")
     def parameters_parameter(pack,):
         (parameter,) = pack
         return parameter
@@ -423,7 +450,10 @@ def generate_parse(print_function):
                 "third_formatting": right_parenthesis.hidden_tokens_before,
                 "fourth_formatting": right_parenthesis.hidden_tokens_after,
                 "value": name
-            }
+            },
+            "before_colon_formatting": [],
+            "after_colon_formatting": [],
+            "annotation": [],
         }]
 
 
@@ -444,6 +474,9 @@ def generate_parse(print_function):
                 "fourth_formatting": right_parenthesis.hidden_tokens_after,
                 "value": fplist,
             },
+            "before_colon_formatting": [],
+            "after_colon_formatting": [],
+            "annotation": [],
         }]
 
 
@@ -486,8 +519,29 @@ def generate_parse(print_function):
             "first_formatting": equal.hidden_tokens_before if equal else [],
             "second_formatting": equal.hidden_tokens_after if equal else [],
             "value": test,
-            "target": name
+            "target": name,
+            "before_colon_formatting": [],
+            "after_colon_formatting": [],
+            "annotation": [],
         }]
+
+    @pg.production("typedparameter : name COLON annotation maybe_test")
+    def parameter_with_annotation(pack):
+      name, colon, annotation, (equal, test) = pack
+      return [{
+            "type": "def_argument",
+            "first_formatting": equal.hidden_tokens_before if equal else [],
+            "second_formatting": equal.hidden_tokens_after if equal else [],
+            "before_colon_formatting": colon.hidden_tokens_before,
+            "after_colon_formatting": colon.hidden_tokens_after,
+            "value": test,
+            "target": name,
+            "annotation": annotation,
+        }]
+
+    @pg.production("annotation : test")
+    def annotation(pack):
+      return pack
 
     @pg.production("maybe_test : EQUAL test")
     def maybe_test(pack):
@@ -632,6 +686,14 @@ def generate_parse(print_function):
         (name,) = pack
         return name
 
+    @pg.production("atom : ELLIPSIS")
+    def atom_ellipsis(pack):
+      (ellipsis,) = pack
+      return {
+          "type": "ellipsis",
+          "first_formatting": [],
+          "second_formatting": [],
+      }
 
     @pg.production("atom : strings")
     def strings(pack):

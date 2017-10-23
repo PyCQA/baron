@@ -62,6 +62,7 @@ BOTH = (
     "FOR",
     "COLON",
     "BACKQUOTE",
+    "RARROW",
 )
 
 STRING = (
