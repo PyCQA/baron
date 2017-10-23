@@ -4,6 +4,8 @@ Changelog
 0.9 (unreleased)
 ----------------
 
+First version of full python 3.7 grammar support.
+
 - add support for ... in from import by bram
 - add support for return annotation by bram
 - add support for exec function by bram
