@@ -153,6 +153,7 @@ def group_generator(sequence):
             in_grouping_mode += 1
         elif current[0] in QUIT_GROUPING_MODE:
             in_grouping_mode -= 1
+            assert in_grouping_mode >= 0
 
         if in_grouping_mode:
             if current[0] in GROUP_THOSE:
@@ -168,11 +169,15 @@ def group_generator(sequence):
                         yield next(iterator)
 
                 fail_on_bad_token(iterator.show_next(), debug_file_content, in_grouping_mode)
+
                 current = append_to_token_before(next(iterator), to_group)
 
+                if current[0] in ENTER_GROUPING_MODE:
+                  in_grouping_mode += 1
                 # TODO test
                 if current[0] in QUIT_GROUPING_MODE:
                     in_grouping_mode -= 1
+                    assert in_grouping_mode >= 0
                     yield current
                     continue
 
