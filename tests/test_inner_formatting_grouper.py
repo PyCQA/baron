@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding:Utf-8 -*-
+# -*- coding:utf-8 -*-
 
 from baron.inner_formatting_grouper import group
 
@@ -182,4 +182,28 @@ def test_number_backslash_newline():
     ]) == [
         ('INT', '3'),
         ('SPACE', '\\\n'),
+    ]
+
+
+def test_nested_grouping_after_endl():
+    """
+    (b
+     [0])
+    """
+    assert group([
+        ('LEFT_PARENTHESIS', '('),
+        ('NAME', 'b'),
+        ('ENDL', '\n'),
+        ('SPACE', ' '),
+        ('LEFT_SQUARE_BRACKET', '['),
+        ('INT', '0'),
+        ('RIGHT_SQUARE_BRACKET', ']'),
+        ('RIGHT_PARENTHESIS', ')'),
+    ]) == [
+        ('LEFT_PARENTHESIS', '('),
+        ('NAME', 'b'),
+        ('LEFT_SQUARE_BRACKET', '[', [('ENDL', '\n'), ('SPACE', ' ')], []),
+        ('INT', '0'),
+        ('RIGHT_SQUARE_BRACKET', ']'),
+        ('RIGHT_PARENTHESIS', ')'),
     ]
