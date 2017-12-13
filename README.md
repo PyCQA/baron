@@ -54,7 +54,7 @@ clumpsy weak code that is very likely to break because you didn't thought about
 all the annoying special cases and the formatting keeps bothering you. You may
 end up playing with [ast.py](http://docs.python.org/2/library/ast.html) until
 you realize that it removes too much information to be suitable for those
-situations. You will probably ditch this task as simple too complicated and
+situations. You will probably ditch this task as simply too complicated and
 really not worth the effort. You are missing a good abstraction that will take
 care of all of the code structure and formatting for you so you can concentrate
 on your task.
