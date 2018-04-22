@@ -2315,6 +2315,20 @@ def test_yield_a():
     ])
 
 
+def test_yield_from_a():
+    "yield from a"
+    group([
+        ('YIELD', 'yield'),
+        ('SPACE', ' '),
+        ('FROM', 'from'),
+        ('SPACE', ' '),
+        ('NAME', 'a'),
+    ], [
+        ('YIELD', 'yield', [], [('SPACE', ' ')]),
+        ('FROM', 'from', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+    ])
+
 def test_del():
     "del a"
     group([
