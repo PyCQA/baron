@@ -835,41 +835,437 @@ def test_for_else_stmt_indent():
                         "indent": "    "
                     },
                     {
-        "type": "pass",
-    },
+                        "type": "pass",
+                    },
                     {
-        "indent": "",
-        "formatting": [],
-        "type": "endl",
-        "value": "\n",
-    }
+                        "indent": "",
+                        "formatting": [],
+                        "type": "endl",
+                        "value": "\n",
+                    }
                 ]
             },
             "iterator": {
-    "type": "name",
-    "value": "i",
-},
+                "type": "name",
+                "value": "i",
+            },
             "target": {
-    "type": "name",
-    "value": "b",
-},
+                "type": "name",
+                "value": "b",
+            },
             "value": [
-    {
-        "type": "endl",
-        "formatting": [],
-        "value": "\n",
-        "indent": "    "
-    },
-    {
-             "type": "pass",
-         },
-    {
-             "indent": "",
-             "formatting": [],
-             "type": "endl",
-             "value": "\n"
-         }
-],
+                {
+                    "type": "endl",
+                    "formatting": [],
+                    "value": "\n",
+                    "indent": "    "
+                },
+                {
+                    "type": "pass",
+                },
+                {
+                    "indent": "",
+                    "formatting": [],
+                    "type": "endl",
+                    "value": "\n"
+                }
+            ],
+        }
+    ])
+
+def test_for_else_stmt_indent_unpack():
+    """
+    for i, j in b:
+        pass
+    else:
+        pass
+    """
+    parse_multi([
+        ('FOR', 'for', [], [('SPACE', ' ')]),
+        ('NAME', 'i'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('NAME', 'j'),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'b'),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+        ('ELSE', 'else'),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+    ], [
+        {
+            "type": "for",
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [],
+            "fifth_formatting": [],
+            "else": {
+                "type": "else",
+                "first_formatting": [],
+                "second_formatting": [],
+                "value": [
+                    {
+                        "type": "endl",
+                        "value": "\n",
+                        "formatting": [],
+                        "indent": "    "
+                    },
+                    {
+                        "type": "pass",
+                    },
+                    {
+                        "indent": "",
+                        "formatting": [],
+                        "type": "endl",
+                        "value": "\n",
+                    }
+                ]
+            },
+            "iterator": {
+                "first_formatting": [],
+                "second_formatting": [],
+                "third_formatting": [],
+                "fourth_formatting": [],
+                "type": "tuple",
+                "with_parenthesis": False,
+                "value": [
+                    {"type": "name", "value": "i"},
+                    {
+                        "first_formatting": [],
+                        "type": "comma",
+                        "second_formatting": [{"type": "space", "value": " "}]
+                    },
+                    {"type": "name", "value": "j"},
+                ],
+            },
+            "target": {
+                "type": "name",
+                "value": "b",
+            },
+            "value": [
+                {
+                    "type": "endl",
+                    "formatting": [],
+                    "value": "\n",
+                    "indent": "    "
+                },
+                {
+                    "type": "pass",
+                },
+                {
+                    "indent": "",
+                    "formatting": [],
+                    "type": "endl",
+                    "value": "\n"
+                }
+            ],
+        }
+    ])
+
+def test_for_else_stmt_indent_unpack_paren():
+    """
+    for (i, j) in b:
+        pass
+    else:
+        pass
+    """
+    parse_multi([
+        ('FOR', 'for', [], [('SPACE', ' ')]),
+        ('LEFT_PARENTHESIS', '('),
+        ('NAME', 'i'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('NAME', 'j'),
+        ('RIGHT_PARENTHESIS', ')'),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'b'),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+        ('ELSE', 'else'),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+    ], [
+        {
+            "type": "for",
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [],
+            "fifth_formatting": [],
+            "else": {
+                "type": "else",
+                "first_formatting": [],
+                "second_formatting": [],
+                "value": [
+                    {
+                        "type": "endl",
+                        "value": "\n",
+                        "formatting": [],
+                        "indent": "    "
+                    },
+                    {
+                        "type": "pass",
+                    },
+                    {
+                        "indent": "",
+                        "formatting": [],
+                        "type": "endl",
+                        "value": "\n",
+                    }
+                ]
+            },
+            "iterator": {
+                "first_formatting": [],
+                "second_formatting": [],
+                "third_formatting": [],
+                "fourth_formatting": [],
+                "type": "tuple",
+                "with_parenthesis": True,
+                "value": [
+                    {"type": "name", "value": "i"},
+                    {
+                        "first_formatting": [],
+                        "type": "comma",
+                        "second_formatting": [{"type": "space", "value": " "}]
+                    },
+                    {"type": "name", "value": "j"},
+                ],
+            },
+            "target": {
+                "type": "name",
+                "value": "b",
+            },
+            "value": [
+                {
+                    "type": "endl",
+                    "formatting": [],
+                    "value": "\n",
+                    "indent": "    "
+                },
+                {
+                    "type": "pass",
+                },
+                {
+                    "indent": "",
+                    "formatting": [],
+                    "type": "endl",
+                    "value": "\n"
+                }
+            ],
+        }
+    ])
+
+def test_for_else_stmt_indent_from_tuple():
+    """
+    for i in b, c:
+        pass
+    else:
+        pass
+    """
+    parse_multi([
+        ('FOR', 'for', [], [('SPACE', ' ')]),
+        ('NAME', 'i'),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'b'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('NAME', 'c'),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+        ('ELSE', 'else'),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+    ], [
+        {
+            "type": "for",
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [],
+            "fifth_formatting": [],
+            "else": {
+                "type": "else",
+                "first_formatting": [],
+                "second_formatting": [],
+                "value": [
+                    {
+                        "type": "endl",
+                        "value": "\n",
+                        "formatting": [],
+                        "indent": "    "
+                    },
+                    {
+                        "type": "pass",
+                    },
+                    {
+                        "indent": "",
+                        "formatting": [],
+                        "type": "endl",
+                        "value": "\n",
+                    }
+                ]
+            },
+            "iterator": {
+                "type": "name",
+                "value": "i",
+            },
+            "target": {
+                "first_formatting": [],
+                "second_formatting": [],
+                "third_formatting": [],
+                "fourth_formatting": [],
+                "type": "tuple",
+                "with_parenthesis": False,
+                "value": [
+                    {"type": "name", "value": "b"},
+                    {
+                        "first_formatting": [],
+                        "type": "comma",
+                        "second_formatting": [{"type": "space", "value": " "}]
+                    },
+                    {"type": "name", "value": "c"},
+                ],
+            },
+            "value": [
+                {
+                    "type": "endl",
+                    "formatting": [],
+                    "value": "\n",
+                    "indent": "    "
+                },
+                {
+                    "type": "pass",
+                },
+                {
+                    "indent": "",
+                    "formatting": [],
+                    "type": "endl",
+                    "value": "\n"
+                }
+            ],
+        }
+    ])
+
+def test_for_else_stmt_indent_from_tuple_paren():
+    """
+    for i in (b, c):
+        pass
+    else:
+        pass
+    """
+    parse_multi([
+        ('FOR', 'for', [], [('SPACE', ' ')]),
+        ('NAME', 'i'),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('LEFT_PARENTHESIS', '('),
+        ('NAME', 'b'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('NAME', 'c'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+        ('ELSE', 'else'),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+    ], [
+        {
+            "type": "for",
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [],
+            "fifth_formatting": [],
+            "else": {
+                "type": "else",
+                "first_formatting": [],
+                "second_formatting": [],
+                "value": [
+                    {
+                        "type": "endl",
+                        "value": "\n",
+                        "formatting": [],
+                        "indent": "    "
+                    },
+                    {
+                        "type": "pass",
+                    },
+                    {
+                        "indent": "",
+                        "formatting": [],
+                        "type": "endl",
+                        "value": "\n",
+                    }
+                ]
+            },
+            "iterator": {
+                "type": "name",
+                "value": "i",
+            },
+            "target": {
+                "first_formatting": [],
+                "second_formatting": [],
+                "third_formatting": [{"type": "space", "value": " "}],
+                "fourth_formatting": [],
+                "type": "tuple",
+                "with_parenthesis": True,
+                "value": [
+                    {"type": "name", "value": "b"},
+                    {
+                        "first_formatting": [],
+                        "type": "comma",
+                        "second_formatting": [{"type": "space", "value": " "}]
+                    },
+                    {"type": "name", "value": "c"},
+                ],
+            },
+            "value": [
+                {
+                    "type": "endl",
+                    "formatting": [],
+                    "value": "\n",
+                    "indent": "    "
+                },
+                {
+                    "type": "pass",
+                },
+                {
+                    "indent": "",
+                    "formatting": [],
+                    "type": "endl",
+                    "value": "\n"
+                }
+            ],
         }
     ])
 

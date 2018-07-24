@@ -729,31 +729,422 @@ def test_generator_comprehension_double_if_if():
                     ],
                 },
                 {
-    "type": "comprehension_loop",
-    "first_formatting": [{"type": "space", "value": " "}],
-    "second_formatting": [{"type": "space", "value": " "}],
-    "third_formatting": [{"type": "space", "value": " "}],
-    "fourth_formatting": [{"type": "space", "value": " "}],
-    "iterator": {
-        "type": "name",
-        "value": "d",
-    },
-    "target": {
-        "type": "name",
-        "value": "e",
-    },
-    "ifs": [
-        {
-            "type": "comprehension_if",
-            "first_formatting": [{"type": "space", "value": " "}],
-            "second_formatting": [{"type": "space", "value": " "}],
-            "value": {
-                "type": "name",
-                "value": "y"
-            },
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "type": "name",
+                        "value": "d",
+                    },
+                    "target": {
+                        "type": "name",
+                        "value": "e",
+                    },
+                    "ifs": [
+                        {
+                            "type": "comprehension_if",
+                            "first_formatting": [{"type": "space", "value": " "}],
+                            "second_formatting": [{"type": "space", "value": " "}],
+                            "value": {
+                                "type": "name",
+                                "value": "y"
+                            },
+                        }
+                    ],
+                }
+            ]
         }
-    ],
-}
+    ])
+
+def test_generator_comprehension_double_unpack1():
+    "( a for b, c in c for d in e )"
+    parse_simple([
+        ('LEFT_PARENTHESIS', '(', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'b'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('NAME', 'c'),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'c'),
+        ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'd'),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'e'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+    ], [
+        {
+            "type": "generator_comprehension",
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [],
+            "result": {
+                "type": "name",
+                "value": "a",
+            },
+            "generators": [
+                {
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "first_formatting": [],
+                        "second_formatting": [],
+                        "third_formatting": [],
+                        "fourth_formatting": [],
+                        "type": "tuple",
+                        "with_parenthesis": False,
+                        "value": [
+                            {"type": "name", "value": "b"},
+                            {
+                                "first_formatting": [],
+                                "type": "comma",
+                                "second_formatting": [{"type": "space", "value": " "}]
+                            },
+                            {"type": "name", "value": "c"},
+                        ],
+                    },
+                    "target": {
+                        "type": "name",
+                        "value": "c",
+                    },
+                    "ifs": [],
+                },
+                {
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "type": "name",
+                        "value": "d",
+                    },
+                    "target": {
+                        "type": "name",
+                        "value": "e",
+                    },
+                    "ifs": [],
+                }
+            ]
+        }
+    ])
+
+def test_generator_comprehension_double_unpack1_paren():
+    "( a for (b, c) in c for d in e )"
+    parse_simple([
+        ('LEFT_PARENTHESIS', '(', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('LEFT_PARENTHESIS', '(', []),
+        ('NAME', 'b'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('NAME', 'c'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'c'),
+        ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'd'),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'e'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+    ], [
+        {
+            "type": "generator_comprehension",
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [],
+            "result": {
+                "type": "name",
+                "value": "a",
+            },
+            "generators": [
+                {
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "first_formatting": [],
+                        "second_formatting": [],
+                        "third_formatting": [{"type": "space", "value": " "}],
+                        "fourth_formatting": [],
+                        "type": "tuple",
+                        "with_parenthesis": True,
+                        "value": [
+                            {"type": "name", "value": "b"},
+                            {
+                                "first_formatting": [],
+                                "type": "comma",
+                                "second_formatting": [{"type": "space", "value": " "}]
+                            },
+                            {"type": "name", "value": "c"},
+                        ],
+                    },
+                    "target": {
+                        "type": "name",
+                        "value": "c",
+                    },
+                    "ifs": [],
+                },
+                {
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "type": "name",
+                        "value": "d",
+                    },
+                    "target": {
+                        "type": "name",
+                        "value": "e",
+                    },
+                    "ifs": [],
+                }
+            ]
+        }
+    ])
+
+def test_generator_comprehension_double_unpack2():
+    "( a for b in c for c, d in e )"
+    parse_simple([
+        ('LEFT_PARENTHESIS', '(', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'b'),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'c'),
+        ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'c'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('NAME', 'd'),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'e'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+    ], [
+        {
+            "type": "generator_comprehension",
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [],
+            "result": {
+                "type": "name",
+                "value": "a",
+            },
+            "generators": [
+                {
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "type": "name",
+                        "value": "b",
+                    },
+                    "target": {
+                        "type": "name",
+                        "value": "c",
+                    },
+                    "ifs": [],
+                },
+                {
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "first_formatting": [],
+                        "second_formatting": [],
+                        "third_formatting": [],
+                        "fourth_formatting": [],
+                        "type": "tuple",
+                        "with_parenthesis": False,
+                        "value": [
+                            {"type": "name", "value": "c"},
+                            {
+                                "first_formatting": [],
+                                "type": "comma",
+                                "second_formatting": [{"type": "space", "value": " "}]
+                            },
+                            {"type": "name", "value": "d"},
+                        ],
+                    },
+                    "target": {
+                        "type": "name",
+                        "value": "e",
+                    },
+                    "ifs": [],
+                }
+            ]
+        }
+    ])
+
+def test_generator_comprehension_double_unpack2_paren():
+    "( a for b in c for (c, d) in e )"
+    parse_simple([
+        ('LEFT_PARENTHESIS', '(', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'b'),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'c'),
+        ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('LEFT_PARENTHESIS', '(', []),
+        ('NAME', 'c'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('NAME', 'd'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'e'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+    ], [
+        {
+            "type": "generator_comprehension",
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [],
+            "result": {
+                "type": "name",
+                "value": "a",
+            },
+            "generators": [
+                {
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "type": "name",
+                        "value": "b",
+                    },
+                    "target": {
+                        "type": "name",
+                        "value": "c",
+                    },
+                    "ifs": [],
+                },
+                {
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "first_formatting": [],
+                        "second_formatting": [],
+                        "third_formatting": [{"type": "space", "value": " "}],
+                        "fourth_formatting": [],
+                        "type": "tuple",
+                        "with_parenthesis": True,
+                        "value": [
+                            {"type": "name", "value": "c"},
+                            {
+                                "first_formatting": [],
+                                "type": "comma",
+                                "second_formatting": [{"type": "space", "value": " "}]
+                            },
+                            {"type": "name", "value": "d"},
+                        ],
+                    },
+                    "target": {
+                        "type": "name",
+                        "value": "e",
+                    },
+                    "ifs": [],
+                }
+            ]
+        }
+    ])
+
+def test_generator_comprehension_double_tuple_paren():
+    "( a for b in (c, d) for d in e )"
+    parse_simple([
+        ('LEFT_PARENTHESIS', '(', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'b'),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('LEFT_PARENTHESIS', '(', []),
+        ('NAME', 'c'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('NAME', 'd'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+        ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'd'),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'e'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+    ], [
+        {
+            "type": "generator_comprehension",
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [],
+            "result": {
+                "type": "name",
+                "value": "a",
+            },
+            "generators": [
+                {
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "type": "name",
+                        "value": "b",
+                    },
+                    "target": {
+                        "first_formatting": [],
+                        "second_formatting": [],
+                        "third_formatting": [{"type": "space", "value": " "}],
+                        "fourth_formatting": [],
+                        "type": "tuple",
+                        "with_parenthesis": True,
+                        "value": [
+                            {"type": "name", "value": "c"},
+                            {
+                                "first_formatting": [],
+                                "type": "comma",
+                                "second_formatting": [{"type": "space", "value": " "}]
+                            },
+                            {"type": "name", "value": "d"},
+                        ],
+                    },
+                    "ifs": [],
+                },
+                {
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "type": "name",
+                        "value": "d",
+                    },
+                    "target": {
+                        "type": "name",
+                        "value": "e",
+                    },
+                    "ifs": [],
+                }
             ]
         }
     ])
@@ -1051,6 +1442,474 @@ def test_list_comprehension_tuple_more():
                                 "value": "e",
                             }
                         ],
+                    },
+                    "ifs": [],
+                }
+            ]
+        }
+    ])
+
+def test_list_comprehension_double_unpack1():
+    "[ a for b, c in c for d in e ]"
+    parse_simple([
+        ('LEFT_SQUARE_BRACKET', '(', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'b'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('NAME', 'c'),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'c'),
+        ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'd'),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'e'),
+        ('RIGHT_SQUARE_BRACKET', ')', [('SPACE', ' ')]),
+    ], [
+        {
+            "type": "list_comprehension",
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [],
+            "result": {
+                "type": "name",
+                "value": "a",
+            },
+            "generators": [
+                {
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "first_formatting": [],
+                        "second_formatting": [],
+                        "third_formatting": [],
+                        "fourth_formatting": [],
+                        "type": "tuple",
+                        "with_parenthesis": False,
+                        "value": [
+                            {"type": "name", "value": "b"},
+                            {
+                                "first_formatting": [],
+                                "type": "comma",
+                                "second_formatting": [{"type": "space", "value": " "}]
+                            },
+                            {"type": "name", "value": "c"},
+                        ],
+                    },
+                    "target": {
+                        "type": "name",
+                        "value": "c",
+                    },
+                    "ifs": [],
+                },
+                {
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "type": "name",
+                        "value": "d",
+                    },
+                    "target": {
+                        "type": "name",
+                        "value": "e",
+                    },
+                    "ifs": [],
+                }
+            ]
+        }
+    ])
+
+def test_list_comprehension_double_unpack1_paren():
+    "[ a for b, c in c for d in e ]"
+    parse_simple([
+        ('LEFT_SQUARE_BRACKET', '(', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('LEFT_PARENTHESIS', '(', []),
+        ('NAME', 'b'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('NAME', 'c'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'c'),
+        ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'd'),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'e'),
+        ('RIGHT_SQUARE_BRACKET', ')', [('SPACE', ' ')]),
+    ], [
+        {
+            "type": "list_comprehension",
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [],
+            "result": {
+                "type": "name",
+                "value": "a",
+            },
+            "generators": [
+                {
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "first_formatting": [],
+                        "second_formatting": [],
+                        "third_formatting": [{"type": "space", "value": " "}],
+                        "fourth_formatting": [],
+                        "type": "tuple",
+                        "with_parenthesis": True,
+                        "value": [
+                            {"type": "name", "value": "b"},
+                            {
+                                "first_formatting": [],
+                                "type": "comma",
+                                "second_formatting": [{"type": "space", "value": " "}]
+                            },
+                            {"type": "name", "value": "c"},
+                        ],
+                    },
+                    "target": {
+                        "type": "name",
+                        "value": "c",
+                    },
+                    "ifs": [],
+                },
+                {
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "type": "name",
+                        "value": "d",
+                    },
+                    "target": {
+                        "type": "name",
+                        "value": "e",
+                    },
+                    "ifs": [],
+                }
+            ]
+        }
+    ])
+
+def test_list_comprehension_double_unpack2():
+    "[ a for b in c for c, d in e ]"
+    parse_simple([
+        ('LEFT_SQUARE_BRACKET', '(', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'b'),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'c'),
+        ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'c'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('NAME', 'd'),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'e'),
+        ('RIGHT_SQUARE_BRACKET', ')', [('SPACE', ' ')]),
+    ], [
+        {
+            "type": "list_comprehension",
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [],
+            "result": {
+                "type": "name",
+                "value": "a",
+            },
+            "generators": [
+                {
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "type": "name",
+                        "value": "b",
+                    },
+                    "target": {
+                        "type": "name",
+                        "value": "c",
+                    },
+                    "ifs": [],
+                },
+                {
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "first_formatting": [],
+                        "second_formatting": [],
+                        "third_formatting": [],
+                        "fourth_formatting": [],
+                        "type": "tuple",
+                        "with_parenthesis": False,
+                        "value": [
+                            {"type": "name", "value": "c"},
+                            {
+                                "first_formatting": [],
+                                "type": "comma",
+                                "second_formatting": [{"type": "space", "value": " "}]
+                            },
+                            {"type": "name", "value": "d"},
+                        ],
+                    },
+                    "target": {
+                        "type": "name",
+                        "value": "e",
+                    },
+                    "ifs": [],
+                }
+            ]
+        }
+    ])
+
+def test_list_comprehension_double_unpack2_paren():
+    "[ a for b in c for (c, d) in e ]"
+    parse_simple([
+        ('LEFT_SQUARE_BRACKET', '(', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'b'),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'c'),
+        ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('LEFT_PARENTHESIS', '(', []),
+        ('NAME', 'c'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('NAME', 'd'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'e'),
+        ('RIGHT_SQUARE_BRACKET', ')', [('SPACE', ' ')]),
+    ], [
+        {
+            "type": "list_comprehension",
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [],
+            "result": {
+                "type": "name",
+                "value": "a",
+            },
+            "generators": [
+                {
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "type": "name",
+                        "value": "b",
+                    },
+                    "target": {
+                        "type": "name",
+                        "value": "c",
+                    },
+                    "ifs": [],
+                },
+                {
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "first_formatting": [],
+                        "second_formatting": [],
+                        "third_formatting": [{"type": "space", "value": " "}],
+                        "fourth_formatting": [],
+                        "type": "tuple",
+                        "with_parenthesis": True,
+                        "value": [
+                            {"type": "name", "value": "c"},
+                            {
+                                "first_formatting": [],
+                                "type": "comma",
+                                "second_formatting": [{"type": "space", "value": " "}]
+                            },
+                            {"type": "name", "value": "d"},
+                        ],
+                    },
+                    "target": {
+                        "type": "name",
+                        "value": "e",
+                    },
+                    "ifs": [],
+                }
+            ]
+        }
+    ])
+
+def test_list_comprehension_double_tuple():
+    "( a for b in c, d for d in e )"
+    parse_simple([
+        ('LEFT_SQUARE_BRACKET', '(', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'b'),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'c'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('NAME', 'd'),
+        ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'd'),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'e'),
+        ('RIGHT_SQUARE_BRACKET', ')', [('SPACE', ' ')]),
+    ], [
+        {
+            "type": "list_comprehension",
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [],
+            "result": {
+                "type": "name",
+                "value": "a",
+            },
+            "generators": [
+                {
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "type": "name",
+                        "value": "b",
+                    },
+                    "target": {
+                        "first_formatting": [],
+                        "second_formatting": [],
+                        "third_formatting": [],
+                        "fourth_formatting": [],
+                        "type": "tuple",
+                        "with_parenthesis": False,
+                        "value": [
+                            {"type": "name", "value": "c"},
+                            {
+                                "first_formatting": [],
+                                "type": "comma",
+                                "second_formatting": [{"type": "space", "value": " "}]
+                            },
+                            {"type": "name", "value": "d"},
+                        ],
+                    },
+                    "ifs": [],
+                },
+                {
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "type": "name",
+                        "value": "d",
+                    },
+                    "target": {
+                        "type": "name",
+                        "value": "e",
+                    },
+                    "ifs": [],
+                }
+            ]
+        }
+    ])
+
+def test_list_comprehension_double_tuple_paren():
+    "( a for b in (c, d) for d in e )"
+    parse_simple([
+        ('LEFT_SQUARE_BRACKET', '(', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'b'),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('LEFT_PARENTHESIS', '(', []),
+        ('NAME', 'c'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('NAME', 'd'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+        ('FOR', 'for', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'd'),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'e'),
+        ('RIGHT_SQUARE_BRACKET', ')', [('SPACE', ' ')]),
+    ], [
+        {
+            "type": "list_comprehension",
+            "first_formatting": [],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [],
+            "result": {
+                "type": "name",
+                "value": "a",
+            },
+            "generators": [
+                {
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "type": "name",
+                        "value": "b",
+                    },
+                    "target": {
+                        "first_formatting": [],
+                        "second_formatting": [],
+                        "third_formatting": [{"type": "space", "value": " "}],
+                        "fourth_formatting": [],
+                        "type": "tuple",
+                        "with_parenthesis": True,
+                        "value": [
+                            {"type": "name", "value": "c"},
+                            {
+                                "first_formatting": [],
+                                "type": "comma",
+                                "second_formatting": [{"type": "space", "value": " "}]
+                            },
+                            {"type": "name", "value": "d"},
+                        ],
+                    },
+                    "ifs": [],
+                },
+                {
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "type": "name",
+                        "value": "d",
+                    },
+                    "target": {
+                        "type": "name",
+                        "value": "e",
                     },
                     "ifs": [],
                 }
