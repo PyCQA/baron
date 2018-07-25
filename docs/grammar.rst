@@ -156,6 +156,24 @@ Action:
     ADD new rule:
     parameter : STAR
 
+Yield From
+----------
+
+Python 3.3 or earlier
+
+PEP 380
+Baron: https://github.com/PyCQA/baron/pull/113 and some after work (spliting in 2 nodes, fixing testlist → test, ...)
+RedBaron: TODO
+
+.. image:: ./grammar_diff/yield_from.png
+
+Action:
+
+::
+
+    ADD new node yield_from
+    Implement grammar from the screenshot
+
 
 TODO
 ====
@@ -319,13 +337,6 @@ Python 3.3 or earlier
 I have no idea on why this is here but that's easy to change.
 
 .. image:: ./grammar_diff/class_inherit_is_arglist_now.png
-
-Yield From
-----------
-
-Python 3.3 or earlier
-
-.. image:: ./grammar_diff/yield_from.png
 
 Async Funcdef
 -------------
