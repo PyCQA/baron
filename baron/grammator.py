@@ -154,7 +154,7 @@ def generate_parse(print_function):
 
     @pg.production("async_maybe : ASYNC")
     @pg.production("async : ASYNC")
-    def async__(pack):
+    def async__2(pack):
         (async_, ) = pack
         return {
             "type": "async",
