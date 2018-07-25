@@ -171,5 +171,5 @@ class BaronLRParser(LRParser):
                     debug_output += "<---- here"
                     debug_output = "Error, got an unexpected token %s here:\n\n" % ltype + debug_output
                     debug_output += "\n\nThe token %s should be one of those: %s" % (ltype, ", ".join(sorted(self.lr_table.lr_action[current_state].keys())))
-                    debug_output += "\n\nIt is not normal that you see this error, it means that Baron has failed to parse valid Python code. It would be kind if you can extract the snippet of your code that makes Baron fail and open a bug here: https://github.com/PyCQA/baron/issues\n\nSorry for the inconvenience."
+                    debug_output += "\n\nBaron has failed to parse this input. If this is valid python code (and by that I mean that the python binary successfully parse this code without any syntax error) (also consider that python does not yet parse python 3 code integrally) it would be kind if you can extract a snippet of your code that make Baron fails and open a bug here: https://github.com/PyCQA/baron/issues\n\nSorry for the inconvenience."
                     raise ParsingError(debug_output)
