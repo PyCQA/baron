@@ -24,8 +24,6 @@ def test_yield():
         ('YIELD', 'yield'),
     ], [{
         "type": "yield",
-        "first_formatting": [],
-        "from": None,
         "value": None,
         "formatting": [],
     }])
@@ -38,9 +36,8 @@ def test_yield_from():
         ('FROM', 'from', [], [('SPACE', ' ')]),
         ('NAME', 'a'),
     ], [{
-        "type": "yield",
+        "type": "yield_from",
         "first_formatting": [{"type": "space", "value": " "}],
-        "from": True,
         "value": {"type": "name", "value": 'a',},
         "formatting": [{"type": "space", "value": " "}]
     ,}])

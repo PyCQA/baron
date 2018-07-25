@@ -83,8 +83,6 @@ def include_primivites(pg, print_function):
         (yield_,) = pack
         return {
             "type": yield_.name.lower(),
-            "first_formatting": [],
-            "from": None,
             "value": None,
             "formatting": yield_.hidden_tokens_after,
         }
@@ -284,9 +282,8 @@ def include_primivites(pg, print_function):
     def yield_from_expr(pack):
         (yield_, from_, test) = pack
         return {
-            "type": yield_.name.lower(),
+            "type": "yield_from",
             "first_formatting": from_.hidden_tokens_after,
-            "from": True,
             "value": test,
             "formatting": yield_.hidden_tokens_after,
         }
