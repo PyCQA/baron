@@ -325,6 +325,10 @@ nodes_rendering_order = {
             ("formatting", "formatting",        True),
             ("key",        "value",             True),
         ],
+        "kwargs_only_marker": [
+            ("constant",   "*",                 True),
+            ("formatting", "formatting",        True),
+        ],
         "dict_argument": [
             ("constant",   "**",                True),
             ("formatting", "formatting",        True),

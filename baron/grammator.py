@@ -537,6 +537,15 @@ def generate_parse(print_function):
             }
         }]
 
+    # TODO refactor those 2 to standardize with argument_star and argument_star_star
+    @pg.production("parameter : STAR")
+    def parameter_star_only(pack):
+        (star, ) = pack
+        return [{
+            "type": "kwargs_only_marker",
+            "formatting": star.hidden_tokens_after,
+        }]
+
     @pg.production("parameter : DOUBLE_STAR NAME")
     def parameter_star_star(pack):
         (double_star, name,) = pack

@@ -538,3 +538,8 @@ def test_single_object():
 
 def test_crash_issue_85():
     check_dumps('d*e-1\n')
+
+
+def test_keyword_only_marker():
+    check_dumps("def foo(a, *, b, c):    pass\n")
+    check_dumps("def foo(a, *  , b, c):    pass\n")
