@@ -139,6 +139,24 @@ Action:
     ADD new rule:
     nonlocal_stmt: 'nonlocal' NAME (',' NAME)*
 
+
+Kwargs only arguments
+---------------------
+
+Python 3.0
+
+PEP: https://www.python.org/dev/peps/pep-3102/
+Baron: https://github.com/PyCQA/baron/pull/108
+RedBaron: TODO
+
+Action:
+
+::
+
+    ADD new rule:
+    parameter : STAR
+
+
 TODO
 ====
 
@@ -350,6 +368,8 @@ Kwargs expressions
 ------------------
 
 Python 3.5
+
+Partially done with kwargs only arguments.
 
 Before:
 
