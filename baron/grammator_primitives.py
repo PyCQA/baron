@@ -278,7 +278,7 @@ def include_primivites(pg, print_function):
         }
 
 
-    @pg.production("yield_expr : YIELD FROM testlist")
+    @pg.production("yield_expr : YIELD FROM test")
     def yield_from_expr(pack):
         (yield_, from_, test) = pack
         return {
