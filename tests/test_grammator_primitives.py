@@ -22,7 +22,28 @@ def test_yield():
     "yield"
     parse_simple([
         ('YIELD', 'yield'),
-    ], [{"type": "yield", "value": None, "formatting": [],}])
+    ], [{
+        "type": "yield",
+        "first_formatting": [],
+        "from": None,
+        "value": None,
+        "formatting": [],
+    }])
+
+
+def test_yield_from():
+    "yield from a"
+    parse_simple([
+        ('YIELD', 'yield', [], [('SPACE', ' ')]),
+        ('FROM', 'from', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+    ], [{
+        "type": "yield",
+        "first_formatting": [{"type": "space", "value": " "}],
+        "from": True,
+        "value": {"type": "name", "value": 'a',},
+        "formatting": [{"type": "space", "value": " "}]
+    ,}])
 
 
 def test_yield_a():
