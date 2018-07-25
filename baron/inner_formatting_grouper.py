@@ -53,6 +53,8 @@ GROUP_ON = (
     "DOUBLE_SLASH",
     "PLUS",
     "MINUS",
+    "ASYNC",
+    "AWAIT",
     "LEFT_SHIFT",
     "RIGHT_SHIFT",
     "AMPER",

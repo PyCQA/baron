@@ -162,6 +162,7 @@ def include_operators(pg):
             "second_formatting": operator.hidden_tokens_after
         }
 
+
     @pg.production("factor : PLUS factor")
     @pg.production("factor : MINUS factor")
     @pg.production("factor : TILDE factor")
@@ -197,6 +198,18 @@ def include_operators(pg):
             "type": "atomtrailers",
             "value": atomtrailers
         }
+
+    @pg.production("power : AWAIT atomtrailers")
+    def power_atomtrailers_await(pack):
+        (await_, atomtrailers,) = pack
+
+        return [{
+            "type": "await",
+            "formatting": await_.hidden_tokens_after
+        }, {
+            "type": "atomtrailers",
+            "value": atomtrailers
+        }]
 
     @pg.production("atomtrailers : atom")
     def atomtrailers_atom(pack):

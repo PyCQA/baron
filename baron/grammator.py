@@ -141,9 +141,36 @@ def generate_parse(print_function):
     @pg.production("compound_stmt : classdef")
     @pg.production("compound_stmt : with_stmt")
     @pg.production("compound_stmt : decorated")
+    @pg.production("compound_stmt : async_stmt")
     def small_and_compound_stmt(pack):
         (statement,) = pack
         return statement
+
+
+    @pg.production("async_maybe : ")
+    def async__(pack):
+        return {}
+
+
+    @pg.production("async_maybe : ASYNC")
+    @pg.production("async : ASYNC")
+    def async__(pack):
+        (async_, ) = pack
+        return {
+            "type": "async",
+            "formatting": async_.hidden_tokens_after
+
+        }
+
+
+    @pg.production("async_stmt : async with_stmt")
+    @pg.production("async_stmt : async for_stmt")
+    @pg.production("async_stmt : async funcdef")
+    def async_stmt(pack):
+        (async_, statement,) = pack
+        statement[0]["async"] = async_
+        return statement
+
 
     if not print_function:
         @pg.production("small_stmt : print_stmt")
@@ -180,6 +207,7 @@ def generate_parse(print_function):
         (with_, with_items, colon, suite) = pack
         return [{
             "type": "with",
+            "async": {},
             "value": suite,
             "first_formatting": with_.hidden_tokens_after,
             "second_formatting": colon.hidden_tokens_before,
@@ -365,12 +393,12 @@ def generate_parse(print_function):
             "formatting": at.hidden_tokens_after,
         }] + endl
 
-
-    @pg.production("funcdef : DEF NAME LEFT_PARENTHESIS parameters RIGHT_PARENTHESIS COLON suite")
+    @pg.production("funcdef : async_maybe DEF NAME LEFT_PARENTHESIS parameters RIGHT_PARENTHESIS COLON suite")
     def function_definition(pack):
-        (def_, name, left_parenthesis, parameters, right_parenthesis, colon, suite) = pack
+        (async_maybe, def_, name, left_parenthesis, parameters, right_parenthesis, colon, suite) = pack
         return [{
             "type": "def",
+            "async": async_maybe,
             "decorators": [],
             "name": name.value,
             "first_formatting": def_.hidden_tokens_after,

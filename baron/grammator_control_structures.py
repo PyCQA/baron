@@ -163,6 +163,7 @@ def include_control_structures(pg):
         (for_, exprlist, in_, testlist, colon, suite) = pack
         return [{
                  "type": "for",
+                 "async": {},
                  "value": suite,
                  "iterator": exprlist,
                  "target": testlist,
