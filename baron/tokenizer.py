@@ -95,6 +95,7 @@ TOKENS = [(re.compile('^' + x[0] + '$'), x[1]) for x in TOKENS]
 
 def tokenize(sequence, print_function=False):
     return list(tokenize_generator(sequence, print_function))
+    return list(unkeywordize_async_names(tokenize_generator(sequence, print_function)))
 
 
 def tokenize_current_keywords(print_function=False):
@@ -119,3 +120,40 @@ def tokenize_generator(sequence, print_function=False):
             raise UnknowItem("Can't find a matching token for this item: '%s'" % item)
     yield ('ENDMARKER', '')
     yield
+
+
+def unkeywordize_async_names(sequence):
+    try:
+        while True:
+            next_item = next(sequence)
+            if next_item is None:
+                continue
+            name, item = next_item
+
+            # ASYNC is only a keyword before def, for, with
+            # in other cases it's a NAME, we try to do this difference here
+            # if we don't match the patterns "ASYNC SPACE {FOR, WITH, DEF}" async is a NAME
+            if name == "ASYNC":
+                # XXX handle StopIteration case here
+                maybe_space_name, maybe_space_item = next(sequence)
+
+                if maybe_space_name != "SPACE":
+                    yield ("NAME", item)
+                    yield (maybe_space_name, maybe_space_item)
+                    continue
+
+                maybe_async_compat_name, maybe_async_compat_item = next(sequence)
+                if maybe_async_compat_name in {"FOR", "WITH", "DEF"}:
+                    yield (name, item)
+                    yield (maybe_space_name, maybe_space_item)
+                    yield (maybe_async_compat_name, maybe_async_compat_item)
+                    continue
+
+                yield ("NAME", item)
+                yield (maybe_space_name, maybe_space_item)
+                yield (maybe_async_compat_name, maybe_async_compat_item)
+
+            else:
+                yield (name, item)
+    except StopIteration:
+        pass
