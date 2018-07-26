@@ -199,13 +199,16 @@ def include_operators(pg):
             "value": atomtrailers
         }
 
-    @pg.production("power : AWAIT atomtrailers")
+    @pg.production("power : NAME SPACE atomtrailers")
     def power_atomtrailers_await(pack):
-        (await_, atomtrailers,) = pack
+        (await_, space, atomtrailers,) = pack
+
+        # XXX real syntax error
+        assert await_.value == "await", await_
 
         return [{
             "type": "await",
-            "formatting": await_.hidden_tokens_after
+            "formatting": [{'type': 'space', 'value': space.value}]
         }, {
             "type": "atomtrailers",
             "value": atomtrailers

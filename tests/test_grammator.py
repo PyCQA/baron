@@ -447,7 +447,8 @@ def test_funcdef_stmt_async():
         pass
     """
     parse_multi([
-        ('ASYNC', 'async', [], [('SPACE', ' ')]),
+        ('NAME', 'async', [], []),
+        ('SPACE', ' '),
         ('DEF', 'def', [], [('SPACE', ' ')]),
         ('NAME', 'a'),
         ('LEFT_PARENTHESIS', '(', [('SPACE', ' ')]),

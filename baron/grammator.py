@@ -152,14 +152,13 @@ def generate_parse(print_function):
         return {}
 
 
-    @pg.production("async_maybe : ASYNC")
-    @pg.production("async : ASYNC")
+    @pg.production("async_maybe : NAME SPACE")
+    @pg.production("async : NAME SPACE")
     def async__2(pack):
-        (async_, ) = pack
+        (async_, space) = pack
         return {
             "type": "async",
-            "formatting": async_.hidden_tokens_after
-
+            "formatting": [{'type': 'space', 'value': space.value}],
         }
 
 

@@ -8709,7 +8709,8 @@ def test_expr_comma_list_3_items():
 def test_await_a():
     "await a"
     parse_simple([
-        ('AWAIT', 'await', [], [('SPACE', ' ')]),
+        ('NAME', 'await', [], []),
+        ('SPACE', ' '),
         ('NAME', 'a'),
     ], [[
         {'formatting': [{'type': 'space', 'value': ' '}], 'type': 'await'},

@@ -156,20 +156,12 @@ class BaronLRParser(LRParser):
                     n = symstack[-1]
                     return n
             else:
-                # TODO: actual error handling here
-                if self.error_handler is not None:
-                    if state is None:
-                        self.error_handler(lookahead)
-                    else:
-                        self.error_handler(state, lookahead)
-                    raise AssertionError("For now, error_handler must raise.")
-                else:
-                    debug_output = parsed_file_content.split("\n")
-                    debug_output = list(zip(range(1, len(debug_output) + 1), debug_output))
-                    debug_output = debug_output[-8:]
-                    debug_output = "\n".join(["%4s %s" % (x[0], x[1]) for x in debug_output])
-                    debug_output += "<---- here"
-                    debug_output = "Error, got an unexpected token %s here:\n\n" % ltype + debug_output
-                    debug_output += "\n\nThe token %s should be one of those: %s" % (ltype, ", ".join(sorted(self.lr_table.lr_action[current_state].keys())))
-                    debug_output += "\n\nBaron has failed to parse this input. If this is valid python code (and by that I mean that the python binary successfully parse this code without any syntax error) (also consider that python does not yet parse python 3 code integrally) it would be kind if you can extract a snippet of your code that make Baron fails and open a bug here: https://github.com/PyCQA/baron/issues\n\nSorry for the inconvenience."
-                    raise ParsingError(debug_output)
+                debug_output = parsed_file_content.split("\n")
+                debug_output = list(zip(range(1, len(debug_output) + 1), debug_output))
+                debug_output = debug_output[-8:]
+                debug_output = "\n".join(["%4s %s" % (x[0], x[1]) for x in debug_output])
+                debug_output += "<---- here"
+                debug_output = "Error, got an unexpected token %s here:\n\n" % ltype + debug_output
+                debug_output += "\n\nThe token %s should be one of those: %s" % (ltype, ", ".join(sorted(self.lr_table.lr_action[current_state].keys())))
+                debug_output += "\n\nBaron has failed to parse this input. If this is valid python code (and by that I mean that the python binary successfully parse this code without any syntax error) (also consider that python does not yet parse python 3 code integrally) it would be kind if you can extract a snippet of your code that make Baron fails and open a bug here: https://github.com/PyCQA/baron/issues\n\nSorry for the inconvenience."
+                raise ParsingError(debug_output)
