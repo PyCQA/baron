@@ -165,7 +165,6 @@ def generate_parse(print_function):
 
     @pg.production("async_stmt : async with_stmt")
     @pg.production("async_stmt : async for_stmt")
-    @pg.production("async_stmt : async funcdef")
     def async_stmt(pack):
         (async_, statement,) = pack
         statement[0]["async"] = async_
