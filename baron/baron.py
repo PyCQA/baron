@@ -23,7 +23,7 @@ def _parse(tokens, print_function):
             parser = parse_tokens if print_function else parse_tokens_print_function
             return parser(tokens)
     except ParsingError as e:
-        raise e
+        raise
     except Exception as e:
         import sys
         import traceback
