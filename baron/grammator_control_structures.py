@@ -182,6 +182,8 @@ def include_control_structures(pg):
         return [{
                  "type": "for",
                  "value": suite,
+                 "async": False,
+                 "async_formatting": [],
                  "iterator": exprlist,
                  "target": testlist,
                  "else": else_stmt,
