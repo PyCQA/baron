@@ -208,10 +208,11 @@ def include_operators(pg):
 
         return [{
             "type": "await",
-            "formatting": [{'type': 'space', 'value': space.value}]
-        }, {
-            "type": "atomtrailers",
-            "value": atomtrailers
+            "formatting": [{'type': 'space', 'value': space.value}],
+            "value": {
+                "type": "atomtrailers",
+                "value": atomtrailers,
+            }
         }]
 
     @pg.production("atomtrailers : atom")

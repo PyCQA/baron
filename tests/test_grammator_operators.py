@@ -8713,8 +8713,11 @@ def test_await_a():
         ('SPACE', ' '),
         ('NAME', 'a'),
     ], [[
-        {'formatting': [{'type': 'space', 'value': ' '}], 'type': 'await'},
-        {'type': 'atomtrailers', 'value': [{'type': 'name', 'value': 'a'}]},
+        {
+         'formatting': [{'type': 'space', 'value': ' '}],
+         'type': 'await',
+         "value": {'type': 'atomtrailers', 'value': [{'type': 'name', 'value': 'a'}]},
+        },
     ]])
 
 

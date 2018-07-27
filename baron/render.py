@@ -297,6 +297,7 @@ nodes_rendering_order = {
         "await": [
             ("constant",    "await",        True),
             ("formatting",  "formatting",   True),
+            ("key",         "value",        True),
 
         ],
         "def": [
