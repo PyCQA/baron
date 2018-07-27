@@ -756,7 +756,8 @@ def test_for_stmt_indent():
     ], [
         {
             "type": "for",
-            "async": {},
+            "async": False,
+            "async_formatting": [],
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [{"type": "space", "value": " "}],

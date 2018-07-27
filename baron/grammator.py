@@ -149,7 +149,10 @@ def generate_parse(print_function):
 
     @pg.production("async_maybe : ")
     def async__(pack):
-        return {}
+        return {
+            "async": False,
+            "formatting": [],
+        }
 
 
     @pg.production("async_maybe : NAME SPACE")
@@ -157,7 +160,7 @@ def generate_parse(print_function):
     def async__2(pack):
         (async_, space) = pack
         return {
-            "type": "async",
+            "async": True,
             "formatting": [{'type': 'space', 'value': space.value}],
         }
 
@@ -166,7 +169,8 @@ def generate_parse(print_function):
     @pg.production("async_stmt : async for_stmt")
     def async_stmt(pack):
         (async_, statement,) = pack
-        statement[0]["async"] = async_
+        statement[0]["async"] = True
+        statement[0]["async_formatting"] = async_["formatting"]
         return statement
 
 
@@ -205,7 +209,8 @@ def generate_parse(print_function):
         (with_, with_items, colon, suite) = pack
         return [{
             "type": "with",
-            "async": {},
+            "async": False,
+            "async_formatting": [],
             "value": suite,
             "first_formatting": with_.hidden_tokens_after,
             "second_formatting": colon.hidden_tokens_before,
@@ -396,7 +401,8 @@ def generate_parse(print_function):
         (async_maybe, def_, name, left_parenthesis, parameters, right_parenthesis, colon, suite) = pack
         return [{
             "type": "def",
-            "async": async_maybe,
+            "async": async_maybe["async"],
+            "async_formatting": async_maybe.get("formatting", []),
             "decorators": [],
             "name": name.value,
             "first_formatting": def_.hidden_tokens_after,

@@ -301,8 +301,9 @@ nodes_rendering_order = {
 
         ],
         "def": [
-            ("key",        "async",             "async"),
             ("list",       "decorators",        True),
+            ("constant",   "async",             "async"),
+            ("formatting", "async_formatting",  "async"),
             ("constant",   "def",               True),
             ("formatting", "first_formatting",  True),
             ("string",     "name",              True),
