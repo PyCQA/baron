@@ -162,93 +162,93 @@ def include_control_structures(pg):
     def for_stmt(pack,):
         (for_, exprlist, in_, testlist, colon, suite) = pack
         return [{
-                 "type": "for",
-                 "async": False,
-                 "async_formatting": [],
-                 "value": suite,
-                 "iterator": exprlist,
-                 "target": testlist,
-                 "else": {},
-                 "first_formatting": for_.hidden_tokens_after,
-                 "second_formatting": in_.hidden_tokens_before,
-                 "third_formatting": in_.hidden_tokens_after,
-                 "fourth_formatting": colon.hidden_tokens_before,
-                 "fifth_formatting": colon.hidden_tokens_after,
-               }]
+            "type": "for",
+            "async": False,
+            "async_formatting": [],
+            "value": suite,
+            "iterator": exprlist,
+            "target": testlist,
+            "else": {},
+            "first_formatting": for_.hidden_tokens_after,
+            "second_formatting": in_.hidden_tokens_before,
+            "third_formatting": in_.hidden_tokens_after,
+            "fourth_formatting": colon.hidden_tokens_before,
+            "fifth_formatting": colon.hidden_tokens_after,
+        }]
 
     @pg.production("for_stmt : FOR exprlist IN testlist COLON suite else_stmt")
     def for_else_stmt(pack,):
         (for_, exprlist, in_, testlist, colon, suite, else_stmt) = pack
         return [{
-                 "type": "for",
-                 "value": suite,
-                 "async": False,
-                 "async_formatting": [],
-                 "iterator": exprlist,
-                 "target": testlist,
-                 "else": else_stmt,
-                 "first_formatting": for_.hidden_tokens_after,
-                 "second_formatting": in_.hidden_tokens_before,
-                 "third_formatting": in_.hidden_tokens_after,
-                 "fourth_formatting": colon.hidden_tokens_before,
-                 "fifth_formatting": colon.hidden_tokens_after,
-               }]
+            "type": "for",
+            "value": suite,
+            "async": False,
+            "async_formatting": [],
+            "iterator": exprlist,
+            "target": testlist,
+            "else": else_stmt,
+            "first_formatting": for_.hidden_tokens_after,
+            "second_formatting": in_.hidden_tokens_before,
+            "third_formatting": in_.hidden_tokens_after,
+            "fourth_formatting": colon.hidden_tokens_before,
+            "fifth_formatting": colon.hidden_tokens_after,
+        }]
 
     @pg.production("while_stmt : WHILE test COLON suite")
     def while_stmt(pack):
         (while_, test, colon, suite) = pack
         return [{
-                 "type": "while",
-                 "value": suite,
-                 "test": test,
-                 "else": {},
-                 "first_formatting": while_.hidden_tokens_after,
-                 "second_formatting": colon.hidden_tokens_before,
-                 "third_formatting": colon.hidden_tokens_after,
-               }]
+            "type": "while",
+            "value": suite,
+            "test": test,
+            "else": {},
+            "first_formatting": while_.hidden_tokens_after,
+            "second_formatting": colon.hidden_tokens_before,
+            "third_formatting": colon.hidden_tokens_after,
+        }]
 
     @pg.production("while_stmt : WHILE test COLON suite else_stmt")
     def while_stmt_else(pack):
         (while_, test, colon, suite, else_stmt) = pack
         return [{
-                 "type": "while",
-                 "value": suite,
-                 "test": test,
-                 "else": else_stmt,
-                 "first_formatting": while_.hidden_tokens_after,
-                 "second_formatting": colon.hidden_tokens_before,
-                 "third_formatting": colon.hidden_tokens_after,
-               }]
+            "type": "while",
+            "value": suite,
+            "test": test,
+            "else": else_stmt,
+            "first_formatting": while_.hidden_tokens_after,
+            "second_formatting": colon.hidden_tokens_before,
+            "third_formatting": colon.hidden_tokens_after,
+        }]
 
     @pg.production("if_stmt : IF test COLON suite")
     def if_stmt(pack):
         (if_, test, colon, suite) = pack
         return [{
-                "type": "ifelseblock",
-                "value": [{
-                           "type": "if",
-                           "value": suite,
-                           "test": test,
-                           "first_formatting": if_.hidden_tokens_after,
-                           "second_formatting": colon.hidden_tokens_before,
-                           "third_formatting": colon.hidden_tokens_after,
-                          }]
-               }]
+            "type": "ifelseblock",
+            "value": [{
+                "type": "if",
+                "value": suite,
+                "test": test,
+                "first_formatting": if_.hidden_tokens_after,
+                "second_formatting": colon.hidden_tokens_before,
+                "third_formatting": colon.hidden_tokens_after,
+            }]
+        }]
 
     @pg.production("if_stmt : IF test COLON suite elifs")
     def if_elif_stmt(pack):
         (if_, test, colon, suite, elifs) = pack
         return [{
-                "type": "ifelseblock",
-                "value": [{
-                           "type": "if",
-                           "value": suite,
-                           "test": test,
-                           "first_formatting": if_.hidden_tokens_after,
-                           "second_formatting": colon.hidden_tokens_before,
-                           "third_formatting": colon.hidden_tokens_after,
-                          }] + elifs
-               }]
+            "type": "ifelseblock",
+            "value": [{
+                "type": "if",
+                "value": suite,
+                "test": test,
+                "first_formatting": if_.hidden_tokens_after,
+                "second_formatting": colon.hidden_tokens_before,
+                "third_formatting": colon.hidden_tokens_after,
+            }] + elifs
+        }]
 
     @pg.production("elifs : elifs ELIF test COLON suite")
     def elifs_elif(pack,):
@@ -278,28 +278,28 @@ def include_control_structures(pg):
     def if_else_stmt(pack):
         (if_, test, colon, suite, else_stmt) = pack
         return [{
-                "type": "ifelseblock",
-                "value": [{
-                           "type": "if",
-                           "value": suite,
-                           "test": test,
-                           "first_formatting": if_.hidden_tokens_after,
-                           "second_formatting": colon.hidden_tokens_before,
-                           "third_formatting": colon.hidden_tokens_after,
-                          }, else_stmt]
-               }]
+            "type": "ifelseblock",
+            "value": [{
+                "type": "if",
+                "value": suite,
+                "test": test,
+                "first_formatting": if_.hidden_tokens_after,
+                "second_formatting": colon.hidden_tokens_before,
+                "third_formatting": colon.hidden_tokens_after,
+            }, else_stmt]
+        }]
 
     @pg.production("if_stmt : IF test COLON suite elifs else_stmt")
     def if_elif_else_stmt(pack):
         (if_, test, colon, suite, elifs, else_stmt) = pack
         return [{
-                "type": "ifelseblock",
-                "value": [{
-                           "type": "if",
-                           "value": suite,
-                           "test": test,
-                           "first_formatting": if_.hidden_tokens_after,
-                           "second_formatting": colon.hidden_tokens_before,
-                           "third_formatting": colon.hidden_tokens_after,
-                          }] + elifs + [else_stmt]
-               }]
+            "type": "ifelseblock",
+            "value": [{
+                "type": "if",
+                "value": suite,
+                "test": test,
+                "first_formatting": if_.hidden_tokens_after,
+                "second_formatting": colon.hidden_tokens_before,
+                "third_formatting": colon.hidden_tokens_after,
+            }] + elifs + [else_stmt]
+        }]
