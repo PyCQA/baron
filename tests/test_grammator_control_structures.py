@@ -877,6 +877,95 @@ def test_for_else_stmt_indent():
     ], [
         {
             "type": "for",
+            "async": False,
+            "async_formatting": [],
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [],
+            "fifth_formatting": [],
+            "else": {
+                "type": "else",
+                "first_formatting": [],
+                "second_formatting": [],
+                "value": [
+                    {
+                        "type": "endl",
+                        "value": "\n",
+                        "formatting": [],
+                        "indent": "    "
+                    },
+                    {
+                        "type": "pass",
+                    },
+                    {
+                        "indent": "",
+                        "formatting": [],
+                        "type": "endl",
+                        "value": "\n",
+                    }
+                ]
+            },
+            "iterator": {
+                "type": "name",
+                "value": "i",
+            },
+            "target": {
+                "type": "name",
+                "value": "b",
+            },
+            "value": [
+                {
+                    "type": "endl",
+                    "formatting": [],
+                    "value": "\n",
+                    "indent": "    "
+                },
+                {
+                "type": "pass",
+                },
+                {
+                    "indent": "",
+                    "formatting": [],
+                    "type": "endl",
+                    "value": "\n"
+                }
+            ],
+        }
+    ])
+
+def test_async_for_else_stmt_indent():
+    """
+    async for i in b:
+        pass
+    else:
+        pass
+    """
+    parse_multi([
+        ('NAME', 'async', [], []),
+        ('SPACE', ' '),
+        ('FOR', 'for', [], [('SPACE', ' ')]),
+        ('NAME', 'i'),
+        ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'b'),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+        ('ELSE', 'else'),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+    ], [
+        {
+            "type": "for",
+            "async": True,
+            "async_formatting": [{"type": "space", "value": " "}],
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [{"type": "space", "value": " "}],
