@@ -1178,6 +1178,174 @@ def test_with_a_as_b_c():
     ])
 
 
+def test_async_with_a():
+    """
+    async with a: pass
+    """
+    parse_multi([
+        ('NAME', 'async', [], []),
+        ('SPACE', ' '),
+        ('WITH', 'with', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('COLON', ':', [], [('SPACE', ' ')]),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+    ], [
+        {
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "type": "with",
+            "async": True,
+            "async_formatting": [{"type": "space", "value": " "}],
+            "contexts": [
+                {
+                    "type": "with_context_item",
+                    "value": {
+                        "type": "name",
+                        "value": "a",
+                    },
+                    "first_formatting": [],
+                    "second_formatting": [],
+                    "as": {},
+                }
+            ],
+            "value": [
+                {
+                    "type": "pass",
+                },
+                {
+                    "formatting": [],
+                    "indent": "",
+                    "type": "endl",
+                    "value": "\n",
+                }
+            ],
+        }
+    ])
+
+
+def test_async_with_a_as_b():
+    """
+    async with a as b: pass
+    """
+    parse_multi([
+        ('NAME', 'async', [], []),
+        ('SPACE', ' '),
+        ('WITH', 'with', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('AS', 'as', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'b'),
+        ('COLON', ':', [], [('SPACE', ' ')]),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+    ], [
+        {
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "type": "with",
+            "async": True,
+            "async_formatting": [{"type": "space", "value": " "}],
+            "contexts": [
+                {
+                    "type": "with_context_item",
+                    "value": {
+                        "type": "name",
+                        "value": "a",
+                    },
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "as": {
+                        "type": "name",
+                        "value": "b",
+                    },
+                }
+            ],
+            "value": [
+                {
+                    "type": "pass",
+                },
+                {
+                    "formatting": [],
+                    "indent": "",
+                    "type": "endl",
+                    "value": "\n",
+                }
+            ],
+        }
+    ])
+
+
+def test_async_with_a_as_b_c():
+    """
+    async with a as b, c: pass
+    """
+    parse_multi([
+        ('NAME', 'async', [], []),
+        ('SPACE', ' '),
+        ('WITH', 'with', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('AS', 'as', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'b'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('NAME', 'c'),
+        ('COLON', ':', [], [('SPACE', ' ')]),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+    ], [
+        {
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "type": "with",
+            "async": True,
+            "async_formatting": [{"type": "space", "value": " "}],
+            "contexts": [
+                {
+                    "type": "with_context_item",
+                    "value": {
+                        "type": "name",
+                        "value": "a",
+                    },
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "as": {
+                        "type": "name",
+                        "value": "b",
+                    },
+                },
+                {
+                    "type": "comma",
+                    "first_formatting": [],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                },
+                {
+                    "type": "with_context_item",
+                    "value": {
+                        "type": "name",
+                        "value": "c",
+                    },
+                    "first_formatting": [],
+                    "second_formatting": [],
+                    "as": {},
+                }
+            ],
+            "value": [
+                {
+                    "type": "pass",
+                },
+                {
+                    "formatting": [],
+                    "indent": "",
+                    "type": "endl",
+                    "value": "\n",
+                }
+            ],
+        }
+    ])
+
+
 def test_decorator():
     """
     @a
