@@ -175,6 +175,30 @@ Action:
     Implement grammar from the screenshot
 
 
+Await atom
+----------
+
+Python 3.5
+
+PEP 492
+Baron: https://github.com/PyCQA/baron/pull/114
+RedBaron: TODO
+
+Before:
+
+::
+
+    power: atom trailer* ['**' factor]
+
+After:
+
+::
+
+    power: atom_expr ['**' factor]
+    atom_expr: [AWAIT] atom trailer*
+
+**Await is a NAME here, not a keyword** (because you can do `await = 42`.)
+
 TODO
 ====
 
@@ -356,24 +380,6 @@ After:
     decorated: decorators (classdef | funcdef | async_funcdef)
     async_funcdef: ASYNC funcdef
 
-
-Await atom
-----------
-
-Python 3.5
-
-Before:
-
-::
-
-    power: atom trailer* ['**' factor]
-
-After:
-
-::
-
-    power: atom_expr ['**' factor]
-    atom_expr: [AWAIT] atom trailer*
 
 Kwargs expressions
 ------------------
