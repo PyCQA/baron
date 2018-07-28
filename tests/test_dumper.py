@@ -276,6 +276,14 @@ def test_with_as():
     check_dumps("with a as b : \n    pass\n")
 
 
+def test_async_with():
+    check_dumps("async with a : \n    pass\n")
+
+
+def test_async_with_as():
+    check_dumps("async with a as b : \n    pass\n")
+
+
 def test_dict_empty():
     check_dumps("{   }")
 

@@ -506,7 +506,8 @@ nodes_rendering_order = {
         ],
 
         "with": [
-            ("key",        "async",             "async"),
+            ("constant",   "async",             "async"),
+            ("formatting", "async_formatting",  "async"),
             ("constant",   "with",              True),
             ("formatting", "first_formatting",  True),
             ("list",       "contexts",          True),
