@@ -1,5 +1,7 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
+import pytest
+from baron.parser import ParsingError
 from .test_utils import parse_simple, parse_multi
 
 
@@ -493,6 +495,28 @@ def test_funcdef_stmt_async():
             ],
         }
     ])
+
+
+def test_funcdef_stmt_async_bad_keyword():
+    """
+    async def a():
+        pass
+    """
+    with pytest.raises(ParsingError):
+        parse_multi([
+            ('NAME', 'not_async', [], []),
+            ('SPACE', ' '),
+            ('DEF', 'def', [], [('SPACE', ' ')]),
+            ('NAME', 'a'),
+            ('LEFT_PARENTHESIS', '(', [('SPACE', ' ')]),
+            ('RIGHT_PARENTHESIS', ')'),
+            ('COLON', ':', [], [('SPACE', ' ')]),
+            ('ENDL', '\n', [], [('SPACE', '    ')]),
+            ('INDENT', ''),
+            ('PASS', 'pass'),
+            ('ENDL', '\n'),
+            ('DEDENT', ''),
+        ], [])
 
 
 def test_funcdef_stmt_one_parameter_indent():
@@ -1344,6 +1368,60 @@ def test_async_with_a_as_b_c():
             ],
         }
     ])
+
+
+def test_async_with_a_bad_keyword():
+    """
+    async with a: pass
+    """
+    with pytest.raises(ParsingError):
+        parse_multi([
+            ('NAME', 'not_async', [], []),
+            ('SPACE', ' '),
+            ('WITH', 'with', [], [('SPACE', ' ')]),
+            ('NAME', 'a'),
+            ('COLON', ':', [], [('SPACE', ' ')]),
+            ('PASS', 'pass'),
+            ('ENDL', '\n'),
+        ], [])
+
+
+def test_async_with_a_as_b_bad_keyword():
+    """
+    async with a as b: pass
+    """
+    with pytest.raises(ParsingError):
+        parse_multi([
+            ('NAME', 'not_async', [], []),
+            ('SPACE', ' '),
+            ('WITH', 'with', [], [('SPACE', ' ')]),
+            ('NAME', 'a'),
+            ('AS', 'as', [('SPACE', ' ')], [('SPACE', ' ')]),
+            ('NAME', 'b'),
+            ('COLON', ':', [], [('SPACE', ' ')]),
+            ('PASS', 'pass'),
+            ('ENDL', '\n'),
+        ], [])
+
+
+def test_async_with_a_as_b_c_bad_keyword():
+    """
+    async with a as b, c: pass
+    """
+    with pytest.raises(ParsingError):
+        parse_multi([
+            ('NAME', 'not_async', [], []),
+            ('SPACE', ' '),
+            ('WITH', 'with', [], [('SPACE', ' ')]),
+            ('NAME', 'a'),
+            ('AS', 'as', [('SPACE', ' ')], [('SPACE', ' ')]),
+            ('NAME', 'b'),
+            ('COMMA', ',', [], [('SPACE', ' ')]),
+            ('NAME', 'c'),
+            ('COLON', ':', [], [('SPACE', ' ')]),
+            ('PASS', 'pass'),
+            ('ENDL', '\n'),
+        ], [])
 
 
 def test_decorator():

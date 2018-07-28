@@ -8,6 +8,7 @@ from .grammator_control_structures import include_control_structures
 from .grammator_primitives import include_primivites
 from .grammator_operators import include_operators
 from .grammator_data_structures import include_data_structures
+from .parser import ParsingError
 
 
 def generate_parse(print_function):
@@ -161,6 +162,7 @@ def generate_parse(print_function):
         (async_,) = pack
         return {
             "async": True,
+            "value": async_.value,
             "formatting": [],
         }
 
@@ -171,6 +173,7 @@ def generate_parse(print_function):
         (async_, space) = pack
         return {
             "async": True,
+            "value": async_.value,
             "formatting": [{'type': 'space', 'value': space.value}],
         }
 
@@ -179,6 +182,10 @@ def generate_parse(print_function):
     @pg.production("async_stmt : async for_stmt")
     def async_stmt(pack):
         (async_, statement,) = pack
+
+        if async_["value"] != "async":
+            raise ParsingError("The only possible keyword before a '%s' is 'async', not '%s'" % (statement[0]["type"], async_["value"]))
+
         statement[0]["async"] = True
         statement[0]["async_formatting"] += async_["formatting"]
         return statement
@@ -409,6 +416,10 @@ def generate_parse(print_function):
     @pg.production("funcdef : async_maybe DEF NAME LEFT_PARENTHESIS parameters RIGHT_PARENTHESIS COLON suite")
     def function_definition(pack):
         (async_maybe, def_, name, left_parenthesis, parameters, right_parenthesis, colon, suite) = pack
+
+        if async_maybe["async"] and async_maybe["value"] != "async":
+            raise ParsingError("The only possible keyword before a 'def' is 'async', not '%s'" % async_maybe["value"])
+
         return [{
             "type": "def",
             "async": async_maybe["async"],

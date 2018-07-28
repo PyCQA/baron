@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
 
+import pytest
+from baron.parser import ParsingError
 from .test_utils import parse_multi
 
 
@@ -849,6 +851,27 @@ def test_async_for_stmt_indent():
         }
     ])
 
+def test_async_for_stmt_indent_bad_keyword():
+    """
+    not_async for i in a:
+        pass
+    """
+    with pytest.raises(ParsingError):
+        parse_multi([
+            ('NAME', 'not_async', [], []),
+            ('SPACE', ' '),
+            ('FOR', 'for', [], [('SPACE', ' ')]),
+            ('NAME', 'i'),
+            ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+            ('NAME', 'a'),
+            ('COLON', ':', [], [('SPACE', ' ')]),
+            ('ENDL', '\n', [], [('SPACE', '    ')]),
+            ('INDENT', ''),
+            ('PASS', 'pass'),
+            ('ENDL', '\n'),
+            ('DEDENT', ''),
+        ], [])
+
 def test_for_else_stmt_indent():
     """
     for i in b:
@@ -1020,6 +1043,36 @@ def test_async_for_else_stmt_indent():
             ],
         }
     ])
+
+def test_async_for_else_stmt_indent_bad_keyword():
+    """
+    async for i in b:
+        pass
+    else:
+        pass
+    """
+    with pytest.raises(ParsingError):
+        parse_multi([
+            ('NAME', 'not_async', [], []),
+            ('SPACE', ' '),
+            ('FOR', 'for', [], [('SPACE', ' ')]),
+            ('NAME', 'i'),
+            ('IN', 'in', [('SPACE', ' ')], [('SPACE', ' ')]),
+            ('NAME', 'b'),
+            ('COLON', ':'),
+            ('ENDL', '\n', [], [('SPACE', '    ')]),
+            ('INDENT', ''),
+            ('PASS', 'pass'),
+            ('ENDL', '\n'),
+            ('DEDENT', ''),
+            ('ELSE', 'else'),
+            ('COLON', ':'),
+            ('ENDL', '\n', [], [('SPACE', '    ')]),
+            ('INDENT', ''),
+            ('PASS', 'pass'),
+            ('ENDL', '\n'),
+            ('DEDENT', ''),
+        ], [])
 
 def test_try_finally_stmt_indent():
     """
