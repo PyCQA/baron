@@ -123,6 +123,22 @@ def test_funcdef_parameter_named():
     check_dumps("def a  ( b  , c = qsd ) : pass\n")
 
 
+def test_async_funcdef():
+    check_dumps("async def a  ( ) : pass\n")
+
+
+def test_async_funcdef_indent():
+    check_dumps("async def a  ( ) : \n    pass\n")
+
+
+def test_async_funcdef_parameter():
+    check_dumps("async def a  ( b ) : pass\n")
+
+
+def test_async_funcdef_parameter_named():
+    check_dumps("async def a  ( b  , c = qsd ) : pass\n")
+
+
 def test_return():
     check_dumps("return a")
 
