@@ -15,6 +15,9 @@ Python 3 parsing:
 - support f-strings https://github.com/PyCQA/baron/pull/110 by odcinek
 - support numeric literals https://github.com/PyCQA/baron/pull/111 by odcinek
 - support nonlocal statement https://github.com/PyCQA/baron/pull/112 by odcinek
+- support keyword only markers https://github.com/PyCQA/baron/pull/108 by boxed
+- support yield from statement https://github.com/PyCQA/baron/pull/113 by odcinek and additional work by bram
+- support async/await statements https://github.com/PyCQA/baron/pull/114 by odcinek and additional work by bram
 
 0.6.6 (2017-06-12)
 ------------------
