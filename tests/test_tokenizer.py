@@ -26,6 +26,16 @@ def test_name_number():
     match('a123', 'NAME')
 
 
+def test_await_as_name():
+    # not a real keyword in python
+    match('await', 'NAME')
+
+
+def test_asyc_as_name():
+    # not a real keyword in python
+    match('async', 'NAME')
+
+
 def test_number():
     match('1234', 'INT')
     match('1234L', 'LONG')
