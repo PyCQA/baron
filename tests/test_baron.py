@@ -57,4 +57,3 @@ def test_error_bad_indentation():
         parse("def fun():\nass")
     with pytest.raises(BaronError):
         parse("def fun():\nass")
-
