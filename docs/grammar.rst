@@ -197,7 +197,76 @@ After:
     power: atom_expr ['**' factor]
     atom_expr: [AWAIT] atom trailer*
 
-**Await is a NAME here, not a keyword** (because you can do `await = 42`.)
+**await is a NAME here, not a keyword** (because you can do `await = 42`.)
+
+Async Funcdef
+-------------
+
+Python 3.5
+PEP 492
+Baron: https://github.com/PyCQA/baron/pull/114
+RedBaron: TODO
+
+Before:
+
+::
+
+    decorated: decorators (classdef | funcdef)
+
+After:
+
+::
+
+    decorated: decorators (classdef | funcdef | async_funcdef)
+    async_funcdef: ASYNC funcdef
+
+**async is a NAME here, not a keyword** (because you can do `async = 42`.)
+
+async for loop
+--------------
+
+Python 3.6
+
+Before:
+
+Baron: https://github.com/PyCQA/baron/pull/114
+RedBaron: TODO
+
+::
+
+    comp_for: 'for' exprlist 'in' or_test [comp_iter]
+
+After:
+
+::
+
+    async: NAME [SPACE]  # where NAME == "async"
+    async_stmt: async for_stmt
+
+**async is a NAME here, not a keyword** (because you can do `async = 42`.)
+
+async with
+----------
+
+Python 3.6
+
+Before:
+
+Baron: https://github.com/PyCQA/baron/pull/114
+RedBaron: TODO
+
+::
+
+    with_stmt: 'with' with_item (',' with_item)*  ':' suite
+
+After:
+
+::
+
+    async: NAME [SPACE]  # where NAME == "async"
+    async_stmt: async with_stmt
+
+**async is a NAME here, not a keyword** (because you can do `async = 42`.)
 
 TODO
 ====
@@ -362,25 +431,6 @@ I have no idea on why this is here but that's easy to change.
 
 .. image:: ./grammar_diff/class_inherit_is_arglist_now.png
 
-Async Funcdef
--------------
-
-Python 3.5
-
-Before:
-
-::
-
-    decorated: decorators (classdef | funcdef)
-
-After:
-
-::
-
-    decorated: decorators (classdef | funcdef | async_funcdef)
-    async_funcdef: ASYNC funcdef
-
-
 Kwargs expressions
 ------------------
 
@@ -450,24 +500,6 @@ After:
     expr_stmt: testlist_star_expr (annassign | augassign (yield_expr|testlist) |
                          ('=' (yield_expr|testlist_star_expr))*)
     annassign: ':' test ['=' test]
-
-async for loop
---------------
-
-Python 3.6
-
-Before:
-
-::
-
-    comp_for: 'for' exprlist 'in' or_test [comp_iter]
-
-After:
-
-::
-
-    comp_for: [ASYNC] 'for' exprlist 'in' or_test [comp_iter]
-
 
 Refactoring in typedargslist ?
 ------------------------------
