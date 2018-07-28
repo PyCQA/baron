@@ -584,7 +584,8 @@ nodes_rendering_order = {
             ("key",        "else",              "else"),
         ],
         "for": [
-            ("key",        "async",             "async"),
+            ("constant",   "async",             "async"),
+            ("formatting", "async_formatting",  "async"),
             ("constant",   "for",               True),
             ("formatting", "first_formatting",  True),
             ("key",        "iterator",          True),

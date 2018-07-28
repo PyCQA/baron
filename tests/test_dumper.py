@@ -196,6 +196,18 @@ def test_for_else():
     check_dumps("for i in pouet : pass\nelse: pass\n")
 
 
+def test_async_for():
+    check_dumps("async for i in pouet : pass\n")
+
+
+def test_async_for_indent():
+    check_dumps("async for i in pouet : \n    pass\n")
+
+
+def test_async_for_else():
+    check_dumps("async for i in pouet : pass\nelse: pass\n")
+
+
 def test_lambda():
     check_dumps("lambda : x")
 

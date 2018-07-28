@@ -164,7 +164,7 @@ def include_control_structures(pg):
         return [{
             "type": "for",
             "async": False,
-            "async_formatting": [],
+            "async_formatting": [] + for_.hidden_tokens_before,
             "value": suite,
             "iterator": exprlist,
             "target": testlist,
@@ -183,7 +183,7 @@ def include_control_structures(pg):
             "type": "for",
             "value": suite,
             "async": False,
-            "async_formatting": [],
+            "async_formatting": [] + for_.hidden_tokens_before,
             "iterator": exprlist,
             "target": testlist,
             "else": else_stmt,

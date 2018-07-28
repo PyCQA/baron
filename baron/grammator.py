@@ -148,16 +148,26 @@ def generate_parse(print_function):
 
 
     @pg.production("async_maybe : ")
-    def async__(pack):
+    def async_maybe(pack):
         return {
             "async": False,
             "formatting": [],
         }
 
 
+    @pg.production("async_maybe : NAME")
+    @pg.production("async : NAME")
+    def async_without_space(pack):
+        (async_,) = pack
+        return {
+            "async": True,
+            "formatting": [],
+        }
+
+
     @pg.production("async_maybe : NAME SPACE")
     @pg.production("async : NAME SPACE")
-    def async__2(pack):
+    def async(pack):
         (async_, space) = pack
         return {
             "async": True,
@@ -170,7 +180,7 @@ def generate_parse(print_function):
     def async_stmt(pack):
         (async_, statement,) = pack
         statement[0]["async"] = True
-        statement[0]["async_formatting"] = async_["formatting"]
+        statement[0]["async_formatting"] += async_["formatting"]
         return statement
 
 
