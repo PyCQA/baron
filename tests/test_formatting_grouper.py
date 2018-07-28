@@ -2797,6 +2797,22 @@ def test_for():
     ])
 
 
+def test_async_for():
+    """
+        """
+    group([
+        ('NAME', 'async'),
+        ('SPACE', '    '),
+        ('FOR', 'for'),
+        ('SPACE', '    '),
+        ('NAME', 'a'),
+    ], [
+        ('NAME', 'async'),
+        ('FOR', 'for', [('SPACE', '    ')], [('SPACE', '    ')]),
+        ('NAME', 'a'),
+    ])
+
+
 def test_except():
     """
         """
@@ -2823,6 +2839,23 @@ def test_def():
     ])
 
 
+def test_async_def():
+    """
+        """
+    group([
+        ('NAME', 'async'),
+        ('SPACE', '    '),
+        ('DEF', 'def'),
+        ('SPACE', '    '),
+        ('NAME', 'a'),
+    ], [
+        ('NAME', 'async'),
+        ('SPACE', '    '),
+        ('DEF', 'def', [], [('SPACE', '    ')]),
+        ('NAME', 'a'),
+    ])
+
+
 def test_class():
     """
         """
@@ -2844,6 +2877,23 @@ def test_with():
         ('SPACE', '    '),
         ('NAME', 'a'),
     ], [
+        ('WITH', 'with', [], [('SPACE', '    ')]),
+        ('NAME', 'a'),
+    ])
+
+
+def test_async_with():
+    """
+        """
+    group([
+        ('NAME', 'async'),
+        ('SPACE', '    '),
+        ('WITH', 'with'),
+        ('SPACE', '    '),
+        ('NAME', 'a'),
+    ], [
+        ('NAME', 'async'),
+        ('SPACE', '    '),
         ('WITH', 'with', [], [('SPACE', '    ')]),
         ('NAME', 'a'),
     ])
