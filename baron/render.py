@@ -104,6 +104,7 @@ def child_by_key(node, key):
 
     if key in node:
         return node[key]
+    
 
     if key in node_keys(node):
         return key
@@ -807,7 +808,7 @@ class RenderWalker(object):
 
     def before(self, key_type, item, render_key):
         if key_type not in node_types:
-            raise NotImplemented("Unknown key type: %s" % key_type)
+            raise NotImplementedError("Unknown key type: %s" % key_type)
 
         to_call = getattr(self, 'before_' + key_type)
 
@@ -815,7 +816,7 @@ class RenderWalker(object):
 
     def after(self, key_type, item, render_key):
         if key_type not in node_types:
-            raise NotImplemented("Unknown key type: %s" % key_type)
+            raise NotImplementedError("Unknown key type: %s" % key_type)
 
         to_call = getattr(self, 'after_' + key_type)
 
