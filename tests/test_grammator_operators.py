@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
 import pytest
+from baron.parser import ParsingError
 from .test_utils import parse_simple
 
 
@@ -8719,6 +8720,16 @@ def test_await_a():
          "value": {'type': 'atomtrailers', 'value': [{'type': 'name', 'value': 'a'}]},
         },
     ]])
+
+
+def test_await_a_bad_keyword():
+    "await a"
+    with pytest.raises(ParsingError):
+        parse_simple([
+            ('NAME', 'not_await', [], []),
+            ('SPACE', ' '),
+            ('NAME', 'a'),
+        ], [])
 
 
 def test_implicit_tuple_space():

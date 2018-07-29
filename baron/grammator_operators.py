@@ -1,3 +1,6 @@
+from .parser import ParsingError
+
+
 def include_operators(pg):
     @pg.production("old_test : or_test")
     @pg.production("old_test : old_lambdef")
@@ -203,8 +206,8 @@ def include_operators(pg):
     def power_atomtrailers_await(pack):
         (await_, space, atomtrailers,) = pack
 
-        # XXX real syntax error
-        assert await_.value == "await", await_
+        if await_.value != "await":
+            raise ParsingError("The only possible keyword before an atomtrailers is 'await', not '%s'" % await_.value)
 
         return [{
             "type": "await",
