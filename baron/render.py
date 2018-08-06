@@ -290,11 +290,6 @@ nodes_rendering_order = {
             ("bool",       "with_parenthesis",  False),
         ],
 
-        "async": [
-            ("constant",    "async",        True),
-            ("formatting",  "formatting",   True),
-
-        ],
         "await": [
             ("constant",    "await",        True),
             ("formatting",  "formatting",   True),
