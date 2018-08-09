@@ -8713,13 +8713,13 @@ def test_await_a():
         ('NAME', 'await', [], []),
         ('SPACE', ' '),
         ('NAME', 'a'),
-    ], [[
+    ], [
         {
          'formatting': [{'type': 'space', 'value': ' '}],
          'type': 'await',
          "value": {'type': 'atomtrailers', 'value': [{'type': 'name', 'value': 'a'}]},
         },
-    ]])
+    ])
 
 
 def test_await_a_bad_keyword():

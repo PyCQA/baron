@@ -209,14 +209,14 @@ def include_operators(pg):
         if await_.value != "await":
             raise ParsingError("The only possible keyword before an atomtrailers is 'await', not '%s'" % await_.value)
 
-        return [{
+        return {
             "type": "await",
             "formatting": [{'type': 'space', 'value': space.value}],
             "value": {
                 "type": "atomtrailers",
                 "value": atomtrailers,
             }
-        }]
+        }
 
     @pg.production("atomtrailers : atom")
     def atomtrailers_atom(pack):
