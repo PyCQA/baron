@@ -172,6 +172,16 @@ nodes_rendering_order = {
             ("string",     "value",             True),
             ("formatting", "second_formatting", True),
         ],
+        "interpolated_string": [
+            ("formatting", "first_formatting",  True),
+            ("string",     "value",             True),
+            ("formatting", "second_formatting", True),
+        ],
+        "interpolated_raw_string": [
+            ("formatting", "first_formatting",  True),
+            ("string",     "value",             True),
+            ("formatting", "second_formatting", True),
+        ],
         "unicode_raw_string": [
             ("formatting", "first_formatting",  True),
             ("string",     "value",             True),

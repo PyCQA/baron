@@ -184,6 +184,14 @@ def test_binary_raw_string():
     check_dumps("br'pouet'")
 
 
+def test_interpolated_string():
+    check_dumps("f'qsd'")
+
+
+def test_nterporlated_raw_string():
+    check_dumps("rf'qsd'")
+
+
 def test_for():
     check_dumps("for i in pouet : pass\n")
 
