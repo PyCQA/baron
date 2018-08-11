@@ -104,7 +104,7 @@ def child_by_key(node, key):
 
     if key in node:
         return node[key]
-    
+
 
     if key in node_keys(node):
         return key
