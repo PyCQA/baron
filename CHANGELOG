@@ -8,6 +8,7 @@ Changelog
 - handle corrupt cache file situation https://github.com/PyCQA/baron/pull/76 by ryu2
 - fix special crashing edge case in indentation marker https://github.com/PyCQA/bar by Ahuge
 - fixed incorrect tokenization case "d*e-1". Fixes #85 https://github.com/PyCQA/baron/pull/107 by boxed
+- fix endl handling inside groupings by kyleatmakrs (extracted from https://github.com/PyCQA/baron/pull/126)
 
 Python 3 parsing:
 - support ellipsis https://github.com/PyCQA/baron/pull/121 by odcinek
