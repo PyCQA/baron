@@ -169,7 +169,7 @@ def generate_parse(print_function):
 
     @pg.production("async_maybe : NAME SPACE")
     @pg.production("async : NAME SPACE")
-    def async(pack):
+    def async_(pack):
         (async_, space) = pack
         return {
             "async": True,
