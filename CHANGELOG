@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.7 (unreleased)
-------------------
+0.7 (2018-08-21)
+----------------
 
 - fix line continuation https://github.com/PyCQA/baron/pull/92 by ibizaman
 - handle corrupt cache file situation https://github.com/PyCQA/baron/pull/76 by ryu2
