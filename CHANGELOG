@@ -10,7 +10,8 @@ Changelog
 - fixed incorrect tokenization case "d*e-1". Fixes #85 https://github.com/PyCQA/baron/pull/107 by boxed
 - fix endl handling inside groupings by kyleatmakrs (extracted from https://github.com/PyCQA/baron/pull/126)
 
-Python 3 parsing:
+Python 3:
+- python 3 parsing extracted from https://github.com/PyCQA/baron/pull/126
 - support ellipsis https://github.com/PyCQA/baron/pull/121 by odcinek
 - support matrix operator https://github.com/PyCQA/baron/pull/117 by odcinek
 - support f-strings https://github.com/PyCQA/baron/pull/110 by odcinek
