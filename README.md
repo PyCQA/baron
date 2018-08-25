@@ -6,6 +6,15 @@ drops some syntax information in the process of its creation (like empty lines,
 comments, formatting), a FST keeps everything and guarantees the operation
 <code>fst\_to\_code(code\_to\_fst(source\_code)) == source\_code</code>.
 
+Roadmap
+=======
+
+Current roadmap is as boring as needed:
+
+* [full python 3.7 compatibility](https://baron.readthedocs.io/en/latest/grammar.html)
+* bug fixs
+* new small features (walker pattern, maybe code generation) and performance improvement.
+
 Installation
 ============
 
