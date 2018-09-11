@@ -581,6 +581,73 @@ def test_funcdef_stmt_one_parameter_indent():
         }
     ])
 
+def test_funcdef_stmt_one_parameter_typed_indent():
+    """
+    def a ( x : int ) :
+        pass
+    """
+    parse_multi([
+        ('DEF', 'def', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('LEFT_PARENTHESIS', '(', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'x'),
+        ('COLON', ':', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'int'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+        ('COLON', ':', [('SPACE', ' ')]),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+    ], [
+        {
+            "type": "def",
+            "name": "a",
+            "decorators": [],
+            "async": False,
+            "async_formatting": [],
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [{"type": "space", "value": " "}],
+            "fifth_formatting": [{"type": "space", "value": " "}],
+            "sixth_formatting": [],
+            "arguments": [
+                {
+                    "type": "def_argument",
+                    "first_formatting": [],
+                    "second_formatting": [],
+                    "target": {
+                        "type": "typed_name",
+                        "annotation": {"type": "name", "value": "int"},
+                        "first_formatting": [{"type": "space", "value": " "}],
+                        "second_formatting": [{"type": "space", "value": " "}],
+                        "value": "x",
+                    },
+                    "value": {},
+                }
+            ],
+            "value": [
+                {
+                    "type": "endl",
+                    "value": "\n",
+                    "formatting": [],
+                    "indent": "    "
+                },
+                {
+                    "type": "pass",
+                },
+                {
+                    "type": "endl",
+                    "formatting": [],
+                    "indent": "",
+                    "value": "\n"
+                }
+            ],
+        }
+    ])
+
 def test_funcdef_stmt_one_parameter_comma_indent():
     """
     def a ( x , ) :
@@ -717,6 +784,117 @@ def test_funcdef_stmt_one_parameter_comma_default_indent():
                     "formatting": [],
                     "indent": "",
                     "type": "endl",
+                    "value": "\n"
+                }
+            ],
+        }
+    ])
+
+def test_funcdef_stmt_two_parameters_typed_with_default_indent():
+    """
+    def a ( x : int = 1 , y : List[str] ) :
+        pass
+    """
+    parse_multi([
+        ('DEF', 'def', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('LEFT_PARENTHESIS', '(', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'x'),
+        ('COLON', ':', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'int'),
+        ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('INT', '1'),
+        ('COMMA', ',', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'y'),
+        ('COLON', ':', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'List'),
+        ('LEFT_SQUARE_BRACKET', '[', [], []),
+        ('NAME', 'str'),
+        ('RIGHT_SQUARE_BRACKET', '[', [], []),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+        ('COLON', ':', [('SPACE', ' ')]),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+    ], [
+        {
+            "type": "def",
+            "name": "a",
+            "decorators": [],
+            "async": False,
+            "async_formatting": [],
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [{"type": "space", "value": " "}],
+            "fifth_formatting": [{"type": "space", "value": " "}],
+            "sixth_formatting": [],
+            "arguments": [
+                {
+                    "type": "def_argument",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "target": {
+                        "type": "typed_name",
+                        "annotation": {"type": "name", "value": "int"},
+                        "first_formatting": [{"type": "space", "value": " "}],
+                        "second_formatting": [{"type": "space", "value": " "}],
+                        "value": "x",
+                    },
+                    "value": {"section": "number", "type": "int", "value": "1"},
+                },
+                {
+                    "type": "comma",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                },
+                {
+                    "type": "def_argument",
+                    "first_formatting": [],
+                    "second_formatting": [],
+                    "target": {
+                        "type": "typed_name",
+                        "annotation":
+                            {
+                                "type": "atomtrailers",
+                                "value": [
+                                    {
+                                        "type": "name",
+                                        "value": "List",
+                                    },
+                                    {
+                                        "type": "getitem",
+                                        "first_formatting": [],
+                                        "second_formatting": [],
+                                        "third_formatting": [],
+                                        "fourth_formatting": [],
+                                        "value": {"type": "name", "value": "str"},
+                                    }
+                                ]
+                            },
+                        "first_formatting": [{"type": "space", "value": " "}],
+                        "second_formatting": [{"type": "space", "value": " "}],
+                        "value": "y",
+                    },
+                    "value": {},
+                },
+            ],
+            "value": [
+                {
+                    "type": "endl",
+                    "value": "\n",
+                    "formatting": [],
+                    "indent": "    "
+                },
+                {
+                    "type": "pass",
+                },
+                {
+                    "type": "endl",
+                    "formatting": [],
+                    "indent": "",
                     "value": "\n"
                 }
             ],

@@ -413,9 +413,9 @@ def generate_parse(print_function):
             "formatting": at.hidden_tokens_after,
         }] + endl
 
-    @pg.production("funcdef : async_maybe DEF NAME LEFT_PARENTHESIS parameters RIGHT_PARENTHESIS COLON suite")
+    @pg.production("funcdef : async_maybe DEF NAME LEFT_PARENTHESIS typed_parameters RIGHT_PARENTHESIS COLON suite")
     def function_definition(pack):
-        (async_maybe, def_, name, left_parenthesis, parameters, right_parenthesis, colon, suite) = pack
+        (async_maybe, def_, name, left_parenthesis, typed_parameters, right_parenthesis, colon, suite) = pack
 
         if async_maybe["async"] and async_maybe["value"] != "async":
             raise ParsingError("The only possible keyword before a 'def' is 'async', not '%s'" % async_maybe["value"])
@@ -432,23 +432,26 @@ def generate_parse(print_function):
             "fourth_formatting": right_parenthesis.hidden_tokens_before,
             "fifth_formatting": colon.hidden_tokens_before,
             "sixth_formatting": colon.hidden_tokens_after,
-            "arguments": parameters,
+            "arguments": typed_parameters,
             "value": suite,
         }]
 
     @pg.production("argslist : argslist argument")
+    @pg.production("typed_parameters : typed_parameters typed_parameter")
     @pg.production("parameters : parameters parameter")
     def parameters_parameters_parameter(pack,):
         (parameters, parameter,) = pack
         return parameters + parameter
 
     @pg.production("argslist : argument")
+    @pg.production("typed_parameters : typed_parameter")
     @pg.production("parameters : parameter")
     def parameters_parameter(pack,):
         (parameter,) = pack
         return parameter
 
     @pg.production("argument :")
+    @pg.production("typed_parameter : ")
     @pg.production("parameter : ")
     def parameter_empty(p):
         return []
@@ -461,6 +464,26 @@ def generate_parse(print_function):
             "value": name_.value,
         }
 
+    @pg.production("typed_name : NAME COLON test")
+    def typed_name_with_type(pack):
+        (name_, colon, test) = pack
+        return {
+            "type": "typed_name",
+            "first_formatting": colon.hidden_tokens_before if colon else [],
+            "second_formatting": colon.hidden_tokens_after if colon else [],
+            "value": name_.value,
+            "annotation": test
+        }
+
+    @pg.production("typed_name : NAME")
+    def typed_name_no_type(pack):
+        (name_,) = pack
+        return {
+            "type": "name",
+            "value": name_.value,
+        }
+
+    @pg.production("typed_parameter : LEFT_PARENTHESIS name RIGHT_PARENTHESIS maybe_test")
     @pg.production("parameter : LEFT_PARENTHESIS name RIGHT_PARENTHESIS maybe_test")
     def parameter_fpdef(pack):
         (left_parenthesis, name, right_parenthesis, (equal, test)) = pack
@@ -480,6 +503,7 @@ def generate_parse(print_function):
         }]
 
 
+    @pg.production("typed_parameter : LEFT_PARENTHESIS fplist RIGHT_PARENTHESIS maybe_test")
     @pg.production("parameter : LEFT_PARENTHESIS fplist RIGHT_PARENTHESIS maybe_test")
     def parameter_fplist(pack):
         (left_parenthesis, fplist, right_parenthesis, (equal, test)) = pack
@@ -531,6 +555,7 @@ def generate_parse(print_function):
             "target": name if equal else {}
         }]
 
+    @pg.production("typed_parameter : typed_name maybe_test")
     @pg.production("parameter : name maybe_test")
     def parameter_with_default(pack):
         (name, (equal, test)) = pack
@@ -578,6 +603,7 @@ def generate_parse(print_function):
         }]
 
     # TODO refactor those 2 to standardize with argument_star and argument_star_star
+    @pg.production("typed_parameter : STAR NAME")
     @pg.production("parameter : STAR NAME")
     def parameter_star(pack):
         (star, name,) = pack
@@ -591,6 +617,7 @@ def generate_parse(print_function):
         }]
 
     # TODO refactor those 2 to standardize with argument_star and argument_star_star
+    @pg.production("typed_parameter : STAR")
     @pg.production("parameter : STAR")
     def parameter_star_only(pack):
         (star, ) = pack
@@ -599,6 +626,7 @@ def generate_parse(print_function):
             "formatting": star.hidden_tokens_after,
         }]
 
+    @pg.production("typed_parameter : DOUBLE_STAR NAME")
     @pg.production("parameter : DOUBLE_STAR NAME")
     def parameter_star_star(pack):
         (double_star, name,) = pack
@@ -612,6 +640,7 @@ def generate_parse(print_function):
         }]
 
     @pg.production("argument : comma")
+    @pg.production("typed_parameter : comma")
     @pg.production("parameter : comma")
     def parameter_comma(pack):
         (comma,) = pack
