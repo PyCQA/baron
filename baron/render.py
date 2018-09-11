@@ -730,6 +730,13 @@ nodes_rendering_order = {
             ("formatting", "second_formatting", "target"),
             ("string",     "target",            "target"),
         ],
+        "typed_name": [
+            ("string",     "value",             True),
+            ("formatting", "first_formatting",  True),
+            ("constant",   ":",                 True),
+            ("formatting", "second_formatting", True),
+            ("key",        "annotation",        True),
+        ],
 
         "print": [
             ("constant",   "print",                  True),
