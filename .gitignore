@@ -3,3 +3,5 @@
 *.swo
 __pycache__
 .coverage
+.pytest_cache/
+baron.egg-info/
