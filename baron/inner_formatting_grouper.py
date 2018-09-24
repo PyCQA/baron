@@ -4,6 +4,7 @@ from .utils import FlexibleIterator, BaronError
 class UnExpectedFormattingToken(BaronError):
         pass
 
+
 class GroupingError(BaronError):
         pass
 
@@ -110,7 +111,7 @@ def append_to_token_before(token, to_append_list):
     elif len(token) == 3:
         return (token[0], token[1], to_append_list + token[2], [])
     elif len(token) == 4:
-        return (token[0], token[1],  to_append_list + token[2], token[3])
+        return (token[0], token[1], to_append_list + token[2], token[3])
 
 
 def group(sequence):
@@ -133,7 +134,7 @@ def fail_on_bad_token(token, debug_file_content, in_grouping_mode):
 def _append_to_debug_file_content(token):
     before_debug = "".join(map(lambda x: x[1], token[2] if len(token) >= 3 else []))
     after_debug = "".join(map(lambda x: x[1], token[3] if len(token) >= 4 else []))
-    return  before_debug + token[1] + after_debug
+    return before_debug + token[1] + after_debug
 
 
 def group_generator(sequence):
@@ -141,11 +142,11 @@ def group_generator(sequence):
     current = None, None
     in_grouping_mode = 0
     debug_file_content = ""
+
     while True:
         if iterator.end():
             return
 
-        debug_previous_token = current
         current = next(iterator)
         debug_file_content += _append_to_debug_file_content(current)
 
@@ -173,14 +174,13 @@ def group_generator(sequence):
                 current = append_to_token_before(next(iterator), to_group)
 
                 if current[0] in ENTER_GROUPING_MODE:
-                  in_grouping_mode += 1
+                    in_grouping_mode += 1
                 # TODO test
                 if current[0] in QUIT_GROUPING_MODE:
                     in_grouping_mode -= 1
                     assert in_grouping_mode >= 0
                     yield current
                     continue
-
 
             if current[0] in GROUP_ON:
                 while iterator.show_next() and iterator.show_next()[0] in GROUP_THOSE:
