@@ -43,6 +43,19 @@ Documentation
 
 Baron documentation is available on [Read The Docs](http://baron.readthedocs.io/en/latest/).
 
+Contributing
+============
+
+If you want to implement new grammar elements for newer python versions, here
+are the documented steps for that:
+https://github.com/PyCQA/redbaron/blob/master/add_new_grammar.md
+
+Also note that reviewing most grammar modifications takes several hours of
+advanced focusing (we can't really afford bugs here) so don't despair if you PR
+seems to be hanging around, sorry for that :/
+
+And thanks in advance for your work!
+
 Why is this important?
 ======================
 
