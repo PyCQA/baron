@@ -346,11 +346,14 @@ Action:
           vfpdef ['=' test]
           (',' vfpdef ['=' test])*
           [
-             ',' ['*' [vfpdef]
-             (',' vfpdef ['=' test])*
-             [',' ['**' vfpdef [',']]]
-          |
-             '**' vfpdef [',']]
+             ','
+             [
+                '*' [vfpdef]
+                (',' vfpdef ['=' test])*
+                [',' ['**' vfpdef [',']]]
+             |
+                '**' vfpdef [',']
+             ]
           ]
        |
           '*' [vfpdef]
