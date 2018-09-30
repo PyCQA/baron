@@ -341,6 +341,8 @@ Action:
           '**' tfpdef [',']
        )
 
+    # after some analysis, this is just a refactoring of the previous form with
+    # fpdef being changed to vfpdef
     varargslist:
        (
           vfpdef ['=' test]
