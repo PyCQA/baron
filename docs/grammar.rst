@@ -301,25 +301,67 @@ Action:
 ::
 
     # CHANGE
-    varargslist: ((fpdef ['=' test] ',')*
-                  ('*' NAME [',' '**' NAME] | '**' NAME) |
-                  fpdef ['=' test] (',' fpdef ['=' test])* [','])
+    varargslist:
+       (
+          (fpdef ['=' test] ',')*
+          (
+             '*' NAME [',' '**' NAME]
+          |
+             '**' NAME
+          )
+       |
+          fpdef ['=' test]
+          (',' fpdef ['=' test])*
+          [',']
+       )
+
     fpdef: NAME | '(' fplist ')'
     fplist: fpdef (',' fpdef)* [',']
 
     # TO
-    typedargslist: (tfpdef ['=' test] (',' tfpdef ['=' test])* [',' [
-            '*' [tfpdef] (',' tfpdef ['=' test])* [',' ['**' tfpdef [',']]]
-          | '**' tfpdef [',']]]
-      | '*' [tfpdef] (',' tfpdef ['=' test])* [',' ['**' tfpdef [',']]]
-      | '**' tfpdef [','])
+    typedargslist:
+       (
+          tfpdef ['=' test]
+          (',' tfpdef ['=' test])*
+          [
+             ','
+             [
+                '*' [tfpdef]
+                (',' tfpdef ['=' test])*
+                [',' ['**' tfpdef [',']]]
+             |
+                '**' tfpdef [',']
+             ]
+          ]
+       |
+          '*' [tfpdef]
+          (',' tfpdef ['=' test])*
+          [',' ['**' tfpdef [',']]]
+       |
+          '**' tfpdef [',']
+       )
+
+    varargslist:
+       (
+          vfpdef ['=' test]
+          (',' vfpdef ['=' test])*
+          [
+             ',' ['*' [vfpdef]
+             (',' vfpdef ['=' test])*
+             [',' ['**' vfpdef [',']]]
+          |
+             '**' vfpdef [',']]
+          ]
+       |
+          '*' [vfpdef]
+          (',' vfpdef ['=' test])*
+          [',' ['**' vfpdef [',']]]
+       |
+          '**' vfpdef [',']
+       )
+
     tfpdef: NAME [':' test]
-    varargslist: (vfpdef ['=' test] (',' vfpdef ['=' test])* [',' [
-            '*' [vfpdef] (',' vfpdef ['=' test])* [',' ['**' vfpdef [',']]]
-          | '**' vfpdef [',']]]
-      | '*' [vfpdef] (',' vfpdef ['=' test])* [',' ['**' vfpdef [',']]]
-      | '**' vfpdef [',']
-    )
+
     vfpdef: NAME
 
 
