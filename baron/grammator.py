@@ -392,7 +392,6 @@ def generate_parse(print_function):
             "formatting": at.hidden_tokens_after,
         }] + endl
 
-
     @pg.production("decorator : AT dotted_name LEFT_PARENTHESIS argslist RIGHT_PARENTHESIS endl")
     def decorator_call(pack):
         (at, dotted_name, left_parenthesis, argslist, right_parenthesis, endl) = pack
