@@ -581,6 +581,7 @@ def test_funcdef_stmt_one_parameter_indent():
         }
     ])
 
+
 def test_funcdef_stmt_one_parameter_typed_indent():
     """
     def a ( x : int ) :
@@ -647,6 +648,209 @@ def test_funcdef_stmt_one_parameter_typed_indent():
             ],
         }
     ])
+
+
+def test_funcdef_stmt_one_parameter_typed_indent_no_format():
+    """
+    def a ( x:int ) :
+        pass
+    """
+    parse_multi([
+        ('DEF', 'def', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('LEFT_PARENTHESIS', '(', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'x'),
+        ('COLON', ':', [], []),
+        ('NAME', 'int'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+        ('COLON', ':', [('SPACE', ' ')]),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+    ], [
+        {
+            "type": "def",
+            "name": "a",
+            "decorators": [],
+            "async": False,
+            "async_formatting": [],
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [{"type": "space", "value": " "}],
+            "fifth_formatting": [{"type": "space", "value": " "}],
+            "sixth_formatting": [],
+            "arguments": [
+                {
+                    "type": "def_argument",
+                    "first_formatting": [],
+                    "second_formatting": [],
+                    "target": {
+                        "type": "typed_name",
+                        "annotation": {"type": "name", "value": "int"},
+                        "first_formatting": [],
+                        "second_formatting": [],
+                        "value": "x",
+                    },
+                    "value": {},
+                }
+            ],
+            "value": [
+                {
+                    "type": "endl",
+                    "value": "\n",
+                    "formatting": [],
+                    "indent": "    "
+                },
+                {
+                    "type": "pass",
+                },
+                {
+                    "type": "endl",
+                    "formatting": [],
+                    "indent": "",
+                    "value": "\n"
+                }
+            ],
+        }
+    ])
+
+
+def test_funcdef_stmt_star_parameter_typed_indent_no_format():
+    """
+    def a ( *x:int ) :
+        pass
+    """
+    parse_multi([
+        ('DEF', 'def', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('LEFT_PARENTHESIS', '(', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('STAR', 'x'),
+        ('NAME', 'x'),
+        ('COLON', ':', [], []),
+        ('NAME', 'int'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+        ('COLON', ':', [('SPACE', ' ')]),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+    ], [
+        {
+            "type": "def",
+            "name": "a",
+            "decorators": [],
+            "async": False,
+            "async_formatting": [],
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [{"type": "space", "value": " "}],
+            "fifth_formatting": [{"type": "space", "value": " "}],
+            "sixth_formatting": [],
+            "arguments": [
+                {
+                    "type": "list_argument",
+                    "formatting": [],
+                    "value": {
+                        "type": "typed_name",
+                        "annotation": {"type": "name", "value": "int"},
+                        "first_formatting": [],
+                        "second_formatting": [],
+                        "value": "x",
+                    },
+                }
+            ],
+            "value": [
+                {
+                    "type": "endl",
+                    "value": "\n",
+                    "formatting": [],
+                    "indent": "    "
+                },
+                {
+                    "type": "pass",
+                },
+                {
+                    "type": "endl",
+                    "formatting": [],
+                    "indent": "",
+                    "value": "\n"
+                }
+            ],
+        }
+    ])
+
+
+def test_funcdef_stmt_double_star_parameter_typed_indent_no_format():
+    """
+    def a ( **x:int ) :
+        pass
+    """
+    parse_multi([
+        ('DEF', 'def', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('LEFT_PARENTHESIS', '(', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('DOUBLE_STAR', '**'),
+        ('NAME', 'x'),
+        ('COLON', ':', [], []),
+        ('NAME', 'int'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')]),
+        ('COLON', ':', [('SPACE', ' ')]),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+    ], [
+        {
+            "type": "def",
+            "name": "a",
+            "decorators": [],
+            "async": False,
+            "async_formatting": [],
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [{"type": "space", "value": " "}],
+            "fifth_formatting": [{"type": "space", "value": " "}],
+            "sixth_formatting": [],
+            "arguments": [
+                {
+                    "type": "dict_argument",
+                    "formatting": [],
+                    "value": {
+                        "type": "typed_name",
+                        "annotation": {"type": "name", "value": "int"},
+                        "first_formatting": [],
+                        "second_formatting": [],
+                        "value": "x",
+                    },
+                }
+            ],
+            "value": [
+                {
+                    "type": "endl",
+                    "value": "\n",
+                    "formatting": [],
+                    "indent": "    "
+                },
+                {
+                    "type": "pass",
+                },
+                {
+                    "type": "endl",
+                    "formatting": [],
+                    "indent": "",
+                    "value": "\n"
+                }
+            ],
+        }
+    ])
+
 
 def test_funcdef_stmt_one_parameter_comma_indent():
     """

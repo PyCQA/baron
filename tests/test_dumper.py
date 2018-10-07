@@ -123,6 +123,30 @@ def test_funcdef_parameter_named():
     check_dumps("def a  ( b  , c = qsd ) : pass\n")
 
 
+def test_funcdef_parameter_named_star():
+    check_dumps("def a  ( b  , c = qsd , * d ) : pass\n")
+
+
+def test_funcdef_parameter_named_star_start():
+    check_dumps("def a  ( b  , c = qsd , * d , ** e ) : pass\n")
+
+
+def test_funcdef_typed_parameter():
+    check_dumps("def a  ( b : c ) : pass\n")
+
+
+def test_funcdef_typed_parameter_named():
+    check_dumps("def a  ( b  , c : d = qsd ) : pass\n")
+
+
+def test_funcdef_typed_parameter_named_star():
+    check_dumps("def a  ( b  , c = qsd , * d : qsd ) : pass\n")
+
+
+def test_funcdef_typed_parameter_named_star_start():
+    check_dumps("def a  ( b  , c = qsd , * d , ** e : qsd ) : pass\n")
+
+
 def test_async_funcdef():
     check_dumps("async def a  ( ) : pass\n")
 

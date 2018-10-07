@@ -565,6 +565,36 @@ def generate_parse(print_function):
             "value": test,
         }]
 
+    @pg.production("typed_parameter : STAR NAME COLON test")
+    def typed_parameter_star(pack):
+        (star, name, colon, test) = pack
+        return [{
+            "type": "list_argument",
+            "formatting": star.hidden_tokens_after,
+            "value": {
+                "type": "typed_name",
+                "first_formatting": colon.hidden_tokens_before if colon else [],
+                "second_formatting": colon.hidden_tokens_after if colon else [],
+                "value": name.value,
+                "annotation": test
+            }
+        }]
+
+    @pg.production("typed_parameter : DOUBLE_STAR NAME COLON test")
+    def typed_parameter_double_star(pack):
+        (double_star, name, colon, test) = pack
+        return [{
+            "type": "dict_argument",
+            "formatting": double_star.hidden_tokens_after,
+            "value": {
+                "type": "typed_name",
+                "first_formatting": colon.hidden_tokens_before if colon else [],
+                "second_formatting": colon.hidden_tokens_after if colon else [],
+                "value": name.value,
+                "annotation": test
+            }
+        }]
+
     # TODO refactor those 2 to standardize with argument_star and argument_star_star
     @pg.production("typed_parameter : STAR NAME")
     @pg.production("parameter : STAR NAME")
