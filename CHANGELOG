@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.8 (unreleased)
+----------------
+
+- add typed parameters support https://github.com/PyCQA/baron/pull/140 by Scott Belden and and additional work by bram
+
 0.7 (2018-08-21)
 ----------------
 
