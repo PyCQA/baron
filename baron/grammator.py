@@ -19,36 +19,31 @@ def generate_parse(print_function):
         (statements,) = pack
         return [x for x in statements if x] if statements else []
 
-
     @pg.production("statements : statements statement")
     def statements_statement(pack):
         (statements, statement) = pack
         return statements + statement
 
-
     @pg.production("statements : statement SEMICOLON")
     def statement_semicolon(pack):
         (statement, semicolon) = pack
         return statement +\
-                [{
-                  "type": "semicolon",
-                  "first_formatting": semicolon.hidden_tokens_before,
-                  "second_formatting": semicolon.hidden_tokens_after,
-                  "value": ";"
-                 }]
-
+            [{
+                "type": "semicolon",
+                "first_formatting": semicolon.hidden_tokens_before,
+                "second_formatting": semicolon.hidden_tokens_after,
+                "value": ";"
+            }]
 
     @pg.production("statements : statement")
     def statement(pack):
         (statement,) = pack
         return statement
 
-
     @pg.production("statement : endl")
     def statement_endl(pack):
         (endl,) = pack
         return endl
-
 
     @pg.production("endl : ENDL")
     def endl(pack):
@@ -64,12 +59,10 @@ def generate_parse(print_function):
             "indent": indent,
         }] + endl.hidden_tokens_after
 
-
     @pg.production("left_parenthesis : LEFT_PARENTHESIS")
     def left_parenthesis(pack):
         (lp,) = pack
         return lp
-
 
     @pg.production("endl : COMMENT ENDL")
     def comment(pack):
@@ -85,11 +78,9 @@ def generate_parse(print_function):
             "value": endl.value
         }]
 
-
     @pg.production("statement : ENDMARKER")
     def end(_):
         return [None]
-
 
     @pg.production("statement : simple_stmt")
     @pg.production("statement : compound_stmt")
@@ -102,30 +93,27 @@ def generate_parse(print_function):
         (small_stmt, semicolon, endl) = pack
         return [small_stmt,
                 {
-                 "type": "semicolon",
-                 "value": ";",
-                 "first_formatting": semicolon.hidden_tokens_before,
-                 "second_formatting": semicolon.hidden_tokens_after
+                    "type": "semicolon",
+                    "value": ";",
+                    "first_formatting": semicolon.hidden_tokens_before,
+                    "second_formatting": semicolon.hidden_tokens_after
                 }] + endl
-
 
     @pg.production("simple_stmt : small_stmt endl")
     def simple_stmt(pack):
         (small_stmt, endl) = pack
         return [small_stmt] + endl
 
-
     @pg.production("simple_stmt : small_stmt SEMICOLON simple_stmt")
     def simple_stmt_semicolon(pack):
         (small_stmt, semicolon, simple_stmt) = pack
         return [small_stmt,
                 {
-                 "type": "semicolon",
-                 "value": ";",
-                 "first_formatting": semicolon.hidden_tokens_before,
-                 "second_formatting": semicolon.hidden_tokens_after
+                    "type": "semicolon",
+                    "value": ";",
+                    "first_formatting": semicolon.hidden_tokens_before,
+                    "second_formatting": semicolon.hidden_tokens_after
                 }] + simple_stmt
-
 
     @pg.production("small_stmt : flow_stmt")
     @pg.production("small_stmt : del_stmt")
@@ -147,14 +135,12 @@ def generate_parse(print_function):
         (statement,) = pack
         return statement
 
-
     @pg.production("async_maybe : ")
     def async_maybe(pack):
         return {
             "async": False,
             "formatting": [],
         }
-
 
     @pg.production("async_maybe : NAME")
     @pg.production("async : NAME")
@@ -166,7 +152,6 @@ def generate_parse(print_function):
             "formatting": [],
         }
 
-
     @pg.production("async_maybe : NAME SPACE")
     @pg.production("async : NAME SPACE")
     def async_(pack):
@@ -176,7 +161,6 @@ def generate_parse(print_function):
             "value": async_.value,
             "formatting": [{'type': 'space', 'value': space.value}],
         }
-
 
     @pg.production("async_stmt : async with_stmt")
     @pg.production("async_stmt : async for_stmt")
@@ -190,13 +174,11 @@ def generate_parse(print_function):
         statement[0]["async_formatting"] += async_["formatting"]
         return statement
 
-
     if not print_function:
         @pg.production("small_stmt : print_stmt")
         def print_statement(pack):
             (statement,) = pack
             return statement
-
 
     @pg.production("small_stmt : expr_stmt")
     @pg.production("expr_stmt : testlist")
@@ -220,7 +202,6 @@ def generate_parse(print_function):
         (level,) = pack
         return level
 
-
     @pg.production("with_stmt : WITH with_items COLON suite")
     def with_stmt(pack):
         (with_, with_items, colon, suite) = pack
@@ -235,18 +216,15 @@ def generate_parse(print_function):
             "contexts": with_items
         }]
 
-
     @pg.production("with_items : with_items comma with_item")
     def with_items_with_item(pack):
         (with_items, comma, with_item,) = pack
         return with_items + [comma, with_item]
 
-
     @pg.production("with_items : with_item")
     def with_items(pack):
         (with_item,) = pack
         return [with_item]
-
 
     @pg.production("with_item : test")
     def with_item(pack):
@@ -259,7 +237,6 @@ def generate_parse(print_function):
             "value": test
         }
 
-
     @pg.production("with_item : test AS expr")
     def with_item_as(pack):
         (test, as_, expr) = pack
@@ -270,7 +247,6 @@ def generate_parse(print_function):
             "second_formatting": as_.hidden_tokens_after,
             "value": test
         }
-
 
     @pg.production("classdef : CLASS NAME COLON suite")
     def class_stmt(pack,):
@@ -290,7 +266,6 @@ def generate_parse(print_function):
             "value": suite,
         }]
 
-
     @pg.production("classdef : CLASS NAME LEFT_PARENTHESIS RIGHT_PARENTHESIS COLON suite")
     def class_stmt_parenthesis(pack,):
         (class_, name, left_parenthesis, right_parenthesis, colon, suite) = pack
@@ -308,7 +283,6 @@ def generate_parse(print_function):
             "decorators": [],
             "value": suite,
         }]
-
 
     @pg.production("classdef : CLASS NAME LEFT_PARENTHESIS testlist RIGHT_PARENTHESIS COLON suite")
     def class_stmt_inherit(pack,):
@@ -328,7 +302,6 @@ def generate_parse(print_function):
             "value": suite,
         }]
 
-
     @pg.production("decorated : decorators funcdef")
     @pg.production("decorated : decorators classdef")
     def decorated(pack):
@@ -336,18 +309,15 @@ def generate_parse(print_function):
         funcdef[0]["decorators"] = decorators
         return funcdef
 
-
     @pg.production("decorators : decorators decorator")
     def decorators_decorator(pack):
         (decorators, decorator,) = pack
         return decorators + decorator
 
-
     @pg.production("decorators : decorator")
     def decorators(pack):
         (decorator,) = pack
         return decorator
-
 
     # TODO tests
     @pg.production("decorator : endl")
@@ -356,7 +326,6 @@ def generate_parse(print_function):
         # split decorators with empty lines... like seriously.
         (endl,) = pack
         return endl
-
 
     @pg.production("decorator : AT dotted_name endl")
     def decorator(pack):
@@ -370,7 +339,6 @@ def generate_parse(print_function):
             "call": {},
             "formatting": at.hidden_tokens_after,
         }] + endl
-
 
     @pg.production("decorator : AT dotted_name LEFT_PARENTHESIS RIGHT_PARENTHESIS endl")
     def decorator_empty_call(pack):
@@ -501,7 +469,6 @@ def generate_parse(print_function):
             }
         }]
 
-
     @pg.production("typed_parameter : LEFT_PARENTHESIS fplist RIGHT_PARENTHESIS maybe_test")
     @pg.production("parameter : LEFT_PARENTHESIS fplist RIGHT_PARENTHESIS maybe_test")
     def parameter_fplist(pack):
@@ -522,7 +489,6 @@ def generate_parse(print_function):
             },
         }]
 
-
     @pg.production("fplist : fplist parameter")
     def fplist_recur(pack):
         (fplist, name) = pack
@@ -530,14 +496,12 @@ def generate_parse(print_function):
             name = [name[0]["target"]]
         return fplist + name
 
-
     @pg.production("fplist : parameter comma")
     def fplist(pack):
         (name, comma) = pack
         if name[0]["type"] == "def_argument":
             name = [name[0]["target"]]
         return name + [comma]
-
 
     # really strange that left part of argument grammar can be a test
     # I guess it's yet another legacy mistake
@@ -650,12 +614,10 @@ def generate_parse(print_function):
         (simple_stmt,) = pack
         return simple_stmt
 
-
     @pg.production("suite : endls INDENT statements DEDENT")
     def suite_indent(pack):
         (endls, indent, statements, dedent,) = pack
         return endls + statements
-
 
     @pg.production("endls : endls endl")
     @pg.production("endls : endl")
@@ -663,7 +625,6 @@ def generate_parse(print_function):
         if len(p) == 1:
             return p[0]
         return p[0] + p[1]
-
 
     include_imports(pg)
     include_control_structures(pg)
@@ -716,12 +677,10 @@ def generate_parse(print_function):
         (int_,) = pack
         return create_node_from_token(int_, section="number")
 
-
     @pg.production("atom : name")
     def atom_name(pack):
         (name,) = pack
         return name
-
 
     @pg.production("atom : strings")
     def strings(pack):
@@ -760,7 +719,6 @@ def generate_parse(print_function):
             "first_formatting": string_.hidden_tokens_before,
             "second_formatting": string_.hidden_tokens_after,
         }]
-
 
     @pg.production("comma : COMMA")
     def comma(pack):
