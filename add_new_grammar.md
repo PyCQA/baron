@@ -48,7 +48,7 @@ Regarding the implementation:
 - [ ] try to find the good file in which to put your code, the name and content should be enough for that https://github.com/PyCQA/baron/tree/master/baron
 - [ ] write/update tests for everything regarding producing the new additions to the tree
 - [ ] implement the new grammar (if relevant)
-- [ ] modifying the rendering tree in [render.py]()
+- [ ] modifying the rendering tree in [render.py](https://github.com/PyCQA/baron/blob/master/baron/render.py)
 - [ ] write rendering and, if needed, rendering after modification, tests for everything here https://github.com/PyCQA/baron/blob/master/tests/test_dumper.py
 
 And you should be good, congratz if you reached this point!
