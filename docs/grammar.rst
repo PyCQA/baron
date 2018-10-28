@@ -268,6 +268,106 @@ After:
 
 **async is a NAME here, not a keyword** (because you can do `async = 42`.)
 
+Typed arguments
+---------------
+
+Python 3.3 or earlier
+
+Baron: https://github.com/PyCQA/baron/pull/140
+RedBaron: Done
+
+.. image:: ./grammar_diff/typed_args.png
+
+Action:
+
+::
+
+    # parameters
+    # this is mixed with the removal of def a((b, c)): style
+    # which will probably need to continue supporting
+
+    CHANGE parameters: '(' [varargslist] ')'
+                               ^
+    TO parameters: '(' [typedargslist] ')'
+                             ^
+
+::
+
+    # CHANGE
+    varargslist:
+       (
+          (fpdef ['=' test] ',')*
+          (
+             '*' NAME [',' '**' NAME]
+          |
+             '**' NAME
+          )
+       |
+          fpdef ['=' test]
+          (',' fpdef ['=' test])*
+          [',']
+       )
+
+    fpdef: NAME | '(' fplist ')'
+    fplist: fpdef (',' fpdef)* [',']
+
+    # TO
+    typedargslist:
+       (
+          tfpdef ['=' test]
+          (',' tfpdef ['=' test])*
+          [
+             ','
+             [
+                '*' [tfpdef]
+                (',' tfpdef ['=' test])*
+                [',' ['**' tfpdef [',']]]
+             |
+                '**' tfpdef [',']
+             ]
+          ]
+       |
+          '*' [tfpdef]
+          (',' tfpdef ['=' test])*
+          [',' ['**' tfpdef [',']]]
+       |
+          '**' tfpdef [',']
+       )
+
+    # after some analysis, this is just a refactoring of the previous form with
+    # fpdef being changed to vfpdef
+    varargslist:
+       (
+          vfpdef ['=' test]
+          (',' vfpdef ['=' test])*
+          [
+             ','
+             [
+                '*' [vfpdef]
+                (',' vfpdef ['=' test])*
+                [',' ['**' vfpdef [',']]]
+             |
+                '**' vfpdef [',']
+             ]
+          ]
+       |
+          '*' [vfpdef]
+          (',' vfpdef ['=' test])*
+          [',' ['**' vfpdef [',']]]
+       |
+          '**' vfpdef [',']
+       )
+
+    tfpdef: NAME [':' test]
+
+    vfpdef: NAME
+
+
+
+
+
+
+
 TODO
 ====
 
@@ -454,142 +554,6 @@ After:
     expr_stmt: testlist_star_expr (annassign | augassign (yield_expr|testlist) |
                          ('=' (yield_expr|testlist_star_expr))*)
     annassign: ':' test ['=' test]
-
-Refactoring in typedargslist ?
-------------------------------
-
-I think this is for asynchronous generator and comprehension:
-
-* https://docs.python.org/3/whatsnew/3.6.html#whatsnew36-pep525
-* https://docs.python.org/3/whatsnew/3.6.html#whatsnew36-pep530
-
-Before:
-
-::
-
-    typedargslist: (tfpdef ['=' test] (',' tfpdef ['=' test])* [','
-           ['*' [tfpdef] (',' tfpdef ['=' test])* [',' '**' tfpdef] | '**' tfpdef]]
-         |  '*' [tfpdef] (',' tfpdef ['=' test])* [',' '**' tfpdef] | '**' tfpdef)
-    varargslist: (vfpdef ['=' test] (',' vfpdef ['=' test])* [','
-           ['*' [vfpdef] (',' vfpdef ['=' test])* [',' '**' vfpdef] | '**' vfpdef]]
-         |  '*' [vfpdef] (',' vfpdef ['=' test])* [',' '**' vfpdef] | '**' vfpdef)
-
-After:
-
-::
-
-    typedargslist: (tfpdef ['=' test] (',' tfpdef ['=' test])* [','
-           ['*' [tfpdef] (',' tfpdef ['=' test])* [',' ['**' tfpdef [',']]]
-          | '**' tfpdef [',']]]
-      | '*' [tfpdef] (',' tfpdef ['=' test])* [',' ['**' tfpdef [',']]]
-      | '**' tfpdef [','])
-    varargslist: (vfpdef ['=' test] (',' vfpdef ['=' test])* [','
-           ['*' [vfpdef] (',' vfpdef ['=' test])* [',' ['**' vfpdef [',']]]
-         | '**' vfpdef [',']]]
-      | '*' [vfpdef] (',' vfpdef ['=' test])* [',' ['**' vfpdef [',']]]
-      | '**' vfpdef [',']
-    )
-
-
-Typed arguments
----------------
-
-Python 3.3 or earlier
-
-Baron: https://github.com/PyCQA/baron/pull/140
-RedBaron: WIP
-
-.. image:: ./grammar_diff/typed_args.png
-
-Action:
-
-::
-
-    # parameters
-    # this is mixed with the removal of def a((b, c)): style
-    # which will probably need to continue supporting
-
-    CHANGE parameters: '(' [varargslist] ')'
-                               ^
-    TO parameters: '(' [typedargslist] ')'
-                             ^
-
-::
-
-    # CHANGE
-    varargslist:
-       (
-          (fpdef ['=' test] ',')*
-          (
-             '*' NAME [',' '**' NAME]
-          |
-             '**' NAME
-          )
-       |
-          fpdef ['=' test]
-          (',' fpdef ['=' test])*
-          [',']
-       )
-
-    fpdef: NAME | '(' fplist ')'
-    fplist: fpdef (',' fpdef)* [',']
-
-    # TO
-    typedargslist:
-       (
-          tfpdef ['=' test]
-          (',' tfpdef ['=' test])*
-          [
-             ','
-             [
-                '*' [tfpdef]
-                (',' tfpdef ['=' test])*
-                [',' ['**' tfpdef [',']]]
-             |
-                '**' tfpdef [',']
-             ]
-          ]
-       |
-          '*' [tfpdef]
-          (',' tfpdef ['=' test])*
-          [',' ['**' tfpdef [',']]]
-       |
-          '**' tfpdef [',']
-       )
-
-    # after some analysis, this is just a refactoring of the previous form with
-    # fpdef being changed to vfpdef
-    varargslist:
-       (
-          vfpdef ['=' test]
-          (',' vfpdef ['=' test])*
-          [
-             ','
-             [
-                '*' [vfpdef]
-                (',' vfpdef ['=' test])*
-                [',' ['**' vfpdef [',']]]
-             |
-                '**' vfpdef [',']
-             ]
-          ]
-       |
-          '*' [vfpdef]
-          (',' vfpdef ['=' test])*
-          [',' ['**' vfpdef [',']]]
-       |
-          '**' vfpdef [',']
-       )
-
-    tfpdef: NAME [':' test]
-
-    vfpdef: NAME
-
-
-
-
-
-
 
 
 
