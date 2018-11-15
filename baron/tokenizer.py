@@ -28,6 +28,7 @@ TOKENS = (
     (r'0[xX][\d_a-fA-F]+[lL]?', 'HEXA'),
     (r'(0[oO][0-7]+)|(0[0-7_]*)[lL]?', 'OCTA'),
     (r'0[bB][01_]+[lL]?', 'BINARY'),
+    (r'->', 'ROCKET'),
     (r'\(', 'LEFT_PARENTHESIS'),
     (r'\)', 'RIGHT_PARENTHESIS'),
     (r':', 'COLON'),

@@ -380,17 +380,34 @@ def generate_parse(print_function):
             "formatting": at.hidden_tokens_after,
         }] + endl
 
-    @pg.production("funcdef : async_maybe DEF NAME LEFT_PARENTHESIS typed_parameters RIGHT_PARENTHESIS COLON suite")
+
+    @pg.production("deftypehint : ")
+    def deftypehint_empty(pack):
+        return {}
+
+    @pg.production("deftypehint : ROCKET names")
+    def deftypehint(pack):
+        (rocket, names_ ) = pack
+        return {
+            "type": "deftypehint",
+            "name": names_,
+            "first_formatting": rocket.hidden_tokens_before,
+            "second_formatting": rocket.hidden_tokens_after,
+        }
+
+    @pg.production("funcdef : async_maybe DEF NAME LEFT_PARENTHESIS typed_parameters RIGHT_PARENTHESIS deftypehint COLON suite")
     def function_definition(pack):
-        (async_maybe, def_, name, left_parenthesis, typed_parameters, right_parenthesis, colon, suite) = pack
+        (async_maybe, def_, name, left_parenthesis, typed_parameters, right_parenthesis, deftypehint_, colon, suite) = pack
 
         if async_maybe["async"] and async_maybe["value"] != "async":
-            raise ParsingError("The only possible keyword before a 'def' is 'async', not '%s'" % async_maybe["value"])
-
+            raise ParsingError(
+                "The only possible keyword before a 'def' is 'async', not '%s'" %
+                async_maybe["value"])
         return [{
             "type": "def",
             "async": async_maybe["async"],
             "async_formatting": async_maybe.get("formatting", []),
+            "deftypehint": deftypehint_,
             "decorators": [],
             "name": name.value,
             "first_formatting": def_.hidden_tokens_after,
@@ -406,6 +423,7 @@ def generate_parse(print_function):
     @pg.production("argslist : argslist argument")
     @pg.production("typed_parameters : typed_parameters typed_parameter")
     @pg.production("parameters : parameters parameter")
+    @pg.production("parameters : parameters typed_parameter")
     def parameters_parameters_parameter(pack,):
         (parameters, parameter,) = pack
         return parameters + parameter
@@ -413,7 +431,18 @@ def generate_parse(print_function):
     @pg.production("argslist : argument")
     @pg.production("typed_parameters : typed_parameter")
     @pg.production("parameters : parameter")
+    @pg.production("parameters : typed_parameter")
     def parameters_parameter(pack,):
+        (parameter,) = pack
+        return parameter
+
+    @pg.production("untyped_parameters : untyped_parameters parameter")
+    def untyped_parameters_untyped_parameters_parameter(pack,):
+        (parameters, parameter,) = pack
+        return parameters + parameter
+
+    @pg.production("untyped_parameters : parameter")
+    def untyped_parameters_parameter(pack,):
         (parameter,) = pack
         return parameter
 
@@ -516,6 +545,33 @@ def generate_parse(print_function):
             "second_formatting": equal.hidden_tokens_after if equal else [],
             "value": test if equal else name,
             "target": name if equal else {}
+        }]
+
+    @pg.production("maybe_typehint : COLON name")
+    @pg.production("typehint : COLON name")
+    def typehint(pack):
+        (colon_, name_) = pack
+        return {
+            "type": "typehint",
+            "first_formatting": colon_.hidden_tokens_before,
+            "value": name_,
+            "second_formatting": colon_.hidden_tokens_after,
+        }
+
+    @pg.production("maybe_typehint : ")
+    def typehint_empty(pack):
+        return {}
+
+    @pg.production("typed_parameter : name maybe_typehint maybe_test")
+    def parameter_with_default(pack):
+        (name, typehint_, (equal, test)) = pack
+        return [{
+            "type": "def_argument",
+            "typehint": typehint_,
+            "first_formatting": equal.hidden_tokens_before if equal else [],
+            "second_formatting": equal.hidden_tokens_after if equal else [],
+            "value": test,
+            "target": name
         }]
 
     @pg.production("typed_parameter : typed_name maybe_test")

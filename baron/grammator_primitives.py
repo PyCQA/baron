@@ -307,8 +307,8 @@ def include_primivites(pg, print_function):
             "value": test
         }
 
-    @pg.production("lambdef : LAMBDA parameters COLON test")
-    @pg.production("old_lambdef : LAMBDA parameters COLON old_test")
+    @pg.production("lambdef : LAMBDA untyped_parameters COLON test")
+    @pg.production("old_lambdef : LAMBDA untyped_parameters COLON old_test")
     def lambdef_arguments(pack):
         (lambda_, parameters, colon, test) = pack
         return {

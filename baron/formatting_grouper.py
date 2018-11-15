@@ -25,6 +25,7 @@ BOTH = (
     "PLUS",
     "MINUS",
     "AT",
+    "ROCKET",
     "LEFT_SHIFT",
     "RIGHT_SHIFT",
     "AMPER",

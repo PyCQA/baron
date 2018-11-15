@@ -320,10 +320,17 @@ nodes_rendering_order = {
             ("list",       "arguments",         True),
             ("formatting", "fourth_formatting", True),
             ("constant",   ")",                 True),
+            ("key",         "deftypehint",         "deftypehint"),
             ("formatting", "fifth_formatting",  True),
             ("constant",   ":",                 True),
             ("formatting", "sixth_formatting",  True),
             ("list",       "value",             True),
+        ],
+        "deftypehint": [
+            ("formatting",  "first_formatting",  True),
+            ("constant",    "->",                True),
+            ("formatting",  "second_formatting", True),
+            ("list",        "name",              True),
         ],
 
         "call_argument": [
@@ -333,8 +340,15 @@ nodes_rendering_order = {
             ("formatting", "second_formatting", "target"),
             ("key",        "value",             True),
         ],
+        "typehint": [
+            ("formatting", "first_formatting",  True),
+            ("constant",   ":",                 True),
+            ("formatting", "second_formatting", True),
+            ("key",        "value",             True),
+        ],
         "def_argument": [
             ("key",        "target",            True),
+            ("key",        "typehint",          "typehint"),
             ("formatting", "first_formatting",  "value"),
             ("constant",   "=",                 "value"),
             ("formatting", "second_formatting", "value"),
