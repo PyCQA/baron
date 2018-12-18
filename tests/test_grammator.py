@@ -2720,3 +2720,51 @@ def test_regression_def_argument_tuple_nested():
             ]
         }
     ])
+
+
+def test_typed_variable_no_assignment():
+    """
+    x : int
+    """
+    parse_simple([
+        ('NAME', 'x'),
+        ('COLON', ':', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'int'),
+    ], [
+        {
+            "type": "annassign",
+            "annotation": {"type": "name", "value": "int"},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [],
+            "fourth_formatting": [],
+            "target": {"type": "name", "value": "x"},
+            "has_value": False,
+            "value": {}
+        }
+    ])
+
+
+def test_typed_variable_with_assignment():
+    """
+    x : int = 1
+    """
+    parse_simple([
+        ('NAME', 'x'),
+        ('COLON', ':', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'int'),
+        ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('INT', '1'),
+    ], [
+        {
+            "type": "annassign",
+            "annotation": {"type": "name", "value": "int"},
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [{"type": "space", "value": " "}],
+            "target": {"type": "name", "value": "x"},
+            "has_value": True,
+            "value": {"section": "number", "type": "int", "value": "1"}
+        }
+    ])

@@ -480,6 +480,19 @@ nodes_rendering_order = {
             ("key",        "value",             True),
         ],
 
+        "annassign": [
+            ("key",        "target",            True),
+            ("formatting", "first_formatting",  True),
+            ("constant",   ":",                 True),
+            ("formatting", "second_formatting", True),
+            ("key",        "annotation",        True),
+            ("formatting", "third_formatting",  "has_value"),
+            ("constant",   "=",                 "has_value"),
+            ("formatting", "fourth_formatting", "has_value"),
+            ("key",        "value",             "has_value"),
+            ("bool",       "has_value",         False),
+        ],
+
         "unitary_operator": [
             ("string",     "value",             True),
             ("formatting", "formatting",        True),

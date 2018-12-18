@@ -18,6 +18,25 @@ def include_operators(pg):
         (old_test, comma, testlist_safe) = pack
         return [old_test, comma] + testlist_safe
 
+    @pg.production("annassign : COLON test maybe_test")
+    def annassign(pack):
+        return pack
+
+    @pg.production("expr_stmt : test annassign")
+    def augmented_assignment_node(pack):
+        (target, (colon, annotation, (equal, test))) = pack
+        return {
+            "type": "annassign",
+            "first_formatting": colon.hidden_tokens_before,
+            "second_formatting": colon.hidden_tokens_after,
+            "third_formatting": equal.hidden_tokens_before if equal else [],
+            "fourth_formatting": equal.hidden_tokens_after if equal else [],
+            "target": target,
+            "value": test,
+            "annotation": annotation,
+            "has_value": equal is not None
+        }
+
     @pg.production("expr_stmt : testlist augassign_operator testlist")
     @pg.production("expr_stmt : testlist augassign_operator yield_expr")
     def augmented_assignment_node(pack):
