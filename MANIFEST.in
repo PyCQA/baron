@@ -1,2 +1,2 @@
-include README.md CHANGELOG LICENCE
+include README.md CHANGELOG LICENSE
 graft tests
