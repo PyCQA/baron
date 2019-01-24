@@ -73,6 +73,7 @@ TOKENS = (
     (r'<<=', 'LEFT_SHIFT_EQUAL'),
     (r'>>=', 'RIGHT_SHIFT_EQUAL'),
     (r'\.\.\.', 'ELLIPSIS'),
+    (r'->', 'RIGHT_ARROW'),
     (r'\*\*=', 'DOUBLE_STAR_EQUAL'),
     (r'//', 'DOUBLE_SLASH'),
     (r'//=', 'DOUBLE_SLASH_EQUAL'),

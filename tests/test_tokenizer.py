@@ -560,3 +560,7 @@ def test_backslash():
 
 def test_ellipsis():
     match("...", "ELLIPSIS")
+
+
+def test_right_arrow():
+    match("->", "RIGHT_ARROW")
