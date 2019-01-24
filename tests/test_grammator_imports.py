@@ -1286,6 +1286,39 @@ def test_from_dot_import_b():
     ])
 
 
+def test_from_dot_dot_dot_import_b():
+    "from ... import b"
+    parse_simple([
+        ('FROM', 'from', [], [('SPACE', ' ')]),
+        ('ELLIPSIS', '...'),
+        ('IMPORT', 'import', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'b')
+    ], [
+        {
+            "type": "from_import",
+            "value": [
+                {
+                    "type": "ellipsis",
+                    "first_formatting": [],
+                    "second_formatting": [],
+                }
+            ],
+            "targets": [
+                {
+                    "type": "name_as_name",
+                    "value": 'b',
+                    "first_formatting": [],
+                    "second_formatting": [],
+                    "target": "",
+                }
+            ],
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}]
+        }
+    ])
+
+
 def test_from_dot_no_space_import_b():
     "from .import b"
     parse_simple([

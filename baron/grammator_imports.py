@@ -160,3 +160,12 @@ def include_imports(pg):
             "first_formatting": dot.hidden_tokens_before,
             "second_formatting": dot.hidden_tokens_after,
         }]
+
+    @pg.production("dotted_name_element : ELLIPSIS")
+    def dotted_name_dot_dot_dot(pack):
+        ellipsis = pack[0]
+        return [{
+            "type": "ellipsis",
+            "first_formatting": ellipsis.hidden_tokens_before,
+            "second_formatting": ellipsis.hidden_tokens_after,
+        }]
