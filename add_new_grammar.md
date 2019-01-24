@@ -58,3 +58,4 @@ And you should be good, congratz if you reached this point!
 - [ ] modify the reference page https://baron.readthedocs.io/en/latest/grammar.html
 - [ ] [modify baron's grammar](https://github.com/PyCQA/baron/blob/master/grammar/baron_grammar)
 - [ ] consider implementing the new additions in [RedBaron](https://github.com/pycqa/redbaron)
+- [ ] udpate CHANGELOG
