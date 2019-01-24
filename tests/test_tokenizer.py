@@ -556,3 +556,7 @@ def test_exponant_complex():
 
 def test_backslash():
     match("\\\n", "SPACE")
+
+
+def test_ellipsis():
+    match("...", "ELLIPSIS")
