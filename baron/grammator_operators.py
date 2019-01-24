@@ -264,7 +264,7 @@ def include_operators(pg):
             "type": "dot",
             "first_formatting": dot.hidden_tokens_before,
             "second_formatting": dot.hidden_tokens_after,
-        },{
+        }, {
             "type": "name",
             "value": name.value,
         }]
