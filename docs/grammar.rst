@@ -268,6 +268,13 @@ After:
 
 **async is a NAME here, not a keyword** (because you can do `async = 42`.)
 
+Ellipsis in from import
+-----------------------
+
+Python 3.3 or earlier
+
+.. image:: ./grammar_diff/ellipsis_in_from_import.png
+
 Typed arguments
 ---------------
 
@@ -370,13 +377,6 @@ Action:
 
 TODO
 ====
-
-Ellipsis in from import
------------------------
-
-Python 3.3 or earlier
-
-.. image:: ./grammar_diff/ellipsis_in_from_import.png
 
 Function return type
 --------------------
