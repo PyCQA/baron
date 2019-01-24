@@ -384,7 +384,7 @@ def test_file_input_simple_stmt_one_item_semicolon_space():
 
 def test_ellipsis():
     "..."
-    parse_simple([('DOT', '.'), ('DOT', '.'), ('DOT', '.')], [
+    parse_simple([('ELLIPSIS', '...')], [
         {
             "type": "ellipsis",
             "first_formatting": [],

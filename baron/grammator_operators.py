@@ -294,14 +294,14 @@ def include_operators(pg):
             "fourth_formatting": right.hidden_tokens_after,
         }]
 
-    @pg.production("subscript : DOT DOT DOT")
-    @pg.production("atom : DOT DOT DOT")
+    @pg.production("subscript : ELLIPSIS")
+    @pg.production("atom : ELLIPSIS")
     def subscript_ellipsis(pack):
-        (dot1, dot2, dot3) = pack
+        ellipsis = pack[0]
         return {
             "type": "ellipsis",
-            "first_formatting": dot1.hidden_tokens_after,
-            "second_formatting": dot2.hidden_tokens_after,
+            "first_formatting": ellipsis.hidden_tokens_after,
+            "second_formatting": ellipsis.hidden_tokens_after,
         }
 
     @pg.production("subscript : test")

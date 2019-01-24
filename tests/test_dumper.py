@@ -549,7 +549,7 @@ def test_global_more():
 
 
 def test_ellipsis():
-    check_dumps("a[ . .  .]")
+    check_dumps("a[ ... ]")
 
 
 def test_yield_atom_empty():

@@ -8848,9 +8848,7 @@ def test_subscript_ellipsis():
     parse_simple([
         ('NAME', 'a'),
         ('LEFT_SQUARE_BRACKET', '['),
-        ('DOT', '.'),
-        ('DOT', '.'),
-        ('DOT', '.'),
+        ('ELLIPSIS', '...'),
         ('RIGHT_SQUARE_BRACKET', ']'),
     ], [
         {
@@ -8878,13 +8876,11 @@ def test_subscript_ellipsis():
 
 
 def test_subscript_ellipsis_space():
-    "a[. .  .   ]"
+    "a[ ...   ]"
     parse_simple([
         ('NAME', 'a'),
-        ('LEFT_SQUARE_BRACKET', '['),
-        ('DOT', '.', [], [('SPACE', ' ')]),
-        ('DOT', '.', [], [('SPACE', '  ')]),
-        ('DOT', '.'),
+        ('LEFT_SQUARE_BRACKET', '[', [('SPACE', ' ')]),
+        ('ELLIPSIS', '...'),
         ('RIGHT_SQUARE_BRACKET', ']', [('SPACE', '   ')]),
     ], [
         {
@@ -8896,14 +8892,14 @@ def test_subscript_ellipsis_space():
                 },
                 {
                     "type": "getitem",
-                    "first_formatting": [],
+                    "first_formatting": [{"type": "space", "value": " "}],
                     "second_formatting": [],
                     "third_formatting": [{"type": "space", "value": "   "}],
                     "fourth_formatting": [],
                     "value": {
                         "type": "ellipsis",
-                        "first_formatting": [{"type": "space", "value": " "}],
-                        "second_formatting": [{"type": "space", "value": "  "}],
+                        "first_formatting": [],
+                        "second_formatting": [],
                     }
                 }
             ]
