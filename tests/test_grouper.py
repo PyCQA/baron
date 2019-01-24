@@ -213,3 +213,6 @@ def test_float_exponant():
     grouper_test("1.e2", ['1', '.', 'e2'], ['1.e2'])
     grouper_test(".3e55", ['.', '3e55'], ['.3e55'])
 
+
+def test_arrow():
+    grouper_test("->", ['-', '>'], ['->'])

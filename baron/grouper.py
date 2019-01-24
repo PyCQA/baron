@@ -29,6 +29,7 @@ to_group = (
     ("\r", "\n"),
     (".", "."),
     ("..", "."),
+    ("-", ">"),
 )
 
 to_group_keys, _ = list(zip(*to_group))
