@@ -6,6 +6,7 @@ Changelog
 
 - add support for ... in from import by bram
 - add support for return annotation by bram
+- add support for exec function by bram
 
 0.8 (2018-10-29)
 ----------------
