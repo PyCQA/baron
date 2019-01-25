@@ -1,6 +1,3 @@
-import re
-
-
 def has_print_function(tokens):
     p = 0
     while p < len(tokens):
