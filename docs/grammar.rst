@@ -290,6 +290,17 @@ Action:
     ADD ['->' test] to funcdef rule
     funcdef: 'def' NAME parameters ['->' test] ':' suite
 
+Exec function
+-------------
+
+Python 3.3 or earlier
+
+.. image:: ./grammar_diff/exec_function.png
+
+Like print_function but for 'exec'.
+
+No one seems to be using that.
+
 Typed arguments
 ---------------
 
@@ -392,17 +403,6 @@ Action:
 
 TODO
 ====
-
-Exec function
--------------
-
-Python 3.3 or earlier
-
-.. image:: ./grammar_diff/exec_function.png
-
-Like print_function but for 'exec'.
-
-No one seems to be using that.
 
 *var generalisation
 -------------------
