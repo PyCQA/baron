@@ -783,7 +783,7 @@ def generate_parse(print_function):
         if print_function:
             new_tokens = []
             for token in tokens:
-                if token[0] == "PRINT":
+                if token[0] in ("PRINT", "EXEC"):
                     token = list(token)
                     token[0] = "NAME"
                     token = tuple(token)

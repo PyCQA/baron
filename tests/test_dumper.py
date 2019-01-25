@@ -544,6 +544,10 @@ def test_exec_globals_locals():
     check_dumps("exec a  in   b   ,     c")
 
 
+def test_exec_function():
+    check_dumps("exec(a)")
+
+
 def test_global():
     check_dumps("global a")
 

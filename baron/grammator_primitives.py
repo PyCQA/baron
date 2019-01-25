@@ -54,6 +54,51 @@ def include_primivites(pg, print_function):
                 "formatting": print_.hidden_tokens_after,
             }
 
+        @pg.production("assert_stmt : EXEC expr")
+        def exec_stmt(pack):
+            (exec_, expr) = pack
+            return {
+                "type": "exec",
+                "value": expr,
+                "globals": None,
+                "locals": None,
+                "first_formatting": exec_.hidden_tokens_after,
+                "second_formatting": [],
+                "third_formatting": [],
+                "fourth_formatting": [],
+                "fifth_formatting": []
+            }
+
+        @pg.production("assert_stmt : EXEC expr IN test")
+        def exec_stmt_in(pack):
+            (exec_, expr, in_, test) = pack
+            return {
+                "type": "exec",
+                "value": expr,
+                "globals": test,
+                "locals": None,
+                "first_formatting": exec_.hidden_tokens_after,
+                "second_formatting": in_.hidden_tokens_before,
+                "third_formatting": in_.hidden_tokens_after,
+                "fourth_formatting": [],
+                "fifth_formatting": []
+            }
+
+        @pg.production("assert_stmt : EXEC expr IN test COMMA test")
+        def exec_stmt_in_comma(pack):
+            (exec_, expr, in_, test, comma, test2) = pack
+            return {
+                "type": "exec",
+                "value": expr,
+                "globals": test,
+                "locals": test2,
+                "first_formatting": exec_.hidden_tokens_after,
+                "second_formatting": in_.hidden_tokens_before,
+                "third_formatting": in_.hidden_tokens_after,
+                "fourth_formatting": comma.hidden_tokens_before,
+                "fifth_formatting": comma.hidden_tokens_after
+            }
+
     @pg.production("flow_stmt : return_stmt")
     @pg.production("flow_stmt : break_stmt")
     @pg.production("flow_stmt : continue_stmt")
@@ -146,51 +191,6 @@ def include_primivites(pg, print_function):
             "third_formatting": comma.hidden_tokens_after,
             "fourth_formatting": comma2.hidden_tokens_before,
             "fifth_formatting": comma2.hidden_tokens_after
-        }
-
-    @pg.production("assert_stmt : EXEC expr")
-    def exec_stmt(pack):
-        (exec_, expr) = pack
-        return {
-            "type": "exec",
-            "value": expr,
-            "globals": None,
-            "locals": None,
-            "first_formatting": exec_.hidden_tokens_after,
-            "second_formatting": [],
-            "third_formatting": [],
-            "fourth_formatting": [],
-            "fifth_formatting": []
-        }
-
-    @pg.production("assert_stmt : EXEC expr IN test")
-    def exec_stmt_in(pack):
-        (exec_, expr, in_, test) = pack
-        return {
-            "type": "exec",
-            "value": expr,
-            "globals": test,
-            "locals": None,
-            "first_formatting": exec_.hidden_tokens_after,
-            "second_formatting": in_.hidden_tokens_before,
-            "third_formatting": in_.hidden_tokens_after,
-            "fourth_formatting": [],
-            "fifth_formatting": []
-        }
-
-    @pg.production("assert_stmt : EXEC expr IN test COMMA test")
-    def exec_stmt_in_comma(pack):
-        (exec_, expr, in_, test, comma, test2) = pack
-        return {
-            "type": "exec",
-            "value": expr,
-            "globals": test,
-            "locals": test2,
-            "first_formatting": exec_.hidden_tokens_after,
-            "second_formatting": in_.hidden_tokens_before,
-            "third_formatting": in_.hidden_tokens_after,
-            "fourth_formatting": comma.hidden_tokens_before,
-            "fifth_formatting": comma.hidden_tokens_after
         }
 
     @pg.production("assert_stmt : ASSERT test")
