@@ -380,9 +380,9 @@ def generate_parse(print_function):
             "formatting": at.hidden_tokens_after,
         }] + endl
 
-    @pg.production("funcdef : async_maybe DEF NAME LEFT_PARENTHESIS typed_parameters RIGHT_PARENTHESIS COLON suite")
+    @pg.production("funcdef : async_maybe DEF NAME LEFT_PARENTHESIS typed_parameters RIGHT_PARENTHESIS return_annotation COLON suite")
     def function_definition(pack):
-        (async_maybe, def_, name, left_parenthesis, typed_parameters, right_parenthesis, colon, suite) = pack
+        (async_maybe, def_, name, left_parenthesis, typed_parameters, right_parenthesis, return_annotation, colon, suite) = pack
 
         if async_maybe["async"] and async_maybe["value"] != "async":
             raise ParsingError("The only possible keyword before a 'def' is 'async', not '%s'" % async_maybe["value"])
@@ -390,6 +390,9 @@ def generate_parse(print_function):
         return [{
             "type": "def",
             "async": async_maybe["async"],
+            "return_annotation": return_annotation["value"],
+            "return_annotation_first_formatting": return_annotation["first_formatting"],
+            "return_annotation_second_formatting": return_annotation["second_formatting"],
             "async_formatting": async_maybe.get("formatting", []),
             "decorators": [],
             "name": name.value,
@@ -402,6 +405,23 @@ def generate_parse(print_function):
             "arguments": typed_parameters,
             "value": suite,
         }]
+
+    @pg.production("return_annotation : ")
+    def return_annotation_empty(pack):
+        return {
+            "value": {},
+            "first_formatting": [],
+            "second_formatting": [],
+        }
+
+    @pg.production("return_annotation : RIGHT_ARROW test")
+    def return_annotation(pack):
+        right_arrow, test = pack
+        return {
+            "value": test,
+            "first_formatting": right_arrow.hidden_tokens_before,
+            "second_formatting": right_arrow.hidden_tokens_after,
+        }
 
     @pg.production("argslist : argslist argument")
     @pg.production("typed_parameters : typed_parameters typed_parameter")

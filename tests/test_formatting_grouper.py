@@ -3037,3 +3037,15 @@ def test_space_before_comment():
 
     )
 
+
+def test_right_arrow():
+    """
+     -> 
+    """
+    group([
+        ('SPACE', ' '),
+        ('RIGHT_ARROW', '->'),
+        ('SPACE', ' '),
+    ], [
+        ('RIGHT_ARROW', '->', [('SPACE', ' ')], [('SPACE', ' ')]),
+    ])

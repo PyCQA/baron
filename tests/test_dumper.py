@@ -103,6 +103,10 @@ def test_dict_argument_funcdef():
     check_dumps("def caramba(** a): pass\n")
 
 
+def test_funcdef_return_annotation():
+    check_dumps("def caramba() -> Stuff: pass\n")
+
+
 def test_string():
     check_dumps("'ama string!'")
 

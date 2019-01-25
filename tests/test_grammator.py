@@ -416,6 +416,65 @@ def test_funcdef_stmt_indent():
             "decorators": [],
             "async": False,
             "async_formatting": [],
+            "return_annotation": {},
+            "return_annotation_first_formatting": [],
+            "return_annotation_second_formatting": [],
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [],
+            "fourth_formatting": [],
+            "fifth_formatting": [{"type": "space", "value": " "}],
+            "sixth_formatting": [{"type": "space", "value": " "}],
+            "arguments": [],
+            "value": [
+                {
+                    "type": "endl",
+                    "value": "\n",
+                    "formatting": [],
+                    "indent": "    "
+                },
+                {
+                    "type": "pass",
+                },
+                {
+                    "type": "endl",
+                    "formatting": [],
+                    "indent": "",
+                    "value": "\n"
+                }
+            ],
+        }
+    ])
+
+
+def test_funcdef_stmt_indent_return_annotation():
+    """
+    def a () -> b :
+        pass
+    """
+    parse_multi([
+        ('DEF', 'def', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('LEFT_PARENTHESIS', '(', [('SPACE', ' ')]),
+        ('RIGHT_PARENTHESIS', ')'),
+        ('RIGHT_ARROW', '->', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'b'),
+        ('COLON', ':', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n'),
+        ('DEDENT', ''),
+    ], [
+        {
+            "type": "def",
+            "name": "a",
+            "decorators": [],
+            "async": False,
+            "return_annotation": {"type": "name", "value": "b"},
+            "return_annotation_first_formatting": [{"type": "space", "value": " "}],
+            "return_annotation_second_formatting": [{"type": "space", "value": " "}],
+            "async_formatting": [],
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [],
@@ -469,6 +528,9 @@ def test_funcdef_stmt_async():
             "decorators": [],
             "async": True,
             "async_formatting": [{"type": "space", "value": " "}],
+            "return_annotation": {},
+            "return_annotation_first_formatting": [],
+            "return_annotation_second_formatting": [],
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [],
@@ -543,6 +605,9 @@ def test_funcdef_stmt_one_parameter_indent():
             "decorators": [],
             "async": False,
             "async_formatting": [],
+            "return_annotation": {},
+            "return_annotation_first_formatting": [],
+            "return_annotation_second_formatting": [],
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [{"type": "space", "value": " "}],
@@ -608,6 +673,9 @@ def test_funcdef_stmt_one_parameter_typed_indent():
             "decorators": [],
             "async": False,
             "async_formatting": [],
+            "return_annotation": {},
+            "return_annotation_first_formatting": [],
+            "return_annotation_second_formatting": [],
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [{"type": "space", "value": " "}],
@@ -676,6 +744,9 @@ def test_funcdef_stmt_one_parameter_typed_indent_no_format():
             "decorators": [],
             "async": False,
             "async_formatting": [],
+            "return_annotation": {},
+            "return_annotation_first_formatting": [],
+            "return_annotation_second_formatting": [],
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [{"type": "space", "value": " "}],
@@ -745,6 +816,9 @@ def test_funcdef_stmt_star_parameter_typed_indent_no_format():
             "decorators": [],
             "async": False,
             "async_formatting": [],
+            "return_annotation": {},
+            "return_annotation_first_formatting": [],
+            "return_annotation_second_formatting": [],
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [{"type": "space", "value": " "}],
@@ -812,6 +886,9 @@ def test_funcdef_stmt_double_star_parameter_typed_indent_no_format():
             "decorators": [],
             "async": False,
             "async_formatting": [],
+            "return_annotation": {},
+            "return_annotation_first_formatting": [],
+            "return_annotation_second_formatting": [],
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [{"type": "space", "value": " "}],
@@ -876,6 +953,9 @@ def test_funcdef_stmt_one_parameter_comma_indent():
             "decorators": [],
             "async": False,
             "async_formatting": [],
+            "return_annotation": {},
+            "return_annotation_first_formatting": [],
+            "return_annotation_second_formatting": [],
             "name": "a",
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
@@ -947,6 +1027,9 @@ def test_funcdef_stmt_one_parameter_comma_default_indent():
             "decorators": [],
             "async": False,
             "async_formatting": [],
+            "return_annotation": {},
+            "return_annotation_first_formatting": [],
+            "return_annotation_second_formatting": [],
             "name": "a",
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
@@ -1031,6 +1114,9 @@ def test_funcdef_stmt_two_parameters_typed_with_default_indent():
             "decorators": [],
             "async": False,
             "async_formatting": [],
+            "return_annotation": {},
+            "return_annotation_first_formatting": [],
+            "return_annotation_second_formatting": [],
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [{"type": "space", "value": " "}],
@@ -1287,6 +1373,9 @@ def test_funcdef_stmt_one_start_parameter_indent():
             "decorators": [],
             "async": False,
             "async_formatting": [],
+            "return_annotation": {},
+            "return_annotation_first_formatting": [],
+            "return_annotation_second_formatting": [],
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [],
             "third_formatting": [],
@@ -1349,6 +1438,9 @@ def test_funcdef_stmt_one_star_star_parameter_indent():
             "decorators": [],
             "async": False,
             "async_formatting": [],
+            "return_annotation": {},
+            "return_annotation_first_formatting": [],
+            "return_annotation_second_formatting": [],
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [],
             "third_formatting": [],
@@ -1843,6 +1935,9 @@ def test_decorator():
             "name": "b",
             "async": False,
             "async_formatting": [],
+            "return_annotation": {},
+            "return_annotation_first_formatting": [],
+            "return_annotation_second_formatting": [],
             "decorators": [
                 {
                     "type": "decorator",
@@ -1911,6 +2006,9 @@ def test_decorator_parenthesis():
             "name": "b",
             "async": False,
             "async_formatting": [],
+            "return_annotation": {},
+            "return_annotation_first_formatting": [],
+            "return_annotation_second_formatting": [],
             "decorators": [
                 {
                     "type": "decorator",
@@ -1987,6 +2085,9 @@ def test_decorator_parenthesis_arg():
             "name": "b",
             "async": False,
             "async_formatting": [],
+            "return_annotation": {},
+            "return_annotation_first_formatting": [],
+            "return_annotation_second_formatting": [],
             "decorators": [
                 {
                     "type": "decorator",
@@ -2075,6 +2176,9 @@ def test_decorator_two():
             "name": "b",
             "async": False,
             "async_formatting": [],
+            "return_annotation": {},
+            "return_annotation_first_formatting": [],
+            "return_annotation_second_formatting": [],
             "decorators": [
                 {
                     "type": "decorator",
@@ -2342,6 +2446,9 @@ def test_fplist():
             "decorators": [],
             "async": False,
             "async_formatting": [],
+            "return_annotation": {},
+            "return_annotation_first_formatting": [],
+            "return_annotation_second_formatting": [],
             "value": [
                 {
                     "type": "pass",
@@ -2418,6 +2525,9 @@ def test_fplist_two():
             "decorators": [],
             "async": False,
             "async_formatting": [],
+            "return_annotation": {},
+            "return_annotation_first_formatting": [],
+            "return_annotation_second_formatting": [],
             "value": [
                 {
                     "type": "pass",
@@ -2480,6 +2590,9 @@ def test_fplist_alone():
             "decorators": [],
             "async": False,
             "async_formatting": [],
+            "return_annotation": {},
+            "return_annotation_first_formatting": [],
+            "return_annotation_second_formatting": [],
             "value": [
                 {
                     "type": "pass",
@@ -2569,6 +2682,9 @@ def test_regression_def_argument_tuple():
             'decorators': [],
             'async': False,
             'async_formatting': [],
+            "return_annotation": {},
+            "return_annotation_first_formatting": [],
+            "return_annotation_second_formatting": [],
             'fifth_formatting': [],
             'first_formatting': [
                 {
@@ -2688,6 +2804,9 @@ def test_regression_def_argument_tuple_nested():
             'decorators': [],
             'async': False,
             'async_formatting': [],
+            "return_annotation": {},
+            "return_annotation_first_formatting": [],
+            "return_annotation_second_formatting": [],
             'fifth_formatting': [],
             'first_formatting': [
                 {
