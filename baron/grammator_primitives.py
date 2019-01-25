@@ -19,7 +19,7 @@ def include_primivites(pg, print_function):
             (print_, testlist) = pack
             return {
                 "type": "print",
-                "value": testlist["value"] if testlist["type"] == "tuple" and testlist["with_parenthesis"] == False else [testlist],
+                "value": testlist["value"] if testlist["type"] == "tuple" and testlist["with_parenthesis"] is False else [testlist],
                 "destination": None,
                 "destination_formatting": [],
                 "formatting": print_.hidden_tokens_after,
@@ -44,7 +44,6 @@ def include_primivites(pg, print_function):
                 "first_formatting": comma.hidden_tokens_before,
                 "second_formatting": comma.hidden_tokens_after,
             }]
-            #print testlist
             value += testlist["value"] if testlist["type"] == "tuple" else [testlist]
             return {
                 "type": "print",
