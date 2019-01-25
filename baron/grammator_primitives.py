@@ -240,11 +240,6 @@ def include_primivites(pg, print_function):
         (name,) = pack
         return [create_node_from_token(name)]
 
-    @pg.production("names : NAME")
-    def names_name(pack):
-        (name,) = pack
-        return [create_node_from_token(name)]
-
     @pg.production("names : names comma name")
     def names_names_name(pack):
         (names, comma, name,) = pack
