@@ -24,7 +24,6 @@ Lexer:
     - `_tokenize` is for new token, obviously, like new keywords or new grouped characters
     - `space_group` will need to be modified for new keywords or statement, it's quite tricky, it's to group space on neighbour tokens (they will be unfold during grammar parsing) following the general rules of "a node needs to be responsible for its formatting"
     - `inner_group` is a variation of the previous one, it's for the case of tokens between `() [] {}`
-    - `inner_group` is a variation of the previous one, it's for the case of tokens between `() [] {}`
     - `mark_indentation` is to handle inserting `IDENT`/`DEDENT` tokens, it very unlikely you'll ever need to work on this one except if python includes new statements (like the `with` statement)
 
 - [ ] have tests for everything regarding the lexer (if possible in a TDD fashion)
