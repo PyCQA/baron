@@ -275,6 +275,21 @@ Python 3.3 or earlier
 
 .. image:: ./grammar_diff/ellipsis_in_from_import.png
 
+Function return type
+--------------------
+
+Python 3.3 or earlier
+
+.. image:: ./grammar_diff/function_return_type.png
+
+Action:
+
+::
+
+    ADD '->' to the lexer
+    ADD ['->' test] to funcdef rule
+    funcdef: 'def' NAME parameters ['->' test] ':' suite
+
 Typed arguments
 ---------------
 
@@ -377,21 +392,6 @@ Action:
 
 TODO
 ====
-
-Function return type
---------------------
-
-Python 3.3 or earlier
-
-.. image:: ./grammar_diff/function_return_type.png
-
-Action:
-
-::
-
-    ADD '->' to the lexer
-    ADD ['->' test] to funcdef rule
-    funcdef: 'def' NAME parameters ['->' test] ':' suite
 
 Exec function
 -------------
