@@ -14,7 +14,6 @@ def include_primivites(pg, print_function):
                 "formatting": [],
             }
 
-
         @pg.production("print_stmt : PRINT testlist")
         def print_stmt(pack):
             (print_, testlist) = pack
@@ -26,7 +25,6 @@ def include_primivites(pg, print_function):
                 "formatting": print_.hidden_tokens_after,
             }
 
-
         @pg.production("print_stmt : PRINT RIGHT_SHIFT test")
         def print_stmt_redirect(pack):
             (print_, right_shift, test) = pack
@@ -37,7 +35,6 @@ def include_primivites(pg, print_function):
                 "destination_formatting": right_shift.hidden_tokens_after,
                 "formatting": print_.hidden_tokens_after,
             }
-
 
         @pg.production("print_stmt : PRINT RIGHT_SHIFT test COMMA testlist")
         def print_stmt_redirect_testlist(pack):
@@ -57,7 +54,6 @@ def include_primivites(pg, print_function):
                 "formatting": print_.hidden_tokens_after,
             }
 
-
     @pg.production("flow_stmt : return_stmt")
     @pg.production("flow_stmt : break_stmt")
     @pg.production("flow_stmt : continue_stmt")
@@ -66,7 +62,6 @@ def include_primivites(pg, print_function):
     def flow(pack):
         (flow_stmt,) = pack
         return flow_stmt
-
 
     @pg.production("return_stmt : RETURN")
     def return_empty(pack):
@@ -77,7 +72,6 @@ def include_primivites(pg, print_function):
             "formatting": token.hidden_tokens_after,
         }
 
-
     @pg.production("yield_expr : YIELD")
     def yield_expr(pack):
         (yield_,) = pack
@@ -87,14 +81,12 @@ def include_primivites(pg, print_function):
             "formatting": yield_.hidden_tokens_after,
         }
 
-
     @pg.production("break_stmt : BREAK")
     @pg.production("continue_stmt : CONTINUE")
     @pg.production("pass_stmt : PASS")
     def break_stmt(pack):
         (token,) = pack
         return {"type": token.name.lower()}
-
 
     @pg.production("raise_stmt : RAISE")
     def raise_stmt_empty(pack):
@@ -111,7 +103,6 @@ def include_primivites(pg, print_function):
             "fifth_formatting": []
         }
 
-
     @pg.production("raise_stmt : RAISE test")
     def raise_stmt(pack):
         (raise_, test) = pack
@@ -126,7 +117,6 @@ def include_primivites(pg, print_function):
             "fourth_formatting": [],
             "fifth_formatting": []
         }
-
 
     @pg.production("raise_stmt : RAISE test COMMA test")
     def raise_stmt_instance(pack):
@@ -143,7 +133,6 @@ def include_primivites(pg, print_function):
             "fifth_formatting": []
         }
 
-
     @pg.production("raise_stmt : RAISE test COMMA test COMMA test")
     def raise_stmt_instance_traceback(pack):
         (raise_, test, comma, test2, comma2, test3) = pack
@@ -158,7 +147,6 @@ def include_primivites(pg, print_function):
             "fourth_formatting": comma2.hidden_tokens_before,
             "fifth_formatting": comma2.hidden_tokens_after
         }
-
 
     @pg.production("assert_stmt : EXEC expr")
     def exec_stmt(pack):
@@ -175,7 +163,6 @@ def include_primivites(pg, print_function):
             "fifth_formatting": []
         }
 
-
     @pg.production("assert_stmt : EXEC expr IN test")
     def exec_stmt_in(pack):
         (exec_, expr, in_, test) = pack
@@ -190,7 +177,6 @@ def include_primivites(pg, print_function):
             "fourth_formatting": [],
             "fifth_formatting": []
         }
-
 
     @pg.production("assert_stmt : EXEC expr IN test COMMA test")
     def exec_stmt_in_comma(pack):
@@ -207,7 +193,6 @@ def include_primivites(pg, print_function):
             "fifth_formatting": comma.hidden_tokens_after
         }
 
-
     @pg.production("assert_stmt : ASSERT test")
     def assert_stmt(pack):
         (assert_, test) = pack
@@ -219,7 +204,6 @@ def include_primivites(pg, print_function):
             "second_formatting": [],
             "third_formatting": []
         }
-
 
     @pg.production("assert_stmt : ASSERT test COMMA test")
     def assert_stmt_message(pack):
@@ -233,7 +217,6 @@ def include_primivites(pg, print_function):
             "third_formatting": comma.hidden_tokens_after
         }
 
-
     @pg.production("global_stmt : GLOBAL names")
     def global_stmt(pack):
         (global_, names) = pack
@@ -242,7 +225,6 @@ def include_primivites(pg, print_function):
             "formatting": global_.hidden_tokens_after,
             "value": names,
         }
-
 
     @pg.production("nonlocal_stmt : NONLOCAL names")
     def nonlocal_stmt(pack):
@@ -253,24 +235,20 @@ def include_primivites(pg, print_function):
             "value": names,
         }
 
-
     @pg.production("names : NAME")
     def names_name(pack):
         (name,) = pack
         return [create_node_from_token(name)]
 
-
     @pg.production("names : NAME")
     def names_name(pack):
         (name,) = pack
         return [create_node_from_token(name)]
-
 
     @pg.production("names : names comma name")
     def names_names_name(pack):
         (names, comma, name,) = pack
         return names + [comma, name]
-
 
     @pg.production("return_stmt : RETURN testlist")
     @pg.production("yield_expr : YIELD testlist")
@@ -282,7 +260,6 @@ def include_primivites(pg, print_function):
             "value": testlist,
             "formatting": token.hidden_tokens_after,
         }
-
 
     @pg.production("yield_expr : YIELD FROM test")
     def yield_from_expr(pack):
