@@ -7930,7 +7930,7 @@ def test_augmented_assignment():
         ])
 
 
-# TODO fix this miss
+# TODO fix this mess
 def test_augmented_assignment_augmented_assignment():
     "a += b"
     for token_name, value in augmented_assignment_tokens:
