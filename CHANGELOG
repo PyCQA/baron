@@ -7,6 +7,7 @@ Changelog
 - add support for ... in from import by bram
 - add support for return annotation by bram
 - add support for exec function by bram
+- add support for variable annotation https://github.com/PyCQA/baron/pull/145 by scottbelden
 
 0.8 (2018-10-29)
 ----------------
