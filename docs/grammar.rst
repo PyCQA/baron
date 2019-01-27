@@ -395,6 +395,28 @@ Action:
 
     vfpdef: NAME
 
+Variables annotations
+---------------------
+
+Python 3.6
+
+Before:
+
+::
+
+    expr_stmt: testlist_star_expr (augassign (yield_expr|testlist) |
+                         ('=' (yield_expr|testlist_star_expr))*)
+
+After:
+
+::
+
+    expr_stmt: testlist_star_expr (annassign | augassign (yield_expr|testlist) |
+                         ('=' (yield_expr|testlist_star_expr))*)
+    annassign: ':' test ['=' test]
+
+
+
 
 
 
@@ -532,34 +554,6 @@ After:
                 test '=' test |
                 '**' test |
                 '*' test )
-
-
-
-Variables annotations
----------------------
-
-Python 3.6
-
-Before:
-
-::
-
-    expr_stmt: testlist_star_expr (augassign (yield_expr|testlist) |
-                         ('=' (yield_expr|testlist_star_expr))*)
-
-After:
-
-::
-
-    expr_stmt: testlist_star_expr (annassign | augassign (yield_expr|testlist) |
-                         ('=' (yield_expr|testlist_star_expr))*)
-    annassign: ':' test ['=' test]
-
-
-
-
-
-
 
 
 
