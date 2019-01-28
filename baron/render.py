@@ -50,6 +50,9 @@ def render_list(node):
 
 
 def render_node(node, strict=False):
+    if node["type"] not in nodes_rendering_order:
+        raise Exception("There are no defined rules for rendering a node of type '%s', has it been defined in render.py?" % node["type"])
+
     for key_type, render_key, dependent in nodes_rendering_order[node['type']]:
         if not dependent:
             continue
