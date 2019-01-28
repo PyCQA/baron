@@ -21,6 +21,14 @@ def test_assign():
     check_dumps("a = 2")
 
 
+def test_standalone_annotation():
+    check_dumps("a :  str")
+
+
+def test_assign_annotation():
+    check_dumps("a :  int   =      2")
+
+
 def test_binary_operator():
     check_dumps("z +  42")
     check_dumps("z   -  42")

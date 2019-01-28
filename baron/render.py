@@ -479,25 +479,24 @@ nodes_rendering_order = {
 
         "assignment": [
             ("key",        "target",            True),
+            ("formatting", "annotation_first_formatting",  "annotation"),
+            ("constant",   ":",                 "annotation"),
+            ("formatting", "annotation_second_formatting",  "annotation"),
+            ("key",        "annotation",        "annotation"),
             ("formatting", "first_formatting",  True),
             # FIXME should probably be a different node type
             ("string",     "operator",          "operator"),
-            ("constant",   "=",                 True),
+            ("constant",   "=",                 "target"),
             ("formatting", "second_formatting", True),
             ("key",        "value",             True),
         ],
 
-        "annassign": [
+        "standalone_annotation": [
             ("key",        "target",            True),
             ("formatting", "first_formatting",  True),
             ("constant",   ":",                 True),
             ("formatting", "second_formatting", True),
             ("key",        "annotation",        True),
-            ("formatting", "third_formatting",  "has_value"),
-            ("constant",   "=",                 "has_value"),
-            ("formatting", "fourth_formatting", "has_value"),
-            ("key",        "value",             "has_value"),
-            ("bool",       "has_value",         False),
         ],
 
         "unitary_operator": [

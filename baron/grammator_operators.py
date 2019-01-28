@@ -18,23 +18,31 @@ def include_operators(pg):
         (old_test, comma, testlist_safe) = pack
         return [old_test, comma] + testlist_safe
 
-    @pg.production("annassign : COLON test maybe_test")
-    def annassign(pack):
-        return pack
-
-    @pg.production("expr_stmt : test annassign")
-    def augmented_assignment_node(pack):
-        (target, (colon, annotation, (equal, test))) = pack
+    @pg.production("expr_stmt : test COLON test")
+    def alone_annotation(pack):
+        target, colon, annotation = pack
         return {
-            "type": "annassign",
+            "type": "standalone_annotation",
+            "target": target,
+            "annotation": annotation,  # not called "value" in case someone
+                                       # wants to work on both assignment and
+                                       # standalone annotations
             "first_formatting": colon.hidden_tokens_before,
             "second_formatting": colon.hidden_tokens_after,
-            "third_formatting": equal.hidden_tokens_before if equal else [],
-            "fourth_formatting": equal.hidden_tokens_after if equal else [],
+        }
+
+    @pg.production("expr_stmt : test COLON test EQUAL test")
+    def augmented_assignment_node(pack):
+        target, colon, annotation, equal, test = pack
+        return {
+            "type": "assignment",
+            "first_formatting": equal.hidden_tokens_before if equal else [],
+            "second_formatting": equal.hidden_tokens_after if equal else [],
             "target": target,
             "value": test,
             "annotation": annotation,
-            "has_value": equal is not None
+            "annotation_first_formatting": colon.hidden_tokens_before,
+            "annotation_second_formatting": colon.hidden_tokens_after,
         }
 
     @pg.production("expr_stmt : testlist augassign_operator testlist")
@@ -47,7 +55,10 @@ def include_operators(pg):
             "second_formatting": operator.hidden_tokens_after,
             "operator": operator.value[:-1],
             "target": target,
-            "value": value
+            "value": value,
+            "annotation": {},
+            "annotation_first_formatting": [],
+            "annotation_second_formatting": [],
         }
 
     @pg.production("augassign_operator : PLUS_EQUAL")
@@ -77,7 +88,10 @@ def include_operators(pg):
             "value": value,
             "target": target,
             "first_formatting": equal.hidden_tokens_before,
-            "second_formatting": equal.hidden_tokens_after
+            "second_formatting": equal.hidden_tokens_after,
+            "annotation": {},
+            "annotation_first_formatting": [],
+            "annotation_second_formatting": [],
         }
 
     @pg.production("test : or_test IF or_test ELSE test")
