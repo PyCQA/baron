@@ -39,7 +39,7 @@ def include_operators(pg):
 
     @pg.production("expr_stmt : testlist augassign_operator testlist")
     @pg.production("expr_stmt : testlist augassign_operator yield_expr")
-    def augmented_assignment_node(pack):
+    def augmented_assignment_node_2(pack):
         (target, operator, value) = pack
         return {
             "type": "assignment",
