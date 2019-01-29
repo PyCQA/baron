@@ -151,6 +151,13 @@ nodes_rendering_order = {
             ("string",     "value",             True),
             ("formatting", "second_formatting", True),
         ],
+
+        "star_expression": [
+            ("constant",   "*",                 True),
+            ("formatting", "formatting",        True),
+            ("key",        "value",             True),
+        ],
+
         "string": [
             ("formatting", "first_formatting",  True),
             ("string",     "value",             True),

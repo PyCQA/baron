@@ -21,6 +21,11 @@ def test_assign():
     check_dumps("a = 2")
 
 
+def test_assign_star_expr():
+    check_dumps("a, *b = 2")
+    check_dumps("a, *  b = 2")
+
+
 def test_standalone_annotation():
     check_dumps("a :  str")
 
