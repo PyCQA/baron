@@ -1,4 +1,5 @@
 import sys
+import json
 
 
 def render(node, strict=False):
@@ -66,11 +67,11 @@ def render_node(node, strict=False):
         if strict:
             try:
                 if key_type == "key":
-                    assert isinstance(node[render_key], (dict, type(None)))
+                    assert isinstance(node[render_key], (dict, type(None))), "Key '%s' is expected to have type of 'key' (dict/None) but has type of '%s' instead" % (render_key, type(node[render_key]))
                 elif key_type == "string":
-                    assert isinstance(node[render_key], str)
+                    assert isinstance(node[render_key], str), "Key '%s' is expected to have type of 'string' but has type of '%s' instead" % (render_key, type(node[render_key]))
                 elif key_type in ("list", "formatting"):
-                    assert isinstance(node[render_key], list)
+                    assert isinstance(node[render_key], list), "Key '%s' is expected to have type of 'list' but has type of '%s' instead" % (render_key, type(node[render_key]))
                 elif key_type == "constant":
                     pass
                 else:
@@ -83,7 +84,7 @@ def render_node(node, strict=False):
                 elif isinstance(dependent, list):
                     assert all([x in node for x in dependent])
             except AssertionError as e:
-                sys.stdout.write("Where node.type == '%s', render_key == '%s' and node == %s\n" % (node["type"], render_key, node))
+                sys.stdout.write("Where node.type == '%s', render_key == '%s' and node ==\n%s\n" % (node["type"], render_key, json.dumps(node, indent=4, sort_keys=True)))
                 raise e
 
         if key_type in ['key', 'string', 'list', 'formatting']:
