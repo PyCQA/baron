@@ -45,8 +45,8 @@ def include_operators(pg):
             "annotation_second_formatting": colon.hidden_tokens_after,
         }
 
-    @pg.production("expr_stmt : testlist augassign_operator testlist")
-    @pg.production("expr_stmt : testlist augassign_operator yield_expr")
+    @pg.production("expr_stmt : testlist_star_expr augassign_operator testlist")
+    @pg.production("expr_stmt : testlist_star_expr augassign_operator yield_expr")
     def augmented_assignment_node_2(pack):
         (target, operator, value) = pack
         return {
@@ -59,6 +59,20 @@ def include_operators(pg):
             "annotation": {},
             "annotation_first_formatting": [],
             "annotation_second_formatting": [],
+        }
+
+    @pg.production("test_or_star_expr : test")
+    @pg.production("test_or_star_expr : star_expr")
+    def test_or_star_expr(pack):
+        return pack[0]
+
+    @pg.production("star_expr : STAR expr")
+    def star_expr(pack):
+        star, expr = pack
+        return {
+            "type": "star_expression",
+            "formatting": star.hidden_tokens_after,
+            "value": expr,
         }
 
     @pg.production("augassign_operator : PLUS_EQUAL")
@@ -78,8 +92,8 @@ def include_operators(pg):
         (operator,) = pack
         return operator
 
-    @pg.production("expr_stmt : testlist EQUAL yield_expr")
-    @pg.production("expr_stmt : testlist EQUAL expr_stmt")
+    @pg.production("expr_stmt : testlist_star_expr EQUAL yield_expr")
+    @pg.production("expr_stmt : testlist_star_expr EQUAL expr_stmt")
     def assignment_node(pack):
         (target, equal, value) = pack
         return {

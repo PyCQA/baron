@@ -28,6 +28,7 @@ def include_data_structures(pg):
 
 
     @pg.production("testlist : test comma")
+    @pg.production("testlist_star_expr : test_or_star_expr comma")
     @pg.production("exprlist : expr comma")
     @pg.production("subscriptlist : subscript comma")
     def implicit_tuple_alone(pack):
@@ -44,6 +45,7 @@ def include_data_structures(pg):
 
 
     @pg.production("testlist : test testlist_part")
+    @pg.production("testlist_star_expr : test_or_star_expr testlist_star_expr_part")
     @pg.production("exprlist : expr exprlist_part")
     @pg.production("subscriptlist : subscript subscriptlist_part")
     def implicit_tuple(pack):
@@ -60,6 +62,7 @@ def include_data_structures(pg):
 
 
     @pg.production("testlist_part : COMMA test")
+    @pg.production("testlist_star_expr_part : COMMA test_or_star_expr")
     @pg.production("exprlist_part : COMMA expr")
     @pg.production("subscriptlist_part : COMMA subscript")
     def testlist_part(pack):
@@ -71,6 +74,7 @@ def include_data_structures(pg):
         }, test]
 
     @pg.production("testlist_part : COMMA test COMMA")
+    @pg.production("testlist_star_expr_part : COMMA test_or_star_expr COMMA")
     @pg.production("exprlist_part : COMMA expr COMMA")
     @pg.production("subscriptlist_part : COMMA subscript COMMA")
     def testlist_part_comma(pack):
@@ -87,6 +91,7 @@ def include_data_structures(pg):
 
 
     @pg.production("testlist_part : COMMA test testlist_part")
+    @pg.production("testlist_star_expr_part : COMMA test_or_star_expr testlist_star_expr_part")
     @pg.production("exprlist_part : COMMA expr exprlist_part")
     @pg.production("subscriptlist_part : COMMA subscript subscriptlist_part")
     def testlist_part_next(pack):

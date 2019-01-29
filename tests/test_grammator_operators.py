@@ -7910,6 +7910,122 @@ def test_assignment_assignment():
     ])
 
 
+def test_assignment_star_expr():
+    "a, *b = c"
+    parse_simple([
+        ('NAME', 'a'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('STAR', '*', [], []),
+        ('NAME', 'b'),
+        ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'c'),
+    ], [
+        {
+            "type": "assignment",
+            "value": {
+                "type": "name",
+                "value": 'c',
+            },
+            "target": {
+                "type": "tuple",
+                "value": [
+                    {
+                        "type": "name",
+                        "value": "a"
+                    },
+                    {
+                        "type": "comma",
+                        "first_formatting": [],
+                        "second_formatting": [
+                            {
+                                "type": "space",
+                                "value": " "
+                            }
+                        ]
+                    },
+                    {
+                        "type": "star_expression",
+                        "formatting": [],
+                        "value": {
+                            "type": "name",
+                            "value": "b",
+                        }
+                    }
+                ],
+                "first_formatting": [],
+                "second_formatting": [],
+                "third_formatting": [],
+                "fourth_formatting": [],
+                "with_parenthesis": False,
+            },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "operator": "",
+            "annotation": {},
+            "annotation_first_formatting": [],
+            "annotation_second_formatting": [],
+        }
+    ])
+    "a, *  b = c"
+    parse_simple([
+        ('NAME', 'a'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('STAR', '*', [], [('SPACE', '  ')]),
+        ('NAME', 'b'),
+        ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'c'),
+    ], [
+        {
+            "type": "assignment",
+            "value": {
+                "type": "name",
+                "value": 'c',
+            },
+            "target": {
+                "type": "tuple",
+                "value": [
+                    {
+                        "type": "name",
+                        "value": "a"
+                    },
+                    {
+                        "type": "comma",
+                        "first_formatting": [],
+                        "second_formatting": [
+                            {
+                                "type": "space",
+                                "value": " "
+                            }
+                        ]
+                    },
+                    {
+                        "type": "star_expression",
+                        "formatting": [{
+                            "type": "space",
+                            "value": "  "
+                        }],
+                        "value": {
+                            "type": "name",
+                            "value": "b",
+                        }
+                    }
+                ],
+                "first_formatting": [],
+                "second_formatting": [],
+                "third_formatting": [],
+                "fourth_formatting": [],
+                "with_parenthesis": False,
+            },
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "operator": "",
+            "annotation": {},
+            "annotation_first_formatting": [],
+            "annotation_second_formatting": [],
+        }
+    ])
+
+
 augmented_assignment_tokens = (
     ('PLUS_EQUAL', '+='),
     ('MINUS_EQUAL', '-='),

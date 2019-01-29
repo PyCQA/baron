@@ -181,8 +181,9 @@ def generate_parse(print_function):
             return statement
 
     @pg.production("small_stmt : expr_stmt")
-    @pg.production("expr_stmt : testlist")
+    @pg.production("expr_stmt : testlist_star_expr")
     @pg.production("testlist : test")
+    @pg.production("testlist_star_expr : test_or_star_expr")
     @pg.production("test : or_test")
     @pg.production("test : lambdef")
     @pg.production("or_test : and_test")
