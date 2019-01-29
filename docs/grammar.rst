@@ -395,6 +395,25 @@ Action:
 
     vfpdef: NAME
 
+*var generalisation
+-------------------
+
+Python 3.3 or earlier
+
+.. image:: ./grammar_diff/testlist_start_expressiong.png
+
+.
+
+.. image:: ./grammar_diff/star_expr.png
+
+.
+
+.. image:: ./grammar_diff/star_expr_in_testlist_comp.png
+
+.
+
+.. image:: ./grammar_diff/star_expr_in_expr_list.png
+
 No more '.' '.' '.' in the grammar
 ----------------------------------
 
@@ -432,25 +451,6 @@ After:
 
 TODO
 ====
-
-*var generalisation
--------------------
-
-Python 3.3 or earlier
-
-.. image:: ./grammar_diff/testlist_start_expressiong.png
-
-.
-
-.. image:: ./grammar_diff/star_expr.png
-
-.
-
-.. image:: ./grammar_diff/star_expr_in_testlist_comp.png
-
-.
-
-.. image:: ./grammar_diff/star_expr_in_expr_list.png
 
 Raise from
 ----------
