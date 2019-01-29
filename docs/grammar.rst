@@ -395,6 +395,13 @@ Action:
 
     vfpdef: NAME
 
+No more '.' '.' '.' in the grammar
+----------------------------------
+
+Python 3.3 or earlier
+
+.. image:: ./grammar_diff/ellipsis_is_first_class_now_not_needed_anymore.png
+
 Variables annotations
 ---------------------
 
@@ -577,9 +584,3 @@ Python 3.3 or earlier
 
 .. image:: ./grammar_diff/no_more_backquote_syntax.png
 
-No more '.' '.' '.' in the grammar
-----------------------------------
-
-Python 3.3 or earlier
-
-.. image:: ./grammar_diff/ellipsis_is_first_class_now_not_needed_anymore.png

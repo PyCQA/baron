@@ -119,7 +119,7 @@ testlist_comp: test ( comp_for | (',' test)* [','] )
 listmaker: test ( list_for | (',' test)* [','] )
 trailer: '(' [arglist] ')' | '[' subscriptlist ']' | '.' NAME
 subscriptlist: subscript (',' subscript)* [',']
-subscript: '.' '.' '.' | test | [test] ':' [test] [sliceop]
+subscript: test | [test] ':' [test] [sliceop]
 sliceop: ':' [test]
 exprlist: expr (',' expr)* [',']
 testlist: test (',' test)* [',']
