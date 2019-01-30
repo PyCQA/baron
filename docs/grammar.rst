@@ -421,6 +421,15 @@ Python 3.3 or earlier
 
 .. image:: ./grammar_diff/ellipsis_is_first_class_now_not_needed_anymore.png
 
+Inheritance in class definition uses arglist now
+------------------------------------------------
+
+Python 3.3 or earlier
+
+I have no idea on why this is here but that's easy to change.
+
+.. image:: ./grammar_diff/class_inherit_is_arglist_now.png
+
 Raise from
 ----------
 
@@ -504,15 +513,6 @@ Python 3.3 or earlier
 Do I need to do anything about that?
 
 .. image:: ./grammar_diff/more_atoms.png
-
-Inheritance in class definition uses arglist now
-------------------------------------------------
-
-Python 3.3 or earlier
-
-I have no idea on why this is here but that's easy to change.
-
-.. image:: ./grammar_diff/class_inherit_is_arglist_now.png
 
 Kwargs expressions
 ------------------
