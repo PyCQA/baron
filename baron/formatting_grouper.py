@@ -63,6 +63,7 @@ BOTH = (
     "COLON",
     "BACKQUOTE",
     "RIGHT_ARROW",
+    "FROM",
 )
 
 STRING = (
@@ -82,7 +83,6 @@ GROUP_SPACE_BEFORE = BOTH + (
 ) + STRING
 
 GROUP_SPACE_AFTER = BOTH + (
-    "FROM",
     "TILDE",
     "RETURN",
     "YIELD",

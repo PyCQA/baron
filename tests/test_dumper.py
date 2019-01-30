@@ -430,6 +430,7 @@ def test_raise():
     check_dumps("raise")
     check_dumps("raise a")
     check_dumps("raise a ,   b")
+    check_dumps("raise a   from      b")
     check_dumps("raise a ,   b   ,     c")
 
 

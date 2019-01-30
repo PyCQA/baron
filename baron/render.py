@@ -381,7 +381,7 @@ nodes_rendering_order = {
             ("formatting", "first_formatting",  True),
             ("key",        "value",             "value"),
             ("formatting", "second_formatting", "instance"),
-            ("constant",   ",",                 "instance"),
+            ("string",     "comma_or_from",     "instance"),
             ("formatting", "third_formatting",  "instance"),
             ("key",        "instance",          "instance"),
             ("formatting", "fourth_formatting", "traceback"),

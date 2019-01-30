@@ -144,7 +144,8 @@ def include_primivites(pg, print_function):
             "second_formatting": [],
             "third_formatting": [],
             "fourth_formatting": [],
-            "fifth_formatting": []
+            "fifth_formatting": [],
+            "comma_or_from": None,
         }
 
     @pg.production("raise_stmt : RAISE test")
@@ -159,7 +160,24 @@ def include_primivites(pg, print_function):
             "second_formatting": [],
             "third_formatting": [],
             "fourth_formatting": [],
-            "fifth_formatting": []
+            "fifth_formatting": [],
+            "comma_or_from": None,
+        }
+
+    @pg.production("raise_stmt : RAISE test FROM test")
+    def raise_stmt_from(pack):
+        (raise_, test, from_, test2) = pack
+        return {
+            "type": "raise",
+            "value": test,
+            "instance": test2,
+            "traceback": None,
+            "first_formatting": raise_.hidden_tokens_after,
+            "second_formatting": from_.hidden_tokens_before,
+            "third_formatting": from_.hidden_tokens_after,
+            "fourth_formatting": [],
+            "fifth_formatting": [],
+            "comma_or_from": "from",
         }
 
     @pg.production("raise_stmt : RAISE test COMMA test")
@@ -174,7 +192,8 @@ def include_primivites(pg, print_function):
             "second_formatting": comma.hidden_tokens_before,
             "third_formatting": comma.hidden_tokens_after,
             "fourth_formatting": [],
-            "fifth_formatting": []
+            "fifth_formatting": [],
+            "comma_or_from": ",",
         }
 
     @pg.production("raise_stmt : RAISE test COMMA test COMMA test")
@@ -189,7 +208,8 @@ def include_primivites(pg, print_function):
             "second_formatting": comma.hidden_tokens_before,
             "third_formatting": comma.hidden_tokens_after,
             "fourth_formatting": comma2.hidden_tokens_before,
-            "fifth_formatting": comma2.hidden_tokens_after
+            "fifth_formatting": comma2.hidden_tokens_after,
+            "comma_or_from": ",",
         }
 
     @pg.production("assert_stmt : ASSERT test")

@@ -163,7 +163,8 @@ def test_raise_empty():
             "second_formatting": [],
             "third_formatting": [],
             "fourth_formatting": [],
-            "fifth_formatting": []
+            "fifth_formatting": [],
+            "comma_or_from": None,
         }
     ])
 
@@ -176,14 +177,38 @@ def test_raise():
     ], [
         {
             "type": "raise",
-            "value": {"type": "name", "value": 'a',},
+            "value": {"type": "name", "value": 'a'},
             "instance": None,
             "traceback": None,
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [],
             "third_formatting": [],
             "fourth_formatting": [],
-            "fifth_formatting": []
+            "fifth_formatting": [],
+            "comma_or_from": None,
+        }
+    ])
+
+
+def test_raise_from():
+    "raise a from b"
+    parse_simple([
+        ('RAISE', 'raise', [], [('SPACE', ' ')]),
+        ('NAME', 'a'),
+        ('FROM', 'from', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'b'),
+    ], [
+        {
+            "type": "raise",
+            "comma_or_from": "from",
+            "value": {"type": "name", "value": 'a'},
+            "instance": {'type': 'name', 'value': 'b'},
+            "traceback": None,
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{'type': 'space', 'value': ' '}],
+            "third_formatting": [{'type': 'space', 'value': ' '}],
+            "fourth_formatting": [],
+            "fifth_formatting": [],
         }
     ])
 
@@ -198,14 +223,15 @@ def test_raise_instance():
     ], [
         {
             "type": "raise",
-            "value": {"type": "name", "value": 'a',},
+            "comma_or_from": ",",
+            "value": {"type": "name", "value": 'a'},
             "instance": {"type": "name", "value": 'b'},
             "traceback": None,
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [],
             "third_formatting": [{"type": "space", "value": " "}],
             "fourth_formatting": [],
-            "fifth_formatting": []
+            "fifth_formatting": [],
         }
     ])
     parse_simple([
@@ -216,14 +242,15 @@ def test_raise_instance():
     ], [
         {
             "type": "raise",
+            "comma_or_from": ",",
             "value": {"type": "name", "value": 'a'},
-            "instance": {"type": "name", "value": 'b',},
+            "instance": {"type": "name", "value": 'b'},
             "traceback": None,
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [],
             "third_formatting": [{"type": "space", "value": " "}],
             "fourth_formatting": [],
-            "fifth_formatting": []
+            "fifth_formatting": [],
         }
     ])
 
@@ -240,14 +267,15 @@ def test_raise_instance_traceback():
     ], [
         {
             "type": "raise",
-            "value": {"type": "name", "value": 'a',},
+            "comma_or_from": ",",
+            "value": {"type": "name", "value": 'a'},
             "instance": {"type": "name", "value": 'b'},
             "traceback": {"type": "name", "value": 'c'},
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [],
             "third_formatting": [{"type": "space", "value": " "}],
             "fourth_formatting": [],
-            "fifth_formatting": [{"type": "space", "value": " "}]
+            "fifth_formatting": [{"type": "space", "value": " "}],
         }
     ])
     parse_simple([
@@ -260,14 +288,15 @@ def test_raise_instance_traceback():
     ], [
         {
             "type": "raise",
+            "comma_or_from": ",",
             "value": {"type": "name", "value": 'a'},
-            "instance": {"type": "name", "value": 'b',},
+            "instance": {"type": "name", "value": 'b'},
             "traceback": {"type": "name", "value": 'c'},
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [],
             "third_formatting": [{"type": "space", "value": " "}],
             "fourth_formatting": [],
-            "fifth_formatting": [{"type": "space", "value": " "}]
+            "fifth_formatting": [{"type": "space", "value": " "}],
         }
     ])
     parse_simple([
@@ -280,14 +309,15 @@ def test_raise_instance_traceback():
     ], [
         {
             "type": "raise",
+            "comma_or_from": ",",
             "value": {"type": "name", "value": 'a'},
             "instance": {"type": "name", "value": 'b'},
-            "traceback": {"type": "name", "value": 'c',},
+            "traceback": {"type": "name", "value": 'c'},
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [],
             "third_formatting": [{"type": "space", "value": " "}],
             "fourth_formatting": [],
-            "fifth_formatting": [{"type": "space", "value": " "}]
+            "fifth_formatting": [{"type": "space", "value": " "}],
         }
     ])
 
