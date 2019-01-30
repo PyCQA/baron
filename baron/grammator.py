@@ -286,6 +286,7 @@ def generate_parse(print_function):
         }]
 
     @pg.production("classdef : CLASS NAME LEFT_PARENTHESIS testlist RIGHT_PARENTHESIS COLON suite")
+    @pg.production("classdef : CLASS NAME LEFT_PARENTHESIS argslist RIGHT_PARENTHESIS COLON suite")
     def class_stmt_inherit(pack,):
         (class_, name, left_parenthesis, testlist, right_parenthesis, colon, suite) = pack
         return [{

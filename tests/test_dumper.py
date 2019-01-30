@@ -377,6 +377,10 @@ def test_class_parenthesis_inherit():
     check_dumps("class A(B): pass\n")
 
 
+def test_class_parenthesis_inherit_arglist():
+    check_dumps("class A(**B): pass\n")
+
+
 def test_class_parenthesis_inherit_decorated():
     check_dumps("@pouet\nclass A(B): pass\n")
 
