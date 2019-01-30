@@ -421,6 +421,26 @@ Python 3.3 or earlier
 
 .. image:: ./grammar_diff/ellipsis_is_first_class_now_not_needed_anymore.png
 
+Raise from
+----------
+
+Python 3.3 or earlier
+
+.. image:: ./grammar_diff/raise_from.png
+
+Action:
+
+::
+
+    # 2.7
+    raise_stmt: 'raise' [test [',' test [',' test]]]
+
+    # 3.3
+    raise_stmt: 'raise' [test ['from' test]]
+
+    # merge
+    raise_stmt: 'raise' [test [(',' test [',' test]] | 'from' test)]
+
 Variables annotations
 ---------------------
 
@@ -451,26 +471,6 @@ After:
 
 TODO
 ====
-
-Raise from
-----------
-
-Python 3.3 or earlier
-
-.. image:: ./grammar_diff/raise_from.png
-
-Action:
-
-::
-
-    # 2.7
-    raise_stmt: 'raise' [test [',' test [',' test]]]
-
-    # 3.3
-    raise_stmt: 'raise' [test ['from' test]]
-
-    # merge
-    raise_stmt: 'raise' [test [(',' test [',' test]] | 'from' test)]
 
 New lambda grammar
 ------------------
