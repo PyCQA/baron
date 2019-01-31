@@ -40,6 +40,7 @@ def include_operators(pg):
             "second_formatting": equal.hidden_tokens_after if equal else [],
             "target": target,
             "value": test,
+            "operator": "",
             "annotation": annotation,
             "annotation_first_formatting": colon.hidden_tokens_before,
             "annotation_second_formatting": colon.hidden_tokens_after,

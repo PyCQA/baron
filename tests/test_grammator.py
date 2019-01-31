@@ -2879,6 +2879,7 @@ def test_typed_variable_with_assignment():
             "annotation_first_formatting": [{"type": "space", "value": " "}],
             "annotation_second_formatting": [{"type": "space", "value": " "}],
             "target": {"type": "name", "value": "x"},
+            "operator": "",
             "value": {"section": "number", "type": "int", "value": "1"}
         }
     ])
