@@ -216,3 +216,11 @@ def test_float_exponant():
 
 def test_arrow():
     grouper_test("->", ['-', '>'], ['->'])
+
+
+def test_dot_dot():
+    grouper_test("..", ['.', '.'], ['.', '.'])
+
+
+def test_dot_dot_dot():
+    grouper_test("...", ['.', '.', '.'], ['...'])

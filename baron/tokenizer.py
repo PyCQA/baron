@@ -114,6 +114,7 @@ def tokenize_generator(sequence, print_function=False):
         if item in current_keywords:
             yield (item.upper(), item)
             continue
+
         for candidate, token_name in TOKENS:
             if candidate.match(item):
                 yield (token_name, item)

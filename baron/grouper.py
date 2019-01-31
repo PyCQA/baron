@@ -103,6 +103,12 @@ def group_generator(sequence):
             current += next(iterator)
             current += next(iterator)
 
+        # edge case where 2 dots follow themselves but not 3 (an ellipsis)
+        if current == "..":
+            yield "."
+            yield "."
+            continue
+
         yield current
 
 
