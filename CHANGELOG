@@ -11,7 +11,7 @@ First version of full python 3.7 grammar support.
 - add support for exec function by bram
 - add support for variable annotation https://github.com/PyCQA/baron/pull/145 by scottbelden and additional work by bram
 - add support for *var expressions in tuple assignment by bram
-- add support for raise https://github.com/PyCQA/baron/pull/120 from by odcinek with additional work by bram
+- add support for raise from https://github.com/PyCQA/baron/pull/120 by odcinek with additional work by bram
 - add support for arglist usage in class definition inheritence by bram
 - bug fix by https://github.com/PyCQA/baron/pull/126/commits/91e839a228293698cc755a7f28afeca2669cb66e kyleatmakrs
 
