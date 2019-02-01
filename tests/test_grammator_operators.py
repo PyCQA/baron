@@ -9924,6 +9924,9 @@ def test_call_two_star_arg():
                         },
                         {
                             "type": "list_argument",
+                            "annotation": {},
+                            "annotation_first_formatting": [],
+                            "annotation_second_formatting": [],
                             "formatting": [],
                             "value": {
                                 "type": "name",
@@ -9999,6 +10002,9 @@ def test_call_two_star_arg_kwarg():
                         },
                         {
                             "type": "list_argument",
+                            "annotation": {},
+                            "annotation_first_formatting": [],
+                            "annotation_second_formatting": [],
                             "formatting": [],
                             "value": {
                                 "type": "name",
@@ -10012,6 +10018,9 @@ def test_call_two_star_arg_kwarg():
                         },
                         {
                             "type": "dict_argument",
+                            "annotation": {},
+                            "annotation_first_formatting": [],
+                            "annotation_second_formatting": [],
                             "formatting": [],
                             "value": {
                                 "type": "name",

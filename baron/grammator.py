@@ -592,6 +592,9 @@ def generate_parse(print_function):
         (star, test,) = pack
         return [{
             "type": "list_argument",
+            "annotation": {},
+            "annotation_first_formatting": [],
+            "annotation_second_formatting": [],
             "formatting": star.hidden_tokens_after,
             "value": test,
         }]
@@ -601,6 +604,9 @@ def generate_parse(print_function):
         (double_star, test,) = pack
         return [{
             "type": "dict_argument",
+            "annotation": {},
+            "annotation_first_formatting": [],
+            "annotation_second_formatting": [],
             "formatting": double_star.hidden_tokens_after,
             "value": test,
         }]
