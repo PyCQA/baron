@@ -350,6 +350,10 @@ nodes_rendering_order = {
         ],
         "def_argument": [
             ("key",        "target",            True),
+            ("formatting", "annotation_first_formatting", "annotation"),
+            ("constant",   ":",                 "annotation"),
+            ("formatting", "annotation_second_formatting", "annotation"),
+            ("key",        "annotation",        "annotation"),
             ("formatting", "first_formatting",  "value"),
             ("constant",   "=",                 "value"),
             ("formatting", "second_formatting", "value"),
@@ -359,6 +363,10 @@ nodes_rendering_order = {
             ("constant",   "*",                 True),
             ("formatting", "formatting",        True),
             ("key",        "value",             True),
+            ("formatting", "annotation_first_formatting", "annotation"),
+            ("constant",   ":",                 "annotation"),
+            ("formatting", "annotation_second_formatting", "annotation"),
+            ("key",        "annotation",        "annotation"),
         ],
         "kwargs_only_marker": [
             ("constant",   "*",                 True),
@@ -368,6 +376,10 @@ nodes_rendering_order = {
             ("constant",   "**",                True),
             ("formatting", "formatting",        True),
             ("key",        "value",             True),
+            ("formatting", "annotation_first_formatting", "annotation"),
+            ("constant",   ":",                 "annotation"),
+            ("formatting", "annotation_second_formatting", "annotation"),
+            ("key",        "annotation",        "annotation"),
         ],
 
         "return": [
@@ -757,14 +769,6 @@ nodes_rendering_order = {
             ("formatting", "second_formatting", "target"),
             ("string",     "target",            "target"),
         ],
-        "typed_name": [
-            ("string",     "value",             True),
-            ("formatting", "first_formatting",  True),
-            ("constant",   ":",                 True),
-            ("formatting", "second_formatting", True),
-            ("key",        "annotation",        True),
-        ],
-
         "print": [
             ("constant",   "print",                  True),
             ("formatting", "formatting",             True),

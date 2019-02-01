@@ -1156,6 +1156,9 @@ def test_list_comprehension_lambda_with_arguments():
                                 "value": {},
                                 "first_formatting": [],
                                 "second_formatting": [],
+                                "annotation": {},
+                                "annotation_first_formatting": [],
+                                "annotation_second_formatting": [],
                                 "type": "def_argument",
                                 "target": {
                                     "type": "name",

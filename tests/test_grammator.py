@@ -617,6 +617,9 @@ def test_funcdef_stmt_one_parameter_indent():
             "arguments": [
                 {
                     "type": "def_argument",
+                    "annotation": {},
+                    "annotation_first_formatting": [],
+                    "annotation_second_formatting": [],
                     "first_formatting": [],
                     "second_formatting": [],
                     "target": {
@@ -687,11 +690,11 @@ def test_funcdef_stmt_one_parameter_typed_indent():
                     "type": "def_argument",
                     "first_formatting": [],
                     "second_formatting": [],
+                    "annotation": {"type": "name", "value": "int"},
+                    "annotation_first_formatting": [{"type": "space", "value": " "}],
+                    "annotation_second_formatting": [{"type": "space", "value": " "}],
                     "target": {
-                        "type": "typed_name",
-                        "annotation": {"type": "name", "value": "int"},
-                        "first_formatting": [{"type": "space", "value": " "}],
-                        "second_formatting": [{"type": "space", "value": " "}],
+                        "type": "name",
                         "value": "x",
                     },
                     "value": {},
@@ -756,13 +759,13 @@ def test_funcdef_stmt_one_parameter_typed_indent_no_format():
             "arguments": [
                 {
                     "type": "def_argument",
+                    "annotation": {"type": "name", "value": "int"},
+                    "annotation_first_formatting": [],
+                    "annotation_second_formatting": [],
                     "first_formatting": [],
                     "second_formatting": [],
                     "target": {
-                        "type": "typed_name",
-                        "annotation": {"type": "name", "value": "int"},
-                        "first_formatting": [],
-                        "second_formatting": [],
+                        "type": "name",
                         "value": "x",
                     },
                     "value": {},
@@ -828,12 +831,12 @@ def test_funcdef_stmt_star_parameter_typed_indent_no_format():
             "arguments": [
                 {
                     "type": "list_argument",
+                    "annotation": {"type": "name", "value": "int"},
+                    "annotation_first_formatting": [],
+                    "annotation_second_formatting": [],
                     "formatting": [],
                     "value": {
-                        "type": "typed_name",
-                        "annotation": {"type": "name", "value": "int"},
-                        "first_formatting": [],
-                        "second_formatting": [],
+                        "type": "name",
                         "value": "x",
                     },
                 }
@@ -898,12 +901,12 @@ def test_funcdef_stmt_double_star_parameter_typed_indent_no_format():
             "arguments": [
                 {
                     "type": "dict_argument",
+                    "annotation": {"type": "name", "value": "int"},
+                    "annotation_first_formatting": [],
+                    "annotation_second_formatting": [],
                     "formatting": [],
                     "value": {
-                        "type": "typed_name",
-                        "annotation": {"type": "name", "value": "int"},
-                        "first_formatting": [],
-                        "second_formatting": [],
+                        "type": "name",
                         "value": "x",
                     },
                 }
@@ -966,6 +969,9 @@ def test_funcdef_stmt_one_parameter_comma_indent():
             "arguments": [
                 {
                     "type": "def_argument",
+                    "annotation": {},
+                    "annotation_first_formatting": [],
+                    "annotation_second_formatting": [],
                     "first_formatting": [],
                     "second_formatting": [],
                     "target": {
@@ -1040,6 +1046,9 @@ def test_funcdef_stmt_one_parameter_comma_default_indent():
             "arguments": [
                 {
                     "type": "def_argument",
+                    "annotation": {},
+                    "annotation_first_formatting": [],
+                    "annotation_second_formatting": [],
                     "first_formatting": [],
                     "second_formatting": [],
                     "target": {
@@ -1126,13 +1135,13 @@ def test_funcdef_stmt_two_parameters_typed_with_default_indent():
             "arguments": [
                 {
                     "type": "def_argument",
+                    "annotation": {"type": "name", "value": "int"},
+                    "annotation_first_formatting": [{"type": "space", "value": " "}],
+                    "annotation_second_formatting": [{"type": "space", "value": " "}],
                     "first_formatting": [{"type": "space", "value": " "}],
                     "second_formatting": [{"type": "space", "value": " "}],
                     "target": {
-                        "type": "typed_name",
-                        "annotation": {"type": "name", "value": "int"},
-                        "first_formatting": [{"type": "space", "value": " "}],
-                        "second_formatting": [{"type": "space", "value": " "}],
+                        "type": "name",
                         "value": "x",
                     },
                     "value": {"section": "number", "type": "int", "value": "1"},
@@ -1144,30 +1153,29 @@ def test_funcdef_stmt_two_parameters_typed_with_default_indent():
                 },
                 {
                     "type": "def_argument",
+                    "annotation": {
+                        "type": "atomtrailers",
+                        "value": [
+                            {
+                                "type": "name",
+                                "value": "List",
+                            },
+                            {
+                                "type": "getitem",
+                                "first_formatting": [],
+                                "second_formatting": [],
+                                "third_formatting": [],
+                                "fourth_formatting": [],
+                                "value": {"type": "name", "value": "str"},
+                            }
+                        ]
+                    },
+                    "annotation_first_formatting": [{"type": "space", "value": " "}],
+                    "annotation_second_formatting": [{"type": "space", "value": " "}],
                     "first_formatting": [],
                     "second_formatting": [],
                     "target": {
-                        "type": "typed_name",
-                        "annotation":
-                            {
-                                "type": "atomtrailers",
-                                "value": [
-                                    {
-                                        "type": "name",
-                                        "value": "List",
-                                    },
-                                    {
-                                        "type": "getitem",
-                                        "first_formatting": [],
-                                        "second_formatting": [],
-                                        "third_formatting": [],
-                                        "fourth_formatting": [],
-                                        "value": {"type": "name", "value": "str"},
-                                    }
-                                ]
-                            },
-                        "first_formatting": [{"type": "space", "value": " "}],
-                        "second_formatting": [{"type": "space", "value": " "}],
+                        "type": "name",
                         "value": "y",
                     },
                     "value": {},
@@ -1385,6 +1393,9 @@ def test_funcdef_stmt_one_start_parameter_indent():
             "arguments": [
                 {
                     "type": "list_argument",
+                    "annotation": {},
+                    "annotation_first_formatting": [],
+                    "annotation_second_formatting": [],
                     "formatting": [],
                     "value": {
                         "value": "b",
@@ -1450,6 +1461,9 @@ def test_funcdef_stmt_one_star_star_parameter_indent():
             "arguments": [
                 {
                     "type": "dict_argument",
+                    "annotation": {},
+                    "annotation_first_formatting": [],
+                    "annotation_second_formatting": [],
                     "formatting": [],
                     "value": {
                         "value": "b",
@@ -2418,6 +2432,9 @@ def test_fplist():
             "arguments": [
                 {
                     "type": "def_argument",
+                    "annotation": {},
+                    "annotation_first_formatting": [],
+                    "annotation_second_formatting": [],
                     "first_formatting": [],
                     "second_formatting": [],
                     "value": {},
@@ -2493,6 +2510,9 @@ def test_fplist_two():
             "arguments": [
                 {
                     "type": "def_argument",
+                    "annotation": {},
+                    "annotation_first_formatting": [],
+                    "annotation_second_formatting": [],
                     "first_formatting": [],
                     "second_formatting": [],
                     "value": {},
@@ -2570,6 +2590,9 @@ def test_fplist_alone():
             "arguments": [
                 {
                     "type": "def_argument",
+                    "annotation": {},
+                    "annotation_first_formatting": [],
+                    "annotation_second_formatting": [],
                     "value": {},
                     "first_formatting": [],
                     "second_formatting": [],
@@ -2650,6 +2673,9 @@ def test_regression_def_argument_tuple():
                     'first_formatting': [],
                     'second_formatting': [],
                     'type': 'def_argument',
+                    "annotation": {},
+                    "annotation_first_formatting": [],
+                    "annotation_second_formatting": [],
                     'target': {
                         'type': 'tuple',
                         'first_formatting': [],
@@ -2752,6 +2778,9 @@ def test_regression_def_argument_tuple_nested():
                 {
                     'first_formatting': [],
                     'second_formatting': [],
+                    "annotation": {},
+                    "annotation_first_formatting": [],
+                    "annotation_second_formatting": [],
                     'type': 'def_argument',
                     'target': {
                         'type': 'tuple',

@@ -946,6 +946,9 @@ def test_lambda_arguments():
                     "first_formatting": [],
                     "second_formatting": [],
                     "type": "def_argument",
+                    "annotation": {},
+                    "annotation_first_formatting": [],
+                    "annotation_second_formatting": [],
                     "target": {
                         "value": "argument",
                         "type": "name",

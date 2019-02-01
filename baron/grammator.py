@@ -453,31 +453,15 @@ def generate_parse(print_function):
             "value": name_.value,
         }
 
-    @pg.production("typed_name : NAME COLON test")
-    def typed_name_with_type(pack):
-        (name_, colon, test) = pack
-        return {
-            "type": "typed_name",
-            "first_formatting": colon.hidden_tokens_before if colon else [],
-            "second_formatting": colon.hidden_tokens_after if colon else [],
-            "value": name_.value,
-            "annotation": test
-        }
-
-    @pg.production("typed_name : NAME")
-    def typed_name_no_type(pack):
-        (name_,) = pack
-        return {
-            "type": "name",
-            "value": name_.value,
-        }
-
     @pg.production("typed_parameter : LEFT_PARENTHESIS name RIGHT_PARENTHESIS maybe_test")
     @pg.production("parameter : LEFT_PARENTHESIS name RIGHT_PARENTHESIS maybe_test")
     def parameter_fpdef(pack):
         (left_parenthesis, name, right_parenthesis, (equal, test)) = pack
         return [{
             "type": "def_argument",
+            "annotation": {},
+            "annotation_first_formatting": [],
+            "annotation_second_formatting": [],
             "first_formatting": equal.hidden_tokens_before if equal else [],
             "second_formatting": equal.hidden_tokens_after if equal else [],
             "value": test,
@@ -497,6 +481,9 @@ def generate_parse(print_function):
         (left_parenthesis, fplist, right_parenthesis, (equal, test)) = pack
         return [{
             "type": "def_argument",
+            "annotation": {},
+            "annotation_first_formatting": [],
+            "annotation_second_formatting": [],
             "first_formatting": equal.hidden_tokens_before if equal else [],
             "second_formatting": equal.hidden_tokens_after if equal else [],
             "value": test,
@@ -540,12 +527,44 @@ def generate_parse(print_function):
             "target": name if equal else {}
         }]
 
-    @pg.production("typed_parameter : typed_name maybe_test")
-    @pg.production("parameter : name maybe_test")
-    def parameter_with_default(pack):
-        (name, (equal, test)) = pack
+    @pg.production("typed_parameter : name COLON test maybe_test")
+    def parameter_annotation_with_default(pack):
+        # name, (equal, test) = pack
+        name, colon, annotation, (equal, test) = pack
+        print name, colon, annotation, (equal, test)
         return [{
             "type": "def_argument",
+            "annotation": annotation,
+            "annotation_first_formatting": colon.hidden_tokens_before,
+            "annotation_second_formatting": colon.hidden_tokens_after,
+            "first_formatting": equal.hidden_tokens_before if equal else [],
+            "second_formatting": equal.hidden_tokens_after if equal else [],
+            "value": test,
+            "target": name
+        }]
+
+    @pg.production("typed_parameter : name maybe_test")
+    def parameter_alone_with_default(pack):
+        name, (equal, test) = pack
+        return [{
+            "type": "def_argument",
+            "annotation": {},
+            "annotation_first_formatting": [],
+            "annotation_second_formatting": [],
+            "first_formatting": equal.hidden_tokens_before if equal else [],
+            "second_formatting": equal.hidden_tokens_after if equal else [],
+            "value": test,
+            "target": name
+        }]
+
+    @pg.production("parameter : name maybe_test")
+    def parameter_with_default(pack):
+        name, (equal, test) = pack
+        return [{
+            "type": "def_argument",
+            "annotation": {},
+            "annotation_first_formatting": [],
+            "annotation_second_formatting": [],
             "first_formatting": equal.hidden_tokens_before if equal else [],
             "second_formatting": equal.hidden_tokens_after if equal else [],
             "value": test,
@@ -593,12 +612,12 @@ def generate_parse(print_function):
         return [{
             "type": "list_argument",
             "formatting": star.hidden_tokens_after,
+            "annotation": test,
+            "annotation_first_formatting": colon.hidden_tokens_before if colon else [],
+            "annotation_second_formatting": colon.hidden_tokens_after if colon else [],
             "value": {
-                "type": "typed_name",
-                "first_formatting": colon.hidden_tokens_before if colon else [],
-                "second_formatting": colon.hidden_tokens_after if colon else [],
+                "type": "name",
                 "value": name.value,
-                "annotation": test
             }
         }]
 
@@ -608,12 +627,12 @@ def generate_parse(print_function):
         return [{
             "type": "dict_argument",
             "formatting": double_star.hidden_tokens_after,
+            "annotation": test,
+            "annotation_first_formatting": colon.hidden_tokens_before if colon else [],
+            "annotation_second_formatting": colon.hidden_tokens_after if colon else [],
             "value": {
-                "type": "typed_name",
-                "first_formatting": colon.hidden_tokens_before if colon else [],
-                "second_formatting": colon.hidden_tokens_after if colon else [],
+                "type": "name",
                 "value": name.value,
-                "annotation": test
             }
         }]
 
@@ -624,6 +643,9 @@ def generate_parse(print_function):
         (star, name,) = pack
         return [{
             "type": "list_argument",
+            "annotation": {},
+            "annotation_first_formatting": [],
+            "annotation_second_formatting": [],
             "formatting": star.hidden_tokens_after,
             "value": {
                 "type": "name",
@@ -647,6 +669,9 @@ def generate_parse(print_function):
         (double_star, name,) = pack
         return [{
             "type": "dict_argument",
+            "annotation": {},
+            "annotation_first_formatting": [],
+            "annotation_second_formatting": [],
             "formatting": double_star.hidden_tokens_after,
             "value": {
                 "type": "name",
