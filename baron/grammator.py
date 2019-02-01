@@ -531,7 +531,6 @@ def generate_parse(print_function):
     def parameter_annotation_with_default(pack):
         # name, (equal, test) = pack
         name, colon, annotation, (equal, test) = pack
-        print name, colon, annotation, (equal, test)
         return [{
             "type": "def_argument",
             "annotation": annotation,
