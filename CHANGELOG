@@ -6,6 +6,7 @@ Changelog
 
 First version of full python 3.7 grammar support.
 
+- BREAKING CHANGE: annotations are now member of {def,list,dict}_argument to flatten the data structure
 - add support for ... in from import by bram
 - add support for return annotation by bram
 - add support for exec function by bram
