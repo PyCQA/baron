@@ -11,7 +11,6 @@ Roadmap
 
 Current roadmap is as boring as needed:
 
-* [full python 3.7 compatibility](https://baron.readthedocs.io/en/latest/grammar.html)
 * bug fixs
 * new small features (walker pattern, maybe code generation) and performance improvement.
 
@@ -147,9 +146,7 @@ conservative once it gets some adoption and will probably accept to
 modify it only once or twice in the future with clear indications on how to
 migrate.
 
-**Baron is targeting python 2.[67]**. It has not been tested on python3 but
-should be working for most parts (except the new grammar like <code>yield from</code>,
-obviously). Baron **runs** under python 2 and python 3.
+Baron is supporting python 2 grammar and up to python 3.7 grammar.
 
 Tests
 =====
