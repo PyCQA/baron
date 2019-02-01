@@ -102,7 +102,7 @@ def tokenize(sequence, print_function=False):
 
 def tokenize_current_keywords(print_function=False):
     if print_function is True:
-        return [x for x in KEYWORDS if x != "print"]
+        return [x for x in KEYWORDS if x not in ("print", "exec")]
     else:
         return KEYWORDS
 
