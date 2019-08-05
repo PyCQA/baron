@@ -71,7 +71,7 @@ must be rendered. We'll see the third column later.
   rendered.
 
 
-Walktrough
+Walkthrough
 ~~~~~~~~~~
 
 Let's see all this is in action by rendering a "lambda" node. First, the
