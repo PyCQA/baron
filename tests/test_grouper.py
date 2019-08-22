@@ -148,7 +148,7 @@ def test_unicode_raw_string():
     grouper_test("UR'pouet'", ["UR", "'pouet'"], ["UR'pouet'"])
 
 
-def test_exponant():
+def test_exponent():
     grouper_test("1e+123", ['1e', '+', '123'], ['1e+123'])
     grouper_test("1e-123", ['1e', '-', '123'], ['1e-123'])
     grouper_test("1.1e+123", ['1', '.', '1e', '+', '123'], ['1.1e+123'])
@@ -198,7 +198,7 @@ def test_complex():
     grouper_test("1e1j", ['1e1j'], ['1e1j'])
 
 
-def test_float_exponant():
+def test_float_exponent():
     grouper_test("1E1", ['1E1'], ['1E1'])
     grouper_test("1E-2", ['1E', '-', '2'], ['1E-2'])
     grouper_test("1E+2", ['1E', '+', '2'], ['1E+2'])

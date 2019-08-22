@@ -126,10 +126,10 @@ nodes_rendering_order = {
         "space":             [("string", "value", True)],
         "binary":            [("string", "value", True)],
         "complex":           [("string", "value", True)],
-        "float_exponant":    [("string", "value", True)],
+        "float_exponent":    [("string", "value", True)],
         "left_parenthesis":  [("string", "value", True)],
         "right_parenthesis": [("string", "value", True)],
-        "float_exponant_complex":    [("string", "value", True)],
+        "float_exponent_complex":    [("string", "value", True)],
 
         "break":             [("string", "type", True)],
         "continue":          [("string", "type", True)],

@@ -542,7 +542,7 @@ def test_complex():
     check_dumps("10j")
 
 
-def test_float_exponant():
+def test_float_exponent():
     check_dumps("1e9")
 
 
