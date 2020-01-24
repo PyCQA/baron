@@ -91,6 +91,10 @@ def test_assign():
     assert split("a = b") == ["a", " ", "=", " ", "b"]
 
 
+def test_assign_unicode():
+    assert split("α = β") == ["α", " ", "=", " ", "β"]
+
+
 def test_call():
     assert split("function()") == ["function", "(", ")"]
 
@@ -247,7 +251,9 @@ def test_if():
 
 
 def test_if_elif_else():
-    assert split("if a:\n pass\nelif b:\n pass\nelse: \n pass") == ["if", " ", "a", ":", "\n", " ", "pass", "\n", "elif", " ", "b", ":", "\n", " ", "pass", "\n", "else", ":", " ", "\n", " ", "pass"]
+    assert split("if a:\n pass\nelif b:\n pass\nelse: \n pass") == ["if", " ", "a", ":", "\n", " ", "pass", "\n",
+                                                                    "elif", " ", "b", ":", "\n", " ", "pass", "\n",
+                                                                    "else", ":", " ", "\n", " ", "pass"]
 
 
 def test_while():
@@ -365,7 +371,9 @@ def test_backslash_in_comment():
 
 
 def test_regression():
-    assert split("(r'[\"\\'](.|\n|\r)*[\"\\']', 'STRING'),") == ["(", "r", "'[\"\\'](.|\n|\r)*[\"\\']'", ",", " ", "'STRING'", ")", ","]
+    assert split("(r'[\"\\'](.|\n|\r)*[\"\\']', 'STRING'),") == ["(", "r", "'[\"\\'](.|\n|\r)*[\"\\']'", ",", " ",
+                                                                 "'STRING'", ")", ","]
+
 
 # TODO: make this test pass in python3 also
 # requires to remove dependency on ast.py

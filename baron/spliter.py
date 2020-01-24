@@ -1,5 +1,5 @@
 import string
-from .utils import FlexibleIterator, BaronError
+from .utils import FlexibleIterator, BaronError, is_xid_start, is_xid_continue
 
 
 def split(sequence):
@@ -57,6 +57,10 @@ def split_generator(sequence):
             if iterator.next_in(section):
                 not_found = False
                 yield iterator.grab(lambda iterator: iterator.show_next() in section)
+
+        if iterator.next_is(is_xid_start) or iterator.next_is(is_xid_continue):
+            not_found = False
+            yield iterator.grab(lambda iterator: iterator.next_is(is_xid_start) or iterator.next_is(is_xid_continue))
 
         for one in "@,.;()=*:+-/^%&<>|\r\n~[]{}!``\\":
             if iterator.next_in(one):

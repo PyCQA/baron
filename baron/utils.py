@@ -1,6 +1,7 @@
 import sys
-import regex as re
+import unicodedata
 
+import regex as re
 
 python_version = sys.version_info[0]
 python_subversion = sys.version_info[1]
@@ -33,9 +34,12 @@ class FlexibleIterator():
         return self.sequence[self.position + 1: self.position + 1 + size_of_choice] == sentence
 
     def next_in(self, choice):
+        return self.next_is(lambda item: item in choice)
+
+    def next_is(self, predicate):
         if self.position + 1 >= len(self.sequence):
             return False
-        return self.sequence[self.position + 1] in choice
+        return predicate(self.sequence[self.position + 1])
 
     def show_next(self, at=1):
         if self.position + at >= len(self.sequence):
@@ -106,6 +110,20 @@ def split_on_newlines(text):
         yield text[current_position:]
 
 
+xid_start_regex = re.compile(r"\p{XID_Start}")
+
+
+def is_xid_start(char):
+    return xid_start_regex.match(char)
+
+
+xid_continue_regex = re.compile(r"\p{XID_Continue}")
+
+
+def is_xid_continue(char):
+    return xid_continue_regex.match(char)
+
+
 # Thanks to
 # https://github.com/nvie/rq/commit/282f4be9316d608ebbacd6114aab1203591e8f95
 if python_version >= 3 or python_subversion >= 7:
@@ -115,26 +133,25 @@ else:
         """Class decorator that fills in missing ordering methods"""
         convert = {
             '__lt__': [('__gt__', lambda self, other: other < self),
-                    ('__le__', lambda self, other: not other < self),
-                    ('__ge__', lambda self, other: not self < other)],
+                       ('__le__', lambda self, other: not other < self),
+                       ('__ge__', lambda self, other: not self < other)],
             '__le__': [('__ge__', lambda self, other: other <= self),
-                    ('__lt__', lambda self, other: not other <= self),
-                    ('__gt__', lambda self, other: not self <= other)],
+                       ('__lt__', lambda self, other: not other <= self),
+                       ('__gt__', lambda self, other: not self <= other)],
             '__gt__': [('__lt__', lambda self, other: other > self),
-                    ('__ge__', lambda self, other: not other > self),
-                    ('__le__', lambda self, other: not self > other)],
+                       ('__ge__', lambda self, other: not other > self),
+                       ('__le__', lambda self, other: not self > other)],
             '__ge__': [('__le__', lambda self, other: other >= self),
-                    ('__gt__', lambda self, other: not other >= self),
-                    ('__lt__', lambda self, other: not self >= other)]
+                       ('__gt__', lambda self, other: not other >= self),
+                       ('__lt__', lambda self, other: not self >= other)]
         }
         roots = set(dir(cls)) & set(convert)
         if not roots:
             raise ValueError('must define at least one ordering operation: < > <= >=')  # noqa
-        root = max(roots)       # prefer __lt__ to __le__ to __gt__ to __ge__
+        root = max(roots)  # prefer __lt__ to __le__ to __gt__ to __ge__
         for opname, opfunc in convert[root]:
             if opname not in roots:
                 opfunc.__name__ = opname
                 opfunc.__doc__ = getattr(int, opname).__doc__
                 setattr(cls, opname, opfunc)
         return cls
-
