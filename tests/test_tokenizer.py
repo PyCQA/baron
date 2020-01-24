@@ -22,6 +22,11 @@ def test_name__():
     match('_a', 'NAME')
 
 
+def test_name_unicode():
+    match('β', 'NAME')
+    match('가사', 'NAME')
+
+
 def test_name_number():
     match('a123', 'NAME')
 
@@ -550,6 +555,7 @@ def test_exponant_complex():
     match("-1.E+1J", "FLOAT_EXPONANT_COMPLEX")
     match("-1.1E+1J", "FLOAT_EXPONANT_COMPLEX")
     match("-.1E+1J", "FLOAT_EXPONANT_COMPLEX")
+
 
 # TODO 1.1e1j
 
