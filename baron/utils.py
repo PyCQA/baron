@@ -1,5 +1,5 @@
 import sys
-import re
+import regex as re
 
 
 python_version = sys.version_info[0]
