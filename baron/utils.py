@@ -1,10 +1,11 @@
 import sys
 
 import regex as re
+import six
 
 python_version = sys.version_info[0]
 python_subversion = sys.version_info[1]
-string_instance = str if python_version == 3 else basestring
+string_instance = six.string_types  # alias, for isinstance usage in redbaron
 
 
 class BaronError(Exception):

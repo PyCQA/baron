@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
-
+import six
 
 from baron.tokenizer import tokenize, KEYWORDS
 
@@ -22,9 +22,10 @@ def test_name__():
     match('_a', 'NAME')
 
 
-def test_name_unicode():
-    match('β', 'NAME')
-    match('가사', 'NAME')
+if six.PY3:
+    def test_name_unicode():
+        match('β', 'NAME')
+        match('가사', 'NAME')
 
 
 def test_name_number():

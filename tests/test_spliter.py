@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
-
+import six
 
 from baron.spliter import split, UntreatedError
 from baron.utils import python_version
@@ -91,8 +91,9 @@ def test_assign():
     assert split("a = b") == ["a", " ", "=", " ", "b"]
 
 
-def test_assign_unicode():
-    assert split("α = β") == ["α", " ", "=", " ", "β"]
+if six.PY3:
+    def test_assign_unicode():
+        assert split("α = β") == ["α", " ", "=", " ", "β"]
 
 
 def test_call():
@@ -377,6 +378,6 @@ def test_regression():
 
 # TODO: make this test pass in python3 also
 # requires to remove dependency on ast.py
-if python_version == 2:
+if six.PY2:
     def test_remove_crap():
         assert split("\x0c\xef\xbb\xbf") == []
