@@ -67,7 +67,7 @@ def split_generator(sequence):
                 not_found = False
                 yield next(iterator)
 
-        if iterator.show_next().__repr__().startswith("'\\x"):
+        if iterator.show_next().__repr__().startswith(r"'\x"):
             # guys, seriously, how do you manage to put this shit in your code?
             # I mean, I don't even know how this is possible!
             # example of guilty file: ve/lib/python2.7/site-packages/tests/test_oauth.py

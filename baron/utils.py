@@ -1,5 +1,4 @@
 import sys
-import unicodedata
 
 import regex as re
 
