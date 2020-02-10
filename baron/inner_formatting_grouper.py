@@ -73,7 +73,7 @@ GROUP_ON = (
     "AT",
     "IF",
     "ELSE",
-    "FROM"
+    "FROM",
     "EQUAL",
     "PLUS_EQUAL",
     "MINUS_EQUAL",
