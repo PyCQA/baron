@@ -207,3 +207,22 @@ def test_nested_grouping_after_endl():
         ('RIGHT_SQUARE_BRACKET', ']'),
         ('RIGHT_PARENTHESIS', ')'),
     ]
+
+
+def test_equal():
+    """
+    (a = b)
+    """
+    assert group([
+        ('LEFT_PARENTHESIS', '('),
+        ('NAME', 'a'),
+        ('SPACE', ' '),
+        ('EQUAL', '='),
+        ('SPACE', ' '),
+        ('RIGHT_PARENTHESIS', ')'),
+    ]) == [
+        ('LEFT_PARENTHESIS', '('),
+        ('NAME', 'a'),
+        ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('RIGHT_PARENTHESIS', ')'),
+    ]
