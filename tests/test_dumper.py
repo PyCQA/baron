@@ -637,3 +637,7 @@ def test_crash_issue_85():
 def test_keyword_only_marker():
     check_dumps("def foo(a, *, b, c):    pass\n")
     check_dumps("def foo(a, *  , b, c):    pass\n")
+
+
+def test_float_with_underscores():
+    check_dumps("123_456.789_012")
