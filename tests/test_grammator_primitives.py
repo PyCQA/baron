@@ -7,7 +7,7 @@ def test_return():
     "return"
     parse_simple([
         ('RETURN', 'return'),
-    ], [{"type": "return", "value": None, "formatting": [],}])
+    ], [{"type": "return", "value": None, "formatting": [], }])
 
 
 def test_return_a():
@@ -15,7 +15,7 @@ def test_return_a():
     parse_simple([
         ('RETURN', 'return', [], [('SPACE', ' ')]),
         ('NAME', 'a'),
-    ], [{"type": "return", "value": {"type": "name", "value": 'a',}, "formatting": [{"type": "space", "value": " "}],}])
+    ], [{"type": "return", "value": {"type": "name", "value": 'a', }, "formatting": [{"type": "space", "value": " "}], }])
 
 
 def test_yield():
@@ -38,9 +38,8 @@ def test_yield_from():
     ], [{
         "type": "yield_from",
         "first_formatting": [{"type": "space", "value": " "}],
-        "value": {"type": "name", "value": 'a',},
-        "formatting": [{"type": "space", "value": " "}]
-    ,}])
+        "value": {"type": "name", "value": 'a', },
+        "formatting": [{"type": "space", "value": " "}], }])
 
 
 def test_yield_a():
@@ -48,7 +47,7 @@ def test_yield_a():
     parse_simple([
         ('YIELD', 'yield', [], [('SPACE', ' ')]),
         ('NAME', 'a'),
-    ], [{"type": "yield", "value": {"type": "name", "value": 'a',}, "formatting": [{"type": "space", "value": " "}],}])
+    ], [{"type": "yield", "value": {"type": "name", "value": 'a', }, "formatting": [{"type": "space", "value": " "}], }])
 
 
 def test_del():
@@ -59,7 +58,7 @@ def test_del():
     ], [
         {
             "type": "del",
-            "value": {"type": "name", "value": 'a',},
+            "value": {"type": "name", "value": 'a', },
             "formatting": [{"type": "space", "value": " "}],
         }
     ])
@@ -106,7 +105,7 @@ def test_assert():
     ], [
         {
             "type": "assert",
-            "value": {"type": "name", "value": 'a',},
+            "value": {"type": "name", "value": 'a', },
             "message": None,
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [],
@@ -125,7 +124,7 @@ def test_assert_message():
     ], [
         {
             "type": "assert",
-            "value": {"type": "name", "value": 'a',},
+            "value": {"type": "name", "value": 'a', },
             "message": {"type": "name", "value": 'b'},
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
@@ -141,7 +140,7 @@ def test_assert_message():
         {
             "type": "assert",
             "value": {"type": "name", "value": 'a'},
-            "message": {"type": "name", "value": 'b',},
+            "message": {"type": "name", "value": 'b', },
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [{"type": "space", "value": " "}]
@@ -330,7 +329,7 @@ def test_exec():
     ], [
         {
             "type": "exec",
-            "value": {"type": "name", "value": 'a',},
+            "value": {"type": "name", "value": 'a', },
             "globals": None,
             "locals": None,
             "first_formatting": [{"type": "space", "value": " "}],
@@ -352,7 +351,7 @@ def test_exec_in():
     ], [
         {
             "type": "exec",
-            "value": {"type": "name", "value": 'a',},
+            "value": {"type": "name", "value": 'a', },
             "globals": {"type": "name", "value": 'b'},
             "locals": None,
             "first_formatting": [{"type": "space", "value": " "}],
@@ -371,7 +370,7 @@ def test_exec_in():
         {
             "type": "exec",
             "value": {"type": "name", "value": 'a'},
-            "globals": {"type": "name", "value": 'b',},
+            "globals": {"type": "name", "value": 'b', },
             "locals": None,
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
@@ -394,7 +393,7 @@ def test_exec_in_c():
     ], [
         {
             "type": "exec",
-            "value": {"type": "name", "value": 'a',},
+            "value": {"type": "name", "value": 'a', },
             "globals": {"type": "name", "value": 'b'},
             "locals": {"type": "name", "value": 'c'},
             "first_formatting": [{"type": "space", "value": " "}],
@@ -415,7 +414,7 @@ def test_exec_in_c():
         {
             "type": "exec",
             "value": {"type": "name", "value": 'a'},
-            "globals": {"type": "name", "value": 'b',},
+            "globals": {"type": "name", "value": 'b', },
             "locals": {"type": "name", "value": 'c'},
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
@@ -436,7 +435,7 @@ def test_exec_in_c():
             "type": "exec",
             "value": {"type": "name", "value": 'a'},
             "globals": {"type": "name", "value": 'b'},
-            "locals": {"type": "name", "value": 'c',},
+            "locals": {"type": "name", "value": 'c', },
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": " "}],
             "third_formatting": [{"type": "space", "value": " "}],
@@ -456,7 +455,7 @@ def test_global():
             "type": "global",
             "formatting": [{"type": "space", "value": " "}],
             "value": [
-                {"type": "name", "value": 'a',},
+                {"type": "name", "value": 'a', },
             ]
         }
     ])
@@ -474,11 +473,11 @@ def test_global_one():
             "type": "global",
             "formatting": [{"type": "space", "value": " "}],
             "value": [
-                {"type": "name", "value": 'a',},
+                {"type": "name", "value": 'a', },
                 {
                     "type": "comma",
                     "first_formatting": [],
-                    "second_formatting": [{"type": "space", "value": " ",},],
+                    "second_formatting": [{"type": "space", "value": " ", }, ],
                 },
                 {"type": "name", "value": 'b'},
             ]
@@ -498,9 +497,9 @@ def test_global_one():
                 {
                     "type": "comma",
                     "first_formatting": [],
-                    "second_formatting": [{"type": "space", "value": " ",},],
+                    "second_formatting": [{"type": "space", "value": " ", }, ],
                 },
-                {"type": "name", "value": 'b',},
+                {"type": "name", "value": 'b', },
             ]
         }
     ])
@@ -524,13 +523,13 @@ def test_global_two():
                 {
                     "type": "comma",
                     "first_formatting": [],
-                    "second_formatting": [{"type": "space", "value": " ",},],
+                    "second_formatting": [{"type": "space", "value": " ", }, ],
                 },
                 {"type": "name", "value": "b"},
                 {
                     "type": "comma",
-                    "first_formatting": [{"type": "space", "value": " "},],
-                    "second_formatting": [{"type": "space", "value": "  "},],
+                    "first_formatting": [{"type": "space", "value": " "}, ],
+                    "second_formatting": [{"type": "space", "value": "  "}, ],
                 },
                 {"type": "name", "value": "c"},
             ]
@@ -562,7 +561,7 @@ def test_print_a():
         {
             "type": "print",
             "formatting": [{"type": "space", "value": " "}],
-            "value": [{"type": "name", "value": 'a',}],
+            "value": [{"type": "name", "value": 'a', }],
             "destination_formatting": [],
             "destination": None,
         }

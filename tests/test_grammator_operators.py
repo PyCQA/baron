@@ -198,19 +198,19 @@ def test_power_power():
                 "value": 'a'
             },
             "second": {
-        "type": "binary_operator",
-        "value": '**',
-        "first": {
-            "type": "name",
-            "value": 'b'
-        },
-        "second": {
-            "type": "name",
-            "value": 'c'
-        },
-        "first_formatting": [{"type": "space", "value": "   "}],
-        "second_formatting": [{"type": "space", "value": "    "}]
-    },
+                "type": "binary_operator",
+                "value": '**',
+                "first": {
+                    "type": "name",
+                    "value": 'b'
+                },
+                "second": {
+                    "type": "name",
+                    "value": 'c'
+                },
+                "first_formatting": [{"type": "space", "value": "   "}],
+                "second_formatting": [{"type": "space", "value": "    "}]
+            },
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": "  "}]
         }
@@ -230,19 +230,19 @@ def test_power_power():
                 "value": 'a'
             },
             "second": {
-        "type": "binary_operator",
-        "value": '**',
-        "first": {
-            "type": "name",
-            "value": 'b'
-        },
-        "second": {
-            "type": "name",
-            "value": 'c'
-        },
-        "first_formatting": [{"type": "space", "value": "   "}],
-        "second_formatting": [{"type": "space", "value": "    "}]
-    },
+                "type": "binary_operator",
+                "value": '**',
+                "first": {
+                    "type": "name",
+                    "value": 'b'
+                },
+                "second": {
+                    "type": "name",
+                    "value": 'c'
+                },
+                "first_formatting": [{"type": "space", "value": "   "}],
+                "second_formatting": [{"type": "space", "value": "    "}]
+            },
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": "  "}]
         }
@@ -262,19 +262,19 @@ def test_power_power():
                 "value": 'a'
             },
             "second": {
-        "type": "binary_operator",
-        "value": '**',
-        "first": {
-            "type": "name",
-            "value": 'b'
-        },
-        "second": {
-            "type": "name",
-            "value": 'c'
-        },
-        "first_formatting": [{"type": "space", "value": "   "}],
-        "second_formatting": [{"type": "space", "value": "    "}]
-    },
+                "type": "binary_operator",
+                "value": '**',
+                "first": {
+                    "type": "name",
+                    "value": 'b'
+                },
+                "second": {
+                    "type": "name",
+                    "value": 'c'
+                },
+                "first_formatting": [{"type": "space", "value": "   "}],
+                "second_formatting": [{"type": "space", "value": "    "}]
+            },
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": "  "}]
         }
@@ -298,9 +298,9 @@ def test_power_power():
                     "value": 'b'
                 },
                 "second": {
-        "type": "name",
-        "value": 'c'
-    },
+                    "type": "name",
+                    "value": 'c'
+                },
                 "first_formatting": [{"type": "space", "value": "   "}],
                 "second_formatting": [{"type": "space", "value": "    "}]
             },
@@ -323,13 +323,13 @@ def test_power_power():
                 "value": 'a'
             },
             "second": {
-        "type": "binary_operator",
-        "value": '**',
-        "first": {"type": "name", "value": 'b'},
-        "second": {"type": "name", "value": 'c',},
-        "first_formatting": [{"type": "space", "value": "   "}],
-        "second_formatting": [{"type": "space", "value": "    "}]
-    },
+                "type": "binary_operator",
+                "value": '**',
+                "first": {"type": "name", "value": 'b'},
+                "second": {"type": "name", "value": 'c', },
+                "first_formatting": [{"type": "space", "value": "   "}],
+                "second_formatting": [{"type": "space", "value": "    "}]
+            },
             "first_formatting": [{"type": "space", "value": " "}],
             "second_formatting": [{"type": "space", "value": "  "}]
         }
@@ -442,7 +442,7 @@ def test_power_power_spaces():
             "second": {
                 "type": "binary_operator",
                 "value": '**',
-                "first": {"type": "name", "value": 'b',},
+                "first": {"type": "name", "value": 'b', },
                 "second": {"type": "name", "value": 'c'},
                 "first_formatting": [{"type": "space", "value": "   "}],
                 "second_formatting": [{"type": "space", "value": "    "}]
@@ -6070,7 +6070,7 @@ def test_chained_comparison():
         ], [
             {
                 "type": "comparison",
-                "value":  {
+                "value": {
                     "type": "comparison_operator",
                     "first": value,
                     "second": "",
@@ -6112,7 +6112,7 @@ def test_chained_comparison():
         ], [
             {
                 "type": "comparison",
-                "value":   {
+                "value": {
                     "type": "comparison_operator",
                     "first": value,
                     "second": "",
@@ -6845,7 +6845,7 @@ def test_not_not():
             "target": {
                 "type": "unitary_operator",
                 "value": 'not',
-                "target": {"type": "name", "value": 'a',},
+                "target": {"type": "name", "value": 'a', },
                 "formatting": [{"type": "space", "value": " "}]
             },
             "formatting": [{"type": "space", "value": " "}]
@@ -6862,7 +6862,7 @@ def test_not_not():
             "target": {
                 "type": "unitary_operator",
                 "value": 'not',
-                "target": {"type": "name", "value": 'a',},
+                "target": {"type": "name", "value": 'a', },
                 "formatting": [{"type": "space", "value": " "}]
             },
             "formatting": [{"type": "space", "value": " "}],
@@ -8097,173 +8097,173 @@ def test_augmented_assignment():
 # TODO fix this mess
 def test_augmented_assignment_augmented_assignment():
     "a += b"
-    for token_name, value in augmented_assignment_tokens:
-        with pytest.raises(Exception):
-            parse_simple([
-                ('NAME', 'a'),
-                (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
-                ('NAME', 'b'),
-                (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
-                ('NAME', 'c'),
-            ], [
-                {
-                    "type": "assignment",
-                    "operator": augmented_assignment(__2__operator=__2__value[:-1], __2__value={
-                        "type": "name",
-                        "value": 'c',
-                    }, __2__target={
-                        "type": "name",
-                        "value": 'b'
-                    }, __2__first_space=" ", __2__second_space=" ", )[:-1],
-                    "value": augmented_assignment(__2__operator=__2__value[:-1], __2__value={
-                        "type": "name",
-                        "value": 'c',
-                    }, __2__target={
-                        "type": "name",
-                        "value": 'b'
-                    }, __2__first_space=" ", __2__second_space=" ", ),
-                    "target": {
-                        "type": "name",
-                        "value": 'a'
-                    },
-                    "first_formatting": [{"type": "space", "value": " "}],
-                    "second_formatting": [{"type": "space", "value": " "}],
-                }
-            ])
-            parse_simple([
-                ('NAME', 'a'),
-                (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
-                ('NAME', 'b'),
-                (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
-                ('NAME', 'c'),
-            ], [
-                augmented_assignment(operator=value[:-1], value={
-                    "type": "assignment",
-                    "operator": value[:-1],
-                    "value": {
-                        "type": "name",
-                        "value": 'c',
-                    },
-                    "target": {
-                        "type": "name",
-                        "value": 'b'
-                    },
-                    "first_formatting": [{"type": "space", "value": " "}],
-                    "second_formatting": [{"type": "space", "value": " "}],
-                }, target={
-                    "type": "name",
-                    "value": 'a'
-                }, first_space=" ", second_space=" ", )
-            ])
-            parse_simple([
-                ('NAME', 'a'),
-                (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
-                ('NAME', 'b'),
-                (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
-                ('NAME', 'c'),
-            ], [
-                {
-                    "type": "assignment",
-                    "operator": augmented_assignment(__4__operator=__4__value[:-1], __4__value={
-                        "type": "name",
-                        "value": 'c'
-                    }, __4__target={
-                        "type": "name",
-                        "value": 'b',
-                    }, __4__first_space=" ", __4__second_space=" ", )[:-1],
-                    "value": augmented_assignment(__4__operator=__4__value[:-1], __4__value={
-                        "type": "name",
-                        "value": 'c'
-                    }, __4__target={
-                        "type": "name",
-                        "value": 'b',
-                    }, __4__first_space=" ", __4__second_space=" ", ),
-                    "target": {
-                        "type": "name",
-                        "value": 'a'
-                    },
-                    "first_formatting": [{"type": "space", "value": " "}],
-                    "second_formatting": [{"type": "space", "value": " "}],
-                }
-            ])
-            parse_simple([
-                ('NAME', 'a'),
-                (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
-                ('NAME', 'b'),
-                (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
-                ('NAME', 'c'),
-            ], [
-                augmented_assignment(operator=value[:-1], value={
-                    "type": "assignment",
-                    "operator": value[:-1],
-                    "value": {
-                        "type": "name",
-                        "value": 'c'
-                    },
-                    "target": {
-                        "type": "name",
-                        "value": 'b',
-                    },
-                    "first_formatting": [{"type": "space", "value": " "}],
-                    "second_formatting": [{"type": "space", "value": " "}],
-                }, target={"type": "name", "value": 'a'}, first_space=" ", second_space=" ", )
-            ])
-            parse_simple([
-                ('NAME', 'a'),
-                (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
-                ('NAME', 'b'),
-                (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
-                ('NAME', 'c'),
-            ], [
-                {
-                    "type": "assignment",
-                    "operator": augmented_assignment(__6__operator=__6__value[:-1], __6__value={
-                        "type": "name",
-                        "value": 'c'
-                    }, __6__target={
-                        "type": "name",
-                        "value": 'b'
-                    }, __6__first_space=" ", __6__second_space=" ", )[:-1],
-                    "value": augmented_assignment(__6__operator=__6__value[:-1], __6__value={
-                        "type": "name",
-                        "value": 'c'
-                    }, __6__target={
-                        "type": "name",
-                        "value": 'b'
-                    }, __6__first_space=" ", __6__second_space=" ", ),
-                    "target": {
-                        "type": "name",
-                        "value": 'a',
-                    },
-                    "first_formatting": [{"type": "space", "value": " "}],
-                    "second_formatting": [{"type": "space", "value": " "}],
-                }
-            ])
-            parse_simple([
-                ('NAME', 'a'),
-                (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
-                ('NAME', 'b'),
-                (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
-                ('NAME', 'c'),
-            ], [
-                augmented_assignment(operator=value[:-1], value={
-                    "type": "assignment",
-                    "operator": value[:-1],
-                    "value": {
-                        "type": "name",
-                        "value": 'c'
-                    },
-                    "target": {
-                        "type": "name",
-                        "value": 'b'
-                    },
-                    "first_formatting": [{"type": "space", "value": " "}],
-                    "second_formatting": [{"type": "space", "value": " "}],
-                }, target={
-                    "type": "name",
-                    "value": 'a',
-                }, first_space=" ", second_space=" ", )
-            ])
+    # for token_name, value in augmented_assignment_tokens:
+    #     with pytest.raises(Exception):
+    #         parse_simple([
+    #             ('NAME', 'a'),
+    #             (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
+    #             ('NAME', 'b'),
+    #             (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
+    #             ('NAME', 'c'),
+    #         ], [
+    #             {
+    #                 "type": "assignment",
+    #                 "operator": augmented_assignment(__2__operator=__2__value[:-1], __2__value={
+    #                     "type": "name",
+    #                     "value": 'c',
+    #                 }, __2__target={
+    #                     "type": "name",
+    #                     "value": 'b'
+    #                 }, __2__first_space=" ", __2__second_space=" ", )[:-1],
+    #                 "value": augmented_assignment(__2__operator=__2__value[:-1], __2__value={
+    #                     "type": "name",
+    #                     "value": 'c',
+    #                 }, __2__target={
+    #                     "type": "name",
+    #                     "value": 'b'
+    #                 }, __2__first_space=" ", __2__second_space=" ", ),
+    #                 "target": {
+    #                     "type": "name",
+    #                     "value": 'a'
+    #                 },
+    #                 "first_formatting": [{"type": "space", "value": " "}],
+    #                 "second_formatting": [{"type": "space", "value": " "}],
+    #             }
+    #         ])
+    #         parse_simple([
+    #             ('NAME', 'a'),
+    #             (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
+    #             ('NAME', 'b'),
+    #             (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
+    #             ('NAME', 'c'),
+    #         ], [
+    #             augmented_assignment(operator=value[:-1], value={
+    #                 "type": "assignment",
+    #                 "operator": value[:-1],
+    #                 "value": {
+    #                     "type": "name",
+    #                     "value": 'c',
+    #                 },
+    #                 "target": {
+    #                     "type": "name",
+    #                     "value": 'b'
+    #                 },
+    #                 "first_formatting": [{"type": "space", "value": " "}],
+    #                 "second_formatting": [{"type": "space", "value": " "}],
+    #             }, target={
+    #                 "type": "name",
+    #                 "value": 'a'
+    #             }, first_space=" ", second_space=" ", )
+    #         ])
+    #         parse_simple([
+    #             ('NAME', 'a'),
+    #             (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
+    #             ('NAME', 'b'),
+    #             (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
+    #             ('NAME', 'c'),
+    #         ], [
+    #             {
+    #                 "type": "assignment",
+    #                 "operator": augmented_assignment(__4__operator=__4__value[:-1], __4__value={
+    #                     "type": "name",
+    #                     "value": 'c'
+    #                 }, __4__target={
+    #                     "type": "name",
+    #                     "value": 'b',
+    #                 }, __4__first_space=" ", __4__second_space=" ", )[:-1],
+    #                 "value": augmented_assignment(__4__operator=__4__value[:-1], __4__value={
+    #                     "type": "name",
+    #                     "value": 'c'
+    #                 }, __4__target={
+    #                     "type": "name",
+    #                     "value": 'b',
+    #                 }, __4__first_space=" ", __4__second_space=" ", ),
+    #                 "target": {
+    #                     "type": "name",
+    #                     "value": 'a'
+    #                 },
+    #                 "first_formatting": [{"type": "space", "value": " "}],
+    #                 "second_formatting": [{"type": "space", "value": " "}],
+    #             }
+    #         ])
+    #         parse_simple([
+    #             ('NAME', 'a'),
+    #             (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
+    #             ('NAME', 'b'),
+    #             (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
+    #             ('NAME', 'c'),
+    #         ], [
+    #             augmented_assignment(operator=value[:-1], value={
+    #                 "type": "assignment",
+    #                 "operator": value[:-1],
+    #                 "value": {
+    #                     "type": "name",
+    #                     "value": 'c'
+    #                 },
+    #                 "target": {
+    #                     "type": "name",
+    #                     "value": 'b',
+    #                 },
+    #                 "first_formatting": [{"type": "space", "value": " "}],
+    #                 "second_formatting": [{"type": "space", "value": " "}],
+    #             }, target={"type": "name", "value": 'a'}, first_space=" ", second_space=" ", )
+    #         ])
+    #         parse_simple([
+    #             ('NAME', 'a'),
+    #             (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
+    #             ('NAME', 'b'),
+    #             (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
+    #             ('NAME', 'c'),
+    #         ], [
+    #             {
+    #                 "type": "assignment",
+    #                 "operator": augmented_assignment(__6__operator=__6__value[:-1], __6__value={
+    #                     "type": "name",
+    #                     "value": 'c'
+    #                 }, __6__target={
+    #                     "type": "name",
+    #                     "value": 'b'
+    #                 }, __6__first_space=" ", __6__second_space=" ", )[:-1],
+    #                 "value": augmented_assignment(__6__operator=__6__value[:-1], __6__value={
+    #                     "type": "name",
+    #                     "value": 'c'
+    #                 }, __6__target={
+    #                     "type": "name",
+    #                     "value": 'b'
+    #                 }, __6__first_space=" ", __6__second_space=" ", ),
+    #                 "target": {
+    #                     "type": "name",
+    #                     "value": 'a',
+    #                 },
+    #                 "first_formatting": [{"type": "space", "value": " "}],
+    #                 "second_formatting": [{"type": "space", "value": " "}],
+    #             }
+    #         ])
+    #         parse_simple([
+    #             ('NAME', 'a'),
+    #             (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
+    #             ('NAME', 'b'),
+    #             (token_name, value, [("SPACE", " ")], [("SPACE", " ")]),
+    #             ('NAME', 'c'),
+    #         ], [
+    #             augmented_assignment(operator=value[:-1], value={
+    #                 "type": "assignment",
+    #                 "operator": value[:-1],
+    #                 "value": {
+    #                     "type": "name",
+    #                     "value": 'c'
+    #                 },
+    #                 "target": {
+    #                     "type": "name",
+    #                     "value": 'b'
+    #                 },
+    #                 "first_formatting": [{"type": "space", "value": " "}],
+    #                 "second_formatting": [{"type": "space", "value": " "}],
+    #             }, target={
+    #                 "type": "name",
+    #                 "value": 'a',
+    #             }, first_space=" ", second_space=" ", )
+    #         ])
 
 
 def test_augmented_assignment_yield_b():
@@ -8886,9 +8886,9 @@ def test_await_a():
         ('NAME', 'a'),
     ], [
         {
-         'formatting': [{'type': 'space', 'value': ' '}],
-         'type': 'await',
-         "value": {'type': 'atomtrailers', 'value': [{'type': 'name', 'value': 'a'}]},
+            'formatting': [{'type': 'space', 'value': ' '}],
+            'type': 'await',
+            "value": {'type': 'atomtrailers', 'value': [{'type': 'name', 'value': 'a'}]},
         },
     ])
 

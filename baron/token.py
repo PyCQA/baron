@@ -53,7 +53,7 @@ class BaronToken(BaseBox):
     def render(self):
         before = "".join([(x["indent"] if x["type"] == "endl" else "") + x["value"] for x in self.hidden_tokens_before])
         after = "".join([(x["indent"] if x["type"] == "endl" else "") + x["value"] for x in self.hidden_tokens_after])
-        #print self.hidden_tokens_before, self.value, self.hidden_tokens_after
+        # print self.hidden_tokens_before, self.value, self.hidden_tokens_after
         return before + self.value + after
 
     def gettokentype(self):

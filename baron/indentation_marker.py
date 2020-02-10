@@ -1,5 +1,4 @@
 from .utils import FlexibleIterator
-import sys
 
 """
 Objective: add an INDENT token and a DEDENT token arround every block.
@@ -25,7 +24,7 @@ def mark_indentation(sequence):
 
 
 def transform_tabs_to_spaces(string):
-    return string.replace("\t", " "*8)
+    return string.replace("\t", " " * 8)
 
 
 def get_space(node):
@@ -111,4 +110,3 @@ def string_is_bigger(s1, s2):
         return True
     else:
         return s1 > s2
-

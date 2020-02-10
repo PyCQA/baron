@@ -3,11 +3,10 @@
 
 from baron.grouper import group
 from baron.spliter import split
-import pytest
 
 
-def grouper_test(input, split_output, group_output):
-    assert split(input) == split_output
+def grouper_test(input_, split_output, group_output):
+    assert split(input_) == split_output
     assert group(split_output) == group_output
 
 

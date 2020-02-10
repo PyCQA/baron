@@ -14,13 +14,13 @@ def test_render_crap():
 
 
 def test_dictionnary_key_validity(dictionnary_node):
-    for key_type, render_key, dependent in dictionnary_node:
+    for key_type, _, _ in dictionnary_node:
         assert key_type in node_types
 
 
 def test_dictionnary_dependent_validity(dictionnary_node):
     keys = set([t[1] for t in dictionnary_node])
-    for key_type, render_key, dependent in dictionnary_node:
+    for key_type, _, dependent in dictionnary_node:
         assert isinstance(dependent, bool) \
             or (isinstance(dependent, str) and dependent in keys) \
             or (isinstance(dependent, list) and all([d in keys for d in dependent]))
@@ -76,6 +76,7 @@ class RenderWalkerTester(RenderWalker):
         return _stop
 
 
+# flake8: noqa
 def test_walk_stop():
     node = parse("a = 1")
     walker = RenderWalkerTester([

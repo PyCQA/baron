@@ -306,7 +306,6 @@ def test_from_a_import_parenthesis_b_without_space():
     ])
 
 
-
 def test_from_a_import_parenthesis_b_comma():
     "from a import (b,)"
     group([
@@ -1244,7 +1243,6 @@ def test_combine_div_modulo_mult():
     ])
 
 
-
 def test_arith_expr_plus():
     "a+b"
     group([
@@ -1256,7 +1254,6 @@ def test_arith_expr_plus():
         ('PLUS', '+'),
         ('NAME', 'b'),
     ])
-
 
 
 def test_arith_expr_add_first_space():
@@ -1273,7 +1270,6 @@ def test_arith_expr_add_first_space():
     ])
 
 
-
 def test_arith_expr_add_second_space():
     "a+ b"
     group([
@@ -1286,7 +1282,6 @@ def test_arith_expr_add_second_space():
         ('PLUS', '+', [], [('SPACE', ' ')]),
         ('NAME', 'b'),
     ])
-
 
 
 def test_arith_expr_add_spaces():
@@ -1302,7 +1297,6 @@ def test_arith_expr_add_spaces():
         ('PLUS', '+', [('SPACE', ' ')], [('SPACE', ' ')]),
         ('NAME', 'b'),
     ])
-
 
 
 def test_arith_expr_add_spaces_atomtrailers():
@@ -1337,7 +1331,6 @@ def test_arith_expr_substract():
     ])
 
 
-
 def test_arith_expr_substract_first_space():
     "a -b"
     group([
@@ -1350,7 +1343,6 @@ def test_arith_expr_substract_first_space():
         ('MINUS', '-', [('SPACE', ' ')]),
         ('NAME', 'b'),
     ])
-
 
 
 def test_arith_expr_substract_second_space():
@@ -1367,7 +1359,6 @@ def test_arith_expr_substract_second_space():
     ])
 
 
-
 def test_arith_expr_substract_spaces():
     "a - b"
     group([
@@ -1381,7 +1372,6 @@ def test_arith_expr_substract_spaces():
         ('MINUS', '-', [('SPACE', ' ')], [('SPACE', ' ')]),
         ('NAME', 'b'),
     ])
-
 
 
 def test_arith_expr_substract_spaces_atomtrailers():
@@ -1433,7 +1423,6 @@ def test_arith_expr_left_shift():
     ])
 
 
-
 def test_arith_expr_left_shift_first_space():
     "a <<b"
     group([
@@ -1448,7 +1437,6 @@ def test_arith_expr_left_shift_first_space():
     ])
 
 
-
 def test_arith_expr_left_shift_second_space():
     "a<< b"
     group([
@@ -1461,7 +1449,6 @@ def test_arith_expr_left_shift_second_space():
         ('LEFT_SHIFT', '<<', [], [('SPACE', ' ')]),
         ('NAME', 'b'),
     ])
-
 
 
 def test_arith_expr_left_shift_spaces():
@@ -2924,9 +2911,7 @@ def test_comment():
 
 
 def test_repr():
-    """
-    ` 
-    """
+    "` "
     group([
         ('BACKQUOTE', '`'),
         ('SPACE', ' '),
@@ -2936,9 +2921,7 @@ def test_repr():
 
 
 def test_semicolon():
-    """
-     ; 
-    """
+    " ; "
     group([
         ('SPACE', ' '),
         ('SEMICOLON', ';'),
@@ -3039,9 +3022,7 @@ def test_space_before_comment():
 
 
 def test_right_arrow():
-    """
-     -> 
-    """
+    " -> "
     group([
         ('SPACE', ' '),
         ('RIGHT_ARROW', '->'),

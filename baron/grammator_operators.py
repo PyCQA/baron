@@ -213,7 +213,6 @@ def include_operators(pg):
             "second_formatting": operator.hidden_tokens_after
         }
 
-
     @pg.production("factor : PLUS factor")
     @pg.production("factor : MINUS factor")
     @pg.production("factor : TILDE factor")

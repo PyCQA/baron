@@ -109,675 +109,715 @@ def child_by_key(node, key):
     if key in node:
         return node[key]
 
-
     if key in node_keys(node):
         return key
 
     raise AttributeError("Cannot access key \"%s\" in node \"%s\"" % (key, node))
 
 
+# for a surprising exception, we won't honnor pep8 here because it really increase lisibility
 nodes_rendering_order = {
-        "int":               [("string", "value", True)],
-        "long":              [("string", "value", True)],
-        "name":              [("string", "value", True)],
-        "hexa":              [("string", "value", True)],
-        "octa":              [("string", "value", True)],
-        "float":             [("string", "value", True)],
-        "space":             [("string", "value", True)],
-        "binary":            [("string", "value", True)],
-        "complex":           [("string", "value", True)],
-        "float_exponant":    [("string", "value", True)],
-        "left_parenthesis":  [("string", "value", True)],
-        "right_parenthesis": [("string", "value", True)],
-        "float_exponant_complex":    [("string", "value", True)],
+    "int":                       [("string", "value", True)],  # noqa
+    "long":                      [("string", "value", True)],  # noqa
+    "name":                      [("string", "value", True)],  # noqa
+    "hexa":                      [("string", "value", True)],  # noqa
+    "octa":                      [("string", "value", True)],  # noqa
+    "float":                     [("string", "value", True)],  # noqa
+    "space":                     [("string", "value", True)],  # noqa
+    "binary":                    [("string", "value", True)],  # noqa
+    "complex":                   [("string", "value", True)],  # noqa
+    "float_exponant":            [("string", "value", True)],  # noqa
+    "left_parenthesis":          [("string", "value", True)],  # noqa
+    "right_parenthesis":         [("string", "value", True)],  # noqa
+    "float_exponant_complex":    [("string", "value", True)],  # noqa
 
-        "break":             [("string", "type", True)],
-        "continue":          [("string", "type", True)],
-        "pass":              [("string", "type", True)],
+    "break":                     [("string", "type", True)],  # noqa
+    "continue":                  [("string", "type", True)],  # noqa
+    "pass":                      [("string", "type", True)],  # noqa
 
-        "dotted_name":       [("list", "value", True)],
-        "ifelseblock":       [("list", "value", True)],
-        "atomtrailers":      [("list", "value", True)],
-        "string_chain":      [("list", "value", True)],
+    "dotted_name":               [("list", "value", True)],  # noqa
+    "ifelseblock":               [("list", "value", True)],  # noqa
+    "atomtrailers":              [("list", "value", True)],  # noqa
+    "string_chain":              [("list", "value", True)],  # noqa
 
-        "endl": [
-            ("formatting", "formatting",        True),
-            ("string",     "value",             True),
-            ("string",     "indent",            True),
-        ],
+    "endl": [
+        ("formatting", "formatting",        True),  # noqa
+        ("string",     "value",             True),  # noqa
+        ("string",     "indent",            True),  # noqa
+    ],
 
-        "star": [
-            ("formatting", "first_formatting",  True),
-            ("string",     "value",             True),
-            ("formatting", "second_formatting", True),
-        ],
+    "star": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("string",     "value",             True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+    ],
 
-        "star_expression": [
-            ("constant",   "*",                 True),
-            ("formatting", "formatting",        True),
-            ("key",        "value",             True),
-        ],
+    "star_expression": [
+        ("constant",   "*",                 True),  # noqa
+        ("formatting", "formatting",        True),  # noqa
+        ("key",        "value",             True),  # noqa
+    ],
 
-        "string": [
-            ("formatting", "first_formatting",  True),
-            ("string",     "value",             True),
-            ("formatting", "second_formatting", True),
-        ],
-        "raw_string": [
-            ("formatting", "first_formatting",  True),
-            ("string",     "value",             True),
-            ("formatting", "second_formatting", True),
-        ],
-        "binary_string": [
-            ("formatting", "first_formatting",  True),
-            ("string",     "value",             True),
-            ("formatting", "second_formatting", True),
-        ],
-        "unicode_string": [
-            ("formatting", "first_formatting",  True),
-            ("string",     "value",             True),
-            ("formatting", "second_formatting", True),
-        ],
-        "binary_raw_string": [
-            ("formatting", "first_formatting",  True),
-            ("string",     "value",             True),
-            ("formatting", "second_formatting", True),
-        ],
-        "interpolated_string": [
-            ("formatting", "first_formatting",  True),
-            ("string",     "value",             True),
-            ("formatting", "second_formatting", True),
-        ],
-        "interpolated_raw_string": [
-            ("formatting", "first_formatting",  True),
-            ("string",     "value",             True),
-            ("formatting", "second_formatting", True),
-        ],
-        "unicode_raw_string": [
-            ("formatting", "first_formatting",  True),
-            ("string",     "value",             True),
-            ("formatting", "second_formatting", True),
-        ],
+    "string": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("string",     "value",             True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+    ],
+    "raw_string": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("string",     "value",             True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+    ],
+    "binary_string": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("string",     "value",             True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+    ],
+    "unicode_string": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("string",     "value",             True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+    ],
+    "binary_raw_string": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("string",     "value",             True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+    ],
+    "interpolated_string": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("string",     "value",             True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+    ],
+    "interpolated_raw_string": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("string",     "value",             True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+    ],
+    "unicode_raw_string": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("string",     "value",             True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+    ],
 
-        # FIXME ugly, comment can end up in formatting of another
-        # node or being standalone, this is bad
-        "comment": [
-            ("formatting", "formatting", "formatting"),
-            ("string",     "value",             True),
-        ],
+    # FIXME ugly, comment can end up in formatting of another
+    # node or being standalone, this is bad
+    "comment": [
+        ("formatting", "formatting", "formatting"),  # noqa
+        ("string",     "value",             True),  # noqa
+    ],
 
-        "ternary_operator": [
-            ("key",        "first",             True),
-            ("formatting", "first_formatting",  True),
-            ("constant",   "if",                True),
-            ("formatting", "second_formatting", True),
-            ("key",        "value",             True),
-            ("formatting", "third_formatting",  True),
-            ("constant",   "else",              True),
-            ("formatting", "fourth_formatting", True),
-            ("key",        "second",            True),
-        ],
+    "ternary_operator": [
+        ("key",        "first",             True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   "if",                True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("key",        "value",             True),  # noqa
+        ("formatting", "third_formatting",  True),  # noqa
+        ("constant",   "else",              True),  # noqa
+        ("formatting", "fourth_formatting", True),  # noqa
+        ("key",        "second",            True),  # noqa
+    ],
 
-        "ellipsis": [
-            ("constant",   ".",                 True),
-            ("formatting", "first_formatting",  True),
-            ("constant",   ".",                 True),
-            ("formatting", "second_formatting", True),
-            ("constant",   ".",                 True),
-        ],
-        "dot": [
-            ("formatting", "first_formatting",  True),
-            ("constant",   ".",                 True),
-            ("formatting", "second_formatting", True),
-        ],
-        "semicolon": [
-            ("formatting", "first_formatting",  True),
-            ("constant",   ";",                 True),
-            ("formatting", "second_formatting", True),
-        ],
-        "comma": [
-            ("formatting", "first_formatting",  True),
-            ("constant",   ",",                 True),
-            ("formatting", "second_formatting", True),
-        ],
+    "ellipsis": [
+        ("constant",   ".",                 True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   ".",                 True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("constant",   ".",                 True),  # noqa
+    ],
 
-        "call": [
-            ("formatting", "first_formatting",  True),
-            ("constant",   "(",                 True),
-            ("formatting", "second_formatting", True),
-            ("list",       "value",             True),
-            ("formatting", "third_formatting",  True),
-            ("constant",   ")",                 True),
-            ("formatting", "fourth_formatting", True),
-        ],
+    "dot": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   ".",                 True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+    ],
 
-        "decorator": [
-            ("constant",   "@",                 True),
-            ("key",        "value",             True),
-            ("key",        "call",              "call"),
-        ],
+    "semicolon": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   ";",                 True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+    ],
 
-        "class": [
-            ("list",       "decorators",        True),
-            ("constant",   "class",             True),
-            ("formatting", "first_formatting",  True),
-            ("string",     "name",              True),
-            ("formatting", "second_formatting", True),
-            ("constant",   "(",                 "parenthesis"),
-            ("formatting", "third_formatting",  True),
-            ("list",       "inherit_from",      True),
-            ("formatting", "fourth_formatting", True),
-            ("constant",   ")",                 "parenthesis"),
-            ("formatting", "fifth_formatting",  True),
-            ("constant",   ":",                 True),
-            ("formatting", "sixth_formatting",  True),
-            ("list",       "value",             True),
-            ("bool",       "parenthesis",       False),
-        ],
+    "comma": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   ",",                 True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+    ],
 
-        "repr": [
-            ("constant",   "`",                 True),
-            ("formatting", "first_formatting",  True),
-            ("list",       "value",             True),
-            ("formatting", "second_formatting", True),
-            ("constant",   "`",                 True),
-        ],
-        "list": [
-            ("formatting", "first_formatting",  True),
-            ("constant",   "[",                 True),
-            ("formatting", "second_formatting", True),
-            ("list",       "value",             True),
-            ("formatting", "third_formatting",  True),
-            ("constant",   "]",                 True),
-            ("formatting", "fourth_formatting", True),
-        ],
-        "associative_parenthesis": [
-            ("formatting", "first_formatting",  True),
-            ("constant",   "(",                 True),
-            ("formatting", "second_formatting", True),
-            ("key",        "value",             True),
-            ("formatting", "third_formatting",  True),
-            ("constant",   ")",                 True),
-            ("formatting", "fourth_formatting", True),
-        ],
-        "tuple": [
-            ("formatting", "first_formatting",  "with_parenthesis"),
-            ("constant",   "(",                 "with_parenthesis"),
-            ("formatting", "second_formatting", "with_parenthesis"),
-            ("list",       "value",             True),
-            ("formatting", "third_formatting",  "with_parenthesis"),
-            ("constant",   ")",                 "with_parenthesis"),
-            ("formatting", "fourth_formatting", "with_parenthesis"),
-            ("bool",       "with_parenthesis",  False),
-        ],
+    "call": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   "(",                 True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("list",       "value",             True),  # noqa
+        ("formatting", "third_formatting",  True),  # noqa
+        ("constant",   ")",                 True),  # noqa
+        ("formatting", "fourth_formatting", True),  # noqa
+    ],
 
-        "await": [
-            ("constant",    "await",        True),
-            ("formatting",  "formatting",   True),
-            ("key",         "value",        True),
+    "decorator": [
+        ("constant",   "@",                 True),  # noqa
+        ("key",        "value",             True),  # noqa
+        ("key",        "call",              "call"),  # noqa
+    ],
 
-        ],
-        "def": [
-            ("list",       "decorators",        True),
-            ("bool",       "async",             False),
-            ("constant",   "async",             "async"),
-            ("formatting", "async_formatting",  "async"),
-            ("constant",   "def",               True),
-            ("formatting", "first_formatting",  True),
-            ("string",     "name",              True),
-            ("formatting", "second_formatting", True),
-            ("constant",   "(",                 True),
-            ("formatting", "third_formatting",  True),
-            ("list",       "arguments",         True),
-            ("formatting", "fourth_formatting", True),
-            ("constant",   ")",                 True),
-            ("formatting", "return_annotation_first_formatting", "return_annotation"),
-            ("constant",   "->", "return_annotation"),
-            ("formatting", "return_annotation_second_formatting", "return_annotation"),
-            ("key",        "return_annotation", "return_annotation"),
-            ("formatting", "fifth_formatting",  True),
-            ("constant",   ":",                 True),
-            ("formatting", "sixth_formatting",  True),
-            ("list",       "value",             True),
-        ],
+    "class": [
+        ("list",       "decorators",        True),  # noqa
+        ("constant",   "class",             True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("string",     "name",              True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("constant",   "(",                 "parenthesis"),  # noqa
+        ("formatting", "third_formatting",  True),  # noqa
+        ("list",       "inherit_from",      True),  # noqa
+        ("formatting", "fourth_formatting", True),  # noqa
+        ("constant",   ")",                 "parenthesis"),  # noqa
+        ("formatting", "fifth_formatting",  True),  # noqa
+        ("constant",   ":",                 True),  # noqa
+        ("formatting", "sixth_formatting",  True),  # noqa
+        ("list",       "value",             True),  # noqa
+        ("bool",       "parenthesis",       False),  # noqa
+    ],
 
-        "call_argument": [
-            ("key",        "target",            "target"),
-            ("formatting", "first_formatting",  "target"),
-            ("constant",   "=",                 "target"),
-            ("formatting", "second_formatting", "target"),
-            ("key",        "value",             True),
-        ],
-        "def_argument": [
-            ("key",        "target",            True),
-            ("formatting", "annotation_first_formatting", "annotation"),
-            ("constant",   ":",                 "annotation"),
-            ("formatting", "annotation_second_formatting", "annotation"),
-            ("key",        "annotation",        "annotation"),
-            ("formatting", "first_formatting",  "value"),
-            ("constant",   "=",                 "value"),
-            ("formatting", "second_formatting", "value"),
-            ("key",        "value",             "value"),
-        ],
-        "list_argument": [
-            ("constant",   "*",                 True),
-            ("formatting", "formatting",        True),
-            ("key",        "value",             True),
-            ("formatting", "annotation_first_formatting", "annotation"),
-            ("constant",   ":",                 "annotation"),
-            ("formatting", "annotation_second_formatting", "annotation"),
-            ("key",        "annotation",        "annotation"),
-        ],
-        "kwargs_only_marker": [
-            ("constant",   "*",                 True),
-            ("formatting", "formatting",        True),
-        ],
-        "dict_argument": [
-            ("constant",   "**",                True),
-            ("formatting", "formatting",        True),
-            ("key",        "value",             True),
-            ("formatting", "annotation_first_formatting", "annotation"),
-            ("constant",   ":",                 "annotation"),
-            ("formatting", "annotation_second_formatting", "annotation"),
-            ("key",        "annotation",        "annotation"),
-        ],
+    "repr": [
+        ("constant",   "`",                 True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("list",       "value",             True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("constant",   "`",                 True),  # noqa
+    ],
 
-        "return": [
-            ("constant",   "return",            True),
-            ("formatting", "formatting",        True),
-            ("key",        "value",             "value"),
-        ],
+    "list": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   "[",                 True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("list",       "value",             True),  # noqa
+        ("formatting", "third_formatting",  True),  # noqa
+        ("constant",   "]",                 True),  # noqa
+        ("formatting", "fourth_formatting", True),  # noqa
+    ],
 
-        "raise": [
-            ("constant",   "raise",             True),
-            ("formatting", "first_formatting",  True),
-            ("key",        "value",             "value"),
-            ("formatting", "second_formatting", "instance"),
-            ("string",     "comma_or_from",     "instance"),
-            ("formatting", "third_formatting",  "instance"),
-            ("key",        "instance",          "instance"),
-            ("formatting", "fourth_formatting", "traceback"),
-            ("constant",   ",",                 "traceback"),
-            ("formatting", "fifth_formatting",  "traceback"),
-            ("key",        "traceback",         "traceback"),
-        ],
+    "associative_parenthesis": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   "(",                 True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("key",        "value",             True),  # noqa
+        ("formatting", "third_formatting",  True),  # noqa
+        ("constant",   ")",                 True),  # noqa
+        ("formatting", "fourth_formatting", True),  # noqa
+    ],
 
-        "assert": [
-            ("constant",   "assert",            True),
-            ("formatting", "first_formatting",  True),
-            ("key",        "value",             True),
-            ("formatting", "second_formatting", "message"),
-            ("constant",   ",",                 "message"),
-            ("formatting", "third_formatting",  "message"),
-            ("key",        "message",           "message"),
-        ],
+    "tuple": [
+        ("formatting", "first_formatting",  "with_parenthesis"),  # noqa
+        ("constant",   "(",                 "with_parenthesis"),  # noqa
+        ("formatting", "second_formatting", "with_parenthesis"),  # noqa
+        ("list",       "value",             True),  # noqa
+        ("formatting", "third_formatting",  "with_parenthesis"),  # noqa
+        ("constant",   ")",                 "with_parenthesis"),  # noqa
+        ("formatting", "fourth_formatting", "with_parenthesis"),  # noqa
+        ("bool",       "with_parenthesis",  False),  # noqa
+    ],
 
-        "set_comprehension": [
-            ("formatting", "first_formatting",  True),
-            ("constant",   "{",                 True),
-            ("formatting", "second_formatting", True),
-            ("key",        "result",            True),
-            ("list",       "generators",        True),
-            ("formatting", "third_formatting",  True),
-            ("constant",   "}",                 True),
-            ("formatting", "fourth_formatting", True),
-        ],
-        "dict_comprehension": [
-            ("formatting", "first_formatting",  True),
-            ("constant",   "{",                 True),
-            ("formatting", "second_formatting", True),
-            ("key",        "result",            True),
-            ("list",       "generators",        True),
-            ("formatting", "third_formatting",  True),
-            ("constant",   "}",                 True),
-            ("formatting", "fourth_formatting", True),
-        ],
-        "argument_generator_comprehension": [
-            ("key",  "result",                  True),
-            ("list", "generators",              True),
-        ],
-        "generator_comprehension": [
-            ("formatting", "first_formatting",  True),
-            ("constant",   "(",                 True),
-            ("formatting", "second_formatting", True),
-            ("key",        "result",            True),
-            ("list",       "generators",        True),
-            ("formatting", "third_formatting",  True),
-            ("constant",   ")",                 True),
-            ("formatting", "fourth_formatting", True),
-        ],
-        "list_comprehension": [
-            ("formatting", "first_formatting",  True),
-            ("constant",   "[",                 True),
-            ("formatting", "second_formatting", True),
-            ("key",        "result",            True),
-            ("list",       "generators",        True),
-            ("formatting", "third_formatting",  True),
-            ("constant",   "]",                 True),
-            ("formatting", "fourth_formatting", True),
-        ],
-        "comprehension_loop": [
-            ("formatting", "first_formatting",  True),
-            ("constant",   "for",               True),
-            ("formatting", "second_formatting", True),
-            ("key",        "iterator",          True),
-            ("formatting", "third_formatting",  True),
-            ("constant",   "in",                True),
-            ("formatting", "fourth_formatting", True),
-            ("key",        "target",            True),
-            ("list",       "ifs",               True),
-        ],
-        "comprehension_if": [
-            ("formatting", "first_formatting",  True),
-            ("constant",   "if",                True),
-            ("formatting", "second_formatting", True),
-            ("key",        "value",             True),
-        ],
+    "await": [
+        ("constant",    "await",        True),  # noqa
+        ("formatting",  "formatting",   True),  # noqa
+        ("key",         "value",        True),  # noqa
+    ],
 
-        "getitem": [
-            ("formatting", "first_formatting",  True),
-            ("constant",   "[",                 True),
-            ("formatting", "second_formatting", True),
-            ("key",        "value",             True),
-            ("formatting", "third_formatting",  True),
-            ("constant",   "]",                 True),
-            ("formatting", "fourth_formatting", True),
-        ],
+    "def": [
+        ("list",       "decorators",        True),  # noqa
+        ("bool",       "async",             False),  # noqa
+        ("constant",   "async",             "async"),  # noqa
+        ("formatting", "async_formatting",  "async"),  # noqa
+        ("constant",   "def",               True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("string",     "name",              True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("constant",   "(",                 True),  # noqa
+        ("formatting", "third_formatting",  True),  # noqa
+        ("list",       "arguments",         True),  # noqa
+        ("formatting", "fourth_formatting", True),  # noqa
+        ("constant",   ")",                 True),  # noqa
+        ("formatting", "return_annotation_first_formatting", "return_annotation"),  # noqa
+        ("constant",   "->", "return_annotation"),  # noqa
+        ("formatting", "return_annotation_second_formatting", "return_annotation"),  # noqa
+        ("key",        "return_annotation", "return_annotation"),  # noqa
+        ("formatting", "fifth_formatting",  True),  # noqa
+        ("constant",   ":",                 True),  # noqa
+        ("formatting", "sixth_formatting",  True),  # noqa
+        ("list",       "value",             True),  # noqa
+    ],
 
-        "slice": [
-            ("key",        "lower",             "lower"),
-            ("formatting", "first_formatting",  True),
-            ("constant",   ":",                 True),
-            ("formatting", "second_formatting", True),
-            ("key",        "upper",             "upper"),
-            ("formatting", "third_formatting",  "has_two_colons"),
-            ("constant",   ":",                 "has_two_colons"),
-            ("formatting", "fourth_formatting", "has_two_colons"),
-            ("key",        "step",              ["has_two_colons", "step"]),
-            ("bool",       "has_two_colons",    False),
-        ],
+    "call_argument": [
+        ("key",        "target",            "target"),  # noqa
+        ("formatting", "first_formatting",  "target"),  # noqa
+        ("constant",   "=",                 "target"),  # noqa
+        ("formatting", "second_formatting", "target"),  # noqa
+        ("key",        "value",             True),  # noqa
+    ],
 
-        "assignment": [
-            ("key",        "target",            True),
-            ("formatting", "annotation_first_formatting",  "annotation"),
-            ("constant",   ":",                 "annotation"),
-            ("formatting", "annotation_second_formatting",  "annotation"),
-            ("key",        "annotation",        "annotation"),
-            ("formatting", "first_formatting",  True),
-            # FIXME should probably be a different node type
-            ("string",     "operator",          "operator"),
-            ("constant",   "=",                 "target"),
-            ("formatting", "second_formatting", True),
-            ("key",        "value",             True),
-        ],
+    "def_argument": [
+        ("key",        "target",            True),  # noqa
+        ("formatting", "annotation_first_formatting", "annotation"),  # noqa
+        ("constant",   ":",                 "annotation"),  # noqa
+        ("formatting", "annotation_second_formatting", "annotation"),  # noqa
+        ("key",        "annotation",        "annotation"),  # noqa
+        ("formatting", "first_formatting",  "value"),  # noqa
+        ("constant",   "=",                 "value"),  # noqa
+        ("formatting", "second_formatting", "value"),  # noqa
+        ("key",        "value",             "value"),  # noqa
+    ],
 
-        "standalone_annotation": [
-            ("key",        "target",            True),
-            ("formatting", "first_formatting",  True),
-            ("constant",   ":",                 True),
-            ("formatting", "second_formatting", True),
-            ("key",        "annotation",        True),
-        ],
+    "list_argument": [
+        ("constant",   "*",                 True),  # noqa
+        ("formatting", "formatting",        True),  # noqa
+        ("key",        "value",             True),  # noqa
+        ("formatting", "annotation_first_formatting", "annotation"),  # noqa
+        ("constant",   ":",                 "annotation"),  # noqa
+        ("formatting", "annotation_second_formatting", "annotation"),  # noqa
+        ("key",        "annotation",        "annotation"),  # noqa
+    ],
 
-        "unitary_operator": [
-            ("string",     "value",             True),
-            ("formatting", "formatting",        True),
-            ("key",        "target",            True),
-        ],
-        "binary_operator": [
-            ("key",        "first",             True),
-            ("formatting", "first_formatting",  True),
-            ("string",     "value",             True),
-            ("formatting", "second_formatting", True),
-            ("key",        "second",            True),
-        ],
-        "boolean_operator": [
-            ("key",        "first",             True),
-            ("formatting", "first_formatting",  True),
-            ("string",     "value",             True),
-            ("formatting", "second_formatting", True),
-            ("key",        "second",            True),
-        ],
-        "comparison_operator": [
-            ("string",     "first",             True),
-            ("formatting", "formatting",        True),
-            ("string",     "second",            "second"),
-        ],
-        "comparison": [
-            ("key",        "first",             True),
-            ("formatting", "first_formatting",  True),
-            ("key",        "value",             True),
-            ("formatting", "second_formatting", True),
-            ("key",        "second",            True),
-        ],
+    "kwargs_only_marker": [
+        ("constant",   "*",                 True),  # noqa
+        ("formatting", "formatting",        True),  # noqa
+    ],
 
-        "with": [
-            ("bool",       "async",             False),
-            ("constant",   "async",             "async"),
-            ("formatting", "async_formatting",  "async"),
-            ("constant",   "with",              True),
-            ("formatting", "first_formatting",  True),
-            ("list",       "contexts",          True),
-            ("formatting", "second_formatting", True),
-            ("constant",   ":",                 True),
-            ("formatting", "third_formatting",  True),
-            ("list",       "value",             True),
-        ],
-        "with_context_item": [
-            ("key",        "value",             True),
-            ("formatting", "first_formatting",  "as"),
-            ("constant",   "as",                "as"),
-            ("formatting", "second_formatting", "as"),
-            ("key",        "as",                "as"),
-        ],
-        "nonlocal": [
-            ("constant",    "nonlocal",         True),
-            ("formatting", "formatting",        True),
-            ("list",        "value",            True),
-        ],
-        "del": [
-            ("constant",   "del",               True),
-            ("formatting", "formatting",        True),
-            ("key",        "value",             True),
-        ],
-        "yield": [
-            ("constant",   "yield",             True),
-            ("formatting", "formatting",        True),
-            ("key",        "value",             "value"),
-        ],
-        "yield_from": [
-            ("constant",   "yield",             True),
-            ("formatting", "formatting",        True),
-            ("constant",   "from",              True),
-            ("formatting", "first_formatting",  True),
-            ("key",        "value",             "value"),
-        ],
-        "yield_atom": [
-            ("constant",   "(",                 True),
-            ("formatting", "first_formatting",  True),
-            ("constant",   "yield",             True),
-            ("formatting", "second_formatting", True),
-            ("key",        "value",             "value"),
-            ("formatting", "third_formatting",  True),
-            ("constant",   ")",                 True),
-        ],
+    "dict_argument": [
+        ("constant",   "**",                True),  # noqa
+        ("formatting", "formatting",        True),  # noqa
+        ("key",        "value",             True),  # noqa
+        ("formatting", "annotation_first_formatting", "annotation"),  # noqa
+        ("constant",   ":",                 "annotation"),  # noqa
+        ("formatting", "annotation_second_formatting", "annotation"),  # noqa
+        ("key",        "annotation",        "annotation"),  # noqa
+    ],
 
-        "exec": [
-            ("constant",   "exec",              True),
-            ("formatting", "first_formatting",  True),
-            ("key",        "value",             True),
-            ("formatting", "second_formatting", "globals"),
-            ("constant",   "in",                "globals"),
-            ("formatting", "third_formatting",  "globals"),
-            ("key",        "globals",           "globals"),
-            ("formatting", "fourth_formatting", "locals"),
-            ("constant",   ",",                 "locals"),
-            ("formatting", "fifth_formatting",  "locals"),
-            ("key",        "locals",            "locals"),
-        ],
-        "global": [
-            ("constant",   "global",            True),
-            ("formatting", "formatting",        True),
-            ("list",       "value",             True),
-        ],
+    "return": [
+        ("constant",   "return",            True),  # noqa
+        ("formatting", "formatting",        True),  # noqa
+        ("key",        "value",             "value"),  # noqa
+    ],
 
-        "while": [
-            ("constant",   "while",             True),
-            ("formatting", "first_formatting",  True),
-            ("key",        "test",              True),
-            ("formatting", "second_formatting", True),
-            ("constant",   ":",                 True),
-            ("formatting", "third_formatting",  True),
-            ("list",       "value",             True),
-            ("key",        "else",              "else"),
-        ],
-        "for": [
-            ("bool",       "async",             False),
-            ("constant",   "async",             "async"),
-            ("formatting", "async_formatting",  "async"),
-            ("constant",   "for",               True),
-            ("formatting", "first_formatting",  True),
-            ("key",        "iterator",          True),
-            ("formatting", "second_formatting", True),
-            ("constant",   "in",                True),
-            ("formatting", "third_formatting",  True),
-            ("key",        "target",            True),
-            ("formatting", "fourth_formatting", True),
-            ("constant",   ":",                 True),
-            ("formatting", "fifth_formatting",  True),
-            ("list",       "value",             True),
-            ("key",        "else",              "else"),
-        ],
-        "if": [
-            ("constant",   "if",                True),
-            ("formatting", "first_formatting",  True),
-            ("key",        "test",              True),
-            ("formatting", "second_formatting", True),
-            ("constant",   ":",                 True),
-            ("formatting", "third_formatting",  True),
-            ("list",       "value",             True),
-        ],
-        "elif": [
-            ("constant",   "elif",              True),
-            ("formatting", "first_formatting",  True),
-            ("key",        "test",              True),
-            ("formatting", "second_formatting", True),
-            ("constant",   ":",                 True),
-            ("formatting", "third_formatting",  True),
-            ("list",       "value",             True),
-        ],
-        "else": [
-            ("constant",   "else",              True),
-            ("formatting", "first_formatting",  True),
-            ("constant",   ":",                 True),
-            ("formatting", "second_formatting", True),
-            ("list",       "value",             True),
-        ],
-        "lambda": [
-            ("constant",   "lambda",            True),
-            ("formatting", "first_formatting",  True),
-            ("list",       "arguments",         True),
-            ("formatting", "second_formatting", True),
-            ("constant",   ":",                 True),
-            ("formatting", "third_formatting",  True),
-            ("key",        "value",             True),
-        ],
-        "try": [
-            ("constant",   "try",               True),
-            ("formatting", "first_formatting",  True),
-            ("constant",   ":",                 True),
-            ("formatting", "second_formatting", True),
-            ("list",       "value",             True),
-            ("list",       "excepts",           True),
-            ("key",        "else",              "else"),
-            ("key",        "finally",           "finally"),
-        ],
-        "except": [
-            ("constant",   "except",            True),
-            ("formatting", "first_formatting",  True),
-            ("key",        "exception",         "exception"),
-            ("formatting", "second_formatting", "delimiter"),
-            ("string",     "delimiter",         "delimiter"),
-            ("formatting", "third_formatting",  "delimiter"),
-            ("key",        "target",            "delimiter"),
-            ("formatting", "fourth_formatting", True),
-            ("constant",   ":",                 True),
-            ("formatting", "fifth_formatting",  True),
-            ("list",       "value",             True),
-        ],
-        "finally": [
-            ("constant",   "finally",           True),
-            ("formatting", "first_formatting",  True),
-            ("constant",   ":",                 True),
-            ("formatting", "second_formatting", True),
-            ("list",       "value",             True),
-        ],
+    "raise": [
+        ("constant",   "raise",             True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("key",        "value",             "value"),  # noqa
+        ("formatting", "second_formatting", "instance"),  # noqa
+        ("string",     "comma_or_from",     "instance"),  # noqa
+        ("formatting", "third_formatting",  "instance"),  # noqa
+        ("key",        "instance",          "instance"),  # noqa
+        ("formatting", "fourth_formatting", "traceback"),  # noqa
+        ("constant",   ",",                 "traceback"),  # noqa
+        ("formatting", "fifth_formatting",  "traceback"),  # noqa
+        ("key",        "traceback",         "traceback"),  # noqa
+    ],
 
-        "dict": [
-            ("formatting", "first_formatting",  True),
-            ("constant",   "{",                 True),
-            ("formatting", "second_formatting", True),
-            ("list",       "value",             True),
-            ("formatting", "third_formatting",  True),
-            ("constant",   "}",                 True),
-            ("formatting", "fourth_formatting", True),
-        ],
-        "set": [
-            ("formatting", "first_formatting",  True),
-            ("constant",   "{",                 True),
-            ("formatting", "second_formatting", True),
-            ("list",       "value",             True),
-            ("formatting", "third_formatting",  True),
-            ("constant",   "}",                 True),
-            ("formatting", "fourth_formatting", True),
-        ],
-        "dictitem": [
-            ("key",        "key",               True),
-            ("formatting", "first_formatting",  True),
-            ("constant",   ":",                 True),
-            ("formatting", "second_formatting", True),
-            ("key",        "value",             True),
-        ],
+    "assert": [
+        ("constant",   "assert",            True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("key",        "value",             True),  # noqa
+        ("formatting", "second_formatting", "message"),  # noqa
+        ("constant",   ",",                 "message"),  # noqa
+        ("formatting", "third_formatting",  "message"),  # noqa
+        ("key",        "message",           "message"),  # noqa
+    ],
 
-        "import": [
-            ("formatting", "first_formatting",  True),
-            ("constant",   "import",            True),
-            ("formatting", "second_formatting", True),
-            ("list",       "value",             True),
-        ],
-        "from_import": [
-            ("constant",   "from",              True),
-            ("formatting", "first_formatting",  True),
-            ("list",       "value",             True),
-            ("formatting", "second_formatting", True),
-            ("constant",   "import",            True),
-            ("formatting", "third_formatting",  True),
-            ("list",       "targets",           True),
-        ],
+    "set_comprehension": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   "{",                 True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("key",        "result",            True),  # noqa
+        ("list",       "generators",        True),  # noqa
+        ("formatting", "third_formatting",  True),  # noqa
+        ("constant",   "}",                 True),  # noqa
+        ("formatting", "fourth_formatting", True),  # noqa
+    ],
 
-        "dotted_as_name": [
-            ("list",       "value",             True),
-            ("formatting", "first_formatting",  "target"),
-            ("constant",   "as",                "target"),
-            ("formatting", "second_formatting", "target"),
-            ("string",     "target",            "target"),
-        ],
-        "name_as_name": [
-            ("string",     "value",             True),
-            ("formatting", "first_formatting",  "target"),
-            ("constant",   "as",                "target"),
-            ("formatting", "second_formatting", "target"),
-            ("string",     "target",            "target"),
-        ],
-        "print": [
-            ("constant",   "print",                  True),
-            ("formatting", "formatting",             True),
-            ("constant",   ">>",                     "destination"),
-            ("formatting", "destination_formatting", "destination"),
-            ("key",        "destination",            "destination"),
-            ("list",       "value",                  "value"),
-        ],
-    }
+    "dict_comprehension": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   "{",                 True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("key",        "result",            True),  # noqa
+        ("list",       "generators",        True),  # noqa
+        ("formatting", "third_formatting",  True),  # noqa
+        ("constant",   "}",                 True),  # noqa
+        ("formatting", "fourth_formatting", True),  # noqa
+    ],
+
+    "argument_generator_comprehension": [
+        ("key",  "result",                  True),  # noqa
+        ("list", "generators",              True),  # noqa
+    ],
+
+    "generator_comprehension": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   "(",                 True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("key",        "result",            True),  # noqa
+        ("list",       "generators",        True),  # noqa
+        ("formatting", "third_formatting",  True),  # noqa
+        ("constant",   ")",                 True),  # noqa
+        ("formatting", "fourth_formatting", True),  # noqa
+    ],
+
+    "list_comprehension": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   "[",                 True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("key",        "result",            True),  # noqa
+        ("list",       "generators",        True),  # noqa
+        ("formatting", "third_formatting",  True),  # noqa
+        ("constant",   "]",                 True),  # noqa
+        ("formatting", "fourth_formatting", True),  # noqa
+    ],
+
+    "comprehension_loop": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   "for",               True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("key",        "iterator",          True),  # noqa
+        ("formatting", "third_formatting",  True),  # noqa
+        ("constant",   "in",                True),  # noqa
+        ("formatting", "fourth_formatting", True),  # noqa
+        ("key",        "target",            True),  # noqa
+        ("list",       "ifs",               True),  # noqa
+    ],
+
+    "comprehension_if": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   "if",                True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("key",        "value",             True),  # noqa
+    ],
+
+    "getitem": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   "[",                 True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("key",        "value",             True),  # noqa
+        ("formatting", "third_formatting",  True),  # noqa
+        ("constant",   "]",                 True),  # noqa
+        ("formatting", "fourth_formatting", True),  # noqa
+    ],
+
+    "slice": [
+        ("key",        "lower",             "lower"),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   ":",                 True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("key",        "upper",             "upper"),  # noqa
+        ("formatting", "third_formatting",  "has_two_colons"),  # noqa
+        ("constant",   ":",                 "has_two_colons"),  # noqa
+        ("formatting", "fourth_formatting", "has_two_colons"),  # noqa
+        ("key",        "step",              ["has_two_colons", "step"]),  # noqa
+        ("bool",       "has_two_colons",    False),  # noqa
+    ],
+
+    "assignment": [
+        ("key",        "target",            True),  # noqa
+        ("formatting", "annotation_first_formatting",  "annotation"),  # noqa
+        ("constant",   ":",                 "annotation"),  # noqa
+        ("formatting", "annotation_second_formatting",  "annotation"),  # noqa
+        ("key",        "annotation",        "annotation"),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        # FIXME should probably be a different node type  # noqa
+        ("string",     "operator",          "operator"),  # noqa
+        ("constant",   "=",                 "target"),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("key",        "value",             True),  # noqa
+    ],
+
+    "standalone_annotation": [
+        ("key",        "target",            True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   ":",                 True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("key",        "annotation",        True),  # noqa
+    ],
+
+    "unitary_operator": [
+        ("string",     "value",             True),  # noqa
+        ("formatting", "formatting",        True),  # noqa
+        ("key",        "target",            True),  # noqa
+    ],
+
+    "binary_operator": [
+        ("key",        "first",             True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("string",     "value",             True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("key",        "second",            True),  # noqa
+    ],
+
+    "boolean_operator": [
+        ("key",        "first",             True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("string",     "value",             True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("key",        "second",            True),  # noqa
+    ],
+
+    "comparison_operator": [
+        ("string",     "first",             True),  # noqa
+        ("formatting", "formatting",        True),  # noqa
+        ("string",     "second",            "second"),  # noqa
+    ],
+
+    "comparison": [
+        ("key",        "first",             True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("key",        "value",             True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("key",        "second",            True),  # noqa
+    ],
+
+    "with": [
+        ("bool",       "async",             False),  # noqa
+        ("constant",   "async",             "async"),  # noqa
+        ("formatting", "async_formatting",  "async"),  # noqa
+        ("constant",   "with",              True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("list",       "contexts",          True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("constant",   ":",                 True),  # noqa
+        ("formatting", "third_formatting",  True),  # noqa
+        ("list",       "value",             True),  # noqa
+    ],
+
+    "with_context_item": [
+        ("key",        "value",             True),  # noqa
+        ("formatting", "first_formatting",  "as"),  # noqa
+        ("constant",   "as",                "as"),  # noqa
+        ("formatting", "second_formatting", "as"),  # noqa
+        ("key",        "as",                "as"),  # noqa
+    ],
+
+    "nonlocal": [
+        ("constant",    "nonlocal",         True),  # noqa
+        ("formatting", "formatting",        True),  # noqa
+        ("list",        "value",            True),  # noqa
+    ],
+
+    "del": [
+        ("constant",   "del",               True),  # noqa
+        ("formatting", "formatting",        True),  # noqa
+        ("key",        "value",             True),  # noqa
+    ],
+
+    "yield": [
+        ("constant",   "yield",             True),  # noqa
+        ("formatting", "formatting",        True),  # noqa
+        ("key",        "value",             "value"),  # noqa
+    ],
+
+    "yield_from": [
+        ("constant",   "yield",             True),  # noqa
+        ("formatting", "formatting",        True),  # noqa
+        ("constant",   "from",              True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("key",        "value",             "value"),  # noqa
+    ],
+
+    "yield_atom": [
+        ("constant",   "(",                 True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   "yield",             True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("key",        "value",             "value"),  # noqa
+        ("formatting", "third_formatting",  True),  # noqa
+        ("constant",   ")",                 True),  # noqa
+    ],
+
+    "exec": [
+        ("constant",   "exec",              True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("key",        "value",             True),  # noqa
+        ("formatting", "second_formatting", "globals"),  # noqa
+        ("constant",   "in",                "globals"),  # noqa
+        ("formatting", "third_formatting",  "globals"),  # noqa
+        ("key",        "globals",           "globals"),  # noqa
+        ("formatting", "fourth_formatting", "locals"),  # noqa
+        ("constant",   ",",                 "locals"),  # noqa
+        ("formatting", "fifth_formatting",  "locals"),  # noqa
+        ("key",        "locals",            "locals"),  # noqa
+    ],
+
+    "global": [
+        ("constant",   "global",            True),  # noqa
+        ("formatting", "formatting",        True),  # noqa
+        ("list",       "value",             True),  # noqa
+    ],
+
+    "while": [
+        ("constant",   "while",             True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("key",        "test",              True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("constant",   ":",                 True),  # noqa
+        ("formatting", "third_formatting",  True),  # noqa
+        ("list",       "value",             True),  # noqa
+        ("key",        "else",              "else"),  # noqa
+    ],
+
+    "for": [
+        ("bool",       "async",             False),  # noqa
+        ("constant",   "async",             "async"),  # noqa
+        ("formatting", "async_formatting",  "async"),  # noqa
+        ("constant",   "for",               True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("key",        "iterator",          True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("constant",   "in",                True),  # noqa
+        ("formatting", "third_formatting",  True),  # noqa
+        ("key",        "target",            True),  # noqa
+        ("formatting", "fourth_formatting", True),  # noqa
+        ("constant",   ":",                 True),  # noqa
+        ("formatting", "fifth_formatting",  True),  # noqa
+        ("list",       "value",             True),  # noqa
+        ("key",        "else",              "else"),  # noqa
+    ],
+
+    "if": [
+        ("constant",   "if",                True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("key",        "test",              True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("constant",   ":",                 True),  # noqa
+        ("formatting", "third_formatting",  True),  # noqa
+        ("list",       "value",             True),  # noqa
+    ],
+
+    "elif": [
+        ("constant",   "elif",              True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("key",        "test",              True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("constant",   ":",                 True),  # noqa
+        ("formatting", "third_formatting",  True),  # noqa
+        ("list",       "value",             True),  # noqa
+    ],
+
+    "else": [
+        ("constant",   "else",              True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   ":",                 True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("list",       "value",             True),  # noqa
+    ],
+
+    "lambda": [
+        ("constant",   "lambda",            True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("list",       "arguments",         True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("constant",   ":",                 True),  # noqa
+        ("formatting", "third_formatting",  True),  # noqa
+        ("key",        "value",             True),  # noqa
+    ],
+
+    "try": [
+        ("constant",   "try",               True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   ":",                 True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("list",       "value",             True),  # noqa
+        ("list",       "excepts",           True),  # noqa
+        ("key",        "else",              "else"),  # noqa
+        ("key",        "finally",           "finally"),  # noqa
+    ],
+
+    "except": [
+        ("constant",   "except",            True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("key",        "exception",         "exception"),  # noqa
+        ("formatting", "second_formatting", "delimiter"),  # noqa
+        ("string",     "delimiter",         "delimiter"),  # noqa
+        ("formatting", "third_formatting",  "delimiter"),  # noqa
+        ("key",        "target",            "delimiter"),  # noqa
+        ("formatting", "fourth_formatting", True),  # noqa
+        ("constant",   ":",                 True),  # noqa
+        ("formatting", "fifth_formatting",  True),  # noqa
+        ("list",       "value",             True),  # noqa
+    ],
+
+    "finally": [
+        ("constant",   "finally",           True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   ":",                 True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("list",       "value",             True),  # noqa
+    ],
+
+    "dict": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   "{",                 True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("list",       "value",             True),  # noqa
+        ("formatting", "third_formatting",  True),  # noqa
+        ("constant",   "}",                 True),  # noqa
+        ("formatting", "fourth_formatting", True),  # noqa
+    ],
+
+    "set": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   "{",                 True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("list",       "value",             True),  # noqa
+        ("formatting", "third_formatting",  True),  # noqa
+        ("constant",   "}",                 True),  # noqa
+        ("formatting", "fourth_formatting", True),  # noqa
+    ],
+
+    "dictitem": [
+        ("key",        "key",               True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   ":",                 True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("key",        "value",             True),  # noqa
+    ],
+
+    "import": [
+        ("formatting", "first_formatting",  True),  # noqa
+        ("constant",   "import",            True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("list",       "value",             True),  # noqa
+    ],
+
+    "from_import": [
+        ("constant",   "from",              True),  # noqa
+        ("formatting", "first_formatting",  True),  # noqa
+        ("list",       "value",             True),  # noqa
+        ("formatting", "second_formatting", True),  # noqa
+        ("constant",   "import",            True),  # noqa
+        ("formatting", "third_formatting",  True),  # noqa
+        ("list",       "targets",           True),  # noqa
+    ],
+
+    "dotted_as_name": [
+        ("list",       "value",             True),  # noqa
+        ("formatting", "first_formatting",  "target"),  # noqa
+        ("constant",   "as",                "target"),  # noqa
+        ("formatting", "second_formatting", "target"),  # noqa
+        ("string",     "target",            "target"),  # noqa
+    ],
+
+    "name_as_name": [
+        ("string",     "value",             True),  # noqa
+        ("formatting", "first_formatting",  "target"),  # noqa
+        ("constant",   "as",                "target"),  # noqa
+        ("formatting", "second_formatting", "target"),  # noqa
+        ("string",     "target",            "target"),  # noqa
+    ],
+
+    "print": [
+        ("constant",   "print",                  True),  # noqa
+        ("formatting", "formatting",             True),  # noqa
+        ("constant",   ">>",                     "destination"),  # noqa
+        ("formatting", "destination_formatting", "destination"),  # noqa
+        ("key",        "destination",            "destination"),  # noqa
+        ("list",       "value",                  "value"),  # noqa
+    ],
+}
 
 
 class RenderWalker(object):

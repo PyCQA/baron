@@ -1,3 +1,5 @@
+# flake8: noqa
+
 from baron.baron import parse
 from baron.path import PathWalker, Position, BoundingBox
 from baron.path import position_to_path, path_to_node, position_to_node
@@ -37,10 +39,10 @@ def test_position_compare():
 
 
 def test_position_bool():
-    assert bool(Position((1, 2))) == True
-    assert bool(Position((-1, 2))) == False
-    assert bool(Position((1, -2))) == False
-    assert bool(Position((-1, -2))) == False
+    assert bool(Position((1, 2)))
+    assert not bool(Position((-1, 2)))
+    assert not bool(Position((1, -2)))
+    assert not bool(Position((-1, -2)))
 
 
 def test_bounding_box():

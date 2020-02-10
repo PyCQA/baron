@@ -1,12 +1,14 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
+# flake8: noqa
 
 from baron.indentation_marker import mark_indentation
 from .test_utils import zip_longest
 
 
-def check(input, output):
-    for i, j in zip_longest(mark_indentation(input + [('ENDMARKER', ''), None]), output + [('ENDMARKER', ''), None]):
+def check(input_, output):
+    for i, j in zip_longest(mark_indentation(input + [('ENDMARKER', ''), None]),
+                            output + [('ENDMARKER', ''), None]):
         assert i == j
 
 
@@ -49,8 +51,7 @@ def test_dumy_if():
 def test_dumy_def_space():
     """
     def foo():
-        pass     
-    """
+        pass     """
     # https://github.com/PyCQA/baron/issues/101
     check([
         ('DEF', 'def', [], [('SPACE', ' ')]),
@@ -61,7 +62,7 @@ def test_dumy_def_space():
         ('ENDL', '\n', [], [('SPACE', '    ')]),
         ('PASS', 'pass'),
         ('ENDL', '\n', [('SPACE', '   ')]),
-    ],  [
+    ], [
         ('DEF', 'def', [], [('SPACE', ' ')]),
         ('NAME', 'foo'),
         ('LEFT_PARENTHESIS', '('),

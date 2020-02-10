@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from baron import (parse, BaronError, ParsingError,
-                   UnExpectedFormattingToken, GroupingError,
-                   UntreatedError)
+                   GroupingError, UntreatedError)
 import pytest
 
 

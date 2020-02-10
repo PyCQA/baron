@@ -85,7 +85,7 @@ def test_import_basic_dot():
                             "first_formatting": [],
                             "second_formatting": [],
                         },
-                        {"type": "name", "value": "blob",}
+                        {"type": "name", "value": "blob", }
                     ],
                     "type": "dotted_as_name",
                     "first_formatting": [],

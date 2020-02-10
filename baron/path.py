@@ -118,7 +118,6 @@ class Position(object):
         other = Position(other)
         return (self.line, self.column) < (other.line, other.column)
 
-
     def __repr__(self):
         return 'Position (%s, %s)' % (str(self.line), str(self.column))
 

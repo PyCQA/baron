@@ -65,7 +65,7 @@ class BaronParserGenerator(ParserGenerator):
             with open(cache_file) as f:
                 try:
                     data = json.load(f)
-                except:
+                except Exception:
                     os.remove(cache_file)
                     data = None
 
@@ -73,8 +73,8 @@ class BaronParserGenerator(ParserGenerator):
                     stat_result = os.fstat(f.fileno())
                     if (
                         os.name == "nt" or (
-                            stat_result.st_uid == os.getuid() and
-                            stat.S_IMODE(stat_result.st_mode) == 0o0600
+                            stat_result.st_uid == os.getuid()
+                            and stat.S_IMODE(stat_result.st_mode) == 0o0600
                         )
                     ):
                         if self.data_is_valid(g, data):
@@ -91,21 +91,19 @@ class BaronParserGenerator(ParserGenerator):
                 with os.fdopen(fd, "w") as f:
                     json.dump(self.serialize_table(table), f)
         # meh :(
-        #if table.sr_conflicts:
-            #warnings.warn(
-                #"%d shift/reduce conflict%s" % (len(table.sr_conflicts), "s" if len(table.sr_conflicts) > 1 else ""),
-                #ParserGeneratorWarning,
-                #stacklevel=2,
-            #)
-        #if table.rr_conflicts:
-            #warnings.warn(
-                #"%d reduce/reduce conflict%s" % (len(table.rr_conflicts), "s" if len(table.rr_conflicts) > 1 else ""),
-                #ParserGeneratorWarning,
-                #stacklevel=2,
-            #)
+        # if table.sr_conflicts:
+            # warnings.warn(
+                # "%d shift/reduce conflict%s" % (len(table.sr_conflicts), "s" if len(table.sr_conflicts) > 1 else ""),
+                # ParserGeneratorWarning,
+                # stacklevel=2,
+            # )
+        # if table.rr_conflicts:
+            # warnings.warn(
+                # "%d reduce/reduce conflict%s" % (len(table.rr_conflicts), "s" if len(table.rr_conflicts) > 1 else ""),
+                # ParserGeneratorWarning,
+                # stacklevel=2,
+            # )
         return BaronLRParser(table, self.error_handler)
-
-
 
 
 class BaronLRParser(LRParser):

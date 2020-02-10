@@ -544,6 +544,7 @@ def test_generator_comprehension_if():
         }
     ])
 
+
 def test_generator_comprehension_if_if():
     "( a for b in c if d if e )"
     parse_simple([
@@ -595,19 +596,20 @@ def test_generator_comprehension_if_if():
                             },
                         },
                         {
-    "type": "comprehension_if",
-    "first_formatting": [{"type": "space", "value": " "}],
-    "second_formatting": [{"type": "space", "value": " "}],
-    "value": {
-        "type": "name",
-        "value": "e"
-    },
-}
+                            "type": "comprehension_if",
+                            "first_formatting": [{"type": "space", "value": " "}],
+                            "second_formatting": [{"type": "space", "value": " "}],
+                            "value": {
+                                "type": "name",
+                                "value": "e"
+                            },
+                        }
                     ],
                 }
             ]
         }
     ])
+
 
 def test_generator_comprehension_double():
     "( a for b in c for d in e )"
@@ -729,34 +731,35 @@ def test_generator_comprehension_double_if_if():
                     ],
                 },
                 {
-    "type": "comprehension_loop",
-    "first_formatting": [{"type": "space", "value": " "}],
-    "second_formatting": [{"type": "space", "value": " "}],
-    "third_formatting": [{"type": "space", "value": " "}],
-    "fourth_formatting": [{"type": "space", "value": " "}],
-    "iterator": {
-        "type": "name",
-        "value": "d",
-    },
-    "target": {
-        "type": "name",
-        "value": "e",
-    },
-    "ifs": [
-        {
-            "type": "comprehension_if",
-            "first_formatting": [{"type": "space", "value": " "}],
-            "second_formatting": [{"type": "space", "value": " "}],
-            "value": {
-                "type": "name",
-                "value": "y"
-            },
-        }
-    ],
-}
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "type": "name",
+                        "value": "d",
+                    },
+                    "target": {
+                        "type": "name",
+                        "value": "e",
+                    },
+                    "ifs": [
+                        {
+                            "type": "comprehension_if",
+                            "first_formatting": [{"type": "space", "value": " "}],
+                            "second_formatting": [{"type": "space", "value": " "}],
+                            "value": {
+                                "type": "name",
+                                "value": "y"
+                            },
+                        }
+                    ],
+                }
             ]
         }
     ])
+
 
 def test_list_comprehension():
     "[ a for b in c ]"
@@ -855,6 +858,7 @@ def test_list_comprehension_if():
         }
     ])
 
+
 def test_list_comprehension_if_if():
     "[ a for b in c if d if d ]"
     parse_simple([
@@ -906,19 +910,20 @@ def test_list_comprehension_if_if():
                             },
                         },
                         {
-    "type": "comprehension_if",
-    "first_formatting": [{"type": "space", "value": " "}],
-    "second_formatting": [{"type": "space", "value": " "}],
-    "value": {
-        "type": "name",
-        "value": "d"
-    },
-}
+                            "type": "comprehension_if",
+                            "first_formatting": [{"type": "space", "value": " "}],
+                            "second_formatting": [{"type": "space", "value": " "}],
+                            "value": {
+                                "type": "name",
+                                "value": "d"
+                            },
+                        }
                     ],
                 }
             ]
         }
     ])
+
 
 def test_list_comprehension_tuple():
     "[ a for b in c, d ]"
@@ -1275,6 +1280,7 @@ def test_set_comprehension_if():
         }
     ])
 
+
 def test_set_comprehension_double_if_if():
     "{ a for b in c if x for d in e if y }"
     parse_simple([
@@ -1332,34 +1338,35 @@ def test_set_comprehension_double_if_if():
                     ],
                 },
                 {
-    "type": "comprehension_loop",
-    "first_formatting": [{"type": "space", "value": " "}],
-    "second_formatting": [{"type": "space", "value": " "}],
-    "third_formatting": [{"type": "space", "value": " "}],
-    "fourth_formatting": [{"type": "space", "value": " "}],
-    "iterator": {
-        "type": "name",
-        "value": "d",
-    },
-    "target": {
-        "type": "name",
-        "value": "e",
-    },
-    "ifs": [
-        {
-            "type": "comprehension_if",
-            "first_formatting": [{"type": "space", "value": " "}],
-            "second_formatting": [{"type": "space", "value": " "}],
-            "value": {
-                "type": "name",
-                "value": "y"
-            },
-        }
-    ],
-}
+                    "type": "comprehension_loop",
+                    "first_formatting": [{"type": "space", "value": " "}],
+                    "second_formatting": [{"type": "space", "value": " "}],
+                    "third_formatting": [{"type": "space", "value": " "}],
+                    "fourth_formatting": [{"type": "space", "value": " "}],
+                    "iterator": {
+                        "type": "name",
+                        "value": "d",
+                    },
+                    "target": {
+                        "type": "name",
+                        "value": "e",
+                    },
+                    "ifs": [
+                        {
+                            "type": "comprehension_if",
+                            "first_formatting": [{"type": "space", "value": " "}],
+                            "second_formatting": [{"type": "space", "value": " "}],
+                            "value": {
+                                "type": "name",
+                                "value": "y"
+                            },
+                        }
+                    ],
+                }
             ]
         }
     ])
+
 
 def test_dict_comprehension():
     "{ a: x for b in c }"
@@ -1552,61 +1559,59 @@ def test_subscript_special_case():
                     "value": "z"
                 },
                 {
-        "first_formatting": [],
-        "third_formatting": [],
-        "fourth_formatting": [],
-        "type": "getitem",
-        "value": {
-            "first_formatting": [],
-            "with_parenthesis": False,
-            "third_formatting": [],
-            "fourth_formatting": [],
-            "type": "tuple",
-            "value": [
-                {
-                    "type": "name",
-                    "value": "a"
-                },
-                {
-            "first_formatting": [],
-            "type": "comma",
-            "second_formatting": [
-                {
-                    "type": "space",
-                    "value": " "
+                    "first_formatting": [],
+                    "type": "getitem",
+                    "value": {
+                        "first_formatting": [],
+                        "with_parenthesis": False,
+                        "third_formatting": [],
+                        "fourth_formatting": [],
+                        "type": "tuple",
+                        "value": [
+                            {
+                                "type": "name",
+                                "value": "a"
+                            },
+                            {
+                                "first_formatting": [],
+                                "type": "comma",
+                                "second_formatting": [
+                                    {
+                                        "type": "space",
+                                        "value": " "
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "name",
+                                "value": "b"
+                            },
+                            {
+                                "first_formatting": [],
+                                "type": "comma",
+                                "second_formatting": [
+                                    {
+                                        "type": "space",
+                                        "value": " "
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "name",
+                                "value": "c"
+                            },
+                            {
+                                "first_formatting": [],
+                                "type": "comma",
+                                "second_formatting": []
+                            }
+                        ],
+                        "second_formatting": []
+                    },
+                    "second_formatting": [],
+                    "third_formatting": [],
+                    "fourth_formatting": []
                 }
-            ]
-        },
-                {
-        "type": "name",
-        "value": "b"
-    },
-                {
-            "first_formatting": [],
-            "type": "comma",
-            "second_formatting": [
-                {
-                    "type": "space",
-                    "value": " "
-                }
-            ]
-        },
-                {
-        "type": "name",
-        "value": "c"
-    },
-                {
-            "first_formatting": [],
-            "type": "comma",
-            "second_formatting": []
-        }
-            ],
-            "second_formatting": []
-        },
-        "second_formatting": [],
-        "third_formatting": [],
-        "fourth_formatting": []
-    }
             ]
         }
     ])
