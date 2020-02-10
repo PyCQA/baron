@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-import re
+import regex as re
 from .utils import FlexibleIterator
 
 to_group = (

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding:Utf-8 -*-
-
+import six
 
 from baron.tokenizer import tokenize, KEYWORDS
 
@@ -20,6 +20,12 @@ def test_name():
 
 def test_name__():
     match('_a', 'NAME')
+
+
+if six.PY3:
+    def test_name_unicode():
+        match('β', 'NAME')
+        match('가사', 'NAME')
 
 
 def test_name_number():
@@ -550,6 +556,7 @@ def test_exponant_complex():
     match("-1.E+1J", "FLOAT_EXPONANT_COMPLEX")
     match("-1.1E+1J", "FLOAT_EXPONANT_COMPLEX")
     match("-.1E+1J", "FLOAT_EXPONANT_COMPLEX")
+
 
 # TODO 1.1e1j
 

@@ -1,4 +1,4 @@
-import re
+import regex as re
 from .utils import BaronError
 
 
@@ -9,7 +9,7 @@ class UnknowItem(BaronError):
 KEYWORDS = ("and", "as", "assert", "break", "class", "continue", "def", "del", "elif", "else", "except", "exec", "finally", "for", "from", "global", "nonlocal", "if", "import", "in", "is", "lambda", "not", "or", "pass", "print", "raise", "return", "try", "while", "with", "yield")
 
 TOKENS = (
-    (r'[a-zA-Z_]\w*', 'NAME'),
+    (r'[\p{XID_Start}_]\p{XID_Continue}*', 'NAME'),
     (r'0', 'INT'),
     (r'[-+]?\d+[eE][-+]?\d+[jJ]', 'FLOAT_EXPONANT_COMPLEX'),
     (r'[-+]?\d+.\d?[eE][-+]?\d+[jJ]', 'FLOAT_EXPONANT_COMPLEX'),

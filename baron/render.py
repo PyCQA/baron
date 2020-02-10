@@ -1,6 +1,8 @@
 import sys
 import json
 
+import six
+
 
 def render(node, strict=False):
     """Recipe to render a given FST node.
@@ -69,7 +71,7 @@ def render_node(node, strict=False):
                 if key_type == "key":
                     assert isinstance(node[render_key], (dict, type(None))), "Key '%s' is expected to have type of 'key' (dict/None) but has type of '%s' instead" % (render_key, type(node[render_key]))
                 elif key_type == "string":
-                    assert isinstance(node[render_key], str), "Key '%s' is expected to have type of 'string' but has type of '%s' instead" % (render_key, type(node[render_key]))
+                    assert isinstance(node[render_key], six.string_types), "Key '%s' is expected to have type of 'string' but has type of '%s' instead" % (render_key, type(node[render_key]))
                 elif key_type in ("list", "formatting"):
                     assert isinstance(node[render_key], list), "Key '%s' is expected to have type of 'list' but has type of '%s' instead" % (render_key, type(node[render_key]))
                 elif key_type == "constant":

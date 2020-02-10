@@ -1,8 +1,9 @@
+import six
+
 from baron.baron import parse
 from baron.path import PathWalker, Position, BoundingBox
-from baron.path import position_to_path, path_to_node, position_to_node
 from baron.path import path_to_bounding_box, node_to_bounding_box
-from baron.utils import string_instance
+from baron.path import position_to_path, path_to_node, position_to_node
 
 
 def test_position():
@@ -145,7 +146,7 @@ def check_path(code, positions, target_path):
             return
 
         node = path_to_node(tree, path)
-        assert isinstance(node, string_instance)
+        assert isinstance(node, six.string_types)
 
         assert position_to_node(tree, position) is node
 
