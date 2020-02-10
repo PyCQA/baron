@@ -2,11 +2,11 @@ from .utils import FlexibleIterator, BaronError
 
 
 class UnExpectedFormattingToken(BaronError):
-        pass
+    pass
 
 
 class GroupingError(BaronError):
-        pass
+    pass
 
 
 GROUP_THOSE = (
