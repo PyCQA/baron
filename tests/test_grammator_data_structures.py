@@ -238,7 +238,7 @@ def test_dict_empty():
     ])
 
 
-def test_dict_one():
+def test_dict_one_colon():
     "{a: b}"
     parse_simple([
         ('LEFT_BRACKET', '{', [], []),
@@ -272,7 +272,36 @@ def test_dict_one():
     ])
 
 
-def test_dict_more():
+def test_dict_one_double_star():
+    "{**a}"
+    parse_simple([
+        ('LEFT_BRACKET', '{', [], []),
+        ('DOUBLE_STAR', '**'),
+        ('NAME', 'a'),
+        ('RIGHT_BRACKET', '}', [], []),
+    ], [
+        {
+            'type': 'dict',
+            'first_formatting': [],
+            'second_formatting': [],
+            'third_formatting': [],
+            'fourth_formatting': [],
+            'value': [
+                {
+                    'type': 'dict_argument',
+                    'annotation': {},
+                    'annotation_first_formatting': [],
+                    'annotation_second_formatting': [],
+                    'formatting': [],
+                    'value': {'type': 'name', 'value': 'a'}
+                }
+            ]
+        }
+    ]
+)
+
+
+def test_dict_more_colon():
     "{a: b, b: c, c: d}"
     parse_simple([
         ('LEFT_BRACKET', '{', [], []),
@@ -346,6 +375,69 @@ def test_dict_more():
                     }
                 }
             ],
+        }
+    ])
+
+
+def test_dict_more_double_star():
+    "{**a, b: c}"
+    parse_simple([
+        ('LEFT_BRACKET', '{', [], []),
+        ('DOUBLE_STAR', '**'),
+        ('NAME', 'a'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('NAME', 'b'),
+        ('COLON', ':', [], [('SPACE', ' ')]),
+        ('NAME', 'c'),
+        ('RIGHT_BRACKET', '}', [], []),
+    ], [
+        {
+            "first_formatting": [],
+            "fourth_formatting": [],
+            "second_formatting": [],
+            "third_formatting": [],
+            "type": "dict",
+            "value": [
+                {
+                    "annotation": {},
+                    "annotation_first_formatting": [],
+                    "annotation_second_formatting": [],
+                    "formatting": [],
+                    "type": "dict_argument",
+                    "value": {
+                        "type": "name",
+                        "value": "a"
+                    }
+                },
+                {
+                    "first_formatting": [],
+                    "second_formatting": [
+                        {
+                            "type": "space",
+                            "value": " "
+                        }
+                    ],
+                    "type": "comma"
+                },
+                {
+                    "first_formatting": [],
+                    "key": {
+                        "type": "name",
+                        "value": "b"
+                    },
+                    "second_formatting": [
+                        {
+                            "type": "space",
+                            "value": " "
+                        }
+                    ],
+                    "type": "dictitem",
+                    "value": {
+                        "type": "name",
+                        "value": "c"
+                    }
+                }
+            ]
         }
     ])
 
