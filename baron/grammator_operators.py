@@ -188,20 +188,20 @@ def include_operators(pg):
             "second_formatting": comparison_operator2.hidden_tokens_after,
         }
 
-    @pg.production("expr : xor_expr VBAR expr")
+    @pg.production("expr : expr VBAR xor_expr")
     @pg.production("xor_expr : and_expr CIRCUMFLEX xor_expr")
     @pg.production("and_expr : shift_expr AMPER and_expr")
-    @pg.production("shift_expr : arith_expr RIGHT_SHIFT shift_expr")
-    @pg.production("shift_expr : arith_expr LEFT_SHIFT shift_expr")
-    @pg.production("arith_expr : term PLUS arith_expr")
-    @pg.production("arith_expr : term MINUS arith_expr")
-    @pg.production("term : factor STAR term")
-    @pg.production("term : factor SLASH term")
-    @pg.production("term : factor PERCENT term")
-    @pg.production("term : factor DOUBLE_SLASH term")
-    @pg.production("term : factor AT term")
-    @pg.production("power : atom DOUBLE_STAR factor")
-    @pg.production("power : atom DOUBLE_STAR power")
+    @pg.production("shift_expr : shift_expr RIGHT_SHIFT arith_expr")
+    @pg.production("shift_expr : shift_expr LEFT_SHIFT arith_expr")
+    @pg.production("arith_expr : arith_expr PLUS term")
+    @pg.production("arith_expr : arith_expr MINUS term")
+    @pg.production("term : term STAR factor")
+    @pg.production("term : term SLASH factor")
+    @pg.production("term : term PERCENT factor")
+    @pg.production("term : term DOUBLE_SLASH factor")
+    @pg.production("term : term AT factor")
+    @pg.production("power : factor DOUBLE_STAR atom")
+    @pg.production("power : power DOUBLE_STAR atom")
     def binary_operator_node(pack):
         (first, operator, second) = pack
         return {
