@@ -188,7 +188,7 @@ def include_operators(pg):
             "second_formatting": comparison_operator2.hidden_tokens_after,
         }
 
-    @pg.production("expr : expr VBAR xor_expr")
+    @pg.production("expr : xor_expr VBAR expr")
     @pg.production("xor_expr : and_expr CIRCUMFLEX xor_expr")
     @pg.production("and_expr : shift_expr AMPER and_expr")
     @pg.production("shift_expr : shift_expr RIGHT_SHIFT arith_expr")
@@ -200,8 +200,8 @@ def include_operators(pg):
     @pg.production("term : term PERCENT factor")
     @pg.production("term : term DOUBLE_SLASH factor")
     @pg.production("term : term AT factor")
-    @pg.production("power : factor DOUBLE_STAR atom")
-    @pg.production("power : power DOUBLE_STAR atom")
+    @pg.production("power : atom DOUBLE_STAR factor")
+    @pg.production("power : atom DOUBLE_STAR power")
     def binary_operator_node(pack):
         (first, operator, second) = pack
         return {
