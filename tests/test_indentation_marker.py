@@ -7,7 +7,7 @@ from .test_utils import zip_longest
 
 
 def check(input_, output):
-    for i, j in zip_longest(mark_indentation(input + [('ENDMARKER', ''), None]),
+    for i, j in zip_longest(mark_indentation(input_ + [('ENDMARKER', ''), None]),
                             output + [('ENDMARKER', ''), None]):
         assert i == j
 
@@ -305,8 +305,8 @@ def test_trailing_spaces():
     """
     if a:
         if b:
-            
-        
+
+
             pass
     """
     check([
