@@ -305,8 +305,8 @@ def test_trailing_spaces():
     """
     if a:
         if b:
-            
-        
+
+
             pass
     """
     check([

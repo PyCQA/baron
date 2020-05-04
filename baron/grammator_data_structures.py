@@ -154,7 +154,7 @@ def include_data_structures(pg):
         return []
 
     @pg.production("dictmaker : test COLON test")
-    def dict_one(pack):
+    def dict_one_colon(pack):
         (test, colon, test2) = pack
         return [{
             "first_formatting": colon.hidden_tokens_before,
@@ -164,8 +164,20 @@ def include_data_structures(pg):
             "type": "dictitem"
         }]
 
+    @pg.production("dictmaker : DOUBLE_STAR test")
+    def dict_one_double_star(pack):
+        (double_star, test) = pack
+        return [{
+            "type": "dict_argument",
+            "annotation": {},
+            "annotation_first_formatting": [],
+            "annotation_second_formatting": [],
+            "formatting": double_star.hidden_tokens_after,
+            "value": test,
+        }]
+
     @pg.production("dictmaker : test COLON test comma dictmaker")
-    def dict_more(pack):
+    def dict_more_colon(pack):
         (test, colon, test2, comma, dictmaker) = pack
         return [{
             "first_formatting": colon.hidden_tokens_before,
@@ -173,6 +185,18 @@ def include_data_structures(pg):
             "key": test,
             "value": test2,
             "type": "dictitem"
+        }, comma] + dictmaker
+
+    @pg.production("dictmaker : DOUBLE_STAR test comma dictmaker")
+    def dict_more_double_star(pack):
+        (double_star, test, comma, dictmaker) = pack
+        return [{
+            "type": "dict_argument",
+            "annotation": {},
+            "annotation_first_formatting": [],
+            "annotation_second_formatting": [],
+            "formatting": double_star.hidden_tokens_after,
+            "value": test,
         }, comma] + dictmaker
 
     @pg.production("atom : LEFT_BRACKET setmaker RIGHT_BRACKET")
