@@ -1,2 +1,13 @@
-include README.md CHANGELOG LICENSE
+include *.md CHANGELOG LICENSE
+include tox.ini
+
+exclude *.txt
+
+recursive-include docs *
+
 graft tests
+
+prune docs/_build
+prune grammar
+
+reverse-exclude */__pycache__/*
