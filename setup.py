@@ -3,24 +3,13 @@
 
 from setuptools import setup
 
-try:
-    from pypandoc import convert_file
-
-    def read_md(f):
-        return convert_file(f, 'rst')
-
-except ImportError:
-    print("warning: pypandoc module not found, could not convert Markdown to RST")
-
-    def read_md(f):
-        return open(f, 'r').read()
-
 
 setup(name='baron',
       version='0.9',
       description='Full Syntax Tree for python to make writing refactoring code a realist task',
       author='Laurent Peuch',
-      long_description=read_md("README.md") + "\n\n" + open("CHANGELOG", "r").read(),
+      long_description=open("README.md").read() + "\n\n" + open("CHANGELOG", "r").read(),
+      long_description_content_type="text/markdown",
       author_email='cortex@worlddomination.be',
       url='https://github.com/PyCQA/baron',
       install_requires=['rply'],
