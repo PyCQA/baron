@@ -288,6 +288,11 @@ def generate_parse(print_function):
 
     @pg.production("classdef : CLASS NAME LEFT_PARENTHESIS testlist_argslist RIGHT_PARENTHESIS COLON suite")
     def class_stmt_inherit(pack,):
+        def unfold_simple_call_arguments(node):
+            if node.get("type") == "call_argument" and not node["target"]:
+                return node["value"]
+            return node
+
         (class_, name, left_parenthesis, testlist, right_parenthesis, colon, suite) = pack
         return [{
             "type": "class",
@@ -299,7 +304,8 @@ def generate_parse(print_function):
             "fourth_formatting": right_parenthesis.hidden_tokens_before,
             "fifth_formatting": right_parenthesis.hidden_tokens_after + colon.hidden_tokens_before,
             "sixth_formatting": colon.hidden_tokens_after,
-            "inherit_from": testlist if isinstance(testlist, list) else [testlist],
+            "inherit_from": [unfold_simple_call_arguments(x)
+                             for x in (testlist if isinstance(testlist, list) else [testlist])],
             "decorators": [],
             "value": suite,
         }]

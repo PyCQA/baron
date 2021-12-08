@@ -4,6 +4,7 @@ Changelog
 0.10 (unreleased)
 -----------------
 
+- bug fix: baron is now able to parse "class A(b, c=d): pass"
 - some project cleaned and integration of tox with good pratices like flake8 and check-manifest
 - bug fix for missing edge case in inner formatting by EhsanKia https://github.com/PyCQA/baron/pull/156
 - complet support for float with underscores in them by tamentis https://github.com/PyCQA/baron/pull/157

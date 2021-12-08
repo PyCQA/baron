@@ -1468,14 +1468,8 @@ def test_class_inherit_metaclass_arglist():
             "sixth_formatting": [],
             "inherit_from": [
                 {
-                    "first_formatting": [],
-                    "second_formatting": [],
-                    "target": {},
-                    "type": "call_argument",
-                    "value": {
-                        "type": "name",
-                        "value": "B"
-                    }
+                    "type": "name",
+                    "value": "B"
                 },
                 {
                     "first_formatting": [],
@@ -1571,14 +1565,8 @@ def test_class_inherit_metaclass_arglist_more():
             "sixth_formatting": [],
             "inherit_from": [
                 {
-                    "first_formatting": [],
-                    "second_formatting": [],
-                    "target": {},
-                    "type": "call_argument",
-                    "value": {
-                        "type": "name",
-                        "value": "B"
-                    }
+                    "type": "name",
+                    "value": "B"
                 },
                 {
                     "first_formatting": [],
@@ -1591,14 +1579,8 @@ def test_class_inherit_metaclass_arglist_more():
                     "type": "comma"
                 },
                 {
-                    "first_formatting": [],
-                    "second_formatting": [],
-                    "target": {},
-                    "type": "call_argument",
-                    "value": {
-                        "type": "name",
-                        "value": "E"
-                    }
+                    "type": "name",
+                    "value": "E"
                 },
                 {
                     "first_formatting": [],
@@ -1611,14 +1593,8 @@ def test_class_inherit_metaclass_arglist_more():
                     "type": "comma"
                 },
                 {
-                    "first_formatting": [],
-                    "second_formatting": [],
-                    "target": {},
-                    "type": "call_argument",
-                    "value": {
-                        "type": "name",
-                        "value": "F"
-                    }
+                    "type": "name",
+                    "value": "F"
                 },
                 {
                     "first_formatting": [],
