@@ -345,6 +345,10 @@ def test_dict_more():
     check_dumps("{ a : b   ,\n123  :     'pouet'  }")
 
 
+def test_dict_kwargs():
+    check_dumps("{  ** a  }")
+
+
 def test_ternary_operator():
     check_dumps("a   if        b  else      c")
 
