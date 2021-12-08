@@ -183,6 +183,7 @@ def generate_parse(print_function):
     @pg.production("small_stmt : expr_stmt")
     @pg.production("expr_stmt : testlist_star_expr")
     @pg.production("testlist : test")
+    @pg.production("testlist_argslist : test")
     @pg.production("testlist_star_expr : test_or_star_expr")
     @pg.production("test : or_test")
     @pg.production("test : lambdef")
@@ -285,8 +286,7 @@ def generate_parse(print_function):
             "value": suite,
         }]
 
-    @pg.production("classdef : CLASS NAME LEFT_PARENTHESIS testlist RIGHT_PARENTHESIS COLON suite")
-    @pg.production("classdef : CLASS NAME LEFT_PARENTHESIS argslist RIGHT_PARENTHESIS COLON suite")
+    @pg.production("classdef : CLASS NAME LEFT_PARENTHESIS testlist_argslist RIGHT_PARENTHESIS COLON suite")
     def class_stmt_inherit(pack,):
         (class_, name, left_parenthesis, testlist, right_parenthesis, colon, suite) = pack
         return [{
@@ -299,7 +299,7 @@ def generate_parse(print_function):
             "fourth_formatting": right_parenthesis.hidden_tokens_before,
             "fifth_formatting": right_parenthesis.hidden_tokens_after + colon.hidden_tokens_before,
             "sixth_formatting": colon.hidden_tokens_after,
-            "inherit_from": [testlist],
+            "inherit_from": testlist if isinstance(testlist, list) else [testlist],
             "decorators": [],
             "value": suite,
         }]
@@ -426,6 +426,7 @@ def generate_parse(print_function):
         }
 
     @pg.production("argslist : argslist argument")
+    @pg.production("testlist_argslist : argslist argument")
     @pg.production("typed_parameters : typed_parameters typed_parameter")
     @pg.production("parameters : parameters parameter")
     def parameters_parameters_parameter(pack,):
@@ -433,6 +434,7 @@ def generate_parse(print_function):
         return parameters + parameter
 
     @pg.production("argslist : argument")
+    @pg.production("testlist_argslist : argument")
     @pg.production("typed_parameters : typed_parameter")
     @pg.production("parameters : parameter")
     def parameters_parameter(pack,):

@@ -1356,6 +1356,325 @@ def test_class_inherit():
     ])
 
 
+def test_class_inherit_metaclass():
+    """
+    class A ( B = C ) :
+        pass
+    """
+    parse_multi([
+        ('CLASS', 'class', [], [('SPACE', ' ')]),
+        ('NAME', 'A'),
+        ('LEFT_PARENTHESIS', '(', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'B'),
+        ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'C'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n', [], []),
+        ('DEDENT', ''),
+    ], [
+        {
+            "type": "class",
+            "name": "A",
+            "decorators": [],
+            "parenthesis": True,
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [{"type": "space", "value": " "}],
+            "fifth_formatting": [{"type": "space", "value": " "}],
+            "sixth_formatting": [],
+            "inherit_from": [
+                {
+                    "first_formatting": [
+                        {
+                            "type": "space",
+                            "value": " "
+                        }
+                    ],
+                    "second_formatting": [
+                        {
+                            "type": "space",
+                            "value": " "
+                        }
+                    ],
+                    "target": {
+                        "type": "name",
+                        "value": "B"
+                    },
+                    "type": "call_argument",
+                    "value": {
+                        "type": "name",
+                        "value": "C"
+                    }
+                }
+            ],
+            "value": [
+                {
+                    "type": "endl",
+                    "value": "\n",
+                    "formatting": [],
+                    "indent": "    "
+                },
+                {
+                    "type": "pass",
+                },
+                {
+                    "formatting": [],
+                    "indent": "",
+                    "type": "endl",
+                    "value": "\n"
+                }
+            ],
+        }
+    ])
+
+
+def test_class_inherit_metaclass_arglist():
+    """
+    class A ( B, C = D ) :
+        pass
+    """
+    parse_multi([
+        ('CLASS', 'class', [], [('SPACE', ' ')]),
+        ('NAME', 'A'),
+        ('LEFT_PARENTHESIS', '(', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'B'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('NAME', 'C'),
+        ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'D'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n', [], []),
+        ('DEDENT', ''),
+    ], [
+        {
+            "type": "class",
+            "name": "A",
+            "decorators": [],
+            "parenthesis": True,
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [{"type": "space", "value": " "}],
+            "fifth_formatting": [{"type": "space", "value": " "}],
+            "sixth_formatting": [],
+            "inherit_from": [
+                {
+                    "first_formatting": [],
+                    "second_formatting": [],
+                    "target": {},
+                    "type": "call_argument",
+                    "value": {
+                        "type": "name",
+                        "value": "B"
+                    }
+                },
+                {
+                    "first_formatting": [],
+                    "second_formatting": [
+                        {
+                            "type": "space",
+                            "value": " "
+                        }
+                    ],
+                    "type": "comma"
+                },
+                {
+                    "first_formatting": [
+                        {
+                            "type": "space",
+                            "value": " "
+                        }
+                    ],
+                    "second_formatting": [
+                        {
+                            "type": "space",
+                            "value": " "
+                        }
+                    ],
+                    "target": {
+                        "type": "name",
+                        "value": "C"
+                    },
+                    "type": "call_argument",
+                    "value": {
+                        "type": "name",
+                        "value": "D"
+                    }
+                }
+            ],
+            "value": [
+                {
+                    "type": "endl",
+                    "value": "\n",
+                    "formatting": [],
+                    "indent": "    "
+                },
+                {
+                    "type": "pass",
+                },
+                {
+                    "formatting": [],
+                    "indent": "",
+                    "type": "endl",
+                    "value": "\n"
+                }
+            ],
+        }
+    ])
+
+
+def test_class_inherit_metaclass_arglist_more():
+    """
+    class A ( B, E, F, C = D ) :
+        pass
+    """
+    parse_multi([
+        ('CLASS', 'class', [], [('SPACE', ' ')]),
+        ('NAME', 'A'),
+        ('LEFT_PARENTHESIS', '(', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'B'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('NAME', 'E'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('NAME', 'F'),
+        ('COMMA', ',', [], [('SPACE', ' ')]),
+        ('NAME', 'C'),
+        ('EQUAL', '=', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('NAME', 'D'),
+        ('RIGHT_PARENTHESIS', ')', [('SPACE', ' ')], [('SPACE', ' ')]),
+        ('COLON', ':'),
+        ('ENDL', '\n', [], [('SPACE', '    ')]),
+        ('INDENT', ''),
+        ('PASS', 'pass'),
+        ('ENDL', '\n', [], []),
+        ('DEDENT', ''),
+    ], [
+        {
+            "type": "class",
+            "name": "A",
+            "decorators": [],
+            "parenthesis": True,
+            "first_formatting": [{"type": "space", "value": " "}],
+            "second_formatting": [{"type": "space", "value": " "}],
+            "third_formatting": [{"type": "space", "value": " "}],
+            "fourth_formatting": [{"type": "space", "value": " "}],
+            "fifth_formatting": [{"type": "space", "value": " "}],
+            "sixth_formatting": [],
+            "inherit_from": [
+                {
+                    "first_formatting": [],
+                    "second_formatting": [],
+                    "target": {},
+                    "type": "call_argument",
+                    "value": {
+                        "type": "name",
+                        "value": "B"
+                    }
+                },
+                {
+                    "first_formatting": [],
+                    "second_formatting": [
+                        {
+                            "type": "space",
+                            "value": " "
+                        }
+                    ],
+                    "type": "comma"
+                },
+                {
+                    "first_formatting": [],
+                    "second_formatting": [],
+                    "target": {},
+                    "type": "call_argument",
+                    "value": {
+                        "type": "name",
+                        "value": "E"
+                    }
+                },
+                {
+                    "first_formatting": [],
+                    "second_formatting": [
+                        {
+                            "type": "space",
+                            "value": " "
+                        }
+                    ],
+                    "type": "comma"
+                },
+                {
+                    "first_formatting": [],
+                    "second_formatting": [],
+                    "target": {},
+                    "type": "call_argument",
+                    "value": {
+                        "type": "name",
+                        "value": "F"
+                    }
+                },
+                {
+                    "first_formatting": [],
+                    "second_formatting": [
+                        {
+                            "type": "space",
+                            "value": " "
+                        }
+                    ],
+                    "type": "comma"
+                },
+                {
+                    "first_formatting": [
+                        {
+                            "type": "space",
+                            "value": " "
+                        }
+                    ],
+                    "second_formatting": [
+                        {
+                            "type": "space",
+                            "value": " "
+                        }
+                    ],
+                    "target": {
+                        "type": "name",
+                        "value": "C"
+                    },
+                    "type": "call_argument",
+                    "value": {
+                        "type": "name",
+                        "value": "D"
+                    }
+                }
+            ],
+            "value": [
+                {
+                    "type": "endl",
+                    "value": "\n",
+                    "formatting": [],
+                    "indent": "    "
+                },
+                {
+                    "type": "pass",
+                },
+                {
+                    "formatting": [],
+                    "indent": "",
+                    "type": "endl",
+                    "value": "\n"
+                }
+            ],
+        }
+    ])
+
+
 def test_funcdef_stmt_one_start_parameter_indent():
     """
     def a (*b):
