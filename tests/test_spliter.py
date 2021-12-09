@@ -373,3 +373,7 @@ def test_regression():
 if python_version == 2:
     def test_remove_crap():
         assert split("\x0c\xef\xbb\xbf") == []
+
+
+def test_split_float_notation():
+    assert split("a._") == ["a", ".", "_"]

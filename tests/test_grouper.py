@@ -230,3 +230,7 @@ def test_dot_dot():
 
 def test_dot_dot_dot():
     grouper_test("...", ['.', '.', '.'], ['...'])
+
+
+def test_split_float_notation():
+    grouper_test("a._", ["a", ".", "_"], ["a", ".", "_"])
