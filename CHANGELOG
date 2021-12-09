@@ -1,10 +1,15 @@
 Changelog
 =========
 
+0.10.1 (2021-12-08)
+-----------------
+
+- bug fix: in "a._" the "._" part was incorrectly recognized as a float, by bram
+
 0.10 (2021-12-08)
 -----------------
 
-- bug fix: baron is now able to parse "class A(b, c=d): pass"
+- bug fix: baron is now able to parse "class A(b, c=d): pass" by bram
 - some project cleaned and integration of tox with good pratices like flake8 and check-manifest
 - bug fix for missing edge case in inner formatting by EhsanKia https://github.com/PyCQA/baron/pull/156
 - complet support for float with underscores in them by tamentis https://github.com/PyCQA/baron/pull/157
