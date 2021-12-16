@@ -88,7 +88,8 @@ def render_node(node, strict=False):
                 raise e
 
         if key_type in ['key', 'string', 'list', 'formatting']:
-            yield (key_type, node[render_key], render_key)
+            if render_key in node:
+                yield (key_type, node[render_key], render_key)
         elif key_type in ['constant', 'string']:
             yield (key_type, render_key, render_key)
         else:
